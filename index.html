@@ -1,0 +1,1737 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Telegram Explorer</title>
+<meta name="description" content="Search and discover public Telegram channels and groups - Explore Telegram like Instagram">
+<meta property="og:title" content="Telegram Explorer">
+<meta property="og:description" content="Search and discover public Telegram channels and groups">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔍</text></svg>">
+<style>
+/* ============================================================
+   CSS VARIABLES & THEME
+   ============================================================ */
+:root {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f5f5f7;
+  --bg-card: #ffffff;
+  --bg-hover: #f0f0f2;
+  --bg-input: #f0f0f2;
+  --bg-overlay: rgba(0,0,0,0.5);
+  --text-primary: #1a1a1a;
+  --text-secondary: #6b6b6b;
+  --text-tertiary: #999;
+  --accent: #0088cc;
+  --accent-light: #e6f4ff;
+  --accent-dark: #0066aa;
+  --border: #e5e5e5;
+  --shadow: 0 2px 12px rgba(0,0,0,0.08);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.12);
+  --radius: 16px;
+  --radius-sm: 10px;
+  --radius-xs: 6px;
+  --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --max-w: 1200px;
+  --header-h: 64px;
+  --gradient: linear-gradient(135deg, #0088cc 0%, #00b2ff 100%);
+}
+
+[data-theme="dark"] {
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #141414;
+  --bg-card: #1a1a1a;
+  --bg-hover: #242424;
+  --bg-input: #1e1e1e;
+  --text-primary: #f0f0f0;
+  --text-secondary: #999;
+  --text-tertiary: #666;
+  --accent: #39bfff;
+  --accent-light: #0d2a3a;
+  --accent-dark: #60ccff;
+  --border: #2a2a2a;
+  --shadow: 0 2px 12px rgba(0,0,0,0.3);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.4);
+}
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font);
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+  transition: background var(--transition), color var(--transition);
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+button { cursor: pointer; border: none; background: none; font-family: inherit; }
+input { font-family: inherit; }
+img { max-width: 100%; display: block; }
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg-primary);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+}
+.header-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--accent);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.logo-icon {
+  width: 36px;
+  height: 36px;
+  background: var(--gradient);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+.icon-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  transition: all var(--transition);
+  font-size: 20px;
+}
+.icon-btn:hover { background: var(--bg-hover); color: var(--text-primary); }
+.lang-select {
+  padding: 6px 10px;
+  border-radius: var(--radius-xs);
+  background: var(--bg-input);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  font-size: 13px;
+  font-weight: 500;
+  outline: none;
+  cursor: pointer;
+}
+
+/* ============================================================
+   SEARCH HERO
+   ============================================================ */
+.hero {
+  background: var(--gradient);
+  padding: 60px 20px 50px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.hero-content { position: relative; max-width: 680px; margin: 0 auto; }
+.hero h1 {
+  font-size: clamp(28px, 5vw, 42px);
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 12px;
+  letter-spacing: -0.5px;
+}
+.hero p {
+  color: rgba(255,255,255,0.85);
+  font-size: 17px;
+  margin-bottom: 32px;
+}
+.search-box {
+  display: flex;
+  background: #fff;
+  border-radius: 16px;
+  padding: 6px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+  max-width: 600px;
+  margin: 0 auto;
+}
+.search-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 14px 18px;
+  font-size: 16px;
+  background: transparent;
+  color: #1a1a1a;
+  min-width: 0;
+}
+.search-input::placeholder { color: #999; }
+.search-btn {
+  background: var(--gradient);
+  color: #fff;
+  padding: 14px 28px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: transform var(--transition), box-shadow var(--transition);
+  white-space: nowrap;
+}
+.search-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(0,136,204,0.4); }
+.search-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 20px;
+}
+.search-tag {
+  background: rgba(255,255,255,0.2);
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all var(--transition);
+  backdrop-filter: blur(10px);
+}
+.search-tag:hover { background: rgba(255,255,255,0.35); }
+
+/* ============================================================
+   MAIN CONTAINER
+   ============================================================ */
+.container {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 24px 20px 80px;
+}
+
+/* ============================================================
+   NAVIGATION TABS
+   ============================================================ */
+.nav-tabs {
+  display: flex;
+  gap: 4px;
+  background: var(--bg-primary);
+  border-radius: var(--radius);
+  padding: 5px;
+  margin-bottom: 24px;
+  border: 1px solid var(--border);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.nav-tab {
+  flex: 1;
+  min-width: fit-content;
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  transition: all var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+.nav-tab:hover { color: var(--text-primary); background: var(--bg-hover); }
+.nav-tab.active { background: var(--accent); color: #fff; }
+
+/* ============================================================
+   CATEGORIES BAR
+   ============================================================ */
+.categories-bar {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  margin-bottom: 24px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.categories-bar::-webkit-scrollbar { display: none; }
+.cat-chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 18px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: 30px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+.cat-chip:hover { border-color: var(--accent); color: var(--accent); }
+.cat-chip.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+.cat-chip .cat-icon { font-size: 16px; }
+
+/* ============================================================
+   RESULTS GRID (Explore)
+   ============================================================ */
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+/* ============================================================
+   CHANNEL CARD
+   ============================================================ */
+.channel-card {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  transition: all var(--transition);
+  cursor: pointer;
+  position: relative;
+}
+.channel-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--accent);
+}
+.card-banner {
+  height: 120px;
+  background: var(--gradient);
+  position: relative;
+  overflow: hidden;
+}
+.card-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.card-banner-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.5), transparent);
+}
+.card-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--gradient);
+  border: 3px solid var(--bg-card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+  position: absolute;
+  bottom: -28px;
+  left: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  overflow: hidden;
+}
+.card-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.card-body { padding: 36px 20px 20px; }
+.card-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 4px;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.card-username {
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+.card-desc {
+  color: var(--text-secondary);
+  font-size: 13px;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-bottom: 14px;
+  min-height: 40px;
+}
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+.card-members {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+}
+.card-actions { display: flex; gap: 6px; }
+.card-action-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  transition: all var(--transition);
+  font-size: 16px;
+}
+.card-action-btn:hover { background: var(--accent-light); color: var(--accent); }
+.card-action-btn.favorited { color: #ff4757; }
+
+/* ============================================================
+   LIST VIEW
+   ============================================================ */
+.results-list { display: flex; flex-direction: column; gap: 12px; }
+.list-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  transition: all var(--transition);
+  cursor: pointer;
+}
+.list-item:hover { border-color: var(--accent); box-shadow: var(--shadow); }
+.list-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--gradient);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.list-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.list-info { flex: 1; min-width: 0; }
+.list-title { font-size: 15px; font-weight: 600; margin-bottom: 2px; }
+.list-user { color: var(--accent); font-size: 13px; }
+.list-desc {
+  color: var(--text-secondary);
+  font-size: 13px;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-top: 4px;
+}
+.list-meta { display: flex; align-items: center; gap: 16px; flex-shrink: 0; }
+.list-members { color: var(--text-secondary); font-size: 13px; display: flex; align-items: center; gap: 4px; }
+
+/* ============================================================
+   CHANNEL DETAIL MODAL
+   ============================================================ */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--bg-overlay);
+  z-index: 200;
+  display: none;
+  align-items: flex-end;
+  justify-content: center;
+  backdrop-filter: blur(4px);
+  animation: fadeIn 0.2s ease;
+}
+.modal-overlay.open { display: flex; }
+.modal {
+  background: var(--bg-primary);
+  border-radius: 24px 24px 0 0;
+  width: 100%;
+  max-width: 640px;
+  max-height: 85vh;
+  overflow-y: auto;
+  animation: slideUp 0.3s ease;
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+.modal-header {
+  padding: 24px 24px 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+.modal-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--gradient);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.modal-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.modal-title { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
+.modal-user { color: var(--accent); font-size: 14px; }
+.modal-members-display { color: var(--text-secondary); font-size: 14px; margin-top: 4px; }
+.modal-close {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  font-size: 20px;
+  margin-left: auto;
+  flex-shrink: 0;
+  transition: all var(--transition);
+}
+.modal-close:hover { background: var(--bg-hover); color: var(--text-primary); }
+.modal-body { padding: 20px 24px 24px; }
+.modal-desc {
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+.modal-btn {
+  flex: 1;
+  padding: 12px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all var(--transition);
+}
+.modal-btn-primary { background: var(--gradient); color: #fff; }
+.modal-btn-primary:hover { box-shadow: 0 4px 16px rgba(0,136,204,0.3); }
+.modal-btn-secondary {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+}
+.modal-btn-secondary:hover { border-color: var(--accent); }
+.modal-posts-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+.modal-posts { display: flex; flex-direction: column; gap: 12px; }
+.post-card {
+  background: var(--bg-secondary);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+}
+.post-text {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+.post-img {
+  width: 100%;
+  border-radius: var(--radius-xs);
+  margin-top: 8px;
+}
+.post-link { color: var(--accent); font-size: 13px; font-weight: 500; }
+
+/* ============================================================
+   EXPLORE GRID (Instagram-like)
+   ============================================================ */
+.explore-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.explore-item {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  cursor: pointer;
+  background: var(--bg-hover);
+}
+.explore-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition);
+}
+.explore-item:hover img { transform: scale(1.05); }
+.explore-item-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+.explore-item:hover .explore-item-overlay { opacity: 1; }
+.explore-item-info {
+  color: #fff;
+  text-align: center;
+  font-weight: 600;
+}
+.explore-item-info .explore-stat { font-size: 18px; }
+.explore-item-info .explore-label { font-size: 12px; opacity: 0.8; }
+
+/* ============================================================
+   LOADING & EMPTY STATES
+   ============================================================ */
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  color: var(--text-secondary);
+}
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-bottom: 16px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-secondary);
+}
+.empty-state .empty-icon { font-size: 64px; margin-bottom: 16px; }
+.empty-state h3 { font-size: 18px; color: var(--text-primary); margin-bottom: 8px; }
+.empty-state p { font-size: 14px; }
+
+/* ============================================================
+   RESULTS COUNT
+   ============================================================ */
+.results-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.results-count {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+.view-toggle {
+  display: flex;
+  gap: 4px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 3px;
+}
+.view-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  transition: all var(--transition);
+  font-size: 16px;
+}
+.view-btn.active { background: var(--accent); color: #fff; }
+
+/* ============================================================
+   FAVORITES
+   ============================================================ */
+.fav-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+/* ============================================================
+   SKELETON LOADING
+   ============================================================ */
+.skeleton {
+  background: linear-gradient(90deg, var(--bg-hover) 25%, var(--bg-secondary) 50%, var(--bg-hover) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: var(--radius);
+  height: 240px;
+}
+@keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+/* ============================================================
+   TOAST NOTIFICATIONS
+   ============================================================ */
+.toast-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 300;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.toast {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12px 20px;
+  font-size: 14px;
+  box-shadow: var(--shadow-lg);
+  animation: slideIn 0.3s ease, fadeOut 0.3s ease 2.7s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+@keyframes slideIn { from { transform: translateX(100%); opacity: 0; } }
+@keyframes fadeOut { to { opacity: 0; transform: translateY(10px); } }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.footer {
+  text-align: center;
+  padding: 24px 20px;
+  color: var(--text-tertiary);
+  font-size: 13px;
+}
+.footer a { color: var(--accent); }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 768px) {
+  .hero { padding: 40px 16px 36px; }
+  .hero h1 { font-size: 26px; }
+  .hero p { font-size: 15px; }
+  .search-box { flex-direction: column; }
+  .search-btn { justify-content: center; }
+  .results-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+  .explore-grid { grid-template-columns: repeat(3, 1fr); gap: 3px; }
+  .modal { border-radius: 20px 20px 0 0; }
+  .list-meta { display: none; }
+  .nav-tab { padding: 10px 14px; font-size: 13px; }
+}
+@media (max-width: 480px) {
+  .results-grid { grid-template-columns: 1fr; }
+  .explore-grid { grid-template-columns: repeat(2, 1fr); }
+  .header-inner { gap: 10px; }
+  .logo span { display: none; }
+}
+
+/* RTL support */
+[dir="rtl"] .search-box { flex-direction: row-reverse; }
+[dir="rtl"] .card-avatar { left: auto; right: 20px; }
+[dir="rtl"] .card-body { text-align: right; }
+[dir="rtl"] .modal-header { flex-direction: row-reverse; }
+[dir="rtl"] .modal-close { margin-left: 0; margin-right: auto; }
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     HEADER
+     ============================================================ -->
+<header class="header">
+  <div class="header-inner">
+    <div class="logo">
+      <div class="logo-icon">🔍</div>
+      <span data-i18n="app_name">Telegram Explorer</span>
+    </div>
+    <div class="header-actions">
+      <select class="lang-select" id="langSelect" aria-label="Language">
+        <option value="en">🇬🇧 EN</option>
+        <option value="fa">🇮🇷 فا</option>
+        <option value="ar">🇸🇦 ع</option>
+        <option value="zh">🇨🇳 中</option>
+        <option value="ru">🇷🇺 РУ</option>
+        <option value="es">🇪🇸 ES</option>
+        <option value="fr">🇫🇷 FR</option>
+      </select>
+      <button class="icon-btn" id="themeToggle" title="Toggle theme" aria-label="Toggle theme">🌙</button>
+      <button class="icon-btn" id="favBtn" title="Favorites" aria-label="Favorites">❤️</button>
+    </div>
+  </div>
+</header>
+
+<!-- ============================================================
+     HERO SEARCH
+     ============================================================ -->
+<section class="hero" id="heroSection">
+  <div class="hero-content">
+    <h1 data-i18n="hero_title">Explore Telegram Channels</h1>
+    <p data-i18n="hero_subtitle">Search and discover public channels and groups across Telegram</p>
+    <div class="search-box">
+      <input class="search-input" id="searchInput" type="text" data-i18n-placeholder="search_placeholder" placeholder="Search channels, topics, groups..." autocomplete="off">
+      <button class="search-btn" id="searchBtn" data-i18n="search_btn">
+        🔍 Search
+      </button>
+    </div>
+    <div class="search-tags" id="searchTags">
+      <span class="search-tag" data-query="technology">💻 Technology</span>
+      <span class="search-tag" data-query="crypto">🪙 Crypto</span>
+      <span class="search-tag" data-query="news">📰 News</span>
+      <span class="search-tag" data-query="meme">😂 Memes</span>
+      <span class="search-tag" data-query="programming">👨‍💻 Programming</span>
+      <span class="search-tag" data-query="science">🔬 Science</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     MAIN CONTENT
+     ============================================================ -->
+<main class="container">
+  <!-- Nav Tabs -->
+  <nav class="nav-tabs" id="navTabs">
+    <button class="nav-tab active" data-tab="explore" data-i18n="tab_explore">🏠 Explore</button>
+    <button class="nav-tab" data-tab="search" data-i18n="tab_search">🔍 Search</button>
+    <button class="nav-tab" data-tab="favorites" data-i18n="tab_favorites">❤️ Favorites</button>
+  </nav>
+
+  <!-- Categories (Explore tab) -->
+  <div class="categories-bar" id="categoriesBar"></div>
+
+  <!-- Results Header -->
+  <div class="results-header" id="resultsHeader" style="display:none">
+    <span class="results-count" id="resultsCount"></span>
+    <div class="view-toggle">
+      <button class="view-btn active" data-view="grid" title="Grid">⊞</button>
+      <button class="view-btn" data-view="list" title="List">☰</button>
+      <button class="view-btn" data-view="explore" title="Explore">⊡</button>
+    </div>
+  </div>
+
+  <!-- Content Area -->
+  <div id="content">
+    <div class="loading">
+      <div class="spinner"></div>
+      <span data-i18n="loading">Loading...</span>
+    </div>
+  </div>
+</main>
+
+<!-- ============================================================
+     CHANNEL DETAIL MODAL
+     ============================================================ -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" id="modal">
+    <div class="modal-header">
+      <div class="modal-avatar" id="modalAvatar">T</div>
+      <div>
+        <div class="modal-title" id="modalTitle"></div>
+        <div class="modal-user" id="modalUser"></div>
+        <div class="modal-members-display" id="modalMembers"></div>
+      </div>
+      <button class="modal-close" id="modalClose">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-desc" id="modalDesc"></div>
+      <div class="modal-actions">
+        <button class="modal-btn modal-btn-primary" id="modalOpenTg">
+          <span>✈️</span> <span data-i18n="open_telegram">Open in Telegram</span>
+        </button>
+        <button class="modal-btn modal-btn-secondary" id="modalFavBtn">
+          <span>❤️</span> <span data-i18n="save">Save</span>
+        </button>
+      </div>
+      <div class="modal-posts-title" data-i18n="recent_posts">Recent Posts</div>
+      <div class="modal-posts" id="modalPosts">
+        <div class="loading"><div class="spinner"></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Toast Container -->
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- ============================================================
+     JAVASCRIPT
+     ============================================================ -->
+<script>
+// ============================================================
+// INTERNATIONALIZATION (i18n)
+// ============================================================
+const I18N = {
+  en: {
+    app_name: 'Telegram Explorer',
+    hero_title: 'Explore Telegram Channels',
+    hero_subtitle: 'Search and discover public channels and groups across Telegram',
+    search_placeholder: 'Search channels, topics, groups...',
+    search_btn: '🔍 Search',
+    tab_explore: '🏠 Explore',
+    tab_search: '🔍 Search',
+    tab_favorites: '❤️ Favorites',
+    loading: 'Loading...',
+    no_results: 'No results found',
+    no_results_desc: 'Try a different search term or explore categories',
+    open_telegram: 'Open in Telegram',
+    save: 'Save',
+    saved: 'Saved!',
+    recent_posts: 'Recent Posts',
+    members: 'members',
+    results_for: 'results for',
+    explore: 'Explore',
+    favorites: 'Favorites',
+    no_favorites: 'No favorites yet',
+    no_favorites_desc: 'Tap ❤️ on channels to save them here',
+    cat_tech: 'Technology',
+    cat_news: 'News',
+    cat_crypto: 'Crypto',
+    cat_entertainment: 'Entertainment',
+    cat_science: 'Science',
+    cat_gaming: 'Gaming',
+    cat_music: 'Music',
+    cat_art: 'Art',
+    cat_sports: 'Sports',
+    cat_education: 'Education',
+    cat_meme: 'Memes',
+    cat_food: 'Food',
+    cat_travel: 'Travel',
+    cat_photography: 'Photography',
+    all: 'All',
+    copied: 'Link copied!',
+    removed_fav: 'Removed from favorites',
+  },
+  fa: {
+    app_name: 'تلگرام اکسپلورر',
+    hero_title: 'کاوش کانال‌های تلگرام',
+    hero_subtitle: 'جستجو و کشف کانال‌ها و گروه‌های عمومی تلگرام',
+    search_placeholder: 'جستجوی کانال، موضوع، گروه...',
+    search_btn: '🔍 جستجو',
+    tab_explore: '🏠 کاوش',
+    tab_search: '🔍 جستجو',
+    tab_favorites: '❤️ علاقه‌مندی‌ها',
+    loading: 'در حال بارگذاری...',
+    no_results: 'نتیجه‌ای یافت نشد',
+    no_results_desc: 'عبارت دیگری امتحان کنید یا دسته‌بندی‌ها را کاوش کنید',
+    open_telegram: 'باز کردن در تلگرام',
+    save: 'ذخیره',
+    saved: 'ذخیره شد!',
+    recent_posts: 'پست‌های اخیر',
+    members: 'عضو',
+    results_for: 'نتیجه برای',
+    explore: 'کاوش',
+    favorites: 'علاقه‌مندی‌ها',
+    no_favorites: 'هنوز علاقه‌مندی ندارید',
+    no_favorites_desc: 'روی ❤️ کانال‌ها بزنید تا اینجا ذخیره شوند',
+    cat_tech: 'تکنولوژی',
+    cat_news: 'اخبار',
+    cat_crypto: 'ارز دیجیتال',
+    cat_entertainment: 'سرگرمی',
+    cat_science: 'علم',
+    cat_gaming: 'بازی',
+    cat_music: 'موسیقی',
+    cat_art: 'هنر',
+    cat_sports: 'ورزش',
+    cat_education: 'آموزش',
+    cat_meme: 'میم',
+    cat_food: 'غذا',
+    cat_travel: 'سفر',
+    cat_photography: 'عکاسی',
+    all: 'همه',
+    copied: 'لینک کپی شد!',
+    removed_fav: 'از علاقه‌مندی‌ها حذف شد',
+  },
+  ar: {
+    app_name: 'مستكشف تيليجرام',
+    hero_title: 'استكشف قنوات تيليجرام',
+    hero_subtitle: 'ابحث واكتشف القنوات والمجموعات العامة عبر تيليجرام',
+    search_placeholder: 'ابحث عن قنوات، مواضيع، مجموعات...',
+    search_btn: '🔍 بحث',
+    tab_explore: '🏠 استكشاف',
+    tab_search: '🔍 بحث',
+    tab_favorites: '❤️ المفضلة',
+    loading: 'جارٍ التحميل...',
+    no_results: 'لم يتم العثور على نتائج',
+    no_results_desc: 'جرّب مصطلح بحث آخر أو استكشف الفئات',
+    open_telegram: 'فتح في تيليجرام',
+    save: 'حفظ',
+    saved: 'تم الحفظ!',
+    recent_posts: 'المنشورات الأخيرة',
+    members: 'عضو',
+    results_for: 'نتائج لـ',
+    explore: 'استكشاف',
+    favorites: 'المفضلة',
+    no_favorites: 'لا توجد مفضلات بعد',
+    no_favorites_desc: 'اضغط ❤️ على القنوات لحفظها هنا',
+    cat_tech: 'التكنولوجيا',
+    cat_news: 'الأخبار',
+    cat_crypto: 'العملات الرقمية',
+    cat_entertainment: 'الترفيه',
+    cat_science: 'العلوم',
+    cat_gaming: 'الألعاب',
+    cat_music: 'الموسيقى',
+    cat_art: 'الفن',
+    cat_sports: 'الرياضة',
+    cat_education: 'التعليم',
+    cat_meme: 'ميمز',
+    cat_food: 'الطعام',
+    cat_travel: 'السفر',
+    cat_photography: 'التصوير',
+    all: 'الكل',
+    copied: 'تم نسخ الرابط!',
+    removed_fav: 'تمت الإزالة من المفضلة',
+  },
+  zh: {
+    app_name: 'Telegram 探索器',
+    hero_title: '探索 Telegram 频道',
+    hero_subtitle: '搜索和发现 Telegram 上的公开频道和群组',
+    search_placeholder: '搜索频道、话题、群组...',
+    search_btn: '🔍 搜索',
+    tab_explore: '🏠 探索',
+    tab_search: '🔍 搜索',
+    tab_favorites: '❤️ 收藏',
+    loading: '加载中...',
+    no_results: '未找到结果',
+    no_results_desc: '尝试其他搜索词或浏览分类',
+    open_telegram: '在 Telegram 中打开',
+    save: '保存',
+    saved: '已保存！',
+    recent_posts: '最近帖子',
+    members: '成员',
+    results_for: '搜索结果',
+    explore: '探索',
+    favorites: '收藏',
+    no_favorites: '暂无收藏',
+    no_favorites_desc: '点击频道上的 ❤️ 保存到这里',
+    cat_tech: '科技',
+    cat_news: '新闻',
+    cat_crypto: '加密货币',
+    cat_entertainment: '娱乐',
+    cat_science: '科学',
+    cat_gaming: '游戏',
+    cat_music: '音乐',
+    cat_art: '艺术',
+    cat_sports: '体育',
+    cat_education: '教育',
+    cat_meme: '表情包',
+    cat_food: '美食',
+    cat_travel: '旅行',
+    cat_photography: '摄影',
+    all: '全部',
+    copied: '链接已复制！',
+    removed_fav: '已从收藏中移除',
+  },
+  ru: {
+    app_name: 'Telegram Explorer',
+    hero_title: 'Исследуйте каналы Telegram',
+    hero_subtitle: 'Ищите и находите публичные каналы и группы в Telegram',
+    search_placeholder: 'Поиск каналов, тем, групп...',
+    search_btn: '🔍 Поиск',
+    tab_explore: '🏠 Обзор',
+    tab_search: '🔍 Поиск',
+    tab_favorites: '❤️ Избранное',
+    loading: 'Загрузка...',
+    no_results: 'Ничего не найдено',
+    no_results_desc: 'Попробуйте другой запрос или просмотрите категории',
+    open_telegram: 'Открыть в Telegram',
+    save: 'Сохранить',
+    saved: 'Сохранено!',
+    recent_posts: 'Последние посты',
+    members: 'участников',
+    results_for: 'результатов для',
+    explore: 'Обзор',
+    favorites: 'Избранное',
+    no_favorites: 'Избранного пока нет',
+    no_favorites_desc: 'Нажмите ❤️ на каналах, чтобы сохранить их',
+    cat_tech: 'Технологии',
+    cat_news: 'Новости',
+    cat_crypto: 'Криптовалюта',
+    cat_entertainment: 'Развлечения',
+    cat_science: 'Наука',
+    cat_gaming: 'Игры',
+    cat_music: 'Музыка',
+    cat_art: 'Искусство',
+    cat_sports: 'Спорт',
+    cat_education: 'Образование',
+    cat_meme: 'Мемы',
+    cat_food: 'Еда',
+    cat_travel: 'Путешествия',
+    cat_photography: 'Фотография',
+    all: 'Все',
+    copied: 'Ссылка скопирована!',
+    removed_fav: 'Удалено из избранного',
+  },
+  es: {
+    app_name: 'Telegram Explorer',
+    hero_title: 'Explora canales de Telegram',
+    hero_subtitle: 'Busca y descubre canales y grupos públicos en Telegram',
+    search_placeholder: 'Buscar canales, temas, grupos...',
+    search_btn: '🔍 Buscar',
+    tab_explore: '🏠 Explorar',
+    tab_search: '🔍 Buscar',
+    tab_favorites: '❤️ Favoritos',
+    loading: 'Cargando...',
+    no_results: 'No se encontraron resultados',
+    no_results_desc: 'Prueba con otro término o explora categorías',
+    open_telegram: 'Abrir en Telegram',
+    save: 'Guardar',
+    saved: '¡Guardado!',
+    recent_posts: 'Publicaciones recientes',
+    members: 'miembros',
+    results_for: 'resultados para',
+    explore: 'Explorar',
+    favorites: 'Favoritos',
+    no_favorites: 'Aún no hay favoritos',
+    no_favorites_desc: 'Toca ❤️ en los canales para guardarlos aquí',
+    cat_tech: 'Tecnología',
+    cat_news: 'Noticias',
+    cat_crypto: 'Criptomonedas',
+    cat_entertainment: 'Entretenimiento',
+    cat_science: 'Ciencia',
+    cat_gaming: 'Juegos',
+    cat_music: 'Música',
+    cat_art: 'Arte',
+    cat_sports: 'Deportes',
+    cat_education: 'Educación',
+    cat_meme: 'Memes',
+    cat_food: 'Comida',
+    cat_travel: 'Viajes',
+    cat_photography: 'Fotografía',
+    all: 'Todo',
+    copied: '¡Enlace copiado!',
+    removed_fav: 'Eliminado de favoritos',
+  },
+  fr: {
+    app_name: 'Telegram Explorer',
+    hero_title: 'Explorez les chaînes Telegram',
+    hero_subtitle: 'Recherchez et découvrez les chaînes et groupes publics sur Telegram',
+    search_placeholder: 'Rechercher des chaînes, sujets, groupes...',
+    search_btn: '🔍 Rechercher',
+    tab_explore: '🏠 Explorer',
+    tab_search: '🔍 Rechercher',
+    tab_favorites: '❤️ Favoris',
+    loading: 'Chargement...',
+    no_results: 'Aucun résultat trouvé',
+    no_results_desc: 'Essayez un autre terme ou explorez les catégories',
+    open_telegram: 'Ouvrir dans Telegram',
+    save: 'Enregistrer',
+    saved: 'Enregistré !',
+    recent_posts: 'Publications récentes',
+    members: 'membres',
+    results_for: 'résultats pour',
+    explore: 'Explorer',
+    favorites: 'Favoris',
+    no_favorites: 'Pas encore de favoris',
+    no_favorites_desc: 'Appuyez ❤️ sur les chaînes pour les sauvegarder',
+    cat_tech: 'Technologie',
+    cat_news: 'Actualités',
+    cat_crypto: 'Crypto',
+    cat_entertainment: 'Divertissement',
+    cat_science: 'Science',
+    cat_gaming: 'Jeux',
+    cat_music: 'Musique',
+    cat_art: 'Art',
+    cat_sports: 'Sports',
+    cat_education: 'Éducation',
+    cat_meme: 'Mèmes',
+    cat_food: 'Cuisine',
+    cat_travel: 'Voyage',
+    cat_photography: 'Photographie',
+    all: 'Tout',
+    copied: 'Lien copié !',
+    removed_fav: 'Retiré des favoris',
+  },
+};
+
+const RTL_LANGS = ['fa', 'ar'];
+
+// ============================================================
+// STATE
+// ============================================================
+let state = {
+  lang: localStorage.getItem('telgram_explorer_lang') || 'en',
+  theme: localStorage.getItem('telgram_explorer_theme') || 'dark',
+  currentTab: 'explore',
+  currentView: 'grid',
+  currentCategory: 'all',
+  searchQuery: '',
+  searchResults: [],
+  favorites: JSON.parse(localStorage.getItem('telgram_explorer_favs') || '[]'),
+  channelCache: {},
+};
+
+// ============================================================
+// WORKER URL — CHANGE THIS TO YOUR WORKER URL
+// ============================================================
+const WORKER_URL = localStorage.getItem('telgram_explorer_worker') || '';
+
+// ============================================================
+// INIT
+// ============================================================
+document.addEventListener('DOMContentLoaded', () => {
+  applyTheme(state.theme);
+  applyLang(state.lang);
+  renderCategories();
+  loadExplore();
+  bindEvents();
+});
+
+// ============================================================
+// EVENT BINDINGS
+// ============================================================
+function bindEvents() {
+  // Search
+  document.getElementById('searchBtn').addEventListener('click', doSearch);
+  document.getElementById('searchInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') doSearch();
+  });
+
+  // Search tags
+  document.getElementById('searchTags').addEventListener('click', e => {
+    const tag = e.target.closest('.search-tag');
+    if (tag) {
+      document.getElementById('searchInput').value = tag.dataset.query;
+      doSearch();
+    }
+  });
+
+  // Nav tabs
+  document.getElementById('navTabs').addEventListener('click', e => {
+    const tab = e.target.closest('.nav-tab');
+    if (tab) switchTab(tab.dataset.tab);
+  });
+
+  // Categories
+  document.getElementById('categoriesBar').addEventListener('click', e => {
+    const chip = e.target.closest('.cat-chip');
+    if (chip) {
+      state.currentCategory = chip.dataset.cat;
+      renderCategories();
+      loadExplore();
+    }
+  });
+
+  // View toggle
+  document.querySelector('.view-toggle')?.addEventListener('click', e => {
+    const btn = e.target.closest('.view-btn');
+    if (btn) {
+      document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      state.currentView = btn.dataset.view;
+      renderResults();
+    }
+  });
+
+  // Theme toggle
+  document.getElementById('themeToggle').addEventListener('click', () => {
+    state.theme = state.theme === 'dark' ? 'light' : 'dark';
+    applyTheme(state.theme);
+    localStorage.setItem('telgram_explorer_theme', state.theme);
+  });
+
+  // Language select
+  document.getElementById('langSelect').addEventListener('change', e => {
+    state.lang = e.target.value;
+    applyLang(state.lang);
+    localStorage.setItem('telgram_explorer_lang', state.lang);
+    renderCategories();
+    renderResults();
+  });
+
+  // Favorites button
+  document.getElementById('favBtn').addEventListener('click', () => switchTab('favorites'));
+
+  // Modal close
+  document.getElementById('modalClose').addEventListener('click', closeModal);
+  document.getElementById('modalOverlay').addEventListener('click', e => {
+    if (e.target === e.currentTarget) closeModal();
+  });
+
+  // Keyboard shortcuts
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeModal();
+  });
+}
+
+// ============================================================
+// THEME
+// ============================================================
+function applyTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  document.getElementById('themeToggle').textContent = theme === 'dark' ? '☀️' : '🌙';
+}
+
+// ============================================================
+// LANGUAGE
+// ============================================================
+function applyLang(lang) {
+  const t = I18N[lang] || I18N.en;
+  const isRTL = RTL_LANGS.includes(lang);
+
+  document.documentElement.lang = lang;
+  document.documentElement.dir = isRTL ? 'rtl' : 'ltr';
+  document.getElementById('langSelect').value = lang;
+
+  // Update text elements
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    if (t[key]) {
+      if (el.tagName === 'INPUT') el.placeholder = t[key];
+      else el.textContent = t[key];
+    }
+  });
+
+  // Update placeholders
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    const key = el.dataset.i18nPlaceholder;
+    if (t[key]) el.placeholder = t[key];
+  });
+}
+
+function t(key) {
+  return (I18N[state.lang] || I18N.en)[key] || I18N.en[key] || key;
+}
+
+// ============================================================
+// TABS
+// ============================================================
+function switchTab(tab) {
+  state.currentTab = tab;
+  document.querySelectorAll('.nav-tab').forEach(el => {
+    el.classList.toggle('active', el.dataset.tab === tab);
+  });
+  document.getElementById('heroSection').style.display = tab === 'favorites' ? 'none' : '';
+  document.getElementById('categoriesBar').style.display = tab === 'explore' ? '' : 'none';
+  document.getElementById('resultsHeader').style.display = tab === 'favorites' ? 'none' : 'none';
+
+  if (tab === 'explore') loadExplore();
+  else if (tab === 'search') renderResults();
+  else if (tab === 'favorites') renderFavorites();
+}
+
+// ============================================================
+// SEARCH
+// ============================================================
+async function doSearch() {
+  const query = document.getElementById('searchInput').value.trim();
+  if (!query) return;
+
+  state.searchQuery = query;
+  state.currentTab = 'search';
+  document.querySelectorAll('.nav-tab').forEach(el => {
+    el.classList.toggle('active', el.dataset.tab === 'search');
+  });
+  document.getElementById('categoriesBar').style.display = 'none';
+  document.getElementById('resultsHeader').style.display = 'flex';
+
+  const content = document.getElementById('content');
+  content.innerHTML = renderSkeletons(6);
+
+  try {
+    let results = [];
+
+    if (WORKER_URL) {
+      // Use worker proxy
+      const resp = await fetch(`${WORKER_URL}/api/search?q=${encodeURIComponent(query)}&lang=${state.lang}`);
+      const data = await resp.json();
+      results = data.results || [];
+    } else {
+      // Fallback: use local curated data + simulated search
+      results = searchLocal(query);
+    }
+
+    state.searchResults = results;
+    document.getElementById('resultsCount').textContent = `${results.length} ${t('results_for')} "${query}"`;
+    renderResults();
+  } catch (err) {
+    content.innerHTML = renderEmpty(t('no_results'), t('no_results_desc'));
+  }
+}
+
+function searchLocal(query) {
+  const q = query.toLowerCase();
+  const all = getAllChannels();
+  return all.filter(ch =>
+    ch.username.toLowerCase().includes(q) ||
+    ch.title.toLowerCase().includes(q) ||
+    (ch.description || '').toLowerCase().includes(q) ||
+    (ch.tags || []).some(tag => tag.includes(q))
+  );
+}
+
+// ============================================================
+// EXPLORE
+// ============================================================
+async function loadExplore() {
+  const content = document.getElementById('content');
+  content.innerHTML = renderSkeletons(9);
+
+  try {
+    let channels = [];
+
+    if (WORKER_URL) {
+      const url = state.currentCategory === 'all'
+        ? `${WORKER_URL}/api/trending?page=1`
+        : `${WORKER_URL}/api/trending?cat=${state.currentCategory}&page=1`;
+      const resp = await fetch(url);
+      const data = await resp.json();
+      channels = data.channels || [];
+    } else {
+      channels = getLocalExplore(state.currentCategory);
+    }
+
+    state.searchResults = channels;
+    renderResults();
+  } catch (err) {
+    content.innerHTML = renderEmpty(t('no_results'), t('no_results_desc'));
+  }
+}
+
+// ============================================================
+// RENDER RESULTS
+// ============================================================
+function renderResults() {
+  const content = document.getElementById('content');
+  const results = state.searchResults;
+
+  if (!results.length) {
+    content.innerHTML = renderEmpty(t('no_results'), t('no_results_desc'));
+    return;
+  }
+
+  if (state.currentView === 'explore') {
+    renderExploreView(content, results);
+  } else if (state.currentView === 'list') {
+    renderListView(content, results);
+  } else {
+    renderGridView(content, results);
+  }
+}
+
+function renderGridView(container, items) {
+  container.innerHTML = `<div class="results-grid">${items.map(ch => `
+    <div class="channel-card" data-user="${ch.username}" onclick="openChannel('${ch.username}')">
+      <div class="card-banner">
+        <div class="card-banner-overlay"></div>
+        <div class="card-avatar">${ch.avatar ? `<img src="${ch.avatar}" alt="" loading="lazy">` : ch.title[0].toUpperCase()}</div>
+      </div>
+      <div class="card-body">
+        <div class="card-title">${escHtml(ch.title)}</div>
+        <div class="card-username">@${escHtml(ch.username)}</div>
+        <div class="card-desc">${escHtml(ch.description || ch.title)}</div>
+        <div class="card-footer">
+          <div class="card-members">👥 ${ch.members || '0'} ${t('members')}</div>
+          <div class="card-actions">
+            <button class="card-action-btn ${isFav(ch.username) ? 'favorited' : ''}" onclick="event.stopPropagation(); toggleFav('${ch.username}', '${escAttr(ch.title)}')" title="Favorite">
+              ${isFav(ch.username) ? '❤️' : '🤍'}
+            </button>
+            <button class="card-action-btn" onclick="event.stopPropagation(); copyLink('${ch.username}')" title="Copy link">🔗</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  `).join('')}</div>`;
+}
+
+function renderListView(container, items) {
+  container.innerHTML = `<div class="results-list">${items.map(ch => `
+    <div class="list-item" onclick="openChannel('${ch.username}')">
+      <div class="list-avatar">${ch.avatar ? `<img src="${ch.avatar}" alt="" loading="lazy">` : ch.title[0].toUpperCase()}</div>
+      <div class="list-info">
+        <div class="list-title">${escHtml(ch.title)}</div>
+        <div class="list-user">@${escHtml(ch.username)}</div>
+        <div class="list-desc">${escHtml(ch.description || '')}</div>
+      </div>
+      <div class="list-meta">
+        <span class="list-members">👥 ${ch.members || '0'}</span>
+        <button class="card-action-btn ${isFav(ch.username) ? 'favorited' : ''}" onclick="event.stopPropagation(); toggleFav('${ch.username}', '${escAttr(ch.title)}')">
+          ${isFav(ch.username) ? '❤️' : '🤍'}
+        </button>
+      </div>
+    </div>
+  `).join('')}</div>`;
+}
+
+function renderExploreView(container, items) {
+  // Instagram-like grid with images
+  const colors = ['#0088cc','#e91e63','#9c27b0','#ff9800','#4caf50','#00bcd4','#795548','#607d8b','#f44336','#3f51b5'];
+  container.innerHTML = `<div class="explore-grid">${items.map((ch, i) => {
+    const color = colors[i % colors.length];
+    const img = ch.image || ch.avatar || '';
+    return `
+    <div class="explore-item" onclick="openChannel('${ch.username}')">
+      ${img ? `<img src="${img}" alt="" loading="lazy">` : `<div style="width:100%;height:100%;background:${color};display:flex;align-items:center;justify-content:center;font-size:36px;color:#fff;font-weight:700">${ch.title[0].toUpperCase()}</div>`}
+      <div class="explore-item-overlay">
+        <div class="explore-item-info">
+          <div class="explore-stat">${ch.members || '0'}</div>
+          <div class="explore-label">${t('members')}</div>
+        </div>
+      </div>
+    </div>`;
+  }).join('')}</div>`;
+}
+
+// ============================================================
+// CHANNEL DETAIL MODAL
+// ============================================================
+async function openChannel(username) {
+  const overlay = document.getElementById('modalOverlay');
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+
+  // Set basic info from cached data
+  const cached = state.searchResults.find(ch => ch.username === username);
+  document.getElementById('modalAvatar').innerHTML = cached?.avatar
+    ? `<img src="${cached.avatar}" alt="">`
+    : (cached?.title?.[0] || username[0]).toUpperCase();
+  document.getElementById('modalTitle').textContent = cached?.title || username;
+  document.getElementById('modalUser').textContent = `@${username}`;
+  document.getElementById('modalMembers').textContent = cached?.members ? `${cached.members} ${t('members')}` : '';
+  document.getElementById('modalDesc').textContent = cached?.description || '';
+  document.getElementById('modalOpenTg').onclick = () => window.open(`https://t.me/${username}`, '_blank');
+  document.getElementById('modalFavBtn').onclick = () => {
+    toggleFav(username, cached?.title || username);
+    updateModalFavBtn(username);
+  };
+  updateModalFavBtn(username);
+
+  // Load posts
+  const postsDiv = document.getElementById('modalPosts');
+  postsDiv.innerHTML = '<div class="loading"><div class="spinner"></div></div>';
+
+  try {
+    if (WORKER_URL) {
+      const resp = await fetch(`${WORKER_URL}/api/posts/${username}`);
+      const data = await resp.json();
+      if (data.posts?.length) {
+        postsDiv.innerHTML = data.posts.map(post => `
+          <div class="post-card">
+            <div class="post-text">${escHtml(post.text)}</div>
+            ${post.image ? `<img class="post-img" src="${post.image}" alt="" loading="lazy">` : ''}
+            <a class="post-link" href="${post.link}" target="_blank" rel="noopener">View on Telegram →</a>
+          </div>
+        `).join('');
+      } else {
+        postsDiv.innerHTML = `<div class="empty-state"><p style="font-size:14px">${t('no_results')}</p></div>`;
+      }
+    } else {
+      // No worker — show link
+      postsDiv.innerHTML = `
+        <div class="empty-state">
+          <div class="empty-icon">📡</div>
+          <p style="font-size:14px">Configure Worker URL to load posts</p>
+          <a href="https://t.me/s/${username}" target="_blank" rel="noopener" style="margin-top:12px;display:inline-block;color:var(--accent)">
+            View posts on t.me →
+          </a>
+        </div>`;
+    }
+  } catch (err) {
+    postsDiv.innerHTML = `<div class="empty-state"><p style="font-size:14px">${t('no_results')}</p></div>`;
+  }
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function updateModalFavBtn(username) {
+  const btn = document.getElementById('modalFavBtn');
+  const fav = isFav(username);
+  btn.querySelector('span:first-child').textContent = fav ? '❤️' : '🤍';
+}
+
+// ============================================================
+// FAVORITES
+// ============================================================
+function toggleFav(username, title) {
+  const idx = state.favorites.findIndex(f => f.username === username);
+  if (idx > -1) {
+    state.favorites.splice(idx, 1);
+    toast(t('removed_fav'));
+  } else {
+    const ch = state.searchResults.find(c => c.username === username) || { username, title };
+    state.favorites.push(ch);
+    toast(t('saved'));
+  }
+  localStorage.setItem('telgram_explorer_favs', JSON.stringify(state.favorites));
+  renderResults();
+}
+
+function isFav(username) {
+  return state.favorites.some(f => f.username === username);
+}
+
+function renderFavorites() {
+  const content = document.getElementById('content');
+  if (!state.favorites.length) {
+    content.innerHTML = renderEmpty(t('no_favorites'), t('no_favorites_desc'));
+    return;
+  }
+  state.searchResults = state.favorites;
+  state.currentView = 'grid';
+  renderGridView(content, state.favorites);
+}
+
+// ============================================================
+// CATEGORIES
+// ============================================================
+function renderCategories() {
+  const bar = document.getElementById('categoriesBar');
+  const cats = [
+    { id: 'all', icon: '🌐', nameKey: 'all' },
+    { id: 'tech', icon: '💻', nameKey: 'cat_tech' },
+    { id: 'news', icon: '📰', nameKey: 'cat_news' },
+    { id: 'crypto', icon: '🪙', nameKey: 'cat_crypto' },
+    { id: 'entertainment', icon: '🎬', nameKey: 'cat_entertainment' },
+    { id: 'science', icon: '🔬', nameKey: 'cat_science' },
+    { id: 'gaming', icon: '🎮', nameKey: 'cat_gaming' },
+    { id: 'music', icon: '🎵', nameKey: 'cat_music' },
+    { id: 'art', icon: '🎨', nameKey: 'cat_art' },
+    { id: 'sports', icon: '⚽', nameKey: 'cat_sports' },
+    { id: 'education', icon: '📚', nameKey: 'cat_education' },
+    { id: 'meme', icon: '😂', nameKey: 'cat_meme' },
+    { id: 'food', icon: '🍕', nameKey: 'cat_food' },
+    { id: 'travel', icon: '✈️', nameKey: 'cat_travel' },
+    { id: 'photography', icon: '📷', nameKey: 'cat_photography' },
+  ];
+  bar.innerHTML = cats.map(c => `
+    <div class="cat-chip ${state.currentCategory === c.id ? 'active' : ''}" data-cat="${c.id}">
+      <span class="cat-icon">${c.icon}</span> ${t(c.nameKey)}
+    </div>
+  `).join('');
+}
+
+// ============================================================
+// LOCAL DATA (fallback when no Worker)
+// ============================================================
+function getAllChannels() {
+  return [
+    { username: 'techcrunch', title: 'TechCrunch', members: '120K', description: 'Latest tech news and startups', tags: ['tech','technology','startup','news'], avatar: '' },
+    { username: 'ai_machinelearning', title: 'AI & Machine Learning', members: '150K', description: 'Artificial Intelligence news and research', tags: ['ai','ml','tech','science'], avatar: '' },
+    { username: 'bitcoin', title: 'Bitcoin', members: '300K', description: 'Bitcoin news, analysis and discussion', tags: ['crypto','bitcoin','btc','finance'], avatar: '' },
+    { username: 'ethereum', title: 'Ethereum', members: '200K', description: 'Ethereum ecosystem updates', tags: ['crypto','ethereum','eth','defi'], avatar: '' },
+    { username: 'bbcpersian', title: 'BBC Persian', members: '1.5M', description: 'BBC Persian news channel', tags: ['news','persian','farsi','bbc'], avatar: '' },
+    { username: 'linux', title: 'Linux', members: '80K', description: 'Linux news and tips', tags: ['tech','linux','opensource','programming'], avatar: '' },
+    { username: 'webdev', title: 'Web Development', members: '60K', description: 'Web development resources', tags: ['tech','web','javascript','programming'], avatar: '' },
+    { username: 'movies_series', title: 'Movies & Series', members: '400K', description: 'Latest movies and TV series', tags: ['entertainment','movies','series','netflix'], avatar: '' },
+    { username: 'science', title: 'Science', members: '120K', description: 'Scientific discoveries and research', tags: ['science','research','discovery'], avatar: '' },
+    { username: 'gaming', title: 'Gaming', members: '200K', description: 'Gaming news and discussions', tags: ['gaming','games','esports'], avatar: '' },
+    { username: 'music', title: 'Music', members: '250K', description: 'Music sharing and discovery', tags: ['music','songs','playlist'], avatar: '' },
+    { username: 'art', title: 'Art', members: '80K', description: 'Digital and traditional art', tags: ['art','design','creative'], avatar: '' },
+    { username: 'football', title: 'Football', members: '300K', description: 'Football news and highlights', tags: ['sports','football','soccer'], avatar: '' },
+    { username: 'learnenglish', title: 'Learn English', members: '200K', description: 'English learning resources', tags: ['education','english','language','learning'], avatar: '' },
+    { username: 'memes', title: 'Memes', members: '500K', description: 'Best memes from around the web', tags: ['meme','funny','humor','entertainment'], avatar: '' },
+    { username: 'recipes', title: 'Recipes', members: '100K', description: 'Cooking recipes and food tips', tags: ['food','cooking','recipe'], avatar: '' },
+    { username: 'travel', title: 'Travel', members: '120K', description: 'Travel tips and destinations', tags: ['travel','tourism','adventure'], avatar: '' },
+    { username: 'photography', title: 'Photography', members: '90K', description: 'Photography tips and showcase', tags: ['photography','photo','camera'], avatar: '' },
+    { username: 'crypto', title: 'Crypto News', members: '150K', description: 'Cryptocurrency market news', tags: ['crypto','bitcoin','market','trading'], avatar: '' },
+    { username: 'nasa', title: 'NASA', members: '90K', description: 'NASA space exploration updates', tags: ['science','space','nasa','astronomy'], avatar: '' },
+    { username: 'python', title: 'Python', members: '100K', description: 'Python programming community', tags: ['tech','programming','python','code'], avatar: '' },
+    { username: 'javascript', title: 'JavaScript', members: '85K', description: 'JavaScript developers community', tags: ['tech','programming','javascript','web'], avatar: '' },
+    { username: 'android_apps', title: 'Android Apps', members: '110K', description: 'Best Android apps and games', tags: ['tech','android','apps','mobile'], avatar: '' },
+    { username: 'design', title: 'Design', members: '60K', description: 'UI/UX and graphic design', tags: ['art','design','ui','ux'], avatar: '' },
+    { username: 'steam', title: 'Steam', members: '150K', description: 'Steam deals and gaming news', tags: ['gaming','steam','pc','games'], avatar: '' },
+  ];
+}
+
+function getLocalExplore(category) {
+  const all = getAllChannels();
+  if (category === 'all') return all;
+  return all.filter(ch => ch.tags?.includes(category));
+}
+
+// ============================================================
+// UTILITY
+// ============================================================
+function escHtml(str) {
+  const el = document.createElement('div');
+  el.textContent = str || '';
+  return el.innerHTML;
+}
+
+function escAttr(str) {
+  return (str || '').replace(/'/g, "\\'").replace(/"/g, '&quot;');
+}
+
+function copyLink(username) {
+  navigator.clipboard.writeText(`https://t.me/${username}`).then(() => toast(t('copied')));
+}
+
+function toast(msg) {
+  const container = document.getElementById('toastContainer');
+  const el = document.createElement('div');
+  el.className = 'toast';
+  el.innerHTML = `<span>✅</span> ${escHtml(msg)}`;
+  container.appendChild(el);
+  setTimeout(() => el.remove(), 3000);
+}
+
+function renderSkeletons(count) {
+  return `<div class="results-grid">${Array(count).fill('<div class="skeleton"></div>').join('')}</div>`;
+}
+
+function renderEmpty(icon, title, desc) {
+  return `<div class="empty-state">
+    <div class="empty-icon">${icon === t('no_favorites') ? '❤️' : '🔍'}</div>
+    <h3>${escHtml(title)}</h3>
+    <p>${escHtml(desc || '')}</p>
+  </div>`;
+}
+</script>
+</body>
+</html>
