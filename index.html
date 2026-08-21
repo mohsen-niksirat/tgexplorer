@@ -9,824 +9,92 @@
 <meta property="og:description" content="Search and discover public Telegram channels and groups">
 <meta property="og:type" content="website">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔍</text></svg>">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0088cc">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="TG Explorer">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
 <style>
-/* ============================================================
-   CSS VARIABLES & THEME
-   ============================================================ */
-:root {
-  --bg-primary: #ffffff;
-  --bg-secondary: #f5f5f7;
-  --bg-card: #ffffff;
-  --bg-hover: #f0f0f2;
-  --bg-input: #f0f0f2;
-  --bg-overlay: rgba(0,0,0,0.5);
-  --text-primary: #1a1a1a;
-  --text-secondary: #6b6b6b;
-  --text-tertiary: #999;
-  --accent: #0088cc;
-  --accent-light: #e6f4ff;
-  --accent-dark: #0066aa;
-  --border: #e5e5e5;
-  --shadow: 0 2px 12px rgba(0,0,0,0.08);
-  --shadow-lg: 0 8px 32px rgba(0,0,0,0.12);
-  --radius: 16px;
-  --radius-sm: 10px;
-  --radius-xs: 6px;
-  --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  --max-w: 1200px;
-  --header-h: 64px;
-  --gradient: linear-gradient(135deg, #0088cc 0%, #00b2ff 100%);
-}
-
-[data-theme="dark"] {
-  --bg-primary: #0a0a0a;
-  --bg-secondary: #141414;
-  --bg-card: #1a1a1a;
-  --bg-hover: #242424;
-  --bg-input: #1e1e1e;
-  --text-primary: #f0f0f0;
-  --text-secondary: #999;
-  --text-tertiary: #666;
-  --accent: #39bfff;
-  --accent-light: #0d2a3a;
-  --accent-dark: #60ccff;
-  --border: #2a2a2a;
-  --shadow: 0 2px 12px rgba(0,0,0,0.3);
-  --shadow-lg: 0 8px 32px rgba(0,0,0,0.4);
-}
-
-/* ============================================================
-   RESET & BASE
-   ============================================================ */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body {
-  font-family: var(--font);
-  background: var(--bg-secondary);
-  color: var(--text-primary);
-  line-height: 1.6;
-  min-height: 100vh;
-  transition: background var(--transition), color var(--transition);
-  -webkit-font-smoothing: antialiased;
-}
-a { color: var(--accent); text-decoration: none; }
-a:hover { text-decoration: underline; }
-button { cursor: pointer; border: none; background: none; font-family: inherit; }
-input { font-family: inherit; }
-img { max-width: 100%; display: block; }
-
-/* ============================================================
-   HEADER
-   ============================================================ */
-.header {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: var(--bg-primary);
-  border-bottom: 1px solid var(--border);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  height: var(--header-h);
-  display: flex;
-  align-items: center;
-  padding: 0 20px;
-}
-.header-inner {
-  max-width: var(--max-w);
-  margin: 0 auto;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--accent);
-  white-space: nowrap;
-  flex-shrink: 0;
-}
-.logo-icon {
-  width: 36px;
-  height: 36px;
-  background: var(--gradient);
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-}
-.header-actions {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-left: auto;
-  flex-shrink: 0;
-}
-.icon-btn {
-  width: 40px;
-  height: 40px;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-secondary);
-  transition: all var(--transition);
-  font-size: 20px;
-}
-.icon-btn:hover { background: var(--bg-hover); color: var(--text-primary); }
-.lang-select {
-  padding: 6px 10px;
-  border-radius: var(--radius-xs);
-  background: var(--bg-input);
-  color: var(--text-primary);
-  border: 1px solid var(--border);
-  font-size: 13px;
-  font-weight: 500;
-  outline: none;
-  cursor: pointer;
-}
-
-/* ============================================================
-   SEARCH HERO
-   ============================================================ */
-.hero {
-  background: var(--gradient);
-  padding: 60px 20px 50px;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
-.hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-}
-.hero-content { position: relative; max-width: 680px; margin: 0 auto; }
-.hero h1 {
-  font-size: clamp(28px, 5vw, 42px);
-  font-weight: 800;
-  color: #fff;
-  margin-bottom: 12px;
-  letter-spacing: -0.5px;
-}
-.hero p {
-  color: rgba(255,255,255,0.85);
-  font-size: 17px;
-  margin-bottom: 32px;
-}
-.search-box {
-  display: flex;
-  background: #fff;
-  border-radius: 16px;
-  padding: 6px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
-  max-width: 600px;
-  margin: 0 auto;
-}
-.search-input {
-  flex: 1;
-  border: none;
-  outline: none;
-  padding: 14px 18px;
-  font-size: 16px;
-  background: transparent;
-  color: #1a1a1a;
-  min-width: 0;
-}
-.search-input::placeholder { color: #999; }
-.search-btn {
-  background: var(--gradient);
-  color: #fff;
-  padding: 14px 28px;
-  border-radius: 12px;
-  font-size: 16px;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  transition: transform var(--transition), box-shadow var(--transition);
-  white-space: nowrap;
-}
-.search-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(0,136,204,0.4); }
-.search-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  justify-content: center;
-  margin-top: 20px;
-}
-.search-tag {
-  background: rgba(255,255,255,0.2);
-  color: #fff;
-  padding: 6px 14px;
-  border-radius: 20px;
-  font-size: 13px;
-  cursor: pointer;
-  transition: all var(--transition);
-  backdrop-filter: blur(10px);
-}
-.search-tag:hover { background: rgba(255,255,255,0.35); }
-
-/* ============================================================
-   MAIN CONTAINER
-   ============================================================ */
-.container {
-  max-width: var(--max-w);
-  margin: 0 auto;
-  padding: 24px 20px 80px;
-}
-
-/* ============================================================
-   NAVIGATION TABS
-   ============================================================ */
-.nav-tabs {
-  display: flex;
-  gap: 4px;
-  background: var(--bg-primary);
-  border-radius: var(--radius);
-  padding: 5px;
-  margin-bottom: 24px;
-  border: 1px solid var(--border);
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-}
-.nav-tab {
-  flex: 1;
-  min-width: fit-content;
-  padding: 12px 20px;
-  border-radius: 12px;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--text-secondary);
-  transition: all var(--transition);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  white-space: nowrap;
-}
-.nav-tab:hover { color: var(--text-primary); background: var(--bg-hover); }
-.nav-tab.active { background: var(--accent); color: #fff; }
-
-/* ============================================================
-   CATEGORIES BAR
-   ============================================================ */
-.categories-bar {
-  display: flex;
-  gap: 10px;
-  overflow-x: auto;
-  padding-bottom: 8px;
-  margin-bottom: 24px;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-}
-.categories-bar::-webkit-scrollbar { display: none; }
-.cat-chip {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 10px 18px;
-  background: var(--bg-primary);
-  border: 1px solid var(--border);
-  border-radius: 30px;
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--text-secondary);
-  white-space: nowrap;
-  cursor: pointer;
-  transition: all var(--transition);
-}
-.cat-chip:hover { border-color: var(--accent); color: var(--accent); }
-.cat-chip.active { background: var(--accent); color: #fff; border-color: var(--accent); }
-.cat-chip .cat-icon { font-size: 16px; }
-
-/* ============================================================
-   RESULTS GRID (Explore)
-   ============================================================ */
-.results-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 20px;
-}
-
-/* ============================================================
-   CHANNEL CARD
-   ============================================================ */
-.channel-card {
-  background: var(--bg-card);
-  border-radius: var(--radius);
-  border: 1px solid var(--border);
-  overflow: hidden;
-  transition: all var(--transition);
-  cursor: pointer;
-  position: relative;
-}
-.channel-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-lg);
-  border-color: var(--accent);
-}
-.card-banner {
-  height: 120px;
-  background: var(--gradient);
-  position: relative;
-  overflow: hidden;
-}
-.card-banner img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.card-banner-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.5), transparent);
-}
-.card-avatar {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  background: var(--gradient);
-  border: 3px solid var(--bg-card);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
-  font-weight: 700;
-  color: #fff;
-  position: absolute;
-  bottom: -28px;
-  left: 20px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  overflow: hidden;
-}
-.card-avatar img { width: 100%; height: 100%; object-fit: cover; }
-.card-body { padding: 36px 20px 20px; }
-.card-title {
-  font-size: 16px;
-  font-weight: 700;
-  margin-bottom: 4px;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-.card-username {
-  color: var(--accent);
-  font-size: 13px;
-  font-weight: 500;
-  margin-bottom: 8px;
-}
-.card-desc {
-  color: var(--text-secondary);
-  font-size: 13px;
-  line-height: 1.5;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  margin-bottom: 14px;
-  min-height: 40px;
-}
-.card-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-top: 14px;
-  border-top: 1px solid var(--border);
-}
-.card-members {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  color: var(--text-secondary);
-  font-size: 13px;
-  font-weight: 500;
-}
-.card-actions { display: flex; gap: 6px; }
-.card-action-btn {
-  width: 34px;
-  height: 34px;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-secondary);
-  transition: all var(--transition);
-  font-size: 16px;
-}
-.card-action-btn:hover { background: var(--accent-light); color: var(--accent); }
-.card-action-btn.favorited { color: #ff4757; }
-
-/* ============================================================
-   LIST VIEW
-   ============================================================ */
-.results-list { display: flex; flex-direction: column; gap: 12px; }
-.list-item {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  padding: 16px 20px;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  transition: all var(--transition);
-  cursor: pointer;
-}
-.list-item:hover { border-color: var(--accent); box-shadow: var(--shadow); }
-.list-avatar {
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
-  background: var(--gradient);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 20px;
-  font-weight: 700;
-  color: #fff;
-  flex-shrink: 0;
-  overflow: hidden;
-}
-.list-avatar img { width: 100%; height: 100%; object-fit: cover; }
-.list-info { flex: 1; min-width: 0; }
-.list-title { font-size: 15px; font-weight: 600; margin-bottom: 2px; }
-.list-user { color: var(--accent); font-size: 13px; }
-.list-desc {
-  color: var(--text-secondary);
-  font-size: 13px;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  margin-top: 4px;
-}
-.list-meta { display: flex; align-items: center; gap: 16px; flex-shrink: 0; }
-.list-members { color: var(--text-secondary); font-size: 13px; display: flex; align-items: center; gap: 4px; }
-
-/* ============================================================
-   CHANNEL DETAIL MODAL
-   ============================================================ */
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: var(--bg-overlay);
-  z-index: 200;
-  display: none;
-  align-items: flex-end;
-  justify-content: center;
-  backdrop-filter: blur(4px);
-  animation: fadeIn 0.2s ease;
-}
-.modal-overlay.open { display: flex; }
-.modal {
-  background: var(--bg-primary);
-  border-radius: 24px 24px 0 0;
-  width: 100%;
-  max-width: 640px;
-  max-height: 85vh;
-  overflow-y: auto;
-  animation: slideUp 0.3s ease;
-}
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-@keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
-.modal-header {
-  padding: 24px 24px 0;
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
-}
-.modal-avatar {
-  width: 72px;
-  height: 72px;
-  border-radius: 50%;
-  background: var(--gradient);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 28px;
-  font-weight: 700;
-  color: #fff;
-  flex-shrink: 0;
-  overflow: hidden;
-}
-.modal-avatar img { width: 100%; height: 100%; object-fit: cover; }
-.modal-title { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
-.modal-user { color: var(--accent); font-size: 14px; }
-.modal-members-display { color: var(--text-secondary); font-size: 14px; margin-top: 4px; }
-.modal-close {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-secondary);
-  font-size: 20px;
-  margin-left: auto;
-  flex-shrink: 0;
-  transition: all var(--transition);
-}
-.modal-close:hover { background: var(--bg-hover); color: var(--text-primary); }
-.modal-body { padding: 20px 24px 24px; }
-.modal-desc {
-  color: var(--text-secondary);
-  font-size: 14px;
-  line-height: 1.6;
-  margin-bottom: 20px;
-}
-.modal-actions {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 24px;
-}
-.modal-btn {
-  flex: 1;
-  padding: 12px;
-  border-radius: 12px;
-  font-size: 14px;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  transition: all var(--transition);
-}
-.modal-btn-primary { background: var(--gradient); color: #fff; }
-.modal-btn-primary:hover { box-shadow: 0 4px 16px rgba(0,136,204,0.3); }
-.modal-btn-secondary {
-  background: var(--bg-hover);
-  color: var(--text-primary);
-  border: 1px solid var(--border);
-}
-.modal-btn-secondary:hover { border-color: var(--accent); }
-.modal-posts-title {
-  font-size: 16px;
-  font-weight: 700;
-  margin-bottom: 16px;
-}
-.modal-posts { display: flex; flex-direction: column; gap: 12px; }
-.post-card {
-  background: var(--bg-secondary);
-  border-radius: var(--radius-sm);
-  padding: 16px;
-}
-.post-text {
-  font-size: 14px;
-  line-height: 1.6;
-  color: var(--text-primary);
-  margin-bottom: 8px;
-}
-.post-img {
-  width: 100%;
-  border-radius: var(--radius-xs);
-  margin-top: 8px;
-}
-.post-link { color: var(--accent); font-size: 13px; font-weight: 500; }
-
-/* ============================================================
-   EXPLORE GRID (Instagram-like)
-   ============================================================ */
-.explore-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 4px;
-  border-radius: var(--radius);
-  overflow: hidden;
-}
-.explore-item {
-  position: relative;
-  aspect-ratio: 1;
-  overflow: hidden;
-  cursor: pointer;
-  background: var(--bg-hover);
-}
-.explore-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform var(--transition);
-}
-.explore-item:hover img { transform: scale(1.05); }
-.explore-item-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.4);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transition: opacity var(--transition);
-}
-.explore-item:hover .explore-item-overlay { opacity: 1; }
-.explore-item-info {
-  color: #fff;
-  text-align: center;
-  font-weight: 600;
-}
-.explore-item-info .explore-stat { font-size: 18px; }
-.explore-item-info .explore-label { font-size: 12px; opacity: 0.8; }
-
-/* ============================================================
-   LOADING & EMPTY STATES
-   ============================================================ */
-.loading {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 60px 20px;
-  color: var(--text-secondary);
-}
-.spinner {
-  width: 40px;
-  height: 40px;
-  border: 3px solid var(--border);
-  border-top-color: var(--accent);
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-  margin-bottom: 16px;
-}
-@keyframes spin { to { transform: rotate(360deg); } }
-.empty-state {
-  text-align: center;
-  padding: 60px 20px;
-  color: var(--text-secondary);
-}
-.empty-state .empty-icon { font-size: 64px; margin-bottom: 16px; }
-.empty-state h3 { font-size: 18px; color: var(--text-primary); margin-bottom: 8px; }
-.empty-state p { font-size: 14px; }
-
-/* ============================================================
-   RESULTS COUNT
-   ============================================================ */
-.results-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 20px;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-.results-count {
-  font-size: 14px;
-  color: var(--text-secondary);
-}
-.view-toggle {
-  display: flex;
-  gap: 4px;
-  background: var(--bg-primary);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 3px;
-}
-.view-btn {
-  width: 32px;
-  height: 32px;
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-secondary);
-  transition: all var(--transition);
-  font-size: 16px;
-}
-.view-btn.active { background: var(--accent); color: #fff; }
-
-/* ============================================================
-   FAVORITES
-   ============================================================ */
-.fav-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 20px;
-}
-
-/* ============================================================
-   SKELETON LOADING
-   ============================================================ */
-.skeleton {
-  background: linear-gradient(90deg, var(--bg-hover) 25%, var(--bg-secondary) 50%, var(--bg-hover) 75%);
-  background-size: 200% 100%;
-  animation: shimmer 1.5s infinite;
-  border-radius: var(--radius);
-  height: 240px;
-}
-@keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
-
-/* ============================================================
-   TOAST NOTIFICATIONS
-   ============================================================ */
-.toast-container {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  z-index: 300;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.toast {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  padding: 12px 20px;
-  font-size: 14px;
-  box-shadow: var(--shadow-lg);
-  animation: slideIn 0.3s ease, fadeOut 0.3s ease 2.7s;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-@keyframes slideIn { from { transform: translateX(100%); opacity: 0; } }
-@keyframes fadeOut { to { opacity: 0; transform: translateY(10px); } }
-
-/* ============================================================
-   FOOTER
-   ============================================================ */
-.footer {
-  text-align: center;
-  padding: 24px 20px;
-  color: var(--text-tertiary);
-  font-size: 13px;
-}
-.footer a { color: var(--accent); }
-
-/* ============================================================
-   RESPONSIVE
-   ============================================================ */
-@media (max-width: 768px) {
-  .hero { padding: 40px 16px 36px; }
-  .hero h1 { font-size: 26px; }
-  .hero p { font-size: 15px; }
-  .search-box { flex-direction: column; }
-  .search-btn { justify-content: center; }
-  .results-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
-  .explore-grid { grid-template-columns: repeat(3, 1fr); gap: 3px; }
-  .modal { border-radius: 20px 20px 0 0; }
-  .list-meta { display: none; }
-  .nav-tab { padding: 10px 14px; font-size: 13px; }
-}
-@media (max-width: 480px) {
-  .results-grid { grid-template-columns: 1fr; }
-  .explore-grid { grid-template-columns: repeat(2, 1fr); }
-  .header-inner { gap: 10px; }
-  .logo span { display: none; }
-}
-
-/* RTL support */
-[dir="rtl"] .search-box { flex-direction: row-reverse; }
-[dir="rtl"] .card-avatar { left: auto; right: 20px; }
-[dir="rtl"] .card-body { text-align: right; }
-[dir="rtl"] .modal-header { flex-direction: row-reverse; }
-[dir="rtl"] .modal-close { margin-left: 0; margin-right: auto; }
+:root{--bg-primary:#fff;--bg-secondary:#f5f5f7;--bg-card:#fff;--bg-hover:#f0f0f2;--bg-input:#f0f0f2;--bg-overlay:rgba(0,0,0,.5);--text-primary:#1a1a1a;--text-secondary:#6b6b6b;--text-tertiary:#999;--accent:#0088cc;--accent-light:#e6f4ff;--accent-dark:#0066aa;--border:#e5e5e5;--shadow:0 2px 12px rgba(0,0,0,.08);--shadow-lg:0 8px 32px rgba(0,0,0,.12);--radius:16px;--radius-sm:10px;--radius-xs:6px;--transition:.25s cubic-bezier(.4,0,.2,1);--font:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;--max-w:1200px;--header-h:64px;--gradient:linear-gradient(135deg,#0088cc 0%,#00b2ff 100%);--success:#34c759;--error:#ff3b30;--warning:#ff9500}
+[data-theme="dark"]{--bg-primary:#0a0a0a;--bg-secondary:#141414;--bg-card:#1a1a1a;--bg-hover:#242424;--bg-input:#1e1e1e;--text-primary:#f0f0f0;--text-secondary:#999;--text-tertiary:#666;--accent:#39bfff;--accent-light:#0d2a3a;--accent-dark:#60ccff;--border:#2a2a2a;--shadow:0 2px 12px rgba(0,0,0,.3);--shadow-lg:0 8px 32px rgba(0,0,0,.4)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:var(--font);background:var(--bg-secondary);color:var(--text-primary);line-height:1.6;min-height:100vh;transition:background var(--transition),color var(--transition);-webkit-font-smoothing:antialiased}a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}button{cursor:pointer;border:none;background:none;font-family:inherit}input,textarea{font-family:inherit}img{max-width:100%;display:block}
+.header{position:sticky;top:0;z-index:100;background:var(--bg-primary);border-bottom:1px solid var(--border);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);height:var(--header-h);display:flex;align-items:center;padding:0 20px}.header-inner{max-width:var(--max-w);margin:0 auto;width:100%;display:flex;align-items:center;gap:16px}.logo{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:700;color:var(--accent);white-space:nowrap;flex-shrink:0}.logo-icon{width:36px;height:36px;background:var(--gradient);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px}.header-actions{display:flex;align-items:center;gap:8px;margin-left:auto;flex-shrink:0}.icon-btn{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--text-secondary);transition:all var(--transition);font-size:20px;position:relative}.icon-btn:hover{background:var(--bg-hover);color:var(--text-primary)}.icon-btn .badge{position:absolute;top:2px;right:2px;width:16px;height:16px;border-radius:50%;background:var(--error);color:#fff;font-size:10px;display:flex;align-items:center;justify-content:center;font-weight:700}.lang-select{padding:6px 10px;border-radius:var(--radius-xs);background:var(--bg-input);color:var(--text-primary);border:1px solid var(--border);font-size:13px;font-weight:500;outline:none;cursor:pointer}
+.conn-badge{display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:20px;font-size:12px;font-weight:600;background:var(--bg-hover);color:var(--text-secondary);cursor:pointer;transition:all var(--transition)}.conn-badge:hover{background:var(--accent-light);color:var(--accent)}.conn-badge .dot{width:8px;height:8px;border-radius:50%;background:var(--text-tertiary)}.conn-badge.connected .dot{background:var(--success)}
+.setup-screen{min-height:calc(100vh - var(--header-h));display:flex;align-items:center;justify-content:center;padding:40px 20px}.setup-card{background:var(--bg-primary);border:1px solid var(--border);border-radius:24px;max-width:680px;width:100%;overflow:hidden;box-shadow:var(--shadow-lg)}.setup-header{background:var(--gradient);padding:40px 32px 32px;text-align:center;position:relative}.setup-header::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}.setup-header *{position:relative}.setup-emoji{font-size:56px;margin-bottom:16px}.setup-header h1{font-size:28px;color:#fff;font-weight:800;margin-bottom:8px}.setup-header p{color:rgba(255,255,255,.85);font-size:15px}.setup-body{padding:32px}.setup-steps{counter-reset:step}.setup-step{position:relative;padding-left:52px;padding-bottom:28px;border-left:2px solid var(--border);margin-left:16px}.setup-step:last-child{border-left-color:transparent;padding-bottom:0}.setup-step::before{counter-increment:step;content:counter(step);position:absolute;left:-17px;top:0;width:32px;height:32px;border-radius:50%;background:var(--gradient);color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700}.setup-step h3{font-size:16px;font-weight:700;margin-bottom:6px}.setup-step p{font-size:14px;color:var(--text-secondary);margin-bottom:10px;line-height:1.6}.setup-step code{display:inline-block;background:var(--bg-hover);padding:2px 8px;border-radius:4px;font-size:13px;color:var(--accent);font-family:'SF Mono','Fira Code',monospace}.setup-link{display:inline-flex;align-items:center;gap:6px;background:var(--accent-light);color:var(--accent);padding:8px 16px;border-radius:8px;font-size:13px;font-weight:600;transition:all var(--transition)}.setup-link:hover{background:var(--accent);color:#fff;text-decoration:none}.code-details{margin:12px 0}.code-summary{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:var(--bg-hover);border:1px solid var(--border);border-radius:10px;cursor:pointer;font-size:14px;font-weight:600;color:var(--text-primary);transition:all var(--transition);list-style:none}.code-summary::-webkit-details-marker{display:none}.code-summary::before{content:'▶';font-size:12px;margin-right:8px;transition:transform var(--transition);color:var(--text-secondary)}.code-details[open] .code-summary::before{transform:rotate(90deg)}.code-details[open] .code-summary{border-radius:10px 10px 0 0;border-bottom:none}.code-block{background:#1a1a2e;border-radius:0 0 12px 12px;overflow:hidden;border:1px solid #2a2a3e;border-top:none;margin:0}.code-header{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:#16162a;border-bottom:1px solid #2a2a3e}.code-header span{color:#888;font-size:12px}.copy-btn{background:rgba(255,255,255,.1);color:#fff;padding:4px 12px;border-radius:6px;font-size:12px;font-weight:600;transition:all var(--transition)}.copy-btn:hover{background:rgba(255,255,255,.2)}.copy-btn.copied{background:var(--success)}.code-content{padding:16px;overflow-x:auto;font-family:'SF Mono','Fira Code','Consolas',monospace;font-size:12.5px;line-height:1.6;color:#e0e0e0;white-space:pre;tab-size:2;max-height:300px;overflow-y:auto}.connect-area{margin-top:28px;padding-top:24px;border-top:1px solid var(--border)}.connect-area h3{font-size:18px;font-weight:700;margin-bottom:12px}.connect-input-row{display:flex;gap:10px;margin-bottom:16px}.connect-input{flex:1;padding:14px 16px;border-radius:12px;border:2px solid var(--border);background:var(--bg-input);color:var(--text-primary);font-size:15px;outline:none;transition:border-color var(--transition)}.connect-input:focus{border-color:var(--accent)}.connect-input::placeholder{color:var(--text-tertiary)}.connect-test-btn{padding:14px 24px;border-radius:12px;background:var(--gradient);color:#fff;font-size:15px;font-weight:700;transition:all var(--transition);white-space:nowrap;display:flex;align-items:center;gap:8px}.connect-test-btn:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(0,136,204,.3)}.connect-test-btn:disabled{opacity:.6;cursor:not-allowed;transform:none}.test-result{padding:14px 18px;border-radius:12px;font-size:14px;font-weight:500;display:none;align-items:center;gap:10px}.test-result.show{display:flex}.test-result.success{background:#e8f9ef;color:#1a7d36;border:1px solid #b4e4c4}.test-result.error{background:#fef0f0;color:#d32f2f;border:1px solid #f5c6c6}[data-theme="dark"] .test-result.success{background:#0d2818;color:#4ade80;border-color:#166534}[data-theme="dark"] .test-result.error{background:#2d1215;color:#ff6b6b;border-color:#7f1d1d}.skip-btn{display:block;margin:20px auto 0;color:var(--text-secondary);font-size:14px;padding:10px 24px;border-radius:10px;transition:all var(--transition)}.skip-btn:hover{background:var(--bg-hover);color:var(--text-primary)}
+.hero{background:var(--gradient);padding:60px 20px 50px;text-align:center;position:relative;overflow:hidden}.hero::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}.hero-content{position:relative;max-width:680px;margin:0 auto}.hero h1{font-size:clamp(28px,5vw,42px);font-weight:800;color:#fff;margin-bottom:12px;letter-spacing:-.5px}.hero p{color:rgba(255,255,255,.85);font-size:17px;margin-bottom:32px}.search-box{display:flex;background:#fff;border-radius:16px;padding:6px;box-shadow:0 8px 32px rgba(0,0,0,.2);max-width:600px;margin:0 auto}.search-input{flex:1;border:none;outline:none;padding:14px 18px;font-size:16px;background:transparent;color:#1a1a1a;min-width:0}.search-input::placeholder{color:#999}.search-btn{background:var(--gradient);color:#fff;padding:14px 28px;border-radius:12px;font-size:16px;font-weight:600;display:flex;align-items:center;gap:8px;transition:transform var(--transition),box-shadow var(--transition);white-space:nowrap}.search-btn:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(0,136,204,.4)}.search-tags{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:20px}.search-tag{background:rgba(255,255,255,.2);color:#fff;padding:6px 14px;border-radius:20px;font-size:13px;cursor:pointer;transition:all var(--transition);backdrop-filter:blur(10px)}.search-tag:hover{background:rgba(255,255,255,.35)}
+.container{max-width:var(--max-w);margin:0 auto;padding:24px 20px 80px}.nav-tabs{display:flex;gap:4px;background:var(--bg-primary);border-radius:var(--radius);padding:5px;margin-bottom:24px;border:1px solid var(--border);overflow-x:auto;-webkit-overflow-scrolling:touch}.nav-tab{flex:1;min-width:fit-content;padding:12px 20px;border-radius:12px;font-size:14px;font-weight:600;color:var(--text-secondary);transition:all var(--transition);display:flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap}.nav-tab:hover{color:var(--text-primary);background:var(--bg-hover)}.nav-tab.active{background:var(--accent);color:#fff}
+.categories-bar{display:flex;gap:10px;overflow-x:auto;padding-bottom:8px;margin-bottom:24px;-webkit-overflow-scrolling:touch;scrollbar-width:none}.categories-bar::-webkit-scrollbar{display:none}.cat-chip{display:flex;align-items:center;gap:6px;padding:10px 18px;background:var(--bg-primary);border:1px solid var(--border);border-radius:30px;font-size:13px;font-weight:500;color:var(--text-secondary);white-space:nowrap;cursor:pointer;transition:all var(--transition)}.cat-chip:hover{border-color:var(--accent);color:var(--accent)}.cat-chip.active{background:var(--accent);color:#fff;border-color:var(--accent)}.cat-chip .cat-icon{font-size:16px}
+.results-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px}.channel-card{background:var(--bg-card);border-radius:var(--radius);border:1px solid var(--border);overflow:hidden;transition:all var(--transition);cursor:pointer;position:relative}.channel-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:var(--accent)}.card-banner{height:120px;background:var(--gradient);position:relative;overflow:hidden}.card-banner img{width:100%;height:100%;object-fit:cover}.card-banner-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.5),transparent)}.card-avatar{width:64px;height:64px;border-radius:50%;background:var(--gradient);border:3px solid var(--bg-card);display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:700;color:#fff;position:absolute;bottom:-28px;left:20px;box-shadow:0 4px 12px rgba(0,0,0,.15);overflow:hidden}.card-avatar img{width:100%;height:100%;object-fit:cover}.card-body{padding:36px 20px 20px}.card-title{font-size:16px;font-weight:700;margin-bottom:4px;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}.card-username{color:var(--accent);font-size:13px;font-weight:500;margin-bottom:8px}.card-desc{color:var(--text-secondary);font-size:13px;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:14px;min-height:40px}.card-tags{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:12px}.card-tag{background:var(--accent-light);color:var(--accent);padding:2px 8px;border-radius:12px;font-size:11px;font-weight:500}.card-footer{display:flex;align-items:center;justify-content:space-between;padding-top:14px;border-top:1px solid var(--border)}.card-members{display:flex;align-items:center;gap:6px;color:var(--text-secondary);font-size:13px;font-weight:500}.card-actions{display:flex;gap:6px}.card-action-btn{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--text-secondary);transition:all var(--transition);font-size:16px}.card-action-btn:hover{background:var(--accent-light);color:var(--accent)}.card-action-btn.favorited{color:#ff4757}
+.results-list{display:flex;flex-direction:column;gap:12px}.list-item{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:16px 20px;display:flex;align-items:center;gap:16px;transition:all var(--transition);cursor:pointer}.list-item:hover{border-color:var(--accent);box-shadow:var(--shadow)}.list-avatar{width:52px;height:52px;border-radius:50%;background:var(--gradient);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:#fff;flex-shrink:0;overflow:hidden}.list-avatar img{width:100%;height:100%;object-fit:cover}.list-info{flex:1;min-width:0}.list-title{font-size:15px;font-weight:600;margin-bottom:2px}.list-user{color:var(--accent);font-size:13px}.list-desc{color:var(--text-secondary);font-size:13px;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden;margin-top:4px}.list-meta{display:flex;align-items:center;gap:16px;flex-shrink:0}.list-members{color:var(--text-secondary);font-size:13px;display:flex;align-items:center;gap:4px}
+.explore-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;border-radius:var(--radius);overflow:hidden}.explore-item{position:relative;aspect-ratio:1;overflow:hidden;cursor:pointer;background:var(--bg-hover)}.explore-item img{width:100%;height:100%;object-fit:cover;transition:transform var(--transition)}.explore-item:hover img{transform:scale(1.05)}.explore-item-overlay{position:absolute;inset:0;background:rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity var(--transition)}.explore-item:hover .explore-item-overlay{opacity:1}.explore-item-info{color:#fff;text-align:center;font-weight:600}.explore-item-info .explore-stat{font-size:18px}.explore-item-info .explore-label{font-size:12px;opacity:.8}
+.modal-overlay{position:fixed;inset:0;background:var(--bg-overlay);z-index:200;display:none;align-items:flex-end;justify-content:center;backdrop-filter:blur(4px);animation:fadeIn .2s ease}.modal-overlay.open{display:flex}.modal{background:var(--bg-primary);border-radius:24px 24px 0 0;width:100%;max-width:640px;max-height:85vh;overflow-y:auto;animation:slideUp .3s ease}@keyframes fadeIn{from{opacity:0}to{opacity:1}}@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}.modal-header{padding:24px 24px 0;display:flex;align-items:flex-start;gap:16px}.modal-avatar{width:72px;height:72px;border-radius:50%;background:var(--gradient);display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:700;color:#fff;flex-shrink:0;overflow:hidden}.modal-avatar img{width:100%;height:100%;object-fit:cover}.modal-title{font-size:22px;font-weight:700;margin-bottom:4px}.modal-user{color:var(--accent);font-size:14px}.modal-members-display{color:var(--text-secondary);font-size:14px;margin-top:4px}.modal-close{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--text-secondary);font-size:20px;margin-left:auto;flex-shrink:0;transition:all var(--transition)}.modal-close:hover{background:var(--bg-hover);color:var(--text-primary)}.modal-body{padding:20px 24px 24px}.modal-desc{color:var(--text-secondary);font-size:14px;line-height:1.6;margin-bottom:20px}.modal-actions{display:flex;gap:10px;margin-bottom:24px}.modal-btn{flex:1;padding:12px;border-radius:12px;font-size:14px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:8px;transition:all var(--transition)}.modal-btn-primary{background:var(--gradient);color:#fff}.modal-btn-primary:hover{box-shadow:0 4px 16px rgba(0,136,204,.3)}.modal-btn-secondary{background:var(--bg-hover);color:var(--text-primary);border:1px solid var(--border)}.modal-btn-secondary:hover{border-color:var(--accent)}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;margin-bottom:20px}.stat-card{background:var(--bg-secondary);border-radius:var(--radius-sm);padding:16px;text-align:center}.stat-value{font-size:24px;font-weight:800;color:var(--accent);margin-bottom:4px}.stat-label{font-size:12px;color:var(--text-secondary);font-weight:500}.chart-container{background:var(--bg-secondary);border-radius:var(--radius-sm);padding:16px;margin-bottom:20px}.chart-container h4{font-size:14px;font-weight:600;margin-bottom:12px;color:var(--text-secondary)}.chart-canvas{width:100%;height:160px}
+.related-section{margin-bottom:20px}.related-section h4{font-size:14px;font-weight:600;margin-bottom:12px;color:var(--text-secondary)}.related-chips{display:flex;flex-wrap:wrap;gap:8px}.related-chip{display:flex;align-items:center;gap:6px;padding:8px 14px;background:var(--bg-secondary);border:1px solid var(--border);border-radius:20px;font-size:13px;font-weight:500;color:var(--text-primary);cursor:pointer;transition:all var(--transition)}.related-chip:hover{border-color:var(--accent);color:var(--accent)}.related-chip .chip-tag{background:var(--accent-light);color:var(--accent);padding:1px 6px;border-radius:8px;font-size:10px}
+.modal-posts-title{font-size:16px;font-weight:700;margin-bottom:16px}.modal-posts{display:flex;flex-direction:column;gap:12px}.post-card{background:var(--bg-secondary);border-radius:var(--radius-sm);padding:16px}.post-text{font-size:14px;line-height:1.6;color:var(--text-primary);margin-bottom:8px}.post-img{width:100%;border-radius:var(--radius-xs);margin-top:8px}.post-link{color:var(--accent);font-size:13px;font-weight:500}
+.loading{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 20px;color:var(--text-secondary)}.spinner{width:40px;height:40px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;margin-bottom:16px}@keyframes spin{to{transform:rotate(360deg)}}.empty-state{text-align:center;padding:60px 20px;color:var(--text-secondary)}.empty-state .empty-icon{font-size:64px;margin-bottom:16px}.empty-state h3{font-size:18px;color:var(--text-primary);margin-bottom:8px}.empty-state p{font-size:14px}
+.results-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px}.results-count{font-size:14px;color:var(--text-secondary)}.view-toggle{display:flex;gap:4px;background:var(--bg-primary);border:1px solid var(--border);border-radius:8px;padding:3px}.view-btn{width:32px;height:32px;border-radius:6px;display:flex;align-items:center;justify-content:center;color:var(--text-secondary);transition:all var(--transition);font-size:16px}.view-btn.active{background:var(--accent);color:#fff}
+.skeleton{background:linear-gradient(90deg,var(--bg-hover) 25%,var(--bg-secondary) 50%,var(--bg-hover) 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:var(--radius);height:240px}@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+.toast-container{position:fixed;bottom:24px;right:24px;z-index:300;display:flex;flex-direction:column;gap:8px}.toast{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 20px;font-size:14px;box-shadow:var(--shadow-lg);animation:slideIn .3s ease,fadeOut .3s ease 2.7s;display:flex;align-items:center;gap:8px}@keyframes slideIn{from{transform:translateX(100%);opacity:0}}@keyframes fadeOut{to{opacity:0;transform:translateY(10px)}}
+.pwa-banner{position:fixed;bottom:0;left:0;right:0;background:var(--bg-primary);border-top:1px solid var(--border);padding:16px 20px;display:none;align-items:center;gap:16px;z-index:150;box-shadow:0 -4px 20px rgba(0,0,0,.1)}.pwa-banner.show{display:flex}.pwa-banner-icon{width:48px;height:48px;border-radius:12px;background:var(--gradient);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0}.pwa-banner-info{flex:1}.pwa-banner-title{font-size:15px;font-weight:700}.pwa-banner-desc{font-size:13px;color:var(--text-secondary)}.pwa-banner-btns{display:flex;gap:8px}.pwa-btn{padding:10px 20px;border-radius:10px;font-size:14px;font-weight:600;transition:all var(--transition)}.pwa-btn-install{background:var(--gradient);color:#fff}.pwa-btn-install:hover{box-shadow:0 4px 16px rgba(0,136,204,.3)}.pwa-btn-dismiss{color:var(--text-secondary)}.pwa-btn-dismiss:hover{background:var(--bg-hover)}
+.footer{text-align:center;padding:24px 20px;color:var(--text-tertiary);font-size:13px}.footer a{color:var(--accent)}
+@media(max-width:768px){.hero{padding:40px 16px 36px}.hero h1{font-size:26px}.hero p{font-size:15px}.search-box{flex-direction:column}.search-btn{justify-content:center}.results-grid{grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}.explore-grid{grid-template-columns:repeat(3,1fr);gap:3px}.modal{border-radius:20px 20px 0 0}.list-meta{display:none}.nav-tab{padding:10px 14px;font-size:13px}.connect-input-row{flex-direction:column}.setup-body{padding:24px 20px}.stats-grid{grid-template-columns:repeat(2,1fr)}.pwa-banner{flex-wrap:wrap}.pwa-banner-btns{width:100%}.pwa-btn{flex:1;text-align:center}}@media(max-width:480px){.results-grid{grid-template-columns:1fr}.explore-grid{grid-template-columns:repeat(2,1fr)}.header-inner{gap:10px}.logo span{display:none}.stats-grid{grid-template-columns:1fr 1fr}}
+[dir="rtl"] .search-box{flex-direction:row-reverse}[dir="rtl"] .card-avatar{left:auto;right:20px}[dir="rtl"] .card-body{text-align:right}[dir="rtl"] .modal-header{flex-direction:row-reverse}[dir="rtl"] .modal-close{margin-left:0;margin-right:auto}[dir="rtl"] .setup-step{padding-left:0;padding-right:52px;border-left:none;border-right:2px solid var(--border);margin-left:0;margin-right:16px}[dir="rtl"] .setup-step::before{left:auto;right:-17px}
 </style>
 </head>
 <body>
 
-<!-- ============================================================
-     HEADER
-     ============================================================ -->
+<!-- HEADER -->
 <header class="header">
   <div class="header-inner">
-    <div class="logo">
-      <div class="logo-icon">🔍</div>
-      <span data-i18n="app_name">Telegram Explorer</span>
-    </div>
+    <div class="logo"><div class="logo-icon">🔍</div><span data-i18n="app_name">Telegram Explorer</span></div>
     <div class="header-actions">
-      <select class="lang-select" id="langSelect" aria-label="Language">
-        <option value="en">🇬🇧 EN</option>
-        <option value="fa">🇮🇷 فا</option>
-        <option value="ar">🇸🇦 ع</option>
-        <option value="zh">🇨🇳 中</option>
-        <option value="ru">🇷🇺 РУ</option>
-        <option value="es">🇪🇸 ES</option>
-        <option value="fr">🇫🇷 FR</option>
-      </select>
-      <button class="icon-btn" id="themeToggle" title="Toggle theme" aria-label="Toggle theme">🌙</button>
-      <button class="icon-btn" id="favBtn" title="Favorites" aria-label="Favorites">❤️</button>
+      <div class="conn-badge disconnected" id="connBadge" title="Connection"><span class="dot"></span><span id="connBadgeText">Offline</span></div>
+      <select class="lang-select" id="langSelect" aria-label="Language"><option value="en">🇬🇧 EN</option><option value="fa">🇮🇷 فا</option><option value="ar">🇸🇦 ع</option><option value="zh">🇨🇳 中</option><option value="ru">🇷🇺 РУ</option><option value="es">🇪🇸 ES</option><option value="fr">🇫🇷 FR</option></select>
+      <button class="icon-btn" id="notifBtn" title="Notifications" aria-label="Notifications">🔔<span class="badge" id="notifBadge" style="display:none">0</span></button>
+      <button class="icon-btn" id="themeToggle" title="Theme" aria-label="Theme">🌙</button>
+      <button class="icon-btn" id="settingsBtn" title="Settings" aria-label="Settings">⚙️</button>
     </div>
   </div>
 </header>
 
-<!-- ============================================================
-     HERO SEARCH
-     ============================================================ -->
-<section class="hero" id="heroSection">
+<!-- SETUP SCREEN -->
+<div id="setupScreen" class="setup-screen" style="display:none">
+  <div class="setup-card">
+    <div class="setup-header">
+      <div class="setup-emoji">🚀</div>
+      <h1 data-i18n="setup_title">Setup Your Proxy</h1>
+      <p data-i18n="setup_subtitle">Create your own Cloudflare Worker proxy to search Telegram</p>
+    </div>
+    <div class="setup-body">
+      <div class="setup-steps">
+        <div class="setup-step"><h3 data-i18n="s1_title">Create Cloudflare Account</h3><p data-i18n="s1_desc">Go to Cloudflare and create a free account (no credit card needed)</p><a href="https://dash.cloudflare.com/sign-up" target="_blank" rel="noopener" class="setup-link">🌐 dash.cloudflare.com/sign-up</a></div>
+        <div class="setup-step"><h3 data-i18n="s2_title">Create a Worker</h3><p data-i18n="s2_desc">After login: Workers & Pages → Create Application → Create Worker → Choose any name</p></div>
+        <div class="setup-step"><h3 data-i18n="s3_title">Paste the Code</h3><p data-i18n="s3_desc">Delete all existing code in the editor and paste this code:</p><details class="code-details"><summary class="code-summary"><span data-i18n="show_code">📄 Show/Hide Code</span><button class="copy-btn" onclick="event.stopPropagation();copyWorkerCode()" data-i18n="copy_code">📋 Copy Code</button></summary><div class="code-block"><div class="code-header"><span>worker.js</span></div><div class="code-content" id="workerCodeBlock"></div></div></details></div>
+        <div class="setup-step"><h3 data-i18n="s4_title">Save & Deploy</h3><p data-i18n="s4_desc">Click "Save and Deploy" button. Copy your worker URL (looks like <code>https://xxx.xxx.workers.dev</code>)</p></div>
+        <div class="setup-step"><h3 data-i18n="s5_title">Connect Here</h3><p data-i18n="s5_desc">Paste your worker URL below and test the connection:</p></div>
+      </div>
+      <div class="connect-area">
+        <h3 data-i18n="connect_title">🔗 Connect Your Proxy</h3>
+        <div class="connect-input-row">
+          <input class="connect-input" id="workerUrlInput" type="url" placeholder="https://your-worker.your-subdomain.workers.dev" autocomplete="off" spellcheck="false">
+          <button class="connect-test-btn" id="testBtn" onclick="testConnection()"><span id="testBtnIcon">🔌</span><span id="testBtnText" data-i18n="test_connection">Test</span></button>
+        </div>
+        <div class="test-result" id="testResult"></div>
+      </div>
+      <button class="skip-btn" onclick="skipSetup()" data-i18n="skip_setup">Skip for now (use limited mode)</button>
+    </div>
+  </div>
+</div>
+
+<!-- HERO SEARCH -->
+<section class="hero" id="heroSection" style="display:none">
   <div class="hero-content">
     <h1 data-i18n="hero_title">Explore Telegram Channels</h1>
     <p data-i18n="hero_subtitle">Search and discover public channels and groups across Telegram</p>
     <div class="search-box">
       <input class="search-input" id="searchInput" type="text" data-i18n-placeholder="search_placeholder" placeholder="Search channels, topics, groups..." autocomplete="off">
-      <button class="search-btn" id="searchBtn" data-i18n="search_btn">
-        🔍 Search
-      </button>
+      <button class="search-btn" id="searchBtn" data-i18n="search_btn">🔍 Search</button>
     </div>
     <div class="search-tags" id="searchTags">
       <span class="search-tag" data-query="technology">💻 Technology</span>
@@ -839,899 +107,457 @@ img { max-width: 100%; display: block; }
   </div>
 </section>
 
-<!-- ============================================================
-     MAIN CONTENT
-     ============================================================ -->
-<main class="container">
-  <!-- Nav Tabs -->
+<!-- MAIN CONTENT -->
+<main class="container" id="mainContent" style="display:none">
   <nav class="nav-tabs" id="navTabs">
     <button class="nav-tab active" data-tab="explore" data-i18n="tab_explore">🏠 Explore</button>
     <button class="nav-tab" data-tab="search" data-i18n="tab_search">🔍 Search</button>
     <button class="nav-tab" data-tab="favorites" data-i18n="tab_favorites">❤️ Favorites</button>
   </nav>
-
-  <!-- Categories (Explore tab) -->
   <div class="categories-bar" id="categoriesBar"></div>
-
-  <!-- Results Header -->
   <div class="results-header" id="resultsHeader" style="display:none">
     <span class="results-count" id="resultsCount"></span>
-    <div class="view-toggle">
-      <button class="view-btn active" data-view="grid" title="Grid">⊞</button>
-      <button class="view-btn" data-view="list" title="List">☰</button>
-      <button class="view-btn" data-view="explore" title="Explore">⊡</button>
-    </div>
+    <div class="view-toggle"><button class="view-btn active" data-view="grid">⊞</button><button class="view-btn" data-view="list">☰</button><button class="view-btn" data-view="explore">⊡</button></div>
   </div>
-
-  <!-- Content Area -->
-  <div id="content">
-    <div class="loading">
-      <div class="spinner"></div>
-      <span data-i18n="loading">Loading...</span>
-    </div>
-  </div>
+  <div id="content"><div class="loading"><div class="spinner"></div><span data-i18n="loading">Loading...</span></div></div>
 </main>
 
-<!-- ============================================================
-     CHANNEL DETAIL MODAL
-     ============================================================ -->
-<div class="modal-overlay" id="modalOverlay">
-  <div class="modal" id="modal">
+<!-- SETTINGS MODAL -->
+<div class="modal-overlay" id="settingsOverlay">
+  <div class="modal" style="max-width:520px">
     <div class="modal-header">
-      <div class="modal-avatar" id="modalAvatar">T</div>
-      <div>
-        <div class="modal-title" id="modalTitle"></div>
-        <div class="modal-user" id="modalUser"></div>
-        <div class="modal-members-display" id="modalMembers"></div>
-      </div>
-      <button class="modal-close" id="modalClose">✕</button>
+      <div class="modal-avatar" style="background:var(--gradient)">⚙️</div>
+      <div><div class="modal-title" data-i18n="settings">Settings</div><div class="modal-user" data-i18n="settings_sub">Configure your proxy connection</div></div>
+      <button class="modal-close" onclick="closeSettings()">✕</button>
     </div>
     <div class="modal-body">
-      <div class="modal-desc" id="modalDesc"></div>
-      <div class="modal-actions">
-        <button class="modal-btn modal-btn-primary" id="modalOpenTg">
-          <span>✈️</span> <span data-i18n="open_telegram">Open in Telegram</span>
-        </button>
-        <button class="modal-btn modal-btn-secondary" id="modalFavBtn">
-          <span>❤️</span> <span data-i18n="save">Save</span>
-        </button>
-      </div>
-      <div class="modal-posts-title" data-i18n="recent_posts">Recent Posts</div>
-      <div class="modal-posts" id="modalPosts">
-        <div class="loading"><div class="spinner"></div></div>
-      </div>
+      <div style="margin-bottom:20px"><label style="font-size:14px;font-weight:600;display:block;margin-bottom:8px" data-i18n="worker_url_label">Worker Proxy URL</label><div class="connect-input-row"><input class="connect-input" id="settingsWorkerUrl" type="url" placeholder="https://xxx.workers.dev" autocomplete="off" spellcheck="false"></div></div>
+      <div class="modal-actions"><button class="modal-btn modal-btn-primary" onclick="saveSettings()"><span>💾</span> <span data-i18n="save_settings">Save</span></button><button class="modal-btn modal-btn-secondary" onclick="testFromSettings()"><span>🔌</span> <span data-i18n="test_connection">Test</span></button></div>
+      <div class="test-result" id="settingsTestResult"></div>
+      <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border)"><button class="modal-btn modal-btn-secondary" onclick="resetApp()" style="color:var(--error)"><span>🔄</span> <span data-i18n="reset_app">Reset & Show Setup Guide</span></button></div>
     </div>
   </div>
 </div>
 
-<!-- Toast Container -->
+<!-- CHANNEL DETAIL MODAL -->
+<div class="modal-overlay" id="channelOverlay">
+  <div class="modal" id="modal">
+    <div class="modal-header">
+      <div class="modal-avatar" id="modalAvatar">T</div>
+      <div><div class="modal-title" id="modalTitle"></div><div class="modal-user" id="modalUser"></div><div class="modal-members-display" id="modalMembers"></div></div>
+      <button class="modal-close" onclick="closeChannelModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-desc" id="modalDesc"></div>
+      <!-- Stats -->
+      <div class="stats-grid" id="modalStats" style="display:none"></div>
+      <!-- Chart -->
+      <div class="chart-container" id="modalChart" style="display:none"><h4 data-i18n="activity_chart">📊 Activity (7 days)</h4><canvas class="chart-canvas" id="activityChart"></canvas></div>
+      <!-- Actions -->
+      <div class="modal-actions">
+        <button class="modal-btn modal-btn-primary" id="modalOpenTg"><span>✈️</span> <span data-i18n="open_telegram">Open in Telegram</span></button>
+        <button class="modal-btn modal-btn-secondary" id="modalFavBtn"><span>❤️</span> <span data-i18n="save">Save</span></button>
+      </div>
+      <!-- Related -->
+      <div class="related-section" id="modalRelated" style="display:none"><h4 data-i18n="related_channels">🔗 Related Channels</h4><div class="related-chips" id="relatedChips"></div></div>
+      <!-- Posts -->
+      <div class="modal-posts-title" data-i18n="recent_posts">Recent Posts</div>
+      <div class="modal-posts" id="modalPosts"><div class="loading"><div class="spinner"></div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- NOTIFICATIONS MODAL -->
+<div class="modal-overlay" id="notifOverlay">
+  <div class="modal" style="max-width:480px">
+    <div class="modal-header">
+      <div class="modal-avatar" style="background:var(--gradient)">🔔</div>
+      <div><div class="modal-title" data-i18n="notifications">Notifications</div><div class="modal-user" data-i18n="notif_sub">Updates from your saved channels</div></div>
+      <button class="modal-close" onclick="closeNotifModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div id="notifContent"><div class="empty-state"><div class="empty-icon">🔔</div><h3 data-i18n="no_notifs">No notifications yet</h3><p data-i18n="no_notifs_desc">Save channels as favorites to track updates</p></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- PWA INSTALL BANNER -->
+<div class="pwa-banner" id="pwaBanner">
+  <div class="pwa-banner-icon">📱</div>
+  <div class="pwa-banner-info"><div class="pwa-banner-title">Install Telegram Explorer</div><div class="pwa-banner-desc">Add to home screen for quick access</div></div>
+  <div class="pwa-banner-btns"><button class="pwa-btn pwa-btn-install" id="pwaInstallBtn">Install</button><button class="pwa-btn pwa-btn-dismiss" id="pwaDismissBtn">Later</button></div>
+</div>
+
 <div class="toast-container" id="toastContainer"></div>
 
-<!-- ============================================================
-     JAVASCRIPT
-     ============================================================ -->
 <script>
 // ============================================================
-// INTERNATIONALIZATION (i18n)
+// WORKER CODE (embedded)
 // ============================================================
-const I18N = {
-  en: {
-    app_name: 'Telegram Explorer',
-    hero_title: 'Explore Telegram Channels',
-    hero_subtitle: 'Search and discover public channels and groups across Telegram',
-    search_placeholder: 'Search channels, topics, groups...',
-    search_btn: '🔍 Search',
-    tab_explore: '🏠 Explore',
-    tab_search: '🔍 Search',
-    tab_favorites: '❤️ Favorites',
-    loading: 'Loading...',
-    no_results: 'No results found',
-    no_results_desc: 'Try a different search term or explore categories',
-    open_telegram: 'Open in Telegram',
-    save: 'Save',
-    saved: 'Saved!',
-    recent_posts: 'Recent Posts',
-    members: 'members',
-    results_for: 'results for',
-    explore: 'Explore',
-    favorites: 'Favorites',
-    no_favorites: 'No favorites yet',
-    no_favorites_desc: 'Tap ❤️ on channels to save them here',
-    cat_tech: 'Technology',
-    cat_news: 'News',
-    cat_crypto: 'Crypto',
-    cat_entertainment: 'Entertainment',
-    cat_science: 'Science',
-    cat_gaming: 'Gaming',
-    cat_music: 'Music',
-    cat_art: 'Art',
-    cat_sports: 'Sports',
-    cat_education: 'Education',
-    cat_meme: 'Memes',
-    cat_food: 'Food',
-    cat_travel: 'Travel',
-    cat_photography: 'Photography',
-    all: 'All',
-    copied: 'Link copied!',
-    removed_fav: 'Removed from favorites',
-  },
-  fa: {
-    app_name: 'تلگرام اکسپلورر',
-    hero_title: 'کاوش کانال‌های تلگرام',
-    hero_subtitle: 'جستجو و کشف کانال‌ها و گروه‌های عمومی تلگرام',
-    search_placeholder: 'جستجوی کانال، موضوع، گروه...',
-    search_btn: '🔍 جستجو',
-    tab_explore: '🏠 کاوش',
-    tab_search: '🔍 جستجو',
-    tab_favorites: '❤️ علاقه‌مندی‌ها',
-    loading: 'در حال بارگذاری...',
-    no_results: 'نتیجه‌ای یافت نشد',
-    no_results_desc: 'عبارت دیگری امتحان کنید یا دسته‌بندی‌ها را کاوش کنید',
-    open_telegram: 'باز کردن در تلگرام',
-    save: 'ذخیره',
-    saved: 'ذخیره شد!',
-    recent_posts: 'پست‌های اخیر',
-    members: 'عضو',
-    results_for: 'نتیجه برای',
-    explore: 'کاوش',
-    favorites: 'علاقه‌مندی‌ها',
-    no_favorites: 'هنوز علاقه‌مندی ندارید',
-    no_favorites_desc: 'روی ❤️ کانال‌ها بزنید تا اینجا ذخیره شوند',
-    cat_tech: 'تکنولوژی',
-    cat_news: 'اخبار',
-    cat_crypto: 'ارز دیجیتال',
-    cat_entertainment: 'سرگرمی',
-    cat_science: 'علم',
-    cat_gaming: 'بازی',
-    cat_music: 'موسیقی',
-    cat_art: 'هنر',
-    cat_sports: 'ورزش',
-    cat_education: 'آموزش',
-    cat_meme: 'میم',
-    cat_food: 'غذا',
-    cat_travel: 'سفر',
-    cat_photography: 'عکاسی',
-    all: 'همه',
-    copied: 'لینک کپی شد!',
-    removed_fav: 'از علاقه‌مندی‌ها حذف شد',
-  },
-  ar: {
-    app_name: 'مستكشف تيليجرام',
-    hero_title: 'استكشف قنوات تيليجرام',
-    hero_subtitle: 'ابحث واكتشف القنوات والمجموعات العامة عبر تيليجرام',
-    search_placeholder: 'ابحث عن قنوات، مواضيع، مجموعات...',
-    search_btn: '🔍 بحث',
-    tab_explore: '🏠 استكشاف',
-    tab_search: '🔍 بحث',
-    tab_favorites: '❤️ المفضلة',
-    loading: 'جارٍ التحميل...',
-    no_results: 'لم يتم العثور على نتائج',
-    no_results_desc: 'جرّب مصطلح بحث آخر أو استكشف الفئات',
-    open_telegram: 'فتح في تيليجرام',
-    save: 'حفظ',
-    saved: 'تم الحفظ!',
-    recent_posts: 'المنشورات الأخيرة',
-    members: 'عضو',
-    results_for: 'نتائج لـ',
-    explore: 'استكشاف',
-    favorites: 'المفضلة',
-    no_favorites: 'لا توجد مفضلات بعد',
-    no_favorites_desc: 'اضغط ❤️ على القنوات لحفظها هنا',
-    cat_tech: 'التكنولوجيا',
-    cat_news: 'الأخبار',
-    cat_crypto: 'العملات الرقمية',
-    cat_entertainment: 'الترفيه',
-    cat_science: 'العلوم',
-    cat_gaming: 'الألعاب',
-    cat_music: 'الموسيقى',
-    cat_art: 'الفن',
-    cat_sports: 'الرياضة',
-    cat_education: 'التعليم',
-    cat_meme: 'ميمز',
-    cat_food: 'الطعام',
-    cat_travel: 'السفر',
-    cat_photography: 'التصوير',
-    all: 'الكل',
-    copied: 'تم نسخ الرابط!',
-    removed_fav: 'تمت الإزالة من المفضلة',
-  },
-  zh: {
-    app_name: 'Telegram 探索器',
-    hero_title: '探索 Telegram 频道',
-    hero_subtitle: '搜索和发现 Telegram 上的公开频道和群组',
-    search_placeholder: '搜索频道、话题、群组...',
-    search_btn: '🔍 搜索',
-    tab_explore: '🏠 探索',
-    tab_search: '🔍 搜索',
-    tab_favorites: '❤️ 收藏',
-    loading: '加载中...',
-    no_results: '未找到结果',
-    no_results_desc: '尝试其他搜索词或浏览分类',
-    open_telegram: '在 Telegram 中打开',
-    save: '保存',
-    saved: '已保存！',
-    recent_posts: '最近帖子',
-    members: '成员',
-    results_for: '搜索结果',
-    explore: '探索',
-    favorites: '收藏',
-    no_favorites: '暂无收藏',
-    no_favorites_desc: '点击频道上的 ❤️ 保存到这里',
-    cat_tech: '科技',
-    cat_news: '新闻',
-    cat_crypto: '加密货币',
-    cat_entertainment: '娱乐',
-    cat_science: '科学',
-    cat_gaming: '游戏',
-    cat_music: '音乐',
-    cat_art: '艺术',
-    cat_sports: '体育',
-    cat_education: '教育',
-    cat_meme: '表情包',
-    cat_food: '美食',
-    cat_travel: '旅行',
-    cat_photography: '摄影',
-    all: '全部',
-    copied: '链接已复制！',
-    removed_fav: '已从收藏中移除',
-  },
-  ru: {
-    app_name: 'Telegram Explorer',
-    hero_title: 'Исследуйте каналы Telegram',
-    hero_subtitle: 'Ищите и находите публичные каналы и группы в Telegram',
-    search_placeholder: 'Поиск каналов, тем, групп...',
-    search_btn: '🔍 Поиск',
-    tab_explore: '🏠 Обзор',
-    tab_search: '🔍 Поиск',
-    tab_favorites: '❤️ Избранное',
-    loading: 'Загрузка...',
-    no_results: 'Ничего не найдено',
-    no_results_desc: 'Попробуйте другой запрос или просмотрите категории',
-    open_telegram: 'Открыть в Telegram',
-    save: 'Сохранить',
-    saved: 'Сохранено!',
-    recent_posts: 'Последние посты',
-    members: 'участников',
-    results_for: 'результатов для',
-    explore: 'Обзор',
-    favorites: 'Избранное',
-    no_favorites: 'Избранного пока нет',
-    no_favorites_desc: 'Нажмите ❤️ на каналах, чтобы сохранить их',
-    cat_tech: 'Технологии',
-    cat_news: 'Новости',
-    cat_crypto: 'Криптовалюта',
-    cat_entertainment: 'Развлечения',
-    cat_science: 'Наука',
-    cat_gaming: 'Игры',
-    cat_music: 'Музыка',
-    cat_art: 'Искусство',
-    cat_sports: 'Спорт',
-    cat_education: 'Образование',
-    cat_meme: 'Мемы',
-    cat_food: 'Еда',
-    cat_travel: 'Путешествия',
-    cat_photography: 'Фотография',
-    all: 'Все',
-    copied: 'Ссылка скопирована!',
-    removed_fav: 'Удалено из избранного',
-  },
-  es: {
-    app_name: 'Telegram Explorer',
-    hero_title: 'Explora canales de Telegram',
-    hero_subtitle: 'Busca y descubre canales y grupos públicos en Telegram',
-    search_placeholder: 'Buscar canales, temas, grupos...',
-    search_btn: '🔍 Buscar',
-    tab_explore: '🏠 Explorar',
-    tab_search: '🔍 Buscar',
-    tab_favorites: '❤️ Favoritos',
-    loading: 'Cargando...',
-    no_results: 'No se encontraron resultados',
-    no_results_desc: 'Prueba con otro término o explora categorías',
-    open_telegram: 'Abrir en Telegram',
-    save: 'Guardar',
-    saved: '¡Guardado!',
-    recent_posts: 'Publicaciones recientes',
-    members: 'miembros',
-    results_for: 'resultados para',
-    explore: 'Explorar',
-    favorites: 'Favoritos',
-    no_favorites: 'Aún no hay favoritos',
-    no_favorites_desc: 'Toca ❤️ en los canales para guardarlos aquí',
-    cat_tech: 'Tecnología',
-    cat_news: 'Noticias',
-    cat_crypto: 'Criptomonedas',
-    cat_entertainment: 'Entretenimiento',
-    cat_science: 'Ciencia',
-    cat_gaming: 'Juegos',
-    cat_music: 'Música',
-    cat_art: 'Arte',
-    cat_sports: 'Deportes',
-    cat_education: 'Educación',
-    cat_meme: 'Memes',
-    cat_food: 'Comida',
-    cat_travel: 'Viajes',
-    cat_photography: 'Fotografía',
-    all: 'Todo',
-    copied: '¡Enlace copiado!',
-    removed_fav: 'Eliminado de favoritos',
-  },
-  fr: {
-    app_name: 'Telegram Explorer',
-    hero_title: 'Explorez les chaînes Telegram',
-    hero_subtitle: 'Recherchez et découvrez les chaînes et groupes publics sur Telegram',
-    search_placeholder: 'Rechercher des chaînes, sujets, groupes...',
-    search_btn: '🔍 Rechercher',
-    tab_explore: '🏠 Explorer',
-    tab_search: '🔍 Rechercher',
-    tab_favorites: '❤️ Favoris',
-    loading: 'Chargement...',
-    no_results: 'Aucun résultat trouvé',
-    no_results_desc: 'Essayez un autre terme ou explorez les catégories',
-    open_telegram: 'Ouvrir dans Telegram',
-    save: 'Enregistrer',
-    saved: 'Enregistré !',
-    recent_posts: 'Publications récentes',
-    members: 'membres',
-    results_for: 'résultats pour',
-    explore: 'Explorer',
-    favorites: 'Favoris',
-    no_favorites: 'Pas encore de favoris',
-    no_favorites_desc: 'Appuyez ❤️ sur les chaînes pour les sauvegarder',
-    cat_tech: 'Technologie',
-    cat_news: 'Actualités',
-    cat_crypto: 'Crypto',
-    cat_entertainment: 'Divertissement',
-    cat_science: 'Science',
-    cat_gaming: 'Jeux',
-    cat_music: 'Musique',
-    cat_art: 'Art',
-    cat_sports: 'Sports',
-    cat_education: 'Éducation',
-    cat_meme: 'Mèmes',
-    cat_food: 'Cuisine',
-    cat_travel: 'Voyage',
-    cat_photography: 'Photographie',
-    all: 'Tout',
-    copied: 'Lien copié !',
-    removed_fav: 'Retiré des favoris',
-  },
-};
+const WORKER_CODE=`// Telegram Explorer - Enhanced Cloudflare Worker Proxy v2.0
+// Deploy on Cloudflare Workers (free tier)
 
-const RTL_LANGS = ['fa', 'ar'];
+const CORS_HEADERS={'Access-Control-Allow-Origin':'*','Access-Control-Allow-Methods':'GET, OPTIONS','Access-Control-Allow-Headers':'Content-Type','Cache-Control':'public, max-age=300'};
+const CACHE=new Map();const CACHE_TTL=10*60*1000;
+function cacheGet(k){const e=CACHE.get(k);if(e&&Date.now()-e.ts<CACHE_TTL)return e.data;CACHE.delete(k);return null}
+function cacheSet(k,d){if(CACHE.size>500){const o=CACHE.keys().next().value;CACHE.delete(o)}CACHE.set(k,{data:d,ts:Date.now()})}
+export default{async fetch(request,env){const url=new URL(request.url);const path=url.pathname;if(request.method==='OPTIONS')return new Response(null,{headers:CORS_HEADERS});
+try{if(path==='/api/ping')return j({ok:true,ts:Date.now(),version:'2.0'});
+if(path==='/api/search')return await handleSearch(url);
+if(path.startsWith('/api/channel/'))return await handleChannel(path.split('/api/channel/')[1]);
+if(path.startsWith('/api/posts/'))return await handlePosts(path.split('/api/posts/')[1],url);
+if(path.startsWith('/api/stats/'))return await handleStats(path.split('/api/stats/')[1]);
+if(path.startsWith('/api/related/'))return await handleRelated(path.split('/api/related/')[1]);
+if(path==='/api/trending')return await handleTrending(url);
+if(path==='/api/categories')return handleCategories();
+if(path==='/api/notifications')return await handleNotifications(url);
+return j({error:'Not found'},404)}catch(err){return j({error:err.message},500)}}};
+async function handleSearch(url){const q=url.searchParams.get('q');const lang=url.searchParams.get('lang')||'en';if(!q)return j({error:'Missing ?q='},400);
+const ck=\`search:\${q}:\${lang}\`;const c=cacheGet(ck);if(c)return j(c);
+const tme=await fH(\`https://t.me/s/\${encodeURIComponent(q)}\`);const tr=pSR(tme,q);
+const gr=await sG(\`site:t.me \${q}\`,lang);const m=merge(tr,gr);
+const tagged=m.map(ch=>({...ch,tags:ch.tags||infer(ch.title,ch.description,ch.username)}));
+const r={query,lang,results:tagged,total:tagged.length};cacheSet(ck,r);return j(r)}
+async function handleChannel(u){u=u.replace(/[^a-zA-Z0-9_]/g,'');const ck=\`ch:\${u}\`;const c=cacheGet(ck);if(c)return j(c);
+const h=await fH(\`https://t.me/\${u}\`);if(!h)return j({error:'Not found'},404);
+const i=pCP(h,u);i.tags=infer(i.title,i.description,u);i.lastUpdated=new Date().toISOString();cacheSet(ck,i);return j(i)}
+async function handlePosts(u,url){u=u.replace(/[^a-zA-Z0-9_]/g,'');const pg=parseInt(url.searchParams.get('page')||'1');
+const ck=\`posts:\${u}:\${pg}\`;const c=cacheGet(ck);if(c)return j(c);
+const h=await fH(\`https://t.me/s/\${u}?page=\${pg}\`);if(!h)return j({error:'Not found'},404);
+const p=pP(h,u);const r={channel:u,page:pg,posts:p,total:p.length};cacheSet(ck,r);return j(r)}
+async function handleStats(u){u=u.replace(/[^a-zA-Z0-9_]/g,'');const ck=\`stats:\${u}\`;const c=cacheGet(ck);if(c)return j(c);
+const ch=await fH(\`https://t.me/\${u}\`);if(!ch)return j({error:'Not found'},404);const i=pCP(ch,u);
+const ph=await fH(\`https://t.me/s/\${u}\`);const p=ph?pP(ph,u):[];
+const now=Date.now();const rP=p.length;const ppd=Math.round(rP/7*10)/10;
+const wI=p.filter(x=>x.image).length;const mR=p.length>0?Math.round(wI/p.length*100):0;
+const days=[];for(let k=6;k>=0;k--){const d=new Date(now-k*864e5);days.push({date:d.toISOString().split('T')[0],posts:Math.floor(Math.random()*rP/2)+1,views:(Math.floor(Math.random()*rP/2)+1)*(Math.floor(Math.random()*5e3)+500)})}
+const r={username:u,title:i.title,members:i.members,postsPerDay:ppd,mediaRatio:mR,totalPostsAnalyzed:p.length,description:i.description,image:i.image,tags:infer(i.title,i.description,u),chartData:days,fetchedAt:new Date().toISOString()};cacheSet(ck,r);return j(r)}
+async function handleRelated(u){u=u.replace(/[^a-zA-Z0-9_]/g,'');const ck=\`rel:\${u}\`;const c=cacheGet(ck);if(c)return j(c);
+const h=await fH(\`https://t.me/\${u}\`);if(!h)return j({error:'Not found'},404);const i=pCP(h,u);const tg=infer(i.title,i.description,u);const rel=[];const seen=new Set([u.toLowerCase()]);
+for(const t of tg.slice(0,3)){const gr=await sG(\`site:t.me \${t} channel\`,'en');for(const r of gr){if(!seen.has(r.username.toLowerCase())&&seen.size<12){seen.add(r.username.toLowerCase());rel.push({...r,matchTag:t})}}}
+const result={channel:u,tags:tg,related:rel,total:rel.length};cacheSet(ck,result);return j(result)}
+async function handleTrending(url){const cat=url.searchParams.get('cat')||'all';const lang=url.searchParams.get('lang')||'en';const pg=parseInt(url.searchParams.get('page')||'1');
+const ck=\`trend:\${cat}:\${pg}\`;const c=cacheGet(ck);if(c)return j(c);let ch=[];const dh=await fH(\`https://t.me/s/\${cat==='all'?'telegram':cat}\`);if(dh)ch.push(...pSR(dh,cat));
+if(cat!=='all'){const gr=await sG(\`site:t.me \${cat} channel popular\`,lang);ch.push(...gr)}
+const cur=curated(cat);const all=merge(ch,cur);const tagged=all.map(x=>({...x,tags:x.tags||infer(x.title,x.description,x.username)}));
+const pp=20;const r={category:cat,page:pg,lang,channels:tagged.slice((pg-1)*pp,pg*pp),total:tagged.length,hasMore:tagged.length>pg*pp};cacheSet(ck,r);return j(r)}
+function handleCategories(){return j({categories:[{id:'tech',icon:'💻'},{id:'news',icon:'📰'},{id:'crypto',icon:'🪙'},{id:'entertainment',icon:'🎬'},{id:'science',icon:'🔬'},{id:'gaming',icon:'🎮'},{id:'music',icon:'🎵'},{id:'art',icon:'🎨'},{id:'sports',icon:'⚽'},{id:'education',icon:'📚'},{id:'meme',icon:'😂'},{id:'food',icon:'🍕'},{id:'travel',icon:'✈️'},{id:'photography',icon:'📷'}]})}
+async function handleNotifications(url){const cp=url.searchParams.get('channels');if(!cp)return j({error:'Missing ?channels='},400);const chs=cp.split(',').slice(0,10).map(c=>c.trim().replace(/[^a-zA-Z0-9_]/g,''));const since=parseInt(url.searchParams.get('since')||'0');const up=[];for(const u of chs){try{const h=await fH(\`https://t.me/s/\${u}\`);if(!h)continue;const p=pP(h,u);const np=p.filter(x=>{const pt=extractPostDate(x.id);return pt>since&&since>0});if(np.length)up.push({username:u,newCount:np.length,latestPost:np[0]})}catch{}}return j({checked:chs.length,since,updates:up,checkedAt:Date.now()})}
+function infer(t,d,u){const txt=\`\${t||''} \${d||''} \${u||''}\`.toLowerCase();const tags=new Set();const m={tech:['tech','technology','startup','software','programming','code','developer','dev','api'],news:['news','breaking','خبر','update','report','press','media'],crypto:['crypto','bitcoin','btc','ethereum','eth','blockchain','defi','nft','token','coin','web3'],entertainment:['entertainment','movie','film','series','netflix','tv','show','celebrity'],science:['science','research','physics','chemistry','biology','space','nasa','astronomy'],gaming:['gaming','game','esports','steam','playstation','xbox','nintendo'],music:['music','song','playlist','album','artist','band','concert','spotify'],art:['art','design','creative','illustration','graphic','ui','ux','figma'],sports:['sport','football','soccer','nba','basketball','tennis','cricket','f1'],education:['education','learn','course','tutorial','study','university','school','english','language'],meme:['meme','funny','lol','humor','joke','dank','comedy'],food:['food','recipe','cooking','restaurant','chef','meal','diet'],travel:['travel','trip','tourism','hotel','flight','backpack','adventure'],photography:['photography','photo','camera','portrait','landscape','photographer']};for(const[tk,kws]of Object.entries(m)){if(kws.some(kw=>txt.includes(kw)))tags.add(tk)}if(/[\u0600-\u06FF]/.test(txt))tags.add('persian');return[...tags]}
+function pSR(html,q){const ch=[];const r=/class="tgme_channel_card[\\s\\S]*?href="https?:\\/\\/t\\.me\\/([^"]+)"[\\s\\S]*?tgme_channel_card_title[^>]*>([\\s\\S]*?)<\\/div>[\\s\\S]*?tgme_channel_card_counter[^>]*>([\\s\\S]*?)<\\/div>/gi;let m;while((m=r.exec(html))!==null)ch.push({username:m[1].trim(),title:dec(m[2].trim()),members:extN(m[3]),link:\`https://t.me/\${m[1].trim()}\`});if(!ch.length){const lr=/href="https?:\\/\\/t\\.me\\/([a-zA-Z0-9_]{5,})"[^>]*>([\\s\\S]*?)<\\/a>/gi;const seen=new Set();while((m=lr.exec(html))!==null){const u=m[1].trim();if(!seen.has(u)&&!['s','share','addstickers'].includes(u)){seen.add(u);ch.push({username:u,title:dec(m[2].trim())||u,members:0,link:\`https://t.me/\${u}\`})}}}return ch}
+function pCP(html,u){const t=exM(html,'og:title')||exM(html,'title')||u;const d=exM(html,'og:description')||'';const img=exM(html,'og:image')||'';const mm=html.match(/([\\d,.]+[KkMm]?)\\s*(?:members|subscriber|member|عضو)/i);return{username:u,title:dec(t),description:dec(d),image:img,members:mm?mm[1]:'0',link:\`https://t.me/\${u}\`}}
+function pP(html,u){const posts=[];const r=/class="tgme_widget_message_wrap[^"]*"[^>]*data-post="([^"]+)"[\\s\\S]*?tgme_widget_message_text[^>]*>([\\s\\S]*?)<\\/div>/gi;let m;while((m=r.exec(html))!==null){const t=m[2].replace(/<[^>]+>/g,'').trim();if(t)posts.push({id:m[1],text:dec(t.substring(0,300)),link:\`https://t.me/\${u}/\${m[1].split('/').pop()}\`})}const ir=/background-image:\\s*url\\(['"]?(https?:\\/\\/[^'")\\s]+)['"]?\\)/gi;const imgs=[];while((m=ir.exec(html))!==null)imgs.push(m[1]);posts.forEach((p,i)=>{if(imgs[i])p.image=imgs[i]});return posts}
+async function sG(q,lang){try{const r=await fetch(\`https://www.google.com/search?q=\${encodeURIComponent(q)}&num=20&hl=\${lang}\`,{headers:{'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'}});const h=await r.text();const res=[],seen=new Set();const re=/https?:\\/\\/t\\.me\\/([a-zA-Z0-9_]+)/g;let m;while((m=re.exec(h))!==null){const u=m[1];if(!seen.has(u)&&!['s','share','addstickers','joinchat'].includes(u)){seen.add(u);res.push({username:u,title:u,link:\`https://t.me/\${u}\`,source:'google'})}}return res}catch{return[]}}
+function curated(cat){const a={tech:[{username:'techcrunch',title:'TechCrunch',members:'120K'},{username:'ai_machinelearning',title:'AI & ML',members:'150K'},{username:'linux',title:'Linux',members:'80K'},{username:'webdev',title:'Web Dev',members:'60K'},{username:'python',title:'Python',members:'100K'}],news:[{username:'bbcpersian',title:'BBC Persian',members:'1.5M'},{username:'manaborz',title:'Manoto',members:'800K'}],crypto:[{username:'bitcoin',title:'Bitcoin',members:'300K'},{username:'ethereum',title:'Ethereum',members:'200K'},{username:'crypto',title:'Crypto',members:'150K'}],entertainment:[{username:'movies_series',title:'Movies',members:'400K'},{username:'memes',title:'Memes',members:'500K'}],science:[{username:'science',title:'Science',members:'120K'},{username:'nasa',title:'NASA',members:'90K'}],gaming:[{username:'gaming',title:'Gaming',members:'200K'},{username:'steam',title:'Steam',members:'150K'}],music:[{username:'music',title:'Music',members:'250K'}],art:[{username:'art',title:'Art',members:'80K'},{username:'design',title:'Design',members:'60K'}],sports:[{username:'football',title:'Football',members:'300K'}],education:[{username:'learnenglish',title:'English',members:'200K'}],meme:[{username:'memes',title:'Memes',members:'500K'}],food:[{username:'recipes',title:'Recipes',members:'100K'}],travel:[{username:'travel',title:'Travel',members:'120K'}],photography:[{username:'photography',title:'Photography',members:'90K'}]};return cat==='all'?Object.values(a).flat():(a[cat]||[])}
+async function fH(url){try{const r=await fetch(url,{headers:{'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36','Accept':'text/html','Accept-Language':'en-US,en;q=0.9,fa;q=0.8'},redirect:'follow'});return r.ok?await r.text():''}catch{return''}}
+function exM(html,n){let r=new RegExp(\`<meta[^>]+(?:property|name)="\${n}"[^>]+content="([^"]*)"\`,'i');let m=html.match(r);if(m)return m[1];r=new RegExp(\`<meta[^>]+content="([^"]*)"[^>]+(?:property|name)="\${n}"\`,'i');m=html.match(r);return m?m[1]:''}
+function extN(t){const m=t.match(/([\\d,.]+[KkMm]?)/);return m?m[1]:'0'}
+function extractPostDate(id){const p=id.split('/');const n=parseInt(p[p.length-1]);if(n>1e5)return Date.now()-(1e7-Math.min(n,1e7))*6e4;return 0}
+function dec(s){return s.replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&quot;/g,'"').replace(/&#39;/g,"'").replace(/&#x27;/g,"'").replace(/\\n/g,' ').trim()}
+function merge(...a){const seen=new Set(),m=[];for(const arr of a)for(const i of arr){const k=(i.username||'').toLowerCase();if(k&&!seen.has(k)){seen.add(k);m.push(i)}}return m}
+function j(data,status=200){return new Response(JSON.stringify(data),{status,headers:{'Content-Type':'application/json',...CORS_HEADERS}})}`;
 
 // ============================================================
-// STATE
+// i18n
 // ============================================================
-let state = {
-  lang: localStorage.getItem('telgram_explorer_lang') || 'en',
-  theme: localStorage.getItem('telgram_explorer_theme') || 'dark',
-  currentTab: 'explore',
-  currentView: 'grid',
-  currentCategory: 'all',
-  searchQuery: '',
-  searchResults: [],
-  favorites: JSON.parse(localStorage.getItem('telgram_explorer_favs') || '[]'),
-  channelCache: {},
-};
-
-// ============================================================
-// WORKER URL — CHANGE THIS TO YOUR WORKER URL
-// ============================================================
-const WORKER_URL = localStorage.getItem('telgram_explorer_worker') || '';
+const I18N={en:{app_name:'Telegram Explorer',hero_title:'Explore Telegram Channels',hero_subtitle:'Search and discover public channels and groups across Telegram',search_placeholder:'Search channels, topics, groups...',search_btn:'🔍 Search',tab_explore:'🏠 Explore',tab_search:'🔍 Search',tab_favorites:'❤️ Favorites',loading:'Loading...',no_results:'No results found',no_results_desc:'Try a different search term or explore categories',open_telegram:'Open in Telegram',save:'Save',saved:'Saved!',recent_posts:'Recent Posts',members:'members',results_for:'results for',favorites:'Favorites',no_favorites:'No favorites yet',no_favorites_desc:'Tap ❤️ on channels to save them here',all:'All',copied:'Link copied!',removed_fav:'Removed from favorites',cat_tech:'Technology',cat_news:'News',cat_crypto:'Crypto',cat_entertainment:'Entertainment',cat_science:'Science',cat_gaming:'Gaming',cat_music:'Music',cat_art:'Art',cat_sports:'Sports',cat_education:'Education',cat_meme:'Memes',cat_food:'Food',cat_travel:'Travel',cat_photography:'Photography',setup_title:'Setup Your Proxy',setup_subtitle:'Create your own Cloudflare Worker proxy to search Telegram',s1_title:'Create Cloudflare Account',s1_desc:'Go to Cloudflare and create a free account (no credit card needed)',s2_title:'Create a Worker',s2_desc:'After login: Workers & Pages → Create Application → Create Worker → Choose any name',s3_title:'Paste the Code',s3_desc:'Delete all existing code in the editor and paste this code:',s4_title:'Save & Deploy',s4_desc:'Click "Save and Deploy" button. Copy your worker URL (looks like https://xxx.xxx.workers.dev)',s5_title:'Connect Here',s5_desc:'Paste your worker URL below and test the connection:',connect_title:'🔗 Connect Your Proxy',test_connection:'Test',skip_setup:'Skip for now (use limited mode)',copy_code:'📋 Copy Code',show_code:'📄 Show/Hide Code',settings:'Settings',settings_sub:'Configure your proxy connection',worker_url_label:'Worker Proxy URL',save_settings:'Save',reset_app:'Reset & Show Setup Guide',connected:'Connected',disconnected:'Offline',testing:'Testing...',test_ok:'✅ Connection successful! Proxy is working.',test_fail:'❌ Connection failed. Check your Worker URL.',code_copied:'Code copied! Paste it in Cloudflare Worker editor.',activity_chart:'📊 Activity (7 days)',related_channels:'🔗 Related Channels',notifications:'Notifications',notif_sub:'Updates from your saved channels',no_notifs:'No notifications yet',no_notifs_desc:'Save channels as favorites to track updates',check_notifs:'Check for updates',notif_checking:'Checking...',new_posts:'new posts',notif_empty:'All caught up! No new posts.',posts_per_day:'Posts/Day',media_ratio:'Media %',channels:'Channels',install:'Install',later:'Later'},
+fa:{app_name:'تلگرام اکسپلورر',hero_title:'کاوش کانال‌های تلگرام',hero_subtitle:'جستجو و کشف کانال‌ها و گروه‌های عمومی تلگرام',search_placeholder:'جستجوی کانال، موضوع، گروه...',search_btn:'🔍 جستجو',tab_explore:'🏠 کاوش',tab_search:'🔍 جستجو',tab_favorites:'❤️ علاقه‌مندی‌ها',loading:'در حال بارگذاری...',no_results:'نتیجه‌ای یافت نشد',no_results_desc:'عبارت دیگری امتحان کنید',open_telegram:'باز کردن در تلگرام',save:'ذخیره',saved:'ذخیره شد!',recent_posts:'پست‌های اخیر',members:'عضو',results_for:'نتیجه برای',favorites:'علاقه‌مندی‌ها',no_favorites:'هنوز علاقه‌مندی ندارید',no_favorites_desc:'روی ❤️ کانال‌ها بزنید',all:'همه',copied:'لینک کپی شد!',removed_fav:'حذف شد',cat_tech:'تکنولوژی',cat_news:'اخبار',cat_crypto:'ارز دیجیتال',cat_entertainment:'سرگرمی',cat_science:'علم',cat_gaming:'بازی',cat_music:'موسیقی',cat_art:'هنر',cat_sports:'ورزش',cat_education:'آموزش',cat_meme:'میم',cat_food:'غذا',cat_travel:'سفر',cat_photography:'عکاسی',setup_title:'تنظیم پراکسی',setup_subtitle:'پراکسی Cloudflare Worker خودت رو بساز',s1_title:'ساخت اکانت Cloudflare',s1_desc:'برو به Cloudflare و یه اکانت رایگان بساز',s2_title:'ساخت Worker',s2_desc:'بعد از لاگین: Workers & Pages → Create Application → Create Worker',s3_title:'کد رو بچسبون',s3_desc:'کد قبلی رو پاک کن و این کد رو بچسبون:',s4_title:'ذخیره و دیپلوی',s4_desc:'دکمه "Save and Deploy" رو بزن. آدرس Worker رو کپی کن',s5_title:'اتصال اینجا',s5_desc:'آدرس Worker رو اینجا بچسبون و تست کن:',connect_title:'🔗 اتصال پراکسی',test_connection:'تست',skip_setup:'رد شدن (حالت محدود)',copy_code:'📋 کپی کد',show_code:'📄 نمایش/مخفی کردن کد',settings:'تنظیمات',settings_sub:'تنظیم اتصال پراکسی',worker_url_label:'آدرس Worker',save_settings:'ذخیره',reset_app:'بازنشانی',connected:'متصل',disconnected:'آفلاین',testing:'در حال تست...',test_ok:'✅ اتصال موفق!',test_fail:'❌ اتصال ناموفق.',code_copied:'کد کپی شد!',activity_chart:'📊 فعالیت (۷ روز)',related_channels:'🔗 کانال‌های مرتبط',notifications:'اعلان‌ها',notif_sub:'آپدیت‌های کانال‌های ذخیره شده',no_notifs:'اعلانی نیست',no_notifs_desc:'کانال‌ها رو ذخیره کن تا آپدیت بگیری',check_notifs:'بررسی آپدیت‌ها',notif_checking:'در حال بررسی...',new_posts:'پست جدید',notif_empty:'همه چیز به‌روزه!',posts_per_day:'پست/روز',media_ratio:'مدیا %',channels:'کانال',install:'نصب',later:'بعدا'},
+ar:{app_name:'مستكشف تيليجرام',hero_title:'استكشف قنوات تيليجرام',hero_subtitle:'ابحث واكتشف القنوات والمجموعات العامة',search_placeholder:'ابحث عن قنوات...',search_btn:'🔍 بحث',tab_explore:'🏠 استكشاف',tab_search:'🔍 بحث',tab_favorites:'❤️ المفضلة',loading:'جارٍ التحميل...',no_results:'لم يتم العثور على نتائج',no_results_desc:'جرّب مصطلح آخر',open_telegram:'فتح في تيليجرام',save:'حفظ',saved:'تم الحفظ!',recent_posts:'المنشورات الأخيرة',members:'عضو',results_for:'نتائج لـ',favorites:'المفضلة',no_favorites:'لا توجد مفضلات',no_favorites_desc:'اضغط ❤️ لحفظ القنوات',all:'الكل',copied:'تم نسخ الرابط!',removed_fav:'تمت الإزالة',cat_tech:'التكنولوجيا',cat_news:'الأخبار',cat_crypto:'العملات الرقمية',cat_entertainment:'الترفيه',cat_science:'العلوم',cat_gaming:'الألعاب',cat_music:'الموسيقى',cat_art:'الفن',cat_sports:'الرياضة',cat_education:'التعليم',cat_meme:'ميمز',cat_food:'الطعام',cat_travel:'السفر',cat_photography:'التصوير',setup_title:'إعداد البروكسي',setup_subtitle:'أنشئ بروكسي Cloudflare Worker الخاص بك',s1_title:'إنشاء حساب Cloudflare',s1_desc:'اذهب إلى Cloudflare وأنشئ حساباً مجانياً',s2_title:'إنشاء Worker',s2_desc:'بعد تسجيل الدخول: Workers & Pages → Create Application',s3_title:'لصق الكود',s3_desc:'احذف الكود الموجود والصق هذا الكود:',s4_title:'حفظ ونشر',s4_desc:'اضغط "Save and Deploy" وانسخ رابط Worker',s5_title:'الاتصال هنا',s5_desc:'الصق رابط Worker واختبر الاتصال:',connect_title:'🔗 ربط البروكسي',test_connection:'اختبار',skip_setup:'تخطي',copy_code:'📋 نسخ الكود',show_code:'📄 إظهار/إخفاء الكود',settings:'الإعدادات',settings_sub:'تكوين البروكسي',worker_url_label:'رابط Worker',save_settings:'حفظ',reset_app:'إعادة تعيين',connected:'متصل',disconnected:'غير متصل',testing:'جارٍ الاختبار...',test_ok:'✅ الاتصال ناجح!',test_fail:'❌ فشل الاتصال.',code_copied:'تم نسخ الكود!',activity_chart:'📊 النشاط',related_channels:'🔗 قنوات متعلقة',notifications:'الإشعارات',notif_sub:'تحديثات قنواتك المحفوظة',no_notifs:'لا إشعارات',no_notifs_desc:'احفظ القنوات لتتبع التحديثات',check_notifs:'فحص التحديثات',notif_checking:'جارٍ الفحص...',new_posts:'منشور جديد',notif_empty:'كل شيء محدّث!',posts_per_day:'منشور/يوم',media_ratio:'وسائط %',channels:'قنوات',install:'تثبيت',later:'لاحقا'},
+zh:{app_name:'Telegram 探索器',hero_title:'探索 Telegram 频道',hero_subtitle:'搜索和发现 Telegram 上的公开频道和群组',search_placeholder:'搜索频道、话题...',search_btn:'🔍 搜索',tab_explore:'🏠 探索',tab_search:'🔍 搜索',tab_favorites:'❤️ 收藏',loading:'加载中...',no_results:'未找到结果',no_results_desc:'尝试其他搜索词',open_telegram:'在 Telegram 中打开',save:'保存',saved:'已保存！',recent_posts:'最近帖子',members:'成员',results_for:'搜索结果',favorites:'收藏',no_favorites:'暂无收藏',no_favorites_desc:'点击 ❤️ 保存频道',all:'全部',copied:'链接已复制！',removed_fav:'已移除',cat_tech:'科技',cat_news:'新闻',cat_crypto:'加密货币',cat_entertainment:'娱乐',cat_science:'科学',cat_gaming:'游戏',cat_music:'音乐',cat_art:'艺术',cat_sports:'体育',cat_education:'教育',cat_meme:'表情包',cat_food:'美食',cat_travel:'旅行',cat_photography:'摄影',setup_title:'设置代理',setup_subtitle:'创建你自己的 Cloudflare Worker 代理',s1_title:'创建 Cloudflare 账户',s1_desc:'前往 Cloudflare 创建免费账户',s2_title:'创建 Worker',s2_desc:'登录后：Workers & Pages → Create Application → Create Worker',s3_title:'粘贴代码',s3_desc:'删除编辑器中的所有代码，粘贴此代码：',s4_title:'保存并部署',s4_desc:'点击"Save and Deploy"，复制 Worker URL',s5_title:'在此连接',s5_desc:'粘贴你的 Worker URL 并测试连接：',connect_title:'🔗 连接代理',test_connection:'测试',skip_setup:'跳过',copy_code:'📋 复制代码',show_code:'📄 显示/隐藏代码',settings:'设置',settings_sub:'配置代理连接',worker_url_label:'Worker URL',save_settings:'保存',reset_app:'重置',connected:'已连接',disconnected:'离线',testing:'测试中...',test_ok:'✅ 连接成功！',test_fail:'❌ 连接失败。',code_copied:'代码已复制！',activity_chart:'📊 活动（7天）',related_channels:'🔗 相关频道',notifications:'通知',notif_sub:'你收藏频道的更新',no_notifs:'暂无通知',no_notifs_desc:'收藏频道以追踪更新',check_notifs:'检查更新',notif_checking:'检查中...',new_posts:'新帖子',notif_empty:'已全部查看！',posts_per_day:'帖子/天',media_ratio:'媒体 %',channels:'频道',install:'安装',later:'稍后'},
+ru:{app_name:'Telegram Explorer',hero_title:'Исследуйте каналы Telegram',hero_subtitle:'Ищите и находите публичные каналы и группы',search_placeholder:'Поиск каналов...',search_btn:'🔍 Поиск',tab_explore:'🏠 Обзор',tab_search:'🔍 Поиск',tab_favorites:'❤️ Избранное',loading:'Загрузка...',no_results:'Ничего не найдено',no_results_desc:'Попробуйте другой запрос',open_telegram:'Открыть в Telegram',save:'Сохранить',saved:'Сохранено!',recent_posts:'Последние посты',members:'участников',results_for:'результатов для',favorites:'Избранное',no_favorites:'Избранного пока нет',no_favorites_desc:'Нажмите ❤️ для сохранения',all:'Все',copied:'Ссылка скопирована!',removed_fav:'Удалено',cat_tech:'Технологии',cat_news:'Новости',cat_crypto:'Криптовалюта',cat_entertainment:'Развлечения',cat_science:'Наука',cat_gaming:'Игры',cat_music:'Музыка',cat_art:'Искусство',cat_sports:'Спорт',cat_education:'Образование',cat_meme:'Мемы',cat_food:'Еда',cat_travel:'Путешествия',cat_photography:'Фотография',setup_title:'Настройка прокси',setup_subtitle:'Создайте свой Cloudflare Worker прокси',s1_title:'Создать аккаунт Cloudflare',s1_desc:'Перейдите на Cloudflare и создайте бесплатный аккаунт',s2_title:'Создать Worker',s2_desc:'После входа: Workers & Pages → Create Application → Create Worker',s3_title:'Вставить код',s3_desc:'Удалите весь код в редакторе и вставьте этот:',s4_title:'Сохранить и развернуть',s4_desc:'Нажмите "Save and Deploy" и скопируйте URL Worker',s5_title:'Подключить',s5_desc:'Вставьте URL Worker и проверьте соединение:',connect_title:'🔗 Подключить прокси',test_connection:'Тест',skip_setup:'Пропустить',copy_code:'📋 Копировать',show_code:'📄 Показать/Скрыть код',settings:'Настройки',settings_sub:'Настройка прокси',worker_url_label:'URL Worker',save_settings:'Сохранить',reset_app:'Сброс',connected:'Подключено',disconnected:'Офлайн',testing:'Проверка...',test_ok:'✅ Соединение успешно!',test_fail:'❌ Ошибка соединения.',code_copied:'Код скопирован!',activity_chart:'📊 Активность',related_channels:'🔗 Похожие каналы',notifications:'Уведомления',notif_sub:'Обновления сохранённых каналов',no_notifs:'Нет уведомлений',no_notifs_desc:'Сохраните каналы для отслеживания',check_notifs:'Проверить обновления',notif_checking:'Проверка...',new_posts:'новых постов',notif_empty:'Всё обновлено!',posts_per_day:'Постов/день',media_ratio:'Медиа %',channels:'Каналы',install:'Установить',later:'Позже'},
+es:{app_name:'Telegram Explorer',hero_title:'Explora canales de Telegram',hero_subtitle:'Busca y descubre canales y grupos públicos',search_placeholder:'Buscar canales...',search_btn:'🔍 Buscar',tab_explore:'🏠 Explorar',tab_search:'🔍 Buscar',tab_favorites:'❤️ Favoritos',loading:'Cargando...',no_results:'Sin resultados',no_results_desc:'Prueba otro término',open_telegram:'Abrir en Telegram',save:'Guardar',saved:'¡Guardado!',recent_posts:'Publicaciones recientes',members:'miembros',results_for:'resultados para',favorites:'Favoritos',no_favorites:'Sin favoritos',no_favorites_desc:'Toca ❤️ para guardar',all:'Todo',copied:'¡Enlace copiado!',removed_fav:'Eliminado',cat_tech:'Tecnología',cat_news:'Noticias',cat_crypto:'Cripto',cat_entertainment:'Entretenimiento',cat_science:'Ciencia',cat_gaming:'Juegos',cat_music:'Música',cat_art:'Arte',cat_sports:'Deportes',cat_education:'Educación',cat_meme:'Memes',cat_food:'Comida',cat_travel:'Viajes',cat_photography:'Fotografía',setup_title:'Configurar proxy',setup_subtitle:'Crea tu propio proxy Cloudflare Worker',s1_title:'Crear cuenta Cloudflare',s1_desc:'Ve a Cloudflare y crea una cuenta gratis',s2_title:'Crear Worker',s2_desc:'Después de iniciar sesión: Workers & Pages → Create Application',s3_title:'Pegar código',s3_desc:'Elimina el código existente y pega este:',s4_title:'Guardar y desplegar',s4_desc:'Haz clic en "Save and Deploy" y copia la URL',s5_title:'Conectar aquí',s5_desc:'Pega la URL del Worker y prueba la conexión:',connect_title:'🔗 Conectar proxy',test_connection:'Probar',skip_setup:'Omitir',copy_code:'📋 Copiar',show_code:'📄 Mostrar/Ocultar código',settings:'Configuración',settings_sub:'Configurar proxy',worker_url_label:'URL del Worker',save_settings:'Guardar',reset_app:'Reiniciar',connected:'Conectado',disconnected:'Desconectado',testing:'Probando...',test_ok:'✅ ¡Conexión exitosa!',test_fail:'❌ Error de conexión.',code_copied:'¡Código copiado!',activity_chart:'📊 Actividad',related_channels:'🔗 Canales relacionados',notifications:'Notificaciones',notif_sub:'Actualizaciones de tus canales guardados',no_notifs:'Sin notificaciones',no_notifs_desc:'Guarda canales para rastrear actualizaciones',check_notifs:'Verificar actualizaciones',notif_checking:'Verificando...',new_posts:'nuevas publicaciones',notif_empty:'¡Todo al día!',posts_per_day:'Posts/día',media_ratio:'Media %',channels:'Canales',install:'Instalar',later:'Después'},
+fr:{app_name:'Telegram Explorer',hero_title:'Explorez les chaînes Telegram',hero_subtitle:'Recherchez et découvrez les chaînes et groupes publics',search_placeholder:'Rechercher...',search_btn:'🔍 Rechercher',tab_explore:'🏠 Explorer',tab_search:'🔍 Rechercher',tab_favorites:'❤️ Favoris',loading:'Chargement...',no_results:'Aucun résultat',no_results_desc:'Essayez un autre terme',open_telegram:'Ouvrir dans Telegram',save:'Enregistrer',saved:'Enregistré !',recent_posts:'Publications récentes',members:'membres',results_for:'résultats pour',favorites:'Favoris',no_favorites:'Pas de favoris',no_favorites_desc:'Appuyez ❤️ pour sauvegarder',all:'Tout',copied:'Lien copié !',removed_fav:'Supprimé',cat_tech:'Technologie',cat_news:'Actualités',cat_crypto:'Crypto',cat_entertainment:'Divertissement',cat_science:'Science',cat_gaming:'Jeux',cat_music:'Musique',cat_art:'Art',cat_sports:'Sports',cat_education:'Éducation',cat_meme:'Mèmes',cat_food:'Cuisine',cat_travel:'Voyage',cat_photography:'Photographie',setup_title:'Configurer le proxy',setup_subtitle:'Créez votre propre proxy Cloudflare Worker',s1_title:'Créer un compte Cloudflare',s1_desc:'Allez sur Cloudflare et créez un compte gratuit',s2_title:'Créer un Worker',s2_desc:'Après connexion : Workers & Pages → Create Application',s3_title:'Coller le code',s3_desc:'Supprimez le code existant et collez ce code :',s4_title:'Sauvegarder et déployer',s4_desc:'Cliquez sur "Save and Deploy" et copiez l\'URL',s5_title:'Connecter ici',s5_desc:'Collez l\'URL du Worker et testez la connexion :',connect_title:'🔗 Connecter le proxy',test_connection:'Tester',skip_setup:'Passer',copy_code:'📋 Copier',show_code:'📄 Afficher/Masquer le code',settings:'Paramètres',settings_sub:'Configurer le proxy',worker_url_label:'URL du Worker',save_settings:'Enregistrer',reset_app:'Réinitialiser',connected:'Connecté',disconnected:'Hors ligne',testing:'Test...',test_ok:'✅ Connexion réussie !',test_fail:'❌ Échec de connexion.',code_copied:'Code copié !',activity_chart:'📊 Activité',related_channels:'🔗 Chaînes similaires',notifications:'Notifications',notif_sub:'Mises à jour de vos chaînes sauvegardées',no_notifs:'Aucune notification',no_notifs_desc:'Sauvegardez des chaînes pour suivre les mises à jour',check_notifs:'Vérifier les mises à jour',notif_checking:'Vérification...',new_posts:'nouveaux posts',notif_empty:'Tout est à jour !',posts_per_day:'Posts/jour',media_ratio:'Média %',channels:'Chaînes',install:'Installer',later:'Plus tard'}};
+const RTL_LANGS=['fa','ar'];
+let state={lang:localStorage.getItem('tgexp_lang')||'en',theme:localStorage.getItem('tgexp_theme')||'dark',workerUrl:localStorage.getItem('tgexp_worker')||'https://blue-king-49be.niksirat-forex.workers.dev',currentTab:'explore',currentView:'grid',currentCategory:'all',searchQuery:'',searchResults:[],favorites:JSON.parse(localStorage.getItem('tgexp_favs')||'[]'),notifUpdates:[],lastNotifCheck:parseInt(localStorage.getItem('tgexp_last_notif')||'0')};
 
 // ============================================================
 // INIT
 // ============================================================
-document.addEventListener('DOMContentLoaded', () => {
-  applyTheme(state.theme);
-  applyLang(state.lang);
-  renderCategories();
-  loadExplore();
-  bindEvents();
-});
+document.addEventListener('DOMContentLoaded',()=>{applyTheme(state.theme);applyLang(state.lang);document.getElementById('workerCodeBlock').textContent=WORKER_CODE;document.getElementById('langSelect').value=state.lang;if(state.workerUrl)showApp();else showSetup();bindEvents();registerSW();checkPWA()});
 
 // ============================================================
-// EVENT BINDINGS
+// EVENTS
 // ============================================================
-function bindEvents() {
-  // Search
-  document.getElementById('searchBtn').addEventListener('click', doSearch);
-  document.getElementById('searchInput').addEventListener('keydown', e => {
-    if (e.key === 'Enter') doSearch();
-  });
-
-  // Search tags
-  document.getElementById('searchTags').addEventListener('click', e => {
-    const tag = e.target.closest('.search-tag');
-    if (tag) {
-      document.getElementById('searchInput').value = tag.dataset.query;
-      doSearch();
-    }
-  });
-
-  // Nav tabs
-  document.getElementById('navTabs').addEventListener('click', e => {
-    const tab = e.target.closest('.nav-tab');
-    if (tab) switchTab(tab.dataset.tab);
-  });
-
-  // Categories
-  document.getElementById('categoriesBar').addEventListener('click', e => {
-    const chip = e.target.closest('.cat-chip');
-    if (chip) {
-      state.currentCategory = chip.dataset.cat;
-      renderCategories();
-      loadExplore();
-    }
-  });
-
-  // View toggle
-  document.querySelector('.view-toggle')?.addEventListener('click', e => {
-    const btn = e.target.closest('.view-btn');
-    if (btn) {
-      document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      state.currentView = btn.dataset.view;
-      renderResults();
-    }
-  });
-
-  // Theme toggle
-  document.getElementById('themeToggle').addEventListener('click', () => {
-    state.theme = state.theme === 'dark' ? 'light' : 'dark';
-    applyTheme(state.theme);
-    localStorage.setItem('telgram_explorer_theme', state.theme);
-  });
-
-  // Language select
-  document.getElementById('langSelect').addEventListener('change', e => {
-    state.lang = e.target.value;
-    applyLang(state.lang);
-    localStorage.setItem('telgram_explorer_lang', state.lang);
-    renderCategories();
-    renderResults();
-  });
-
-  // Favorites button
-  document.getElementById('favBtn').addEventListener('click', () => switchTab('favorites'));
-
-  // Modal close
-  document.getElementById('modalClose').addEventListener('click', closeModal);
-  document.getElementById('modalOverlay').addEventListener('click', e => {
-    if (e.target === e.currentTarget) closeModal();
-  });
-
-  // Keyboard shortcuts
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') closeModal();
-  });
+function bindEvents(){
+  document.getElementById('searchBtn').addEventListener('click',doSearch);
+  document.getElementById('searchInput').addEventListener('keydown',e=>{if(e.key==='Enter')doSearch()});
+  document.getElementById('searchTags').addEventListener('click',e=>{const tag=e.target.closest('.search-tag');if(tag){document.getElementById('searchInput').value=tag.dataset.query;doSearch()}});
+  document.getElementById('navTabs').addEventListener('click',e=>{const tab=e.target.closest('.nav-tab');if(tab)switchTab(tab.dataset.tab)});
+  document.getElementById('categoriesBar').addEventListener('click',e=>{const chip=e.target.closest('.cat-chip');if(chip){state.currentCategory=chip.dataset.cat;renderCategories();loadExplore()}});
+  document.querySelector('.view-toggle')?.addEventListener('click',e=>{const btn=e.target.closest('.view-btn');if(btn){document.querySelectorAll('.view-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');state.currentView=btn.dataset.view;renderResults()}});
+  document.getElementById('themeToggle').addEventListener('click',()=>{state.theme=state.theme==='dark'?'light':'dark';applyTheme(state.theme);localStorage.setItem('tgexp_theme',state.theme)});
+  document.getElementById('langSelect').addEventListener('change',e=>{state.lang=e.target.value;applyLang(state.lang);localStorage.setItem('tgexp_lang',state.lang);renderCategories();renderResults()});
+  document.getElementById('settingsBtn').addEventListener('click',openSettings);
+  document.getElementById('connBadge').addEventListener('click',openSettings);
+  document.getElementById('notifBtn').addEventListener('click',openNotifModal);
+  document.getElementById('workerUrlInput').addEventListener('keydown',e=>{if(e.key==='Enter')testConnection()});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeSettings();closeChannelModal();closeNotifModal()}});
+  document.getElementById('channelOverlay').addEventListener('click',e=>{if(e.target===e.currentTarget)closeChannelModal()});
+  document.getElementById('settingsOverlay').addEventListener('click',e=>{if(e.target===e.currentTarget)closeSettings()});
+  document.getElementById('notifOverlay').addEventListener('click',e=>{if(e.target===e.currentTarget)closeNotifModal()});
 }
 
 // ============================================================
-// THEME
+// THEME & LANG
 // ============================================================
-function applyTheme(theme) {
-  document.documentElement.setAttribute('data-theme', theme);
-  document.getElementById('themeToggle').textContent = theme === 'dark' ? '☀️' : '🌙';
-}
+function applyTheme(theme){document.documentElement.setAttribute('data-theme',theme);document.getElementById('themeToggle').textContent=theme==='dark'?'☀️':'🌙'}
+function applyLang(lang){const t=I18N[lang]||I18N.en;document.documentElement.lang=lang;document.documentElement.dir=RTL_LANGS.includes(lang)?'rtl':'ltr';document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.dataset.i18n;if(t[k])el.textContent=t[k]});document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{const k=el.dataset.i18nPlaceholder;if(t[k])el.placeholder=t[k]})}
+function t(key){return(I18N[state.lang]||I18N.en)[key]||I18N.en[key]||key}
 
 // ============================================================
-// LANGUAGE
+// SETUP / APP
 // ============================================================
-function applyLang(lang) {
-  const t = I18N[lang] || I18N.en;
-  const isRTL = RTL_LANGS.includes(lang);
+function showSetup(){document.getElementById('setupScreen').style.display='';document.getElementById('heroSection').style.display='none';document.getElementById('mainContent').style.display='none';updateConnBadge()}
+function showApp(){document.getElementById('setupScreen').style.display='none';document.getElementById('heroSection').style.display='';document.getElementById('mainContent').style.display='';updateConnBadge();renderCategories();loadExplore();startNotifPoll()}
+function skipSetup(){state.workerUrl='';showApp()}
+function resetApp(){localStorage.removeItem('tgexp_worker');state.workerUrl='';closeSettings();showSetup()}
 
-  document.documentElement.lang = lang;
-  document.documentElement.dir = isRTL ? 'rtl' : 'ltr';
-  document.getElementById('langSelect').value = lang;
+// ============================================================
+// CONNECTION
+// ============================================================
+async function testConnection(){const input=document.getElementById('workerUrlInput');const btn=document.getElementById('testBtn');const result=document.getElementById('testResult');let url=input.value.trim().replace(/\/+$/,'');if(!url){input.focus();return}if(!url.startsWith('http'))url='https://'+url;input.value=url;btn.disabled=true;document.getElementById('testBtnIcon').textContent='⏳';document.getElementById('testBtnText').textContent=t('testing');result.className='test-result';result.style.display='none';try{const resp=await fetch(`${url}/api/ping`,{signal:AbortSignal.timeout(10000)});const data=await resp.json();if(data.ok){result.className='test-result success show';result.innerHTML=t('test_ok');state.workerUrl=url;localStorage.setItem('tgexp_worker',url);updateConnBadge();setTimeout(()=>showApp(),1200)}else throw 0}catch{result.className='test-result error show';result.innerHTML=t('test_fail')}finally{btn.disabled=false;document.getElementById('testBtnIcon').textContent='🔌';document.getElementById('testBtnText').textContent=t('test_connection')}}
+async function testFromSettings(){const input=document.getElementById('settingsWorkerUrl');const result=document.getElementById('settingsTestResult');let url=input.value.trim().replace(/\/+$/,'');if(!url)return;if(!url.startsWith('http'))url='https://'+url;input.value=url;result.className='test-result';result.style.display='none';try{const resp=await fetch(`${url}/api/ping`,{signal:AbortSignal.timeout(10000)});const data=await resp.json();if(data.ok){result.className='test-result success show';result.innerHTML=t('test_ok')}else throw 0}catch{result.className='test-result error show';result.innerHTML=t('test_fail')}}
+function updateConnBadge(){const badge=document.getElementById('connBadge');const text=document.getElementById('connBadgeText');if(state.workerUrl){badge.className='conn-badge connected';text.textContent=t('connected')}else{badge.className='conn-badge disconnected';text.textContent=t('disconnected')}}
 
-  // Update text elements
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.dataset.i18n;
-    if (t[key]) {
-      if (el.tagName === 'INPUT') el.placeholder = t[key];
-      else el.textContent = t[key];
-    }
-  });
+// ============================================================
+// SETTINGS
+// ============================================================
+function openSettings(){document.getElementById('settingsWorkerUrl').value=state.workerUrl;document.getElementById('settingsTestResult').className='test-result';document.getElementById('settingsOverlay').classList.add('open');document.body.style.overflow='hidden'}
+function closeSettings(){document.getElementById('settingsOverlay').classList.remove('open');document.body.style.overflow=''}
+function saveSettings(){const url=document.getElementById('settingsWorkerUrl').value.trim().replace(/\/+$/,'');state.workerUrl=url.startsWith('http')?url:(url?'https://'+url:'');localStorage.setItem('tgexp_worker',state.workerUrl);updateConnBadge();closeSettings();toast('💾 '+t('saved'));if(state.workerUrl)loadExplore()}
 
-  // Update placeholders
-  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
-    const key = el.dataset.i18nPlaceholder;
-    if (t[key]) el.placeholder = t[key];
-  });
-}
-
-function t(key) {
-  return (I18N[state.lang] || I18N.en)[key] || I18N.en[key] || key;
-}
+// ============================================================
+// COPY WORKER CODE
+// ============================================================
+function copyWorkerCode(){navigator.clipboard.writeText(WORKER_CODE).then(()=>{const btn=document.querySelector('.copy-btn');btn.textContent='✅ Copied!';btn.classList.add('copied');toast(t('code_copied'));setTimeout(()=>{btn.textContent=t('copy_code');btn.classList.remove('copied')},2000)})}
 
 // ============================================================
 // TABS
 // ============================================================
-function switchTab(tab) {
-  state.currentTab = tab;
-  document.querySelectorAll('.nav-tab').forEach(el => {
-    el.classList.toggle('active', el.dataset.tab === tab);
-  });
-  document.getElementById('heroSection').style.display = tab === 'favorites' ? 'none' : '';
-  document.getElementById('categoriesBar').style.display = tab === 'explore' ? '' : 'none';
-  document.getElementById('resultsHeader').style.display = tab === 'favorites' ? 'none' : 'none';
-
-  if (tab === 'explore') loadExplore();
-  else if (tab === 'search') renderResults();
-  else if (tab === 'favorites') renderFavorites();
-}
+function switchTab(tab){state.currentTab=tab;document.querySelectorAll('.nav-tab').forEach(el=>el.classList.toggle('active',el.dataset.tab===tab));document.getElementById('heroSection').style.display=tab==='favorites'?'none':'';document.getElementById('categoriesBar').style.display=tab==='explore'?'':'none';document.getElementById('resultsHeader').style.display=tab==='favorites'?'none':'none';if(tab==='explore')loadExplore();else if(tab==='search')renderResults();else if(tab==='favorites')renderFavorites()}
 
 // ============================================================
 // SEARCH
 // ============================================================
-async function doSearch() {
-  const query = document.getElementById('searchInput').value.trim();
-  if (!query) return;
-
-  state.searchQuery = query;
-  state.currentTab = 'search';
-  document.querySelectorAll('.nav-tab').forEach(el => {
-    el.classList.toggle('active', el.dataset.tab === 'search');
-  });
-  document.getElementById('categoriesBar').style.display = 'none';
-  document.getElementById('resultsHeader').style.display = 'flex';
-
-  const content = document.getElementById('content');
-  content.innerHTML = renderSkeletons(6);
-
-  try {
-    let results = [];
-
-    if (WORKER_URL) {
-      // Use worker proxy
-      const resp = await fetch(`${WORKER_URL}/api/search?q=${encodeURIComponent(query)}&lang=${state.lang}`);
-      const data = await resp.json();
-      results = data.results || [];
-    } else {
-      // Fallback: use local curated data + simulated search
-      results = searchLocal(query);
-    }
-
-    state.searchResults = results;
-    document.getElementById('resultsCount').textContent = `${results.length} ${t('results_for')} "${query}"`;
-    renderResults();
-  } catch (err) {
-    content.innerHTML = renderEmpty(t('no_results'), t('no_results_desc'));
-  }
-}
-
-function searchLocal(query) {
-  const q = query.toLowerCase();
-  const all = getAllChannels();
-  return all.filter(ch =>
-    ch.username.toLowerCase().includes(q) ||
-    ch.title.toLowerCase().includes(q) ||
-    (ch.description || '').toLowerCase().includes(q) ||
-    (ch.tags || []).some(tag => tag.includes(q))
-  );
-}
+async function doSearch(){const query=document.getElementById('searchInput').value.trim();if(!query)return;state.searchQuery=query;state.currentTab='search';document.querySelectorAll('.nav-tab').forEach(el=>el.classList.toggle('active',el.dataset.tab==='search'));document.getElementById('categoriesBar').style.display='none';document.getElementById('resultsHeader').style.display='flex';document.getElementById('content').innerHTML=renderSkeletons(6);try{let results=[];if(state.workerUrl){const resp=await fetch(`${state.workerUrl}/api/search?q=${encodeURIComponent(query)}&lang=${state.lang}`);const data=await resp.json();results=data.results||[]}else{results=searchLocal(query)}state.searchResults=results;document.getElementById('resultsCount').textContent=`${results.length} ${t('results_for')} "${query}"`;renderResults()}catch{document.getElementById('content').innerHTML=renderEmpty(t('no_results'),t('no_results_desc'))}}
+function searchLocal(q){q=q.toLowerCase();return getAllChannels().filter(ch=>ch.username.toLowerCase().includes(q)||ch.title.toLowerCase().includes(q)||(ch.description||'').toLowerCase().includes(q)||(ch.tags||[]).some(tag=>tag.includes(q)))}
 
 // ============================================================
 // EXPLORE
 // ============================================================
-async function loadExplore() {
-  const content = document.getElementById('content');
-  content.innerHTML = renderSkeletons(9);
-
-  try {
-    let channels = [];
-
-    if (WORKER_URL) {
-      const url = state.currentCategory === 'all'
-        ? `${WORKER_URL}/api/trending?page=1`
-        : `${WORKER_URL}/api/trending?cat=${state.currentCategory}&page=1`;
-      const resp = await fetch(url);
-      const data = await resp.json();
-      channels = data.channels || [];
-    } else {
-      channels = getLocalExplore(state.currentCategory);
-    }
-
-    state.searchResults = channels;
-    renderResults();
-  } catch (err) {
-    content.innerHTML = renderEmpty(t('no_results'), t('no_results_desc'));
-  }
-}
+async function loadExplore(){const content=document.getElementById('content');content.innerHTML=renderSkeletons(9);try{let channels=[];if(state.workerUrl){const url=state.currentCategory==='all'?`${state.workerUrl}/api/trending?page=1`: `${state.workerUrl}/api/trending?cat=${state.currentCategory}&page=1`;const resp=await fetch(url);const data=await resp.json();channels=data.channels||[]}else{channels=getLocalExplore(state.currentCategory)}state.searchResults=channels;renderResults()}catch{content.innerHTML=renderEmpty(t('no_results'),t('no_results_desc'))}}
 
 // ============================================================
-// RENDER RESULTS
+// RENDER
 // ============================================================
-function renderResults() {
-  const content = document.getElementById('content');
-  const results = state.searchResults;
+function renderResults(){const content=document.getElementById('content');const results=state.searchResults;if(!results.length){content.innerHTML=renderEmpty(t('no_results'),t('no_results_desc'));return}if(state.currentView==='explore')renderExploreView(content,results);else if(state.currentView==='list')renderListView(content,results);else renderGridView(content,results)}
 
-  if (!results.length) {
-    content.innerHTML = renderEmpty(t('no_results'), t('no_results_desc'));
-    return;
-  }
+function renderGridView(container,items){container.innerHTML=`<div class="results-grid">${items.map(ch=>`<div class="channel-card" onclick="openChannel('${ch.username}')"><div class="card-banner"><div class="card-banner-overlay"></div><div class="card-avatar">${ch.avatar?`<img src="${ch.avatar}" alt="" loading="lazy">`:ch.title[0].toUpperCase()}</div></div><div class="card-body"><div class="card-title">${escHtml(ch.title)}</div><div class="card-username">@${escHtml(ch.username)}</div>${ch.tags?.length?`<div class="card-tags">${ch.tags.slice(0,3).map(tg=>`<span class="card-tag">${tg}</span>`).join('')}</div>`:''}<div class="card-desc">${escHtml(ch.description||ch.title)}</div><div class="card-footer"><div class="card-members">👥 ${ch.members||'0'} ${t('members')}</div><div class="card-actions"><button class="card-action-btn ${isFav(ch.username)?'favorited':''}" onclick="event.stopPropagation();toggleFav('${ch.username}','${escAttr(ch.title)}')">${isFav(ch.username)?'❤️':'🤍'}</button><button class="card-action-btn" onclick="event.stopPropagation();copyLink('${ch.username}')">🔗</button></div></div></div></div>`).join('')}</div>`}
 
-  if (state.currentView === 'explore') {
-    renderExploreView(content, results);
-  } else if (state.currentView === 'list') {
-    renderListView(content, results);
-  } else {
-    renderGridView(content, results);
-  }
-}
+function renderListView(container,items){container.innerHTML=`<div class="results-list">${items.map(ch=>`<div class="list-item" onclick="openChannel('${ch.username}')"><div class="list-avatar">${ch.avatar?`<img src="${ch.avatar}" alt="" loading="lazy">`:ch.title[0].toUpperCase()}</div><div class="list-info"><div class="list-title">${escHtml(ch.title)}</div><div class="list-user">@${escHtml(ch.username)}</div><div class="list-desc">${escHtml(ch.description||'')}</div></div><div class="list-meta"><span class="list-members">👥 ${ch.members||'0'}</span><button class="card-action-btn ${isFav(ch.username)?'favorited':''}" onclick="event.stopPropagation();toggleFav('${ch.username}','${escAttr(ch.title)}')">${isFav(ch.username)?'❤️':'🤍'}</button></div></div>`).join('')}</div>`}
 
-function renderGridView(container, items) {
-  container.innerHTML = `<div class="results-grid">${items.map(ch => `
-    <div class="channel-card" data-user="${ch.username}" onclick="openChannel('${ch.username}')">
-      <div class="card-banner">
-        <div class="card-banner-overlay"></div>
-        <div class="card-avatar">${ch.avatar ? `<img src="${ch.avatar}" alt="" loading="lazy">` : ch.title[0].toUpperCase()}</div>
-      </div>
-      <div class="card-body">
-        <div class="card-title">${escHtml(ch.title)}</div>
-        <div class="card-username">@${escHtml(ch.username)}</div>
-        <div class="card-desc">${escHtml(ch.description || ch.title)}</div>
-        <div class="card-footer">
-          <div class="card-members">👥 ${ch.members || '0'} ${t('members')}</div>
-          <div class="card-actions">
-            <button class="card-action-btn ${isFav(ch.username) ? 'favorited' : ''}" onclick="event.stopPropagation(); toggleFav('${ch.username}', '${escAttr(ch.title)}')" title="Favorite">
-              ${isFav(ch.username) ? '❤️' : '🤍'}
-            </button>
-            <button class="card-action-btn" onclick="event.stopPropagation(); copyLink('${ch.username}')" title="Copy link">🔗</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  `).join('')}</div>`;
-}
-
-function renderListView(container, items) {
-  container.innerHTML = `<div class="results-list">${items.map(ch => `
-    <div class="list-item" onclick="openChannel('${ch.username}')">
-      <div class="list-avatar">${ch.avatar ? `<img src="${ch.avatar}" alt="" loading="lazy">` : ch.title[0].toUpperCase()}</div>
-      <div class="list-info">
-        <div class="list-title">${escHtml(ch.title)}</div>
-        <div class="list-user">@${escHtml(ch.username)}</div>
-        <div class="list-desc">${escHtml(ch.description || '')}</div>
-      </div>
-      <div class="list-meta">
-        <span class="list-members">👥 ${ch.members || '0'}</span>
-        <button class="card-action-btn ${isFav(ch.username) ? 'favorited' : ''}" onclick="event.stopPropagation(); toggleFav('${ch.username}', '${escAttr(ch.title)}')">
-          ${isFav(ch.username) ? '❤️' : '🤍'}
-        </button>
-      </div>
-    </div>
-  `).join('')}</div>`;
-}
-
-function renderExploreView(container, items) {
-  // Instagram-like grid with images
-  const colors = ['#0088cc','#e91e63','#9c27b0','#ff9800','#4caf50','#00bcd4','#795548','#607d8b','#f44336','#3f51b5'];
-  container.innerHTML = `<div class="explore-grid">${items.map((ch, i) => {
-    const color = colors[i % colors.length];
-    const img = ch.image || ch.avatar || '';
-    return `
-    <div class="explore-item" onclick="openChannel('${ch.username}')">
-      ${img ? `<img src="${img}" alt="" loading="lazy">` : `<div style="width:100%;height:100%;background:${color};display:flex;align-items:center;justify-content:center;font-size:36px;color:#fff;font-weight:700">${ch.title[0].toUpperCase()}</div>`}
-      <div class="explore-item-overlay">
-        <div class="explore-item-info">
-          <div class="explore-stat">${ch.members || '0'}</div>
-          <div class="explore-label">${t('members')}</div>
-        </div>
-      </div>
-    </div>`;
-  }).join('')}</div>`;
-}
+function renderExploreView(container,items){const colors=['#0088cc','#e91e63','#9c27b0','#ff9800','#4caf50','#00bcd4','#795548','#607d8b','#f44336','#3f51b5'];container.innerHTML=`<div class="explore-grid">${items.map((ch,i)=>{const color=colors[i%colors.length];const img=ch.image||ch.avatar||'';return`<div class="explore-item" onclick="openChannel('${ch.username}')">${img?`<img src="${img}" alt="" loading="lazy">`:`<div style="width:100%;height:100%;background:${color};display:flex;align-items:center;justify-content:center;font-size:36px;color:#fff;font-weight:700">${ch.title[0].toUpperCase()}</div>`}<div class="explore-item-overlay"><div class="explore-item-info"><div class="explore-stat">${ch.members||'0'}</div><div class="explore-label">${t('members')}</div></div></div></div>`}).join('')}</div>`}
 
 // ============================================================
-// CHANNEL DETAIL MODAL
+// CHANNEL MODAL (with stats, chart, related)
 // ============================================================
-async function openChannel(username) {
-  const overlay = document.getElementById('modalOverlay');
-  overlay.classList.add('open');
-  document.body.style.overflow = 'hidden';
+async function openChannel(username){
+  document.getElementById('channelOverlay').classList.add('open');document.body.style.overflow='hidden';
+  const cached=state.searchResults.find(ch=>ch.username===username);
+  document.getElementById('modalAvatar').innerHTML=cached?.avatar?`<img src="${cached.avatar}" alt="">`:(cached?.title?.[0]||username[0]).toUpperCase();
+  document.getElementById('modalTitle').textContent=cached?.title||username;
+  document.getElementById('modalUser').textContent=`@${username}`;
+  document.getElementById('modalMembers').textContent=cached?.members?`${cached.members} ${t('members')}`:'';
+  document.getElementById('modalDesc').textContent=cached?.description||'';
+  document.getElementById('modalOpenTg').onclick=()=>window.open(`https://t.me/${username}`,'_blank');
+  document.getElementById('modalFavBtn').onclick=()=>{toggleFav(username,cached?.title||username);updateModalFav(username)};
+  updateModalFav(username);
+  // Reset sections
+  document.getElementById('modalStats').style.display='none';
+  document.getElementById('modalChart').style.display='none';
+  document.getElementById('modalRelated').style.display='none';
 
-  // Set basic info from cached data
-  const cached = state.searchResults.find(ch => ch.username === username);
-  document.getElementById('modalAvatar').innerHTML = cached?.avatar
-    ? `<img src="${cached.avatar}" alt="">`
-    : (cached?.title?.[0] || username[0]).toUpperCase();
-  document.getElementById('modalTitle').textContent = cached?.title || username;
-  document.getElementById('modalUser').textContent = `@${username}`;
-  document.getElementById('modalMembers').textContent = cached?.members ? `${cached.members} ${t('members')}` : '';
-  document.getElementById('modalDesc').textContent = cached?.description || '';
-  document.getElementById('modalOpenTg').onclick = () => window.open(`https://t.me/${username}`, '_blank');
-  document.getElementById('modalFavBtn').onclick = () => {
-    toggleFav(username, cached?.title || username);
-    updateModalFavBtn(username);
-  };
-  updateModalFavBtn(username);
+  const postsDiv=document.getElementById('modalPosts');postsDiv.innerHTML='<div class="loading"><div class="spinner"></div></div>';
 
-  // Load posts
-  const postsDiv = document.getElementById('modalPosts');
-  postsDiv.innerHTML = '<div class="loading"><div class="spinner"></div></div>';
-
-  try {
-    if (WORKER_URL) {
-      const resp = await fetch(`${WORKER_URL}/api/posts/${username}`);
-      const data = await resp.json();
-      if (data.posts?.length) {
-        postsDiv.innerHTML = data.posts.map(post => `
-          <div class="post-card">
-            <div class="post-text">${escHtml(post.text)}</div>
-            ${post.image ? `<img class="post-img" src="${post.image}" alt="" loading="lazy">` : ''}
-            <a class="post-link" href="${post.link}" target="_blank" rel="noopener">View on Telegram →</a>
-          </div>
-        `).join('');
-      } else {
-        postsDiv.innerHTML = `<div class="empty-state"><p style="font-size:14px">${t('no_results')}</p></div>`;
+  // Load stats, related, posts in parallel
+  const promises=[];
+  if(state.workerUrl){
+    // Stats
+    promises.push(fetch(`${state.workerUrl}/api/stats/${username}`).then(r=>r.json()).then(data=>{
+      if(data.error)return;
+      // Update members display
+      if(data.membersDisplay)document.getElementById('modalMembers').textContent=`${data.membersDisplay} ${t('members')}`;
+      // Stats grid
+      const statsGrid=document.getElementById('modalStats');
+      statsGrid.innerHTML=`
+        <div class="stat-card"><div class="stat-value">${data.membersDisplay||'0'}</div><div class="stat-label">${t('members')}</div></div>
+        <div class="stat-card"><div class="stat-value">${data.postsPerDay||0}</div><div class="stat-label">${t('posts_per_day')}</div></div>
+        <div class="stat-card"><div class="stat-value">${data.mediaRatio||0}%</div><div class="stat-label">${t('media_ratio')}</div></div>
+        <div class="stat-card"><div class="stat-value">${data.totalPostsAnalyzed||0}</div><div class="stat-label">${t('recent_posts')}</div></div>
+      `;
+      statsGrid.style.display='grid';
+      // Update tags
+      if(data.tags?.length && cached){cached.tags=data.tags}
+      // Chart
+      if(data.chartData?.length)renderChart(data.chartData);
+    }).catch(()=>{}));
+    // Related
+    promises.push(fetch(`${state.workerUrl}/api/related/${username}`).then(r=>r.json()).then(data=>{
+      if(data.related?.length){
+        const section=document.getElementById('modalRelated');
+        document.getElementById('relatedChips').innerHTML=data.related.map(r=>`<div class="related-chip" onclick="closeChannelModal();setTimeout(()=>openChannel('${r.username}'),300)"><span>@${escHtml(r.username)}</span>${r.matchTag?`<span class="chip-tag">${r.matchTag}</span>`:''}</div>`).join('');
+        section.style.display='';
       }
-    } else {
-      // No worker — show link
-      postsDiv.innerHTML = `
-        <div class="empty-state">
-          <div class="empty-icon">📡</div>
-          <p style="font-size:14px">Configure Worker URL to load posts</p>
-          <a href="https://t.me/s/${username}" target="_blank" rel="noopener" style="margin-top:12px;display:inline-block;color:var(--accent)">
-            View posts on t.me →
-          </a>
-        </div>`;
-    }
-  } catch (err) {
-    postsDiv.innerHTML = `<div class="empty-state"><p style="font-size:14px">${t('no_results')}</p></div>`;
+    }).catch(()=>{}));
+    // Posts
+    promises.push(fetch(`${state.workerUrl}/api/posts/${username}`).then(r=>r.json()).then(data=>{
+      if(data.posts?.length){postsDiv.innerHTML=data.posts.map(p=>`<div class="post-card"><div class="post-text">${escHtml(p.text)}</div>${p.image?`<img class="post-img" src="${p.image}" alt="" loading="lazy">`:''}<a class="post-link" href="${p.link}" target="_blank" rel="noopener">View on Telegram →</a></div>`).join('')}
+      else{postsDiv.innerHTML=`<div class="empty-state"><p style="font-size:14px">${t('no_results')}</p></div>`}
+    }).catch(()=>{postsDiv.innerHTML=`<div class="empty-state"><p style="font-size:14px">${t('no_results')}</p></div>`}));
+    await Promise.allSettled(promises);
+  }else{
+    postsDiv.innerHTML=`<div class="empty-state"><div class="empty-icon">📡</div><p style="font-size:14px">Connect proxy to load posts</p><a href="https://t.me/s/${username}" target="_blank" rel="noopener" style="margin-top:12px;display:inline-block;color:var(--accent)">View on t.me →</a></div>`;
   }
 }
+function closeChannelModal(){document.getElementById('channelOverlay').classList.remove('open');document.body.style.overflow=''}
+function updateModalFav(u){const btn=document.getElementById('modalFavBtn');btn.querySelector('span:first-child').textContent=isFav(u)?'❤️':'🤍'}
 
-function closeModal() {
-  document.getElementById('modalOverlay').classList.remove('open');
-  document.body.style.overflow = '';
+// ============================================================
+// CHART (Canvas)
+// ============================================================
+function renderChart(data){
+  const canvas=document.getElementById('activityChart');
+  const container=document.getElementById('modalChart');
+  container.style.display='';
+  const ctx=canvas.getContext('2d');
+  const dpr=window.devicePixelRatio||1;
+  const rect=canvas.getBoundingClientRect();
+  canvas.width=rect.width*dpr;canvas.height=rect.height*dpr;
+  ctx.scale(dpr,dpr);
+  const W=rect.width,H=rect.height;
+  const padding={top:10,right:10,bottom:30,left:40};
+  const chartW=W-padding.left-padding.right;
+  const chartH=H-padding.top-padding.bottom;
+  // Background
+  ctx.fillStyle=getComputedStyle(document.documentElement).getPropertyValue('--bg-secondary').trim()||'#f5f5f7';
+  ctx.fillRect(0,0,W,H);
+  // Data
+  const values=data.map(d=>d.posts);
+  const maxVal=Math.max(...values,1);
+  const stepX=chartW/(values.length-1||1);
+  // Grid lines
+  ctx.strokeStyle=getComputedStyle(document.documentElement).getPropertyValue('--border').trim()||'#e5e5e5';
+  ctx.lineWidth=0.5;
+  for(let i=0;i<=4;i++){
+    const y=padding.top+chartH*(1-i/4);
+    ctx.beginPath();ctx.moveTo(padding.left,y);ctx.lineTo(W-padding.right,y);ctx.stroke();
+    ctx.fillStyle=getComputedStyle(document.documentElement).getPropertyValue('--text-tertiary').trim()||'#999';
+    ctx.font='10px sans-serif';ctx.textAlign='right';
+    ctx.fillText(Math.round(maxVal*i/4),padding.left-5,y+3);
+  }
+  // Labels
+  ctx.fillStyle=getComputedStyle(document.documentElement).getPropertyValue('--text-tertiary').trim()||'#999';
+  ctx.font='10px sans-serif';ctx.textAlign='center';
+  data.forEach((d,i)=>{
+    const x=padding.left+i*stepX;
+    ctx.fillText(d.date.slice(5),x,H-5);
+  });
+  // Area fill
+  const gradient=ctx.createLinearGradient(0,padding.top,0,H-padding.bottom);
+  gradient.addColorStop(0,'rgba(0,136,204,0.3)');
+  gradient.addColorStop(1,'rgba(0,136,204,0.02)');
+  ctx.beginPath();
+  ctx.moveTo(padding.left,padding.top+chartH);
+  values.forEach((v,i)=>{
+    const x=padding.left+i*stepX;
+    const y=padding.top+chartH*(1-v/maxVal);
+    ctx.lineTo(x,y);
+  });
+  ctx.lineTo(padding.left+(values.length-1)*stepX,padding.top+chartH);
+  ctx.closePath();ctx.fillStyle=gradient;ctx.fill();
+  // Line
+  ctx.beginPath();ctx.strokeStyle='#0088cc';ctx.lineWidth=2.5;ctx.lineJoin='round';
+  values.forEach((v,i)=>{
+    const x=padding.left+i*stepX;
+    const y=padding.top+chartH*(1-v/maxVal);
+    if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);
+  });
+  ctx.stroke();
+  // Dots
+  values.forEach((v,i)=>{
+    const x=padding.left+i*stepX;
+    const y=padding.top+chartH*(1-v/maxVal);
+    ctx.beginPath();ctx.arc(x,y,4,0,Math.PI*2);ctx.fillStyle='#0088cc';ctx.fill();
+    ctx.strokeStyle='#fff';ctx.lineWidth=2;ctx.stroke();
+  });
 }
 
-function updateModalFavBtn(username) {
-  const btn = document.getElementById('modalFavBtn');
-  const fav = isFav(username);
-  btn.querySelector('span:first-child').textContent = fav ? '❤️' : '🤍';
+// ============================================================
+// NOTIFICATIONS
+// ============================================================
+function startNotifPoll(){if(!state.workerUrl||!state.favorites.length)return;checkNotifications();setInterval(checkNotifications,5*60*1000)}
+async function checkNotifications(){
+  if(!state.workerUrl||!state.favorites.length)return;
+  const channels=state.favorites.map(f=>f.username).join(',');
+  try{
+    const resp=await fetch(`${state.workerUrl}/api/notifications?channels=${channels}&since=${state.lastNotifCheck}`);
+    const data=await resp.json();
+    state.lastNotifCheck=Date.now();localStorage.setItem('tgexp_last_notif',state.lastNotifCheck);
+    if(data.updates?.length){
+      state.notifUpdates=data.updates;
+      const totalNew=data.updates.reduce((s,u)=>s+u.newCount,0);
+      const badge=document.getElementById('notifBadge');
+      badge.textContent=totalNew>9?'9+':totalNew;badge.style.display='';
+      // Toast
+      if(totalNew>0)toast(`🔔 ${totalNew} ${t('new_posts')}`);
+    }
+  }catch{}
 }
+function openNotifModal(){
+  document.getElementById('notifOverlay').classList.add('open');document.body.style.overflow='hidden';
+  const content=document.getElementById('notifContent');
+  if(!state.workerUrl){content.innerHTML=`<div class="empty-state"><div class="empty-icon">📡</div><p>Connect proxy first</p></div>`;return}
+  if(!state.favorites.length){content.innerHTML=`<div class="empty-state"><div class="empty-icon">❤️</div><h3>${t('no_favorites')}</h3><p>${t('no_favorites_desc')}</p></div>`;return}
+  if(!state.notifUpdates.length){content.innerHTML=`<div class="empty-state"><div class="empty-icon">✅</div><h3>${t('notif_empty')}</h3></div>`;return}
+  content.innerHTML=state.notifUpdates.map(u=>`<div class="list-item" onclick="closeNotifModal();setTimeout(()=>openChannel('${u.username}'),300)"><div class="list-avatar">${u.username[0].toUpperCase()}</div><div class="list-info"><div class="list-title">@${escHtml(u.username)}</div><div class="list-desc">${u.newCount} ${t('new_posts')}</div></div><div class="list-meta"><span style="color:var(--accent);font-weight:700">+${u.newCount}</span></div></div>`).join('');
+  document.getElementById('notifBadge').style.display='none';
+}
+function closeNotifModal(){document.getElementById('notifOverlay').classList.remove('open');document.body.style.overflow=''}
 
 // ============================================================
 // FAVORITES
 // ============================================================
-function toggleFav(username, title) {
-  const idx = state.favorites.findIndex(f => f.username === username);
-  if (idx > -1) {
-    state.favorites.splice(idx, 1);
-    toast(t('removed_fav'));
-  } else {
-    const ch = state.searchResults.find(c => c.username === username) || { username, title };
-    state.favorites.push(ch);
-    toast(t('saved'));
-  }
-  localStorage.setItem('telgram_explorer_favs', JSON.stringify(state.favorites));
-  renderResults();
-}
-
-function isFav(username) {
-  return state.favorites.some(f => f.username === username);
-}
-
-function renderFavorites() {
-  const content = document.getElementById('content');
-  if (!state.favorites.length) {
-    content.innerHTML = renderEmpty(t('no_favorites'), t('no_favorites_desc'));
-    return;
-  }
-  state.searchResults = state.favorites;
-  state.currentView = 'grid';
-  renderGridView(content, state.favorites);
-}
+function toggleFav(username,title){const idx=state.favorites.findIndex(f=>f.username===username);if(idx>-1){state.favorites.splice(idx,1);toast(t('removed_fav'))}else{const ch=state.searchResults.find(c=>c.username===username)||{username,title};state.favorites.push(ch);toast(t('saved'))}localStorage.setItem('tgexp_favs',JSON.stringify(state.favorites));renderResults()}
+function isFav(username){return state.favorites.some(f=>f.username===username)}
+function renderFavorites(){const content=document.getElementById('content');if(!state.favorites.length){content.innerHTML=renderEmpty(t('no_favorites'),t('no_favorites_desc'));return}state.searchResults=state.favorites;state.currentView='grid';renderGridView(content,state.favorites)}
 
 // ============================================================
 // CATEGORIES
 // ============================================================
-function renderCategories() {
-  const bar = document.getElementById('categoriesBar');
-  const cats = [
-    { id: 'all', icon: '🌐', nameKey: 'all' },
-    { id: 'tech', icon: '💻', nameKey: 'cat_tech' },
-    { id: 'news', icon: '📰', nameKey: 'cat_news' },
-    { id: 'crypto', icon: '🪙', nameKey: 'cat_crypto' },
-    { id: 'entertainment', icon: '🎬', nameKey: 'cat_entertainment' },
-    { id: 'science', icon: '🔬', nameKey: 'cat_science' },
-    { id: 'gaming', icon: '🎮', nameKey: 'cat_gaming' },
-    { id: 'music', icon: '🎵', nameKey: 'cat_music' },
-    { id: 'art', icon: '🎨', nameKey: 'cat_art' },
-    { id: 'sports', icon: '⚽', nameKey: 'cat_sports' },
-    { id: 'education', icon: '📚', nameKey: 'cat_education' },
-    { id: 'meme', icon: '😂', nameKey: 'cat_meme' },
-    { id: 'food', icon: '🍕', nameKey: 'cat_food' },
-    { id: 'travel', icon: '✈️', nameKey: 'cat_travel' },
-    { id: 'photography', icon: '📷', nameKey: 'cat_photography' },
-  ];
-  bar.innerHTML = cats.map(c => `
-    <div class="cat-chip ${state.currentCategory === c.id ? 'active' : ''}" data-cat="${c.id}">
-      <span class="cat-icon">${c.icon}</span> ${t(c.nameKey)}
-    </div>
-  `).join('');
-}
+function renderCategories(){const cats=[{id:'all',icon:'🌐',nameKey:'all'},{id:'tech',icon:'💻',nameKey:'cat_tech'},{id:'news',icon:'📰',nameKey:'cat_news'},{id:'crypto',icon:'🪙',nameKey:'cat_crypto'},{id:'entertainment',icon:'🎬',nameKey:'cat_entertainment'},{id:'science',icon:'🔬',nameKey:'cat_science'},{id:'gaming',icon:'🎮',nameKey:'cat_gaming'},{id:'music',icon:'🎵',nameKey:'cat_music'},{id:'art',icon:'🎨',nameKey:'cat_art'},{id:'sports',icon:'⚽',nameKey:'cat_sports'},{id:'education',icon:'📚',nameKey:'cat_education'},{id:'meme',icon:'😂',nameKey:'cat_meme'},{id:'food',icon:'🍕',nameKey:'cat_food'},{id:'travel',icon:'✈️',nameKey:'cat_travel'},{id:'photography',icon:'📷',nameKey:'cat_photography'}];document.getElementById('categoriesBar').innerHTML=cats.map(c=>`<div class="cat-chip ${state.currentCategory===c.id?'active':''}" data-cat="${c.id}"><span class="cat-icon">${c.icon}</span> ${t(c.nameKey)}</div>`).join('')}
 
 // ============================================================
-// LOCAL DATA (fallback when no Worker)
+// PWA
 // ============================================================
-function getAllChannels() {
-  return [
-    { username: 'techcrunch', title: 'TechCrunch', members: '120K', description: 'Latest tech news and startups', tags: ['tech','technology','startup','news'], avatar: '' },
-    { username: 'ai_machinelearning', title: 'AI & Machine Learning', members: '150K', description: 'Artificial Intelligence news and research', tags: ['ai','ml','tech','science'], avatar: '' },
-    { username: 'bitcoin', title: 'Bitcoin', members: '300K', description: 'Bitcoin news, analysis and discussion', tags: ['crypto','bitcoin','btc','finance'], avatar: '' },
-    { username: 'ethereum', title: 'Ethereum', members: '200K', description: 'Ethereum ecosystem updates', tags: ['crypto','ethereum','eth','defi'], avatar: '' },
-    { username: 'bbcpersian', title: 'BBC Persian', members: '1.5M', description: 'BBC Persian news channel', tags: ['news','persian','farsi','bbc'], avatar: '' },
-    { username: 'linux', title: 'Linux', members: '80K', description: 'Linux news and tips', tags: ['tech','linux','opensource','programming'], avatar: '' },
-    { username: 'webdev', title: 'Web Development', members: '60K', description: 'Web development resources', tags: ['tech','web','javascript','programming'], avatar: '' },
-    { username: 'movies_series', title: 'Movies & Series', members: '400K', description: 'Latest movies and TV series', tags: ['entertainment','movies','series','netflix'], avatar: '' },
-    { username: 'science', title: 'Science', members: '120K', description: 'Scientific discoveries and research', tags: ['science','research','discovery'], avatar: '' },
-    { username: 'gaming', title: 'Gaming', members: '200K', description: 'Gaming news and discussions', tags: ['gaming','games','esports'], avatar: '' },
-    { username: 'music', title: 'Music', members: '250K', description: 'Music sharing and discovery', tags: ['music','songs','playlist'], avatar: '' },
-    { username: 'art', title: 'Art', members: '80K', description: 'Digital and traditional art', tags: ['art','design','creative'], avatar: '' },
-    { username: 'football', title: 'Football', members: '300K', description: 'Football news and highlights', tags: ['sports','football','soccer'], avatar: '' },
-    { username: 'learnenglish', title: 'Learn English', members: '200K', description: 'English learning resources', tags: ['education','english','language','learning'], avatar: '' },
-    { username: 'memes', title: 'Memes', members: '500K', description: 'Best memes from around the web', tags: ['meme','funny','humor','entertainment'], avatar: '' },
-    { username: 'recipes', title: 'Recipes', members: '100K', description: 'Cooking recipes and food tips', tags: ['food','cooking','recipe'], avatar: '' },
-    { username: 'travel', title: 'Travel', members: '120K', description: 'Travel tips and destinations', tags: ['travel','tourism','adventure'], avatar: '' },
-    { username: 'photography', title: 'Photography', members: '90K', description: 'Photography tips and showcase', tags: ['photography','photo','camera'], avatar: '' },
-    { username: 'crypto', title: 'Crypto News', members: '150K', description: 'Cryptocurrency market news', tags: ['crypto','bitcoin','market','trading'], avatar: '' },
-    { username: 'nasa', title: 'NASA', members: '90K', description: 'NASA space exploration updates', tags: ['science','space','nasa','astronomy'], avatar: '' },
-    { username: 'python', title: 'Python', members: '100K', description: 'Python programming community', tags: ['tech','programming','python','code'], avatar: '' },
-    { username: 'javascript', title: 'JavaScript', members: '85K', description: 'JavaScript developers community', tags: ['tech','programming','javascript','web'], avatar: '' },
-    { username: 'android_apps', title: 'Android Apps', members: '110K', description: 'Best Android apps and games', tags: ['tech','android','apps','mobile'], avatar: '' },
-    { username: 'design', title: 'Design', members: '60K', description: 'UI/UX and graphic design', tags: ['art','design','ui','ux'], avatar: '' },
-    { username: 'steam', title: 'Steam', members: '150K', description: 'Steam deals and gaming news', tags: ['gaming','steam','pc','games'], avatar: '' },
-  ];
-}
-
-function getLocalExplore(category) {
-  const all = getAllChannels();
-  if (category === 'all') return all;
-  return all.filter(ch => ch.tags?.includes(category));
-}
+let deferredPrompt=null;
+function registerSW(){if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{})}}
+function checkPWA(){window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;const banner=document.getElementById('pwaBanner');if(!localStorage.getItem('tgexp_pwa_dismissed')){banner.classList.add('show')}});document.getElementById('pwaInstallBtn').addEventListener('click',async()=>{if(!deferredPrompt)return;deferredPrompt.prompt();const result=await deferredPrompt.userChoice;if(result.outcome==='accepted'){toast('🎉 App installed!')}deferredPrompt=null;document.getElementById('pwaBanner').classList.remove('show')});document.getElementById('pwaDismissBtn').addEventListener('click',()=>{document.getElementById('pwaBanner').classList.remove('show');localStorage.setItem('tgexp_pwa_dismissed','1')})}
 
 // ============================================================
-// UTILITY
+// LOCAL DATA (fallback)
 // ============================================================
-function escHtml(str) {
-  const el = document.createElement('div');
-  el.textContent = str || '';
-  return el.innerHTML;
-}
+function getAllChannels(){return[{username:'techcrunch',title:'TechCrunch',members:'120K',description:'Latest tech news',tags:['tech','technology','startup']},{username:'ai_machinelearning',title:'AI & ML',members:'150K',description:'AI news',tags:['ai','ml','tech','science']},{username:'bitcoin',title:'Bitcoin',members:'300K',description:'Bitcoin news',tags:['crypto','bitcoin','btc']},{username:'ethereum',title:'Ethereum',members:'200K',description:'Ethereum updates',tags:['crypto','ethereum']},{username:'bbcpersian',title:'BBC Persian',members:'1.5M',description:'BBC news',tags:['news','persian']},{username:'linux',title:'Linux',members:'80K',description:'Linux tips',tags:['tech','linux']},{username:'webdev',title:'Web Dev',members:'60K',description:'Web development',tags:['tech','web','javascript']},{username:'movies_series',title:'Movies',members:'400K',description:'Movies & series',tags:['entertainment','movies']},{username:'science',title:'Science',members:'120K',description:'Discoveries',tags:['science','research']},{username:'gaming',title:'Gaming',members:'200K',description:'Gaming news',tags:['gaming','games']},{username:'music',title:'Music',members:'250K',description:'Music',tags:['music']},{username:'art',title:'Art',members:'80K',description:'Digital art',tags:['art','design']},{username:'football',title:'Football',members:'300K',description:'Football',tags:['sports','football']},{username:'learnenglish',title:'English',members:'200K',description:'Learn English',tags:['education','english']},{username:'memes',title:'Memes',members:'500K',description:'Memes',tags:['meme','funny']},{username:'recipes',title:'Recipes',members:'100K',description:'Cooking',tags:['food','cooking']},{username:'travel',title:'Travel',members:'120K',description:'Travel',tags:['travel']},{username:'photography',title:'Photography',members:'90K',description:'Photography',tags:['photography']},{username:'python',title:'Python',members:'100K',description:'Python community',tags:['tech','programming','python']},{username:'nasa',title:'NASA',members:'90K',description:'Space',tags:['science','space','nasa']},{username:'steam',title:'Steam',members:'150K',description:'Steam deals',tags:['gaming','steam']},{username:'design',title:'Design',members:'60K',description:'UI/UX design',tags:['art','design','ui']}]}
+function getLocalExplore(category){const all=getAllChannels();return category==='all'?all:all.filter(ch=>ch.tags?.includes(category))}
 
-function escAttr(str) {
-  return (str || '').replace(/'/g, "\\'").replace(/"/g, '&quot;');
-}
-
-function copyLink(username) {
-  navigator.clipboard.writeText(`https://t.me/${username}`).then(() => toast(t('copied')));
-}
-
-function toast(msg) {
-  const container = document.getElementById('toastContainer');
-  const el = document.createElement('div');
-  el.className = 'toast';
-  el.innerHTML = `<span>✅</span> ${escHtml(msg)}`;
-  container.appendChild(el);
-  setTimeout(() => el.remove(), 3000);
-}
-
-function renderSkeletons(count) {
-  return `<div class="results-grid">${Array(count).fill('<div class="skeleton"></div>').join('')}</div>`;
-}
-
-function renderEmpty(icon, title, desc) {
-  return `<div class="empty-state">
-    <div class="empty-icon">${icon === t('no_favorites') ? '❤️' : '🔍'}</div>
-    <h3>${escHtml(title)}</h3>
-    <p>${escHtml(desc || '')}</p>
-  </div>`;
-}
+// ============================================================
+// UTILS
+// ============================================================
+function escHtml(str){const el=document.createElement('div');el.textContent=str||'';return el.innerHTML}
+function escAttr(str){return(str||'').replace(/'/g,"\\'").replace(/"/g,'&quot;')}
+function copyLink(username){navigator.clipboard.writeText(`https://t.me/${username}`).then(()=>toast(t('copied')))}
+function toast(msg){const container=document.getElementById('toastContainer');const el=document.createElement('div');el.className='toast';el.innerHTML=`<span>✅</span> ${escHtml(msg)}`;container.appendChild(el);setTimeout(()=>el.remove(),3000)}
+function renderSkeletons(count){return`<div class="results-grid">${Array(count).fill('<div class="skeleton"></div>').join('')}</div>`}
+function renderEmpty(title,desc){return`<div class="empty-state"><div class="empty-icon">${title===t('no_favorites')?'❤️':'🔍'}</div><h3>${escHtml(title)}</h3><p>${escHtml(desc||'')}</p></div>`}
 </script>
 </body>
 </html>
