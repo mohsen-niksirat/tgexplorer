@@ -313,7 +313,7 @@ let state={lang:localStorage.getItem('tgexp_lang')||'en',theme:localStorage.getI
 // ============================================================
 // INIT
 // ============================================================
-document.addEventListener('DOMContentLoaded',()=>{applyTheme(state.theme);applyLang(state.lang);document.getElementById('workerCodeBlock').textContent=WORKER_CODE;document.getElementById('langSelect').value=state.lang;if(state.workerUrl||localStorage.getItem('tgexp_setup_skipped'))showApp();else showSetup();bindEvents();registerSW();checkPWA()});
+document.addEventListener('DOMContentLoaded',()=>{applyTheme(state.theme);applyLang(state.lang);document.getElementById('workerCodeBlock').textContent=WORKER_CODE;document.getElementById('langSelect').value=state.lang;if(state.workerUrl||localStorage.getItem('tgexp_setup_skipped'))showApp();else showSetup();bindEvents();registerSW();checkPWA();checkSharedFolder()});
 
 // ============================================================
 // EVENTS
@@ -376,7 +376,7 @@ function copyWorkerCode(){navigator.clipboard.writeText(WORKER_CODE).then(()=>{c
 // ============================================================
 // TABS
 // ============================================================
-function switchTab(tab){state.currentTab=tab;document.querySelectorAll('.nav-tab').forEach(el=>el.classList.toggle('active',el.dataset.tab===tab));document.getElementById('heroSection').style.display=(tab==='favorites'||tab==='feed')?'none':'';document.getElementById('categoriesBar').style.display=(tab==='explore'||tab==='feed')?'':'none';document.getElementById('langFilter').style.display=(tab==='explore'||tab==='search')?'':'none';document.getElementById('resultsHeader').style.display=(tab==='favorites'||tab==='feed')?'none':'none';if(tab==='explore')loadExplore();else if(tab==='feed')loadFeed();else if(tab==='search')renderResults();else if(tab==='favorites')renderFavorites()}
+function switchTab(tab){window._sharedFolder=null;state.currentTab=tab;document.querySelectorAll('.nav-tab').forEach(el=>el.classList.toggle('active',el.dataset.tab===tab));document.getElementById('heroSection').style.display=(tab==='favorites'||tab==='feed')?'none':'';document.getElementById('categoriesBar').style.display=(tab==='explore'||tab==='feed')?'':'none';document.getElementById('langFilter').style.display=(tab==='explore'||tab==='search')?'':'none';document.getElementById('resultsHeader').style.display=(tab==='favorites'||tab==='feed')?'none':'none';if(tab==='explore')loadExplore();else if(tab==='feed')loadFeed();else if(tab==='search')renderResults();else if(tab==='favorites')renderFavorites()}
 
 // ============================================================
 // SEARCH
@@ -450,7 +450,7 @@ function openFeedPost(index){
 // ============================================================
 // RENDER
 // ============================================================
-function renderResults(){const content=document.getElementById('content');const results=state.searchResults;if(!results.length){content.innerHTML=renderEmpty(t('no_results'),t('no_results_desc'));return}if(state.currentView==='explore')renderExploreView(content,results);else if(state.currentView==='list')renderListView(content,results);else renderGridView(content,results)}
+function renderResults(){if(window._sharedFolder)return;const content=document.getElementById('content');const results=state.searchResults;if(!results.length){content.innerHTML=renderEmpty(t('no_results'),t('no_results_desc'));return}if(state.currentView==='explore')renderExploreView(content,results);else if(state.currentView==='list')renderListView(content,results);else renderGridView(content,results)}
 
 function renderGridView(container,items){container.innerHTML=`<div class="results-grid">${items.map(ch=>`<div class="channel-card" onclick="openChannel('${ch.username}')"><div class="card-banner"><div class="card-banner-overlay"></div><div class="card-avatar">${ch.avatar?`<img src="${ch.avatar}" alt="" loading="lazy">`:ch.title[0].toUpperCase()}</div></div><div class="card-body"><div class="card-title">${escHtml(ch.title)}</div><div class="card-username">@${escHtml(ch.username)}<span class="lang-badge ${ch.lang==='fa'?'fa':'en'}">${ch.lang==='fa'?'🇮🇷 فارسی':'🇬🇧 EN'}</span></div>${ch.tags?.length?`<div class="card-tags">${ch.tags.slice(0,3).map(tg=>`<span class="card-tag">${tg}</span>`).join('')}</div>`:''}<div class="card-desc">${escHtml(ch.description||ch.title)}</div><div class="card-footer"><div class="card-members">👥 ${ch.members||'0'} ${t('members')}</div><div class="card-actions"><button class="card-action-btn ${isFav(ch.username)?'favorited':''}" onclick="event.stopPropagation();toggleFav('${ch.username}','${escAttr(ch.title)}')">${isFav(ch.username)?'❤️':'🤍'}</button><button class="card-action-btn" onclick="event.stopPropagation();copyLink('${ch.username}')">🔗</button><button class="card-action-btn" onclick="event.stopPropagation();openFolderPicker('ch','${ch.username}','','${escAttr(ch.title)}')">🗂</button></div></div></div></div>`).join('')}</div>`}
 
@@ -749,6 +749,80 @@ function createFolderFromTab(){
   const id=createFolder(input.value);
   if(id){input.value='';toast('📁 فولدر ساخته شد');renderFavorites()}
 }
+// ============================================================
+// SHARE FOLDER
+// ============================================================
+function b64urlEncode(str){const bytes=new TextEncoder().encode(str);let bin='';for(let i=0;i<bytes.length;i++)bin+=String.fromCharCode(bytes[i]);return btoa(bin).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'')}
+function b64urlDecode(str){str=str.replace(/-/g,'+').replace(/_/g,'/');while(str.length%4)str+='=';const bin=atob(str);const bytes=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)bytes[i]=bin.charCodeAt(i);return new TextDecoder().decode(bytes)}
+function shareFolder(id){
+  const f=state.folders.find(x=>x.id===id);if(!f)return;
+  const payload={n:f.name,i:f.icon||'📁',items:f.items.map(it=>it.type==='ch'?['c',it.username]:['p',it.username,it.postId||'',it.label||''])};
+  const url=location.origin+location.pathname+'#folder='+b64urlEncode(JSON.stringify(payload));
+  if(navigator.share){navigator.share({title:'Telegram Explorer — '+f.name,url}).catch(()=>{})}
+  else{navigator.clipboard.writeText(url).then(()=>toast('🔗 لینک فولدر کپی شد!')).catch(()=>toast('⚠️ کپی ناموفق بود'))}
+}
+function decodeSharedFolder(p){
+  try{
+    const obj=JSON.parse(b64urlDecode(p));
+    if(!obj||typeof obj!=='object'||typeof obj.n!=='string'||!Array.isArray(obj.items))return null;
+    const items=obj.items.filter(it=>Array.isArray(it)&&(it[0]==='c'||it[0]==='p')&&typeof it[1]==='string'&&it[1]).map(it=>it[0]==='c'?{type:'ch',username:it[1],postId:null,label:''}:{type:'post',username:it[1],postId:(it[2]||'').toString(),label:it[3]||''});
+    return {name:obj.n.slice(0,40),icon:typeof obj.i==='string'?obj.i:'📁',items};
+  }catch(e){return null}
+}
+function renderSharedFolder(f){
+  const content=document.getElementById('content');
+  document.getElementById('setupScreen').style.display='none';
+  document.getElementById('heroSection').style.display='none';
+  document.getElementById('mainContent').style.display='';
+  document.getElementById('categoriesBar').style.display='none';
+  let html='<div style="padding:8px 0 20px"><button class="folder-back" onclick="dismissSharedFolder()">✕ بستن</button>'+
+    '<div class="folder-detail-head"><span style="font-size:26px">'+f.icon+'</span><span class="folder-detail-name">'+escHtml(f.name)+'</span><span class="folder-picker-count">'+f.items.length+' آیتم</span>'+
+    '<button class="modal-btn modal-btn-primary" style="max-width:190px;padding:10px" onclick="importSharedFolder()">📥 ذخیره در فولدرهای من</button></div>';
+  const chs=f.items.filter(it=>it.type==='ch').map(it=>getAllChannels().find(c=>c.username===it.username)).filter(Boolean);
+  const posts=f.items.filter(it=>it.type==='post').map(it=>{
+    const list=getChannelPosts(it.username);
+    const p=list.find(x=>String(x.id)===String(it.postId));
+    const ch=getAllChannels().find(c=>c.username===it.username)||{username:it.username,title:it.label||it.username};
+    return {username:it.username,postId:it.postId,ch,image:p?p.image:'',text:p?p.text:(it.label||''),hasVideo:p?p.hasVideo:false};
+  });
+  if(!chs.length&&!posts.length){html+='<div class="empty-state"><div class="empty-icon">🗂</div><h3>این فولدر خالی است</h3></div>'}
+  if(chs.length)html+='<div class="folder-sec-title">📢 کانال‌ها</div><div class="results-grid">'+chs.map(ch=>'<div class="channel-card" onclick="openChannel(\''+ch.username+'\')"><div class="card-banner"><div class="card-banner-overlay"></div><div class="card-avatar">'+ch.title[0].toUpperCase()+'</div></div><div class="card-body"><div class="card-title">'+escHtml(ch.title)+'</div><div class="card-username">@'+escHtml(ch.username)+'</div><div class="card-footer"><div class="card-members">👥 '+(ch.members||'0')+'</div></div></div></div>').join('')+'</div>';
+  if(posts.length)html+='<div class="folder-sec-title">🖼 پست‌ها</div><div class="explore-grid">'+posts.map(p=>{
+    const img=p.image;
+    const idx=Math.max(0,getChannelPosts(p.username).findIndex(x=>String(x.id)===String(p.postId)));
+    return '<div class="explore-item" style="aspect-ratio:3/4" onclick="openPostModal(\''+p.username+'\','+idx+')">'+
+      (img?'<img src="'+img+'" loading="lazy" onerror="this.style.display=&#39;none&#39;">':'<div style="width:100%;height:100%;background:#0088cc;display:flex;align-items:center;justify-content:center;font-size:28px;color:#fff;font-weight:700">'+(p.ch.title||'?')[0].toUpperCase()+'</div>')+
+      (p.hasVideo?'<div class="feed-video-badge">▶</div>':'')+
+      '<div class="explore-item-overlay"><div class="explore-item-info"><div class="explore-stat">'+escHtml(p.ch.title||p.username)+'</div><div class="explore-label">'+(p.text?escHtml(p.text.slice(0,28)):'')+'</div></div></div></div>';
+  }).join('')+'</div>';
+  content.innerHTML=html;
+}
+function importSharedFolder(){
+  const f=window._sharedFolder;if(!f)return;
+  const base=f.name||'فولدر مشترک';
+  let name=base,k=1;
+  while(state.folders.some(x=>x.name===name)){name=base+' ('+(++k)+')'}
+  const id=createFolder(name);
+  if(!id)return;
+  const target=state.folders.find(x=>x.id===id);
+  target.icon=f.icon||'📁';
+  target.items=f.items.map(it=>({type:it.type,username:it.username,postId:it.postId||null,label:it.label||null}));
+  saveFolders();
+  window._sharedFolder=null;location.hash='';
+  state.favFolder=true;state.favPost=false;state.openFolder=id;
+  switchTab('favorites');
+  toast('📥 فولدر «'+name+'» ذخیره شد');
+}
+function dismissSharedFolder(){window._sharedFolder=null;location.hash='';switchTab(state.currentTab)}
+function checkSharedFolder(){
+  const m=location.hash.match(/^#folder=(.+)$/);
+  if(!m)return;
+  const folder=decodeSharedFolder(m[1]);
+  if(!folder){toast('⚠️ لینک فولدر نامعتبر است');return}
+  window._sharedFolder=folder;
+  renderSharedFolder(folder);
+}
+
 function renderFavorites(){
   const content=document.getElementById('content');
   const tab=state.favFolder?'folder':(state.favPost?'post':'ch');
@@ -757,7 +831,7 @@ function renderFavorites(){
   if(state.openFolder){
     const f=state.folders.find(x=>x.id===state.openFolder);
     if(!f){state.openFolder='';return renderFavorites()}
-    let html=toggleHtml+'<div><button class="folder-back" onclick="state.openFolder=\'\';renderFavorites()">← بازگشت</button><div class="folder-detail-head"><span style="font-size:26px">'+f.icon+'</span><span class="folder-detail-name">'+escHtml(f.name)+'</span><span class="folder-picker-count">'+f.items.length+' آیتم</span><button class="folder-del" title="حذف فولدر" onclick="deleteFolder(\''+f.id+'\')">🗑</button></div>';
+    let html=toggleHtml+'<div><button class="folder-back" onclick="state.openFolder=\'\';renderFavorites()">← بازگشت</button><div class="folder-detail-head"><span style="font-size:26px">'+f.icon+'</span><span class="folder-detail-name">'+escHtml(f.name)+'</span><span class="folder-picker-count">'+f.items.length+' آیتم</span><button class="folder-del" title="حذف فولدر" onclick="deleteFolder(\''+f.id+'\')">🗑</button><button class="folder-del" title="اشتراک‌گذاری فولدر" onclick="shareFolder(\''+f.id+'\')">🔗</button></div>';
     if(!f.items.length){content.innerHTML=html+renderEmpty('🗂','این فولدر خالی است');return}
     const chs=f.items.filter(it=>it.type==='ch').map(it=>getAllChannels().find(c=>c.username===it.username)).filter(Boolean);
     const posts=f.items.filter(it=>it.type==='post').map(it=>{
