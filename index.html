@@ -39,7 +39,7 @@
 .modal-overlay{position:fixed;inset:0;background:var(--bg-overlay);z-index:200;display:none;align-items:flex-end;justify-content:center;backdrop-filter:blur(4px);animation:fadeIn .2s ease}.modal-overlay.open{display:flex}.modal{background:var(--bg-primary);border-radius:24px 24px 0 0;width:100%;max-width:640px;max-height:85vh;overflow-y:auto;animation:slideUp .3s ease}@keyframes fadeIn{from{opacity:0}to{opacity:1}}@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}.modal-header{padding:24px 24px 0;display:flex;align-items:flex-start;gap:16px}.modal-avatar{width:72px;height:72px;border-radius:50%;background:var(--gradient);display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:700;color:#fff;flex-shrink:0;overflow:hidden}.modal-avatar img{width:100%;height:100%;object-fit:cover}.modal-title{font-size:22px;font-weight:700;margin-bottom:4px}.modal-user{color:var(--accent);font-size:14px}.modal-members-display{color:var(--text-secondary);font-size:14px;margin-top:4px}.modal-close{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--text-secondary);font-size:20px;margin-left:auto;flex-shrink:0;transition:all var(--transition)}.modal-close:hover{background:var(--bg-hover);color:var(--text-primary)}.modal-body{padding:20px 24px 24px}.modal-desc{color:var(--text-secondary);font-size:14px;line-height:1.6;margin-bottom:20px}.modal-actions{display:flex;gap:10px;margin-bottom:24px}.modal-btn{flex:1;padding:12px;border-radius:12px;font-size:14px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:8px;transition:all var(--transition)}.modal-btn-primary{background:var(--gradient);color:#fff}.modal-btn-primary:hover{box-shadow:0 4px 16px rgba(0,136,204,.3)}.modal-btn-secondary{background:var(--bg-hover);color:var(--text-primary);border:1px solid var(--border)}.modal-btn-secondary:hover{border-color:var(--accent)}
 .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;margin-bottom:20px}.stat-card{background:var(--bg-secondary);border-radius:var(--radius-sm);padding:16px;text-align:center}.stat-value{font-size:24px;font-weight:800;color:var(--accent);margin-bottom:4px}.stat-label{font-size:12px;color:var(--text-secondary);font-weight:500}.chart-container{background:var(--bg-secondary);border-radius:var(--radius-sm);padding:16px;margin-bottom:20px}.chart-container h4{font-size:14px;font-weight:600;margin-bottom:12px;color:var(--text-secondary)}.chart-canvas{width:100%;height:160px}
 .related-section{margin-bottom:20px}.related-section h4{font-size:14px;font-weight:600;margin-bottom:12px;color:var(--text-secondary)}.related-chips{display:flex;flex-wrap:wrap;gap:8px}.related-chip{display:flex;align-items:center;gap:6px;padding:8px 14px;background:var(--bg-secondary);border:1px solid var(--border);border-radius:20px;font-size:13px;font-weight:500;color:var(--text-primary);cursor:pointer;transition:all var(--transition)}.related-chip:hover{border-color:var(--accent);color:var(--accent)}.related-chip .chip-tag{background:var(--accent-light);color:var(--accent);padding:1px 6px;border-radius:8px;font-size:10px}
-.modal-posts-title{font-size:16px;font-weight:700;margin-bottom:16px}.modal-posts{display:flex;flex-direction:column;gap:12px}.post-card{background:var(--bg-secondary);border-radius:var(--radius-sm);padding:16px}.post-text{font-size:14px;line-height:1.6;color:var(--text-primary);margin-bottom:8px}.post-img{width:100%;border-radius:var(--radius-xs);margin-top:8px}.post-link{color:var(--accent);font-size:13px;font-weight:500}
+.modal-posts-title{font-size:16px;font-weight:700;margin-bottom:16px}.modal-posts{display:flex;flex-direction:column;gap:12px}.post-card{background:var(--bg-secondary);border-radius:var(--radius-sm);padding:16px}.post-text{font-size:14px;line-height:1.6;color:var(--text-primary);margin-bottom:8px}.post-img{width:100%;border-radius:var(--radius-xs);margin-top:8px}.post-link{color:var(--accent);font-size:13px;font-weight:500}.post-modal-img{width:100%;max-height:60vh;object-fit:contain;border-radius:12px;background:#000}.post-modal-video{display:inline-block;background:rgba(0,0,0,.55);color:#fff;padding:6px 14px;border-radius:20px;font-size:13px;font-weight:600}.post-modal-date{color:var(--text-secondary);font-size:12px;margin:10px 0 6px}.post-modal-text{font-size:15px;line-height:1.8;color:var(--text-primary);margin-bottom:16px;white-space:pre-wrap}.post-modal-actions{display:flex;gap:10px;margin:16px 0 20px}.post-modal-more-title{font-size:14px;font-weight:700;margin-bottom:12px}.post-modal-thumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.post-thumb{position:relative;aspect-ratio:1;border-radius:8px;overflow:hidden;cursor:pointer;background:var(--bg-hover);display:flex;align-items:center;justify-content:center;color:var(--text-secondary);font-weight:700}.post-thumb img{width:100%;height:100%;object-fit:cover;transition:transform var(--transition)}.post-thumb:hover img{transform:scale(1.06)}.post-thumb.noimg span{font-size:18px}.post-thumb-vid{position:absolute;bottom:4px;right:4px;background:rgba(0,0,0,.6);color:#fff;font-size:10px;padding:1px 6px;border-radius:6px}
 .loading{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 20px;color:var(--text-secondary)}.spinner{width:40px;height:40px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;margin-bottom:16px}@keyframes spin{to{transform:rotate(360deg)}}.empty-state{text-align:center;padding:60px 20px;color:var(--text-secondary)}.empty-state .empty-icon{font-size:64px;margin-bottom:16px}.empty-state h3{font-size:18px;color:var(--text-primary);margin-bottom:8px}.empty-state p{font-size:14px}
 .results-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px}.results-count{font-size:14px;color:var(--text-secondary)}.view-toggle{display:flex;gap:4px;background:var(--bg-primary);border:1px solid var(--border);border-radius:8px;padding:3px}.view-btn{width:32px;height:32px;border-radius:6px;display:flex;align-items:center;justify-content:center;color:var(--text-secondary);transition:all var(--transition);font-size:16px}.view-btn.active{background:var(--accent);color:#fff}
 .skeleton{background:linear-gradient(90deg,var(--bg-hover) 25%,var(--bg-secondary) 50%,var(--bg-hover) 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:var(--radius);height:240px}@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
@@ -150,6 +150,13 @@
 </div>
 
 <!-- CHANNEL DETAIL MODAL -->
+<div class="modal-overlay" id="postOverlay">
+  <div class="modal" style="max-width:640px">
+    <div class="modal-header" id="postModalHead"></div>
+    <button class="modal-close" style="position:absolute;top:16px;left:16px;z-index:5" onclick="closePostModal()">✕</button>
+    <div class="modal-body" id="postModalBody"></div>
+  </div>
+</div>
 <div class="modal-overlay" id="channelOverlay">
   <div class="modal" id="modal">
     <div class="modal-header">
@@ -200,6 +207,7 @@
 
 <div class="toast-container" id="toastContainer"></div>
 
+<script src="posts.js"></script>
 <script src="channels.js"></script>
 <script>
 // ============================================================
@@ -361,7 +369,7 @@ function searchLocal(q){q=(q||'').trim();if(!q)return[];const lang=state.searchL
 // ============================================================
 // EXPLORE
 // ============================================================
-async function loadExplore(){const content=document.getElementById('content');content.innerHTML=renderSkeletons(9);try{let channels=[];if(state.workerUrl){const url=state.currentCategory==='all'?`${state.workerUrl}/api/trending?page=1`: `${state.workerUrl}/api/trending?cat=${state.currentCategory}&page=1`;const resp=await fetch(url);const data=await resp.json();channels=data.channels||[]}else{channels=getLocalExplore(state.currentCategory)}state.searchResults=channels;renderResults()}catch{content.innerHTML=renderEmpty(t('no_results'),t('no_results_desc'))}}
+async function loadExplore(){const content=document.getElementById('content');content.innerHTML=renderSkeletons(9);try{let channels=[];if(state.workerUrl){const url=state.currentCategory==='all'?`${state.workerUrl}/api/trending?page=1`: `${state.workerUrl}/api/trending?cat=${state.currentCategory}&page=1`;const resp=await fetch(url);const data=await resp.json();channels=data.channels||[]}else{channels=getLocalExplore(state.currentCategory)}state.searchResults=channels;if(state.currentTab==='explore')state.currentView='explore';renderResults()}catch{content.innerHTML=renderEmpty(t('no_results'),t('no_results_desc'))}}
 
 // ============================================================
 // FEED (Instagram-like)
@@ -428,69 +436,70 @@ function renderGridView(container,items){container.innerHTML=`<div class="result
 
 function renderListView(container,items){container.innerHTML=`<div class="results-list">${items.map(ch=>`<div class="list-item" onclick="openChannel('${ch.username}')"><div class="list-avatar">${ch.avatar?`<img src="${ch.avatar}" alt="" loading="lazy">`:ch.title[0].toUpperCase()}</div><div class="list-info"><div class="list-title">${escHtml(ch.title)}</div><div class="list-user">@${escHtml(ch.username)}</div><div class="list-desc">${escHtml(ch.description||'')}</div></div><div class="list-meta"><span class="list-members">👥 ${ch.members||'0'}</span><button class="card-action-btn ${isFav(ch.username)?'favorited':''}" onclick="event.stopPropagation();toggleFav('${ch.username}','${escAttr(ch.title)}')">${isFav(ch.username)?'❤️':'🤍'}</button></div></div>`).join('')}</div>`}
 
-function renderExploreView(container,items){const colors=['#0088cc','#e91e63','#9c27b0','#ff9800','#4caf50','#00bcd4','#795548','#607d8b','#f44336','#3f51b5'];container.innerHTML=`<div class="explore-grid">${items.map((ch,i)=>{const color=colors[i%colors.length];const img=ch.image||ch.avatar||'';return`<div class="explore-item" onclick="openChannel('${ch.username}')">${img?`<img src="${img}" alt="" loading="lazy">`:`<div style="width:100%;height:100%;background:${color};display:flex;align-items:center;justify-content:center;font-size:36px;color:#fff;font-weight:700">${ch.title[0].toUpperCase()}</div>`}<div class="explore-item-overlay"><div class="explore-item-info"><div class="explore-stat">${ch.members||'0'}</div><div class="explore-label">${t('members')}</div></div></div></div>`}).join('')}</div>`}
-
-// ============================================================
-// CHANNEL MODAL (with stats, chart, related)
-// ============================================================
-async function openChannel(username){
-  document.getElementById('channelOverlay').classList.add('open');document.body.style.overflow='hidden';
-  const cached=state.searchResults.find(ch=>ch.username===username);
-  document.getElementById('modalAvatar').innerHTML=cached?.avatar?`<img src="${cached.avatar}" alt="">`:(cached?.title?.[0]||username[0]).toUpperCase();
-  document.getElementById('modalTitle').textContent=cached?.title||username;
-  document.getElementById('modalUser').textContent=`@${username}`;
-  document.getElementById('modalMembers').textContent=cached?.members?`${cached.members} ${t('members')}`:'';
-  document.getElementById('modalDesc').textContent=cached?.description||'';
-  document.getElementById('modalOpenTg').onclick=()=>window.open(`https://t.me/${username}`,'_blank');
-  document.getElementById('modalFavBtn').onclick=()=>{toggleFav(username,cached?.title||username);updateModalFav(username)};
-  updateModalFav(username);
-  // Reset sections
-  document.getElementById('modalStats').style.display='none';
-  document.getElementById('modalChart').style.display='none';
-  document.getElementById('modalRelated').style.display='none';
-
-  const postsDiv=document.getElementById('modalPosts');postsDiv.innerHTML='<div class="loading"><div class="spinner"></div></div>';
-
-  // Load stats, related, posts in parallel
-  const promises=[];
-  if(state.workerUrl){
-    // Stats
-    promises.push(fetch(`${state.workerUrl}/api/stats/${username}`).then(r=>r.json()).then(data=>{
-      if(data.error)return;
-      // Update members display
-      if(data.membersDisplay)document.getElementById('modalMembers').textContent=`${data.membersDisplay} ${t('members')}`;
-      // Stats grid
-      const statsGrid=document.getElementById('modalStats');
-      statsGrid.innerHTML=`
-        <div class="stat-card"><div class="stat-value">${data.membersDisplay||'0'}</div><div class="stat-label">${t('members')}</div></div>
-        <div class="stat-card"><div class="stat-value">${data.postsPerDay||0}</div><div class="stat-label">${t('posts_per_day')}</div></div>
-        <div class="stat-card"><div class="stat-value">${data.mediaRatio||0}%</div><div class="stat-label">${t('media_ratio')}</div></div>
-        <div class="stat-card"><div class="stat-value">${data.totalPostsAnalyzed||0}</div><div class="stat-label">${t('recent_posts')}</div></div>
-      `;
-      statsGrid.style.display='grid';
-      // Update tags
-      if(data.tags?.length && cached){cached.tags=data.tags}
-      // Chart
-      if(data.chartData?.length)renderChart(data.chartData);
-    }).catch(()=>{}));
-    // Related
-    promises.push(fetch(`${state.workerUrl}/api/related/${username}`).then(r=>r.json()).then(data=>{
-      if(data.related?.length){
-        const section=document.getElementById('modalRelated');
-        document.getElementById('relatedChips').innerHTML=data.related.map(r=>`<div class="related-chip" onclick="closeChannelModal();setTimeout(()=>openChannel('${r.username}'),300)"><span>@${escHtml(r.username)}</span>${r.matchTag?`<span class="chip-tag">${r.matchTag}</span>`:''}</div>`).join('');
-        section.style.display='';
-      }
-    }).catch(()=>{}));
-    // Posts
-    promises.push(fetch(`${state.workerUrl}/api/posts/${username}`).then(r=>r.json()).then(data=>{
-      if(data.posts?.length){postsDiv.innerHTML=data.posts.map(p=>`<div class="post-card"><div class="post-text">${escHtml(p.text)}</div>${p.image?`<img class="post-img" src="${p.image}" alt="" loading="lazy">`:''}<a class="post-link" href="${p.link}" target="_blank" rel="noopener">View on Telegram →</a></div>`).join('')}
-      else{postsDiv.innerHTML=`<div class="empty-state"><p style="font-size:14px">${t('no_results')}</p></div>`}
-    }).catch(()=>{postsDiv.innerHTML=`<div class="empty-state"><p style="font-size:14px">${t('no_results')}</p></div>`}));
-    await Promise.allSettled(promises);
-  }else{
-    postsDiv.innerHTML=`<div class="empty-state"><div class="empty-icon">📡</div><p style="font-size:14px">Connect proxy to load posts</p><a href="https://t.me/s/${username}" target="_blank" rel="noopener" style="margin-top:12px;display:inline-block;color:var(--accent)">View on t.me →</a></div>`;
-  }
+function getChannelPosts(username){
+  try{ if(typeof CHANNEL_POSTS!=='undefined' && CHANNEL_POSTS[username]) return CHANNEL_POSTS[username]; }catch(e){}
+  return [];
 }
+function renderExploreView(container,items){
+  const colors=['#0088cc','#e91e63','#9c27b0','#ff9800','#4caf50','#00bcd4','#795548','#607d8b','#f44336','#3f51b5'];
+  container.innerHTML=`<div class="explore-grid">${items.map((ch,i)=>{
+    const posts=getChannelPosts(ch.username);
+    const post=posts[0]||null;
+    const img=(post&&post.image)||ch.image||ch.avatar||'';
+    const color=colors[i%colors.length];
+    const initial=(ch.title||ch.username||'?')[0].toUpperCase();
+    const imgHtml=img?`<img src="${img}" alt="" loading="lazy" onerror="this.style.display='none'">`:`<div style="width:100%;height:100%;background:${color};display:flex;align-items:center;justify-content:center;font-size:36px;color:#fff;font-weight:700">${initial}</div>`;
+    const onclick=posts.length?`openPostModal('${ch.username}')`:`openChannel('${ch.username}')`;
+    return `<div class="explore-item" onclick="${onclick}" style="aspect-ratio:3/4">
+      ${imgHtml}
+      ${post&&post.hasVideo?`<div class="feed-video-badge">▶</div>`:''}
+      <div class="explore-item-overlay">
+        <div class="explore-item-info">
+          <div class="explore-stat">${ch.members||'0'}</div>
+          <div class="explore-label">${t('members')}</div>
+        </div>
+      </div>
+    </div>`;
+  }).join('')}</div>`;
+}
+function openPostModal(username, idx){
+  idx=idx||0;
+  const posts=getChannelPosts(username);
+  if(!posts.length){openChannel(username);return}
+  const ch=getAllChannels().find(c=>c.username===username)||{username,title:username};
+  const overlay=document.getElementById('postOverlay');
+  overlay.classList.add('open');document.body.style.overflow='hidden';
+  window._postCtx={username,ch,posts};
+  renderPostModal(idx);
+}
+function renderPostModal(idx){
+  const ctx=window._postCtx;if(!ctx)return;
+  const {username,ch,posts}=ctx;
+  const p=posts[idx]||posts[0];
+  const dateTxt=p.date?new Date(p.date).toLocaleString('fa-IR',{dateStyle:'medium',timeStyle:'short'}):'';
+  const text=(p.text||'').slice(0,500)+(p.text&&p.text.length>500?'…':'');
+  const color='#0088cc';
+  const imgHtml=p.image?`<img src="${p.image}" alt="" class="post-modal-img" onerror="this.style.display='none'">`:''+(p.hasVideo?`<div class="post-modal-video">▶ ویدیو</div>`:'');
+  const others=posts.map((x,i)=>i===idx?null:`<div class="post-thumb ${x.image?'':'noimg'}" onclick="renderPostModal(${i})">${x.image?`<img src="${x.image}" alt="" loading="lazy" onerror="this.style.display='none'">`:'<span>'+(x.text||'پست').slice(0,1)+'</span>'}${x.hasVideo?'<span class="post-thumb-vid">▶</span>':''}</div>`).filter(Boolean).join('');
+  document.getElementById('postModalHead').innerHTML=`
+    <div class="modal-avatar">${(ch.title||username)[0].toUpperCase()}</div>
+    <div>
+      <div class="modal-title">${escHtml(ch.title||username)}</div>
+      <div class="modal-user">@${escHtml(username)} <span class="post-modal-members">${ch.members?('👥 '+ch.members):''}</span></div>
+    </div>`;
+  document.getElementById('postModalBody').innerHTML=`
+    ${imgHtml}
+    ${dateTxt?`<div class="post-modal-date">🕐 ${dateTxt}</div>`:''}
+    ${text?`<div class="post-modal-text">${escHtml(text)}</div>`:''}
+    <div class="post-modal-actions">
+      <button class="modal-btn modal-btn-primary" onclick="openChannel('${username}')">📢 ${t('open_telegram')||'Open in Telegram'}</button>
+      <button class="modal-btn modal-btn-secondary" onclick="window.open('https://t.me/${username}/${p.id}','_blank')">🔗 مشاهده پست</button>
+    </div>
+    ${others?`<div class="post-modal-more"><div class="post-modal-more-title">📸 پست‌های قبلی ${escHtml(ch.title||username)}</div><div class="post-modal-thumbs">${others}</div></div>`:''}`;
+  document.getElementById('postModalHead').scrollIntoView({block:'start'});
+}
+function closePostModal(){document.getElementById('postOverlay').classList.remove('open');document.body.style.overflow=''}
+
 function closeChannelModal(){document.getElementById('channelOverlay').classList.remove('open');document.body.style.overflow=''}
 function updateModalFav(u){const btn=document.getElementById('modalFavBtn');btn.querySelector('span:first-child').textContent=isFav(u)?'❤️':'🤍'}
 
