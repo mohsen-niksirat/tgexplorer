@@ -53,6 +53,16 @@ Checks every channel in `channels.js` live against `t.me/s/<username>`:
 
 To add channels: add an entry to `channels.js` and re-run the script.
 
+## 🤖 Automated daily crawl
+
+A GitHub Actions workflow (`.github/workflows/crawl.yml`) runs `node crawl_posts.js`
+**every night at 02:15 UTC** and, if the posts changed, commits and pushes the new
+`posts.js` automatically. You can also trigger it manually from the **Actions** tab.
+
+Safety: if fewer than 10 channels are reachable (e.g. t.me blocking the runner),
+the crawler exits with an error and **keeps the existing `posts.js`** instead of
+wiping it. Run it locally anytime with `node crawl_posts.js`.
+
 ## 📁 Project Structure
 
 ```
