@@ -13,6 +13,33 @@ Search and discover public Telegram channels and groups — like Instagram Explo
 - 📄 **Works out of the box** — no worker required (local mode is the default)
 - 🧪 **`verify_channels.js`** — re-validate every channel in the database against t.me
 
+## 📦 Changelog
+
+### v1.1.0
+
+- 📸 **Instagram-like Explore** — every channel shows its latest post as a 3:4 tile
+- 🎬 **Post popup** with the channel's previous posts and **in-modal video playback**
+- 🔄 **4-mode Explore filter** — see only clips, only photos, only text posts, or everything
+- ♾️ **Infinite scroll feed** inside the post popup — scroll to load the next posts
+- 🤖 **Automated daily crawl** via GitHub Actions (posts.js refreshes every night)
+- ✕ Close popups with the ✕ button, backdrop click, or **Esc** (video fully stops)
+- 📤 **Share & copy post link** buttons on every post
+- ❤️ **Save posts as favorites** (new Posts tab in Favorites)
+- 🗂 **Personal folders** to organize saved channels & posts (with emoji icons)
+- 🔗 **Share folders as links** — anyone can open and import them into their own app
+- 🌐 **Channels outside the database** render in shared folders with direct Telegram buttons
+- ➕ **Add channels manually** to folders via any `t.me` link (validated)
+- 🕒 **Live latest-post preview** — when a channel is added, its newest post is fetched from t.me and shown in the folder, with a 🔄 refresh button and auto-refresh
+
+### v1.0.0
+
+- ✅ **Verified channel database** — 61 real public channels, every one checked live against t.me
+- 🔍 **Smart fuzzy search** (typo-tolerant) + Persian/English language filter
+- ❤️ **Save channels as favorites**
+- 🌙 Dark / Light mode · 🌍 7 languages · 📱 responsive layout
+- 📄 **Local mode by default** — works out of the box, no worker or API key required
+- 🧪 `verify_channels.js` — re-validate the channel database against t.me
+
 ## 🚀 Quick Start
 
 ### Option 1: Local mode (default — no setup)
