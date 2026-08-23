@@ -4,24 +4,22 @@ Search and discover public Telegram channels and groups — like Instagram Explo
 
 ## ✨ Features
 
-- 🔍 **Search** public Telegram channels and groups
-- 🏠 **Explore** trending channels by category
-- 📱 **Instagram-like grid** view for visual browsing
+- 🔍 **Smart Search** — fuzzy matching (typo-tolerant) + Persian/English language filter
+- 🏠 **Explore** — browse 60+ **verified** public channels by category (every one checked live against t.me)
+- 🇮🇷 **Persian & English** channels — BBC Persian, Radio Farda, Tabnak, Varzesh3, Digiato/TechNolife tech + NYT, Guardian, Sky News, NASA-level English channels
+- 📱 **Instagram-like grid** view with language badges on every card
 - ❤️ **Favorites** — save channels locally
-- 🌙 **Dark / Light** mode
-- 🌍 **7 Languages**: English, فارسی, العربية, 中文, Русский, Español, Français
-- 📱 **Responsive** — works on mobile and desktop
-- 📄 **Single HTML file** — no build step, no dependencies
+- 🌙 **Dark / Light** mode · 🌍 **7 Languages** · 📱 **Responsive**
+- 📄 **Works out of the box** — no worker required (local mode is the default)
+- 🧪 **`verify_channels.js`** — re-validate every channel in the database against t.me
 
 ## 🚀 Quick Start
 
-### Option 1: Without Worker (Limited — local data only)
+### Option 1: Local mode (default — no setup)
 
-Just open `index.html` in your browser. You'll have access to a curated set of popular channels.
+Just open `index.html` (or deploy to GitHub Pages). The app starts with a **verified database of 60+ real channels** and full fuzzy search + language filter — no worker, no API key.
 
-### Option 2: With Cloudflare Worker (Full power)
-
-This gives you real-time search, channel posts, and more.
+### Option 2: With Cloudflare Worker (full power — live Telegram search)
 
 #### Step 1: Deploy the Worker
 
@@ -32,28 +30,41 @@ This gives you real-time search, channel posts, and more.
 5. Click **Save and Deploy**
 6. Copy your worker URL (e.g., `https://telegram-explorer-api.your-subdomain.workers.dev`)
 
-#### Step 2: Configure the HTML
+#### Step 2: Connect it in the app
 
-Open `index.html` and find this line near the top of the `<script>`:
-
-```javascript
-const WORKER_URL = localStorage.getItem('telgram_explorer_worker') || '';
-```
-
-Replace `''` with your worker URL:
+Open the app → **⚙️ Settings** → paste your worker URL → **Save**. Or via console:
 
 ```javascript
-const WORKER_URL = 'https://telegram-explorer-api.your-subdomain.workers.dev';
+localStorage.setItem('tgexp_worker', 'https://your-worker-url.workers.dev');
 ```
 
-Or set it via browser console:
-```javascript
-localStorage.setItem('telgram_explorer_worker', 'https://your-worker-url.workers.dev');
+> Note: the storage key is `tgexp_worker` (older READMEs said `telgram_explorer_worker` — that was a typo).
+
+## 🧪 Verifying the channel database
+
+```bash
+node verify_channels.js
 ```
 
-#### Step 3: Open `index.html`
+Checks every channel in `channels.js` live against `t.me/s/<username>`:
+- `OK` — real public channel (title matched)
+- `USER` — username exists but is a user/bot, not a channel
+- `FAIL` — no public channel with this username
 
-That's it! 🎉
+To add channels: add an entry to `channels.js` and re-run the script.
+
+## 📁 Project Structure
+
+```
+telegram-explorer/
+├── index.html          # Main app (single file)
+├── channels.js         # Verified channel database (~60 channels)
+├── verify_channels.js  # Channel validation script (Node)
+├── worker.js           # Cloudflare Worker proxy
+├── sw.js               # Service Worker (PWA offline)
+├── manifest.json       # PWA manifest
+└── icons/              # PWA icons
+```
 
 ## 📁 Project Structure
 
@@ -93,6 +104,8 @@ telegram-explorer/
 ```
 
 - The **HTML file** is the frontend — pure vanilla JS, no frameworks
+- **Without a worker**, the app uses the local verified database (`channels.js`) with fuzzy search
+- **With a worker**, it adds live search, posts and notifications from `t.me`
 - The **Cloudflare Worker** acts as a proxy to bypass CORS restrictions
 - It scrapes `t.me` for channel data and posts
 - All favorites are stored in **localStorage** (client-side)
