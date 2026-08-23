@@ -150,7 +150,7 @@
 </div>
 
 <!-- CHANNEL DETAIL MODAL -->
-<div class="modal-overlay" id="postOverlay">
+<div class="modal-overlay" id="postOverlay" onclick="if(event.target===this)closePostModal()">
   <div class="modal" style="max-width:640px">
     <div class="modal-header" id="postModalHead"></div>
     <button class="modal-close" style="position:absolute;top:16px;left:16px;z-index:5" onclick="closePostModal()">✕</button>
@@ -313,7 +313,7 @@ document.getElementById('langFilter').addEventListener('click',e=>{const chip=e.
   document.getElementById('connBadge').addEventListener('click',openSettings);
   document.getElementById('notifBtn').addEventListener('click',openNotifModal);
   document.getElementById('workerUrlInput').addEventListener('keydown',e=>{if(e.key==='Enter')testConnection()});
-  document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeSettings();closeChannelModal();closeNotifModal()}});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeSettings();closePostModal();closeChannelModal();closeNotifModal()}});
   document.getElementById('channelOverlay').addEventListener('click',e=>{if(e.target===e.currentTarget)closeChannelModal()});
   document.getElementById('settingsOverlay').addEventListener('click',e=>{if(e.target===e.currentTarget)closeSettings()});
   document.getElementById('notifOverlay').addEventListener('click',e=>{if(e.target===e.currentTarget)closeNotifModal()});
@@ -498,7 +498,7 @@ function renderPostModal(idx){
     ${others?`<div class="post-modal-more"><div class="post-modal-more-title">📸 پست‌های قبلی ${escHtml(ch.title||username)}</div><div class="post-modal-thumbs">${others}</div></div>`:''}`;
   document.getElementById('postModalHead').scrollIntoView({block:'start'});
 }
-function closePostModal(){document.getElementById('postOverlay').classList.remove('open');document.body.style.overflow=''}
+function closePostModal(){document.querySelectorAll('#postModalBody video').forEach(function(v){try{v.pause();v.removeAttribute('src');v.load()}catch(e){}});document.getElementById('postOverlay').classList.remove('open');document.body.style.overflow=''}
 
 function closeChannelModal(){document.getElementById('channelOverlay').classList.remove('open');document.body.style.overflow=''}
 function updateModalFav(u){const btn=document.getElementById('modalFavBtn');btn.querySelector('span:first-child').textContent=isFav(u)?'❤️':'🤍'}
