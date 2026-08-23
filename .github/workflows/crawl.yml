@@ -2,7 +2,7 @@ name: Crawl Channel Posts
 
 on:
   schedule:
-    - cron: '15 2 * * *'   # 02:15 UTC nightly
+    - cron: '17 */6 * * *'  # every 6 hours (00:17, 06:17, 12:17, 18:17 UTC)
   workflow_dispatch:        # manual trigger
 
 permissions:

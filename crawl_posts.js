@@ -6,7 +6,7 @@
 const fs = require('fs');
 const fn = new Function(fs.readFileSync('channels.js', 'utf8') + '; return CHANNEL_DB;');
 const db = fn();
-const MAX_POSTS = 12;
+const MAX_POSTS = 50;
 const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
 
 function esc(s){ return String(s||'').replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&quot;/g,'"').replace(/&#39;/g,"'").replace(/<br\s*\/?>/gi,'\n').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim(); }
@@ -39,23 +39,32 @@ function parsePosts(html, username){
       video,
       hasVideo
     });
-    if (posts.length >= MAX_POSTS) break;
   }
   return posts;
 }
 
 async function fetchPosts(ch){
+  const all = [];
+  let before = '';
   try {
-    const r = await fetch('https://t.me/s/' + encodeURIComponent(ch.username), {
-      headers: { 'User-Agent': UA, 'Accept': 'text/html', 'Accept-Language': 'en' },
-      redirect: 'follow'
-    });
-    if (!r.ok) return [];
-    const html = await r.text();
-    return parsePosts(html, ch.username);
-  } catch (e) {
-    return [];
-  }
+    for (let page = 0; page < 6 && all.length < MAX_POSTS; page++) {
+      const url = 'https://t.me/s/' + encodeURIComponent(ch.username) + (before ? ('?before=' + before) : '');
+      const r = await fetch(url, {
+        headers: { 'User-Agent': UA, 'Accept': 'text/html', 'Accept-Language': 'en' },
+        redirect: 'follow'
+      });
+      if (!r.ok) break;
+      const posts = parsePosts(await r.text(), ch.username);
+      if (!posts.length) break;
+      for (const p of posts) if (!all.some(x => x.id === p.id)) all.push(p);
+      const minId = String(Math.min.apply(null, posts.map(p => Number(p.id))));
+      if (before && minId === before) break;
+      before = minId;
+      if (posts.length < 10) break;
+      await new Promise(r => setTimeout(r, 200));
+    }
+  } catch (e) {}
+  return all.slice(0, MAX_POSTS).sort((a, b) => Number(b.id) - Number(a.id));
 }
 
 (async () => {
