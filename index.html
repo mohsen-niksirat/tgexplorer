@@ -766,6 +766,16 @@ function cycleFolderIcon(id){
   f.icon=FOLDER_ICONS[(i+1)%FOLDER_ICONS.length];
   saveFolders();renderFavorites();
 }
+function folderChannelCardsHtml(items,folderId){
+  const known=items.filter(it=>it.type==='ch').map(it=>({username:it.username,ch:getAllChannels().find(c=>c.username===it.username)})).filter(x=>x.ch);
+  const unknown=items.filter(it=>it.type==='ch').map(it=>({username:it.username,ch:getAllChannels().find(c=>c.username===it.username)})).filter(x=>!x.ch);
+  const rm=folderId?'<button class="card-action-btn" title="حذف از فولدر" onclick="event.stopPropagation();removeFolderItem(\''+folderId+'\',\'ch\',\'{u}\',null)">🗑</button>':'';
+  let html='';
+  if(known.length)html+='<div class="folder-sec-title">📢 کانال‌ها</div><div class="results-grid">'+known.map(x=>'<div class="channel-card" onclick="openChannel(\''+x.ch.username+'\')"><div class="card-banner"><div class="card-banner-overlay"></div><div class="card-avatar">'+x.ch.title[0].toUpperCase()+'</div></div><div class="card-body"><div class="card-title">'+escHtml(x.ch.title)+'</div><div class="card-username">@'+escHtml(x.ch.username)+'</div><div class="card-footer"><div class="card-members">👥 '+(x.ch.members||'0')+'</div><div class="card-actions">'+(folderId?rm.replace('{u}',x.ch.username):'')+'</div></div></div></div>').join('')+'</div>';
+  if(unknown.length)html+='<div class="folder-sec-title">📢 کانال‌های خارج از دیتابیس</div><div class="results-grid">'+unknown.map(x=>'<div class="channel-card" onclick="openChannel(\''+x.username+'\')"><div class="card-banner"><div class="card-banner-overlay"></div><div class="card-avatar" style="background:linear-gradient(135deg,#607d8b,#455a64)">?</div></div><div class="card-body"><div class="card-title">@'+escHtml(x.username)+'</div><div class="card-username" style="color:var(--text-secondary)">خارج از دیتابیس</div><div class="card-footer"><div class="card-members">—</div><div class="card-actions">'+(folderId?rm.replace('{u}',x.username):'')+'<button class="card-action-btn" title="باز کردن در تلگرام" onclick="event.stopPropagation();window.open(\'https://t.me/'+x.username+'\',\'_blank\')">✈️</button><button class="card-action-btn" onclick="event.stopPropagation();copyLink(\''+x.username+'\')">🔗</button></div></div></div></div>').join('')+'</div>';
+  return html;
+}
+
 
 // ============================================================
 // SHARE FOLDER
@@ -796,15 +806,14 @@ function renderSharedFolder(f){
   let html='<div style="padding:8px 0 20px"><button class="folder-back" onclick="dismissSharedFolder()">✕ بستن</button>'+
     '<div class="folder-detail-head"><button class="folder-icon-btn" title="تغییر آیکون" onclick="cycleFolderIcon(\''+f.id+'\')"><span style="font-size:26px">'+f.icon+'</span></button><span class="folder-detail-name">'+escHtml(f.name)+'</span><span class="folder-picker-count">'+f.items.length+' آیتم</span>'+
     '<button class="modal-btn modal-btn-primary" style="max-width:190px;padding:10px" onclick="importSharedFolder()">📥 ذخیره در فولدرهای من</button></div>';
-  const chs=f.items.filter(it=>it.type==='ch').map(it=>getAllChannels().find(c=>c.username===it.username)).filter(Boolean);
   const posts=f.items.filter(it=>it.type==='post').map(it=>{
     const list=getChannelPosts(it.username);
     const p=list.find(x=>String(x.id)===String(it.postId));
     const ch=getAllChannels().find(c=>c.username===it.username)||{username:it.username,title:it.label||it.username};
     return {username:it.username,postId:it.postId,ch,image:p?p.image:'',text:p?p.text:(it.label||''),hasVideo:p?p.hasVideo:false};
   });
-  if(!chs.length&&!posts.length){html+='<div class="empty-state"><div class="empty-icon">🗂</div><h3>این فولدر خالی است</h3></div>'}
-  if(chs.length)html+='<div class="folder-sec-title">📢 کانال‌ها</div><div class="results-grid">'+chs.map(ch=>'<div class="channel-card" onclick="openChannel(\''+ch.username+'\')"><div class="card-banner"><div class="card-banner-overlay"></div><div class="card-avatar">'+ch.title[0].toUpperCase()+'</div></div><div class="card-body"><div class="card-title">'+escHtml(ch.title)+'</div><div class="card-username">@'+escHtml(ch.username)+'</div><div class="card-footer"><div class="card-members">👥 '+(ch.members||'0')+'</div></div></div></div>').join('')+'</div>';
+  if(!f.items.filter(it=>it.type==='ch').length&&!posts.length){html+='<div class="empty-state"><div class="empty-icon">🗂</div><h3>این فولدر خالی است</h3></div>'}
+  html+=folderChannelCardsHtml(f.items);
   if(posts.length)html+='<div class="folder-sec-title">🖼 پست‌ها</div><div class="explore-grid">'+posts.map(p=>{
     const img=p.image;
     const idx=Math.max(0,getChannelPosts(p.username).findIndex(x=>String(x.id)===String(p.postId)));
@@ -851,14 +860,13 @@ function renderFavorites(){
     if(!f){state.openFolder='';return renderFavorites()}
     let html=toggleHtml+'<div><button class="folder-back" onclick="state.openFolder=\'\';renderFavorites()">← بازگشت</button><div class="folder-detail-head"><span style="font-size:26px">'+f.icon+'</span><span class="folder-detail-name">'+escHtml(f.name)+'</span><span class="folder-picker-count">'+f.items.length+' آیتم</span><button class="folder-del" title="حذف فولدر" onclick="deleteFolder(\''+f.id+'\')">🗑</button><button class="folder-del" title="اشتراک‌گذاری فولدر" onclick="shareFolder(\''+f.id+'\')">🔗</button></div>';
     if(!f.items.length){content.innerHTML=html+renderEmpty('🗂','این فولدر خالی است');return}
-    const chs=f.items.filter(it=>it.type==='ch').map(it=>getAllChannels().find(c=>c.username===it.username)).filter(Boolean);
     const posts=f.items.filter(it=>it.type==='post').map(it=>{
       const list=getChannelPosts(it.username);
       const p=list.find(x=>x.id===it.postId);
       const ch=getAllChannels().find(c=>c.username===it.username)||{username:it.username,title:it.label||it.username};
       return {username:it.username,postId:it.postId,ch,image:p?p.image:'',text:p?p.text:(it.label||''),hasVideo:p?p.hasVideo:false};
     });
-    if(chs.length)html+='<div class="folder-sec-title">📢 کانال‌ها</div><div class="results-grid">'+chs.map(ch=>'<div class="channel-card" onclick="openChannel(\''+ch.username+'\')"><div class="card-banner"><div class="card-banner-overlay"></div><div class="card-avatar">'+ch.title[0].toUpperCase()+'</div></div><div class="card-body"><div class="card-title">'+escHtml(ch.title)+'</div><div class="card-username">@'+escHtml(ch.username)+'</div><div class="card-footer"><div class="card-members">👥 '+(ch.members||'0')+'</div><div class="card-actions"><button class="card-action-btn" title="حذف از فولدر" onclick="event.stopPropagation();removeFolderItem(\''+f.id+'\',\'ch\',\''+ch.username+'\',null)">🗑</button></div></div></div></div>').join('')+'</div>';
+  html+=folderChannelCardsHtml(f.items,f.id);
     if(posts.length)html+='<div class="folder-sec-title">🖼 پست‌ها</div><div class="explore-grid">'+posts.map(p=>{
       const img=p.image;
       const idx=Math.max(0,getChannelPosts(p.username).findIndex(x=>x.id===p.postId));
