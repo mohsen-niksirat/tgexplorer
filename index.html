@@ -54,6 +54,7 @@
 @media(max-width:768px){.hero{padding:40px 16px 36px}.hero h1{font-size:26px}.hero p{font-size:15px}.search-box{flex-direction:column}.search-btn{justify-content:center}.results-grid{grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}.explore-grid{grid-template-columns:repeat(3,1fr);gap:3px}.modal{border-radius:20px 20px 0 0}.list-meta{display:none}.nav-tab{padding:10px 14px;font-size:13px}.connect-input-row{flex-direction:column}.setup-body{padding:24px 20px}.stats-grid{grid-template-columns:repeat(2,1fr)}.pwa-banner{flex-wrap:wrap}.pwa-banner-btns{width:100%}.pwa-btn{flex:1;text-align:center}}@media(max-width:480px){.results-grid{grid-template-columns:1fr}.explore-grid{grid-template-columns:repeat(2,1fr)}.header-inner{gap:10px}.logo span{display:none}.stats-grid{grid-template-columns:1fr 1fr}}
 [dir="rtl"] .search-box{flex-direction:row-reverse}[dir="rtl"] .card-avatar{left:auto;right:20px}[dir="rtl"] .card-body{text-align:right}[dir="rtl"] .modal-header{flex-direction:row-reverse}[dir="rtl"] .modal-close{margin-left:0;margin-right:auto}[dir="rtl"] .setup-step{padding-left:0;padding-right:52px;border-left:none;border-right:2px solid var(--border);margin-left:0;margin-right:16px}[dir="rtl"] .setup-step::before{left:auto;right:-17px}
 </style>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
 
@@ -319,7 +320,7 @@ let state={lang:localStorage.getItem('tgexp_lang')||'en',theme:localStorage.getI
 // ============================================================
 // INIT
 // ============================================================
-document.addEventListener('DOMContentLoaded',()=>{applyTheme(state.theme);applyLang(state.lang);document.getElementById('workerCodeBlock').textContent=WORKER_CODE;document.getElementById('langSelect').value=state.lang;showApp();if(!state.workerUrl&&!localStorage.getItem('tgexp_setup_hint')&&!localStorage.getItem('tgexp_setup_skipped')){localStorage.setItem('tgexp_setup_hint','1');setTimeout(()=>toast(t('proxy_hint')),1500)}bindEvents();registerSW();checkPWA();checkSharedFolder()});
+document.addEventListener('DOMContentLoaded',()=>{applyTheme(state.theme);applyLang(state.lang);initTelegramWebApp();watchTgBackButton();document.getElementById('workerCodeBlock').textContent=WORKER_CODE;document.getElementById('langSelect').value=state.lang;showApp();if(!state.workerUrl&&!localStorage.getItem('tgexp_setup_hint')&&!localStorage.getItem('tgexp_setup_skipped')){localStorage.setItem('tgexp_setup_hint','1');setTimeout(()=>toast(t('proxy_hint')),1500)}bindEvents();registerSW();checkPWA();checkSharedFolder()});
 
 // ============================================================
 // EVENTS
@@ -348,8 +349,49 @@ document.getElementById('langFilter').addEventListener('click',e=>{const chip=e.
 // ============================================================
 // THEME & LANG
 // ============================================================
-function applyTheme(theme){document.documentElement.setAttribute('data-theme',theme);document.getElementById('themeToggle').textContent=theme==='dark'?'☀️':'🌙'}
+function applyTheme(theme){document.documentElement.setAttribute('data-theme',theme);document.getElementById('themeToggle').textContent=theme==='dark'?'☀️':'🌙';try{if(window.Telegram&&Telegram.WebApp)Telegram.WebApp.setHeaderColor(theme==='dark'?'#0a0a0a':'#ffffff')}catch(e){}}
 function applyLang(lang){const t=I18N[lang]||I18N.en;document.documentElement.lang=lang;document.documentElement.dir=RTL_LANGS.includes(lang)?'rtl':'ltr';document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.dataset.i18n;if(t[k])el.textContent=t[k]});document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{const k=el.dataset.i18nPlaceholder;if(t[k])el.placeholder=t[k]})}
+function initTelegramWebApp(){
+  if(!window.Telegram||!Telegram.WebApp)return;
+  const wa=Telegram.WebApp;
+  wa.ready();
+  try{wa.expand()}catch(e){}
+  try{if(wa.disableVerticalSwipes)wa.disableVerticalSwipes()}catch(e){}
+  if(!localStorage.getItem('tgexp_theme')&&wa.colorScheme)applyTheme(wa.colorScheme==='dark'?'dark':'light');
+  wa.onEvent('themeChanged',()=>{
+    if(!localStorage.getItem('tgexp_theme')&&Telegram.WebApp.colorScheme)applyTheme(Telegram.WebApp.colorScheme==='dark'?'dark':'light');
+    else{try{Telegram.WebApp.setHeaderColor(state.theme==='dark'?'#0a0a0a':'#ffffff')}catch(e){}}
+  });
+  wa.onEvent('viewportChanged',()=>{try{Telegram.WebApp.expand()}catch(e){}});
+  wa.BackButton.onClick(tgGoBack);
+  syncTgBackButton();
+}
+function syncTgBackButton(){
+  if(!window.Telegram||!Telegram.WebApp)return;
+  const ids=['postOverlay','channelOverlay','settingsOverlay','notifOverlay','folderPicker'];
+  const open=ids.some(id=>{const el=document.getElementById(id);return el&&el.classList.contains('open')});
+  try{if(open)Telegram.WebApp.BackButton.show();else Telegram.WebApp.BackButton.hide()}catch(e){}
+}
+function watchTgBackButton(){
+  if(!window.Telegram||!Telegram.WebApp)return;
+  const obs=new MutationObserver(()=>syncTgBackButton());
+  try{obs.observe(document.body,{subtree:true,attributes:true,attributeFilter:['class']})}catch(e){}
+}
+function tgGoBack(){
+  const ids=['postOverlay','channelOverlay','settingsOverlay','notifOverlay','folderPicker'];
+  for(const id of ids){
+    const el=document.getElementById(id);
+    if(el&&el.classList.contains('open')){
+      if(id==='postOverlay')closePostModal();
+      else if(id==='channelOverlay')closeChannelModal();
+      else if(id==='settingsOverlay')closeSettings();
+      else if(id==='notifOverlay')closeNotifModal();
+      else closeFolderPicker();
+      return;
+    }
+  }
+}
+
 function t(key){return(I18N[state.lang]||I18N.en)[key]||I18N.en[key]||key}
 
 // ============================================================
