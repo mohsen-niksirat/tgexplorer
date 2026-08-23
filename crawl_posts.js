@@ -26,13 +26,18 @@ function parsePosts(html, username){
     if (!image) { const im2 = b.match(/<img[^>]+src="([^"]+)"[^>]*class="[^"]*tgme_widget_message_photo/); if (im2) image = im2[1]; }
     const tm = b.match(/<time datetime="([^"]+)"/);
     const txtm = b.match(/class="tgme_widget_message_text[^"]*"[^>]*>([\s\S]*?)<\/div>/);
-    const hasVideo = /tgme_widget_message_video|data-video|class="[^"]*video[^"]*"/.test(b) && !image;
+    let video='';
+    const vm = b.match(/<video[^>]+src="([^"]+)"[^>]*class="[^"]*tgme_widget_message_video[^"]*"/);
+    if (vm) video = vm[1];
+    else { const v2 = b.match(/<video[^>]+class="[^"]*tgme_widget_message_video[^"]*"[^>]+src="([^"]+)"/); if (v2) video = v2[1]; }
+    const hasVideo = !!video;
     posts.push({
       id: idm[1].split('/').pop(),
       date: tm ? tm[1] : '',
       text: txtm ? esc(txtm[1]) : '',
       image,
-      hasVideo: !!hasVideo
+      video,
+      hasVideo
     });
     if (posts.length >= MAX_POSTS) break;
   }
