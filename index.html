@@ -55,6 +55,7 @@
 [dir="rtl"] .search-box{flex-direction:row-reverse}[dir="rtl"] .card-avatar{left:auto;right:20px}[dir="rtl"] .card-body{text-align:right}[dir="rtl"] .modal-header{flex-direction:row-reverse}[dir="rtl"] .modal-close{margin-left:0;margin-right:auto}[dir="rtl"] .setup-step{padding-left:0;padding-right:52px;border-left:none;border-right:2px solid var(--border);margin-left:0;margin-right:16px}[dir="rtl"] .setup-step::before{left:auto;right:-17px}
 .home-feed{max-width:640px;margin:0 auto;display:flex;flex-direction:column;gap:18px;padding-bottom:24px}.home-feed-item{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;overflow:hidden;cursor:pointer;transition:all var(--transition)}.home-feed-item:hover{border-color:var(--accent)}.home-feed-item img,.home-feed-item video{width:100%;max-height:70vh;object-fit:contain;background:#000;display:block}.home-feed-head{display:flex;align-items:center;gap:10px;padding:12px 14px}.home-feed-avatar{width:40px;height:40px;border-radius:50%;background:var(--gradient);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;flex-shrink:0}.home-feed-title{font-size:14px;font-weight:700;line-height:1.3}.home-feed-user{font-size:12px;color:var(--text-secondary)}.home-feed-date{font-size:11px;color:var(--text-secondary);margin-left:auto;white-space:nowrap}.home-feed-text{padding:2px 14px 14px;font-size:14px;line-height:1.8;color:var(--text-primary);white-space:pre-wrap}.home-feed-media-text{padding:40px 14px;text-align:center;color:var(--text-secondary);background:var(--bg-secondary)}.home-feed-end{text-align:center;color:var(--text-secondary);font-size:12px;padding:12px 0;opacity:.6}.live-posts-loading{text-align:center;color:var(--text-secondary);font-size:13px;padding:16px 0}.sug-field{display:block;width:100%;margin-bottom:12px;padding:10px 14px;border-radius:10px;border:1px solid var(--border);background:var(--bg-card);color:var(--text-primary);font-size:14px;outline:none;box-sizing:border-box}.sug-field:focus{border-color:var(--accent)}.sug-label{display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:5px}.sug-row{display:flex;gap:10px}.sug-result{margin-top:14px;padding:12px;border-radius:12px;background:var(--bg-secondary);font-size:13px;text-align:center;display:flex;flex-direction:column;gap:10px}
 .home-stats{display:flex;gap:10px;margin-bottom:6px}.home-stat{flex:1;background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:12px;text-align:center}.home-stat-num{font-size:22px;font-weight:800;color:var(--accent)}.home-stat-lbl{font-size:12px;color:var(--text-secondary);margin-top:2px}.folder-rule{background:var(--bg-secondary);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:16px}.folder-rule-head{font-size:13px;font-weight:700;margin-bottom:10px;color:var(--text-secondary)}.folder-rule-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.folder-rule-empty{color:var(--text-secondary);font-size:13px;padding:14px;text-align:center;border:1px dashed var(--border);border-radius:12px;margin-bottom:10px}
+.folder-smart{margin-top:18px}.folder-smart .modal-btn{width:100%;background:var(--accent-light);color:var(--accent);border:1px dashed var(--accent)}
 </style>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
@@ -1282,7 +1283,7 @@ html+='<div class="folder-rule"><div class="folder-rule-head">🤖 فیلتر خ
   }
   if(tab==='folder'){
     const tiles=state.folders.map(f=>'<div class="folder-card" onclick="state.openFolder=\''+f.id+'\';renderFavorites()"><div class="folder-card-icon">'+f.icon+'</div><div class="folder-card-name">'+escHtml(f.name)+'</div><div class="folder-card-count">'+f.items.length+' آیتم</div></div>').join('');
-    const newForm='<div class="folder-new-form"><input id="folderNewInput" placeholder="نام فولدر جدید..." onkeydown="if(event.key===\'Enter\')createFolderFromTab()"><button class="modal-btn modal-btn-primary" onclick="createFolderFromTab()">➕ ساخت</button></div>'+folderIconRow();
+    const newForm='<div class="folder-smart"><button class="modal-btn modal-btn-secondary" onclick="createSmartFolders()">🤖 فولدر هوشمند — اخبار فارسی · تکنولوژی · ورزش</button></div><div class="folder-new-form"><input id="folderNewInput" placeholder="نام فولدر جدید..." onkeydown="if(event.key===\'Enter\')createFolderFromTab()"><button class="modal-btn modal-btn-primary" onclick="createFolderFromTab()">➕ ساخت</button></div>'+folderIconRow();
     if(!state.folders.length){content.innerHTML=toggleHtml+renderEmpty('🗂','هنوز فولدری نساخته‌اید')+newForm;return}
     content.innerHTML=toggleHtml+'<div class="folder-grid">'+tiles+'</div>'+newForm;
     return;
@@ -1587,6 +1588,28 @@ function addAutoOne(id,username){
   const c=getAllChannels().find(x=>x.username.toLowerCase()===username.toLowerCase());
   f.items.push({type:'ch',username:c?c.username:username,postId:null,label:c?c.title:'',latestPost:null});
   saveFolders();toast('✅ اضافه شد');renderFavorites();
+}
+
+// ============================================================
+// SMART FOLDERS
+// ============================================================
+function createSmartFolders(){
+  const presets=[
+    {name:'📰 اخبار فارسی',icon:'📰',rule:{cat:'news',lang:'fa'}},
+    {name:'💻 تکنولوژی',icon:'💻',rule:{cat:'tech',lang:'all'}},
+    {name:'⚽ ورزش',icon:'⚽',rule:{cat:'sports',lang:'all'}}
+  ];
+  let made=0,exists=0;
+  presets.forEach(p=>{
+    if(state.folders.some(f=>f.name===p.name)){exists++;return}
+    const id=createFolder(p.name,p.icon);
+    if(!id)return;
+    const f=state.folders.find(x=>x.id===id);
+    f.rule=p.rule;f.items=[];made++;
+  });
+  saveFolders();
+  toast(made?('🤖 '+made+' فولدر هوشمند ساخته شد'):'فولدرهای هوشمند از قبل موجودند');
+  renderFavorites();
 }
 
 // ============================================================
