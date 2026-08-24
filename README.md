@@ -42,6 +42,21 @@ This repo ships a ready-made [`worker.js`](worker.js) + [`wrangler.toml`](wrangl
 
 ## 📦 Changelog
 
+### v1.5.0
+
+- 🎨 **Gradient initial-letter avatars** — channels without a t.me photo get a
+  deterministic per-channel gradient tile (8 palettes hashed by username) across
+  grid, list, modals, folders, home feed and notifications; channel modals also
+  show the real avatar image when available
+- 🎙️ **New Explore categories: Podcast & Cinema** — chips translated in all 7
+  languages, with 8 freshly verified channels (پادکست رخ, رادیو زمانه,
+  Lex Fridman, ایران فیلم, Кинопоиск, Netflix, MOVIE CLIPS, MOVIE TRAILERS);
+  the channel DB now holds 114 verified channels
+- 🪶 **Compact hero** — slimmer header (smaller title/subtitle/search, less
+  padding); the search-tag chip row is removed on mobile
+- 🖼 **+45 verified channels** (61 → 106) — validated live against t.me
+- 🔄 **Avatars refreshed & network-first** — avatars.js is now served network-first
+
 ### v1.4.0
 
 - 🗂 **Explore list view** — switch between grid (▦) and list (☰) with a single

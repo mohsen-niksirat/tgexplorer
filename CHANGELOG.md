@@ -3,6 +3,24 @@
 Full version history of Telegram Explorer. The latest release is summarized in the
 [README](README.md#-changelog).
 
+## v1.5.0
+
+- 🎨 **Gradient initial-letter avatars** — channels without a t.me photo now get a
+  deterministic per-channel gradient tile (8 palettes hashed by username) across
+  grid, list, channel modal, post modal, folders, home feed and notifications;
+  channel modals also show the real avatar image when available.
+- 🎙️ **New Explore categories: Podcast & Cinema** — two new chips in Explore
+  (translated in all 7 languages), backed by 8 freshly verified channels:
+  پادکست رخ, رادیو زمانه, Lex Fridman, ایران فیلم, Кинопоиск, Netflix,
+  MOVIE CLIPS and MOVIE TRAILERS (channel DB is now 114 verified channels).
+- 🪶 **Compact hero** — the landing header is much slimmer (smaller title,
+  subtitle and search, less padding); the search-tag chip row is removed on
+  mobile so channels are visible immediately.
+- 🖼 **+45 verified channels** (61 → 106) — each candidate validated live against
+  t.me (title match + member count); sold/reserved brand handles were rejected.
+- 🔄 **Avatars refreshed & network-first** — `fetch_avatars.js` re-ran (78/106
+  channels got real photos); `avatars.js` is now network-first in the service
+  worker so avatar updates reach users without clearing the cache.
 ## v1.4.0
 
 - 🗂 **Explore list view** — switch between grid (▦) and list (☰) with a single

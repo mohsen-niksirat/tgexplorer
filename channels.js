@@ -125,4 +125,15 @@ const CHANNEL_DB = [
   {username:'csgo',title:'Counter-Strike',members:'900K',description:'Counter-Strike news',tags:['gaming'],lang:'en'},
   {username:'coldplay',title:'Coldplay',members:'1M',description:'Coldplay official updates',tags:['music'],lang:'en'},
   {username:'taylorswift',title:'Taylor Swift',members:'1.5M',description:'Taylor Swift official updates',tags:['music'],lang:'en'},
+  // ---------- Podcast ----------
+  {username:'rokhpodcast',title:'پادکست رخ',members:'110K',description:'داستان زندگی کسانی که قسمتی از تاریخ را رقم زدند، به روایت امیر سودبخش',tags:['podcast','persian'],lang:'fa'},
+  {username:'radiozamaneh',title:'رادیو زمانه',members:'16K',description:'گفت‌وگو و تحلیل سیاسی، اجتماعی و فرهنگی',tags:['podcast','persian'],lang:'fa'},
+  {username:'lexfridman',title:'Lex Fridman',members:'22K',description:'Lex Fridman Podcast — AI, science and deep conversations',tags:['podcast','tech','science'],lang:'en'},
+  // ---------- Cinema ----------
+  {username:'iranfilm',title:'ایران فیلم',members:'15K',description:'یادبود سایت ایران فیلم — رفقای فیلم‌باز',tags:['cinema','movies','persian'],lang:'fa'},
+  {username:'kinopoisk',title:'Кинопоиск',members:'812K',description:'Кино, сериалы, аниме — всё о фильмах',tags:['cinema','movies'],lang:'ru'},
+  {username:'netflix',title:'Netflix',members:'92K',description:'Unofficial Netflix fan club — movies & series',tags:['cinema','movies'],lang:'en'},
+  {username:'movieclips',title:'MOVIE CLIPS',members:'8K',description:'Best movie clips and scenes',tags:['cinema','movies'],lang:'en'},
+  {username:'trailers',title:'MOVIE TRAILERS',members:'6.5K',description:'Latest movie trailers',tags:['cinema','movies'],lang:'en'},
 ];
+
