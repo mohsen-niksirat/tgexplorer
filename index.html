@@ -58,10 +58,6 @@
 .folder-smart{margin-top:18px}.folder-smart .modal-btn{width:100%;background:var(--accent-light);color:var(--accent);border:1px dashed var(--accent)}
 </style>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <!-- Cloudflare Web Analytics (optional): set your site token below to enable.
-         Create one at dashboard.Cloudflare.com > Analytics > Web Analytics > Add
-         a site. Without a token the script is inert. -->
-    <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "REPLACE_WITH_CLOUDFLARE_SITE_TOKEN"}'"></script>
 </head>
 <body>
 
@@ -1850,5 +1846,8 @@ function renderSkeletons(count){return`<div class="results-grid">${Array(count).
 function renderEmpty(title,desc){return`<div class="empty-state"><div class="empty-icon">${title===t('no_favorites')?'❤️':'🔍'}</div><h3>${escHtml(title)}</h3><p>${escHtml(desc||'')}</p></div>`}
 </script>
 <button id="scrollTopBtn" class="scroll-top" onclick="scrollToTop()" title="بالا">↑</button>
+<!-- Cloudflare Web Analytics -->
+<script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "ed5603fcf9b64b4abe5e3ac1c82c0069"}'></script>
+<!-- End Cloudflare Web Analytics -->
 </body>
 </html>
