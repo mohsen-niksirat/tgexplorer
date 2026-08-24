@@ -147,6 +147,7 @@
       <button class="modal-close" onclick="closeSettings()">✕</button>
     </div>
     <div class="modal-body">
+      <a class="modal-btn modal-btn-primary" style="text-decoration:none;display:flex;justify-content:center;margin-bottom:20px" href="https://t.me/telgexplorerbot" target="_blank" rel="noopener"><span>🚀</span> <span data-i18n="open_telegram">Open in Telegram</span></a>
       <div style="margin-bottom:20px"><label style="font-size:14px;font-weight:600;display:block;margin-bottom:8px" data-i18n="worker_url_label">Worker Proxy URL</label><div class="connect-input-row"><input class="connect-input" id="settingsWorkerUrl" type="url" placeholder="https://xxx.workers.dev" autocomplete="off" spellcheck="false"></div></div>
       <div class="modal-actions"><button class="modal-btn modal-btn-primary" onclick="saveSettings()"><span>💾</span> <span data-i18n="save_settings">Save</span></button><button class="modal-btn modal-btn-secondary" onclick="testFromSettings()"><span>🔌</span> <span data-i18n="test_connection">Test</span></button></div>
       <div class="test-result" id="settingsTestResult"></div>
