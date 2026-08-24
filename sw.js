@@ -3,7 +3,7 @@
 // Handles caching for offline support and PWA
 // ============================================================
 
-const CACHE_NAME = 'tgexplorer-202608241925';
+const CACHE_NAME = 'tgexplorer-202608242054';
 const STATIC_ASSETS = [
   './',
   './index.html',
@@ -39,6 +39,22 @@ self.addEventListener('fetch', event => {
   // API requests: network only (don't cache)
   if (url.pathname.includes('/api/')) {
     event.respondWith(fetch(event.request));
+    return;
+  }
+
+  // HTML (index.html) and manifest: network first so app updates (new
+  // features) show up on refresh — no stale cached copy. Fall back to cache
+  // only when offline.
+  if (url.pathname.endsWith('/index.html') || url.pathname.endsWith('/manifest.json')) {
+    event.respondWith(
+      fetch(event.request).then(response => {
+        if (response.ok) {
+          const clone = response.clone();
+          caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
+        }
+        return response;
+      }).catch(() => caches.match(event.request))
+    );
     return;
   }
 
