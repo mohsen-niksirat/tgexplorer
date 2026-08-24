@@ -2,6 +2,8 @@
 
 Search and discover public Telegram channels and groups — like Instagram Explore, but for Telegram.
 
+[![Crawl Channel Posts](https://github.com/mohsen-niksirat/tgexplorer/actions/workflows/crawl.yml/badge.svg)](https://github.com/mohsen-niksirat/tgexplorer/actions/workflows/crawl.yml)
+
 ## ✨ Features
 
 - 🔍 **Smart Search** — fuzzy matching (typo-tolerant) + Persian/English language filter
@@ -120,15 +122,22 @@ Checks every channel in `channels.js` live against `t.me/s/<username>`:
 
 To add channels: add an entry to `channels.js` and re-run the script.
 
-## 🤖 Automated daily crawl
+## 🤖 Automated crawl (every 3 hours)
 
 A GitHub Actions workflow (`.github/workflows/crawl.yml`) runs `node crawl_posts.js`
-**every night at 02:15 UTC** and, if the posts changed, commits and pushes the new
-`posts.js` automatically. You can also trigger it manually from the **Actions** tab.
+**every 3 hours** (at :17 — 00:17, 03:17, 06:17, 09:17, 12:17, 15:17, 18:17, 21:17 UTC)
+and, if the posts changed, commits and pushes the new `posts.js` automatically.
+
+Each crawl with new data also **bumps the service worker cache version** in
+`sw.js` to a unique per-run value, so every client immediately picks up the fresh
+posts (old caches are cleaned on SW activate). `posts.js` / `channels.js` are
+served **network-first**, so fresh data shows up even without waiting for a cache
+refresh. You can also trigger the workflow manually from the **Actions** tab.
 
 Safety: if fewer than 10 channels are reachable (e.g. t.me blocking the runner),
 the crawler exits with an error and **keeps the existing `posts.js`** instead of
-wiping it. Run it locally anytime with `node crawl_posts.js`.
+wiping it. When no data changed, no commit is made. Run it locally anytime with
+`node crawl_posts.js`.
 
 ## 📁 Project Structure
 
