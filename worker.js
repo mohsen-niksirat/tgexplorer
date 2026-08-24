@@ -26,6 +26,15 @@ function cacheSet(k, d) { if (CACHE.size > 500) CACHE.delete(CACHE.keys().next()
 // Uses Telegram's CDN to get avatars via public web endpoints
 // ============================================================
 
+function generateAvatar(username) {
+  const colors = ['#0088cc', '#e91e63', '#9c27b0', '#ff9800', '#4caf50', '#00bcd4', '#795548', '#607d8b', '#f44336', '#3f51b5'];
+  const u = username || '?';
+  const initial = u[0].toUpperCase();
+  const color = colors[u.charCodeAt(0) % colors.length];
+  const svg = '<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect width="100" height="100" rx="20" fill="' + color + '"/><text x="50" y="66" font-size="44" font-family="Arial, sans-serif" font-weight="bold" fill="#ffffff" text-anchor="middle">' + initial + '</text></svg>';
+  return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+}
+
 async function getChannelAvatar(username) {
   // Try to get avatar from t.me profile page
   const cacheKey = `avatar:${username}`;
@@ -51,7 +60,7 @@ async function getChannelAvatar(username) {
       }
     }
   } catch {}
-  return null;
+  return generateAvatar(username);
 }
 // ============================================================
 // MAIN HANDLER
