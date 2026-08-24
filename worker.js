@@ -259,7 +259,8 @@ async function handleRelated(username) {
   const seen = new Set([u.toLowerCase()]);
 
   for (const tag of tags.slice(0, 3)) {
-    const results = await searchGoogle(`site:t.me ${tag} channel`, 'en');
+    let results = await searchGoogle(`site:t.me ${tag} channel`, 'en');
+    if (!results.length) results = (getTrendingChannels(tag) || []).map(c => ({ ...c, source: 'curated' }));
     for (const r of results) {
       if (!seen.has(r.username.toLowerCase()) && seen.size < 12) {
         seen.add(r.username.toLowerCase());
@@ -478,78 +479,58 @@ function parseChannelPage(html, username) {
 
 function parsePosts(html, username) {
   const posts = [];
-  const r = /class="tgme_widget_message_wrap[^"]*"[^>]*data-post="([^"]+)"[\s\S]*?tgme_widget_message_text[^>]*>([\s\S]*?)<\/div>/gi;
-  let m;
-  while ((m = r.exec(html)) !== null) {
-    const text = m[2].replace(/<[^>]+>/g, '').trim();
-    if (text) posts.push({ id: m[1], text: decodeEntities(text.substring(0, 300)), link: `https://t.me/${username}/${m[1].split('/').pop()}` });
+  const blockRe = /class="tgme_widget_message_wrap[^"]*"[\s\S]*?(?=class="tgme_widget_message_wrap|$)/gi;
+  let mb;
+  while ((mb = blockRe.exec(html)) !== null) {
+    const block = mb[0];
+    const idm = block.match(/class="tgme_widget_message[^"]*"[^>]*data-post="([^"]+)"/);
+    if (!idm) continue;
+    const id = idm[1];
+    const tm = block.match(/class="tgme_widget_message_text[^>]*>([\s\S]*?)<\/div>/);
+    const text = tm ? tm[1].replace(/<[^>]+>/g, '').trim() : '';
+    const im = block.match(/background-image:\s*url\(['"]?(https?:\/\/[^'") \s]+)['"]?\)/);
+    const vm = block.match(/<video[^>]*src="([^"]+)"/);
+    const post = { id, link: `https://t.me/${username}/${id.split('/').pop()}` };
+    if (text) post.text = decodeEntities(text.substring(0, 300));
+    if (vm) { post.video = vm[1]; post.hasVideo = true; }
+    if (im) post.image = im[1];
+    if (text || im || vm) posts.push(post);
   }
-  const ir = /background-image:\s*url\(['"]?(https?:\/\/[^'")\s]+)['"]?\)/gi;
-  const imgs = [];
-  while ((m = ir.exec(html)) !== null) imgs.push(m[1]);
-  posts.forEach((p, i) => { if (imgs[i]) p.image = imgs[i]; });
-
-  // Detect videos
-  const vr = /class="tgme_widget_message_video_wrap[\s\S]*?<video[^>]*src="([^"]+)"/gi;
-  const videos = [];
-  while ((m = vr.exec(html)) !== null) videos.push(m[1]);
-  posts.forEach((p, i) => { if (videos[i]) { p.video = videos[i]; p.hasVideo = true; } });
-
-  // Also detect video thumbnails
-  const vtr = /class="tgme_widget_message_video_thumb[\s\S]*?background-image:\s*url\(['"]?(https?:\/\/[^'")\s]+)['"]?\)/gi;
-  while ((m = vtr.exec(html)) !== null) {
-    // Find the post this belongs to
-    const before = html.substring(0, m.index);
-    const postMatch = before.match(/data-post="([^"]+)"[\s\S]*?$/);
-    if (postMatch) {
-      const postId = postMatch[1];
-      const post = posts.find(p => p.id === postId);
-      if (post && !post.image) {
-        post.image = m[1];
-        post.hasVideo = true;
-      }
-    }
-  }
-
-  // Detect round video (video messages)
-  const rvr = /class="tgme_widget_message_roundvideo_wrap[\s\S]*?<video[^>]*src="([^"]+)"/gi;
-  while ((m = rvr.exec(html)) !== null) {
-    const before = html.substring(0, m.index);
-    const postMatch = before.match(/data-post="([^"]+)"[\s\S]*?$/);
-    if (postMatch) {
-      const postId = postMatch[1];
-      const post = posts.find(p => p.id === postId);
-      if (post) { post.video = m[1]; post.hasVideo = true; post.isRound = true; }
-    }
-  }
-
   return posts;
 }
 
-// ============================================================
+
 // GOOGLE SEARCH
 // ============================================================
 async function searchGoogle(query, lang) {
-  try {
-    const resp = await fetch(`https://www.google.com/search?q=${encodeURIComponent(query)}&num=20&hl=${lang}`, {
-      headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36' }
-    });
-    const html = await resp.text();
-    const results = [], seen = new Set();
-    const re = /https?:\/\/t\.me\/([a-zA-Z0-9_]+)/g;
-    let m;
-    while ((m = re.exec(html)) !== null) {
-      const u = m[1];
-      if (!seen.has(u) && !['s', 'share', 'addstickers', 'joinchat'].includes(u)) {
-        seen.add(u);
-        results.push({ username: u, title: u, link: `https://t.me/${u}`, source: 'google' });
+  const sources = [
+    { name: 'google', url: `https://www.google.com/search?q=${encodeURIComponent(query)}&num=20&hl=${lang}` },
+    { name: 'ddg', url: `https://html.duckduckgo.com/html/?q=${encodeURIComponent(query)}` },
+    { name: 'bing', url: `https://www.bing.com/search?q=${encodeURIComponent(query)}&setlang=${lang || 'en'}` },
+  ];
+  for (const s of sources) {
+    try {
+      const resp = await fetch(s.url, {
+        headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36', 'Accept': 'text/html', 'Accept-Language': 'en-US,en;q=0.9,fa;q=0.8' }
+      });
+      const html = await resp.text();
+      const results = [], seen = new Set();
+      const re = /https?:\/\/t\.me\/([a-zA-Z0-9_]+)/g;
+      let m;
+      while ((m = re.exec(html)) !== null) {
+        const u = m[1];
+        if (!seen.has(u) && !['s', 'share', 'addstickers', 'joinchat'].includes(u)) {
+          seen.add(u);
+          results.push({ username: u, title: u, link: `https://t.me/${u}`, source: s.name });
+        }
       }
-    }
-    return results;
-  } catch { return []; }
+      if (results.length) return results;
+    } catch {}
+  }
+  return [];
 }
 
-// ============================================================
+
 // CURATED CHANNELS
 // ============================================================
 function getTrendingChannels(cat){const a={tech:[{username:'digiato',title:'دیجیاتو',members:'500K'},{username:'technolife',title:'تکنولایف',members:'350K'},{username:'github',title:'GitHub Community',members:'1M'},{username:'javascript',title:'JavaScript',members:'600K'},{username:'google',title:'Google',members:'1.2M'},{username:'microsoft',title:'Microsoft',members:'900K'},{username:'technews',title:'Tech News',members:'300K'},{username:'spacex',title:'SpaceX',members:'1.2M'}],news:[{username:'bbcpersian',title:'BBC Persian',members:'1.6M'},{username:'radiofarda',title:'رادیو فردا',members:'1.1M'},{username:'khamenei_ir',title:'دفتر حفظ و نشر آثار رهبری',members:'1.6M'},{username:'tabnak',title:'تابناک',members:'900K'},{username:'khabaronline',title:'خبر آنلاین',members:'800K'},{username:'manototv',title:'تلویزیون منوتو',members:'800K'},{username:'nytimes',title:'The New York Times',members:'1.4M'},{username:'guardian',title:'The Guardian',members:'1M'},{username:'skynews',title:'Sky News',members:'1M'},{username:'france24',title:'FRANCE 24',members:'900K'},{username:'aljazeera',title:'AL JAZEERA',members:'1.2M'},{username:'reddit',title:'Reddit',members:'1.5M'}],crypto:[{username:'arzdigital',title:'ارزدیجیتال',members:'400K'},{username:'crypto',title:'Crypto',members:'500K'},{username:'bitcoin',title:'Bitcoin',members:'700K'},{username:'cointelegraph',title:'Cointelegraph',members:'600K'},{username:'altcoin',title:'Altcoins Channel',members:'400K'},{username:'blockchain',title:'Blockchain.com',members:'450K'}],entertainment:[{username:'filimo',title:'کانال رسمی فیلیمو',members:'600K'},{username:'telewebion',title:'تلوبیون',members:'400K'},{username:'netflix',title:'Netflix',members:'2M'},{username:'series',title:'Movies & Series',members:'900K'},{username:'primevideo',title:'Prime Video',members:'800K'}],science:[{username:'science',title:'Science',members:'700K'},{username:'nature',title:'Nature',members:'400K'},{username:'astronomy',title:'Astronomy',members:'300K'},{username:'physics',title:'Physics',members:'250K'},{username:'biology',title:'Biology',members:'250K'},{username:'chemistry',title:'Chemistry',members:'200K'}],gaming:[{username:'nintendo',title:'Nintendo',members:'800K'},{username:'fortnite',title:'Fortnite',members:'500K'}],music:[{username:'radiojavan',title:'Radio Javan',members:'800K'},{username:'spotify',title:'Spotify',members:'1.5M'},{username:'billboard',title:'Billboard',members:'700K'}],art:[{username:'dribbble',title:'Dribbble',members:'400K'},{username:'design',title:'Design',members:'500K'},{username:'digitalart',title:'NFT DigitalArt',members:'350K'},{username:'unsplash',title:'Unsplash',members:'400K'},{username:'photography',title:'Photography',members:'700K'}],sports:[{username:'varzesh3',title:'ورزش سه',members:'1.2M'},{username:'football360',title:'فوتبال ۳۶۰',members:'600K'},{username:'chelseafc',title:'Chelsea FC',members:'600K'},{username:'skysports',title:'Sky Sports',members:'1.2M'},{username:'ufc',title:'UFC',members:'800K'}],education:[{username:'duolingo',title:'Duolingo',members:'700K'},{username:'bbclearningenglish',title:'BBC Learning English',members:'600K'},{username:'englishgrammar',title:'Advanced Grammar',members:'300K'},{username:'vocabulary',title:'Vocabulary',members:'400K'}],meme:[{username:'memes',title:'Memes',members:'1M'}],food:[{username:'baking',title:'Baking',members:'300K'},{username:'foodporn',title:'FoodPorn',members:'500K'}],travel:[{username:'natgeotravel',title:'Nat Geo Travel',members:'800K'},{username:'travel',title:'Travel',members:'500K'}],};return cat==='all'?Object.values(a).flat():(a[cat]||[])}
