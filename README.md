@@ -13,7 +13,43 @@ Search and discover public Telegram channels and groups — like Instagram Explo
 - 📄 **Works out of the box** — no worker required (local mode is the default)
 - 🧪 **`verify_channels.js`** — re-validate every channel in the database against t.me
 
+## 🚀 Deploy your own Worker (optional)
+
+Live search, live trending and notifications use a Cloudflare Worker proxy. Everything else (Explore, Home feed, folders, favorites, folder sharing, the local 61-channel search) works **without any worker**.
+
+### One-click deploy
+[![Deploy to Cloudflare Workers](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/mohsen-niksirat/tgexplorer)
+
+This repo ships a ready-made [`worker.js`](worker.js) + [`wrangler.toml`](wrangler.toml). After deploying, copy your `https://xxx.workers.dev` URL and paste it in the app: **⚙️ Settings → Worker Proxy URL → Save**.
+
+### Manual deploy
+1. Go to [Cloudflare](https://dash.cloudflare.com) → **Workers & Pages** → **Create Worker**.
+2. Delete the default code and paste the whole [`worker.js`](worker.js).
+3. Replace `API_ID` / `API_HASH` with your own credentials from [my.telegram.org](https://my.telegram.org) *(optional — the worker also works without them for public channels)*.
+4. Click **Save and Deploy**, copy your worker URL and paste it in the app settings.
+
+### Worker endpoints
+- `GET /api/ping` — health check
+- `GET /api/search?q=...&lang=...` — live Telegram search
+- `GET /api/posts/<username>?page=N` — paginated channel posts
+- `GET /api/trending?cat=...&page=1&lang=...` — trending channels
+- `GET /api/notifications?channels=a,b&since=...` — new-post updates
+- `GET /api/explore-feed?cat=...&page=1&limit=30` — merged image feed
+- `GET /api/channel/<username>` · `/api/stats/<username>` · `/api/related/<username>` · `/api/avatar/<username>`
+
 ## 📦 Changelog
+
+### v1.2.0
+
+- 🏠 **Home feed** — all your favorite channels' posts merged into one infinite Instagram-style feed (newest first)
+- 🌐 **Live search indicator** — the search bar shows 🌐 Live (worker) vs 📦 Local results
+- 🔔 **Browser push notifications** — opt-in in Settings; get a notification when a favorite channel posts something new
+- 🗂 **"Add to folder" button** in the channel modal (posts already had it)
+- 📥 **Export / 📤 Import** — full backup of favorites, saved posts and folders as a JSON file
+- 🌍 **Explore language filter** — Persian/English filter persisted between sessions (also applied to worker trending)
+- 💡 **Suggest a channel** — community-driven form in Settings that pre-fills a GitHub issue
+- 🕒 **Shared folder live posts** — opening a shared folder link now fetches the latest post of each channel live from t.me
+- ☁️ **One-click Worker deploy** — `wrangler.toml` + deploy button (see below)
 
 ### v1.1.0
 
