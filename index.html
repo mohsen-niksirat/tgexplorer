@@ -348,13 +348,13 @@ fr:{app_name:'Telegram Explorer',hero_title:'Explorez les chaînes Telegram',her
    Keys used by newer UI (type chips, sorting, tabs, toasts, folder UI).
    t() reads these after I18N so existing keys win. */
 const I18N_UI={
-en:{all:'All',clip:'🎬 Clips',image:'🖼 Photos',text:'📝 Text',newest:'🕐 Newest',oldest:'🕐 Oldest',by_name:'📛 Name (A-Z)',by_name_desc:'📛 Name (Z-A)',by_posts:'📊 Post count',by_channel:'📛 Channel',by_type:'🎬 Post type',sort:'🔀 Sort',channels:'Channels',posts:'Posts',folders:'Folders',none_folder:'You haven\'t created any folders yet — create one below',created:'📁 Folder created',deleted:'🗑 Folder deleted',removed_from:'🗑 Removed from',renamed:'✏️ Folder renamed',post_saved:'❤️ Post saved',post_removed:'💔 Removed from saved',open_in_tg:'Open in Telegram',share:'Share',folder_btn:'🗂 Folder',watch_post:'View post',save_folder:'🗂 Save to folder',no:'No',yes:'Yes',chan_for:'channel',post_for:'post',instant_search:'🔍 Instant list search...',no_match:'🔍 No channels match this search',loading_post:'⏳ Loading posts...',loading_older:'⏳ Loading older posts...',end_posts:'— End of posts —',no_posts:'No posts available',member_since:'👥',view_channel:'View channel',fold_empty:'Still no folders here',newest_sh:'🕐 Newest',oldest_sh:'🕐 Oldest',by_name_sh:'📛 Name (A-Z)',by_name_desc_sh:'📛 Name (Z-A)',copy_text:'Copy text',copy_link:'Copy link'},
-fa:{all:'همه',clip:'🎬 کلیپ',image:'🖼 عکس',text:'📝 متن',newest:'🕐 جدیدترین',oldest:'🕐 قدیمی‌ترین',by_name:'📛 نام (الف تا ی)',by_name_desc:'📛 نام (ی تا الف)',by_posts:'📊 تعداد پست',by_channel:'📛 نام کانال',by_type:'🎬 نوع پست',sort:'🔀 مرتب‌سازی',channels:'کانال‌ها',posts:'پست‌ها',folders:'فولدرها',none_folder:'هنوز فولدری نساخته‌اید — از پایین بسازید',created:'📁 فولدر ساخته شد',deleted:'🗑 فولدر حذف شد',removed_from:'🗑 از',post_saved:'❤️ پست ذخیره شد',post_removed:'💔 از ذخیره‌ها حذف شد',open_in_tg:'باز کردن در تلگرام',share:'اشتراک‌گذاری',folder_btn:'🗂 فولدر',watch_post:'مشاهده پست',save_folder:'🗂 افزودن به فولدر',no:'خیر',yes:'بله',chan_for:'کانال',post_for:'پست',instant_search:'🔍 جستجوی فوری در لیست...',no_match:'"+t(no_match)+"',loading_post:'⏳ در حال دریافت پست‌ها...',loading_older:'⏳ در حال دریافت پست‌های قدیمی‌تر...',end_posts:'— پایان پست‌ها —',no_posts:'پستی در دسترس نیست',member_since:'👥',view_channel:'مشاهده کانال',fold_empty:'هنوز فولدری اینجا نیست',newest_sh:'🕐 جدیدترین',oldest_sh:'🕐 قدیمی‌ترین',by_name_sh:'📛 نام (الف تا ی)',by_name_desc_sh:'📛 نام (ی تا الف)',copy_text:'کپی متن',copy_link:'کپی لینک'},
-ar:{all:'الكل',clip:'🎬 مقاطع',image:'🖼 صور',text:'📝 نصوص',newest:'🕐 الأحدث',oldest:'🕐 الأقدم',by_name:'📛 الاسم (أ-ي)',by_name_desc:'📛 الاسم (ي-أ)',by_posts:'📊 عدد المنشورات',by_channel:'📛 اسم القناة',by_type:'🎬 نوع المنشور',sort:'🔀 ترتيب',channels:'القنوات',posts:'المنشورات',folders:'المجلدات',none_folder:'لم تنشئ مجلدات بعد — أنشئ واحداً أدناه',created:'📁 تم إنشاء المجلد',deleted:'🗑 تم حذف المجلد',removed_from:'🗑 من',post_saved:'❤️ تم حفظ المنشور',post_removed:'💔 أُزيل من المحفوظات',open_in_tg:'فتح في تيليجرام',share:'📤 مشاركة',folder_btn:'🗂 مجلد',watch_post:'🔗 عرض المنشور',save_folder:'🗂 حفظ في مجلد',no:'لا',yes:'نعم',chan_for:'قناة',post_for:'منشور',instant_search:'🔍 بحث فوري في القائمة...',no_match:'🔍 لا توجد قنوات تطابق البحث',loading_post:'⏳ جارٍ التحميل...',loading_older:'⏳ جارٍ تحميل المنشورات الأقدم...',end_posts:'— نهاية المنشورات —',no_posts:'لا توجد منشورات',member_since:'👥',view_channel:'عرض القناة',fold_empty:'لا مجلدات هنا بعد',newest_sh:'🕐 الأحدث',oldest_sh:'🕐 الأقدم',by_name_sh:'📛 الاسم (أ-ي)',by_name_desc_sh:'📛 الاسم (ي-أ)',copy_text:'📋 نسخ النص',copy_link:'🔗 نسخ الرابط'},
-zh:{all:'全部',clip:'🎬 视频',image:'🖼 图片',text:'📝 文本',newest:'🕐 最新',oldest:'🕐 最旧',by_name:'📛 名称（A-Z）',by_name_desc:'📛 名称（Z-A）',by_posts:'📊 帖子数',by_channel:'📛 频道',by_type:'🎬 帖子类型',sort:'🔀 排序',channels:'频道',posts:'帖子',folders:'文件夹',none_folder:'您还没有创建文件夹 — 请在下方创建',created:'📁 文件夹已创建',deleted:'🗑 文件夹已删除',removed_from:'🗑 已从',post_saved:'❤️ 帖子已保存',post_removed:'💔 已从收藏中移除',open_in_tg:'在 Telegram 中打开',share:'📤 分享',folder_btn:'🗂 文件夹',watch_post:'🔗 查看帖子',save_folder:'🗂 保存到文件夹',no:'否',yes:'是',chan_for:'频道',post_for:'帖子',instant_search:'🔍 即时搜索列表...',no_match:'🔍 没有匹配的频道',loading_post:'⏳ 正在加载...',loading_older:'⏳ 正在加载更早的帖子...',end_posts:'— 帖子结束 —',no_posts:'没有可用帖子',member_since:'👥',view_channel:'查看频道',fold_empty:'这里还没有文件夹',newest_sh:'🕐 最新',oldest_sh:'🕐 最旧',by_name_sh:'📛 名称（A-Z）',by_name_desc_sh:'📛 名称（Z-A）',copy_text:'📋 复制文本',copy_link:'🔗 复制链接'},
-ru:{all:'Все',clip:'🎬 Клипы',image:'🖼 Фото',text:'📝 Текст',newest:'🕐 Новые',oldest:'🕐 Старые',by_name:'📛 Имя (А-Я)',by_name_desc:'📛 Имя (Я-А)',by_posts:'📊 Число постов',by_channel:'📛 Канал',by_type:'🎬 Тип поста',sort:'🔀 Сортировка',channels:'Каналы',posts:'Посты',folders:'Папки',none_folder:'У вас пока нет папок — создайте одну ниже',created:'📁 Папка создана',deleted:'🗑 Папка удалена',removed_from:'🗑 Удалена из',post_saved:'❤️ Пост сохранён',post_removed:'💔 Удалён из сохранённых',open_in_tg:'Открыть в Telegram',share:'📤 Поделиться',folder_btn:'🗂 Папка',watch_post:'🔗 Смотреть пост',save_folder:'🗂 Сохранить в папку',no:'Нет',yes:'Да',chan_for:'канал',post_for:'пост',instant_search:'🔍 Мгновенный поиск по списку...',no_match:'🔍 Каналы не найдены',loading_post:'⏳ Загрузка...',loading_older:'⏳ Загрузка более старых постов...',end_posts:'— Конец постов —',no_posts:'Нет доступных постов',member_since:'👥',view_channel:'Смотреть канал',fold_empty:'Здесь пока нет папок',newest_sh:'🕐 Новые',oldest_sh:'🕐 Старые',by_name_sh:'📛 Имя (А-Я)',by_name_desc_sh:'📛 Имя (Я-А)',copy_text:'📋 Копировать текст',copy_link:'🔗 Копировать ссылку'},
-es:{all:'Todo',clip:'🎬 Clips',image:'🖼 Fotos',text:'📝 Texto',newest:'🕐 Recientes',oldest:'🕐 Antiguos',by_name:'📛 Nombre (A-Z)',by_name_desc:'📛 Nombre (Z-A)',by_posts:'📊 Nº de publicaciones',by_channel:'📛 Canal',by_type:'🎬 Tipo de publicación',sort:'🔀 Ordenar',channels:'Canales',posts:'Publicaciones',folders:'Carpetas',none_folder:'Aún no has creado carpetas — crea una abajo',created:'📁 Carpeta creada',deleted:'🗑 Carpeta eliminada',removed_from:'🗑 Eliminada de',post_saved:'❤️ Publicación guardada',post_removed:'💔 Eliminada de guardadas',open_in_tg:'Abrir en Telegram',share:'📤 Compartir',folder_btn:'🗂 Carpeta',watch_post:'🔗 Ver publicación',save_folder:'🗂 Guardar en carpeta',no:'No',yes:'Sí',chan_for:'canal',post_for:'publicación',instant_search:'🔍 Búsqueda instantánea...',no_match:'🔍 No se encontraron canales',loading_post:'⏳ Cargando...',loading_older:'⏳ Cargando publicaciones antiguas...',end_posts:'— Fin de las publicaciones —',no_posts:'No hay publicaciones',member_since:'👥',view_channel:'Ver canal',fold_empty:'Aún no hay carpetas',newest_sh:'🕐 Recientes',oldest_sh:'🕐 Antiguos',by_name_sh:'📛 Nombre (A-Z)',by_name_desc_sh:'📛 Nombre (Z-A)',copy_text:'📋 Copiar texto',copy_link:'🔗 Copiar enlace'},
-fr:{all:'Tout',clip:'🎬 Clips',image:'🖼 Photos',text:'📝 Texte',newest:'🕐 Récents',oldest:'🕐 Anciens',by_name:'📛 Nom (A-Z)',by_name_desc:'📛 Nom (Z-A)',by_posts:'📊 Nombre de publications',by_channel:'📛 Chaîne',by_type:'🎬 Type de publication',sort:'🔀 Trier',channels:'Chaînes',posts:'Publications',folders:'Dossiers',none_folder:'Vous n\'avez pas encore créé de dossier — créez-en un ci-dessous',created:'📁 Dossier créé',deleted:'🗑 Dossier supprimé',removed_from:'🗑 Supprimé de',post_saved:'❤️ Publication enregistrée',post_removed:'💔 Supprimée des enregistrées',open_in_tg:'Ouvrir dans Telegram',share:'📤 Partager',folder_btn:'🗂 Dossier',watch_post:'🔗 Voir la publication',save_folder:'🗂 Enregistrer dans un dossier',no:'Non',yes:'Oui',chan_for:'chaîne',post_for:'publication',instant_search:'🔍 Recherche instantanée...',no_match:'🔍 Aucune chaîne trouvée',loading_post:'⏳ Chargement...',loading_older:'⏳ Chargement des publications plus anciennes...',end_posts:'— Fin des publications —',no_posts:'Aucune publication disponible',member_since:'👥',view_channel:'Voir la chaîne',fold_empty:'Pas encore de dossiers',newest_sh:'🕐 Récents',oldest_sh:'🕐 Anciens',by_name_sh:'📛 Nom (A-Z)',by_name_desc_sh:'📛 Nom (Z-A)',copy_text:'📋 Copier le texte',copy_link:'🔗 Copier le lien'}
+en:{all:'All',clip:'🎬 Clips',image:'🖼 Photos',text:'📝 Text',newest:'🕐 Newest',oldest:'🕐 Oldest',by_name:'📛 Name (A-Z)',by_name_desc:'📛 Name (Z-A)',by_posts:'📊 Post count',by_channel:'📛 Channel',by_type:'🎬 Post type',sort:'🔀 Sort',channels:'Channels',posts:'Posts',folders:'Folders',none_folder:'You haven\'t created any folders yet — create one below',created:'📁 Folder created',deleted:'🗑 Folder deleted',removed_from:'🗑 Removed from',renamed:'✏️ Folder renamed',post_saved:'❤️ Post saved',post_removed:'💔 Removed from saved',open_in_tg:'Open in Telegram',share:'Share',folder_btn:'🗂 Folder',watch_post:'View post',save_folder:'🗂 Save to folder',no:'No',yes:'Yes',chan_for:'channel',post_for:'post',instant_search:'🔍 Instant list search...',no_match:'🔍 No channels match this search',loading_post:'⏳ Loading posts...',loading_older:'⏳ Loading older posts...',end_posts:'— End of posts —',no_posts:'No posts available',member_since:'👥',view_channel:'View channel',fold_empty:'Still no folders here',newest_sh:'🕐 Newest',oldest_sh:'🕐 Oldest',by_name_sh:'📛 Name (A-Z)',by_name_desc_sh:'📛 Name (Z-A)',copy_text:'Copy text',copy_link:'Copy link','toast_fav_removed':'Removed from saved posts','toast_post_saved':'Post saved','toast_removed_folder':'Removed from folder','toast_added_to_folder':'Added to folder «{0}»','toast_folder_deleted':'Folder deleted','toast_folder_created':'Folder created','toast_folder_renamed':'Folder renamed','toast_updating':'Updating posts...','toast_save_channels_first':'Save channels first','toast_fetching_latest':'Fetching latest posts...','toast_posts_added':'{0} new posts received','toast_no_posts':'No post received','toast_invalid_username':'Invalid username','toast_not_channel_link':'Not a channel link','toast_already_in_folder':'Already in this folder','toast_ch_added':'Added','toast_last_post':'Latest post of {0} received','toast_link_copied':'Folder link copied!','toast_copy_fail':'Copy failed','toast_folder_saved':'Folder «{0}» saved','toast_folder_invalid':'Invalid folder link','toast_folder_restored':'Folder "{0}" restored','toast_filter_on':'Auto-filter enabled','toast_rule_removed':'Rule removed','toast_ch_added_n':'{0} channels added','toast_added':'Added','toast_smartfolders':'{0} smart folders created','toast_smartfolders_exist':'Smart folders already exist','toast_link_copied_post':'Post link copied','toast_no_text':'No text','toast_text_copied':'Post text copied'},
+fa:{all:'همه',clip:'🎬 کلیپ',image:'🖼 عکس',text:'📝 متن',newest:'🕐 جدیدترین',oldest:'🕐 قدیمی‌ترین',by_name:'📛 نام (الف تا ی)',by_name_desc:'📛 نام (ی تا الف)',by_posts:'📊 تعداد پست',by_channel:'📛 نام کانال',by_type:'🎬 نوع پست',sort:'🔀 مرتب‌سازی',channels:'کانال‌ها',posts:'پست‌ها',folders:'فولدرها',none_folder:'هنوز فولدری نساخته‌اید — از پایین بسازید',created:'📁 فولدر ساخته شد',deleted:'🗑 فولدر حذف شد',removed_from:'🗑 از',post_saved:'❤️ پست ذخیره شد',post_removed:'💔 از ذخیره‌ها حذف شد',open_in_tg:'باز کردن در تلگرام',share:'اشتراک‌گذاری',folder_btn:'🗂 فولدر',watch_post:'مشاهده پست',save_folder:'🗂 افزودن به فولدر',no:'خیر',yes:'بله',chan_for:'کانال',post_for:'پست',instant_search:'🔍 جستجوی فوری در لیست...',no_match:'🔍 هیچ کانالی مطابقت ندارد',loading_post:'⏳ در حال دریافت پست‌ها...',loading_older:'⏳ در حال دریافت پست‌های قدیمی‌تر...',end_posts:'— پایان پست‌ها —',no_posts:'پستی در دسترس نیست',member_since:'👥',view_channel:'مشاهده کانال',fold_empty:'هنوز فولدری اینجا نیست',newest_sh:'🕐 جدیدترین',oldest_sh:'🕐 قدیمی‌ترین',by_name_sh:'📛 نام (الف تا ی)',by_name_desc_sh:'📛 نام (ی تا الف)',copy_text:'کپی متن',copy_link:'کپی لینک','toast_fav_removed':'از ذخیره‌ها حذف شد','toast_post_saved':'پست ذخیره شد','toast_removed_folder':'از فولدر حذف شد','toast_added_to_folder':'به فولدر «{0}» اضافه شد','toast_folder_deleted':'فولدر حذف شد','toast_folder_created':'فولدر ساخته شد','toast_folder_renamed':'نام فولدر تغییر کرد','toast_updating':'در حال به‌روزرسانی پست‌ها...','toast_save_channels_first':'اول کانال‌ها را ذخیره کنید','toast_fetching_latest':'در حال دریافت آخرین پست‌ها...','toast_posts_added':'{0} پست جدید دریافت شد','toast_no_posts':'پستی دریافت نشد','toast_invalid_username':'یوزرنیم نامعتبر است','toast_not_channel_link':'این لینک، لینک کانال نیست','toast_already_in_folder':'این کانال قبلاً در فولدر است','toast_ch_added':'اضافه شد','toast_last_post':'آخرین پست {0} دریافت شد','toast_link_copied':'لینک فولدر کپی شد!','toast_copy_fail':'کپی ناموفق بود','toast_folder_saved':'فولدر «{0}» ذخیره شد','toast_folder_invalid':'لینک فولدر نامعتبر است','toast_folder_restored':'فولدر "{0}" بازیابی شد','toast_filter_on':'فیلتر خودکار فعال شد','toast_rule_removed':'قانون حذف شد','toast_ch_added_n':'{0} کانال اضافه شد','toast_added':'اضافه شد','toast_smartfolders':'{0} فولدر هوشمند ساخته شد','toast_smartfolders_exist':'فولدرهای هوشمند از قبل موجودند','toast_link_copied_post':'لینک پست کپی شد','toast_no_text':'متنی وجود ندارد','toast_text_copied':'متن پست کپی شد'},
+ar:{all:'الكل',clip:'🎬 مقاطع',image:'🖼 صور',text:'📝 نصوص',newest:'🕐 الأحدث',oldest:'🕐 الأقدم',by_name:'📛 الاسم (أ-ي)',by_name_desc:'📛 الاسم (ي-أ)',by_posts:'📊 عدد المنشورات',by_channel:'📛 اسم القناة',by_type:'🎬 نوع المنشور',sort:'🔀 ترتيب',channels:'القنوات',posts:'المنشورات',folders:'المجلدات',none_folder:'لم تنشئ مجلدات بعد — أنشئ واحداً أدناه',created:'📁 تم إنشاء المجلد',deleted:'🗑 تم حذف المجلد',removed_from:'🗑 من',post_saved:'❤️ تم حفظ المنشور',post_removed:'💔 أُزيل من المحفوظات',open_in_tg:'فتح في تيليجرام',share:'📤 مشاركة',folder_btn:'🗂 مجلد',watch_post:'🔗 عرض المنشور',save_folder:'🗂 حفظ في مجلد',no:'لا',yes:'نعم',chan_for:'قناة',post_for:'منشور',instant_search:'🔍 بحث فوري في القائمة...',no_match:'🔍 لا توجد قنوات تطابق البحث',loading_post:'⏳ جارٍ التحميل...',loading_older:'⏳ جارٍ تحميل المنشورات الأقدم...',end_posts:'— نهاية المنشورات —',no_posts:'لا توجد منشورات',member_since:'👥',view_channel:'عرض القناة',fold_empty:'لا مجلدات هنا بعد',newest_sh:'🕐 الأحدث',oldest_sh:'🕐 الأقدم',by_name_sh:'📛 الاسم (أ-ي)',by_name_desc_sh:'📛 الاسم (ي-أ)',copy_text:'📋 نسخ النص',copy_link:'🔗 نسخ الرابط','toast_fav_removed':'أُزيل من المحفوظات','toast_post_saved':'تم حفظ المنشور','toast_removed_folder':'أُزيل من المجلد','toast_added_to_folder':'أُضيف إلى المجلد «{0}»','toast_folder_deleted':'تم حذف المجلد','toast_folder_created':'تم إنشاء المجلد','toast_folder_renamed':'تم تغيير اسم المجلد','toast_updating':'جارٍ تحديث المنشورات...','toast_save_channels_first':'احفظ القنوات أولاً','toast_fetching_latest':'جارٍ جلب أحدث المنشورات...','toast_posts_added':'تم استلام {0} منشورات جديدة','toast_no_posts':'لم يتم استلام منشور','toast_invalid_username':'اسم مستخدم غير صالح','toast_not_channel_link':'هذا ليس رابط قناة','toast_already_in_folder':'هذه القناة موجودة في المجلد','toast_ch_added':'تمت الإضافة','toast_last_post':'تم استلام آخر منشور {0}','toast_link_copied':'تم نسخ رابط المجلد!','toast_copy_fail':'فشل النسخ','toast_folder_saved':'تم حفظ المجلد «{0}»','toast_folder_invalid':'رابط المجلد غير صالح','toast_folder_restored':'تمت استعادة المجلد "{0}"','toast_filter_on':'تم تفعيل التصفية التلقائية','toast_rule_removed':'تم حذف القاعدة','toast_ch_added_n':'تمت إضافة {0} قنوات','toast_added':'تمت الإضافة','toast_smartfolders':'تم إنشاء {0} مجلدات ذكية','toast_smartfolders_exist':'المجلدات الذكية موجودة مسبقاً','toast_link_copied_post':'تم نسخ رابط المنشور','toast_no_text':'لا يوجد نص','toast_text_copied':'تم نسخ نص المنشور'},
+zh:{all:'全部',clip:'🎬 视频',image:'🖼 图片',text:'📝 文本',newest:'🕐 最新',oldest:'🕐 最旧',by_name:'📛 名称（A-Z）',by_name_desc:'📛 名称（Z-A）',by_posts:'📊 帖子数',by_channel:'📛 频道',by_type:'🎬 帖子类型',sort:'🔀 排序',channels:'频道',posts:'帖子',folders:'文件夹',none_folder:'您还没有创建文件夹 — 请在下方创建',created:'📁 文件夹已创建',deleted:'🗑 文件夹已删除',removed_from:'🗑 已从',post_saved:'❤️ 帖子已保存',post_removed:'💔 已从收藏中移除',open_in_tg:'在 Telegram 中打开',share:'📤 分享',folder_btn:'🗂 文件夹',watch_post:'🔗 查看帖子',save_folder:'🗂 保存到文件夹',no:'否',yes:'是',chan_for:'频道',post_for:'帖子',instant_search:'🔍 即时搜索列表...',no_match:'🔍 没有匹配的频道',loading_post:'⏳ 正在加载...',loading_older:'⏳ 正在加载更早的帖子...',end_posts:'— 帖子结束 —',no_posts:'没有可用帖子',member_since:'👥',view_channel:'查看频道',fold_empty:'这里还没有文件夹',newest_sh:'🕐 最新',oldest_sh:'🕐 最旧',by_name_sh:'📛 名称（A-Z）',by_name_desc_sh:'📛 名称（Z-A）',copy_text:'📋 复制文本',copy_link:'🔗 复制链接','toast_fav_removed':'已从收藏中移除','toast_post_saved':'帖子已保存','toast_removed_folder':'已从文件夹移除','toast_added_to_folder':'已添加到文件夹《{0}》','toast_folder_deleted':'文件夹已删除','toast_folder_created':'已创建文件夹','toast_folder_renamed':'文件夹已重命名','toast_updating':'正在更新帖子...','toast_save_channels_first':'请先收藏频道','toast_fetching_latest':'正在获取最新帖子...','toast_posts_added':'收到 {0} 个新帖子','toast_no_posts':'未收到帖子','toast_invalid_username':'用户名无效','toast_not_channel_link':'此链接不是频道链接','toast_already_in_folder':'该频道已在文件夹中','toast_ch_added':'已添加','toast_last_post':'已收到 {0} 的最新帖子','toast_link_copied':'文件夹链接已复制！','toast_copy_fail':'复制失败','toast_folder_saved':'文件夹《{0}》已保存','toast_folder_invalid':'无效的文件夹链接','toast_folder_restored':'已恢复文件夹"{0}"','toast_filter_on':'已启用自动筛选','toast_rule_removed':'规则已删除','toast_ch_added_n':'已添加 {0} 个频道','toast_added':'已添加','toast_smartfolders':'已创建 {0} 个智能文件夹','toast_smartfolders_exist':'智能文件夹已存在','toast_link_copied_post':'帖子链接已复制','toast_no_text':'无文本','toast_text_copied':'帖子文本已复制'},
+ru:{all:'Все',clip:'🎬 Клипы',image:'🖼 Фото',text:'📝 Текст',newest:'🕐 Новые',oldest:'🕐 Старые',by_name:'📛 Имя (А-Я)',by_name_desc:'📛 Имя (Я-А)',by_posts:'📊 Число постов',by_channel:'📛 Канал',by_type:'🎬 Тип поста',sort:'🔀 Сортировка',channels:'Каналы',posts:'Посты',folders:'Папки',none_folder:'У вас пока нет папок — создайте одну ниже',created:'📁 Папка создана',deleted:'🗑 Папка удалена',removed_from:'🗑 Удалена из',post_saved:'❤️ Пост сохранён',post_removed:'💔 Удалён из сохранённых',open_in_tg:'Открыть в Telegram',share:'📤 Поделиться',folder_btn:'🗂 Папка',watch_post:'🔗 Смотреть пост',save_folder:'🗂 Сохранить в папку',no:'Нет',yes:'Да',chan_for:'канал',post_for:'пост',instant_search:'🔍 Мгновенный поиск по списку...',no_match:'🔍 Каналы не найдены',loading_post:'⏳ Загрузка...',loading_older:'⏳ Загрузка более старых постов...',end_posts:'— Конец постов —',no_posts:'Нет доступных постов',member_since:'👥',view_channel:'Смотреть канал',fold_empty:'Здесь пока нет папок',newest_sh:'🕐 Новые',oldest_sh:'🕐 Старые',by_name_sh:'📛 Имя (А-Я)',by_name_desc_sh:'📛 Имя (Я-А)',copy_text:'📋 Копировать текст',copy_link:'🔗 Копировать ссылку','toast_fav_removed':'Удалено из сохранённых','toast_post_saved':'Пост сохранён','toast_removed_folder':'Удалено из папки','toast_added_to_folder':'Добавлено в папку «{0}»','toast_folder_deleted':'Папка удалена','toast_folder_created':'Папка создана','toast_folder_renamed':'Папка переименована','toast_updating':'Обновление постов...','toast_save_channels_first':'Сначала сохраните каналы','toast_fetching_latest':'Загрузка последних постов...','toast_posts_added':'Получено {0} новых постов','toast_no_posts':'Пост не получен','toast_invalid_username':'Неверное имя пользователя','toast_not_channel_link':'Это не ссылка на канал','toast_already_in_folder':'Этот канал уже в папке','toast_ch_added':'Добавлено','toast_last_post':'Получен последний пост {0}','toast_link_copied':'Ссылка на папку скопирована!','toast_copy_fail':'Не удалось скопировать','toast_folder_saved':'Папка «{0}» сохранена','toast_folder_invalid':'Неверная ссылка на папку','toast_folder_restored':'Папка "{0}" восстановлена','toast_filter_on':'Автофильтр включён','toast_rule_removed':'Правило удалено','toast_ch_added_n':'Добавлено {0} каналов','toast_added':'Добавлено','toast_smartfolders':'Создано {0} умных папок','toast_smartfolders_exist':'Умные папки уже есть','toast_link_copied_post':'Ссылка на пост скопирована','toast_no_text':'Нет текста','toast_text_copied':'Текст поста скопирован'},
+es:{all:'Todo',clip:'🎬 Clips',image:'🖼 Fotos',text:'📝 Texto',newest:'🕐 Recientes',oldest:'🕐 Antiguos',by_name:'📛 Nombre (A-Z)',by_name_desc:'📛 Nombre (Z-A)',by_posts:'📊 Nº de publicaciones',by_channel:'📛 Canal',by_type:'🎬 Tipo de publicación',sort:'🔀 Ordenar',channels:'Canales',posts:'Publicaciones',folders:'Carpetas',none_folder:'Aún no has creado carpetas — crea una abajo',created:'📁 Carpeta creada',deleted:'🗑 Carpeta eliminada',removed_from:'🗑 Eliminada de',post_saved:'❤️ Publicación guardada',post_removed:'💔 Eliminada de guardadas',open_in_tg:'Abrir en Telegram',share:'📤 Compartir',folder_btn:'🗂 Carpeta',watch_post:'🔗 Ver publicación',save_folder:'🗂 Guardar en carpeta',no:'No',yes:'Sí',chan_for:'canal',post_for:'publicación',instant_search:'🔍 Búsqueda instantánea...',no_match:'🔍 No se encontraron canales',loading_post:'⏳ Cargando...',loading_older:'⏳ Cargando publicaciones antiguas...',end_posts:'— Fin de las publicaciones —',no_posts:'No hay publicaciones',member_since:'👥',view_channel:'Ver canal',fold_empty:'Aún no hay carpetas',newest_sh:'🕐 Recientes',oldest_sh:'🕐 Antiguos',by_name_sh:'📛 Nombre (A-Z)',by_name_desc_sh:'📛 Nombre (Z-A)',copy_text:'📋 Copiar texto',copy_link:'🔗 Copiar enlace','toast_fav_removed':'Eliminada de guardados','toast_post_saved':'Publicacion guardada','toast_removed_folder':'Eliminada de la carpeta','toast_added_to_folder':'Anadida a la carpeta «{0}»','toast_folder_deleted':'Carpeta eliminada','toast_folder_created':'Carpeta creada','toast_folder_renamed':'Carpeta renombrada','toast_updating':'Actualizando publicaciones...','toast_save_channels_first':'Guarda canales primero','toast_fetching_latest':'Obteniendo ultimas publicaciones...','toast_posts_added':'Se recibieron {0} publicaciones nuevas','toast_no_posts':'No se recibio ninguna publicacion','toast_invalid_username':'Nombre de usuario no valido','toast_not_channel_link':'Este enlace no es de un canal','toast_already_in_folder':'Este canal ya esta en la carpeta','toast_ch_added':'Anadido','toast_last_post':'Ultimo post de {0} recibido','toast_link_copied':'Enlace de carpeta copiado!','toast_copy_fail':'Error al copiar','toast_folder_saved':'Carpeta «{0}» guardada','toast_folder_invalid':'Enlace de carpeta no valido','toast_folder_restored':'Carpeta "{0}" restaurada','toast_filter_on':'Filtro automatico activado','toast_rule_removed':'Regla eliminada','toast_ch_added_n':'Se anadieron {0} canales','toast_added':'Anadido','toast_smartfolders':'Se crearon {0} carpetas inteligentes','toast_smartfolders_exist':'Las carpetas inteligentes ya existen','toast_link_copied_post':'Enlace de publicacion copiado','toast_no_text':'Sin texto','toast_text_copied':'Texto de publicacion copiado'},
+fr:{all:'Tout',clip:'🎬 Clips',image:'🖼 Photos',text:'📝 Texte',newest:'🕐 Récents',oldest:'🕐 Anciens',by_name:'📛 Nom (A-Z)',by_name_desc:'📛 Nom (Z-A)',by_posts:'📊 Nombre de publications',by_channel:'📛 Chaîne',by_type:'🎬 Type de publication',sort:'🔀 Trier',channels:'Chaînes',posts:'Publications',folders:'Dossiers',none_folder:'Vous n\'avez pas encore créé de dossier — créez-en un ci-dessous',created:'📁 Dossier créé',deleted:'🗑 Dossier supprimé',removed_from:'🗑 Supprimé de',post_saved:'❤️ Publication enregistrée',post_removed:'💔 Supprimée des enregistrées',open_in_tg:'Ouvrir dans Telegram',share:'📤 Partager',folder_btn:'🗂 Dossier',watch_post:'🔗 Voir la publication',save_folder:'🗂 Enregistrer dans un dossier',no:'Non',yes:'Oui',chan_for:'chaîne',post_for:'publication',instant_search:'🔍 Recherche instantanée...',no_match:'🔍 Aucune chaîne trouvée',loading_post:'⏳ Chargement...',loading_older:'⏳ Chargement des publications plus anciennes...',end_posts:'— Fin des publications —',no_posts:'Aucune publication disponible',member_since:'👥',view_channel:'Voir la chaîne',fold_empty:'Pas encore de dossiers',newest_sh:'🕐 Récents',oldest_sh:'🕐 Anciens',by_name_sh:'📛 Nom (A-Z)',by_name_desc_sh:'📛 Nom (Z-A)',copy_text:'📋 Copier le texte',copy_link:'🔗 Copier le lien','toast_fav_removed':'Supprime des enregistres','toast_post_saved':'Publication enregistree','toast_removed_folder':'Supprime du dossier','toast_added_to_folder':'Ajoute au dossier «{0}»','toast_folder_deleted':'Dossier supprime','toast_folder_created':'Dossier cree','toast_folder_renamed':'Dossier renomme','toast_updating':'Mise a jour des publications...','toast_save_channels_first':'Enregistrez les chaines d abord','toast_fetching_latest':'Recuperation des dernieres publications...','toast_posts_added':'{0} nouvelles publications recues','toast_no_posts':'Aucune publication recue','toast_invalid_username':'Nom d utilisateur invalide','toast_not_channel_link':'Ce lien n est pas un lien de chaine','toast_already_in_folder':'Cette chaine est deja dans le dossier','toast_ch_added':'Ajoute','toast_last_post':'Dernier post de {0} recu','toast_link_copied':'Lien du dossier copie !','toast_copy_fail':'Echec de la copie','toast_folder_saved':'Dossier «{0}» enregistre','toast_folder_invalid':'Lien de dossier invalide','toast_folder_restored':'Dossier "{0}" restaure','toast_filter_on':'Filtre automatique active','toast_rule_removed':'Regle supprimee','toast_ch_added_n':'{0} chaines ajoutees','toast_added':'Ajoute','toast_smartfolders':'{0} dossiers intelligents crees','toast_smartfolders_exist':'Les dossiers intelligents existent deja','toast_link_copied_post':'Lien de publication copie','toast_no_text':'Pas de texte','toast_text_copied':'Texte de publication copie'}
 };
 const RTL_LANGS=['fa','ar'];
 let state={lang:localStorage.getItem('tgexp_lang')||'en',theme:localStorage.getItem('tgexp_theme')||'dark',workerUrl:localStorage.getItem('tgexp_worker')||'',currentTab:'explore',currentView:'grid',currentCategory:'all',searchLang:localStorage.getItem('tgexp_search_lang')||'all',exploreType:localStorage.getItem('tgexp_etype')||'all',homeType:localStorage.getItem('tgexp_home_type')||'all',searchQuery:'',searchResults:[],favorites:JSON.parse(localStorage.getItem('tgexp_favs')||'[]'),postFavs:JSON.parse(localStorage.getItem('tgexp_post_favs')||'[]'),favPost:false,favFolder:false,openFolder:'',folderIcon:'📁',favSort:localStorage.getItem('tgexp_favsort')||'name',exploreSort:localStorage.getItem('tgexp_esort')||'name',exploreView:localStorage.getItem('tgexp_eview')||'grid',exploreSearch:localStorage.getItem('tgexp_esearch')||'',favPostType:localStorage.getItem('tgexp_favptype')||'all',folders:JSON.parse(localStorage.getItem('tgexp_folders')||'[]'),livePosts:[],notifUpdates:[],notifSeen:JSON.parse(localStorage.getItem('tgexp_notif_seen')||'{}'),notifEnabled:localStorage.getItem('tgexp_notif_enabled')==='1',suggestions:JSON.parse(localStorage.getItem('tgexp_suggestions')||'[]'),lastNotifCheck:parseInt(localStorage.getItem('tgexp_last_notif')||'0')};
@@ -438,9 +438,14 @@ function tgGoBack(){
 
 function t(key){
   const L=I18N[state.lang]||I18N.en;
-  if(key in L)return L[key];
-  if(I18N_UI&&I18N_UI[state.lang]&&key in I18N_UI[state.lang])return I18N_UI[state.lang][key];
-  return I18N.en[key]||I18N_UI.en[key]||key;
+  let s;
+  if(key in L)s=L[key];
+  else if(I18N_UI&&key in (I18N_UI[state.lang]||{}))s=I18N_UI[state.lang][key];
+  else if(I18N.en[key]!=null)s=I18N.en[key];
+  else if(I18N_UI&&I18N_UI.en&&key in I18N_UI.en)s=I18N_UI.en[key];
+  else return key;
+  for(let i=0;i<arguments.length-1;i++)s=String(s).replace(new RegExp('\\{'+i+'\\}','g'),arguments[i+1]);
+  return s;
 }
 
 // ============================================================
@@ -575,7 +580,7 @@ function renderExploreView(container,items){
   const bar='<div class="etype-bar">'+types.map(t=>'<button class="etype-chip '+(type===t[0]?'active':'')+'" onclick="state.exploreType=\''+t[0]+'\';localStorage.setItem(\'tgexp_etype\',state.exploreType);renderResults()">'+t[1]+'</button>').join('')+viewToggleHtml()+'</div>';
   let filtered=sortExplore(type==='all'?items:items.filter(ch=>typeOf(ch)===type));
   if(state.exploreView==='list'&&state.exploreSearch){const q=state.exploreSearch.toLowerCase();filtered=filtered.filter(ch=>(ch.title||'').toLowerCase().includes(q)||(ch.username||'').toLowerCase().includes(q));}
-  const searchHtml=state.exploreView==='list'?'<div style="padding:0 8px 10px"><input class="sug-field" style="width:100%" placeholder="+t(instant_search)+" value="'+escAttr(state.exploreSearch)+'" oninput="setExploreSearch(this.value)"></div>':'';
+  const searchHtml=state.exploreView==='list'?'<div style="padding:0 8px 10px"><input class="sug-field" style="width:100%" placeholder="'+t('instant_search')+'" value="'+escAttr(state.exploreSearch)+'" oninput="setExploreSearch(this.value)"></div>':'';
   const listBody=filtered.length?exploreListViewHtml(filtered,colors):'<div style="padding:24px;text-align:center;color:#888">"+t(no_match)+"</div>';
   container.innerHTML=bar+exploreSortHtml()+searchHtml+(state.exploreView==='list'?listBody:`<div class="explore-grid">${filtered.map((ch,i)=>{
     const posts=getChannelPosts(ch.username);
@@ -961,11 +966,11 @@ function savePostFavs(){localStorage.setItem('tgexp_post_favs',JSON.stringify(st
 function togglePostFav(username,postId){
   const idx=state.postFavs.findIndex(f=>f.username===username&&f.postId===postId);
   const ctx=window._postCtx;const p=(ctx&&ctx.posts.find(x=>x.id===postId))||{};
-  if(idx>-1){state.postFavs.splice(idx,1);toast('💔 از ذخیره‌ها حذف شد')}
+  if(idx>-1){state.postFavs.splice(idx,1);toast('💔 '+t('toast_fav_removed'))}
   else{
     const ch=getAllChannels().find(c=>c.username===username)||{username,title:username};
     state.postFavs.push({username,postId,channelTitle:ch.title||username,text:(p.text||'').slice(0,120),image:p.image||'',date:p.date||'',hasVideo:p.hasVideo||false});
-    toast('❤️ پست ذخیره شد')
+    toast('❤️ '+t('toast_post_saved'))
   }
   savePostFavs();
   if(ctx)renderPostModal();
@@ -989,14 +994,14 @@ function folderHas(folderId,type,username,postId){const f=state.folders.find(x=>
 function toggleFolderItem(folderId,type,username,postId,label){
   const f=state.folders.find(x=>x.id===folderId);if(!f)return;
   const i=f.items.findIndex(it=>it.type===type&&it.username===username&&it.postId===(postId||null));
-  if(i>-1){f.items.splice(i,1);toast('🗂 از فولدر حذف شد')}
-  else{f.items.push({type,username,postId:postId||null,label:label||username});toast('🗂 به فولدر «'+f.name+'» اضافه شد')}
+  if(i>-1){f.items.splice(i,1);toast('🗂️ '+t('toast_removed_folder'))}
+  else{f.items.push({type,username,postId:postId||null,label:label||username});toast('🗂️ '+t('toast_added_to_folder', f.name))}
   saveFolders();renderFolderPickerList();
 }
 function removeFolderItem(folderId,type,username,postId){
   const f=state.folders.find(x=>x.id===folderId);if(!f)return;
   const i=f.items.findIndex(it=>it.type===type&&it.username===username&&it.postId===(postId||null));
-  if(i>-1){f.items.splice(i,1);saveFolders();toast('🗑 از فولدر حذف شد');renderFavorites()}
+  if(i>-1){f.items.splice(i,1);saveFolders();toast('🗑️ '+t('toast_removed_folder'));renderFavorites()}
 }
 function createFolder(name,icon){
   name=(name||'').trim();if(!name)return null;
@@ -1007,7 +1012,7 @@ function deleteFolder(id){
   const f=state.folders.find(x=>x.id===id);if(!f)return;
   state.folders=state.folders.filter(x=>x.id!==id);saveFolders();
   if(state.openFolder===id)state.openFolder='';
-  toast('🗑 فولدر حذف شد');renderFavorites();
+  toast('🗑️ '+t('toast_folder_deleted'));renderFavorites();
 }
 function openFolderPicker(type,username,postId,label){
   window._fp={type,username,postId:postId||null,label:label||username};
@@ -1041,13 +1046,13 @@ function renderFolderPickerList(){
 function createFolderFromPicker(){
   const input=document.getElementById('folderNewName');
   const id=createFolder(input.value,state.folderIcon);
-  if(id){input.value='';state.folderIcon='📁';renderFolderPickerList();toast('📁 فولدر ساخته شد')}
+  if(id){input.value='';state.folderIcon='📁';renderFolderPickerList();toast('📁 '+t('toast_folder_created'))}
 }
 function createFolderFromTab(){
   const input=document.getElementById('folderNewInput');
   if(!input)return;
   const id=createFolder(input.value,state.folderIcon);
-  if(id){input.value='';state.folderIcon='📁';toast('📁 فولدر ساخته شد');renderFavorites()}
+  if(id){input.value='';state.folderIcon='📁';toast('📁 '+t('toast_folder_created'));renderFavorites()}
 }
 const FOLDER_ICONS=['📁','⭐','🔥','❤️','🎬','🎮','📰','💻','📚','🎵','✈️','🍕','🔬','⚽','🖼','💼'];
 function folderIconRow(){
@@ -1083,7 +1088,7 @@ function saveRename(id,name){
   const el=document.getElementById('folderName_'+id);
   const input=el?el.previousElementSibling:null;
   if(input&&input.tagName==='INPUT')input.remove();
-  if(trimmed&&trimmed!==f.name){f.name=trimmed;saveFolders();toast('✏️ نام فولدر تغییر کرد');renderFavorites()}
+  if(trimmed&&trimmed!==f.name){f.name=trimmed;saveFolders();toast('✏️ '+t('toast_folder_renamed'));renderFavorites()}
   else if(el){el.style.display=''}
 }
 function setFavSort(v){state.favSort=v;localStorage.setItem('tgexp_favsort',v);renderFavorites()}
@@ -1250,7 +1255,7 @@ async function fetchLatestPost(u){
 function refreshFolderPosts(folderId,silent){
   const f=state.folders.find(x=>x.id===folderId);if(!f)return;
   const items=f.items.filter(it=>it.type==='ch');if(!items.length)return;
-  if(!silent)toast('🔄 در حال بهروزرسانی پستها...');
+  if(!silent)toast('🔄 '+t('toast_updating'));
   let done=0;
   items.forEach(it=>{
     fetchLatestPost(it.username).then(p=>{
@@ -1263,8 +1268,8 @@ function refreshFolderPosts(folderId,silent){
 
 async function fetchFavNewPosts(){
   const favs=state.favorites.slice(0,12);
-  if(!favs.length){toast('❤️ اول کانال‌ها را ذخیره کنید');return}
-  toast('⏳ در حال دریافت آخرین پست‌ها...');
+  if(!favs.length){toast('❤️ '+t('toast_save_channels_first'));return}
+  toast('⏳ '+t('toast_fetching_latest'));
   state.livePosts=[];
   for(const ch of favs){
     try{
@@ -1273,8 +1278,8 @@ async function fetchFavNewPosts(){
     }catch(e){}
   }
   renderFavorites();
-  if(state.livePosts.length)toast('✅ '+state.livePosts.length+' پست جدید دریافت شد');
-  else toast('⚠️ پستی دریافت نشد');
+  if(state.livePosts.length)toast('✅ '+t('toast_posts_added', state.livePosts.length));
+  else toast('⚠️ '+t('toast_no_posts'));
 }
 function clearLivePosts(){state.livePosts=[];renderFavorites()}
 function openLivePost(lp){
@@ -1304,15 +1309,15 @@ function addChannelToFolder(folderId){
   const input=document.getElementById('folderAddChannel');
   if(!input)return;
   const u=parseChannelInput(input.value);
-  if(!u||!u.match(/^[A-Za-z0-9_]{5,32}$/)){toast('⚠️ یوزرنیم نامعتبر است');input.focus();return}
-  if(['joinchat','share','s','proxy','addstickers','addtheme','invoice','boost','verify','giftcode'].includes(u.toLowerCase())){toast('⚠️ این لینک، لینک کانال نیست');return}
+  if(!u||!u.match(/^[A-Za-z0-9_]{5,32}$/)){toast('⚠️ '+t('toast_invalid_username'));input.focus();return}
+  if(['joinchat','share','s','proxy','addstickers','addtheme','invoice','boost','verify','giftcode'].includes(u.toLowerCase())){toast('⚠️ '+t('toast_not_channel_link'));return}
   const f=state.folders.find(x=>x.id===folderId);if(!f)return;
-  if(f.items.some(it=>it.type==='ch'&&it.username.toLowerCase()===u.toLowerCase())){toast('⚠️ این کانال قبلاً در فولدر است');return}
+  if(f.items.some(it=>it.type==='ch'&&it.username.toLowerCase()===u.toLowerCase())){toast('⚠️ '+t('toast_already_in_folder'));return}
   const ch=getAllChannels().find(c=>c.username.toLowerCase()===u.toLowerCase());
   f.items.push({type:'ch',username:ch?ch.username:u,postId:null,label:ch?ch.title:'',latestPost:null});
   saveFolders();
   input.value='';
-  toast(ch?('✅ '+ch.title+' اضافه شد'):('✅ @'+u+' اضافه شد'));
+  toast(ch?('✅ '+ch.title+' '+t('toast_added')):('✅ @'+u+' '+t('toast_added')));
   renderFavorites();
   fetchLatestPost(u).then(p=>{
     if(!p)return;
@@ -1320,7 +1325,7 @@ function addChannelToFolder(folderId){
     const it=fi&&fi.items.find(i=>i.type==='ch'&&i.username.toLowerCase()===u.toLowerCase());
     if(it)it.latestPost={id:String(p.id),image:p.image||'',date:p.date||'',text:p.text||'',ts:Date.now()};
     saveFolders();
-    toast('🕒 آخرین پست '+u+' دریافت شد');
+    toast('🕒 '+t('toast_last_post', u));
     if(state.openFolder===folderId)renderFavorites();
   });
 
@@ -1338,7 +1343,7 @@ function shareFolder(id){
   const payload={n:f.name,i:f.icon||'📁',items:f.items.map(it=>it.type==='ch'?['c',it.username]:['p',it.username,it.postId||'',it.label||''])};
   const url=location.origin+location.pathname+'#folder='+b64urlEncode(JSON.stringify(payload));
   if(navigator.share){navigator.share({title:'Telegram Explorer — '+f.name,url}).catch(()=>{})}
-  else{navigator.clipboard.writeText(url).then(()=>toast('🔗 لینک فولدر کپی شد!')).catch(()=>toast('⚠️ کپی ناموفق بود'))}
+  else{navigator.clipboard.writeText(url).then(()=>toast('🔗 '+t('toast_link_copied'))).catch(()=>toast('⚠️ '+t('toast_copy_fail')))}
 }
 function decodeSharedFolder(p){
   try{
@@ -1390,14 +1395,14 @@ function importSharedFolder(){
   window._sharedFolder=null;location.hash='';
   state.favFolder=true;state.favPost=false;state.openFolder=id;
   switchTab('favorites');
-  toast('📥 فولدر «'+name+'» ذخیره شد');
+  toast('📥 '+t('toast_folder_saved', name));
 }
 function dismissSharedFolder(){window._sharedFolder=null;location.hash='';switchTab(state.currentTab)}
 function checkSharedFolder(){
   const m=location.hash.match(/^#folder=(.+)$/);
   if(!m)return;
   const folder=decodeSharedFolder(m[1]);
-  if(!folder){toast('⚠️ لینک فولدر نامعتبر است');return}
+  if(!folder){toast('⚠️ '+t('toast_folder_invalid'));return}
   window._sharedFolder=folder;
   renderSharedFolder(folder);
 }
@@ -1677,7 +1682,7 @@ function importBackup(ev){
         if(!Array.isArray(f.items))f.items=[];
         if(state.folders.some(x=>x.id===f.id))f.id='f'+Date.now();
         state.folders.push(f);saveFolders();
-        toast('✅ فولدر "'+f.name+'" بازیابی شد');
+        toast('✅ '+t('toast_folder_restored', f.name));
         renderFavorites();return;
       }
       if(Array.isArray(d.favorites)){state.favorites=d.favorites;localStorage.setItem('tgexp_favs',JSON.stringify(d.favorites))}
@@ -1764,11 +1769,11 @@ function autoFolderChannels(f){
 function saveFolderRule(id){
   const f=state.folders.find(x=>x.id===id);if(!f)return;
   f.rule={cat:document.getElementById('folderRuleCat').value,lang:document.getElementById('folderRuleLang').value};
-  saveFolders();toast('🤖 فیلتر خودکار فعال شد');renderFavorites();
+  saveFolders();toast('🤖 '+t('toast_filter_on'));renderFavorites();
 }
 function clearFolderRule(id){
   const f=state.folders.find(x=>x.id===id);if(!f)return;
-  f.rule=null;saveFolders();toast('قانون حذف شد');renderFavorites();
+  f.rule=null;saveFolders();toast(t('toast_rule_removed'));renderFavorites();
 }
 function addAutoAll(id){
   const f=state.folders.find(x=>x.id===id);if(!f)return;
@@ -1779,14 +1784,14 @@ function addAutoAll(id){
       f.items.push({type:'ch',username:c.username,postId:null,label:c.title,latestPost:null});added++;
     }
   });
-  saveFolders();toast('➕ '+added+' کانال اضافه شد');renderFavorites();
+  saveFolders();toast('➕ '+t('toast_ch_added_n', added));renderFavorites();
 }
 function addAutoOne(id,username){
   const f=state.folders.find(x=>x.id===id);if(!f)return;
-  if(f.items.some(it=>it.type==='ch'&&it.username.toLowerCase()===username.toLowerCase())){toast('⚠️ قبلاً در فولدر است');return}
+  if(f.items.some(it=>it.type==='ch'&&it.username.toLowerCase()===username.toLowerCase())){toast('⚠️ '+t('toast_already_in_folder'));return}
   const c=getAllChannels().find(x=>x.username.toLowerCase()===username.toLowerCase());
   f.items.push({type:'ch',username:c?c.username:username,postId:null,label:c?c.title:'',latestPost:null});
-  saveFolders();toast('✅ اضافه شد');renderFavorites();
+  saveFolders();toast('✅ '+t('toast_ch_added'));renderFavorites();
 }
 
 // ============================================================
@@ -1807,7 +1812,7 @@ function createSmartFolders(){
     f.rule=p.rule;f.items=[];made++;
   });
   saveFolders();
-  toast(made?('🤖 '+made+' فولدر هوشمند ساخته شد'):'فولدرهای هوشمند از قبل موجودند');
+  toast(made?('🤖 '+t('toast_smartfolders', made)):t('toast_smartfolders_exist'));
   renderFavorites();
 }
 
@@ -1836,8 +1841,8 @@ function goodImg(u){return u&&!/\/img\/emoji\//i.test(u)?u:''}
 function escHtml(str){const el=document.createElement('div');el.textContent=str||'';return el.innerHTML}
 function escAttr(str){return(str||'').replace(/'/g,"\\'").replace(/"/g,'&quot;')}
 function copyLink(username){navigator.clipboard.writeText(`https://t.me/${username}`).then(()=>toast(t('copied')))}
-function copyPostLink(username,postId){const url=`https://t.me/${username}/${postId}`;navigator.clipboard.writeText(url).then(()=>toast('🔗 لینک پست کپی شد!'))}
-function copyPostText(username,postId){const list=getChannelPosts(username);const p=list.find(x=>x.id===postId);const text=(p&&p.text)?p.text:'';if(!text){toast('📋 متنی وجود ندارد');return}navigator.clipboard.writeText(text).then(()=>toast('📋 متن پست کپی شد!')).catch(()=>{const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();toast('📋 متن پست کپی شد!')})}
+function copyPostLink(username,postId){const url=`https://t.me/${username}/${postId}`;navigator.clipboard.writeText(url).then(()=>toast('🔗 '+t('toast_link_copied_post')))}
+function copyPostText(username,postId){const list=getChannelPosts(username);const p=list.find(x=>x.id===postId);const text=(p&&p.text)?p.text:'';if(!text){toast('📋 '+t('toast_no_text'));return}navigator.clipboard.writeText(text).then(()=>toast('📋 '+t('toast_text_copied'))).catch(()=>{const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();toast('📋 '+t('toast_text_copied'))})}
 window.addEventListener('scroll',()=>{const b=document.getElementById('scrollTopBtn');if(b)b.style.display=window.scrollY>400?'flex':'none'},{passive:true});
 function scrollToTop(){window.scrollTo({top:0,behavior:'smooth'})}
 function sharePost(username,postId){const url=`https://t.me/${username}/${postId}`;const title=username;if(navigator.share){navigator.share({title,url}).catch(()=>{})}else{copyPostLink(username,postId)}}
