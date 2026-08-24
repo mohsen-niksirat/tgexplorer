@@ -497,7 +497,7 @@ function renderFeedView(container,posts){
   container.innerHTML=`<div class="feed-grid">${posts.map((p,i)=>{
     const color=colors[i%colors.length];
     const initial=(p.channelTitle||p.channel||'?')[0].toUpperCase();
-    const imgHtml=p.image?`<img src="${p.image}" alt="" loading="lazy" onerror="this.style.display='none'">`:`<div style="width:100%;height:100%;background:${color};display:flex;align-items:center;justify-content:center;font-size:32px;color:#fff;font-weight:700">${initial}</div>`;
+    const img=goodImg(p.image);const imgHtml=img?`<img src="${img}" alt="" loading="lazy" onerror="this.style.display='none'">`:`<div style="width:100%;height:100%;background:${color};display:flex;align-items:center;justify-content:center;font-size:32px;color:#fff;font-weight:700">${initial}</div>`;
     const videoBadge=p.hasVideo?`<div class="feed-video-badge">▶ Video</div>`:'';
     const text=p.text?p.text.substring(0,80)+(p.text.length>80?'...':''):'';
     return `<div class="feed-item" onclick="openFeedPost(${i})" data-index="${i}">
@@ -557,7 +557,7 @@ function renderExploreView(container,items){
   container.innerHTML=bar+`<div class="explore-grid">${filtered.map((ch,i)=>{
     const posts=getChannelPosts(ch.username);
     const post=posts[0]||null;
-    const img=(post&&post.image)||ch.image||ch.avatar||'';
+    const img=goodImg((post&&post.image)||ch.image)||ch.avatar||'';
     const color=colors[i%colors.length];
     const initial=(ch.title||ch.username||'?')[0].toUpperCase();
     const imgHtml=img?`<img src="${img}" alt="" loading="lazy" onerror="this.style.display='none'">`:`<div style="width:100%;height:100%;background:${color};display:flex;align-items:center;justify-content:center;font-size:36px;color:#fff;font-weight:700">${initial}</div>`;
@@ -591,7 +591,7 @@ function renderExploreView(container,items){
 function postItemHtml(p,ch,username,autoplay){
   const dateTxt=p.date?new Date(p.date).toLocaleString('fa-IR',{dateStyle:'medium',timeStyle:'short'}):'';
   const text=(p.text||'').slice(0,500)+(p.text&&p.text.length>500?'…':'');
-  const mediaHtml=p.video?`<video src="${p.video}" poster="${p.image||''}" ${autoplay?'autoplay':'preload="metadata"'} controls muted playsinline class="post-modal-video-el"></video>`:(p.image?`<img src="${p.image}" alt="" class="post-modal-img" loading="lazy" onerror="this.style.display='none'">`:(p.hasVideo?`<div class="post-modal-video">▶ ویدیو</div>`:''));
+  const pimg=goodImg(p.image);const mediaHtml=p.video?`<video src="${p.video}" poster="${pimg||''}" ${autoplay?'autoplay':'preload="metadata"'} controls muted playsinline class="post-modal-video-el"></video>`:(pimg?`<img src="${pimg}" alt="" class="post-modal-img" loading="lazy" onerror="this.style.display='none'">`:(p.hasVideo?`<div class="post-modal-video">▶ ویدیو</div>`:''));
   return `<div class="post-feed-item">
     ${mediaHtml}
     ${dateTxt?`<div class="post-modal-date">🕐 ${dateTxt}</div>`:''}
@@ -1634,6 +1634,7 @@ function getLocalExplore(category){const all=getAllChannels();const byCat=catego
 // ============================================================
 // UTILS
 // ============================================================
+function goodImg(u){return u&&!/\/img\/emoji\//i.test(u)?u:''}
 function escHtml(str){const el=document.createElement('div');el.textContent=str||'';return el.innerHTML}
 function escAttr(str){return(str||'').replace(/'/g,"\\'").replace(/"/g,'&quot;')}
 function copyLink(username){navigator.clipboard.writeText(`https://t.me/${username}`).then(()=>toast(t('copied')))}

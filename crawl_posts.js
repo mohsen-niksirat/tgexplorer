@@ -24,6 +24,7 @@ function parsePosts(html, username){
     if (bg) image = bg[1];
     else { const im = b.match(/<img[^>]+class="tgme_widget_message_photo[^>]+src="([^"]+)"/); if (im) image = im[1]; }
     if (!image) { const im2 = b.match(/<img[^>]+src="([^"]+)"[^>]*class="[^"]*tgme_widget_message_photo/); if (im2) image = im2[1]; }
+    if (image && /\/img\/emoji\//i.test(image)) image = '';
     const tm = b.match(/<time datetime="([^"]+)"/);
     const txtm = b.match(/class="tgme_widget_message_text[^"]*"[^>]*>([\s\S]*?)<\/div>/);
     let video='';

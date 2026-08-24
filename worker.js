@@ -33,51 +33,26 @@ async function getChannelAvatar(username) {
   if (cached) return cached;
 
   try {
-    // Method 1: Try t.me profile page for avatar
     const html = await fetchHtml(`https://t.me/${username}`);
     if (html) {
-      // Look for og:image which sometimes contains the avatar
-      const ogImage = extractMeta(html, 'og:image');
-      if (ogImage && ogImage.includes('telegram.org') === false && !ogImage.includes('telegram')) {
-        // Might be a real avatar
-        cacheSet(cacheKey, ogImage);
-        return ogImage;
-      }
-
-      // Look for profile photo in HTML
-      const avatarMatch = html.match(/background-image:\s*url\(['"]?(https?:\/\/[^'")\s]+telegram[^'")\s]+)['"]?\)/i);
-      if (avatarMatch) {
-        cacheSet(cacheKey, avatarMatch[1]);
-        return avatarMatch[1];
-      }
-
-      // Look for any image that might be an avatar
-      const imgMatches = html.match(/https?:\/\/cdn\d?\.telegram\.org\/[^'")\s]+\.(jpg|jpeg|png|webp)/gi);
-      if (imgMatches && imgMatches.length > 0) {
-        // Filter out stickers and other non-avatar images
-        const avatar = imgMatches.find(img => 
-          !img.includes('stickers') && 
-          !img.includes('emoji') && 
-          !img.includes('file_') &&
-          (img.includes('photo') || img.includes('avatar') || img.includes('profile'))
-        );
-        if (avatar) {
-          cacheSet(cacheKey, avatar);
-          return avatar;
+      // 1. The definitive avatar element on t.me channel pages
+      let m = html.match(/<img[^>]*class="tgme_page_photo_image"[^>]*src="([^"]+)"/i);
+      // 2. og:image (same avatar for channel pages)
+      if (!m) m = html.match(/<meta[^>]+property="og:image"[^>]+content="([^"]+)"/i);
+      // 3. CSS background-image with a photo URL
+      if (!m) m = html.match(/background-image:\s*url\(['"]?(https?:\/\/[^'")]+)['"]?\)/i);
+      if (m) {
+        const url = m[1].replace(/&amp;/g, '&');
+        // Exclude generic Telegram logo / svg placeholders
+        if (!/telegram\.org\/img|t_logo|\.svg/i.test(url)) {
+          cacheSet(cacheKey, url);
+          return url;
         }
       }
     }
-
-    // Method 2: Try Telegram Bot API if we have a bot token
-    // This is a fallback - would need a bot added to the channel
-    
-    // Method 3: Generate avatar from channel name (fallback)
-    return null;
-  } catch {
-    return null;
-  }
+  } catch {}
+  return null;
 }
-
 // ============================================================
 // MAIN HANDLER
 // ============================================================
@@ -92,7 +67,7 @@ export default {
     }
 
     try {
-      if (path === '/api/ping') return j({ ok: true, ts: Date.now(), version: '3.0', hasApi: true });
+      if (path === '/api/ping') return j({ ok: true, ts: Date.now(), version: '3.1', hasApi: true });
 
       if (path === '/api/search') return await handleSearch(url);
       if (path.startsWith('/api/channel/')) return await handleChannel(path.split('/api/channel/')[1]);
@@ -182,7 +157,7 @@ async function handleSearch(url) {
   }
 
   // Fetch avatars for top results
-  const withAvatars = await Promise.all(merged.slice(0, 10).map(async (ch) => {
+  const withAvatars = await Promise.all(merged.slice(0, 15).map(async (ch) => {
     const avatar = await getChannelAvatar(ch.username);
     return { ...ch, avatar: avatar || '', tags: ch.tags || inferTags(ch.title, ch.description, ch.username) };
   }));
