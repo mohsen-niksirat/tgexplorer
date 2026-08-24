@@ -135,8 +135,51 @@ async function handleSearch(url) {
 
   const tmeHtml = await fetchHtml(`https://t.me/s/${encodeURIComponent(query)}`);
   const tmeResults = parseSearchResults(tmeHtml, query);
-  const googleResults = await searchGoogle(`site:t.me ${query}`, lang);
+  // Direct channel match: if t.me/s/{query} has posts, the exact name is a real channel
+  if (tmeResults.length === 0 && parsePosts(tmeHtml, query).length > 0) {
+    const direct = parseChannelPage(tmeHtml, query);
+    direct.username = query;
+    direct.source = 'direct';
+    tmeResults.push(direct);
+  }
+  const googleResults = await searchGoogle(query, lang);
   const merged = mergeResults(tmeResults, googleResults);
+
+  // Curated fallback: when live sources return nothing (bot walls on search
+  // engines from datacenter IPs), match the curated channel DB by keyword or
+  // category so search never comes back empty.
+  if (merged.length === 0) {
+    const q = query.toLowerCase();
+    const curated = getTrendingChannels('all').filter(c =>
+      (c.username || '').toLowerCase().includes(q) ||
+      (c.title || '').toLowerCase().includes(q)
+    );
+    const cats = {
+      tech: ['tech', 'technology', 'techno', 'تکنولوژی'],
+      news: ['news', 'خبر', 'اخبار', 'newspaper'],
+      crypto: ['crypto', 'bitcoin', 'کریپتو', 'ارز', 'coin'],
+      sports: ['sport', 'ورزش', 'football', 'فوتبال', 'varzesh'],
+      music: ['music', 'موزیک', 'موسیقی', 'radio'],
+      travel: ['travel', 'سفر'],
+      science: ['science', 'علم', 'space', 'فضا'],
+      gaming: ['game', 'بازی', 'nintendo'],
+      food: ['food', 'غذا', 'baking'],
+      education: ['learn', 'english', 'آموزش', 'انگلیسی', 'grammar'],
+      entertainment: ['movie', 'film', 'سینما', 'فیلم', 'series'],
+      art: ['art', 'هنر', 'photo', 'عکس', 'design', 'طراحی'],
+      meme: ['meme', 'طنز', 'joke']
+    };
+    for (const [cat, keys] of Object.entries(cats)) {
+      if (keys.some(k => q.includes(k) || k.includes(q))) {
+        curated.push(...getTrendingChannels(cat));
+      }
+    }
+    const seen = new Set();
+    for (const c of curated) {
+      const k = (c.username || '').toLowerCase();
+      if (k && !seen.has(k)) { seen.add(k); c.source = 'curated'; merged.push(c); }
+    }
+  }
 
   // Fetch avatars for top results
   const withAvatars = await Promise.all(merged.slice(0, 10).map(async (ch) => {
@@ -504,9 +547,9 @@ function parsePosts(html, username) {
 // ============================================================
 async function searchGoogle(query, lang) {
   const sources = [
-    { name: 'google', url: `https://www.google.com/search?q=${encodeURIComponent(query)}&num=20&hl=${lang}` },
-    { name: 'ddg', url: `https://html.duckduckgo.com/html/?q=${encodeURIComponent(query)}` },
-    { name: 'bing', url: `https://www.bing.com/search?q=${encodeURIComponent(query)}&setlang=${lang || 'en'}` },
+    { name: 'ddg', url: `https://html.duckduckgo.com/html/?q=${encodeURIComponent('t.me ' + query)}` },
+    { name: 'ddg2', url: `https://html.duckduckgo.com/html/?q=${encodeURIComponent('telegram channel ' + query)}` },
+    { name: 'bing', url: `https://www.bing.com/search?q=${encodeURIComponent('t.me ' + query)}&setlang=${lang || 'en'}` },
   ];
   for (const s of sources) {
     try {
@@ -515,13 +558,26 @@ async function searchGoogle(query, lang) {
       });
       const html = await resp.text();
       const results = [], seen = new Set();
-      const re = /https?:\/\/t\.me\/([a-zA-Z0-9_]+)/g;
+      // DDG redirect links: uddg=https%3A%2F%2Ft.me%2Fusername
+      const ur = /uddg=(https?%3A%2F%2Ft\.me%2F[a-zA-Z0-9_]+)/g;
       let m;
-      while ((m = re.exec(html)) !== null) {
-        const u = m[1];
-        if (!seen.has(u) && !['s', 'share', 'addstickers', 'joinchat'].includes(u)) {
-          seen.add(u);
-          results.push({ username: u, title: u, link: `https://t.me/${u}`, source: s.name });
+      while ((m = ur.exec(html)) !== null) {
+        try {
+          const u = decodeURIComponent(m[1]).split('/')[3] || '';
+          if (u && !seen.has(u) && !['s', 'share', 'addstickers', 'joinchat', 'boost'].includes(u)) {
+            seen.add(u);
+            results.push({ username: u, title: u, link: `https://t.me/${u}`, source: s.name });
+          }
+        } catch {}
+      }
+      if (!results.length) {
+        const re = /https?:\/\/t\.me\/([a-zA-Z0-9_]+)/g;
+        while ((m = re.exec(html)) !== null) {
+          const u = m[1];
+          if (!seen.has(u) && !['s', 'share', 'addstickers', 'joinchat', 'boost'].includes(u)) {
+            seen.add(u);
+            results.push({ username: u, title: u, link: `https://t.me/${u}`, source: s.name });
+          }
         }
       }
       if (results.length) return results;
