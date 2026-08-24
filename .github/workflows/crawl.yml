@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: write
+  issues: write
 
 jobs:
   crawl:
@@ -47,11 +48,27 @@ jobs:
           git commit -m "chore: update channel posts $(date -u +%Y-%m-%dT%H:%M:%SZ)"
 
           for i in 1 2 3 4 5; do git fetch origin main && break || sleep 5; done
-          git rebase origin/main 2>/dev/null || true
-          if [ -d .git/rebase-merge ] || [ -d .git/rebase-apply ]; then
-            git checkout --theirs posts.js 2>/dev/null || true
-            git checkout --theirs sw.js 2>/dev/null || true
-            git add posts.js sw.js
-            GIT_EDITOR=true git rebase --continue 2>/dev/null || true
-          fi
-          git push origin main
+          for attempt in 1 2 3 4 5; do
+            git rebase origin/main 2>/dev/null || true
+            if [ -d .git/rebase-merge ] || [ -d .git/rebase-apply ]; then
+              git checkout --theirs posts.js 2>/dev/null || true
+              git checkout --theirs sw.js 2>/dev/null || true
+              git add posts.js sw.js
+              GIT_EDITOR=true git rebase --continue 2>/dev/null || true
+            fi
+            if git push origin main; then
+              echo "Pushed successfully (attempt $attempt)"
+              break
+            fi
+            echo "Push raced with another run — retrying ($attempt/5)"
+            sleep 8
+          done
+
+      - name: Report failure (GitHub Issue)
+        if: failure()
+        run: |
+          curl -s -X POST \
+            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.github+json" \
+            https://api.github.com/repos/${{ github.repository }}/issues \
+            -d "{\"title\": \"🤖 Crawl workflow failed (run #${{ github.run_number }})\", \"body\": \"The **Crawl Channel Posts** workflow failed on \`${{ github.ref }}\`.\n\n[View run logs](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})\n\nTriggered by: ${{ github.event_name }}\"}"

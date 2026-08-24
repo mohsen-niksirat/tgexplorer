@@ -1,0 +1,52 @@
+name: Refresh Channel Avatars
+
+on:
+  schedule:
+    - cron: '23 5 * * *'  # daily at 05:23 UTC (after several crawl runs)
+  workflow_dispatch:      # manual trigger
+
+permissions:
+  contents: write
+
+jobs:
+  avatars:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Fetch avatars, commit and push
+        run: |
+          set -e
+          node fetch_avatars.js
+
+          git add avatars.js
+          if git diff --cached --quiet; then
+            echo "No avatar changes — nothing to push"
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore: refresh channel avatars $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+
+          for i in 1 2 3 4 5; do git fetch origin main && break || sleep 5; done
+          for attempt in 1 2 3 4 5; do
+            git rebase origin/main 2>/dev/null || true
+            if [ -d .git/rebase-merge ] || [ -d .git/rebase-apply ]; then
+              git checkout --theirs avatars.js 2>/dev/null || true
+              git add avatars.js
+              GIT_EDITOR=true git rebase --continue 2>/dev/null || true
+            fi
+            if git push origin main; then
+              echo "Pushed successfully (attempt $attempt)"
+              break
+            fi
+            echo "Push raced with another run — retrying ($attempt/5)"
+            sleep 8
+          done

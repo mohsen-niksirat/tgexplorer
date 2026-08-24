@@ -139,6 +139,11 @@ the crawler exits with an error and **keeps the existing `posts.js`** instead of
 wiping it. When no data changed, no commit is made. Run it locally anytime with
 `node crawl_posts.js`.
 
+A second workflow (**Refresh Channel Avatars**, daily at 05:23 UTC) runs
+`node fetch_avatars.js` and updates `avatars.js` — the local channel-avatar map
+that gives the app real avatars even **without a worker**. If a crawl run fails,
+the workflow automatically opens a GitHub Issue with a link to the failed logs.
+
 ## 📁 Project Structure
 
 ```
