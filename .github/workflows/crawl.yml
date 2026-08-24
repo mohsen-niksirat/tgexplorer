@@ -2,7 +2,7 @@ name: Crawl Channel Posts
 
 on:
   schedule:
-    - cron: '17 */6 * * *'  # every 6 hours (00:17, 06:17, 12:17, 18:17 UTC)
+    - cron: '17 */3 * * *'  # every 3 hours (00:17, 03:17, ... UTC)
   workflow_dispatch:        # manual trigger
 
 permissions:
@@ -20,24 +20,38 @@ jobs:
         with:
           node-version: '24'
 
-      - name: Run post crawler
-        run: node crawl_posts.js
-
-      - name: Commit and push
+      - name: Crawl, bump SW cache, commit and push
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          set -e
+          node crawl_posts.js
+
           git add posts.js
           if git diff --cached --quiet; then
             echo "No data changes — nothing to push"
             exit 0
           fi
+
+          # Unique cache name per run -> old SW caches get cleaned on activate,
+          # so clients always pick up the freshly crawled data.
+          python3 - <<'PYEOF'
+          import re, datetime
+          ver = datetime.datetime.utcnow().strftime('%Y%m%d%H%M')
+          s = open('sw.js', encoding='utf-8').read()
+          s = re.sub(r"const CACHE_NAME = '[^']*'", f"const CACHE_NAME = 'tgexplorer-{ver}'", s, count=1)
+          open('sw.js', 'w', encoding='utf-8').write(s)
+          PYEOF
+          git add sw.js
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
           git commit -m "chore: update channel posts $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+
           for i in 1 2 3 4 5; do git fetch origin main && break || sleep 5; done
           git rebase origin/main 2>/dev/null || true
           if [ -d .git/rebase-merge ] || [ -d .git/rebase-apply ]; then
             git checkout --theirs posts.js 2>/dev/null || true
-            git add posts.js
+            git checkout --theirs sw.js 2>/dev/null || true
+            git add posts.js sw.js
             GIT_EDITOR=true git rebase --continue 2>/dev/null || true
           fi
           git push origin main

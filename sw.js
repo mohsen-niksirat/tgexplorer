@@ -42,6 +42,21 @@ self.addEventListener('fetch', event => {
     return;
   }
 
+  // Data files (posts.js / channels.js): network first so crawls show up
+  // immediately — fall back to the cached copy only when offline.
+  if (url.pathname.endsWith('/posts.js') || url.pathname.endsWith('/channels.js')) {
+    event.respondWith(
+      fetch(event.request).then(response => {
+        if (response.ok) {
+          const clone = response.clone();
+          caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
+        }
+        return response;
+      }).catch(() => caches.match(event.request))
+    );
+    return;
+  }
+
   // Static assets: cache first, then network
   event.respondWith(
     caches.match(event.request).then(cached => {
