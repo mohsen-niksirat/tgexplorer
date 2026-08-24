@@ -42,6 +42,9 @@ This repo ships a ready-made [`worker.js`](worker.js) + [`wrangler.toml`](wrangl
 ### v1.2.0
 
 - 🏠 **Home feed** — all your favorite channels' posts merged into one infinite Instagram-style feed (newest first)
+- 📊 **Home stats bar** — favorite channels / total posts / posts today at the top of Home
+- 🎬 **Home type filter** — see only clips, photos or text in the Home feed (persisted)
+- 🤖 **Folder auto-filter** — set a rule (category + language) on a folder and matching channels are listed automatically, add one or all
 - 🌐 **Live search indicator** — the search bar shows 🌐 Live (worker) vs 📦 Local results
 - 🔔 **Browser push notifications** — opt-in in Settings; get a notification when a favorite channel posts something new
 - 🗂 **"Add to folder" button** in the channel modal (posts already had it)
