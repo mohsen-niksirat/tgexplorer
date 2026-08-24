@@ -3,6 +3,21 @@
 Full version history of Telegram Explorer. The latest release is summarized in the
 [README](README.md#-changelog).
 
+## v1.4.0
+
+- 🗂 **Explore list view** — switch between grid (▦) and list (☰) with a single
+  toggle; the list shows a small thumbnail, title, @username, post-type badge and
+  post count per channel.
+- 🌐 **Global grid/list view** — the selected view is now applied consistently
+  across every tab (Explore, Favorites, Home, Feed, Search) and remembered in
+  localStorage.
+- 🔍 **Instant search in Explore list** — a live search field filters channels by
+  title or username as you type, with an empty-state message when nothing matches.
+- 🎬 **Saved-posts type filter** — filter your saved posts by All / Clips / Photos /
+  Text, combined with sorting.
+- 📊 **Favorites stats bar** — shows favorite channels, total saved posts and
+  video/photo/text breakdown at the top of the saved-posts tab, updated live.
+
 ## v1.3.0
 
 - 🖼 **Real channel avatars everywhere** — the worker extracts avatars reliably from

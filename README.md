@@ -42,6 +42,19 @@ This repo ships a ready-made [`worker.js`](worker.js) + [`wrangler.toml`](wrangl
 
 ## 📦 Changelog
 
+### v1.4.0
+
+- 🗂 **Explore list view** — switch between grid (▦) and list (☰) with a single
+  toggle; rows show a thumbnail, title, @username, post-type badge and post count
+- 🌐 **Global grid/list view** — the selected view applies consistently across
+  Explore, Favorites, Home, Feed and Search (remembered in localStorage)
+- 🔍 **Instant search in Explore list** — live filtering of channels by title or
+  username as you type, with an empty-state message
+- 🎬 **Saved-posts type filter** — All / Clips / Photos / Text chips combined with
+  sorting
+- 📊 **Favorites stats bar** — favorite channels, total saved posts and a
+  video/photo/text breakdown, updated live
+
 ### v1.3.0
 
 - 🖼 **Real channel avatars everywhere** — reliable avatar extraction in the worker
