@@ -3,6 +3,7 @@
 Search and discover public Telegram channels and groups — like Instagram Explore, but for Telegram.
 
 [![Crawl Channel Posts](https://github.com/mohsen-niksirat/tgexplorer/actions/workflows/crawl.yml/badge.svg)](https://github.com/mohsen-niksirat/tgexplorer/actions/workflows/crawl.yml)
+[![Refresh Channel Avatars](https://github.com/mohsen-niksirat/tgexplorer/actions/workflows/avatars.yml/badge.svg)](https://github.com/mohsen-niksirat/tgexplorer/actions/workflows/avatars.yml)
 
 ## ✨ Features
 
