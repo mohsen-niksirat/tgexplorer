@@ -411,6 +411,9 @@ es:{all:'Todo',clip:'🎬 Clips',image:'🖼 Fotos',text:'📝 Texto',newest:'�
 fr:{all:'Tout',clip:'🎬 Clips',image:'🖼 Photos',text:'📝 Texte',newest:'🕐 Récents',oldest:'🕐 Anciens',by_name:'📛 Nom (A-Z)',by_name_desc:'📛 Nom (Z-A)',by_posts:'📊 Nombre de publications',by_channel:'📛 Chaîne',by_type:'🎬 Type de publication',sort:'🔀 Trier',channels:'Chaînes',posts:'Publications',folders:'Dossiers',none_folder:'Vous n\'avez pas encore créé de dossier — créez-en un ci-dessous',created:'📁 Dossier créé',deleted:'🗑 Dossier supprimé',removed_from:'🗑 Supprimé de',post_saved:'❤️ Publication enregistrée',post_removed:'💔 Supprimée des enregistrées',open_in_tg:'Ouvrir dans Telegram',share:'📤 Partager',folder_btn:'🗂 Dossier',watch_post:'🔗 Voir la publication',save_folder:'🗂 Enregistrer dans un dossier',no:'Non',yes:'Oui',chan_for:'chaîne',post_for:'publication',instant_search:'🔍 Recherche instantanée...',no_match:'🔍 Aucune chaîne trouvée',loading_post:'⏳ Chargement...',loading_older:'⏳ Chargement des publications plus anciennes...',end_posts:'— Fin des publications —',no_posts:'Aucune publication disponible',member_since:'👥',view_channel:'Voir la chaîne',fold_empty:'Pas encore de dossiers',newest_sh:'🕐 Récents',oldest_sh:'🕐 Anciens',by_name_sh:'📛 Nom (A-Z)',by_name_desc_sh:'📛 Nom (Z-A)',copy_text:'📋 Copier le texte',copy_link:'🔗 Copier le lien','toast_fav_removed':'Supprime des enregistres','toast_post_saved':'Publication enregistree','toast_removed_folder':'Supprime du dossier','toast_added_to_folder':'Ajoute au dossier «{0}»','toast_folder_deleted':'Dossier supprime','toast_folder_created':'Dossier cree','toast_folder_renamed':'Dossier renomme','toast_updating':'Mise a jour des publications...','toast_save_channels_first':'Enregistrez les chaines d abord','toast_fetching_latest':'Recuperation des dernieres publications...','toast_posts_added':'{0} nouvelles publications recues','toast_no_posts':'Aucune publication recue','toast_invalid_username':'Nom d utilisateur invalide','toast_not_channel_link':'Ce lien n est pas un lien de chaine','toast_already_in_folder':'Cette chaine est deja dans le dossier','toast_ch_added':'Ajoute','toast_last_post':'Dernier post de {0} recu','toast_link_copied':'Lien du dossier copie !','toast_copy_fail':'Echec de la copie','toast_folder_saved':'Dossier «{0}» enregistre','toast_folder_invalid':'Lien de dossier invalide','toast_folder_restored':'Dossier "{0}" restaure','toast_filter_on':'Filtre automatique active','toast_rule_removed':'Regle supprimee','toast_ch_added_n':'{0} chaines ajoutees','toast_added':'Ajoute','toast_smartfolders':'{0} dossiers intelligents crees','toast_smartfolders_exist':'Les dossiers intelligents existent deja','toast_link_copied_post':'Lien de publication copie','toast_no_text':'Pas de texte','toast_text_copied':'Texte de publication copie'}
 };
 I18N_UI.en.show_more='Show more';I18N_UI.fa.show_more='ادامهٔ متن';I18N_UI.ar.show_more='عرض المزيد';I18N_UI.zh.show_more='展开全文';I18N_UI.ru.show_more='Показать полностью';I18N_UI.es.show_more='Mostrar más';I18N_UI.fr.show_more='Voir plus';
+I18N_UI.en.download='Download';I18N_UI.fa.download='دانلود';I18N_UI.ar.download='تنزيل';I18N_UI.zh.download='下载';I18N_UI.ru.download='Скачать';I18N_UI.es.download='Descargar';I18N_UI.fr.download='Télécharger';
+I18N_UI.en.toast_downloading='Downloading…';I18N_UI.fa.toast_downloading='در حال دانلود…';I18N_UI.ar.toast_downloading='جارٍ التنزيل…';I18N_UI.zh.toast_downloading='下载中…';I18N_UI.ru.toast_downloading='Загрузка…';I18N_UI.es.toast_downloading='Descargando…';I18N_UI.fr.toast_downloading='Téléchargement…';
+I18N_UI.en.toast_no_media='No downloadable media';I18N_UI.fa.toast_no_media='رسانه‌ای برای دانلود نیست';I18N_UI.ar.toast_no_media='لا توجد وسائط للتنزيل';I18N_UI.zh.toast_no_media='无可下载媒体';I18N_UI.ru.toast_no_media='Нет медиа для скачивания';I18N_UI.es.toast_no_media='No hay medios descargables';I18N_UI.fr.toast_no_media='Aucun média à télécharger';
 const RTL_LANGS=['fa','ar'];
 let state={lang:localStorage.getItem('tgexp_lang')||'en',theme:localStorage.getItem('tgexp_theme')||'dark',workerUrl:localStorage.getItem('tgexp_worker')||'',currentTab:'explore',currentView:'grid',currentCategory:'all',searchLang:localStorage.getItem('tgexp_search_lang')||'all',exploreType:localStorage.getItem('tgexp_etype')||'all',homeType:localStorage.getItem('tgexp_home_type')||'all',searchQuery:'',searchResults:[],favorites:JSON.parse(localStorage.getItem('tgexp_favs')||'[]'),postFavs:JSON.parse(localStorage.getItem('tgexp_post_favs')||'[]'),favPost:false,favFolder:false,openFolder:'',folderIcon:'📁',favSort:localStorage.getItem('tgexp_favsort')||'name',exploreSort:localStorage.getItem('tgexp_esort')||'name',exploreView:localStorage.getItem('tgexp_eview')||'grid',exploreSearch:localStorage.getItem('tgexp_esearch')||'',favPostType:localStorage.getItem('tgexp_favptype')||'all',folders:JSON.parse(localStorage.getItem('tgexp_folders')||'[]'),livePosts:[],notifUpdates:[],notifSeen:JSON.parse(localStorage.getItem('tgexp_notif_seen')||'{}'),notifEnabled:localStorage.getItem('tgexp_notif_enabled')==='1',suggestions:JSON.parse(localStorage.getItem('tgexp_suggestions')||'[]'),lastNotifCheck:parseInt(localStorage.getItem('tgexp_last_notif')||'0'),feedPool:[],feedPage:0,feedDone:false,feedMode:'local'};
 
@@ -813,6 +816,7 @@ function postItemHtml(p,ch,username,autoplay){
     <div class="post-modal-share">
       <button class="modal-btn modal-btn-secondary" onclick="sharePost('${username}','${p.id}')">📤 ${t('share')}</button><button class="modal-btn modal-btn-secondary" onclick="copyPostText('${username}','${p.id}')">📋 ${t('copy_text')}</button>
       <button class="modal-btn modal-btn-secondary" onclick="copyPostLink('${username}','${p.id}')">🔗 ${t('copy_link')}</button>
+      ${(p.video||goodImg(p.image))?`<button class="modal-btn modal-btn-secondary" onclick="downloadPostMedia('${username}','${p.id}')">⬇️ ${t('download')}</button>`:''}
       <button class="modal-btn modal-btn-secondary ${isPostFav(username,p.id)?'post-fav-saved':''}" onclick="togglePostFav('${username}','${p.id}')">${isPostFav(username,p.id)?'❤️':'🤍'} ${t('save')}</button>
       <button class="modal-btn modal-btn-secondary" onclick="openFolderPicker('post','${username}','${p.id}','${escAttr(ch.title)}')">🗂 ${t('folder_btn')}</button>
     </div>
@@ -2082,6 +2086,31 @@ function copyPostText(username,postId){const list=getChannelPosts(username);cons
 window.addEventListener('scroll',()=>{const b=document.getElementById('scrollTopBtn');if(b)b.style.display=window.scrollY>400?'flex':'none'},{passive:true});
 function scrollToTop(){window.scrollTo({top:0,behavior:'smooth'})}
 function sharePost(username,postId){const url=`https://t.me/${username}/${postId}`;const title=username;if(navigator.share){navigator.share({title,url}).catch(()=>{})}else{copyPostLink(username,postId)}}
+// ============================================================
+// MEDIA DOWNLOAD
+// ============================================================
+async function downloadPostMedia(username,postId){
+  const list=getChannelPosts(username);
+  const p=list.find(x=>String(x.id)===String(postId));
+  const url=p?(p.video||goodImg(p.image)):'';
+  if(!url){toast('⚠️ '+t('toast_no_media'));return}
+  const ext=p.video?(/\.mp4/i.test(url)?'mp4':'mp4'):(/\.jpe?g/i.test(url)?'jpg':/\.png/i.test(url)?'png':'jpg');
+  const name=(username+'_'+postId+'.'+ext).replace(/[^a-zA-Z0-9._-]/g,'_');
+  try{
+    toast('⏳ '+t('toast_downloading'));
+    const r=await fetch(url,{signal:AbortSignal.timeout(30000)});
+    if(!r.ok)throw 0;
+    const blob=await r.blob();
+    const a=document.createElement('a');
+    a.href=URL.createObjectURL(blob);a.download=name;
+    document.body.appendChild(a);a.click();a.remove();
+    setTimeout(()=>URL.revokeObjectURL(a.href),10000);
+    toast('✅ '+name);
+  }catch(e){
+    // CORS fallback: open in a new tab so the browser can save it
+    window.open(url,'_blank');
+  }
+}
 function toast(msg){const container=document.getElementById('toastContainer');const el=document.createElement('div');el.className='toast';el.innerHTML=`<span>✅</span> ${escHtml(msg)}`;container.appendChild(el);setTimeout(()=>el.remove(),3000)}
 function renderSkeletons(count){return`<div class="results-grid">${Array(count).fill('<div class="skeleton"></div>').join('')}</div>`}
 function renderEmpty(title,desc){return`<div class="empty-state"><div class="empty-icon">${title===t('no_favorites')?'❤️':'🔍'}</div><h3>${escHtml(title)}</h3><p>${escHtml(desc||'')}</p></div>`}
