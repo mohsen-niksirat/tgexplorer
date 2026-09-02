@@ -56,6 +56,28 @@
 .home-feed{max-width:640px;margin:0 auto;display:flex;flex-direction:column;gap:18px;padding-bottom:24px}.home-feed-item{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;overflow:hidden;cursor:pointer;transition:all var(--transition)}.home-feed-item:hover{border-color:var(--accent)}.home-feed-item img,.home-feed-item video{width:100%;max-height:70vh;object-fit:contain;background:#000;display:block}.home-feed-head{display:flex;align-items:center;gap:10px;padding:12px 14px}.home-feed-avatar{width:40px;height:40px;border-radius:50%;background:var(--gradient);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;flex-shrink:0}.home-feed-title{font-size:14px;font-weight:700;line-height:1.3}.home-feed-user{font-size:12px;color:var(--text-secondary)}.home-feed-date{font-size:11px;color:var(--text-secondary);margin-left:auto;white-space:nowrap}.home-feed-text{padding:2px 14px 14px;font-size:14px;line-height:1.8;color:var(--text-primary);white-space:pre-wrap}.home-feed-media-text{padding:40px 14px;text-align:center;color:var(--text-secondary);background:var(--bg-secondary)}.home-feed-end{text-align:center;color:var(--text-secondary);font-size:12px;padding:12px 0;opacity:.6}.live-posts-loading{text-align:center;color:var(--text-secondary);font-size:13px;padding:16px 0}.sug-field{display:block;width:100%;margin-bottom:12px;padding:10px 14px;border-radius:10px;border:1px solid var(--border);background:var(--bg-card);color:var(--text-primary);font-size:14px;outline:none;box-sizing:border-box}.sug-field:focus{border-color:var(--accent)}.sug-label{display:block;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:5px}.sug-row{display:flex;gap:10px}.sug-result{margin-top:14px;padding:12px;border-radius:12px;background:var(--bg-secondary);font-size:13px;text-align:center;display:flex;flex-direction:column;gap:10px}
 .home-stats{display:flex;gap:10px;margin-bottom:6px}.home-stat{flex:1;background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:12px;text-align:center}.home-stat-num{font-size:22px;font-weight:800;color:var(--accent)}.home-stat-lbl{font-size:12px;color:var(--text-secondary);margin-top:2px}.folder-rule{background:var(--bg-secondary);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:16px}.folder-rule-head{font-size:13px;font-weight:700;margin-bottom:10px;color:var(--text-secondary)}.folder-rule-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.folder-rule-empty{color:var(--text-secondary);font-size:13px;padding:14px;text-align:center;border:1px dashed var(--border);border-radius:12px;margin-bottom:10px}
 .folder-smart{margin-top:18px}.folder-smart .modal-btn{width:100%;background:var(--accent-light);color:var(--accent);border:1px dashed var(--accent)}
+/* Text preview on cards + full-text popup */
+.card-text-preview{position:absolute;left:0;right:0;bottom:0;background:linear-gradient(to top,rgba(0,0,0,.85) 30%,rgba(0,0,0,.4) 70%,transparent);color:#fff;padding:26px 10px 8px;font-size:11.5px;line-height:1.45;text-align:start;-webkit-line-clamp:3;display:-webkit-box;-webkit-box-orient:vertical;overflow:hidden;pointer-events:none}
+.home-feed-text-clamped{-webkit-line-clamp:4;display:-webkit-box;-webkit-box-orient:vertical;overflow:hidden}
+.post-text-more{background:none;border:none;color:var(--accent);font-size:13px;font-weight:700;cursor:pointer;padding:4px 14px 12px;text-align:start;display:block;width:100%}
+[dir="rtl"] .post-text-more{text-align:end}
+.explore-item{position:relative}
+.text-preview-badge{position:absolute;top:8px;right:8px;z-index:3}
+.post-fulltext-overlay{position:fixed;inset:0;background:var(--bg-overlay);z-index:400;display:none;align-items:center;justify-content:center;padding:24px;backdrop-filter:blur(4px)}
+.post-fulltext-overlay.open{display:flex}
+.post-fulltext{background:var(--bg-primary);border-radius:20px;max-width:560px;width:100%;max-height:80vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:var(--shadow-lg)}
+.post-fulltext-head{display:flex;align-items:center;gap:10px;padding:16px 18px;border-bottom:1px solid var(--border)}
+.post-fulltext-body{padding:18px;overflow-y:auto;font-size:15px;line-height:1.9;white-space:pre-wrap;word-break:break-word}
+.post-fulltext-actions{display:flex;gap:8px;padding:0 18px 16px}
+.post-fulltext-actions .modal-btn{flex:1;padding:10px;font-size:13px}
+/* Search autocomplete */
+.hero-content{position:relative}
+.ac-list{position:absolute;top:calc(100% - 6px);left:50%;transform:translateX(-50%);width:min(540px,92%);background:var(--bg-primary);border:1px solid var(--border);border-radius:12px;box-shadow:var(--shadow-lg);z-index:120;overflow:hidden;text-align:start}
+.ac-item{display:flex;align-items:center;gap:10px;padding:9px 12px;cursor:pointer}
+.ac-item:hover{background:var(--bg-hover)}
+.ac-avatar{width:30px;height:30px;border-radius:50%;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
+.ac-title{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--text-primary)}
+.ac-user{font-size:11px;color:var(--text-secondary)}
 </style>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
@@ -120,7 +142,9 @@
       <span class="search-tag" data-query="meme">😂 Memes</span>
       <span class="search-tag" data-query="programming">👨‍💻 Programming</span>
       <span class="search-tag" data-query="science">🔬 Science</span>
+      <span class="search-tag" id="randomChip">🎲 Random</span>
     </div>
+    <div class="ac-list" id="acList" style="display:none"></div>
   </div>
 </section>
 
@@ -161,6 +185,22 @@
     </div>
   </div>
     <button id="postScrollTop" class="post-scroll-top" onclick="scrollPostModalTop()" title="بازگشت به بالا">↑</button>
+  </div>
+</div>
+
+<!-- FULL TEXT POPUP -->
+<div class="post-fulltext-overlay" id="fullTextOverlay" onclick="if(event.target===this)closeFullText()">
+  <div class="post-fulltext">
+    <div class="post-fulltext-head">
+      <div class="home-feed-avatar" id="fullTextAvatar" style="width:36px;height:36px;font-size:15px">📝</div>
+      <div style="flex:1;min-width:0"><div class="home-feed-title" id="fullTextTitle"></div><div class="home-feed-user" id="fullTextUser"></div></div>
+      <button class="modal-close" style="margin:0" onclick="closeFullText()">✕</button>
+    </div>
+    <div class="post-fulltext-body" id="fullTextBody"></div>
+    <div class="post-fulltext-actions">
+      <button class="modal-btn modal-btn-secondary" onclick="copyFullText()">📋 <span data-i18n="copy_text">Copy text</span></button>
+      <button class="modal-btn modal-btn-secondary" onclick="window.open(window._fullTextLink||'#','_blank')">🔗 <span data-i18n="watch_post">View post</span></button>
+    </div>
   </div>
 </div>
 
@@ -357,8 +397,9 @@ ru:{all:'Все',clip:'🎬 Клипы',image:'🖼 Фото',text:'📝 Тек�
 es:{all:'Todo',clip:'🎬 Clips',image:'🖼 Fotos',text:'📝 Texto',newest:'🕐 Recientes',oldest:'🕐 Antiguos',by_name:'📛 Nombre (A-Z)',by_name_desc:'📛 Nombre (Z-A)',by_posts:'📊 Nº de publicaciones',by_channel:'📛 Canal',by_type:'🎬 Tipo de publicación',sort:'🔀 Ordenar',channels:'Canales',posts:'Publicaciones',folders:'Carpetas',none_folder:'Aún no has creado carpetas — crea una abajo',created:'📁 Carpeta creada',deleted:'🗑 Carpeta eliminada',removed_from:'🗑 Eliminada de',post_saved:'❤️ Publicación guardada',post_removed:'💔 Eliminada de guardadas',open_in_tg:'Abrir en Telegram',share:'📤 Compartir',folder_btn:'🗂 Carpeta',watch_post:'🔗 Ver publicación',save_folder:'🗂 Guardar en carpeta',no:'No',yes:'Sí',chan_for:'canal',post_for:'publicación',instant_search:'🔍 Búsqueda instantánea...',no_match:'🔍 No se encontraron canales',loading_post:'⏳ Cargando...',loading_older:'⏳ Cargando publicaciones antiguas...',end_posts:'— Fin de las publicaciones —',no_posts:'No hay publicaciones',member_since:'👥',view_channel:'Ver canal',fold_empty:'Aún no hay carpetas',newest_sh:'🕐 Recientes',oldest_sh:'🕐 Antiguos',by_name_sh:'📛 Nombre (A-Z)',by_name_desc_sh:'📛 Nombre (Z-A)',copy_text:'📋 Copiar texto',copy_link:'🔗 Copiar enlace','toast_fav_removed':'Eliminada de guardados','toast_post_saved':'Publicacion guardada','toast_removed_folder':'Eliminada de la carpeta','toast_added_to_folder':'Anadida a la carpeta «{0}»','toast_folder_deleted':'Carpeta eliminada','toast_folder_created':'Carpeta creada','toast_folder_renamed':'Carpeta renombrada','toast_updating':'Actualizando publicaciones...','toast_save_channels_first':'Guarda canales primero','toast_fetching_latest':'Obteniendo ultimas publicaciones...','toast_posts_added':'Se recibieron {0} publicaciones nuevas','toast_no_posts':'No se recibio ninguna publicacion','toast_invalid_username':'Nombre de usuario no valido','toast_not_channel_link':'Este enlace no es de un canal','toast_already_in_folder':'Este canal ya esta en la carpeta','toast_ch_added':'Anadido','toast_last_post':'Ultimo post de {0} recibido','toast_link_copied':'Enlace de carpeta copiado!','toast_copy_fail':'Error al copiar','toast_folder_saved':'Carpeta «{0}» guardada','toast_folder_invalid':'Enlace de carpeta no valido','toast_folder_restored':'Carpeta "{0}" restaurada','toast_filter_on':'Filtro automatico activado','toast_rule_removed':'Regla eliminada','toast_ch_added_n':'Se anadieron {0} canales','toast_added':'Anadido','toast_smartfolders':'Se crearon {0} carpetas inteligentes','toast_smartfolders_exist':'Las carpetas inteligentes ya existen','toast_link_copied_post':'Enlace de publicacion copiado','toast_no_text':'Sin texto','toast_text_copied':'Texto de publicacion copiado'},
 fr:{all:'Tout',clip:'🎬 Clips',image:'🖼 Photos',text:'📝 Texte',newest:'🕐 Récents',oldest:'🕐 Anciens',by_name:'📛 Nom (A-Z)',by_name_desc:'📛 Nom (Z-A)',by_posts:'📊 Nombre de publications',by_channel:'📛 Chaîne',by_type:'🎬 Type de publication',sort:'🔀 Trier',channels:'Chaînes',posts:'Publications',folders:'Dossiers',none_folder:'Vous n\'avez pas encore créé de dossier — créez-en un ci-dessous',created:'📁 Dossier créé',deleted:'🗑 Dossier supprimé',removed_from:'🗑 Supprimé de',post_saved:'❤️ Publication enregistrée',post_removed:'💔 Supprimée des enregistrées',open_in_tg:'Ouvrir dans Telegram',share:'📤 Partager',folder_btn:'🗂 Dossier',watch_post:'🔗 Voir la publication',save_folder:'🗂 Enregistrer dans un dossier',no:'Non',yes:'Oui',chan_for:'chaîne',post_for:'publication',instant_search:'🔍 Recherche instantanée...',no_match:'🔍 Aucune chaîne trouvée',loading_post:'⏳ Chargement...',loading_older:'⏳ Chargement des publications plus anciennes...',end_posts:'— Fin des publications —',no_posts:'Aucune publication disponible',member_since:'👥',view_channel:'Voir la chaîne',fold_empty:'Pas encore de dossiers',newest_sh:'🕐 Récents',oldest_sh:'🕐 Anciens',by_name_sh:'📛 Nom (A-Z)',by_name_desc_sh:'📛 Nom (Z-A)',copy_text:'📋 Copier le texte',copy_link:'🔗 Copier le lien','toast_fav_removed':'Supprime des enregistres','toast_post_saved':'Publication enregistree','toast_removed_folder':'Supprime du dossier','toast_added_to_folder':'Ajoute au dossier «{0}»','toast_folder_deleted':'Dossier supprime','toast_folder_created':'Dossier cree','toast_folder_renamed':'Dossier renomme','toast_updating':'Mise a jour des publications...','toast_save_channels_first':'Enregistrez les chaines d abord','toast_fetching_latest':'Recuperation des dernieres publications...','toast_posts_added':'{0} nouvelles publications recues','toast_no_posts':'Aucune publication recue','toast_invalid_username':'Nom d utilisateur invalide','toast_not_channel_link':'Ce lien n est pas un lien de chaine','toast_already_in_folder':'Cette chaine est deja dans le dossier','toast_ch_added':'Ajoute','toast_last_post':'Dernier post de {0} recu','toast_link_copied':'Lien du dossier copie !','toast_copy_fail':'Echec de la copie','toast_folder_saved':'Dossier «{0}» enregistre','toast_folder_invalid':'Lien de dossier invalide','toast_folder_restored':'Dossier "{0}" restaure','toast_filter_on':'Filtre automatique active','toast_rule_removed':'Regle supprimee','toast_ch_added_n':'{0} chaines ajoutees','toast_added':'Ajoute','toast_smartfolders':'{0} dossiers intelligents crees','toast_smartfolders_exist':'Les dossiers intelligents existent deja','toast_link_copied_post':'Lien de publication copie','toast_no_text':'Pas de texte','toast_text_copied':'Texte de publication copie'}
 };
+I18N_UI.en.show_more='Show more';I18N_UI.fa.show_more='ادامهٔ متن';I18N_UI.ar.show_more='عرض المزيد';I18N_UI.zh.show_more='展开全文';I18N_UI.ru.show_more='Показать полностью';I18N_UI.es.show_more='Mostrar más';I18N_UI.fr.show_more='Voir plus';
 const RTL_LANGS=['fa','ar'];
-let state={lang:localStorage.getItem('tgexp_lang')||'en',theme:localStorage.getItem('tgexp_theme')||'dark',workerUrl:localStorage.getItem('tgexp_worker')||'',currentTab:'explore',currentView:'grid',currentCategory:'all',searchLang:localStorage.getItem('tgexp_search_lang')||'all',exploreType:localStorage.getItem('tgexp_etype')||'all',homeType:localStorage.getItem('tgexp_home_type')||'all',searchQuery:'',searchResults:[],favorites:JSON.parse(localStorage.getItem('tgexp_favs')||'[]'),postFavs:JSON.parse(localStorage.getItem('tgexp_post_favs')||'[]'),favPost:false,favFolder:false,openFolder:'',folderIcon:'📁',favSort:localStorage.getItem('tgexp_favsort')||'name',exploreSort:localStorage.getItem('tgexp_esort')||'name',exploreView:localStorage.getItem('tgexp_eview')||'grid',exploreSearch:localStorage.getItem('tgexp_esearch')||'',favPostType:localStorage.getItem('tgexp_favptype')||'all',folders:JSON.parse(localStorage.getItem('tgexp_folders')||'[]'),livePosts:[],notifUpdates:[],notifSeen:JSON.parse(localStorage.getItem('tgexp_notif_seen')||'{}'),notifEnabled:localStorage.getItem('tgexp_notif_enabled')==='1',suggestions:JSON.parse(localStorage.getItem('tgexp_suggestions')||'[]'),lastNotifCheck:parseInt(localStorage.getItem('tgexp_last_notif')||'0')};
+let state={lang:localStorage.getItem('tgexp_lang')||'en',theme:localStorage.getItem('tgexp_theme')||'dark',workerUrl:localStorage.getItem('tgexp_worker')||'',currentTab:'explore',currentView:'grid',currentCategory:'all',searchLang:localStorage.getItem('tgexp_search_lang')||'all',exploreType:localStorage.getItem('tgexp_etype')||'all',homeType:localStorage.getItem('tgexp_home_type')||'all',searchQuery:'',searchResults:[],favorites:JSON.parse(localStorage.getItem('tgexp_favs')||'[]'),postFavs:JSON.parse(localStorage.getItem('tgexp_post_favs')||'[]'),favPost:false,favFolder:false,openFolder:'',folderIcon:'📁',favSort:localStorage.getItem('tgexp_favsort')||'name',exploreSort:localStorage.getItem('tgexp_esort')||'name',exploreView:localStorage.getItem('tgexp_eview')||'grid',exploreSearch:localStorage.getItem('tgexp_esearch')||'',favPostType:localStorage.getItem('tgexp_favptype')||'all',folders:JSON.parse(localStorage.getItem('tgexp_folders')||'[]'),livePosts:[],notifUpdates:[],notifSeen:JSON.parse(localStorage.getItem('tgexp_notif_seen')||'{}'),notifEnabled:localStorage.getItem('tgexp_notif_enabled')==='1',suggestions:JSON.parse(localStorage.getItem('tgexp_suggestions')||'[]'),lastNotifCheck:parseInt(localStorage.getItem('tgexp_last_notif')||'0'),feedPool:[],feedPage:0,feedDone:false,feedMode:'local'};
 
 // ============================================================
 // INIT
@@ -371,7 +412,10 @@ document.addEventListener('DOMContentLoaded',()=>{applyTheme(state.theme);applyL
 function bindEvents(){
   document.getElementById('searchBtn').addEventListener('click',doSearch);
   document.getElementById('searchInput').addEventListener('keydown',e=>{if(e.key==='Enter')doSearch()});
-  document.getElementById('searchTags').addEventListener('click',e=>{const tag=e.target.closest('.search-tag');if(tag){document.getElementById('searchInput').value=tag.dataset.query;doSearch()}});
+  document.getElementById('searchInput').addEventListener('input',onSearchType);
+  document.getElementById('searchInput').addEventListener('blur',()=>setTimeout(()=>{const el=document.getElementById('acList');if(el)el.style.display='none'},200));
+  document.getElementById('acList').addEventListener('mousedown',e=>{const item=e.target.closest('.ac-item');if(item){pickAutocomplete(item.dataset.username)}});
+  document.getElementById('searchTags').addEventListener('click',e=>{const tag=e.target.closest('.search-tag');if(!tag)return;if(tag.id==='randomChip'){openRandomChannel();return}document.getElementById('searchInput').value=tag.dataset.query;doSearch()});
   document.getElementById('navTabs').addEventListener('click',e=>{const tab=e.target.closest('.nav-tab');if(tab)switchTab(tab.dataset.tab)});
   document.getElementById('categoriesBar').addEventListener('click',e=>{const chip=e.target.closest('.cat-chip');if(chip){state.currentCategory=chip.dataset.cat;renderCategories();loadExplore()}});
 document.getElementById('langFilter').addEventListener('click',e=>{const chip=e.target.closest('.lang-chip');if(chip){state.searchLang=chip.dataset.lang;localStorage.setItem('tgexp_search_lang',state.searchLang);document.querySelectorAll('.lang-chip').forEach(el=>el.classList.toggle('active',el===chip));if(state.currentTab==='search')doSearch();else if(state.currentTab==='explore')loadExplore()}});
@@ -382,7 +426,7 @@ document.getElementById('langFilter').addEventListener('click',e=>{const chip=e.
   document.getElementById('connBadge').addEventListener('click',openSettings);
   document.getElementById('notifBtn').addEventListener('click',openNotifModal);
   document.getElementById('workerUrlInput').addEventListener('keydown',e=>{if(e.key==='Enter')testConnection()});
-  document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeSettings();closePostModal();closeChannelModal();closeNotifModal();closeFolderPicker();closeSuggestModal()}});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeSettings();closePostModal();closeChannelModal();closeNotifModal();closeFolderPicker();closeSuggestModal();closeFullText()}});
   document.getElementById('channelOverlay').addEventListener('click',e=>{if(e.target===e.currentTarget)closeChannelModal()});
   document.getElementById('folderPicker').addEventListener('click',e=>{if(e.target===e.currentTarget)closeFolderPicker()});
   document.getElementById('suggestOverlay').addEventListener('click',e=>{if(e.target===e.currentTarget)closeSuggestModal()});
@@ -488,6 +532,41 @@ async function doSearch(){const query=document.getElementById('searchInput').val
 function normalizeText(x){return (x||'').toLowerCase().replace(/ي/g,'ی').replace(/ك/g,'ک').replace(/[‌​]/g,' ').replace(/\s+/g,' ').trim()}
 function fuzzyScore(q,t){if(!q||!t)return 0;if(t===q)return 100;if(t.indexOf(q)===0)return 90;if(t.indexOf(q)>-1)return 80;let score=0,ti=0,m=0;for(const ch of q){const idx=t.indexOf(ch,ti);if(idx===-1){if(m===0)return 0;break}score+=10;m++;ti=idx+1}return m>=2?score:0}
 function searchLocal(q){q=(q||'').trim();if(!q)return[];const lang=state.searchLang||'all';let base=getAllChannels();if(lang!=='all')base=base.filter(ch=>ch.lang===lang);const nq=normalizeText(q);const scored=base.map(ch=>{const hay=normalizeText([ch.title,ch.username,ch.description,(ch.tags||[]).join(' ')].join(' '));return{ch,score:fuzzyScore(nq,hay)}}).filter(x=>x.score>0);scored.sort((a,b)=>b.score-a.score);return scored.map(x=>x.ch)}
+// ============================================================
+// SEARCH AUTOCOMPLETE (instant local DB suggestions)
+// ============================================================
+let _acTimer=null;
+function onSearchType(){
+  clearTimeout(_acTimer);
+  _acTimer=setTimeout(()=>{
+    const inp=document.getElementById('searchInput');
+    const q=inp.value.trim();
+    const list=document.getElementById('acList');
+    if(!q||q.length<2){list.style.display='none';return}
+    const hits=searchLocal(q).slice(0,6);
+    if(!hits.length){list.style.display='none';return}
+    list.innerHTML=hits.map(ch=>`<div class="ac-item" data-username="${escAttr(ch.username)}">
+      <div class="ac-avatar" style="${avatarGrad(ch.username)}">${escHtml((ch.title||ch.username||'?')[0].toUpperCase())}</div>
+      <div style="min-width:0"><div class="ac-title">${escHtml(ch.title||ch.username)}</div><div class="ac-user">@${escHtml(ch.username)} · 👥 ${ch.members||'0'}</div></div>
+    </div>`).join('');
+    list.style.display='block';
+  },120);
+}
+function pickAutocomplete(username){
+  const list=document.getElementById('acList');if(list)list.style.display='none';
+  document.getElementById('searchInput').value='';
+  openChannel(username);
+}
+// ============================================================
+// RANDOM CHANNEL
+// ============================================================
+function openRandomChannel(){
+  const pool=getLocalExplore('all');
+  if(!pool.length)return;
+  const ch=pool[Math.floor(Math.random()*pool.length)];
+  if(getChannelPosts(ch.username).length)openPostModal(ch.username,0);
+  else openChannel(ch.username);
+}
 
 // ============================================================
 // EXPLORE
@@ -497,47 +576,101 @@ async function loadExplore(){const content=document.getElementById('content');co
 // ============================================================
 // FEED (Instagram-like)
 // ============================================================
+// Build a merged image/video feed from the local channel posts
+function buildLocalFeedPool(category){
+  const chans=getLocalExplore(category||'all');
+  const posts=[];
+  for(const ch of chans){
+    for(const p of getChannelPosts(ch.username)){
+      if(!p.image&&!p.hasVideo)continue;
+      posts.push({id:p.id,date:p.date||'',text:p.text||'',image:p.image||'',video:p.video||'',hasVideo:!!p.hasVideo,channel:ch.username,channelTitle:ch.title||ch.username,channelMembers:ch.members||'0',type:p.hasVideo?'video':'image'});
+    }
+  }
+  for(let i=posts.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));const tmp=posts[i];posts[i]=posts[j];posts[j]=tmp}
+  return posts;
+}
 async function loadFeed(){
   const content=document.getElementById('content');
   content.innerHTML=renderSkeletons(9);
+  state.feedPool=[];state.feedPage=0;state.feedDone=false;window._feedLoading=false;
   try{
     if(state.workerUrl){
       const cat=state.currentCategory;
       const resp=await fetch(`${state.workerUrl}/api/explore-feed?cat=${cat}&page=1&limit=30`);
       const data=await resp.json();
-      if(data.posts?.length){
-        renderFeedView(content,data.posts);
-      }else{
-        content.innerHTML=renderEmpty(t('no_results'),t('no_results_desc'));
-      }
+      if(data.posts?.length)state.feedPool=data.posts.slice();
+      state.feedMode='worker';
     }else{
-      content.innerHTML=`<div class="empty-state"><div class="empty-icon">📡</div><h3>Connect proxy to load feed</h3><p>Set up your Cloudflare Worker to see image posts from channels</p></div>`;
+      state.feedMode='local';
     }
+    if(!state.feedPool.length&&state.feedMode==='worker')state.feedMode='local';
+    if(state.feedMode==='local'&&!state.feedPool.length)state.feedPool=buildLocalFeedPool(state.currentCategory);
+    if(!state.feedPool.length){
+      content.innerHTML=`<div class="empty-state"><div class="empty-icon">📡</div><h3>Connect proxy to load feed</h3><p>Set up your Cloudflare Worker to see image posts from channels</p></div>`;
+      return;
+    }
+    state.feedPage=1;
+    renderFeedView(content,state.feedPool.slice(0,30));
   }catch(err){
-    content.innerHTML=renderEmpty(t('no_results'),t('no_results_desc'));
+    // worker failed — fall back to local feed
+    state.feedMode='local';
+    state.feedPool=buildLocalFeedPool(state.currentCategory);
+    if(state.feedPool.length){state.feedPage=1;renderFeedView(content,state.feedPool.slice(0,30))}
+    else content.innerHTML=renderEmpty(t('no_results'),t('no_results_desc'));
   }
 }
+async function appendFeedPosts(){
+  if(state.currentTab!=='feed'||state.feedDone||window._feedLoading)return;
+  const rendered=(state.feedPage||1)*30;
+  window._feedLoading=true;
+  try{
+    // Extend the pool in worker mode when it runs out
+    if(state.feedMode==='worker'&&state.feedPool.length<rendered+30){
+      const next=(state.feedPage||1)+1;
+      const resp=await fetch(`${state.workerUrl}/api/explore-feed?cat=${state.currentCategory}&page=${next}&limit=30`);
+      const data=await resp.json();
+      if(data.posts?.length){state.feedPool.push(...data.posts);state.feedPage=next}
+      else state.feedDone=true;
+    }
+    const have=state.feedPool.length;
+    if(rendered>=have){
+      if(state.feedMode==='local'||state.feedDone){
+        if(rendered>=have)state.feedDone=true;
+        window._feedLoading=false;return;
+      }
+    }
+    const chunk=state.feedPool.slice(rendered,rendered+30);
+    if(!chunk.length){state.feedDone=true;window._feedLoading=false;return}
+    const grid=document.querySelector('.feed-grid');
+    const list=document.querySelector('.explore-list');
+    const html=state.exploreView==='list'?chunk.map((p,i)=>feedRowHtml(p,rendered+i)).join(''):chunk.map((p,i)=>feedItemHtml(p,rendered+i)).join('');
+    if(grid)grid.insertAdjacentHTML('beforeend',html);
+    else if(list)list.insertAdjacentHTML('beforeend',html);
+    window._feedPosts=state.feedPool.slice(0,rendered+chunk.length);
+  }finally{window._feedLoading=false}
+}
 
-function renderFeedView(container,posts){
+function feedItemHtml(p,i){
   const colors=['#e91e63','#9c27b0','#3f51b5','#0088cc','#009688','#4caf50','#ff9800','#795548','#607d8b','#f44336'];
-  container.innerHTML='<div style="display:flex;justify-content:flex-end;margin-bottom:10px">'+viewToggleHtml()+'</div>'+(state.exploreView==='list'?'<div class="explore-list">'+posts.map((p,i)=>feedRowHtml(p,i)).join('')+'</div>':`<div class="feed-grid">${posts.map((p,i)=>{
-    const color=colors[i%colors.length];
-    const initial=(p.channelTitle||p.channel||'?')[0].toUpperCase();
-    const img=goodImg(p.image);const imgHtml=img?`<img src="${img}" alt="" loading="lazy" onerror="this.style.display='none'">`:`<div style="width:100%;height:100%;background:${color};display:flex;align-items:center;justify-content:center;font-size:32px;color:#fff;font-weight:700">${initial}</div>`;
-    const videoBadge=p.hasVideo?`<div class="feed-video-badge">▶ Video</div>`:'';
-    const text=p.text?p.text.substring(0,80)+(p.text.length>80?'...':''):'';
-    return `<div class="feed-item" onclick="openFeedPost(${i})" data-index="${i}">
-      ${imgHtml}
-      ${videoBadge}
-      <div class="feed-item-overlay">
-        <div class="feed-channel-name">
-          <span class="feed-avatar-sm" style="${avatarGrad(p.channel)}">${initial}</span>
-          @${escHtml(p.channel||'')}
-        </div>
-        <div class="feed-post-text">${escHtml(text)}</div>
+  const color=colors[i%colors.length];
+  const initial=(p.channelTitle||p.channel||'?')[0].toUpperCase();
+  const img=goodImg(p.image);const imgHtml=img?`<img src="${img}" alt="" loading="lazy" onerror="this.style.display='none'">`:`<div style="width:100%;height:100%;background:${color};display:flex;align-items:center;justify-content:center;font-size:32px;color:#fff;font-weight:700">${initial}</div>`;
+  const videoBadge=p.hasVideo?`<div class="feed-video-badge">▶ Video</div>`:'';
+  const text=p.text?p.text.substring(0,80)+(p.text.length>80?'...':''):'';
+  return `<div class="feed-item" onclick="openFeedPost(${i})" data-index="${i}">
+    ${imgHtml}
+    ${videoBadge}
+    <div class="feed-item-overlay">
+      <div class="feed-channel-name">
+        <span class="feed-avatar-sm" style="${avatarGrad(p.channel)}">${initial}</span>
+        @${escHtml(p.channel||'')}
       </div>
-    </div>`;
-  }).join('')}</div>`);
+      <div class="feed-post-text">${escHtml(text)}</div>
+    </div>
+  </div>`;
+}
+function renderFeedView(container,posts){
+  container.innerHTML='<div style="display:flex;justify-content:flex-end;margin-bottom:10px">'+viewToggleHtml()+'</div>'+(state.exploreView==='list'?'<div class="explore-list">'+posts.map((p,i)=>feedRowHtml(p,i)).join('')+'</div>':`<div class="feed-grid">${posts.map((p,i)=>feedItemHtml(p,i)).join('')}</div>`);
   // Store posts for modal
   window._feedPosts=posts;
 }
@@ -546,7 +679,7 @@ function openFeedPost(index){
   const posts=window._feedPosts||[];
   const p=posts[index];
   if(!p)return;
-  // Open channel modal
+  if(getChannelPosts(p.channel).length){openPostModal(p.channel,0);return}
   if(p.channel)openChannel(p.channel);
 }
 
@@ -608,9 +741,11 @@ function renderExploreView(container,items){
     const initial=(ch.title||ch.username||'?')[0].toUpperCase();
     const imgHtml=img?`<img src="${img}" alt="" loading="lazy" onerror="this.style.display='none'">`:`<div style="width:100%;height:100%;background:${color};display:flex;align-items:center;justify-content:center;font-size:36px;color:#fff;font-weight:700">${initial}</div>`;
     const onclick=posts.length?`openPostModal('${ch.username}')`:`openChannel('${ch.username}')`;
+    const previewText=post&&post.text?post.text.slice(0,140):'';
     return `<div class="explore-item" onclick="${onclick}" style="aspect-ratio:3/4">
       ${imgHtml}
-      ${post?`<div class="feed-type-badge">${post.hasVideo?'🎬':(post.image?'🖼':'📝')}</div>`:''}
+      ${post?`<div class="feed-type-badge text-preview-badge">${post.hasVideo?'🎬':(post.image?'🖼':'📝')}</div>`:''}
+      ${previewText?`<div class="card-text-preview">${escHtml(previewText)}${post.text.length>140?'…':''}</div>`:''}
       <div class="explore-item-overlay">
         <div class="explore-item-info">
           <div class="explore-stat">${ch.members||'0'}</div>
@@ -880,8 +1015,23 @@ function openChannel(username){
   }else{
     postsEl.innerHTML='<div class="empty-state" style="padding:20px"><div class="empty-icon">📭</div><p>پستی در دسترس نیست</p></div>';
   }
+  renderLocalRelated(username);
   document.getElementById('channelOverlay').classList.add('open');
   document.body.style.overflow='hidden';
+}
+// Local related-channels fallback (worker /api/related gets priority elsewhere)
+function renderLocalRelated(username){
+  const wrap=document.getElementById('modalRelated');
+  const chips=document.getElementById('relatedChips');
+  if(!wrap||!chips)return;
+  const me=getAllChannels().find(c=>c.username===username);
+  if(!me||!me.tags||!me.tags.length){wrap.style.display='none';return}
+  const rel=getAllChannels().filter(c=>c.username!==username&&c.tags.some(tg=>me.tags.includes(tg)))
+    .map(c=>({c,shared:c.tags.filter(tg=>me.tags.includes(tg)).length}))
+    .sort((a,b)=>b.shared-a.shared).slice(0,6);
+  if(!rel.length){wrap.style.display='none';return}
+  chips.innerHTML=rel.map(r=>`<span class="related-chip" onclick="closeChannelModal();openChannel('${r.c.username}')"><span style="${avatarGrad(r.c.username)};width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:10px;font-weight:700">${escHtml((r.c.title||r.c.username)[0].toUpperCase())}</span>${escHtml(r.c.title||r.c.username)}${r.shared?`<span class="chip-tag">+${r.shared}</span>`:''}</span>`).join('');
+  wrap.style.display='';
 }
 
 function updateModalFav(u){const btn=document.getElementById('modalFavBtn');btn.querySelector('span:first-child').textContent=isFav(u)?'❤️':'🤍'}
@@ -1605,6 +1755,21 @@ function setHomeType(tp){
   hf.rendered=0;
   renderHomeFeedChunk(true);
 }
+// ============================================================
+// FULL TEXT POPUP
+// ============================================================
+function openFullText(username,title,text,link){
+  const ov=document.getElementById('fullTextOverlay');
+  document.getElementById('fullTextAvatar').style.cssText=avatarGrad(username);
+  document.getElementById('fullTextAvatar').textContent=(title||username||'?')[0].toUpperCase();
+  document.getElementById('fullTextTitle').textContent=title||username;
+  document.getElementById('fullTextUser').textContent='@'+username;
+  document.getElementById('fullTextBody').textContent=text||'';
+  window._fullTextLink=link||('https://t.me/'+username);
+  ov.classList.add('open');document.body.style.overflow='hidden';
+}
+function closeFullText(){document.getElementById('fullTextOverlay').classList.remove('open');document.body.style.overflow=''}
+function copyFullText(){const txt=document.getElementById('fullTextBody').textContent;if(!txt)return;navigator.clipboard.writeText(txt).then(()=>toast('📋 '+t('toast_text_copied')))}
 function homeFeedItemHtml(x){
   const ch=getAllChannels().find(c=>c.username===x.username)||{username:x.username,title:x.channelTitle};
   const dateTxt=x.date?new Date(x.date).toLocaleString('fa-IR',{dateStyle:'medium',timeStyle:'short'}):'';
@@ -1612,13 +1777,24 @@ function homeFeedItemHtml(x){
   if(x.hasVideo&&x.video)media='<video src="'+x.video+'" poster="'+(x.image||'')+'" preload="metadata" controls muted playsinline></video>';
   else if(x.image)media='<img src="'+x.image+'" alt="" loading="lazy" onerror="this.style.display=&#39;none&#39;">';
   else if(x.hasVideo)media='<div class="home-feed-media-text">▶ ویدیو</div>';
+  const longText=x.text&&x.text.length>260;
+  if(longText)window._homeTexts[x.username+'_'+x.id]=x.text;
+  const openTxt='event.stopPropagation();openHomeFullText(\''+x.username+'\',\''+x.id+'\')';
+  const textHtml=x.text?'<div class="home-feed-text'+(longText?' home-feed-text-clamped':'')+'" style="cursor:'+(longText?'pointer':'inherit')+'" onclick="'+(longText?openTxt:'')+'">'+escHtml(x.text.slice(0,600))+(longText?' …':'')+'</div>'
+    +(longText?'<button class="post-text-more" style="margin:0 14px 12px" onclick="'+openTxt+'">📄 '+t('show_more')+'</button>':''):'';
   return '<div class="home-feed-item" onclick="openHomePost(\''+x.username+'\',\''+x.id+'\')">'+
     '<div class="home-feed-head"><div class="home-feed-avatar" style="'+avatarGrad(x.username)+'">'+escHtml((ch.title||x.username)[0].toUpperCase())+'</div>'+
     '<div class="home-feed-title">'+escHtml(ch.title||x.username)+'<div class="home-feed-user">@'+escHtml(x.username)+'</div></div>'+
     (dateTxt?'<div class="home-feed-date">'+dateTxt+'</div>':'')+'</div>'+
     media+
-    (x.text?'<div class="home-feed-text">'+escHtml(x.text.slice(0,320))+'</div>':'')+
+    textHtml+
     '</div>';
+}
+window._homeTexts={};
+function openHomeFullText(username,id){
+  const txt=window._homeTexts[username+'_'+id];if(!txt)return;
+  const ch=getAllChannels().find(c=>c.username===username)||{username,title:username};
+  openFullText(username,ch.title||username,txt,'https://t.me/'+username+'/'+id);
 }
 function openHomePost(username,id){
   const posts=getChannelPosts(username);
@@ -1632,7 +1808,7 @@ function openHomePost(username,id){
   const scroller=overlay.querySelector('.modal');
   if(scroller)scroller.onscroll=function(){if(scroller.scrollTop+scroller.clientHeight>=scroller.scrollHeight-300)appendPostFeed();if(scroller.scrollTop<=50)checkNewerPosts()};
 }
-window.addEventListener('scroll',()=>{if(state.currentTab==='home'&&window.innerHeight+window.scrollY>=document.body.scrollHeight-300)renderHomeFeedChunk(false)});
+window.addEventListener('scroll',()=>{if(state.currentTab==='home'&&window.innerHeight+window.scrollY>=document.body.scrollHeight-300)renderHomeFeedChunk(false);if(state.currentTab==='feed'&&window.innerHeight+window.scrollY>=document.body.scrollHeight-400)appendFeedPosts()});
 
 // ============================================================
 // PUSH NOTIFICATIONS

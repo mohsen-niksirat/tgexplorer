@@ -8,7 +8,7 @@ Search and discover public Telegram channels and groups — like Instagram Explo
 ## ✨ Features
 
 - 🔍 **Smart Search** — fuzzy matching (typo-tolerant) + Persian/English language filter
-- 🏠 **Explore** — browse 114 **verified** public channels by category (every one checked live against t.me)
+- 🏠 **Explore** — browse 151 **verified** public channels by category (every one checked live against t.me)
 - 🇮🇷 **Persian & English** channels — BBC Persian, Radio Farda, Tabnak, Varzesh3, Digiato/TechNolife tech + NYT, Guardian, Sky News, NASA-level English channels
 - 📱 **Instagram-like grid** view with language badges on every card
 - ❤️ **Favorites** — save channels locally
@@ -41,6 +41,34 @@ This repo ships a ready-made [`worker.js`](worker.js) + [`wrangler.toml`](wrangl
 - `GET /api/channel/<username>` · `/api/stats/<username>` · `/api/related/<username>` · `/api/avatar/<username>`
 
 ## 📦 Changelog
+
+### v1.6.0
+
+- 📡 **+37 verified channels (114 → 151)** — each candidate checked live
+  against t.me (DW فارسی، The Verge، Bloomberg، TradingView، Glassnode،
+  Epic Games Store، Astronomy Picture of the Day، Pavel Durov، Telegram Tips،
+  MotoGP، Quanta Magazine، تپسی، گجت نیوز و…); duplicate Netflix entry removed
+- 🛢 **3-day rolling retention** — the crawler now drops posts older than
+  `RETENTION_DAYS` (default 3) from the archive on every run, so crawled data
+  auto-expires in GitHub and the repo never bloats (undated posts are kept)
+- 🖼 **Feed works without a worker + infinite scroll** — the Feed tab now
+  builds a shuffled image/video feed from the local post archive (previously
+  it was worker-only), and both local and worker modes load more content as
+  you scroll, so Explore no longer "runs out" quickly
+- 📄 **Text post previews + full-text popup** — text-only channel cards show a
+  3-line preview on the grid, home feed clamps long texts, and a 📄 button /
+  tap opens a popup with the complete text plus copy and Telegram links
+- 🔍 **Search autocomplete** — instant channel suggestions under the search box
+  (fuzzy, language-aware) with tap-to-open
+- 🎲 **Random channel** — a chip on the hero that opens a random verified channel
+- 🔗 **Local related channels** — the channel modal now shows tag-based related
+  channels even without a worker
+- ☁️ **Optional Cloudflare KV cache** — bind a KV namespace as `CACHE_KV` to
+  give the worker a persistent cache (survives cold starts); falls back to
+  in-memory when not bound; new "Free services" section in the README
+- 🧭 Inspiration from similar projects (TeleSearch, searchkit, directory apps):
+  multi-type content discovery (our Feed/Explore), instant search, trending
+  queries and related-channel suggestions
 
 ### v1.5.1
 
@@ -116,7 +144,7 @@ This repo ships a ready-made [`worker.js`](worker.js) + [`wrangler.toml`](wrangl
 
 ### Option 1: Local mode (default — no setup)
 
-Just open `index.html` (or deploy to GitHub Pages). The app starts with a **verified database of 114 real channels** and full fuzzy search + language filter — no worker, no API key.
+Just open `index.html` (or deploy to GitHub Pages). The app starts with a **verified database of 151 real channels** and full fuzzy search + language filter — no worker, no API key.
 
 ### Option 2: With Cloudflare Worker (full power — live Telegram search)
 
@@ -138,6 +166,24 @@ localStorage.setItem('tgexp_worker', 'https://your-worker-url.workers.dev');
 ```
 
 > Note: the storage key is `tgexp_worker` (older READMEs said `telgram_explorer_worker` — that was a typo).
+
+## ☁️ Free services you can plug in (optional)
+
+| Service | Free tier | What it adds |
+|---|---|---|
+| **Cloudflare Workers** | 100k req/day | The worker proxy (live search, posts, trending) — core optional backend |
+| **Cloudflare KV** | 100k reads + 1k writes/day | Persistent cache for the worker (survives cold starts) — bind as `CACHE_KV`, see `wrangler.toml` |
+| **GitHub Pages** | Unlimited static | Hosting for the app itself (already used) |
+| **GitHub Actions** | 2000 min/month (public repos: free) | The 3-hour crawl + daily avatar refresh (already used) |
+| **Cloudflare Web Analytics** | Free | Privacy-first page views (already wired in `index.html`) |
+| **Web Push (service worker)** | Free | Browser notifications for new posts of favorites (client-side, no server needed) |
+| **r.jina.ai** | Free | Client-side t.me fallback proxy for older posts without an archive |
+| **PWA install** | Free | Installable app on Android/iOS — no store needed |
+
+Other viable free options (not wired yet):
+- **Supabase / Neon (Postgres free tier)** — a serverless DB if the JSON-file archive ever outgrows static hosting; the crawler could push there instead of committing.
+- **R2 (Cloudflare, 10GB free)** — object storage for the `posts/` archive with the same on-demand pattern.
+- **Telegram Bot API** — a bot (@BotFather) can send channel updates via `sendMessage`; pairs with GitHub Actions cron.
 
 ## 🇮🇷 راهنمای فارسی
 
@@ -213,7 +259,7 @@ the workflow automatically opens a GitHub Issue with a link to the failed logs.
 ```
 tgexplorer/
 ├── index.html           # Main app (single file, HTML+CSS+JS)
-├── channels.js          # Verified channel database (114 channels)
+├── channels.js          # Verified channel database (151 channels)
 ├── posts.js             # Inline seed: latest 12 posts per channel (generated)
 ├── posts/               # Full archive, one JSON per channel (lazy-loaded)
 ├── avatars.js           # Channel avatar map (generated)

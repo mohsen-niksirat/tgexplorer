@@ -1,3 +1,14 @@
 name = "tgexplorer-worker"
 main = "worker.js"
 compatibility_date = "2024-11-01"
+
+# OPTIONAL: persistent KV cache (free tier: 100k reads + 1k writes/day).
+# 1. npx wrangler kv namespace create CACHE_KV
+# 2. Put the returned id below and uncomment:
+# [[kv_namespaces]]
+# binding = "CACHE_KV"
+# id = "<your-namespace-id>"
+#
+# OPTIONAL: Telegram API credentials (secrets, never hardcode):
+#   npx wrangler secret put TG_API_ID
+#   npx wrangler secret put TG_API_HASH

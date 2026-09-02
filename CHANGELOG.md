@@ -3,6 +3,40 @@
 Full version history of Telegram Explorer. The latest release is summarized in the
 [README](README.md#-changelog).
 
+## v1.6.0
+
+- 📡 **+37 verified channels (114 → 151)** — every candidate validated live
+  against `t.me/s/<username>` (title match, member scrape); the duplicate
+  `netflix` entry was removed. New additions include DW فارسی, The Verge,
+  Bloomberg, CNN Breaking, The Guardian, The Economist, Business Insider,
+  TradingView, Glassnode, Crypto Briefing, Epic Games Store, Rockstar Games,
+  MotoGP, Astronomy Picture of the Day, Quanta Magazine, Scientific American,
+  Rocket Lab, Hugging Face, Go, Figma, Pavel Durov, Telegram Tips, SCMP,
+  EL PAÍS, تپسی, گجت نیوز, خبر فارسی and more.
+- 🛢 **3-day rolling retention** — `crawl_posts.js` now drops posts older than
+  `RETENTION_DAYS` (default 3 days) from `posts/<username>.json` on every run;
+  the repo self-cleans and storage stays flat. Posts without a parseable date
+  are kept. The seed (`posts.js`) is rebuilt from the retained window.
+- 🖼 **Feed without a worker + infinite scroll** — `loadFeed()` previously
+  showed "Connect proxy" in local mode; it now builds a shuffled image/video
+  pool from the local archive, and `appendFeedPosts()` adds 30 more items as
+  the user scrolls (worker mode pages through `/api/explore-feed`).
+- 📄 **Text previews + full-text popup** — text-only Explore cards render a
+  3-line gradient preview; the Home feed clamps long texts at 4 lines with a
+  "Show more" button (7 languages); a new full-text popup shows the complete
+  post text with copy-text and open-in-Telegram actions.
+- 🔍 **Search autocomplete** — debounced (120 ms) fuzzy suggestions from the
+  local channel DB appear under the hero search box; picking one opens the
+  channel directly.
+- 🎲 **Random channel chip** on the hero opens a random verified channel's
+  post modal.
+- 🔗 **Local related channels** — the channel modal falls back to tag-similarity
+  related channels (with shared-tag badges) when no worker is connected.
+- ☁️ **Optional Cloudflare KV** — the worker caches search/trending responses
+  in a KV namespace bound as `CACHE_KV` (config documented in `wrangler.toml`);
+  without a binding the in-memory cache is used. A new README section lists
+  all compatible free services (KV, R2, Supabase, Telegram Bot API, …).
+
 ## v1.5.1
 
 - 🪶 **Lazy-loaded post archive (73% lighter initial load)** — the crawler

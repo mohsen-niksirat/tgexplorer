@@ -78,6 +78,32 @@ function rateLimited(ip) {
 }
 
 // ============================================================
+// OPTIONAL PERSISTENT CACHE (Cloudflare KV — free tier)
+// Bind a KV namespace as CACHE_KV to survive cold starts / share
+// cache across isolates (in-memory CACHE is per-isolate only):
+//   wrangler.toml ->  kv_namespaces = [{ binding="CACHE_KV", id="..." }]
+// If not bound, everything falls back to the in-memory cache.
+// ============================================================
+async function kvGet(env, key) {
+  if (!env || !env.CACHE_KV) return null;
+  try { return await env.CACHE_KV.get(key, { type: 'json' }); } catch { return null; }
+}
+async function kvPut(env, key, value, ttlSeconds) {
+  if (!env || !env.CACHE_KV) return;
+  try { await env.CACHE_KV.put(key, JSON.stringify(value), ttlSeconds ? { expirationTtl: ttlSeconds } : undefined); } catch {}
+}
+async function cacheGet2(env, key) {
+  const mem = cacheGet(key); if (mem) return mem;
+  const kv = await kvGet(env, 'c:' + key);
+  if (kv) cacheSet(key, kv);
+  return kv;
+}
+async function cacheSet2(env, key, value, ttlSeconds) {
+  cacheSet(key, value);
+  await kvPut(env, 'c:' + key, value, ttlSeconds || 600);
+}
+
+// ============================================================
 // MAIN HANDLER
 // ============================================================
 
@@ -98,12 +124,12 @@ export default {
     try {
       if (path === '/api/ping') return j({ ok: true, ts: Date.now(), version: '3.2', hasApi: !!(env && env.TG_API_HASH) });
 
-      if (path === '/api/search') return await handleSearch(url);
+      if (path === '/api/search') return await handleSearch(url, env);
       if (path.startsWith('/api/channel/')) return await handleChannel(path.split('/api/channel/')[1]);
       if (path.startsWith('/api/posts/')) return await handlePosts(path.split('/api/posts/')[1], url);
       if (path.startsWith('/api/stats/')) return await handleStats(path.split('/api/stats/')[1]);
       if (path.startsWith('/api/related/')) return await handleRelated(path.split('/api/related/')[1]);
-      if (path === '/api/trending') return await handleTrending(url);
+      if (path === '/api/trending') return await handleTrending(url, env);
       if (path === '/api/categories') return handleCategories();
       if (path === '/api/notifications') return await handleNotifications(url);
 
@@ -128,13 +154,13 @@ export default {
 // ============================================================
 // SEARCH
 // ============================================================
-async function handleSearch(url) {
+async function handleSearch(url, env) {
   const query = url.searchParams.get('q');
   const lang = url.searchParams.get('lang') || 'en';
   if (!query) return j({ error: 'Missing ?q=' }, 400);
 
   const cacheKey = `search:${query}:${lang}`;
-  const cached = cacheGet(cacheKey);
+  const cached = await cacheGet2(env, cacheKey);
   if (cached) return j(cached);
 
   const tmeHtml = await fetchHtml(`https://t.me/s/${encodeURIComponent(query)}`);
@@ -192,7 +218,7 @@ async function handleSearch(url) {
   }));
 
   const result = { query, lang, results: withAvatars, total: merged.length };
-  cacheSet(cacheKey, result);
+  await cacheSet2(env, cacheKey, result);
   return j(result);
 }
 
@@ -326,13 +352,13 @@ async function handleRelated(username) {
 // ============================================================
 // TRENDING
 // ============================================================
-async function handleTrending(url) {
+async function handleTrending(url, env) {
   const cat = url.searchParams.get('cat') || 'all';
   const lang = url.searchParams.get('lang') || 'en';
   const page = parseInt(url.searchParams.get('page') || '1');
 
   const cacheKey = `trending:${cat}:${page}`;
-  const cached = cacheGet(cacheKey);
+  const cached = await cacheGet2(env, cacheKey);
   if (cached) return j(cached);
 
   let channels = [];
@@ -362,7 +388,7 @@ async function handleTrending(url) {
     total: all.length,
     hasMore: all.length > start + perPage
   };
-  cacheSet(cacheKey, result);
+  await cacheSet2(env, cacheKey, result, 900);
   return j(result);
 }
 
