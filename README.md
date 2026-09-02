@@ -207,7 +207,7 @@ Ranked by value/effort (community PRs welcome!):
 - 🔐 **Optional accounts** (Supabase free tier) — sync favorites/folders across devices
 - 🔍 **Full-text search over archived posts** — build a client-side lunr/MiniSearch index from `posts/` at first visit
 - 🧠 **Semantic "similar channels"** — embed channel descriptions and suggest lookalikes
-- 📱 **React Native / Capacitor shell** — publish to stores while reusing 100% of this codebase
+- 📱 **Capacitor shell** — ✅ shipped in `mobile/` (see `mobile/README.md`) for store-ready Android/iOS builds
 - 🌍 **More languages + RTL grid fixes** for ru/zh communities
 
 ## 🇮🇷 راهنمای فارسی

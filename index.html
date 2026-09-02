@@ -83,6 +83,13 @@
 .post-fulltext-body{padding:18px;overflow-y:auto;font-size:16px;line-height:2;white-space:pre-wrap;word-break:break-word}
 .post-fulltext-actions{display:flex;gap:8px;padding:0 18px 16px}
 .post-fulltext-actions .modal-btn{flex:1;padding:10px;font-size:13px}
+/* Font-size setting (small/medium/large) for post texts */
+body[data-fs="small"] .post-modal-text,body[data-fs="small"] .home-feed-text,body[data-fs="small"] .post-fulltext-body,body[data-fs="small"] .explore-item-textbody>span{font-size:12.5px}
+body[data-fs="large"] .post-modal-text,body[data-fs="large"] .home-feed-text,body[data-fs="large"] .post-fulltext-body,body[data-fs="large"] .explore-item-textbody>span{font-size:17.5px}
+body[data-fs="large"] .home-feed-text-clamped{-webkit-line-clamp:3}
+.fs-toggle{width:34px;height:34px;border-radius:50%;border:1px solid var(--border);background:var(--bg-card);color:var(--text-secondary);font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-left:auto;transition:all var(--transition)}
+.fs-toggle:hover{color:var(--accent);border-color:var(--accent)}
+[dir="rtl"] .fs-toggle{margin-left:0;margin-right:auto}
 /* Search autocomplete */
 .hero-content{position:relative}
 .ac-list{position:absolute;top:calc(100% - 6px);left:50%;transform:translateX(-50%);width:min(540px,92%);background:var(--bg-primary);border:1px solid var(--border);border-radius:12px;box-shadow:var(--shadow-lg);z-index:120;overflow:hidden;text-align:start}
@@ -414,13 +421,19 @@ I18N_UI.en.show_more='Show more';I18N_UI.fa.show_more='ادامهٔ متن';I18N
 I18N_UI.en.download='Download';I18N_UI.fa.download='دانلود';I18N_UI.ar.download='تنزيل';I18N_UI.zh.download='下载';I18N_UI.ru.download='Скачать';I18N_UI.es.download='Descargar';I18N_UI.fr.download='Télécharger';
 I18N_UI.en.toast_downloading='Downloading…';I18N_UI.fa.toast_downloading='در حال دانلود…';I18N_UI.ar.toast_downloading='جارٍ التنزيل…';I18N_UI.zh.toast_downloading='下载中…';I18N_UI.ru.toast_downloading='Загрузка…';I18N_UI.es.toast_downloading='Descargando…';I18N_UI.fr.toast_downloading='Téléchargement…';
 I18N_UI.en.toast_no_media='No downloadable media';I18N_UI.fa.toast_no_media='رسانه‌ای برای دانلود نیست';I18N_UI.ar.toast_no_media='لا توجد وسائط للتنزيل';I18N_UI.zh.toast_no_media='无可下载媒体';I18N_UI.ru.toast_no_media='Нет медиа для скачивания';I18N_UI.es.toast_no_media='No hay medios descargables';I18N_UI.fr.toast_no_media='Aucun média à télécharger';
+I18N_UI.en.font_size='Font size';I18N_UI.fa.font_size='اندازهٔ فونت';I18N_UI.ar.font_size='حجم الخط';I18N_UI.zh.font_size='字体大小';I18N_UI.ru.font_size='Размер шрифта';I18N_UI.es.font_size='Tamaño de fuente';I18N_UI.fr.font_size='Taille de police';
+I18N_UI.en.font_small='Small font';I18N_UI.fa.font_small='فونت کوچک';I18N_UI.ar.font_small='خط صغير';I18N_UI.zh.font_small='小字体';I18N_UI.ru.font_small='Мелкий шрифт';I18N_UI.es.font_small='Fuente pequeña';I18N_UI.fr.font_small='Petite police';
+I18N_UI.en.font_medium='Medium font';I18N_UI.fa.font_medium='فونت متوسط';I18N_UI.ar.font_medium='خط متوسط';I18N_UI.zh.font_medium='中字体';I18N_UI.ru.font_medium='Обычный шрифт';I18N_UI.es.font_medium='Fuente mediana';I18N_UI.fr.font_medium='Police moyenne';
+I18N_UI.en.font_large='Large font';I18N_UI.fa.font_large='فونت بزرگ';I18N_UI.ar.font_large='خط كبير';I18N_UI.zh.font_large='大字体';I18N_UI.ru.font_large='Крупный шрифт';I18N_UI.es.font_large='Fuente grande';I18N_UI.fr.font_large='Grande police';
+I18N_UI.en.toast_md_copied='Copied as Markdown';I18N_UI.fa.toast_md_copied='به‌صورت Markdown کپی شد';I18N_UI.ar.toast_md_copied='تم النسخ بصيغة Markdown';I18N_UI.zh.toast_md_copied='已复制为 Markdown';I18N_UI.ru.toast_md_copied='Скопировано как Markdown';I18N_UI.es.toast_md_copied='Copiado como Markdown';I18N_UI.fr.toast_md_copied='Copié en Markdown';
+I18N_UI.en.copy_md='MD';I18N_UI.fa.copy_md='MD';I18N_UI.ar.copy_md='MD';I18N_UI.zh.copy_md='MD';I18N_UI.ru.copy_md='MD';I18N_UI.es.copy_md='MD';I18N_UI.fr.copy_md='MD';
 const RTL_LANGS=['fa','ar'];
-let state={lang:localStorage.getItem('tgexp_lang')||'en',theme:localStorage.getItem('tgexp_theme')||'dark',workerUrl:localStorage.getItem('tgexp_worker')||'',currentTab:'explore',currentView:'grid',currentCategory:'all',searchLang:localStorage.getItem('tgexp_search_lang')||'all',exploreType:localStorage.getItem('tgexp_etype')||'all',homeType:localStorage.getItem('tgexp_home_type')||'all',searchQuery:'',searchResults:[],favorites:JSON.parse(localStorage.getItem('tgexp_favs')||'[]'),postFavs:JSON.parse(localStorage.getItem('tgexp_post_favs')||'[]'),favPost:false,favFolder:false,openFolder:'',folderIcon:'📁',favSort:localStorage.getItem('tgexp_favsort')||'name',exploreSort:localStorage.getItem('tgexp_esort')||'name',exploreView:localStorage.getItem('tgexp_eview')||'grid',exploreSearch:localStorage.getItem('tgexp_esearch')||'',favPostType:localStorage.getItem('tgexp_favptype')||'all',folders:JSON.parse(localStorage.getItem('tgexp_folders')||'[]'),livePosts:[],notifUpdates:[],notifSeen:JSON.parse(localStorage.getItem('tgexp_notif_seen')||'{}'),notifEnabled:localStorage.getItem('tgexp_notif_enabled')==='1',suggestions:JSON.parse(localStorage.getItem('tgexp_suggestions')||'[]'),lastNotifCheck:parseInt(localStorage.getItem('tgexp_last_notif')||'0'),feedPool:[],feedPage:0,feedDone:false,feedMode:'local'};
+let state={lang:localStorage.getItem('tgexp_lang')||'en',theme:localStorage.getItem('tgexp_theme')||'dark',workerUrl:localStorage.getItem('tgexp_worker')||'',currentTab:'explore',currentView:'grid',currentCategory:'all',searchLang:localStorage.getItem('tgexp_search_lang')||'all',exploreType:localStorage.getItem('tgexp_etype')||'all',homeType:localStorage.getItem('tgexp_home_type')||'all',searchQuery:'',searchResults:[],favorites:JSON.parse(localStorage.getItem('tgexp_favs')||'[]'),postFavs:JSON.parse(localStorage.getItem('tgexp_post_favs')||'[]'),favPost:false,favFolder:false,openFolder:'',folderIcon:'📁',favSort:localStorage.getItem('tgexp_favsort')||'name',exploreSort:localStorage.getItem('tgexp_esort')||'name',exploreView:localStorage.getItem('tgexp_eview')||'grid',exploreSearch:localStorage.getItem('tgexp_esearch')||'',favPostType:localStorage.getItem('tgexp_favptype')||'all',folders:JSON.parse(localStorage.getItem('tgexp_folders')||'[]'),livePosts:[],notifUpdates:[],notifSeen:JSON.parse(localStorage.getItem('tgexp_notif_seen')||'{}'),notifEnabled:localStorage.getItem('tgexp_notif_enabled')==='1',suggestions:JSON.parse(localStorage.getItem('tgexp_suggestions')||'[]'),lastNotifCheck:parseInt(localStorage.getItem('tgexp_last_notif')||'0'),feedPool:[],feedPage:0,feedDone:false,feedMode:'local',fontSize:localStorage.getItem('tgexp_fs')||'medium'};
 
 // ============================================================
 // INIT
 // ============================================================
-document.addEventListener('DOMContentLoaded',()=>{applyTheme(state.theme);applyLang(state.lang);initTelegramWebApp();watchTgBackButton();document.getElementById('workerCodeBlock').textContent=WORKER_CODE;document.getElementById('langSelect').value=state.lang;document.querySelectorAll('.lang-chip').forEach(el=>el.classList.toggle('active',el.dataset.lang===state.searchLang));showApp();if(!state.workerUrl&&!localStorage.getItem('tgexp_setup_hint')&&!localStorage.getItem('tgexp_setup_skipped')){localStorage.setItem('tgexp_setup_hint','1');setTimeout(()=>toast(t('proxy_hint')),1500)}bindEvents();registerSW();checkPWA();checkSharedFolder();initNotifs()});
+document.addEventListener('DOMContentLoaded',()=>{applyTheme(state.theme);applyLang(state.lang);applyFontSize();initTelegramWebApp();watchTgBackButton();document.getElementById('workerCodeBlock').textContent=WORKER_CODE;document.getElementById('langSelect').value=state.lang;document.querySelectorAll('.lang-chip').forEach(el=>el.classList.toggle('active',el.dataset.lang===state.searchLang));showApp();if(!state.workerUrl&&!localStorage.getItem('tgexp_setup_hint')&&!localStorage.getItem('tgexp_setup_skipped')){localStorage.setItem('tgexp_setup_hint','1');setTimeout(()=>toast(t('proxy_hint')),1500)}bindEvents();registerSW();checkPWA();checkSharedFolder();initNotifs()});
 
 // ============================================================
 // EVENTS
@@ -817,6 +830,7 @@ function postItemHtml(p,ch,username,autoplay){
       <button class="modal-btn modal-btn-secondary" onclick="sharePost('${username}','${p.id}')">📤 ${t('share')}</button><button class="modal-btn modal-btn-secondary" onclick="copyPostText('${username}','${p.id}')">📋 ${t('copy_text')}</button>
       <button class="modal-btn modal-btn-secondary" onclick="copyPostLink('${username}','${p.id}')">🔗 ${t('copy_link')}</button>
       ${(p.video||goodImg(p.image))?`<button class="modal-btn modal-btn-secondary" onclick="downloadPostMedia('${username}','${p.id}')">⬇️ ${t('download')}</button>`:''}
+      <button class="modal-btn modal-btn-secondary" onclick="copyPostMarkdown('${username}','${p.id}')">📝 ${t('copy_md')}</button>
       <button class="modal-btn modal-btn-secondary ${isPostFav(username,p.id)?'post-fav-saved':''}" onclick="togglePostFav('${username}','${p.id}')">${isPostFav(username,p.id)?'❤️':'🤍'} ${t('save')}</button>
       <button class="modal-btn modal-btn-secondary" onclick="openFolderPicker('post','${username}','${p.id}','${escAttr(ch.title)}')">🗂 ${t('folder_btn')}</button>
     </div>
@@ -832,6 +846,7 @@ function renderPostModal(){
         <div class="modal-title post-title-click" title="مشاهده کانال" onclick="closePostModal();openChannel('${username}')">${escHtml(ch.title||username)} ↗</div>
         <div class="modal-user"><span class="post-user-click" title="مشاهده کانال" onclick="closePostModal();openChannel('${username}')">@${escHtml(username)}</span> <span class="post-modal-members">${ch.members?('👥 '+ch.members):''}</span></div>
       </div>
+      <button class="fs-toggle" id="fsToggleBtn" title="${escAttr(t('font_size'))}" onclick="cycleFontSize()">A</button>
     </div>`;
   const body=document.getElementById('postModalBody');
   const slice=posts.slice(0,ctx.rendered);
@@ -2110,6 +2125,40 @@ async function downloadPostMedia(username,postId){
     // CORS fallback: open in a new tab so the browser can save it
     window.open(url,'_blank');
   }
+}
+// ============================================================
+// FONT SIZE (small / medium / large)
+// ============================================================
+function applyFontSize(){document.body.dataset.fs=state.fontSize||'medium'}
+function cycleFontSize(){
+  const order=['small','medium','large'];
+  const i=order.indexOf(state.fontSize||'medium');
+  state.fontSize=order[(i+1)%order.length];
+  localStorage.setItem('tgexp_fs',state.fontSize);
+  applyFontSize();
+  const btn=document.getElementById('fsToggleBtn');
+  if(btn){btn.textContent=state.fontSize==='small'?'A-':state.fontSize==='large'?'A+':'A'}
+  toast('🔤 '+t('font_'+state.fontSize));
+}
+// ============================================================
+// COPY POST AS MARKDOWN
+// ============================================================
+function postToMarkdown(username,postId){
+  const ctx=window._postCtx;
+  const list=(ctx&&ctx.username===username?ctx.posts:[]).concat(getChannelPosts(username));
+  const p=list.find(x=>String(x.id)===String(postId));
+  if(!p)return '';
+  const link='https://t.me/'+username+'/'+postId;
+  let md=(p.text||'')+'\n\n';
+  if(p.image)md+='![image]('+p.image+')\n\n';
+  if(p.video)md+='▶ [video]('+p.video+')\n\n';
+  md+='— ['+username+']('+link+')';
+  return md.trim();
+}
+function copyPostMarkdown(username,postId){
+  const md=postToMarkdown(username,postId);
+  if(!md){toast('📋 '+t('toast_no_text'));return}
+  navigator.clipboard.writeText(md).then(()=>toast('📝 '+t('toast_md_copied'))).catch(()=>toast('❌ '+t('toast_copy_fail')));
 }
 function toast(msg){const container=document.getElementById('toastContainer');const el=document.createElement('div');el.className='toast';el.innerHTML=`<span>✅</span> ${escHtml(msg)}`;container.appendChild(el);setTimeout(()=>el.remove(),3000)}
 function renderSkeletons(count){return`<div class="results-grid">${Array(count).fill('<div class="skeleton"></div>').join('')}</div>`}

@@ -1,0 +1,11 @@
+{
+  "appId": "ir.tgexplorer.app",
+  "appName": "TG Explorer",
+  "webDir": "www",
+  "android": {
+    "allowMixedContent": true
+  },
+  "ios": {
+    "contentInset": "always"
+  }
+}
