@@ -26,7 +26,7 @@ jobs:
           set -e
           node crawl_posts.js
 
-          git add posts.js
+          git add posts.js posts
           if git diff --cached --quiet; then
             echo "No data changes — nothing to push"
             exit 0
@@ -53,7 +53,7 @@ jobs:
             if [ -d .git/rebase-merge ] || [ -d .git/rebase-apply ]; then
               git checkout --theirs posts.js 2>/dev/null || true
               git checkout --theirs sw.js 2>/dev/null || true
-              git add posts.js sw.js
+              git add posts.js posts sw.js 2>/dev/null || true
               GIT_EDITOR=true git rebase --continue 2>/dev/null || true
             fi
             if git push origin main; then

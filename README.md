@@ -8,7 +8,7 @@ Search and discover public Telegram channels and groups — like Instagram Explo
 ## ✨ Features
 
 - 🔍 **Smart Search** — fuzzy matching (typo-tolerant) + Persian/English language filter
-- 🏠 **Explore** — browse 60+ **verified** public channels by category (every one checked live against t.me)
+- 🏠 **Explore** — browse 114 **verified** public channels by category (every one checked live against t.me)
 - 🇮🇷 **Persian & English** channels — BBC Persian, Radio Farda, Tabnak, Varzesh3, Digiato/TechNolife tech + NYT, Guardian, Sky News, NASA-level English channels
 - 📱 **Instagram-like grid** view with language badges on every card
 - ❤️ **Favorites** — save channels locally
@@ -28,7 +28,7 @@ This repo ships a ready-made [`worker.js`](worker.js) + [`wrangler.toml`](wrangl
 ### Manual deploy
 1. Go to [Cloudflare](https://dash.cloudflare.com) → **Workers & Pages** → **Create Worker**.
 2. Delete the default code and paste the whole [`worker.js`](worker.js).
-3. Replace `API_ID` / `API_HASH` with your own credentials from [my.telegram.org](https://my.telegram.org) *(optional — the worker also works without them for public channels)*.
+3. *(Optional)* Add `TG_API_ID` / `TG_API_HASH` secrets from [my.telegram.org](https://my.telegram.org) — the worker works without them for public channels. **Never hardcode credentials in the code.**
 4. Click **Save and Deploy**, copy your worker URL and paste it in the app settings.
 
 ### Worker endpoints
@@ -41,6 +41,26 @@ This repo ships a ready-made [`worker.js`](worker.js) + [`wrangler.toml`](wrangl
 - `GET /api/channel/<username>` · `/api/stats/<username>` · `/api/related/<username>` · `/api/avatar/<username>`
 
 ## 📦 Changelog
+
+### v1.5.1
+
+- 🪶 **73% lighter initial load** — `posts.js` is now a small inline seed
+  (latest 12 posts per channel, 2.4 MB → ~650 KB); the full 50-post archive
+  lives in `posts/<username>.json`, one file per channel, fetched on demand
+  and cached by the service worker. Scrolling older posts in local mode now
+  reads the archive instead of scraping r.jina.ai (which stays as fallback)
+- 🔐 **Security fix** — hardcoded Telegram `API_ID`/`API_HASH` removed from
+  `worker.js`; the worker now reads optional `TG_API_ID` / `TG_API_HASH`
+  environment secrets instead (never commit credentials)
+- 📊 **Real stats & notifications** — `/api/stats` chart and
+  `/api/notifications` no longer return random data; post dates are parsed
+  from t.me and used to build the 7-day activity chart and detect genuinely
+  new posts (worker **v3.2**)
+- 🛡 **Rate limiting** — simple per-IP rate limit (60 req/min) on all worker
+  endpoints, embedded setup-worker copy synced
+- 🐛 **Search dedup fix** — `/api/search` no longer duplicates results 10–15
+- 📝 **README cleanup** — removed the duplicated/outdated "Project Structure"
+  section and refreshed channel counts (114 verified channels)
 
 ### v1.5.0
 
@@ -96,7 +116,7 @@ This repo ships a ready-made [`worker.js`](worker.js) + [`wrangler.toml`](wrangl
 
 ### Option 1: Local mode (default — no setup)
 
-Just open `index.html` (or deploy to GitHub Pages). The app starts with a **verified database of 60+ real channels** and full fuzzy search + language filter — no worker, no API key.
+Just open `index.html` (or deploy to GitHub Pages). The app starts with a **verified database of 114 real channels** and full fuzzy search + language filter — no worker, no API key.
 
 ### Option 2: With Cloudflare Worker (full power — live Telegram search)
 
@@ -191,23 +211,19 @@ the workflow automatically opens a GitHub Issue with a link to the failed logs.
 ## 📁 Project Structure
 
 ```
-telegram-explorer/
-├── index.html          # Main app (single file)
-├── channels.js         # Verified channel database (~60 channels)
-├── verify_channels.js  # Channel validation script (Node)
-├── worker.js           # Cloudflare Worker proxy
-├── sw.js               # Service Worker (PWA offline)
-├── manifest.json       # PWA manifest
-└── icons/              # PWA icons
-```
-
-## 📁 Project Structure
-
-```
-telegram-explorer/
-├── index.html      # Main app (single file, ~58KB)
-├── worker.js       # Cloudflare Worker proxy
-└── README.md       # This file
+tgexplorer/
+├── index.html           # Main app (single file, HTML+CSS+JS)
+├── channels.js          # Verified channel database (114 channels)
+├── posts.js             # Inline seed: latest 12 posts per channel (generated)
+├── posts/               # Full archive, one JSON per channel (lazy-loaded)
+├── avatars.js           # Channel avatar map (generated)
+├── crawl_posts.js       # Post crawler (Node)
+├── fetch_avatars.js     # Avatar refresher (Node)
+├── verify_channels.js   # Channel validation script (Node)
+├── worker.js            # Cloudflare Worker proxy
+├── sw.js                # Service Worker (PWA offline)
+├── manifest.json        # PWA manifest
+└── icons/               # PWA icons
 ```
 
 ## 🌐 Deploy to GitHub Pages

@@ -276,8 +276,9 @@ const CORS_HEADERS={'Access-Control-Allow-Origin':'*','Access-Control-Allow-Meth
 const CACHE=new Map();const CACHE_TTL=10*60*1000;
 function cacheGet(k){const e=CACHE.get(k);if(e&&Date.now()-e.ts<CACHE_TTL)return e.data;CACHE.delete(k);return null}
 function cacheSet(k,d){if(CACHE.size>500){const o=CACHE.keys().next().value;CACHE.delete(o)}CACHE.set(k,{data:d,ts:Date.now()})}
-export default{async fetch(request,env){const url=new URL(request.url);const path=url.pathname;if(request.method==='OPTIONS')return new Response(null,{headers:CORS_HEADERS});
-try{if(path==='/api/ping')return j({ok:true,ts:Date.now(),version:'2.0'});
+const RATE=new Map(),RATE_LIMIT=60,RATE_WIN=60000;function rateOK(ip){const now=Date.now();if(RATE.size>5000)RATE.clear();const e=RATE.get(ip);if(!e||now-e.ts>RATE_WIN){RATE.set(ip,{ts:now,n:1});return true}e.n++;return e.n<=RATE_LIMIT}
+export default{async fetch(request,env){const url=new URL(request.url);const path=url.pathname;if(request.method==='OPTIONS')return new Response(null,{headers:CORS_HEADERS});const ip=request.headers.get('CF-Connecting-IP')||'unknown';if(!rateOK(ip))return j({error:'Too many requests'},429);
+try{if(path==='/api/ping')return j({ok:true,ts:Date.now(),version:'3.2',hasApi:!!(env&&env.TG_API_HASH)});
 if(path==='/api/search')return await handleSearch(url);
 if(path.startsWith('/api/channel/'))return await handleChannel(path.split('/api/channel/')[1]);
 if(path.startsWith('/api/posts/'))return await handlePosts(path.split('/api/posts/')[1],url);
@@ -306,7 +307,8 @@ const ch=await fH(\`https://t.me/\${u}\`);if(!ch)return j({error:'Not found'},40
 const ph=await fH(\`https://t.me/s/\${u}\`);const p=ph?pP(ph,u):[];
 const now=Date.now();const rP=p.length;const ppd=Math.round(rP/7*10)/10;
 const wI=p.filter(x=>x.image).length;const mR=p.length>0?Math.round(wI/p.length*100):0;
-const days=[];for(let k=6;k>=0;k--){const d=new Date(now-k*864e5);days.push({date:d.toISOString().split('T')[0],posts:Math.floor(Math.random()*rP/2)+1,views:(Math.floor(Math.random()*rP/2)+1)*(Math.floor(Math.random()*5e3)+500)})}
+const pd={};for(const x of p){if(!x.date)continue;const t=Date.parse(x.date);if(isNaN(t))continue;const k2=new Date(t).toISOString().split('T')[0];pd[k2]=(pd[k2]||0)+1}
+const days=[];for(let k=6;k>=0;k--){const key=new Date(now-k*864e5).toISOString().split('T')[0];const c=pd[key]||0;days.push({date:key,posts:c,views:c*1000})}
 const r={username:u,title:i.title,members:i.members,postsPerDay:ppd,mediaRatio:mR,totalPostsAnalyzed:p.length,description:i.description,image:i.image,tags:infer(i.title,i.description,u),chartData:days,fetchedAt:new Date().toISOString()};cacheSet(ck,r);return j(r)}
 async function handleRelated(u){u=u.replace(/[^a-zA-Z0-9_]/g,'');const ck=\`rel:\${u}\`;const c=cacheGet(ck);if(c)return j(c);
 const h=await fH(\`https://t.me/\${u}\`);if(!h)return j({error:'Not found'},404);const i=pCP(h,u);const tg=infer(i.title,i.description,u);const rel=[];const seen=new Set([u.toLowerCase()]);
@@ -319,17 +321,16 @@ const cur=curated(cat);const all=merge(ch,cur);const tagged=all.map(x=>({...x,ta
 const pp=20;const r={category:cat,page:pg,lang,channels:tagged.slice((pg-1)*pp,pg*pp),total:tagged.length,hasMore:tagged.length>pg*pp};cacheSet(ck,r);return j(r)}
 async function handleExploreFeed(url){const cat=url.searchParams.get('cat')||'all';const pg=parseInt(url.searchParams.get('page')||'1');const lim=parseInt(url.searchParams.get('limit')||'30');const ck=\`explore:\${cat}:\${pg}\`;const c=cacheGet(ck);if(c)return j(c);const channels=curated(cat);const allPosts=[];const batch=channels.slice(0,8);const fetches=batch.map(async ch=>{try{const html=await fH(\`https://t.me/s/\${ch.username}\`);if(!html)return[];const posts=pP(html,ch.username);return posts.filter(p=>p.image||p.hasVideo).map(p=>({...p,channel:ch.username,channelTitle:ch.title||ch.username,channelMembers:ch.members||'0',type:p.hasVideo?'video':'image'}))}catch{return[]}});const results=await Promise.all(fetches);for(const r of results)allPosts.push(...r);for(let i=allPosts.length-1;i>0;i--){const j2=Math.floor(Math.random()*(i+1));[allPosts[i],allPosts[j2]]=[allPosts[j2],allPosts[i]]}const start=(pg-1)*lim;const feed=allPosts.slice(start,start+lim);const result={category:cat,page:pg,posts:feed,total:allPosts.length,hasMore:allPosts.length>start+lim};cacheSet(ck,result);return j(result)}
 function handleCategories(){return j({categories:[{id:'tech',icon:'💻'},{id:'news',icon:'📰'},{id:'crypto',icon:'🪙'},{id:'entertainment',icon:'🎬'},{id:'science',icon:'🔬'},{id:'gaming',icon:'🎮'},{id:'music',icon:'🎵'},{id:'art',icon:'🎨'},{id:'sports',icon:'⚽'},{id:'education',icon:'📚'},{id:'meme',icon:'😂'},{id:'food',icon:'🍕'},{id:'travel',icon:'✈️'},{id:'photography',icon:'📷'}]})}
-async function handleNotifications(url){const cp=url.searchParams.get('channels');if(!cp)return j({error:'Missing ?channels='},400);const chs=cp.split(',').slice(0,10).map(c=>c.trim().replace(/[^a-zA-Z0-9_]/g,''));const since=parseInt(url.searchParams.get('since')||'0');const up=[];for(const u of chs){try{const h=await fH(\`https://t.me/s/\${u}\`);if(!h)continue;const p=pP(h,u);const np=p.filter(x=>{const pt=extractPostDate(x.id);return pt>since&&since>0});if(np.length)up.push({username:u,newCount:np.length,latestPost:np[0]})}catch{}}return j({checked:chs.length,since,updates:up,checkedAt:Date.now()})}
+async function handleNotifications(url){const cp=url.searchParams.get('channels');if(!cp)return j({error:'Missing ?channels='},400);const chs=cp.split(',').slice(0,10).map(c=>c.trim().replace(/[^a-zA-Z0-9_]/g,''));const since=parseInt(url.searchParams.get('since')||'0');const up=[];for(const u of chs){try{const h=await fH(\`https://t.me/s/\${u}\`);if(!h)continue;const p=pP(h,u);const np=since>0?p.filter(x=>{const t=x.date?Date.parse(x.date):0;return t>since}):[];if(np.length)up.push({username:u,newCount:np.length,latestPost:np[0]})}catch{}}return j({checked:chs.length,since,updates:up,checkedAt:Date.now()})}
 function infer(t,d,u){const txt=\`\${t||''} \${d||''} \${u||''}\`.toLowerCase();const tags=new Set();const m={tech:['tech','technology','startup','software','programming','code','developer','dev','api'],news:['news','breaking','خبر','update','report','press','media'],crypto:['crypto','bitcoin','btc','ethereum','eth','blockchain','defi','nft','token','coin','web3'],entertainment:['entertainment','movie','film','series','netflix','tv','show','celebrity'],science:['science','research','physics','chemistry','biology','space','nasa','astronomy'],gaming:['gaming','game','esports','steam','playstation','xbox','nintendo'],music:['music','song','playlist','album','artist','band','concert','spotify'],art:['art','design','creative','illustration','graphic','ui','ux','figma'],sports:['sport','football','soccer','nba','basketball','tennis','cricket','f1'],education:['education','learn','course','tutorial','study','university','school','english','language'],meme:['meme','funny','lol','humor','joke','dank','comedy'],food:['food','recipe','cooking','restaurant','chef','meal','diet'],travel:['travel','trip','tourism','hotel','flight','backpack','adventure'],photography:['photography','photo','camera','portrait','landscape','photographer']};for(const[tk,kws]of Object.entries(m)){if(kws.some(kw=>txt.includes(kw)))tags.add(tk)}if(/[\u0600-\u06FF]/.test(txt))tags.add('persian');return[...tags]}
 function pSR(html,q){const ch=[];const r=/class="tgme_channel_card[\\s\\S]*?href="https?:\\/\\/t\\.me\\/([^"]+)"[\\s\\S]*?tgme_channel_card_title[^>]*>([\\s\\S]*?)<\\/div>[\\s\\S]*?tgme_channel_card_counter[^>]*>([\\s\\S]*?)<\\/div>/gi;let m;while((m=r.exec(html))!==null)ch.push({username:m[1].trim(),title:dec(m[2].trim()),members:extN(m[3]),link:\`https://t.me/\${m[1].trim()}\`});if(!ch.length){const lr=/href="https?:\\/\\/t\\.me\\/([a-zA-Z0-9_]{5,})"[^>]*>([\\s\\S]*?)<\\/a>/gi;const seen=new Set();while((m=lr.exec(html))!==null){const u=m[1].trim();if(!seen.has(u)&&!['s','share','addstickers'].includes(u)){seen.add(u);ch.push({username:u,title:dec(m[2].trim())||u,members:0,link:\`https://t.me/\${u}\`})}}}return ch}
 function pCP(html,u){const t=exM(html,'og:title')||exM(html,'title')||u;const d=exM(html,'og:description')||'';const img=exM(html,'og:image')||'';const mm=html.match(/([\\d,.]+[KkMm]?)\\s*(?:members|subscriber|member|عضو)/i);return{username:u,title:dec(t),description:dec(d),image:img,members:mm?mm[1]:'0',link:\`https://t.me/\${u}\`}}
-function pP(html,u){const posts=[];const r=/class="tgme_widget_message_wrap[^"]*"[^>]*data-post="([^"]+)"[\\s\\S]*?tgme_widget_message_text[^>]*>([\\s\\S]*?)<\\/div>/gi;let m;while((m=r.exec(html))!==null){const t=m[2].replace(/<[^>]+>/g,'').trim();if(t)posts.push({id:m[1],text:dec(t.substring(0,300)),link:\`https://t.me/\${u}/\${m[1].split('/').pop()}\`})}const ir=/background-image:\\s*url\\(['"]?(https?:\\/\\/[^'")\\s]+)['"]?\\)/gi;const imgs=[];while((m=ir.exec(html))!==null)imgs.push(m[1]);posts.forEach((p,i)=>{if(imgs[i])p.image=imgs[i]});const vr=/class="tgme_widget_message_video_wrap[\s\S]*?<video[^>]*src="([^"]+)"/gi;while((m=vr.exec(html))!==null){const bef=html.substring(0,m.index);const pm=bef.match(/data-post="([^"]+)"[\s\S]*?$/);if(pm){const post=posts.find(p=>p.id===pm[1]);if(post){post.video=m[1];post.hasVideo=true}}}return posts}
+function pP(html,u){const posts=[];const dates={};html.split('tgme_widget_message_wrap').forEach(b=>{const dm=b.match(/data-post="([^"]+)"/);const tm=b.match(/<time[^>]+datetime="([^"]+)"/);if(dm&&tm)dates[dm[1]]=tm[1]});const r=/class="tgme_widget_message_wrap[^"]*"[^>]*data-post="([^"]+)"[\\s\\S]*?tgme_widget_message_text[^>]*>([\\s\\S]*?)<\\/div>/gi;let m;while((m=r.exec(html))!==null){const t=m[2].replace(/<[^>]+>/g,'').trim();if(t)posts.push({id:m[1],text:dec(t.substring(0,300)),date:dates[m[1]]||'',link:\`https://t.me/\${u}/\${m[1].split('/').pop()}\`})}const ir=/background-image:\\s*url\\(['"]?(https?:\\/\\/[^'")\\s]+)['"]?\\)/gi;const imgs=[];while((m=ir.exec(html))!==null)imgs.push(m[1]);posts.forEach((p,i)=>{if(imgs[i])p.image=imgs[i]});const vr=/class="tgme_widget_message_video_wrap[\s\S]*?<video[^>]*src="([^"]+)"/gi;while((m=vr.exec(html))!==null){const bef=html.substring(0,m.index);const pm=bef.match(/data-post="([^"]+)"[\s\S]*?$/);if(pm){const post=posts.find(p=>p.id===pm[1]);if(post){post.video=m[1];post.hasVideo=true}}}return posts}
 async function sG(q,lang){try{const r=await fetch(\`https://www.google.com/search?q=\${encodeURIComponent(q)}&num=20&hl=\${lang}\`,{headers:{'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'}});const h=await r.text();const res=[],seen=new Set();const re=/https?:\\/\\/t\\.me\\/([a-zA-Z0-9_]+)/g;let m;while((m=re.exec(h))!==null){const u=m[1];if(!seen.has(u)&&!['s','share','addstickers','joinchat'].includes(u)){seen.add(u);res.push({username:u,title:u,link:\`https://t.me/\${u}\`,source:'google'})}}return res}catch{return[]}}
 function curated(cat){const a={tech:[{username:'digiato',title:'دیجیاتو',members:'500K'},{username:'technolife',title:'تکنولایف',members:'350K'},{username:'github',title:'GitHub Community',members:'1M'},{username:'javascript',title:'JavaScript',members:'600K'},{username:'google',title:'Google',members:'1.2M'},{username:'microsoft',title:'Microsoft',members:'900K'},{username:'technews',title:'Tech News',members:'300K'},{username:'spacex',title:'SpaceX',members:'1.2M'}],news:[{username:'bbcpersian',title:'BBC Persian',members:'1.6M'},{username:'radiofarda',title:'رادیو فردا',members:'1.1M'},{username:'khamenei_ir',title:'دفتر حفظ و نشر آثار رهبری',members:'1.6M'},{username:'tabnak',title:'تابناک',members:'900K'},{username:'khabaronline',title:'خبر آنلاین',members:'800K'},{username:'manototv',title:'تلویزیون منوتو',members:'800K'},{username:'nytimes',title:'The New York Times',members:'1.4M'},{username:'guardian',title:'The Guardian',members:'1M'},{username:'skynews',title:'Sky News',members:'1M'},{username:'france24',title:'FRANCE 24',members:'900K'},{username:'aljazeera',title:'AL JAZEERA',members:'1.2M'},{username:'reddit',title:'Reddit',members:'1.5M'}],crypto:[{username:'arzdigital',title:'ارزدیجیتال',members:'400K'},{username:'crypto',title:'Crypto',members:'500K'},{username:'bitcoin',title:'Bitcoin',members:'700K'},{username:'cointelegraph',title:'Cointelegraph',members:'600K'},{username:'altcoin',title:'Altcoins Channel',members:'400K'},{username:'blockchain',title:'Blockchain.com',members:'450K'}],entertainment:[{username:'filimo',title:'کانال رسمی فیلیمو',members:'600K'},{username:'telewebion',title:'تلوبیون',members:'400K'},{username:'netflix',title:'Netflix',members:'2M'},{username:'series',title:'Movies & Series',members:'900K'},{username:'primevideo',title:'Prime Video',members:'800K'}],science:[{username:'science',title:'Science',members:'700K'},{username:'nature',title:'Nature',members:'400K'},{username:'astronomy',title:'Astronomy',members:'300K'},{username:'physics',title:'Physics',members:'250K'},{username:'biology',title:'Biology',members:'250K'},{username:'chemistry',title:'Chemistry',members:'200K'}],gaming:[{username:'nintendo',title:'Nintendo',members:'800K'},{username:'fortnite',title:'Fortnite',members:'500K'}],music:[{username:'radiojavan',title:'Radio Javan',members:'800K'},{username:'spotify',title:'Spotify',members:'1.5M'},{username:'billboard',title:'Billboard',members:'700K'}],art:[{username:'dribbble',title:'Dribbble',members:'400K'},{username:'design',title:'Design',members:'500K'},{username:'digitalart',title:'NFT DigitalArt',members:'350K'},{username:'unsplash',title:'Unsplash',members:'400K'},{username:'photography',title:'Photography',members:'700K'}],sports:[{username:'varzesh3',title:'ورزش سه',members:'1.2M'},{username:'football360',title:'فوتبال ۳۶۰',members:'600K'},{username:'chelseafc',title:'Chelsea FC',members:'600K'},{username:'skysports',title:'Sky Sports',members:'1.2M'},{username:'ufc',title:'UFC',members:'800K'}],education:[{username:'duolingo',title:'Duolingo',members:'700K'},{username:'bbclearningenglish',title:'BBC Learning English',members:'600K'},{username:'englishgrammar',title:'Advanced Grammar',members:'300K'},{username:'vocabulary',title:'Vocabulary',members:'400K'}],meme:[{username:'memes',title:'Memes',members:'1M'}],food:[{username:'baking',title:'Baking',members:'300K'},{username:'foodporn',title:'FoodPorn',members:'500K'}],travel:[{username:'natgeotravel',title:'Nat Geo Travel',members:'800K'},{username:'travel',title:'Travel',members:'500K'}],};return cat==='all'?Object.values(a).flat():(a[cat]||[])}
 async function fH(url){try{const r=await fetch(url,{headers:{'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36','Accept':'text/html','Accept-Language':'en-US,en;q=0.9,fa;q=0.8'},redirect:'follow'});return r.ok?await r.text():''}catch{return''}}
 function exM(html,n){let r=new RegExp(\`<meta[^>]+(?:property|name)="\${n}"[^>]+content="([^"]*)"\`,'i');let m=html.match(r);if(m)return m[1];r=new RegExp(\`<meta[^>]+content="([^"]*)"[^>]+(?:property|name)="\${n}"\`,'i');m=html.match(r);return m?m[1]:''}
 function extN(t){const m=t.match(/([\\d,.]+[KkMm]?)/);return m?m[1]:'0'}
-function extractPostDate(id){const p=id.split('/');const n=parseInt(p[p.length-1]);if(n>1e5)return Date.now()-(1e7-Math.min(n,1e7))*6e4;return 0}
 function dec(s){return s.replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&quot;/g,'"').replace(/&#39;/g,"'").replace(/&#x27;/g,"'").replace(/\\n/g,' ').trim()}
 function merge(...a){const seen=new Set(),m=[];for(const arr of a)for(const i of arr){const k=(i.username||'').toLowerCase();if(k&&!seen.has(k)){seen.add(k);m.push(i)}}return m}
 function j(data,status=200){return new Response(JSON.stringify(data),{status,headers:{'Content-Type':'application/json',...CORS_HEADERS}})}`;
@@ -559,12 +560,29 @@ function renderGridView(container,items){container.innerHTML=`<div class="result
 function renderListView(container,items){container.innerHTML=`<div class="results-list">${items.map(ch=>`<div class="list-item" onclick="openChannel('${ch.username}')"><div class="list-avatar" style="${avatarGrad(ch.username)}">${ch.avatar?`<img src="${ch.avatar}" alt="" loading="lazy">`:ch.title[0].toUpperCase()}</div><div class="list-info"><div class="list-title">${escHtml(ch.title)}</div><div class="list-user">@${escHtml(ch.username)}</div><div class="list-desc">${escHtml(ch.description||'')}</div></div><div class="list-meta"><span class="list-members">👥 ${ch.members||'0'}</span><button class="card-action-btn ${isFav(ch.username)?'favorited':''}" onclick="event.stopPropagation();toggleFav('${ch.username}','${escAttr(ch.title)}')">${isFav(ch.username)?'❤️':'🤍'}</button></div></div>`).join('')}</div>`}
 
 function getChannelPosts(username){
-  try{ if(typeof CHANNEL_POSTS!=='undefined' && CHANNEL_POSTS[username]){
-    const arr=CHANNEL_POSTS[username];
-    if(arr.length>1&&Number(arr[0].id)<Number(arr[1].id))return arr.slice().sort((a,b)=>Number(b.id)-Number(a.id));
-    return arr;
-  } }catch(e){}
+  try{
+    const full=window._fullPosts&&window._fullPosts[username];
+    if(full&&full.length)return full;
+    if(typeof CHANNEL_POSTS!=='undefined' && CHANNEL_POSTS[username]){
+      const arr=CHANNEL_POSTS[username];
+      if(arr.length>1&&Number(arr[0].id)<Number(arr[1].id))return arr.slice().sort((a,b)=>Number(b.id)-Number(a.id));
+      return arr;
+    }
+  }catch(e){}
   return [];
+}
+// Full per-channel archive (posts/<username>.json) — fetched on demand and cached
+window._fullPosts={};
+async function loadFullChannelPosts(username){
+  try{
+    if(window._fullPosts[username])return window._fullPosts[username];
+    const r=await fetch('posts/'+encodeURIComponent(username)+'.json',{signal:AbortSignal.timeout(8000)});
+    if(!r.ok)return [];
+    const arr=await r.json();
+    if(!Array.isArray(arr))return [];
+    window._fullPosts[username]=arr.filter(p=>p&&p.id);
+    return window._fullPosts[username];
+  }catch(e){return []}
 }
 function renderExploreView(container,items){
   const colors=['#0088cc','#e91e63','#9c27b0','#ff9800','#4caf50','#00bcd4','#795548','#607d8b','#f44336','#3f51b5'];
@@ -609,6 +627,7 @@ function renderExploreView(container,items){
   const overlay=document.getElementById('postOverlay');
   overlay.classList.add('open');document.body.style.overflow='hidden';
   window._postCtx={username,ch,posts,rendered:Math.max(4,Math.min(posts.length,idx+1)),openAt:idx,page:0,beforeId:'',hasMore:true,loading:false,canGoNewer:true,loadingNew:false};
+  loadFullChannelPosts(username);
   renderPostModal();
   const scroller=overlay.querySelector('.modal');
   if(scroller)scroller.onscroll=function(){
@@ -787,25 +806,38 @@ function parseJinaPosts(md){
       if(r.ok){const d=await r.json();newPosts=(d.posts||[]).filter(p=>p&&p.id)}
       ctx.page=page;
     }else{
-      const before=ctx.beforeId||(ctx.posts.length?ctx.posts[ctx.posts.length-1].id:'');
-      const q=before?('?before='+before):'';
-      const url='https://r.jina.ai/https://t.me/s/'+encodeURIComponent(ctx.username)+q;
-      let r=await fetch(url,{headers:{'X-Respond-With':'html'},signal:AbortSignal.timeout(12000)});
-      let htmlTxt=r.ok?await r.text():'';
-      newPosts=parseTgHtml(htmlTxt,ctx.username);
-      if(newPosts.length<=1){
-        try{
-          const r1=await fetch(url,{headers:{'X-Respond-With':'html'},signal:AbortSignal.timeout(12000)});
-          if(r1.ok){const t1=await r1.text();const p1=parseTgHtml(t1,ctx.username);if(p1.length>newPosts.length)newPosts=p1}
-        }catch(e){}
+      // Local mode: use the full per-channel archive (posts/<username>.json)
+      const full=await loadFullChannelPosts(ctx.username);
+      if(full.length){
+        const before=ctx.beforeId||(ctx.posts.length?ctx.posts[ctx.posts.length-1].id:'');
+        newPosts=before?full.filter(p=>Number(p.id)<Number(before)):full.slice(0);
+        if(!newPosts.length){
+          const loader=document.getElementById('postFeedLoading');if(loader)loader.remove();
+          if(!body.querySelector('.post-feed-end'))body.insertAdjacentHTML('beforeend','<div class="post-feed-end">— پایان پست‌ها —</div>');
+          ctx.hasMore=false;ctx.loading=false;return;
+        }
+      }else{
+        // No archive available (fetch failed or not deployed) — r.jina.ai fallback
+        const before=ctx.beforeId||(ctx.posts.length?ctx.posts[ctx.posts.length-1].id:'');
+        const q=before?('?before='+before):'';
+        const url='https://r.jina.ai/https://t.me/s/'+encodeURIComponent(ctx.username)+q;
+        let r=await fetch(url,{headers:{'X-Respond-With':'html'},signal:AbortSignal.timeout(12000)});
+        let htmlTxt=r.ok?await r.text():'';
+        newPosts=parseTgHtml(htmlTxt,ctx.username);
+        if(newPosts.length<=1){
+          try{
+            const r1=await fetch(url,{headers:{'X-Respond-With':'html'},signal:AbortSignal.timeout(12000)});
+            if(r1.ok){const t1=await r1.text();const p1=parseTgHtml(t1,ctx.username);if(p1.length>newPosts.length)newPosts=p1}
+          }catch(e){}
+        }
+        if(newPosts.length<=1){
+          try{
+            const r2=await fetch(url,{signal:AbortSignal.timeout(12000)});
+            if(r2.ok)newPosts=parseJinaPosts(await r2.text(),ctx.username);
+          }catch(e){}
+        }
+        if(newPosts.length){const nums=newPosts.map(p=>Number(p.id)).filter(n=>!isNaN(n));if(nums.length)ctx.beforeId=String(Math.min.apply(null,nums));}
       }
-      if(newPosts.length<=1){
-        try{
-          const r2=await fetch(url,{signal:AbortSignal.timeout(12000)});
-          if(r2.ok)newPosts=parseJinaPosts(await r2.text(),ctx.username);
-        }catch(e){}
-      }
-      if(newPosts.length){const nums=newPosts.map(p=>Number(p.id)).filter(n=>!isNaN(n));if(nums.length)ctx.beforeId=String(Math.min.apply(null,nums));}
     }
   }catch(e){}
   const loader=document.getElementById('postFeedLoading');if(loader)loader.remove();

@@ -3,7 +3,7 @@
 // Handles caching for offline support and PWA
 // ============================================================
 
-const CACHE_NAME = 'tgexplorer-202609021532';
+const CACHE_NAME = 'tgexplorer-202609021200';
 const STATIC_ASSETS = [
   './',
   './index.html',
@@ -58,10 +58,11 @@ self.addEventListener('fetch', event => {
     return;
   }
 
-  // Data files (posts.js / channels.js / avatars.js): network first so
-  // crawls and avatar refreshes show up immediately — fall back to the
-  // cached copy only when offline.
-  if (url.pathname.endsWith('/posts.js') || url.pathname.endsWith('/channels.js') || url.pathname.endsWith('/avatars.js')) {
+  // Data files (posts.js / channels.js / avatars.js / posts/*.json):
+  // network first so crawls and avatar refreshes show up immediately —
+  // fall back to the cached copy only when offline.
+  if (url.pathname.endsWith('/posts.js') || url.pathname.endsWith('/channels.js') || url.pathname.endsWith('/avatars.js')
+    || (url.pathname.includes('/posts/') && url.pathname.endsWith('.json'))) {
     event.respondWith(
       fetch(event.request).then(response => {
         if (response.ok) {

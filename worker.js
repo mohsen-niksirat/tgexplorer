@@ -1,12 +1,13 @@
 // ============================================================
-// Telegram Explorer - Worker with MTProto (Real Avatars)
+// Telegram Explorer - Worker (Real Avatars)
 // ============================================================
-// ⚠️ Replace API_ID and API_HASH with your own credentials
-// from https://my.telegram.org
+// Optional: set TG_API_ID / TG_API_HASH as Worker secrets instead
+// of hardcoding them:
+//   npx wrangler secret put TG_API_ID
+//   npx wrangler secret put TG_API_HASH
+// (or Cloudflare dashboard → Worker → Settings → Variables).
+// The worker works without them for public channels.
 // ============================================================
-
-const API_ID = 39190723;
-const API_HASH = 'fc2370463d51086368a3e2b460f564ca';
 
 const CORS_HEADERS = {
   'Access-Control-Allow-Origin': '*',
@@ -63,6 +64,20 @@ async function getChannelAvatar(username) {
   return generateAvatar(username);
 }
 // ============================================================
+// SIMPLE RATE LIMITER (per IP, sliding window)
+// ============================================================
+const RATE_LIMIT = 60;        // requests
+const RATE_WINDOW = 60 * 1000; // per minute
+const rateMap = new Map();
+function rateLimited(ip) {
+  const now = Date.now();
+  const e = rateMap.get(ip);
+  if (!e || now - e.ts > RATE_WINDOW) { rateMap.set(ip, { ts: now, n: 1 }); if (rateMap.size > 5000) { for (const [k, v] of rateMap) if (now - v.ts > RATE_WINDOW) rateMap.delete(k); } return false; }
+  e.n++;
+  return e.n > RATE_LIMIT;
+}
+
+// ============================================================
 // MAIN HANDLER
 // ============================================================
 
@@ -75,8 +90,13 @@ export default {
       return new Response(null, { headers: CORS_HEADERS });
     }
 
+    const ip = request.headers.get('CF-Connecting-IP') || 'unknown';
+    if (rateLimited(ip)) {
+      return j({ error: 'Too many requests' }, 429);
+    }
+
     try {
-      if (path === '/api/ping') return j({ ok: true, ts: Date.now(), version: '3.1', hasApi: true });
+      if (path === '/api/ping') return j({ ok: true, ts: Date.now(), version: '3.2', hasApi: !!(env && env.TG_API_HASH) });
 
       if (path === '/api/search') return await handleSearch(url);
       if (path.startsWith('/api/channel/')) return await handleChannel(path.split('/api/channel/')[1]);
@@ -170,12 +190,8 @@ async function handleSearch(url) {
     const avatar = await getChannelAvatar(ch.username);
     return { ...ch, avatar: avatar || '', tags: ch.tags || inferTags(ch.title, ch.description, ch.username) };
   }));
-  // Add remaining without avatar fetch
-  const rest = merged.slice(10).map(ch => ({
-    ...ch, avatar: '', tags: ch.tags || inferTags(ch.title, ch.description, ch.username)
-  }));
 
-  const result = { query, lang, results: [...withAvatars, ...rest], total: merged.length };
+  const result = { query, lang, results: withAvatars, total: merged.length };
   cacheSet(cacheKey, result);
   return j(result);
 }
@@ -244,16 +260,21 @@ async function handleStats(username) {
   const withImages = posts.filter(p => p.image).length;
   const mediaRatio = posts.length > 0 ? Math.round(withImages / posts.length * 100) : 0;
 
+  // Build the 7-day chart from real post timestamps (parsePosts now
+  // extracts each post's <time datetime>; unknown dates are skipped)
+  const perDay = {};
+  for (const p of posts) {
+    if (!p.date) continue;
+    const d = new Date(p.date);
+    if (isNaN(d)) continue;
+    const key = d.toISOString().split('T')[0];
+    perDay[key] = (perDay[key] || 0) + 1;
+  }
   const now = Date.now();
   const days = [];
   for (let k = 6; k >= 0; k--) {
-    const d = new Date(now - k * 864e5);
-    const dayPosts = Math.floor(Math.random() * (posts.length / 2)) + 1;
-    days.push({
-      date: d.toISOString().split('T')[0],
-      posts: dayPosts,
-      views: dayPosts * (Math.floor(Math.random() * 5000) + 500)
-    });
+    const key = new Date(now - k * 864e5).toISOString().split('T')[0];
+    days.push({ date: key, posts: perDay[key] || 0, views: (perDay[key] || 0) * 1000 });
   }
 
   const avatar = await getChannelAvatar(u);
@@ -430,7 +451,12 @@ async function handleNotifications(url) {
       const h = await fetchHtml(`https://t.me/s/${u}`);
       if (!h) continue;
       const p = parsePosts(h, u);
-      const np = since > 0 ? p.filter(() => Math.random() > 0.7) : [];
+      // Real new-post detection: only posts whose <time datetime> is
+      // newer than the client's last check timestamp
+      const np = since > 0 ? p.filter(x => {
+        const t = x.date ? Date.parse(x.date) : 0;
+        return t > since;
+      }) : [];
       if (np.length) up.push({ username: u, newCount: np.length, latestPost: np[0] });
     } catch {}
   }
@@ -515,9 +541,10 @@ function parsePosts(html, username) {
     const id = idm[1];
     const tm = block.match(/class="tgme_widget_message_text[^>]*>([\s\S]*?)<\/div>/);
     const text = tm ? tm[1].replace(/<[^>]+>/g, '').trim() : '';
+    const dm = block.match(/<time[^>]+datetime="([^"]+)"/);
     const im = block.match(/background-image:\s*url\(['"]?(https?:\/\/[^'") \s]+)['"]?\)/);
     const vm = block.match(/<video[^>]*src="([^"]+)"/);
-    const post = { id, link: `https://t.me/${username}/${id.split('/').pop()}` };
+    const post = { id, link: `https://t.me/${username}/${id.split('/').pop()}`, date: dm ? dm[1] : '' };
     if (text) post.text = decodeEntities(text.substring(0, 300));
     if (vm) { post.video = vm[1]; post.hasVideo = true; }
     if (im) post.image = im[1];

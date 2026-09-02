@@ -3,6 +3,34 @@
 Full version history of Telegram Explorer. The latest release is summarized in the
 [README](README.md#-changelog).
 
+## v1.5.1
+
+- 🪶 **Lazy-loaded post archive (73% lighter initial load)** — the crawler
+  (`crawl_posts.js`) now writes two outputs: a small inline seed in
+  `posts.js` (latest 12 posts per channel, 2.4 MB → ~650 KB) and the full
+  50-post archive in `posts/<username>.json`, one JSON per channel. The app
+  boots with the seed, fetches the channel's archive on demand when a user
+  opens a post modal (cached in memory and by the service worker), and
+  "older posts" scrolling in local mode reads the archive first — the
+  r.jina.ai scraping fallback remains for channels without an archive. The
+  crawl workflow commits the `posts/` folder together with `posts.js`.
+- 🔐 **Security fix** — the hardcoded Telegram `API_ID` / `API_HASH` in
+  `worker.js` were removed. The worker now reads them from optional
+  `TG_API_ID` / `TG_API_HASH` environment secrets (`npx wrangler secret put …`)
+  and works fine without them for public channels.
+- 📊 **Real stats & notifications (worker v3.2)** — `parsePosts` now extracts
+  each post's `<time datetime>`; `/api/stats` builds its 7-day activity chart
+  from real post dates and `/api/notifications` reports only posts genuinely
+  newer than the client's last check. The random "fake data" logic is gone.
+- 🛡 **Rate limiting** — a simple per-IP sliding-window limiter (60 req/min)
+  protects every endpoint from abuse; excess requests get HTTP 429.
+- 🐛 **Search dedup fix** — `/api/search` used to merge avatar-fetched results
+  (top 15) with an overlapping unprocessed slice (top 10), duplicating entries;
+  results are now built once.
+- 📝 **README cleanup** — removed the duplicated/outdated "Project Structure"
+  section, refreshed channel counts (114 verified) and updated the deploy
+  instructions to use secrets instead of hardcoded credentials.
+
 ## v1.5.0
 
 - 🎨 **Gradient initial-letter avatars** — channels without a t.me photo now get a
