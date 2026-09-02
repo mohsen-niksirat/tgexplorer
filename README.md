@@ -185,6 +185,31 @@ Other viable free options (not wired yet):
 - **R2 (Cloudflare, 10GB free)** — object storage for the `posts/` archive with the same on-demand pattern.
 - **Telegram Bot API** — a bot (@BotFather) can send channel updates via `sendMessage`; pairs with GitHub Actions cron.
 
+## 🌱 Roadmap — ideas for future versions
+
+Ranked by value/effort (community PRs welcome!):
+
+**Quick wins**
+- 📥 **Download media** — save post images/videos with the original filename
+- 🕒 **Viewed badges** — dim already-opened channels/posts (localStorage)
+- 🔤 **Font-size setting** — small/medium/large for post texts
+- 📌 **Pin favorites** — keep favorite channels at the top of lists
+- 🔗 **Copy post as markdown** — text + image link formatted for sharing
+
+**Medium**
+- 💬 **Comments via discussion group** — link each channel post to its tg discussion thread
+- 🌐 **Full live mode** — real-time t.me scraping in the worker with pagination on Explore/Home too
+- 🤖 **Telegram bot companion** — @BotFather bot that sends new-post digests of favorites (pairs with GitHub Actions cron)
+- 🗂 **Shared folders → public pages** — publish a folder as a read-only page with OG image
+- 📈 **Real stats** — store per-day post counts over time (the 3-day retention makes historical charts need a KV/R2 counter table)
+
+**Bigger**
+- 🔐 **Optional accounts** (Supabase free tier) — sync favorites/folders across devices
+- 🔍 **Full-text search over archived posts** — build a client-side lunr/MiniSearch index from `posts/` at first visit
+- 🧠 **Semantic "similar channels"** — embed channel descriptions and suggest lookalikes
+- 📱 **React Native / Capacitor shell** — publish to stores while reusing 100% of this codebase
+- 🌍 **More languages + RTL grid fixes** for ru/zh communities
+
 ## 🇮🇷 راهنمای فارسی
 
 ### 🚀 چطور از اپ استفاده کنم؟

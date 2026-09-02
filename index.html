@@ -57,17 +57,30 @@
 .home-stats{display:flex;gap:10px;margin-bottom:6px}.home-stat{flex:1;background:var(--bg-card);border:1px solid var(--border);border-radius:14px;padding:12px;text-align:center}.home-stat-num{font-size:22px;font-weight:800;color:var(--accent)}.home-stat-lbl{font-size:12px;color:var(--text-secondary);margin-top:2px}.folder-rule{background:var(--bg-secondary);border:1px solid var(--border);border-radius:12px;padding:12px;margin-bottom:16px}.folder-rule-head{font-size:13px;font-weight:700;margin-bottom:10px;color:var(--text-secondary)}.folder-rule-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.folder-rule-empty{color:var(--text-secondary);font-size:13px;padding:14px;text-align:center;border:1px dashed var(--border);border-radius:12px;margin-bottom:10px}
 .folder-smart{margin-top:18px}.folder-smart .modal-btn{width:100%;background:var(--accent-light);color:var(--accent);border:1px dashed var(--accent)}
 /* Text preview on cards + full-text popup */
-.card-text-preview{position:absolute;left:0;right:0;bottom:0;background:linear-gradient(to top,rgba(0,0,0,.85) 30%,rgba(0,0,0,.4) 70%,transparent);color:#fff;padding:26px 10px 8px;font-size:11.5px;line-height:1.45;text-align:start;-webkit-line-clamp:3;display:-webkit-box;-webkit-box-orient:vertical;overflow:hidden;pointer-events:none}
+.card-text-preview{position:absolute;left:0;right:0;bottom:0;background:linear-gradient(to top,rgba(0,0,0,.9) 35%,rgba(0,0,0,.45) 70%,transparent);color:#fff;padding:30px 10px 8px;font-size:13px;line-height:1.55;text-align:start;-webkit-line-clamp:4;display:-webkit-box;-webkit-box-orient:vertical;overflow:hidden;pointer-events:none;z-index:1}
 .home-feed-text-clamped{-webkit-line-clamp:4;display:-webkit-box;-webkit-box-orient:vertical;overflow:hidden}
 .post-text-more{background:none;border:none;color:var(--accent);font-size:13px;font-weight:700;cursor:pointer;padding:4px 14px 12px;text-align:start;display:block;width:100%}
 [dir="rtl"] .post-text-more{text-align:end}
 .explore-item{position:relative}
-.text-preview-badge{position:absolute;top:8px;right:8px;z-index:3}
+/* Channel header (circular avatar + name) on top of every explore card */
+.explore-item-head{position:absolute;top:0;left:0;right:0;z-index:2;display:flex;align-items:center;gap:7px;padding:8px 10px 18px;background:linear-gradient(to bottom,rgba(0,0,0,.75),transparent)}
+.explore-item-avatar{width:24px;height:24px;border-radius:50%;color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0;border:1.5px solid rgba(255,255,255,.75)}
+.explore-item-name{font-size:12px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:start;text-shadow:0 1px 2px rgba(0,0,0,.5)}
+/* Text-only post card: header + centered large text + footer */
+.explore-item-text{display:flex;flex-direction:column;background:var(--bg-card)}
+.explore-item-text .explore-item-head{position:relative;background:var(--bg-card);border-bottom:1px solid var(--border);padding:8px 10px;flex-shrink:0}
+.explore-item-text .explore-item-name{color:var(--text-primary);text-shadow:none}
+.explore-item-text .explore-item-avatar{border-color:var(--border)}
+.explore-item-textbody{flex:1;min-height:0;overflow:hidden;display:flex;align-items:center;justify-content:center;padding:12px 14px}
+.explore-item-textbody>span{display:-webkit-box;-webkit-line-clamp:10;-webkit-box-orient:vertical;overflow:hidden;font-size:13.5px;line-height:1.8;color:var(--text-primary);text-align:start;width:100%}
+.explore-item-foot{display:flex;align-items:center;justify-content:space-between;padding:6px 10px;border-top:1px solid var(--border);flex-shrink:0}
+.explore-item-foot .feed-type-badge{position:static;background:var(--accent-light);color:var(--accent);font-size:12px}
+.text-preview-badge{position:absolute;top:auto;bottom:10px;right:8px;z-index:3}
 .post-fulltext-overlay{position:fixed;inset:0;background:var(--bg-overlay);z-index:400;display:none;align-items:center;justify-content:center;padding:24px;backdrop-filter:blur(4px)}
 .post-fulltext-overlay.open{display:flex}
 .post-fulltext{background:var(--bg-primary);border-radius:20px;max-width:560px;width:100%;max-height:80vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:var(--shadow-lg)}
 .post-fulltext-head{display:flex;align-items:center;gap:10px;padding:16px 18px;border-bottom:1px solid var(--border)}
-.post-fulltext-body{padding:18px;overflow-y:auto;font-size:15px;line-height:1.9;white-space:pre-wrap;word-break:break-word}
+.post-fulltext-body{padding:18px;overflow-y:auto;font-size:16px;line-height:2;white-space:pre-wrap;word-break:break-word}
 .post-fulltext-actions{display:flex;gap:8px;padding:0 18px 16px}
 .post-fulltext-actions .modal-btn{flex:1;padding:10px;font-size:13px}
 /* Search autocomplete */
@@ -739,13 +752,26 @@ function renderExploreView(container,items){
     const img=goodImg((post&&post.image)||ch.image)||ch.avatar||'';
     const color=colors[i%colors.length];
     const initial=(ch.title||ch.username||'?')[0].toUpperCase();
-    const imgHtml=img?`<img src="${img}" alt="" loading="lazy" onerror="this.style.display='none'">`:`<div style="width:100%;height:100%;background:${color};display:flex;align-items:center;justify-content:center;font-size:36px;color:#fff;font-weight:700">${initial}</div>`;
+    const chName=escHtml(ch.title||ch.username);
     const onclick=posts.length?`openPostModal('${ch.username}')`:`openChannel('${ch.username}')`;
-    const previewText=post&&post.text?post.text.slice(0,140):'';
+    // Channel header (circular avatar + name) shown on top of every card
+    const head=`<div class="explore-item-head"><div class="explore-item-avatar" style="${avatarGrad(ch.username)}">${escHtml(initial)}</div><div class="explore-item-name">${chName}</div></div>`;
+    // Text-only post: centered, larger text in the card body
+    if(post&&!post.image&&!post.hasVideo&&post.text){
+      const textMax=420,more=post.text.length>textMax;
+      return `<div class="explore-item explore-item-text" onclick="${onclick}" style="aspect-ratio:3/4">
+        ${head}
+        <div class="explore-item-textbody"><span>${escHtml(post.text.slice(0,textMax))}${more?' …':''}</span></div>
+        <div class="explore-item-foot"><span class="feed-type-badge">📝</span><span style="font-size:11px;color:var(--text-secondary)">👥 ${ch.members||'0'}</span></div>
+      </div>`;
+    }
+    const imgHtml=img?`<img src="${img}" alt="" loading="lazy" onerror="this.style.display='none'">`:`<div style="width:100%;height:100%;background:${color};display:flex;align-items:center;justify-content:center;font-size:36px;color:#fff;font-weight:700">${initial}</div>`;
+    const previewText=post&&post.text?post.text.slice(0,200):'';
     return `<div class="explore-item" onclick="${onclick}" style="aspect-ratio:3/4">
       ${imgHtml}
+      ${head}
       ${post?`<div class="feed-type-badge text-preview-badge">${post.hasVideo?'🎬':(post.image?'🖼':'📝')}</div>`:''}
-      ${previewText?`<div class="card-text-preview">${escHtml(previewText)}${post.text.length>140?'…':''}</div>`:''}
+      ${previewText?`<div class="card-text-preview">${escHtml(previewText)}${post.text.length>200?' …':''}</div>`:''}
       <div class="explore-item-overlay">
         <div class="explore-item-info">
           <div class="explore-stat">${ch.members||'0'}</div>
