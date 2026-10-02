@@ -3,7 +3,7 @@
 // Handles caching for offline support and PWA
 // ============================================================
 
-const CACHE_NAME = 'tgexplorer-202610011827';
+const CACHE_NAME = 'tgexplorer-202610020048';
 const STATIC_ASSETS = [
   './',
   './index.html',
