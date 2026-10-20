@@ -1,49 +1,242 @@
 // ============================================================
 // verify_channels.js — check that every channel in channels.js
 // actually exists as a PUBLIC CHANNEL on Telegram
-// Usage: node verify_channels.js
-//   - OK     : real public channel
-//   - USER   : username exists but is a user/bot, not a channel
-//   - MISSING: no public channel with this username
+//
+// Usage:
+//   node verify_channels.js                 -> CLI report (+ JSON report file)
+//   node verify_channels.js --json          -> JSON report to stdout only
+//   node verify_channels.js --prune         -> also move dead channels (USER/FAIL)
+//                                              from channels.js to channels-deprecated.js
+//
+// Statuses:
+//   OK     : real public channel
+//   USER   : username exists but is a user/bot, not a channel
+//   FAIL   : HTTP error or not a public channel page
+//   ERR    : network error (retry later)
+//
+// Output: verify_channels_report.json (CI artifact) with per-channel
+// status, old/new member counts, and a "dead" list (USER+FAIL) that the
+// workflow can use to move channels out of the active DB.
 // ============================================================
 const fs = require('fs');
-const src = fs.readFileSync('channels.js', 'utf8');
+const path = require('path');
+
+const JSON_REPORT_FILE = path.join(__dirname, 'verify_channels_report.json');
+
+const src = fs.readFileSync(path.join(__dirname, 'channels.js'), 'utf8');
 const fn = new Function(src + '; return CHANNEL_DB;');
 const db = fn();
 
 const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
 
+// Parse a members count like "1.2M", "600K", "1252" into a number.
+function parseMembers(raw) {
+  const m = String(raw || '').trim().match(/^([\d.,]+)\s*([KkMm])?$/);
+  if (!m) return NaN;
+  let val = Number(m[1].replace(/,/g, ''));
+  const unit = (m[2] || '').toUpperCase();
+  if (unit === 'K') val *= 1000;
+  if (unit === 'M') val *= 1000000;
+  return val;
+}
+
+// Fetch a t.me page and return { ok, title, html }.
+async function fetchTme(url) {
+  const r = await fetch(url, {
+    headers: { 'User-Agent': UA, 'Accept': 'text/html', 'Accept-Language': 'en' },
+    redirect: 'follow',
+  });
+  if (!r.ok) return { ok: false, status: r.status };
+  const html = await r.text();
+  const title = (html.match(/<title>([^<]*)<\/title>/) || [])[1] || '';
+  return { ok: true, title: title.trim(), html };
+}
+
 async function check(ch) {
   const url = 'https://t.me/s/' + encodeURIComponent(ch.username);
   try {
-    const r = await fetch(url, { headers: { 'User-Agent': UA, 'Accept': 'text/html', 'Accept-Language': 'en' }, redirect: 'follow' });
+    const r = await fetchTme(url);
     if (!r.ok) return { ch, status: 'FAIL', reason: 'HTTP ' + r.status };
-    const html = await r.text();
-    const title = (html.match(/<title>([^<]*)<\/title>/) || [])[1] || '';
-    if (!html.includes('tgme_page')) return { ch, status: 'FAIL', reason: 'not a public channel page' };
-    if (/^Telegram: Contact/i.test(title.trim())) return { ch, status: 'USER', reason: '"' + title.slice(0, 60) + '"' };
-    return { ch, status: 'OK', reason: '"' + title.slice(0, 60) + '"' };
+    const title = r.title;
+    if (!r.html.includes('tgme_page')) return { ch, status: 'FAIL', reason: 'not a public channel page' };
+
+    // "Telegram: Contact @x" on the /s/ preview usually means the username is
+    // a user/bot — BUT some live channels disable the public preview and get
+    // the same page. Double-check the plain profile page before declaring dead.
+    if (/^Telegram: Contact/i.test(title)) {
+      const p = await fetchTme('https://t.me/' + encodeURIComponent(ch.username));
+      if (p.ok && p.title && !/^Telegram: Contact/i.test(p.title) && p.title !== 'Telegram') {
+        // Profile page shows a real title -> live channel with preview disabled.
+        return { ch, status: 'OK', reason: '"' + p.title.slice(0, 60) + '" (preview disabled)', members: null };
+      }
+      return { ch, status: 'USER', reason: '"' + title.slice(0, 60) + '"' };
+    }
+
+    // Extract the live member count so the report can track growth/decay.
+    const mm = r.html.match(/([\d.,]+[KkMm]?)\s*(?:members|subscriber|عضو)/i);
+    return { ch, status: 'OK', reason: '"' + title.slice(0, 60) + '"', members: mm ? mm[1] : null };
   } catch (e) {
     return { ch, status: 'ERR', reason: 'network: ' + e.message };
   }
 }
 
+function classify(results) {
+  const byStatus = { OK: [], USER: [], FAIL: [], ERR: [] };
+  for (const r of results) byStatus[r.status].push(r);
+
+  // USER/FAIL: candidates to remove from the active DB (move to deprecated).
+  const dead = byStatus.USER.concat(byStatus.FAIL).map(r => ({
+    username: r.username,
+    title: r.title,
+    status: r.status,
+    reason: r.reason,
+  }));
+
+  // ERR on low-member channels is suspicious: possibly dead/deleted recently.
+  const suspicious = byStatus.ERR.filter(
+    r => !Number.isNaN(parseMembers(r.oldMembers)) && parseMembers(r.oldMembers) < 100
+  ).map(r => ({ username: r.username, status: r.status, reason: r.reason }));
+
+  // Title drift: the live t.me title no longer matches the DB title.
+  const renamed = results.filter(r => {
+    if (r.status !== 'OK') return false;
+    const live = (r.reason || '').replace(/"/g, '').trim();
+    const dbTitle = (r.title || '').trim();
+    if (!live || !dbTitle) return false;
+    return !live.toLowerCase().includes(dbTitle.toLowerCase()) &&
+           !dbTitle.toLowerCase().includes(live.toLowerCase());
+  }).map(r => ({
+    username: r.username,
+    dbTitle: r.title,
+    liveTitle: (r.reason || '').replace(/"/g, '').trim(),
+  }));
+
+  return { byStatus, dead, suspicious, renamed };
+}
+
+// ============================================================
+// PRUNE — move dead channels (USER/FAIL) out of channels.js into
+// channels-deprecated.js. Enabled with: node verify_channels.js --prune
+// Line-based rewrite keeps the original formatting/comments intact.
+// ============================================================
+function pruneDead(dead) {
+  if (!dead.length) {
+    console.log('\nPrune: no dead channels — channels.js unchanged.');
+    return;
+  }
+  const deadSet = new Set(dead.map(d => d.username));
+  const chPath = path.join(__dirname, 'channels.js');
+  const lines = fs.readFileSync(chPath, 'utf8').split('\n');
+  const kept = [];
+  const removed = [];
+  for (const line of lines) {
+    const m = line.match(/\busername:'([^']+)'/);
+    if (m && deadSet.has(m[1])) removed.push(line.trim().replace(/,$/, ''));
+    else kept.push(line);
+  }
+  fs.writeFileSync(chPath, kept.join('\n'), 'utf8');
+
+  // Merge into channels-deprecated.js (dedup by username).
+  const depPath = path.join(__dirname, 'channels-deprecated.js');
+  const existing = new Set();
+  const merged = [];
+  if (fs.existsSync(depPath)) {
+    for (const line of fs.readFileSync(depPath, 'utf8').split('\n')) {
+      const m = line.match(/\busername:'([^']+)'/);
+      if (m && !existing.has(m[1])) { existing.add(m[1]); merged.push(line.trim().replace(/,$/, '')); }
+    }
+  }
+  for (const line of removed) {
+    const m = line.match(/\busername:'([^']+)'/);
+    if (m && !existing.has(m[1])) { existing.add(m[1]); merged.push(line); }
+  }
+  const header = [
+    '// ============================================================',
+    '// channels-deprecated.js — channels that failed live verification',
+    '// (the username now belongs to a user/bot or the channel is gone).',
+    '// Auto-managed by: node verify_channels.js --prune — do not edit by hand.',
+    '// ============================================================',
+    'const DEPRECATED_DB = [',
+  ];
+  const body = merged.map(l => '  ' + l + ',').join('\n');
+  fs.writeFileSync(depPath, header.join('\n') + '\n' + body + '\n];\n', 'utf8');
+  console.log('\nPrune: moved ' + removed.length + ' dead channel(s) from channels.js to channels-deprecated.js:');
+  removed.forEach(l => { const m = l.match(/\busername:'([^']+)'/); if (m) console.log('  - @' + m[1]); });
+}
+
 (async () => {
+  const args = process.argv.slice(2);
+  const jsonOnly = args.includes('--json');
+
   console.log('Checking ' + db.length + ' channels on t.me...\n');
   const counts = { OK: 0, USER: 0, FAIL: 0, ERR: 0 };
-  const bad = [];
+  const results = [];
   for (const ch of db) {
     const res = await check(ch);
     counts[res.status]++;
+    results.push({
+      username: res.ch.username,
+      title: res.ch.title,
+      oldMembers: res.ch.members,
+      newMembers: res.members || null,
+      status: res.status,
+      reason: res.reason,
+    });
     const mark = { OK: '  OK  ', USER: ' USER ', FAIL: ' FAIL ', ERR: ' ERR  ' }[res.status];
     console.log(mark + ' @' + ch.username.padEnd(22) + res.reason);
-    if (res.status !== 'OK') bad.push(res);
     await new Promise(r => setTimeout(r, 300));
   }
-  console.log('\n=== RESULT: ' + counts.OK + ' OK, ' + counts.USER + ' user, ' + counts.FAIL + ' missing, ' + counts.ERR + ' network error ===');
-  if (bad.length) {
-    console.log('\nChannels to fix/remove from channels.js:');
-    bad.forEach(b => console.log('  - ' + b.ch.username + '  [' + b.status + '] ' + b.reason));
+
+  // Duplicate usernames (data hygiene — reported, not auto-removed).
+  const seenUsernames = new Set();
+  const duplicates = [];
+  for (const ch of db) {
+    if (seenUsernames.has(ch.username)) duplicates.push(ch.username);
+    seenUsernames.add(ch.username);
   }
-  process.exit(counts.FAIL + counts.USER > 0 ? 1 : 0);
+
+  const summary = {
+    checked: db.length,
+    counts,
+    duplicates,
+    reportGeneratedAt: new Date().toISOString(),
+    results,
+    ...classify(results),
+  };
+
+  console.log(
+    '\n=== RESULT: ' + counts.OK + ' OK, ' + counts.USER + ' user, ' + counts.FAIL + ' missing, ' + counts.ERR + ' network error ==='
+  );
+
+  if (summary.duplicates.length) {
+    console.log('\nDuplicate usernames in channels.js: ' + summary.duplicates.join(', '));
+  }
+
+  if (args.includes('--prune')) pruneDead(summary.dead);
+
+  if (jsonOnly) {
+    console.log(JSON.stringify(summary, null, 2));
+  } else {
+    const bad = results.filter(r => r.status !== 'OK');
+    if (bad.length) {
+      console.log('\nChannels to fix/remove from channels.js:');
+      bad.forEach(b => console.log('  - ' + b.username + '  [' + b.status + '] ' + b.reason));
+    }
+    if (summary.renamed.length) {
+      console.log('\nPossible renames (live title differs from DB title):');
+      summary.renamed.forEach(r => console.log('  - @' + r.username + ': "' + r.dbTitle + '" -> "' + r.liveTitle + '"'));
+    }
+    if (summary.suspicious.length) {
+      console.log('\nSUSPICIOUS (network errors on low-member channels — verify manually):');
+      summary.suspicious.forEach(r => console.log('  - ' + r.username + '  [' + r.status + '] ' + r.reason));
+    }
+    // Always write the JSON report file (CI artifact friendly).
+    fs.writeFileSync(JSON_REPORT_FILE, JSON.stringify(summary, null, 2), 'utf8');
+    console.log('\nJSON report written to: ' + JSON_REPORT_FILE);
+  }
+
+  // Exit code: fail on USER/FAIL (dead channels). ERR alone does not fail the
+  // build — transient network errors should not block CI, they are reported.
+  const failCount = counts.USER + counts.FAIL;
+  process.exit(failCount > 0 ? 1 : 0);
 })();
