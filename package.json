@@ -1,0 +1,20 @@
+{
+  "name": "tgexplorer",
+  "version": "1.7.0",
+  "description": "Telegram Explorer — search and discover public Telegram channels",
+  "private": true,
+  "scripts": {
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "test:headed": "playwright test --headed",
+    "test:debug": "playwright test --debug",
+    "verify": "node verify_channels.js"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.52.0",
+    "serve": "^14.2.6"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

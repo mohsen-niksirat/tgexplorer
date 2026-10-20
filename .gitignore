@@ -1,8 +1,16 @@
 .wrangler/
 
-
 mobile/node_modules/
 mobile/www/
 mobile/android/
 mobile/ios/
 mobile/.capacitor/
+
+# Playwright
+node_modules/
+test-results/
+playwright-report/
+blob-report/
+
+# Verify channels JSON report
+verify_channels_report.json
