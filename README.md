@@ -44,6 +44,15 @@ This repo ships a ready-made [`worker.js`](worker.js) + [`wrangler.toml`](wrangl
 
 ### v1.7.0
 
+- 🧩 **Modularized app code** — the monolithic inline script is split into ES
+  modules: `js/i18n.js` (all 7 languages + `applyLang()`/`t()`), `js/state.js`
+  (the shared app state) and `js/worker-code.js` (the Worker source shown in
+  the setup screen). `index.html` now loads a `<script type="module">` and
+  re-publishes the app functions on `window` through a generated bridge, so
+  every inline `onclick="…"` handler keeps working exactly as before. The
+  service worker now serves `js/*.js` network-first and pre-caches them, so
+  a new module version is picked up immediately and the app still works
+  offline
 - 🐛 **Fixed six buttons that threw a ReferenceError** — folder export
   (text / PDF / JSON), saved-post export (text / PDF) and the post-modal
   "scroll to top" button were wired to functions that did not exist, so

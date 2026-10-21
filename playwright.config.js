@@ -9,6 +9,11 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 1 : 0,
   workers: process.env.CI ? 1 : undefined,
+  // The app parses a 600 KB local post archive on boot, and the offline
+  // test waits for the service worker to take control — 30 s is not
+  // enough on a loaded CI runner.
+  timeout: 90 * 1000,
+  expect: { timeout: 15 * 1000 },
   reporter: [['html', { open: 'never' }], ['json', { outputFile: 'test-results/results.json' }]],
   use: {
     baseURL: 'http://localhost:3000',

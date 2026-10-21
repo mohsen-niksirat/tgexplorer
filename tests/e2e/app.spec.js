@@ -140,43 +140,6 @@ test.describe('Telegram Explorer - e2e', () => {
     }
   });
 
-  test('offline mode shows a clear banner and still returns local results', async ({ page, context }) => {
-    // Simulate a dead network for everything EXCEPT the local data files
-    // (channels.js / posts.js), which the service worker serves from cache.
-    await context.route('**/*', route => {
-      const url = route.request().url();
-      if (/\/(channels|posts|avatars)\.js(\?|$)/.test(url)) return route.continue();
-      return route.abort('internetdisconnected');
-    });
-    // A real offline signal — navigator.onLine flips to false, which is what
-    // the app listens to for the offline banner.
-    await context.setOffline(true);
-
-    // The app must still boot (cached shell) and reach the content area.
-    await page.goto('/');
-    const heroVisible = await page.locator('#heroSection').isVisible();
-    if (!heroVisible) {
-      await page.evaluate(() => {
-        if (typeof window.skipSetup === 'function') window.skipSetup();
-      });
-    }
-    await expect(page.locator('#heroSection')).toBeVisible();
-
-    // Offline banner is visible and explains the situation.
-    const banner = page.locator('#netBanner');
-    await expect(banner).toHaveClass(/show/);
-    await expect(page.locator('#netBannerText')).toContainText(/offline/i);
-
-    // Local (cached) search still works — no "no results" dead end.
-    const searchInput = page.locator('#searchInput');
-    await searchInput.fill('bbc');
-    await searchInput.press('Enter');
-    await page.keyboard.press('Escape');
-
-    const cards = page.locator('.explore-item, .channel-card, .list-item');
-    await expect(cards.first()).toBeVisible();
-  });
-
   test('unreachable worker falls back to the local database with a visible notice', async ({ page }) => {
     // Point the app at a worker URL that cannot be reached. The local
     // channel DB must still answer the search.
@@ -194,6 +157,56 @@ test.describe('Telegram Explorer - e2e', () => {
     await expect(banner).toHaveClass(/show/);
 
     // ...and the local database is used instead of an error screen.
+    const searchInput = page.locator('#searchInput');
+    await searchInput.fill('bbc');
+    await searchInput.press('Enter');
+    await page.keyboard.press('Escape');
+
+    const cards = page.locator('.explore-item, .channel-card, .list-item');
+    await expect(cards.first()).toBeVisible();
+  });
+});
+
+/**
+ * Offline behaviour runs in its own describe block with its own context:
+ * `context.setOffline(true)` tears the whole network down, so it must not
+ * leak into the tests above.
+ */
+test.describe('Telegram Explorer - offline', () => {
+  test('offline mode shows a clear banner and still returns local results', async ({ page, context }) => {
+    // 1) Load the app online first, so the service worker installs and
+    //    caches the shell + the local channel database.
+    await page.goto('/');
+    await page.evaluate(() => {
+      if (typeof window.skipSetup === 'function') window.skipSetup();
+    });
+    await page.waitForFunction(
+      () => navigator.serviceWorker && navigator.serviceWorker.controller !== null,
+      null,
+      { timeout: 20000 }
+    ).catch(() => {});
+    await page.waitForTimeout(2000);
+
+    // 2) Now simulate a dead network. The local data files are served by
+    //    the service worker from its cache.
+    await context.setOffline(true);
+
+    // 3) The app must still boot (cached shell) and reach the content area.
+    await page.reload();
+    const heroVisible = await page.locator('#heroSection').isVisible();
+    if (!heroVisible) {
+      await page.evaluate(() => {
+        if (typeof window.skipSetup === 'function') window.skipSetup();
+      });
+    }
+    await expect(page.locator('#heroSection')).toBeVisible();
+
+    // 4) The offline banner is visible and explains the situation.
+    const banner = page.locator('#netBanner');
+    await expect(banner).toHaveClass(/show/);
+    await expect(page.locator('#netBannerText')).toContainText(/offline/i);
+
+    // 5) Local (cached) search still works — no "no results" dead end.
     const searchInput = page.locator('#searchInput');
     await searchInput.fill('bbc');
     await searchInput.press('Enter');

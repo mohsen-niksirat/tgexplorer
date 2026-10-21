@@ -3,14 +3,16 @@
 // Handles caching for offline support and PWA
 // ============================================================
 
-const CACHE_NAME = 'tgexplorer-202610210900';
+const CACHE_NAME = 'tgexplorer-202610211200';
 const STATIC_ASSETS = [
   './',
   './index.html',
   './manifest.json',
   './channels.js',
-  './posts.js',
   './avatars.js',
+  './js/i18n.js',
+  './js/state.js',
+  './js/worker-code.js',
 ];
 
 // Install: cache static assets. Data files are best-effort — a missing
@@ -55,6 +57,22 @@ self.addEventListener('fetch', event => {
   // features) show up on refresh — no stale cached copy. Fall back to cache
   // only when offline.
   if (url.pathname.endsWith('/index.html') || url.pathname.endsWith('/manifest.json')) {
+    event.respondWith(
+      fetch(event.request).then(response => {
+        if (response.ok) {
+          const clone = response.clone();
+          caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
+        }
+        return response;
+      }).catch(() => caches.match(event.request))
+    );
+    return;
+  }
+
+  // ES modules (js/*.js): network first, so a new deploy of a module is
+  // picked up on the next load instead of being pinned to a stale cached
+  // copy. Falls back to the cache when offline.
+  if (url.pathname.includes('/js/') && url.pathname.endsWith('.js')) {
     event.respondWith(
       fetch(event.request).then(response => {
         if (response.ok) {

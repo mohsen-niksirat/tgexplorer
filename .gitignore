@@ -14,3 +14,8 @@ blob-report/
 
 # Verify channels JSON report
 verify_channels_report.json
+
+# Local test output / scratch files
+test-out.txt
+*.bak
+source-app.html
