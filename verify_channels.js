@@ -219,7 +219,7 @@ function pruneDead(dead) {
   removed.forEach(l => { const m = l.match(/\busername:'([^']+)'/); if (m) console.log('  - @' + m[1]); });
 }
 
-(async () => {
+async function main() {
   const args = process.argv.slice(2);
   const jsonOnly = args.includes('--json');
 
@@ -294,4 +294,10 @@ function pruneDead(dead) {
   // build — transient network errors should not block CI, they are reported.
   const failCount = counts.USER + counts.FAIL;
   process.exit(failCount > 0 ? 1 : 0);
-})();
+}
+
+module.exports = { check, fetchTme, parseMembers, profileKind, extractMemberCount };
+
+if (require.main === module) {
+  main();
+}

@@ -1,0 +1,78 @@
+name: Channel suggestion
+description: Suggest a public Telegram channel — it is checked against t.me and turned into a pull request automatically.
+
+title: "[Channel] @username"
+labels: ["channel-suggestion"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting a channel!
+
+        The workflow checks the channel against `t.me` and, if it is a public
+        channel, opens a pull request that adds it to `channels.js`.
+        Please fill in the fields below — the workflow reads them from here.
+  - type: input
+    id: username
+    attributes:
+      label: Username
+      description: The channel username, without the @ (for example `bbcpersian`).
+      placeholder: bbcpersian
+    validations:
+      required: true
+  - type: input
+    id: title
+    attributes:
+      label: Title
+      description: The name of the channel as it should appear in the app.
+      placeholder: BBC Persian
+    validations:
+      required: true
+  - type: dropdown
+    id: lang
+    attributes:
+      label: Language
+      options:
+        - English
+        - Persian
+        - Arabic
+        - Other
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options:
+        - news
+        - tech
+        - crypto
+        - entertainment
+        - science
+        - sports
+        - music
+        - education
+        - travel
+        - photography
+        - meme
+        - food
+        - art
+        - gaming
+        - podcast
+        - cinema
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: One or two sentences about the channel.
+    validations:
+      required: false
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: Confirm
+      options:
+        - label: The channel is public and I did not send copyrighted material.
+          required: true

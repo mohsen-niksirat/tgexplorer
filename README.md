@@ -425,7 +425,13 @@ Checks every channel in `channels.js` live against `t.me/s/<username>`:
 - `USER` — username exists but is a user/bot, not a channel
 - `FAIL` — no public channel with this username
 
-To add channels: add an entry to `channels.js` and re-run the script.
+To add channels: use **⚙️ Settings → 💡 Suggest a channel** in the app (or
+open an issue with the [channel suggestion template](.github/ISSUE_TEMPLATE/suggest-channel.yml)).
+The suggestion is checked against `t.me` by a GitHub Action and, if it is a
+real public channel, a **pull request that adds it to `channels.js`** is
+opened automatically — you only have to merge it.
+
+To add a channel by hand: add an entry to `channels.js` and re-run the script.
 
 ## 🤖 Automated crawl (every 3 hours)
 

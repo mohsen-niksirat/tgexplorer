@@ -2386,7 +2386,7 @@ function submitSuggestion(){
   list.push(s);localStorage.setItem('tgexp_suggestions',JSON.stringify(list));
   const body='**Suggested channel**\n- Username: @'+u+'\n- Title: '+title+'\n- Language: '+lang+'\n- Category: '+cat+'\n- Description: '+(desc||'-');
   window._lastSuggestBody=body;
-  const url='https://github.com/mohsen-niksirat/tgexplorer/issues/new?title='+encodeURIComponent('Channel suggestion: '+u)+'&body='+encodeURIComponent(body);
+  const url='https://github.com/mohsen-niksirat/tgexplorer/issues/new?title='+encodeURIComponent('Channel suggestion: '+u)+'&labels=channel-suggestion&body='+encodeURIComponent(body);
   const res=document.getElementById('sugResult');
   res.style.display='flex';
   res.innerHTML='<div>✅ '+t('sug_done')+'</div><div style="display:flex;gap:10px"><button class="modal-btn modal-btn-secondary" onclick="copySuggestBody()">📋 '+t('sug_copy')+'</button><a class="modal-btn modal-btn-primary" style="text-decoration:none" target="_blank" rel="noopener" href="'+url+'">🐙 '+t('sug_open_issue')+'</a></div>';
@@ -3192,6 +3192,8 @@ Object.assign(window, {
   toggleNotifs,
   togglePostFav,
 });
+
+
 
 
 

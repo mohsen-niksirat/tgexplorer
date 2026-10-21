@@ -5,6 +5,12 @@ Full version history of Telegram Explorer. The latest release is summarized in t
 
 ## v1.7.0
 
+- 🆕 **Suggest a channel — and let a bot add it** — the app's "Suggest a
+  channel" dialog now opens an issue with the `channel-suggestion` label.
+  A GitHub Action reads the suggestion, checks the channel against `t.me`
+  and, if it is a real public channel, opens a **pull request that adds it
+  to `channels.js`** — merging it is all that is left to do. The issue
+  template covers the same flow for people who prefer the web form.
 - 📄 **A share page for every channel** — each channel gets a static page
   (`share/<username>.html`) with the Open Graph and Twitter card tags, so a
   link to it renders a rich preview in Telegram, X, WhatsApp and Slack. The
