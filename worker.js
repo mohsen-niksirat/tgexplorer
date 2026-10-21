@@ -125,6 +125,7 @@ export default {
       if (path === '/api/ping') return j({ ok: true, ts: Date.now(), version: '3.2', hasApi: !!(env && env.TG_API_HASH) });
 
       if (path === '/api/search') return await handleSearch(url, env);
+      if (path === '/api/searchPosts') return await handleSearchPosts(url, env);
       if (path.startsWith('/api/channel/')) return await handleChannel(path.split('/api/channel/')[1]);
       if (path.startsWith('/api/posts/')) return await handlePosts(path.split('/api/posts/')[1], url);
       if (path.startsWith('/api/stats/')) return await handleStats(path.split('/api/stats/')[1]);
@@ -154,6 +155,60 @@ export default {
 // ============================================================
 // SEARCH
 // ============================================================
+// Search the *text* of the posts of the curated channels —
+// "which channels talked about this topic?".
+async function handleSearchPosts(url, env) {
+  const query = (url.searchParams.get('q') || '').trim();
+  if (!query) return j({ error: 'Missing ?q=' }, 400);
+  const limit = Math.min(parseInt(url.searchParams.get('limit') || '40', 10) || 40, 100);
+
+  const cacheKey = `searchPosts:${query}`;
+  const cached = await cacheGet2(env, cacheKey);
+  if (cached) return j(cached);
+
+  const needle = query.toLowerCase();
+  const channels = getTrendingChannels('all').slice(0, 60);
+  const matches = [];
+  let checked = 0;
+
+  // A handful of channels at a time, so the Worker stays within its
+  // subrequest budget.
+  const BATCH = 6;
+  for (let i = 0; i < channels.length && matches.length < limit; i += BATCH) {
+    const batch = channels.slice(i, i + BATCH);
+    const pages = await Promise.all(batch.map(async ch => {
+      try {
+        const html = await fetchHtml(`https://t.me/s/${encodeURIComponent(ch.username)}`);
+        return { ch, html };
+      } catch (e) {
+        return { ch, html: '' };
+      }
+    }));
+    for (const { ch, html } of pages) {
+      checked++;
+      if (!html) continue;
+      const posts = parsePosts(html, ch.username);
+      for (const p of posts) {
+        if (!p.text) continue;
+        const at = p.text.toLowerCase().indexOf(needle);
+        if (at === -1) continue;
+        matches.push({
+          username: ch.username,
+          title: ch.title || ch.username,
+          date: p.date || '',
+          excerpt: p.text.slice(Math.max(0, at - 90), at + needle.length + 90),
+        });
+        if (matches.length >= limit) break;
+      }
+      if (matches.length >= limit) break;
+    }
+  }
+
+  const result = { query, matches, checked, total: matches.length };
+  await cacheSet2(env, cacheKey, result);
+  return j(result);
+}
+
 async function handleSearch(url, env) {
   const query = url.searchParams.get('q');
   const lang = url.searchParams.get('lang') || 'en';

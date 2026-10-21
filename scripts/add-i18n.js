@@ -20,6 +20,14 @@ const ROWS = [
   ['never', 'Never', 'هرگز', 'أبداً', '从未', 'Никогда', 'Nunca', 'Jamais'],
   ['activity_30d', '📊 Activity (30 days)', '📊 فعالیت (۳۰ روز)', '📊 النشاط (30 يوماً)', '📊 活跃度（30 天）', '📊 Активность (30 дней)', '📊 Actividad (30 días)', '📊 Activité (30 jours)'],
   ['share_link', '🔗 Share link', '🔗 اشتراک‌گذاری لینک', '🔗 مشاركة الرابط', '🔗 分享链接', '🔗 Поделиться ссылкой', '🔗 Compartir enlace', '🔗 Partager le lien'],
+  ['psr_summary', '{0} matches in {1} channels', '{0} نتیجه در {1} کانال', '{0} نتيجة في {1} قناة', '{0} 条结果，来自 {1} 个频道', '{0} совпадений в {1} каналах', '{0} coincidencias en {1} canales', '{0} résultats dans {1} chaînes'],
+  ['psr_deep', '🔍 Search the full archive', '🔍 جست‌وجو در کل آرشیو', '🔍 ابحث في الأرشيف الكامل', '🔍 搜索完整归档', '🔍 Искать во всём архиве', '🔍 Buscar en el archivo completo', '🔍 Rechercher dans les archives'],
+  ['psr_deep_progress', '⏳ Searching {0}/{1}…', '⏳ در حال جست‌وجو {0}/{1}…', '⏳ جارٍ البحث {0}/{1}…', '⏳ 正在搜索 {0}/{1}…', '⏳ Поиск {0}/{1}…', '⏳ Buscando {0}/{1}…', '⏳ Recherche {0}/{1}…'],
+  ['psr_empty', 'No post mentions this', 'هیچ پستی به این موضوع اشاره نکرده', 'لا يوجد منشور يذكر هذا', '没有帖子提到此内容', 'Ни один пост не упоминает это', 'Ninguna publicación lo menciona', 'Aucune publication ne le mentionne'],
+  ['psr_empty_desc', 'Try another word, or search the full archive', 'کلمهٔ دیگری را امتحان کنید یا کل آرشیو را بگردید', 'جرّب كلمة أخرى أو ابحث في الأرشيف الكامل', '换一个词，或搜索完整归档', 'Попробуйте другое слово или ищите во всём архиве', 'Prueba otra palabra o busca en el archivo completo', 'Essayez un autre mot ou cherchez dans les archives'],
+  ['psr_placeholder', 'Search inside posts…', 'جست‌وجو در متن پست‌ها…', 'ابحث داخل المنشورات…', '搜索帖子内容…', 'Искать в постах…', 'Buscar dentro de las publicaciones…', 'Rechercher dans les publications…'],
+  ['psr_mode_channels', '🔎 Channels', '🔎 کانال‌ها', '🔎 القنوات', '🔎 频道', '🔎 Каналы', '🔎 Canales', '🔎 Chaînes'],
+  ['psr_mode_posts', '💬 Posts', '💬 پست‌ها', '💬 المنشورات', '💬 帖子', '💬 Посты', '💬 Publicaciones', '💬 Publications'],
 ];
 
 const p = path.join(__dirname, '..', 'js', 'i18n.js');

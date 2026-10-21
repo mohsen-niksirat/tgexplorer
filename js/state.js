@@ -35,6 +35,7 @@ export let state={
   exploreType:localStorage.getItem('tgexp_etype')||'all',
   homeType:localStorage.getItem('tgexp_home_type')||'all',
   searchQuery:'',
+  searchMode:localStorage.getItem('tgexp_search_mode')||'channels',
   searchResults:[],
   favorites:JSON.parse(localStorage.getItem('tgexp_favs')||'[]'),
   postFavs:JSON.parse(localStorage.getItem('tgexp_post_favs')||'[]'),

@@ -127,6 +127,37 @@ test.describe('Telegram Explorer - e2e', () => {
     await expect(page.locator('#modalShareBtn')).toBeVisible();
   });
 
+  test('searching inside the post texts finds the channels that mentioned it', async ({ page }) => {
+    // Switch to the post mode.
+    await page.locator('.search-mode-btn[data-mode="posts"]').click();
+    await expect(page.locator('.search-mode-btn[data-mode="posts"]')).toHaveClass(/active/);
+
+    // Use a word that really occurs in the local archive.
+    const word = await page.evaluate(() => {
+      for (const u in CHANNEL_POSTS) {
+        for (const p of CHANNEL_POSTS[u] || []) {
+          const m = (p.text || '').match(/[\p{L}]{6,}/u);
+          if (m) return m[0];
+        }
+      }
+      return null;
+    });
+    expect(word).toBeTruthy();
+
+    const searchInput = page.locator('#searchInput');
+    await searchInput.fill(word);
+    await searchInput.press('Enter');
+    await page.waitForTimeout(800);
+
+    // The results are grouped by channel and the match is highlighted.
+    expect(await page.locator('.psr-group').count()).toBeGreaterThan(0);
+    expect(await page.locator('.psr-hit-text mark').count()).toBeGreaterThan(0);
+    await expect(page.locator('.psr-summary')).toContainText(/\d/);
+
+    // The deep search button is offered.
+    await expect(page.locator('#psrDeepBtn')).toBeVisible();
+  });
+
   test('language switching updates the document', async ({ page }) => {
     await page.locator('#langSelect').selectOption('fa');
 

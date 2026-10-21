@@ -13,6 +13,7 @@ const RATE=new Map(),RATE_LIMIT=60,RATE_WIN=60000;function rateOK(ip){const now=
 export default{async fetch(request,env){const url=new URL(request.url);const path=url.pathname;if(request.method==='OPTIONS')return new Response(null,{headers:CORS_HEADERS});const ip=request.headers.get('CF-Connecting-IP')||'unknown';if(!rateOK(ip))return j({error:'Too many requests'},429);
 try{if(path==='/api/ping')return j({ok:true,ts:Date.now(),version:'3.2',hasApi:!!(env&&env.TG_API_HASH)});
 if(path==='/api/search')return await handleSearch(url);
+if(path==='/api/searchPosts')return await handleSearchPosts(url);
 if(path.startsWith('/api/channel/'))return await handleChannel(path.split('/api/channel/')[1]);
 if(path.startsWith('/api/posts/'))return await handlePosts(path.split('/api/posts/')[1],url);
 if(path.startsWith('/api/stats/'))return await handleStats(path.split('/api/stats/')[1]);
@@ -22,6 +23,21 @@ if(path==='/api/explore-feed')return await handleExploreFeed(url);
 if(path==='/api/categories')return handleCategories();
 if(path==='/api/notifications')return await handleNotifications(url);
 return j({error:'Not found'},404)}catch(err){return j({error:err.message},500)}}};
+async function handleSearchPosts(url){const q=(url.searchParams.get('q')||'').trim();if(!q)return j({error:'Missing ?q='},400);
+const lim=Math.min(parseInt(url.searchParams.get('limit')||'40',10)||40,100);
+const ck=\`searchPosts:\${q}\`;const c=cacheGet(ck);if(c)return j(c);
+const needle=q.toLowerCase();const chans=curated('all').slice(0,60);const matches=[];let checked=0;
+for(let i=0;i<chans.length&&matches.length<lim;i+=6){
+const batch=chans.slice(i,i+6);
+const pages=await Promise.all(batch.map(async ch=>{try{return{ch,html:await fH(\`https://t.me/s/\${ch.username}\`)}}catch(e){return{ch,html:''}}}));
+for(const{ch,html}of pages){checked++;if(!html)continue;
+const posts=pP(html,ch.username);
+for(const p of posts){if(!p.text)continue;
+const at=p.text.toLowerCase().indexOf(needle);if(at===-1)continue;
+matches.push({username:ch.username,title:ch.title||ch.username,date:p.date||'',excerpt:p.text.slice(Math.max(0,at-90),at+needle.length+90)});
+if(matches.length>=lim)break}
+if(matches.length>=lim)break}}
+const r={query:q,matches,checked,total:matches.length};cacheSet(ck,r);return j(r)}
 async function handleSearch(url){const q=url.searchParams.get('q');const lang=url.searchParams.get('lang')||'en';if(!q)return j({error:'Missing ?q='},400);
 const ck=\`search:\${q}:\${lang}\`;const c=cacheGet(ck);if(c)return j(c);
 const tme=await fH(\`https://t.me/s/\${encodeURIComponent(q)}\`);const tr=pSR(tme,q);

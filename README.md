@@ -44,6 +44,14 @@ This repo ships a ready-made [`worker.js`](worker.js) + [`wrangler.toml`](wrangl
 
 ### v1.7.0
 
+- 💬 **Search inside the posts** — a second search mode next to the search box
+  looks for a topic in the **text of the posts** instead of the channel
+  names: "which channels talked about this?". The results are grouped by
+  channel with the matching words highlighted, and a **Search the full
+  archive** button loads the complete per-channel archives (about 1 MB) for
+  the deep search. With a Worker connected the query goes to the new
+  `/api/searchPosts` endpoint instead, which searches the live pages of the
+  curated channels
 - 📊 **Richer channel profile** — the channel modal now shows what the post
   archive knows: **posts per day**, **total posts**, **active days** and the
   **last post**, an **activity chart** that switches between the last **7 and

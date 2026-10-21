@@ -125,6 +125,29 @@ body[data-fs="large"] .home-feed-text-clamped{-webkit-line-clamp:3}
 .filter-btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
 .filter-btn.primary:hover{opacity:.92;color:#fff}
 /* ============================================================
+   IN-POST SEARCH
+   ============================================================ */
+.search-modes{display:flex;gap:6px;justify-content:center;margin-top:12px}
+.search-mode-btn{border:1px solid var(--border);background:var(--bg-primary);color:var(--text-secondary);font-size:12.5px;font-weight:600;padding:6px 16px;border-radius:20px;cursor:pointer;transition:all var(--transition)}
+.search-mode-btn:hover{border-color:var(--accent);color:var(--accent)}
+.search-mode-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.psr-wrap{display:flex;flex-direction:column;gap:14px}
+.psr-summary{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:13px;color:var(--text-secondary)}
+.psr-summary b{color:var(--text-primary)}
+.psr-deep-btn{border:1px solid var(--border);background:var(--bg-primary);color:var(--text-secondary);font-size:12.5px;font-weight:600;padding:5px 14px;border-radius:18px;cursor:pointer;transition:all var(--transition)}
+.psr-deep-btn:hover{border-color:var(--accent);color:var(--accent)}
+.psr-deep-btn:disabled{opacity:.55;cursor:default}
+.psr-group{background:var(--bg-secondary);border:1px solid var(--border);border-radius:14px;overflow:hidden}
+.psr-channel{display:flex;align-items:center;gap:8px;padding:10px 14px;border-bottom:1px solid var(--border);font-size:13px;font-weight:700;color:var(--text-primary);cursor:pointer}
+.psr-channel:hover{color:var(--accent)}
+.psr-channel .psr-count{margin-left:auto;font-size:11.5px;font-weight:600;color:var(--text-tertiary)}
+.psr-hit{padding:10px 14px;border-bottom:1px solid var(--border);cursor:pointer;transition:background var(--transition)}
+.psr-hit:last-child{border-bottom:none}
+.psr-hit:hover{background:var(--bg-hover)}
+.psr-hit-text{font-size:13.5px;line-height:1.7;color:var(--text-primary);white-space:pre-wrap;word-break:break-word}
+.psr-hit-text mark{background:rgba(255,204,0,.35);color:inherit;border-radius:3px;padding:0 2px;font-weight:700}
+.psr-hit-meta{margin-top:4px;font-size:11.5px;color:var(--text-tertiary)}
+/* ============================================================
    OFFLINE / FALLBACK STATUS BANNER
    Shown when the network is down, or when the configured Worker
    proxy cannot be reached and the app falls back to local data.
@@ -203,6 +226,10 @@ body[data-fs="large"] .home-feed-text-clamped{-webkit-line-clamp:3}
     <div class="search-box">
       <input class="search-input" id="searchInput" type="text" data-i18n-placeholder="search_placeholder" data-i18n-aria-label="search_placeholder" aria-label="Search channels, topics, groups..." autocomplete="off">
       <button class="search-btn" id="searchBtn" data-i18n="search_btn">🔍 Search</button>
+    </div>
+    <div class="search-modes" id="searchModes" role="group" aria-label="Search mode">
+      <button class="search-mode-btn active" data-mode="channels" aria-pressed="true" onclick="setSearchMode('channels')" data-i18n="psr_mode_channels">🔎 Channels</button>
+      <button class="search-mode-btn" data-mode="posts" aria-pressed="false" onclick="setSearchMode('posts')" data-i18n="psr_mode_posts">💬 Posts</button>
     </div>
     <div class="search-tags" id="searchTags">
       <span class="search-tag" data-query="technology">💻 Technology</span>
@@ -394,7 +421,7 @@ import { state } from './js/state.js';
 // ============================================================
 // INIT
 // ============================================================
-document.addEventListener('DOMContentLoaded',()=>{applyTheme(state.theme);applyLang(state.lang);applyFontSize();initTelegramWebApp();watchTgBackButton();document.getElementById('workerCodeBlock').textContent=WORKER_CODE;document.getElementById('langSelect').value=state.lang;readUrlFilters(false);syncUrlFilters(false);renderFilterChips();renderFilterBar();showApp();if(!state.workerUrl&&!localStorage.getItem('tgexp_setup_hint')&&!localStorage.getItem('tgexp_setup_skipped')){localStorage.setItem('tgexp_setup_hint','1');setTimeout(()=>toast(t('proxy_hint')),1500)}bindEvents();registerSW();checkPWA();checkSharedFolder();initNotifs();initNetStatus();window.addEventListener('popstate',()=>{readUrlFilters(true);renderFilterChips();renderFilterBar();applyFiltersToView()})});
+document.addEventListener('DOMContentLoaded',()=>{applyTheme(state.theme);applyLang(state.lang);applyFontSize();initTelegramWebApp();watchTgBackButton();document.getElementById('workerCodeBlock').textContent=WORKER_CODE;document.getElementById('langSelect').value=state.lang;readUrlFilters(false);syncUrlFilters(false);renderFilterChips();renderFilterBar();setSearchMode(state.searchMode==='posts'?'posts':'channels');showApp();if(!state.workerUrl&&!localStorage.getItem('tgexp_setup_hint')&&!localStorage.getItem('tgexp_setup_skipped')){localStorage.setItem('tgexp_setup_hint','1');setTimeout(()=>toast(t('proxy_hint')),1500)}bindEvents();registerSW();checkPWA();checkSharedFolder();initNotifs();initNetStatus();window.addEventListener('popstate',()=>{readUrlFilters(true);renderFilterChips();renderFilterBar();applyFiltersToView()})});
 
 // ============================================================
 // EVENTS
@@ -508,7 +535,188 @@ function switchTab(tab){window._sharedFolder=null;state.currentTab=tab;document.
 // SEARCH
 // ============================================================
 // ============================================================
-// NETWORK STATUS + WORKER FALLBACK
+// IN-POST SEARCH
+// ------------------------------------------------------------
+// "Which channels talked about this?" — the text of every post in
+// the local archive is searched, the results are grouped by channel.
+// In worker mode the query is sent to /api/searchPosts.
+// ============================================================
+let postSearchMode='channels';
+let postSearchHits=[];
+let postSearchSources=null;   // username -> posts, once the archive is loaded
+
+// Build a case-insensitive regex that also matches the Arabic/Persian
+// letter variants (ي/ی, ك/ک).
+function buildPostQueryRe(query){
+  const esc=String(query||'').replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+  const variants=esc.replace(/[يی]/g,'[يی]').replace(/[كک]/g,'[كک]');
+  try{return new RegExp(variants,'gi')}catch(e){return null}
+}
+
+// Search the text of the given posts. Returns one hit per matching post.
+function searchPostTexts(query,sources){
+  const re=buildPostQueryRe(query);
+  if(!re)return [];
+  const hits=[];
+  for(const username in sources){
+    const posts=sources[username];
+    if(!posts||!posts.length)continue;
+    for(const p of posts){
+      if(!p.text)continue;
+      re.lastIndex=0;
+      const m=re.exec(p.text);
+      if(!m)continue;
+      hits.push({username,post:p,match:m[0],at:m.index});
+    }
+  }
+  return hits;
+}
+
+// A snippet around the match with the hit highlighted.
+function postSnippet(text,at,len,radius){
+  const start=Math.max(0,at-radius);
+  const end=Math.min(text.length,at+len+radius);
+  let out=escHtml(text.slice(start,end));
+  const re=buildPostQueryRe(text.slice(at,at+len));
+  if(re)out=out.replace(re,m=>'<mark>'+m+'</mark>');
+  return (start>0?'… ':'')+out+(end<text.length?' …':'');
+}
+
+// The posts that are already in memory (the inline seed).
+function seedPostSources(){
+  const out={};
+  if(typeof CHANNEL_POSTS==='undefined')return out;
+  for(const u in CHANNEL_POSTS){
+    const arr=CHANNEL_POSTS[u];
+    if(arr&&arr.length)out[u]=arr;
+  }
+  return out;
+}
+
+// Load the full per-channel archives (posts/<username>.json).
+async function loadArchiveSources(onProgress){
+  const seed=seedPostSources();
+  const names=Object.keys(seed);
+  const sources={...seed};
+  let done=0;
+  const CONCURRENCY=8;
+  let index=0;
+  async function worker(){
+    while(index<names.length){
+      const u=names[index++];
+      try{
+        const r=await fetch('posts/'+encodeURIComponent(u)+'.json',{signal:AbortSignal.timeout(10000)});
+        if(r.ok){
+          const arr=await r.json();
+          if(Array.isArray(arr)&&arr.length)sources[u]=arr;
+        }
+      }catch(e){}
+      done++;
+      if(onProgress)onProgress(done,names.length);
+    }
+  }
+  await Promise.all(Array.from({length:CONCURRENCY},worker));
+  return sources;
+}
+
+// Group the hits by channel.
+function groupPostHits(hits){
+  const groups=new Map();
+  for(const h of hits){
+    if(!groups.has(h.username))groups.set(h.username,[]);
+    groups.get(h.username).push(h);
+  }
+  return [...groups.entries()].map(([username,list])=>({username,list}));
+}
+
+// Render the post-search results.
+function renderPostSearchResults(){
+  const content=document.getElementById('content');
+  const hits=postSearchHits;
+  const groups=groupPostHits(hits);
+  const channels=new Set(hits.map(h=>h.username));
+  const db=getAllChannels();
+  const head='<div class="psr-summary"><span>'+escHtml(t('psr_summary').replace('{0}',String(hits.length)).replace('{1}',String(channels.size)))+'</span>'+
+    '<button class="psr-deep-btn" id="psrDeepBtn" onclick="deepSearchPosts()">'+escHtml(t('psr_deep'))+'</button></div>';
+  if(!hits.length){
+    content.innerHTML=head+renderEmpty(t('psr_empty'),t('psr_empty_desc'));
+    return;
+  }
+  const body=groups.map(g=>{
+    const ch=db.find(c=>c.username===g.username);
+    const title=ch&&ch.title?ch.title:g.username;
+    const items=g.list.map(h=>{
+      const text=h.post.text||'';
+      const snippet=postSnippet(text,h.at,h.match.length,90);
+      return '<div class="psr-hit" tabindex="0" role="button" onclick="openPostModal(\''+g.username+'\')" onkeydown="if(event.key===\'Enter\'){openPostModal(\''+g.username+'\')}">'+
+        '<div class="psr-hit-text">'+snippet+'</div>'+
+        '<div class="psr-hit-meta">'+(h.post.date?escHtml(h.post.date.slice(0,16).replace('T',' ')):'')+'</div></div>';
+    }).join('');
+    return '<div class="psr-group"><div class="psr-channel" onclick="openChannel(\''+g.username+'\')">'+
+      '<span style="'+avatarGrad(g.username)+';width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:700">'+escHtml((title||'?')[0].toUpperCase())+'</span>'+
+      escHtml(title)+' <span style="color:var(--text-tertiary);font-weight:500">@'+escHtml(g.username)+'</span>'+
+      '<span class="psr-count">'+g.list.length+'</span></div>'+items+'</div>';
+  }).join('');
+  content.innerHTML='<div class="psr-wrap">'+head+body+'</div>';
+}
+
+// Search the posts of the local archive.
+async function doPostSearch(query){
+  const q=(query||'').trim();
+  if(!q)return;
+  const content=document.getElementById('content');
+  content.innerHTML=renderSkeletons(4);
+  // In worker mode the query goes to the proxy, which searches the live
+  // pages of the curated channels.
+  if(state.workerUrl&&!isOffline()){
+    const data=await fetchWorker('/api/searchPosts?q='+encodeURIComponent(q));
+    if(data&&Array.isArray(data.matches)){
+      postSearchHits=data.matches.map(m=>({username:m.username,post:{text:m.excerpt||'',date:m.date||''},match:q,at:Math.max(0,(m.excerpt||'').toLowerCase().indexOf(q.toLowerCase()))}));
+      renderPostSearchResults();
+      const countEl=document.getElementById('resultsCount');
+      if(countEl)countEl.textContent=t('psr_summary').replace('{0}',String(postSearchHits.length)).replace('{1}',String(new Set(postSearchHits.map(h=>h.username)).size));
+      return;
+    }
+    setNetBanner('fallback',t('net_fallback'));
+  }
+  const sources=postSearchSources||seedPostSources();
+  postSearchHits=searchPostTexts(q,sources);
+  renderPostSearchResults();
+  const countEl=document.getElementById('resultsCount');
+  if(countEl)countEl.textContent=t('psr_summary').replace('{0}',String(postSearchHits.length)).replace('{1}',String(new Set(postSearchHits.map(h=>h.username)).size));
+}
+
+// Search the full per-channel archive as well.
+async function deepSearchPosts(){
+  const btn=document.getElementById('psrDeepBtn');
+  if(btn)btn.disabled=true;
+  const query=(document.getElementById('searchInput').value||'').trim();
+  postSearchSources=await loadArchiveSources((done,total)=>{
+    if(btn)btn.textContent=t('psr_deep_progress').replace('{0}',String(done)).replace('{1}',String(total));
+  });
+  if(btn){btn.disabled=false;btn.textContent=t('psr_deep')}
+  doPostSearch(query);
+}
+
+// Switch between searching channels and searching post texts.
+function setSearchMode(mode){
+  postSearchMode=mode;
+  state.searchMode=mode;
+  localStorage.setItem('tgexp_search_mode',mode);
+  document.querySelectorAll('.search-mode-btn').forEach(b=>{
+    const on=b.dataset.mode===mode;
+    b.classList.toggle('active',on);
+    b.setAttribute('aria-pressed',String(on));
+  });
+  const input=document.getElementById('searchInput');
+  if(input)input.placeholder=mode==='posts'?t('psr_placeholder'):t('search_placeholder');
+  const query=input?input.value.trim():'';
+  if(query){
+    if(mode==='posts')doPostSearch(query);
+    else doSearch();
+  }
+}
+
 // ------------------------------------------------------------
 // The app must degrade gracefully: when the network is down, or the
 // configured Worker proxy cannot be reached, we fall back to the
@@ -571,7 +779,7 @@ async function retryNetwork(){
   else{setNetBanner('fallback',t('net_fallback'));toast('⚠️ '+t('net_still_down'))}
 }
 
-async function doSearch(){const query=document.getElementById('searchInput').value.trim();if(!query)return;state.searchQuery=query;state.currentTab='search';document.querySelectorAll('.nav-tab').forEach(el=>el.classList.toggle('active',el.dataset.tab==='search'));document.getElementById('categoriesBar').style.display='none';document.getElementById('resultsHeader').style.display='flex';document.getElementById('content').innerHTML=renderSkeletons(6);let results=[];let live=false;if(state.workerUrl&&!isOffline()){const data=await fetchWorker(`/api/search?q=${encodeURIComponent(query)}&lang=${state.lang}`);if(data&&data.results){results=data.results;live=true}else{setNetBanner('fallback',t('net_fallback'));results=searchLocal(query)}}else{results=searchLocal(query);if(isOffline())setNetBanner('offline',t('net_offline'))}state.searchResults=results;document.getElementById('resultsCount').textContent=`${live?t('search_live'):t('search_local')} — ${results.length} ${t('results_for')} "${query}"`;renderResults()}
+async function doSearch(){const query=document.getElementById('searchInput').value.trim();if(!query)return;if(postSearchMode==='posts'){doPostSearch(query);return}state.searchQuery=query;state.currentTab='search';document.querySelectorAll('.nav-tab').forEach(el=>el.classList.toggle('active',el.dataset.tab==='search'));document.getElementById('categoriesBar').style.display='none';document.getElementById('resultsHeader').style.display='flex';document.getElementById('content').innerHTML=renderSkeletons(6);let results=[];let live=false;if(state.workerUrl&&!isOffline()){const data=await fetchWorker(`/api/search?q=${encodeURIComponent(query)}&lang=${state.lang}`);if(data&&data.results){results=data.results;live=true}else{setNetBanner('fallback',t('net_fallback'));results=searchLocal(query)}}else{results=searchLocal(query);if(isOffline())setNetBanner('offline',t('net_offline'))}state.searchResults=results;document.getElementById('resultsCount').textContent=`${live?t('search_live'):t('search_local')} — ${results.length} ${t('results_for')} "${query}"`;renderResults()}
 function normalizeText(x){return (x||'').toLowerCase().replace(/ي/g,'ی').replace(/ك/g,'ک').replace(/[‌​]/g,' ').replace(/\s+/g,' ').trim()}
 function fuzzyScore(q,t){if(!q||!t)return 0;if(t===q)return 100;if(t.indexOf(q)===0)return 90;if(t.indexOf(q)>-1)return 80;let score=0,ti=0,m=0;for(const ch of q){const idx=t.indexOf(ch,ti);if(idx===-1){if(m===0)return 0;break}score+=10;m++;ti=idx+1}return m>=2?score:0}
 function searchLocal(q){q=(q||'').trim();if(!q)return[];const f=filterState();let base=getAllChannels();if(f.langs.length)base=base.filter(ch=>f.langs.includes(ch.lang||'en'));const nq=normalizeText(q);const scored=base.map(ch=>{const hay=normalizeText([ch.title,ch.username,ch.description,(ch.tags||[]).join(' ')].join(' '));return{ch,score:fuzzyScore(nq,hay)}}).filter(x=>x.score>0);scored.sort((a,b)=>b.score-a.score);return scored.map(x=>x.ch)}
@@ -2692,6 +2900,119 @@ Object.assign(window, {
   setFavPostType,
   setFavSort,
   setHomeType,
+  shareFilters,
+  shareFolder,
+  sharePost,
+  skipSetup,
+  state,
+  submitSuggestion,
+  switchTab,
+  syncUrlFilters,
+  t,
+  testConnection,
+  testFromSettings,
+  toast,
+  toggleExploreType,
+  toggleFav,
+  toggleFilter,
+  toggleNotifs,
+  togglePostFav,
+});
+
+
+
+
+// ============================================================
+// WINDOW BRIDGE
+// ----------------------------------------------------------
+// Inline `onclick="fn(...)"` handlers and the e2e suite expect the
+// app functions on `window` (as they were in the classic script).
+// ============================================================
+Object.assign(window, {
+  addAutoAll,
+  addAutoOne,
+  addChannelToFolder,
+  applyExploreFilters,
+  applyFiltersToView,
+  clearFilters,
+  clearFolderRule,
+  clearLivePosts,
+  closeChannelModal,
+  closeFolderPicker,
+  closeFullText,
+  closeNotifModal,
+  closePostModal,
+  closeSettings,
+  closeSuggestModal,
+  copyFullText,
+  copyLink,
+  copyPostLink,
+  copyPostMarkdown,
+  copyPostText,
+  copySuggestBody,
+  copyWorkerCode,
+  createFolderFromPicker,
+  createFolderFromTab,
+  createSmartFolders,
+  cycleFolderIcon,
+  cycleFontSize,
+  deepSearchPosts,
+  deleteFolder,
+  dismissSharedFolder,
+  doSearch,
+  downloadPostMedia,
+  editFolder,
+  escAttr,
+  exportBackup,
+  exportPostsPdf,
+  exportPostsTxt,
+  fetchFavNewPosts,
+  filterState,
+  folderExportJson,
+  folderExportPdf,
+  folderExportTxt,
+  fpToggle,
+  getAllChannels,
+  getChannelPosts,
+  getLocalExplore,
+  importBackup,
+  importSharedFolder,
+  loadExplore,
+  loadFeed,
+  loadSharedLivePosts,
+  openChannel,
+  openFeedPost,
+  openFolderPicker,
+  openHomePost,
+  openLivePost,
+  openPostModal,
+  openSavedPost,
+  openSuggestModal,
+  pickFolderIcon,
+  readUrlFilters,
+  refreshFolderPosts,
+  removeFolderItem,
+  renderCategories,
+  renderFavFiltered,
+  renderFavorites,
+  renderFilterBar,
+  renderFilterChips,
+  renderResults,
+  resetApp,
+  retryNetwork,
+  saveFilters,
+  saveFolderRule,
+  saveSettings,
+  scrollPostModalTop,
+  searchLocal,
+  setChartRange,
+  setExploreSearch,
+  setExploreSort,
+  setExploreView,
+  setFavPostType,
+  setFavSort,
+  setHomeType,
+  setSearchMode,
   shareFilters,
   shareFolder,
   sharePost,
