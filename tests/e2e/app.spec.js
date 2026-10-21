@@ -102,6 +102,31 @@ test.describe('Telegram Explorer - e2e', () => {
     await expect(overlay).not.toHaveClass(/open/);
   });
 
+  test('the channel profile shows stats, an activity chart and content tags', async ({ page }) => {
+    await page.evaluate(() => window.openChannel('bbcpersian'));
+    await expect(page.locator('#channelOverlay')).toHaveClass(/open/);
+
+    // Four stat cards: posts per day, total posts, active days, last post.
+    const stats = page.locator('#modalStats .stat-card');
+    await expect(stats).toHaveCount(4);
+    await expect(page.locator('#modalStats')).toBeVisible();
+
+    // The activity chart is drawn on a canvas and can switch between the
+    // 7 and the 30 day window.
+    await expect(page.locator('.chart-range-btn')).toHaveCount(2);
+    await expect(page.locator('#activityChartTitle')).toContainText('7');
+    await page.locator('.chart-range-btn[data-days="30"]').click();
+    await expect(page.locator('#activityChartTitle')).toContainText('30');
+    await expect(page.locator('.chart-range-btn[data-days="30"]')).toHaveClass(/active/);
+
+    // Content tags extracted from the post texts.
+    await expect(page.locator('#modalTags')).toBeVisible();
+    expect(await page.locator('#modalTags .modal-tag').count()).toBeGreaterThan(0);
+
+    // The direct share link button is there.
+    await expect(page.locator('#modalShareBtn')).toBeVisible();
+  });
+
   test('language switching updates the document', async ({ page }) => {
     await page.locator('#langSelect').selectOption('fa');
 

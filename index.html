@@ -40,6 +40,16 @@
 @media(max-width:768px){.feed-grid{grid-template-columns:repeat(3,1fr);gap:2px}.feed-item-overlay{padding:8px}.feed-channel-name{font-size:11px}.feed-post-text{font-size:11px;-webkit-line-clamp:1}}@media(max-width:480px){.feed-grid{grid-template-columns:repeat(2,1fr)}}
 .modal-overlay{position:fixed;inset:0;background:var(--bg-overlay);z-index:200;display:none;align-items:flex-end;justify-content:center;backdrop-filter:blur(4px);animation:fadeIn .2s ease}.modal-overlay.open{display:flex}.modal{background:var(--bg-primary);border-radius:24px 24px 0 0;width:100%;max-width:640px;max-height:85vh;overflow-y:auto;animation:slideUp .3s ease}@keyframes fadeIn{from{opacity:0}to{opacity:1}}@keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}.modal-header{padding:24px 24px 0;display:flex;align-items:flex-start;gap:16px}.modal-avatar{width:72px;height:72px;border-radius:50%;background:var(--gradient);display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:700;color:#fff;flex-shrink:0;overflow:hidden}.modal-avatar img{width:100%;height:100%;object-fit:cover}.modal-title{font-size:22px;font-weight:700;margin-bottom:4px}.modal-user{color:var(--accent);font-size:14px}.post-head-link{display:flex;align-items:center;gap:6px;flex-wrap:wrap}.post-head-link .post-title-click{cursor:pointer}.post-head-link .post-user-click{display:inline-flex;align-items:center;gap:3px;cursor:pointer;border-bottom:1px dashed var(--accent)}.post-head-link .post-user-click:hover{text-decoration:underline}.modal-members-display{color:var(--text-secondary);font-size:14px;margin-top:4px}.modal-close{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--text-secondary);font-size:20px;margin-left:auto;flex-shrink:0;transition:all var(--transition)}.modal-close:hover{background:var(--bg-hover);color:var(--text-primary)}.modal-body{padding:20px 24px 24px}.modal-desc{color:var(--text-secondary);font-size:14px;line-height:1.6;margin-bottom:20px}.modal-actions{display:flex;gap:10px;margin-bottom:24px}.modal-btn{flex:1;padding:12px;border-radius:12px;font-size:14px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:8px;transition:all var(--transition)}.modal-btn-primary{background:var(--gradient);color:#fff}.modal-btn-primary:hover{box-shadow:0 4px 16px rgba(0,136,204,.3)}.modal-btn-secondary{background:var(--bg-hover);color:var(--text-primary);border:1px solid var(--border)}.modal-btn-secondary:hover{border-color:var(--accent)}
 .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;margin-bottom:20px}.stat-card{background:var(--bg-secondary);border-radius:var(--radius-sm);padding:16px;text-align:center}.stat-value{font-size:24px;font-weight:800;color:var(--accent);margin-bottom:4px}.stat-label{font-size:12px;color:var(--text-secondary);font-weight:500}.chart-container{background:var(--bg-secondary);border-radius:var(--radius-sm);padding:16px;margin-bottom:20px}.chart-container h4{font-size:14px;font-weight:600;margin-bottom:12px;color:var(--text-secondary)}.chart-canvas{width:100%;height:160px}
+.chart-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
+.chart-head h4{font-size:14px;font-weight:600;margin-bottom:0;color:var(--text-secondary)}
+.chart-range{display:flex;gap:4px;background:var(--bg-primary);border:1px solid var(--border);border-radius:20px;padding:3px}
+.chart-range-btn{border:none;background:none;color:var(--text-secondary);font-size:12px;font-weight:700;padding:4px 12px;border-radius:16px;cursor:pointer;transition:all var(--transition)}
+.chart-range-btn:hover{color:var(--accent)}
+.chart-range-btn.active{background:var(--accent);color:#fff}
+.modal-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px}
+.modal-tags-label{width:100%;font-size:12px;font-weight:600;color:var(--text-secondary);margin-bottom:2px}
+.modal-tag{padding:4px 11px;border-radius:14px;background:var(--bg-hover);border:1px solid var(--border);font-size:12px;color:var(--text-secondary);white-space:nowrap}
+.modal-tag b{color:var(--text-primary);font-weight:700}
 .related-section{margin-bottom:20px}.related-section h4{font-size:14px;font-weight:600;margin-bottom:12px;color:var(--text-secondary)}.related-chips{display:flex;flex-wrap:wrap;gap:8px}.related-chip{display:flex;align-items:center;gap:6px;padding:8px 14px;background:var(--bg-secondary);border:1px solid var(--border);border-radius:20px;font-size:13px;font-weight:500;color:var(--text-primary);cursor:pointer;transition:all var(--transition)}.related-chip:hover{border-color:var(--accent);color:var(--accent)}.related-chip .chip-tag{background:var(--accent-light);color:var(--accent);padding:1px 6px;border-radius:8px;font-size:10px}
 .modal-posts-title{font-size:16px;font-weight:700;margin-bottom:16px}.modal-posts{display:flex;flex-direction:column;gap:12px}.post-card{background:var(--bg-secondary);border-radius:var(--radius-sm);padding:16px}.post-text{font-size:14px;line-height:1.6;color:var(--text-primary);margin-bottom:8px}.post-img{width:100%;border-radius:var(--radius-xs);margin-top:8px}.post-link{color:var(--accent);font-size:13px;font-weight:500}.post-modal-img{width:100%;max-height:60vh;object-fit:contain;border-radius:12px;background:#000}.post-modal-video-el{width:100%;max-height:60vh;border-radius:12px;background:#000;aspect-ratio:16/9}.post-modal-video{display:inline-block;background:rgba(0,0,0,.55);color:#fff;padding:6px 14px;border-radius:20px;font-size:13px;font-weight:600}.post-modal-date{color:var(--text-secondary);font-size:12px;margin:10px 0 6px}.post-modal-text{font-size:15px;line-height:1.8;color:var(--text-primary);margin-bottom:16px;white-space:pre-wrap}.post-modal-actions{display:flex;gap:10px;margin:16px 0 10px}.post-modal-share{display:flex;gap:10px;margin-bottom:20px}.post-modal-share .post-fav-saved{background:rgba(255,71,87,.15);border-color:#ff4757;color:#ff4757}.fav-tabs{display:flex;gap:8px;margin-bottom:16px}.fav-tab{flex:1;padding:10px;border-radius:12px;border:1px solid var(--border);background:var(--bg-card);color:var(--text-secondary);font-size:13px;font-weight:600;cursor:pointer;transition:all var(--transition)}.fav-tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}.folder-picker-row{display:flex;align-items:center;gap:10px;padding:12px;border-radius:12px;background:var(--bg-secondary);margin-bottom:8px;cursor:pointer;border:1px solid var(--border);transition:all var(--transition)}.folder-picker-row:hover{border-color:var(--accent)}.folder-picker-row.active{border-color:var(--accent);background:var(--accent-light)}.folder-picker-icon{font-size:20px}.folder-picker-name{flex:1;font-size:14px;font-weight:600}.folder-picker-count{background:var(--bg-hover);padding:2px 10px;border-radius:12px;font-size:12px;color:var(--text-secondary)}.folder-picker-check{font-size:16px;font-weight:700;color:var(--accent)}.folder-picker-empty{color:var(--text-secondary);font-size:14px;text-align:center;padding:20px}.folder-new{display:flex;gap:8px;margin-top:14px}.folder-new input{flex:1;padding:10px 14px;border-radius:10px;border:1px solid var(--border);background:var(--bg-card);color:var(--text-primary);font-size:14px;outline:none}.folder-new input:focus{border-color:var(--accent)}.folder-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px}.folder-card{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:16px;text-align:center;cursor:pointer;transition:all var(--transition)}.folder-card:hover{border-color:var(--accent);transform:translateY(-2px)}.folder-card-icon{font-size:32px;margin-bottom:8px}.folder-card-name{font-size:14px;font-weight:700;margin-bottom:4px}.folder-card-count{font-size:12px;color:var(--text-secondary)}.folder-back{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:10px;background:var(--bg-secondary);border:1px solid var(--border);color:var(--text-secondary);font-size:13px;font-weight:600;cursor:pointer;margin-bottom:16px}.folder-back:hover{color:var(--accent);border-color:var(--accent)}.folder-detail-head{display:flex;align-items:center;gap:10px;margin-bottom:16px}.folder-detail-name{font-size:18px;font-weight:800;flex:1}.folder-del{background:none;border:none;font-size:18px;cursor:pointer;opacity:.7}.folder-del:hover{opacity:1}.folder-sec-title{font-size:14px;font-weight:700;margin:18px 0 12px;color:var(--text-secondary)}.folder-new-form{display:flex;gap:8px;margin-top:18px}.folder-new-form input{flex:1;padding:10px 14px;border-radius:10px;border:1px solid var(--border);background:var(--bg-card);color:var(--text-primary);font-size:14px;outline:none}.folder-new-form input:focus{border-color:var(--accent)}.folder-remove-btn{position:absolute;top:6px;left:6px;background:rgba(0,0,0,.65);color:#fff;border:none;width:28px;height:28px;border-radius:8px;font-size:13px;cursor:pointer;z-index:5}.folder-remove-btn:hover{background:rgba(255,71,87,.9)}.folder-icon-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.folder-icon-opt{width:38px;height:38px;border-radius:10px;border:1px solid var(--border);background:var(--bg-card);font-size:20px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all var(--transition)}.folder-icon-opt:hover{border-color:var(--accent);transform:scale(1.08)}.folder-icon-opt.active{border-color:var(--accent);background:var(--accent-light);box-shadow:0 0 0 2px var(--accent)}.folder-icon-btn{background:none;border:none;cursor:pointer;padding:2px 4px;border-radius:10px;font-size:inherit}.folder-icon-btn:hover{background:var(--bg-hover)}.scroll-top{position:fixed;bottom:90px;right:14px;width:46px;height:46px;border-radius:50%;background:var(--gradient);color:#fff;font-size:22px;border:none;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.35);z-index:150;display:none;align-items:center;justify-content:center;transition:all var(--transition)}.scroll-top:hover{transform:translateY(-2px)}.latest-post-card{display:flex;align-items:center;gap:12px;padding:12px;border-radius:14px;background:var(--bg-card);border:1px solid var(--border);margin-bottom:10px;cursor:pointer;transition:all var(--transition)}.latest-post-card:hover{border-color:var(--accent)}.latest-post-thumb{width:64px;height:64px;border-radius:12px;overflow:hidden;flex-shrink:0;background:var(--bg-secondary)}.latest-post-thumb img{width:100%;height:100%;object-fit:cover}.latest-post-thumb-fb{width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0088cc,#005e8c);color:#fff;font-size:24px;font-weight:800}.latest-post-body{flex:1;min-width:0}.latest-post-title{font-size:14px;font-weight:700;margin-bottom:3px}.latest-post-text{font-size:12.5px;color:var(--text-secondary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:3px}.latest-post-meta{font-size:11px;color:var(--text-secondary);opacity:.75}.latest-post-actions{display:flex;gap:6px;flex-shrink:0}.post-scroll-top{position:fixed;top:76px;right:14px;width:44px;height:44px;border-radius:50%;background:var(--gradient);color:#fff;font-size:20px;border:none;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.35);z-index:210;display:none;align-items:center;justify-content:center;transition:all var(--transition)}.post-scroll-top:hover{transform:translateY(-2px)}.folder-export-row{display:flex;gap:8px;margin:0 0 16px}.explore-list{display:flex;flex-direction:column;gap:10px}.explore-list-item{display:flex;align-items:center;gap:12px;padding:10px 12px;background:var(--bg-card);border:1px solid var(--border);border-radius:14px;cursor:pointer;transition:all var(--transition)}.explore-list-item:hover{border-color:var(--accent);transform:translateY(-1px)}.explore-list-thumb{width:56px;height:56px;border-radius:12px;overflow:hidden;flex-shrink:0;background:var(--bg-secondary)}.explore-list-thumb img{width:100%;height:100%;object-fit:cover}.explore-list-body{flex:1;min-width:0}.explore-list-title{font-size:14px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.explore-list-sub{font-size:12px;color:var(--text-secondary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}.explore-list-count{font-size:12px;color:var(--text-secondary);background:var(--bg-hover);padding:3px 10px;border-radius:12px;white-space:nowrap}.fav-stats{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}.fav-stats span{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:6px 12px;font-size:12.5px;color:var(--text-secondary)}.view-toggle{display:flex;gap:8px;flex-shrink:0;align-items:center}.view-toggle button{width:44px;height:38px;border-radius:12px;border:1px solid var(--border);background:var(--bg-card);font-size:16px;cursor:pointer;transition:all var(--transition);color:var(--text-secondary);display:flex;align-items:center;justify-content:center}.view-toggle button.active{border-color:var(--accent);background:var(--accent-light);color:var(--accent);box-shadow:0 0 0 2px var(--accent)}.home-feed-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;border-radius:var(--radius);overflow:hidden}
 
@@ -289,11 +299,13 @@ body[data-fs="large"] .home-feed-text-clamped{-webkit-line-clamp:3}
       <!-- Stats -->
       <div class="stats-grid" id="modalStats" style="display:none"></div>
       <!-- Chart -->
-      <div class="chart-container" id="modalChart" style="display:none"><h4 data-i18n="activity_chart">📊 Activity (7 days)</h4><canvas class="chart-canvas" id="activityChart"></canvas></div>
+      <div class="chart-container" id="modalChart" style="display:none"><div class="chart-head"><h4 id="activityChartTitle" data-i18n="activity_chart">📊 Activity (7 days)</h4><div class="chart-range" role="group" aria-label="Chart range"><button class="chart-range-btn active" data-days="7" onclick="setChartRange(7)">7</button><button class="chart-range-btn" data-days="30" onclick="setChartRange(30)">30</button></div></div><canvas class="chart-canvas" id="activityChart"></canvas></div>
+      <!-- Content tags -->
+      <div class="modal-tags" id="modalTags" style="display:none"></div>
       <!-- Actions -->
       <div class="modal-actions">
         <button class="modal-btn modal-btn-primary" id="modalOpenTg"><span>✈️</span> <span data-i18n="open_telegram">Open in Telegram</span></button>
-        <button class="modal-btn modal-btn-secondary" id="modalFavBtn"><span>❤️</span> <span data-i18n="save">Save</span></button><button class="modal-btn modal-btn-secondary" id="modalFolderBtn"><span>🗂</span> <span>Folder</span></button>
+        <button class="modal-btn modal-btn-secondary" id="modalFavBtn"><span>❤️</span> <span data-i18n="save">Save</span></button><button class="modal-btn modal-btn-secondary" id="modalFolderBtn"><span>🗂</span> <span>Folder</span></button><button class="modal-btn modal-btn-secondary" id="modalShareBtn"><span>🔗</span> <span data-i18n="share_link">Share link</span></button>
       </div>
       <!-- Related -->
       <div class="related-section" id="modalRelated" style="display:none"><h4 data-i18n="related_channels">🔗 Related Channels</h4><div class="related-chips" id="relatedChips"></div></div>
@@ -1073,6 +1085,7 @@ function openChannel(username){
   document.getElementById('modalOpenTg').onclick=()=>window.open('https://t.me/'+username,'_blank');
   document.getElementById('modalFavBtn').onclick=()=>{toggleFav(username,ch.title||username);updateModalFav(username)};
   document.getElementById('modalFolderBtn').onclick=()=>openFolderPicker('ch',username,'',ch.title||username);
+  document.getElementById('modalShareBtn').onclick=()=>shareChannelLink(username);
   updateModalFav(username);
   const posts=getChannelPosts(username);
   const postsEl=document.getElementById('modalPosts');
@@ -1084,6 +1097,9 @@ function openChannel(username){
   renderLocalRelated(username);
   document.getElementById('channelOverlay').classList.add('open');
   document.body.style.overflow='hidden';
+  // The profile is rendered after the modal is visible: the activity chart
+  // is drawn on a canvas, which needs a real size to measure.
+  renderChannelProfile(username);
 }
 // Local related-channels fallback (worker /api/related gets priority elsewhere)
 function renderLocalRelated(username){
@@ -1101,6 +1117,120 @@ function renderLocalRelated(username){
 }
 
 function updateModalFav(u){const btn=document.getElementById('modalFavBtn');btn.querySelector('span:first-child').textContent=isFav(u)?'❤️':'🤍'}
+
+// ============================================================
+// CHANNEL PROFILE — activity, stats, content tags
+// ------------------------------------------------------------
+// Everything is derived from the local post archive, so the
+// profile works offline and without a Worker.
+// ============================================================
+let chartRange=7;
+let chartUsername='';
+
+// Post count per day for the last `days` days (UTC buckets).
+function channelActivity(username,days){
+  const posts=getChannelPosts(username);
+  const buckets=new Map();
+  const today=new Date();
+  today.setUTCHours(0,0,0,0);
+  for(let i=days-1;i>=0;i--){
+    const d=new Date(today.getTime()-i*86400000);
+    buckets.set(d.toISOString().slice(0,10),{date:d.toISOString().slice(0,10),posts:0});
+  }
+  for(const p of posts){
+    if(!p.date)continue;
+    const key=String(p.date).slice(0,10);
+    const b=buckets.get(key);
+    if(b)b.posts++;
+  }
+  return [...buckets.values()];
+}
+
+// The most frequent words in the post texts — a quick content fingerprint.
+const POST_STOPWORDS=new Set(['the','and','for','with','from','that','this','your','you','are','was','have','has','not','but','all','new','now','out','get','its','our','can','will','one','two','how','what','why','who','more','than','about','into','over','also','been','were','their','there','they','them','these','those','just','like','very','day','today','post','posts','video','photo','image','که','را','در','به','از','با','برای','است','های','شد','می','تا','کرد','بر','آن','یک','ها','خود','کرده','دارد','هم','بود','نیز','هر','دو','اگر','او','ما','شما','آنها','این','و','در','را','به']);
+function postKeywords(posts,limit){
+  const freq=new Map();
+  for(const p of posts){
+    const words=String(p.text||'').toLowerCase().match(/[\p{L}\p{N}]{3,}/gu)||[];
+    for(const w of words){
+      if(POST_STOPWORDS.has(w))continue;
+      freq.set(w,(freq.get(w)||0)+1);
+    }
+  }
+  return [...freq.entries()].sort((a,b)=>b[1]-a[1]).slice(0,limit);
+}
+
+function formatPostDate(iso){
+  if(!iso)return t('never');
+  const d=new Date(iso);
+  if(isNaN(d.getTime()))return t('never');
+  const diff=Date.now()-d.getTime();
+  const day=86400000;
+  if(diff<3600000)return Math.max(1,Math.round(diff/60000))+' min';
+  if(diff<day)return Math.round(diff/3600000)+' h';
+  if(diff<30*day)return Math.round(diff/day)+' d';
+  return d.toISOString().slice(0,10);
+}
+
+// Fill the stats grid, the activity chart and the content tags.
+function renderChannelProfile(username){
+  chartUsername=username;
+  const posts=getChannelPosts(username);
+  const statsEl=document.getElementById('modalStats');
+  const chartEl=document.getElementById('modalChart');
+  const tagsEl=document.getElementById('modalTags');
+
+  const days=chartRange;
+  const activity=channelActivity(username,days);
+  const total=activity.reduce((s,d)=>s+d.posts,0);
+  const activeDays=activity.filter(d=>d.posts>0).length;
+  const perDay=(total/days).toFixed(1);
+  const lastPost=posts.length?posts[0].date:null;
+
+  if(statsEl){
+    const cards=[
+      {v:perDay,l:t('posts_per_day')},
+      {v:String(posts.length),l:t('total_posts')},
+      {v:activeDays+'/'+days,l:t('active_days')},
+      {v:formatPostDate(lastPost),l:t('last_post')},
+    ];
+    statsEl.innerHTML=cards.map(c=>'<div class="stat-card"><div class="stat-value">'+escHtml(c.v)+'</div><div class="stat-label">'+escHtml(c.l)+'</div></div>').join('');
+    statsEl.style.display='';
+  }
+
+  const title=document.getElementById('activityChartTitle');
+  if(title)title.textContent=days===30?t('activity_30d'):t('activity_chart');
+  document.querySelectorAll('.chart-range-btn').forEach(b=>b.classList.toggle('active',Number(b.dataset.days)===days));
+  if(chartEl){
+    if(total>0){renderChart(activity)}
+    else{chartEl.style.display='none'}
+  }
+
+  if(tagsEl){
+    const kw=postKeywords(posts,8);
+    if(kw.length){
+      tagsEl.innerHTML='<div class="modal-tags-label">'+escHtml(t('content_tags'))+'</div>'+kw.map(k=>'<span class="modal-tag"><b>'+escHtml(k[0])+'</b> · '+k[1]+'</span>').join('');
+      tagsEl.style.display='';
+    }else tagsEl.style.display='none';
+  }
+}
+
+// Switch the activity chart between the 7 and 30 day window.
+function setChartRange(days){
+  chartRange=days;
+  if(chartUsername)renderChannelProfile(chartUsername);
+}
+
+// Share a direct link to the channel.
+async function shareChannelLink(username){
+  const url='https://t.me/'+username;
+  if(navigator.share){
+    try{await navigator.share({title:'@'+username,url});return}
+    catch(e){if(e&&e.name==='AbortError')return}
+  }
+  try{await navigator.clipboard.writeText(url);toast('🔗 '+t('toast_link_copied'))}
+  catch(e){toast('⚠️ '+t('toast_copy_fail'))}
+}
 
 // ============================================================
 // CHART (Canvas)
@@ -1135,10 +1265,13 @@ function renderChart(data){
     ctx.font='10px sans-serif';ctx.textAlign='right';
     ctx.fillText(Math.round(maxVal*i/4),padding.left-5,y+3);
   }
-  // Labels
+  // Labels — with 30 days only every few ticks are drawn, so they do not
+  // overlap.
   ctx.fillStyle=getComputedStyle(document.documentElement).getPropertyValue('--text-tertiary').trim()||'#999';
   ctx.font='10px sans-serif';ctx.textAlign='center';
+  const every=Math.max(1,Math.ceil(data.length/10));
   data.forEach((d,i)=>{
+    if(i%every!==0&&i!==data.length-1)return;
     const x=padding.left+i*stepX;
     ctx.fillText(d.date.slice(5),x,H-5);
   });
@@ -2468,6 +2601,8 @@ function renderEmpty(title,desc){return`<div class="empty-state"><div class="emp
 
 
 
+
+
 // ============================================================
 // WINDOW BRIDGE
 // ----------------------------------------------------------
@@ -2550,6 +2685,7 @@ Object.assign(window, {
   saveSettings,
   scrollPostModalTop,
   searchLocal,
+  setChartRange,
   setExploreSearch,
   setExploreSort,
   setExploreView,

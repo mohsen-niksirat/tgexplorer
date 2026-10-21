@@ -44,6 +44,13 @@ This repo ships a ready-made [`worker.js`](worker.js) + [`wrangler.toml`](wrangl
 
 ### v1.7.0
 
+- 📊 **Richer channel profile** — the channel modal now shows what the post
+  archive knows: **posts per day**, **total posts**, **active days** and the
+  **last post**, an **activity chart** that switches between the last **7 and
+  30 days**, and **content tags** extracted from the post texts (the most
+  frequent words). A **Share link** button copies the direct `t.me` link.
+  Everything is derived from the local archive, so it works offline and
+  without a Worker
 - 🎛️ **Advanced Explore filters** — category, language and content type
   (photo / video / text) are now **multi-select**: pick *news + technology* and
   *Persian + English* at the same time instead of one value per axis. A filter
