@@ -28,12 +28,16 @@ const ROWS = [
   ['psr_placeholder', 'Search inside posts…', 'جست‌وجو در متن پست‌ها…', 'ابحث داخل المنشورات…', '搜索帖子内容…', 'Искать в постах…', 'Buscar dentro de las publicaciones…', 'Rechercher dans les publications…'],
   ['psr_mode_channels', '🔎 Channels', '🔎 کانال‌ها', '🔎 القنوات', '🔎 频道', '🔎 Каналы', '🔎 Canales', '🔎 Chaînes'],
   ['psr_mode_posts', '💬 Posts', '💬 پست‌ها', '💬 المنشورات', '💬 帖子', '💬 Посты', '💬 Publicaciones', '💬 Publications'],
+
+  ['show_more_channels', 'Show more channels', 'نمایش کانال‌های بیشتر', 'عرض المزيد من القنوات', '显示更多频道', 'Показать больше каналов', 'Mostrar más canales', 'Afficher plus de chaînes'],
+  ['share_page', '📄 Share page', '📄 صفحهٔ اشتراک', '📄 صفحة المشاركة', '📄 分享页面', '📄 Страница публикации', '📄 Página para compartir', '📄 Page de partage'],
 ];
 
 const p = path.join(__dirname, '..', 'js', 'i18n.js');
 let s = fs.readFileSync(p, 'utf8');
 
-const lines = [];
+const lines = [
+];
 for (const row of ROWS) {
   const [key, ...values] = row;
   if (values.length !== LANGS.length) {

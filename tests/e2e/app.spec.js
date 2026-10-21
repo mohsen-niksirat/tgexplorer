@@ -160,6 +160,13 @@ test.describe('Telegram Explorer - e2e', () => {
     await expect(page.locator('#psrDeepBtn')).toBeVisible();
   });
 
+  test('a shared link opens the channel directly', async ({ page }) => {
+    await page.goto('/?channel=bbcpersian');
+    await page.waitForTimeout(1500);
+    await expect(page.locator('#channelOverlay')).toHaveClass(/open/);
+    await expect(page.locator('#modalTitle')).toContainText(/BBC/i);
+  });
+
   test('language switching updates the document', async ({ page }) => {
     await page.locator('#langSelect').selectOption('fa');
 

@@ -4,37 +4,29 @@
 // app then fails to boot with "Unexpected identifier". The French privacy
 // text had "Rien n'est envoyé." for exactly that reason.
 //
-// The value of an assignment runs until the next ";" that is not inside a
-// string, so the scan below simply takes everything up to the next
-// semicolon and escapes the apostrophes in it.
+// The generated format puts one assignment per line:
+//
+//     I18N.en.some_key='the value';
+//
+// so the value of an assignment is everything between the first quote and
+// the last quote of that line. Escaping every apostrophe in that range
+// makes the string valid again - and it is idempotent.
 const fs = require('fs');
 const path = require('path');
 
 const p = path.join(__dirname, '..', 'js', 'i18n.js');
-let s = fs.readFileSync(p, 'utf8');
-const before = s;
+const src = fs.readFileSync(p, 'utf8');
 
-const startRe = /(I18N(?:_UI)?\.[a-z]{2}\.[A-Za-z0-9_]+=)'/g;
-let out = '';
-let last = 0;
-let m;
+const assignmentRe = /(I18N(?:_UI)?\.[a-z]{2}\.[A-Za-z0-9_]+=)'([^'\n]*)'/g;
 let fixed = 0;
 
-while ((m = startRe.exec(s)) !== null) {
-  const valueStart = m.index + m[0].length;
-  const end = s.indexOf("';", valueStart);
-  if (end === -1) continue;
-  const value = s.slice(valueStart, end);
-  if (!value.includes("'")) continue;
-
-  out += s.slice(last, valueStart);
-  out += value.replace(/'/g, "\\'");
-  last = end;
+const out = src.replace(assignmentRe, (m, head, value) => {
+  if (!value.includes("'")) return m;
+  // Unescape first, then escape exactly once.
+  const plain = value.replace(/\\'/g, "'");
   fixed++;
-  startRe.lastIndex = end;
-}
-out += s.slice(last);
+  return head + "'" + plain.replace(/'/g, "\\'") + "'";
+});
 
 fs.writeFileSync(p, out, 'utf8');
 console.log('escaped the apostrophes in ' + fixed + ' string(s)');
-console.log(before === out ? 'nothing changed' : 'the file was rewritten');
