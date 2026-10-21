@@ -5,13 +5,15 @@
 export const WORKER_CODE=`// Telegram Explorer - Enhanced Cloudflare Worker Proxy v2.0
 // Deploy on Cloudflare Workers (free tier)
 
+const BUILD_TIME='2026-10-21';
 const CORS_HEADERS={'Access-Control-Allow-Origin':'*','Access-Control-Allow-Methods':'GET, OPTIONS','Access-Control-Allow-Headers':'Content-Type','Cache-Control':'public, max-age=300'};
 const CACHE=new Map();const CACHE_TTL=10*60*1000;
 function cacheGet(k){const e=CACHE.get(k);if(e&&Date.now()-e.ts<CACHE_TTL)return e.data;CACHE.delete(k);return null}
 function cacheSet(k,d){if(CACHE.size>500){const o=CACHE.keys().next().value;CACHE.delete(o)}CACHE.set(k,{data:d,ts:Date.now()})}
 const RATE=new Map(),RATE_LIMIT=60,RATE_WIN=60000;function rateOK(ip){const now=Date.now();if(RATE.size>5000)RATE.clear();const e=RATE.get(ip);if(!e||now-e.ts>RATE_WIN){RATE.set(ip,{ts:now,n:1});return true}e.n++;return e.n<=RATE_LIMIT}
 export default{async fetch(request,env){const url=new URL(request.url);const path=url.pathname;if(request.method==='OPTIONS')return new Response(null,{headers:CORS_HEADERS});const ip=request.headers.get('CF-Connecting-IP')||'unknown';if(!rateOK(ip))return j({error:'Too many requests'},429);
-try{if(path==='/api/ping')return j({ok:true,ts:Date.now(),version:'3.2',hasApi:!!(env&&env.TG_API_HASH)});
+try{if(path==='/api/ping')if(path==='/api/version')return j({version:'3.3',name:'tgexplorer-worker',endpoints:['/api/ping','/api/search','/api/searchPosts','/api/trending','/api/explore-feed','/api/channel','/api/posts','/api/related','/api/stats','/api/categories','/api/notifications','/api/version'],builtAt:BUILD_TIME});
+return j({ok:true,ts:Date.now(),version:'3.2',hasApi:!!(env&&env.TG_API_HASH)});
 if(path==='/api/search')return await handleSearch(url);
 if(path==='/api/searchPosts')return await handleSearchPosts(url);
 if(path.startsWith('/api/channel/'))return await handleChannel(path.split('/api/channel/')[1]);

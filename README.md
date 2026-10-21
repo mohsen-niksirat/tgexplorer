@@ -33,17 +33,47 @@ This repo ships a ready-made [`worker.js`](worker.js) + [`wrangler.toml`](wrangl
 
 ### Worker endpoints
 - `GET /api/ping` — health check
+- `GET /api/version` — the Worker version, its build date and the endpoint list
 - `GET /api/search?q=...&lang=...` — live Telegram search
+- `GET /api/searchPosts?q=...&limit=40` — search the **text** of the curated channels' posts
 - `GET /api/posts/<username>?page=N` — paginated channel posts
 - `GET /api/trending?cat=...&page=1&lang=...` — trending channels
 - `GET /api/notifications?channels=a,b&since=...` — new-post updates
 - `GET /api/explore-feed?cat=...&page=1&limit=30` — merged image feed
 - `GET /api/channel/<username>` · `/api/stats/<username>` · `/api/related/<username>` · `/api/avatar/<username>`
 
+### Rate limits & cache
+
+| What | Limit | Notes |
+|---|---|---|
+| Requests per IP | 60 / minute | `429` with `Too many requests` when exceeded |
+| `/api/search` | cached 5 min | key: `search:<query>:<lang>` |
+| `/api/trending` | cached 5 min | key: `trend:<category>:<page>` |
+| `/api/posts/<user>` | cached 5 min | key: `posts:<user>:<page>` |
+| `/api/searchPosts` | cached 5 min | key: `searchPosts:<query>` |
+| `/api/ping`, `/api/version` | never cached | health and version checks |
+
+The Worker runs on the free Cloudflare plan: **100 000 requests/day** and a
+**10 ms CPU time per request**. Every response is sent with
+`Cache-Control: public, max-age=300`, so the browser and the CDN cache it
+too. If you hit a limit, the endpoints keep working from the cache.
+
+**Worker version:** `3.3` — check what you are running with
+`curl https://<your-worker>/api/version`.
+
 ## 📦 Changelog
 
 ### v1.7.0
 
+- 🛡️ **Privacy explained in the Settings** — a new section spells out exactly
+  what is stored where: favourites, folders, settings and filters live in
+  this browser's `localStorage`, a connected Worker only ever sees your
+  search queries and the channels you open, and there are no cookies, no
+  fingerprinting and no third-party trackers. A **No tracking** badge makes
+  it visible at a glance
+- 🔎 **Worker version endpoint** — `GET /api/version` reports the version,
+  the build date and the endpoint list, so a deployment can be checked with
+  `curl`. The README now also lists the rate limits and the cache keys
 - ⚡ **Faster first paint** — the Cloudflare Web Analytics beacon no longer
   blocks the page (it cost **5.6 s** of main-thread time on a phone), the
   Telegram WebApp SDK is loaded once the app is interactive, the data files

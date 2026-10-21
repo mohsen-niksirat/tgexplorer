@@ -9,6 +9,7 @@
 // The worker works without them for public channels.
 // ============================================================
 
+const BUILD_TIME='2026-10-21';
 const CORS_HEADERS = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Methods': 'GET, OPTIONS',
@@ -123,6 +124,7 @@ export default {
 
     try {
       if (path === '/api/ping') return j({ ok: true, ts: Date.now(), version: '3.2', hasApi: !!(env && env.TG_API_HASH) });
+      if (path === '/api/version') return j({ version: '3.3', name: 'tgexplorer-worker', endpoints: ['/api/ping', '/api/search', '/api/searchPosts', '/api/trending', '/api/explore-feed', '/api/channel', '/api/posts', '/api/related', '/api/stats', '/api/categories', '/api/notifications', '/api/version'], builtAt: BUILD_TIME });
 
       if (path === '/api/search') return await handleSearch(url, env);
       if (path === '/api/searchPosts') return await handleSearchPosts(url, env);

@@ -5,6 +5,15 @@ Full version history of Telegram Explorer. The latest release is summarized in t
 
 ## v1.7.0
 
+- 🛡️ **Privacy explained in the Settings** — a new section spells out exactly
+  what is stored where: favourites, folders, settings and filters live in
+  this browser's `localStorage`, a connected Worker only ever sees your
+  search queries and the channels you open, and there are no cookies, no
+  fingerprinting and no third-party trackers. A **No tracking** badge makes
+  it visible at a glance.
+- 🔎 **Worker version endpoint** — `GET /api/version` reports the version,
+  the build date and the endpoint list, so a deployment can be checked with
+  `curl`. The README now also lists the rate limits and the cache keys.
 - ⚡ **Faster first paint** — the Cloudflare Web Analytics beacon no longer
   blocks the page (it cost **5.6 s** of main-thread time on a phone), the
   Telegram WebApp SDK is loaded once the app is interactive, the data files
