@@ -3,7 +3,7 @@
 // Handles caching for offline support and PWA
 // ============================================================
 
-const CACHE_NAME = 'tgexplorer-202610211200';
+const CACHE_NAME = 'tgexplorer-202610211600';
 const STATIC_ASSETS = [
   './',
   './index.html',
@@ -53,10 +53,13 @@ self.addEventListener('fetch', event => {
     return;
   }
 
-  // HTML (index.html) and manifest: network first so app updates (new
-  // features) show up on refresh — no stale cached copy. Fall back to cache
-  // only when offline.
-  if (url.pathname.endsWith('/index.html') || url.pathname.endsWith('/manifest.json')) {
+  // App shell (every navigation) and the manifest: network first so app
+  // updates (new features) show up on refresh — no stale cached copy. The
+  // root path "/" is a navigation too, so it must not fall through to the
+  // cache-first branch below: that would keep serving an old index.html
+  // until the cache version is bumped. Fall back to the cache only offline.
+  if (event.request.mode === 'navigate'
+    || url.pathname.endsWith('/index.html') || url.pathname.endsWith('/manifest.json')) {
     event.respondWith(
       fetch(event.request).then(response => {
         if (response.ok) {
@@ -64,7 +67,7 @@ self.addEventListener('fetch', event => {
           caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
         }
         return response;
-      }).catch(() => caches.match(event.request))
+      }).catch(() => caches.match(event.request).then(cached => cached || caches.match('./index.html')))
     );
     return;
   }
