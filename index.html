@@ -1130,6 +1130,13 @@ function parseJinaPosts(md){
   ctx.loading=false;
   autoFillPostFeed();
 }
+// Scroll the post modal back to the top (the ↑ button in the post overlay).
+function scrollPostModalTop(){
+  const overlay=document.getElementById('postOverlay');
+  const scroller=overlay&&overlay.querySelector('.modal');
+  if(scroller)scroller.scrollTo({top:0,behavior:'smooth'});
+  else window.scrollTo({top:0,behavior:'smooth'});
+}
 function closePostModal(){document.querySelectorAll('#postModalBody video').forEach(function(v){try{v.pause();v.removeAttribute('src');v.load()}catch(e){}});document.getElementById('postOverlay').classList.remove('open');document.body.style.overflow='';const pbtn=document.getElementById('postScrollTop');if(pbtn)pbtn.style.display='none'}
 
 function closeChannelModal(){document.getElementById('channelOverlay').classList.remove('open');document.body.style.overflow=''}
@@ -1662,6 +1669,106 @@ function shareFolder(id){
   if(navigator.share){navigator.share({title:'Telegram Explorer — '+f.name,url}).catch(()=>{})}
   else{navigator.clipboard.writeText(url).then(()=>toast('🔗 '+t('toast_link_copied'))).catch(()=>toast('⚠️ '+t('toast_copy_fail')))}
 }
+// Download a text/blob in the user's browser.
+function downloadBlob(content,filename,mime){
+  const blob=new Blob([content],{type:mime||'text/plain;charset=utf-8'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download=filename;
+  document.body.appendChild(a);a.click();a.remove();
+  setTimeout(()=>URL.revokeObjectURL(a.href),5000);
+}
+// Human-readable lines for a folder: one entry per channel/post.
+function folderExportLines(f){
+  const lines=['📁 '+f.name+' — Telegram Explorer',''];
+  const chans=f.items.filter(it=>it.type==='ch');
+  const posts=f.items.filter(it=>it.type==='post');
+  if(chans.length){
+    lines.push('Channels ('+chans.length+'):');
+    for(const it of chans){
+      const ch=getAllChannels().find(c=>c.username===it.username);
+      lines.push('- @'+it.username+(ch&&ch.title?' — '+ch.title:''));
+    }
+    lines.push('');
+  }
+  if(posts.length){
+    lines.push('Posts ('+posts.length+'):');
+    for(const it of posts){
+      const text=(it.label||'').replace(/\s+/g,' ').trim();
+      lines.push('- @'+it.username+'/'+it.postId+(text?' — '+text:''));
+    }
+    lines.push('');
+  }
+  if(!chans.length&&!posts.length)lines.push('(empty folder)');
+  return lines.join('\n');
+}
+function folderExportTxt(id){
+  const f=state.folders.find(x=>x.id===id);if(!f)return;
+  downloadBlob(folderExportLines(f),'tgexplorer-folder-'+f.name.replace(/[^\w؀-ۿ-]+/g,'_')+'.txt','text/plain;charset=utf-8');
+  toast('📝 '+t('toast_folder_saved',f.name));
+}
+function folderExportJson(id){
+  const f=state.folders.find(x=>x.id===id);if(!f)return;
+  downloadBlob(JSON.stringify({app:'tgexplorer_folder',folder:{name:f.name,icon:f.icon||'📁',items:f.items},exportedAt:new Date().toISOString()},null,2),'tgexplorer-folder-'+f.name.replace(/[^\w؀-ۿ-]+/g,'_')+'.json','application/json');
+  toast('💾 '+t('toast_folder_saved',f.name));
+}
+function folderExportPdf(id){
+  const f=state.folders.find(x=>x.id===id);if(!f)return;
+  // Minimal, dependency-free PDF: a single Helvetica text page.
+  const lines=folderExportLines(f).split('\n');
+  const esc=s=>String(s).replace(/\\/g,'\\\\').replace(/\(/g,'\\(').replace(/\)/g,'\\)');
+  const body=lines.slice(0,48).map((l,i)=>`BT /F1 11 Tf 40 ${750-i*16} Td (${esc(l.slice(0,95))}) Tj ET`).join('\n');
+  const objects=[
+    '<< /Type /Catalog /Pages 2 0 R >>',
+    '<< /Type /Pages /Kids [3 0 R] /Count 1 >>',
+    '<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 4 0 R >> >> /Contents 5 0 R >>',
+    '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>',
+    `<< /Length ${body.length} >>\nstream\n${body}\nendstream`,
+  ];
+  let pdf='%PDF-1.4\n';
+  const offsets=[];
+  objects.forEach((o,i)=>{offsets.push(pdf.length);pdf+=`${i+1} 0 obj\n${o}\nendobj\n`});
+  const xrefPos=pdf.length;
+  pdf+='xref\n0 '+objects.length+'\n0000000000 65535 f \n';
+  for(const off of offsets)pdf+=String(off).padStart(10,'0')+' 00000 n \n';
+  pdf+=`trailer\n<< /Size ${objects.length+1} /Root 1 0 R >>\nstartxref\n${xrefPos}\n%%EOF`;
+  downloadBlob(pdf,'tgexplorer-folder-'+f.name.replace(/[^\w؀-ۿ-]+/g,'_')+'.pdf','application/pdf');
+  toast('🖨 '+t('toast_folder_saved',f.name));
+}
+// Export the saved-posts list (favorites → post tab).
+function exportPostsTxt(){
+  const items=state.postFavs||[];
+  const lines=['🖼 Saved posts — Telegram Explorer',''];
+  for(const it of items)lines.push('- @'+it.username+'/'+it.postId+((it.text||'').replace(/\s+/g,' ').trim()?' — '+it.text.replace(/\s+/g,' ').trim().slice(0,120):''));
+  if(!items.length)lines.push('(no saved posts)');
+  downloadBlob(lines.join('\n'),'tgexplorer-posts.txt','text/plain;charset=utf-8');
+  toast('📝 '+t('toast_post_saved'));
+}
+function exportPostsPdf(){
+  const items=state.postFavs||[];
+  const lines=['Saved posts — Telegram Explorer',''];
+  for(const it of items)lines.push('@'+it.username+'/'+it.postId+' '+(it.text||'').replace(/\s+/g,' ').trim().slice(0,90));
+  if(!items.length)lines.push('(no saved posts)');
+  const esc=s=>String(s).replace(/\\/g,'\\\\').replace(/\(/g,'\\(').replace(/\)/g,'\\)');
+  const body=lines.slice(0,48).map((l,i)=>`BT /F1 11 Tf 40 ${750-i*16} Td (${esc(l.slice(0,95))}) Tj ET`).join('\n');
+  const objects=[
+    '<< /Type /Catalog /Pages 2 0 R >>',
+    '<< /Type /Pages /Kids [3 0 R] /Count 1 >>',
+    '<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 4 0 R >> >> /Contents 5 0 R >>',
+    '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>',
+    `<< /Length ${body.length} >>\nstream\n${body}\nendstream`,
+  ];
+  let pdf='%PDF-1.4\n';
+  const offsets=[];
+  objects.forEach((o,i)=>{offsets.push(pdf.length);pdf+=`${i+1} 0 obj\n${o}\nendobj\n`});
+  const xrefPos=pdf.length;
+  pdf+='xref\n0 '+objects.length+'\n0000000000 65535 f \n';
+  for(const off of offsets)pdf+=String(off).padStart(10,'0')+' 00000 n \n';
+  pdf+=`trailer\n<< /Size ${objects.length+1} /Root 1 0 R >>\nstartxref\n${xrefPos}\n%%EOF`;
+  downloadBlob(pdf,'tgexplorer-posts.pdf','application/pdf');
+  toast('🖨 '+t('toast_post_saved'));
+}
+
 function decodeSharedFolder(p){
   try{
     const obj=JSON.parse(b64urlDecode(p));

@@ -5,6 +5,11 @@ Full version history of Telegram Explorer. The latest release is summarized in t
 
 ## v1.7.0
 
+- 🐛 **Fixed six buttons that threw a ReferenceError** — folder export
+  (text / PDF / JSON), saved-post export (text / PDF) and the post-modal
+  "scroll to top" button were wired to functions that did not exist, so
+  clicking them did nothing. They are implemented now (the PDF exports are
+  dependency-free, generated in the browser).
 - 📴 **Real offline mode + transparent worker fallback** — when the network is
   down, a banner explains that cached data is being shown and the app keeps
   working from the service-worker cache; when the Worker proxy cannot be

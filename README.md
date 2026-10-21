@@ -44,6 +44,11 @@ This repo ships a ready-made [`worker.js`](worker.js) + [`wrangler.toml`](wrangl
 
 ### v1.7.0
 
+- 🐛 **Fixed six buttons that threw a ReferenceError** — folder export
+  (text / PDF / JSON), saved-post export (text / PDF) and the post-modal
+  "scroll to top" button were wired to functions that did not exist, so
+  clicking them did nothing. They are implemented now (the PDF exports are
+  dependency-free, generated in the browser)
 - 📴 **Real offline mode + transparent worker fallback** — when the network is
   down a clear banner explains that cached data is being shown (and the app
   keeps working from the service-worker cache); when the configured Worker
@@ -316,7 +321,11 @@ the workflow automatically opens a GitHub Issue with a link to the failed logs.
 
 ```
 tgexplorer/
-├── index.html           # Main app (single file, HTML+CSS+JS)
+├── index.html           # Main app (HTML + CSS + the app module)
+├── js/                  # ES modules extracted from the inline script
+│   ├── i18n.js          #   all UI strings for the 7 languages + applyLang()/t()
+│   ├── state.js         #   the single mutable app state (localStorage)
+│   └── worker-code.js   #   the Worker source shown in the setup screen
 ├── channels.js          # Verified channel database (151 channels)
 ├── posts.js             # Inline seed: latest 12 posts per channel (generated)
 ├── posts/               # Full archive, one JSON per channel (lazy-loaded)
@@ -326,8 +335,10 @@ tgexplorer/
 ├── verify_channels.js   # Channel validation script (Node)
 ├── worker.js            # Cloudflare Worker proxy
 ├── sw.js                # Service Worker (PWA offline)
+├── scripts/             # Dev helpers (module split checks, usage scans)
 ├── manifest.json        # PWA manifest
-└── icons/               # PWA icons
+├── icons/               # PWA icons
+└── tests/e2e/           # Playwright suite
 ```
 
 ## 🌐 Deploy to GitHub Pages
