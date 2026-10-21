@@ -2,23 +2,58 @@
 
 Search and discover public Telegram channels and groups — like Instagram Explore, but for Telegram.
 
+[![Tests](https://github.com/mohsen-niksirat/tgexplorer/actions/workflows/test.yml/badge.svg)](https://github.com/mohsen-niksirat/tgexplorer/actions/workflows/test.yml)
 [![Crawl Channel Posts](https://github.com/mohsen-niksirat/tgexplorer/actions/workflows/crawl.yml/badge.svg)](https://github.com/mohsen-niksirat/tgexplorer/actions/workflows/crawl.yml)
 [![Refresh Channel Avatars](https://github.com/mohsen-niksirat/tgexplorer/actions/workflows/avatars.yml/badge.svg)](https://github.com/mohsen-niksirat/tgexplorer/actions/workflows/avatars.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-0088cc.svg)](LICENSE)
+[![PWA](https://img.shields.io/badge/PWA-installable-0088cc.svg)](manifest.json)
+[![Languages](https://img.shields.io/badge/languages-7-0088cc.svg)](#-supported-languages)
+[![No tracking](https://img.shields.io/badge/no%20tracking-48bb78.svg)](#-privacy)
+
+![The Explore grid](docs/grid.png)
+
+## 💡 Why Telegram Explorer?
+
+Telegram's own search finds **messages**, not **channels** — you need to know
+the name you are looking for. Telegram Explorer does the opposite: it keeps a
+**verified database of public channels** (every one checked live against
+`t.me`), lets you browse them like Instagram Explore, and shows you what each
+one actually posts — so you can find a channel by *topic*, *language* or
+*what it publishes*, not by name.
+
+| | Telegram search | Telegram Explorer |
+|---|---|---|
+| Find a channel by name | ✅ | ✅ |
+| Find a channel by **topic** (tech, news, crypto…) | ❌ | ✅ |
+| Multi-select filters, shareable as a link | ❌ | ✅ |
+| Search **inside** the posts | ❌ | ✅ |
+| See the activity chart and content tags | ❌ | ✅ |
+| Know the channel is still alive | ❌ | ✅ (re-verified daily) |
+| Works without an account, without a proxy | partially | ✅ |
+
+<p align="center">
+  <img src="docs/mobile.png" width="280" alt="The app on a phone">
+  <img src="docs/channel.png" width="480" alt="The channel profile">
+</p>
 
 ## ✨ Features
 
 - 🔍 **Smart Search** — fuzzy matching (typo-tolerant) + Persian/English language filter
-- 🏠 **Explore** — browse 151 **verified** public channels by category (every one checked live against t.me)
+- 💬 **Search inside the posts** — find the channels that talked about a topic, not just the ones named after it
+- 🎛️ **Advanced filters** — multi-select category, language and content type, mirrored into the URL so a filtered view can be shared
+- 🏠 **Explore** — browse **verified** public channels by category (every one checked live against t.me)
+- 📊 **Channel profiles** — posts per day, active days, a 7/30-day activity chart and content tags
 - 🇮🇷 **Persian & English** channels — BBC Persian, Radio Farda, Tabnak, Varzesh3, Digiato/TechNolife tech + NYT, Guardian, Sky News, NASA-level English channels
 - 📱 **Instagram-like grid** view with language badges on every card
 - ❤️ **Favorites** — save channels locally
 - 🌙 **Dark / Light** mode · 🌍 **7 Languages** · 📱 **Responsive**
+- 🛡️ **No tracking** — everything stays in your browser, see the privacy section in Settings
 - 📄 **Works out of the box** — no worker required (local mode is the default)
 - 🧪 **`verify_channels.js`** — re-validate every channel in the database against t.me
 
 ## 🚀 Deploy your own Worker (optional)
 
-Live search, live trending and notifications use a Cloudflare Worker proxy. Everything else (Explore, Home feed, folders, favorites, folder sharing, the local 61-channel search) works **without any worker**.
+Live search, live trending and notifications use a Cloudflare Worker proxy. Everything else (Explore, Home feed, folders, favorites, folder sharing, the local channel search) works **without any worker**.
 
 ### One-click deploy
 [![Deploy to Cloudflare Workers](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/mohsen-niksirat/tgexplorer)
@@ -273,7 +308,7 @@ too. If you hit a limit, the endpoints keep working from the cache.
 
 ### Option 1: Local mode (default — no setup)
 
-Just open `index.html` (or deploy to GitHub Pages). The app starts with a **verified database of 151 real channels** and full fuzzy search + language filter — no worker, no API key.
+Just open `index.html` (or deploy to GitHub Pages). The app starts with a **verified database of 122 real channels** and full fuzzy search + language filter — no worker, no API key.
 
 ### Option 2: With Cloudflare Worker (full power — live Telegram search)
 
@@ -417,7 +452,7 @@ tgexplorer/
 │   ├── i18n.js          #   all UI strings for the 7 languages + applyLang()/t()
 │   ├── state.js         #   the single mutable app state (localStorage)
 │   └── worker-code.js   #   the Worker source shown in the setup screen
-├── channels.js          # Verified channel database (151 channels)
+├── channels.js          # Verified channel database (122 channels)
 ├── posts.js             # Inline seed: latest 12 posts per channel (generated)
 ├── posts/               # Full archive, one JSON per channel (lazy-loaded)
 ├── avatars.js           # Channel avatar map (generated)
@@ -431,6 +466,21 @@ tgexplorer/
 ├── icons/               # PWA icons
 └── tests/e2e/           # Playwright suite
 ```
+
+## 🛡️ Privacy
+
+Telegram Explorer is a static page. There is no account, no database on a
+server and no tracking:
+
+| What | Where it lives | Who can see it |
+|---|---|---|
+| Favourites, folders, settings, filters | your browser's `localStorage` | only you |
+| Search queries and opened channels | your own Worker (if you set one up) | you, and the Worker operator |
+| Page views | Cloudflare Web Analytics (only if the site is hosted there) | the site operator, no cookies |
+
+There are **no cookies, no fingerprinting and no third-party trackers**. The
+app never writes anything outside your browser unless you explicitly connect
+a Worker. The same information is in the Settings dialog.
 
 ## 🌐 Deploy to GitHub Pages
 

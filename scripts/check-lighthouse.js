@@ -37,6 +37,7 @@ for (const id of metrics) {
 
 let failed = false;
 console.log('\n=== budgets ===');
+const summary = [];
 for (const [category, budget] of Object.entries(BUDGETS)) {
   const cat = report.categories[category];
   if (!cat) {
@@ -48,6 +49,7 @@ for (const [category, budget] of Object.entries(BUDGETS)) {
   const ok = score >= budget;
   if (!ok) failed = true;
   console.log('  ' + (ok ? 'OK   ' : 'FAIL ') + category.padEnd(16) + score + ' / ' + budget);
+  summary.push('| ' + category + ' | ' + score + ' | ' + budget + ' | ' + (ok ? 'pass' : 'FAIL') + ' |');
 
   // List the audits that dragged the score down.
   if (!ok) {
@@ -59,6 +61,13 @@ for (const [category, budget] of Object.entries(BUDGETS)) {
       console.log('         [' + a.score + '] ' + a.id + ' — ' + a.title + (a.displayValue ? ' (' + a.displayValue + ')' : ''));
     }
   }
+}
+
+// Show the scores in the run summary of the CI job.
+if (process.env.GITHUB_STEP_SUMMARY) {
+  fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,
+    '### Lighthouse (mobile)\n\n| Category | Score | Budget | |\n|---|---|---|---|\n' +
+    summary.join('\n') + '\n');
 }
 
 if (failed) {
