@@ -111,6 +111,19 @@ body[data-fs="large"] .home-feed-text-clamped{-webkit-line-clamp:3}
 .ac-title{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--text-primary)}
 .ac-user{font-size:11px;color:var(--text-secondary)}
 /* ============================================================
+   PRIVACY BOX (Settings)
+   ============================================================ */
+.privacy-box{margin-top:16px;padding:14px;border:1px solid var(--border);border-radius:14px;background:var(--bg-secondary)}
+.privacy-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.privacy-badge{display:inline-flex;align-items:center;gap:5px;background:rgba(72,187,120,.15);color:#2f9e5f;border:1px solid rgba(72,187,120,.35);border-radius:14px;padding:3px 11px;font-size:11.5px;font-weight:700;white-space:nowrap}
+[data-theme="dark"] .privacy-badge{color:#5fd18a}
+.privacy-title{font-size:13.5px;font-weight:700;color:var(--text-primary)}
+.privacy-list{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:7px}
+.privacy-list li{font-size:12.5px;line-height:1.6;color:var(--text-secondary)}
+.privacy-list li span[data-i18n]{color:var(--text-primary);font-weight:600}
+.privacy-link{display:inline-block;margin-top:10px;font-size:12.5px;font-weight:600;color:var(--accent);text-decoration:none}
+.privacy-link:hover{text-decoration:underline}
+/* ============================================================
    ADVANCED EXPLORE FILTERS
    Multi-select category / language / content type. The active
    filter set is mirrored into the URL so a filtered view can be
@@ -3041,6 +3054,118 @@ Object.assign(window, {
   togglePostFav,
 });
 
+
+// ============================================================
+// WINDOW BRIDGE
+// ----------------------------------------------------------
+// Inline `onclick="fn(...)"` handlers and the e2e suite expect the
+// app functions on `window` (as they were in the classic script).
+// ============================================================
+Object.assign(window, {
+  addAutoAll,
+  addAutoOne,
+  addChannelToFolder,
+  applyExploreFilters,
+  applyFiltersToView,
+  clearFilters,
+  clearFolderRule,
+  clearLivePosts,
+  closeChannelModal,
+  closeFolderPicker,
+  closeFullText,
+  closeNotifModal,
+  closePostModal,
+  closeSettings,
+  closeSuggestModal,
+  copyFullText,
+  copyLink,
+  copyPostLink,
+  copyPostMarkdown,
+  copyPostText,
+  copySuggestBody,
+  copyWorkerCode,
+  createFolderFromPicker,
+  createFolderFromTab,
+  createSmartFolders,
+  cycleFolderIcon,
+  cycleFontSize,
+  deepSearchPosts,
+  deleteFolder,
+  dismissSharedFolder,
+  doSearch,
+  downloadPostMedia,
+  editFolder,
+  escAttr,
+  exportBackup,
+  exportPostsPdf,
+  exportPostsTxt,
+  fetchFavNewPosts,
+  filterState,
+  folderExportJson,
+  folderExportPdf,
+  folderExportTxt,
+  fpToggle,
+  getAllChannels,
+  getChannelPosts,
+  getLocalExplore,
+  importBackup,
+  importSharedFolder,
+  loadExplore,
+  loadFeed,
+  loadSharedLivePosts,
+  openChannel,
+  openFeedPost,
+  openFolderPicker,
+  openHomePost,
+  openLivePost,
+  openPostModal,
+  openSavedPost,
+  openSuggestModal,
+  pickFolderIcon,
+  readUrlFilters,
+  refreshFolderPosts,
+  removeFolderItem,
+  renderCategories,
+  renderFavFiltered,
+  renderFavorites,
+  renderFilterBar,
+  renderFilterChips,
+  renderResults,
+  resetApp,
+  retryNetwork,
+  saveFilters,
+  saveFolderRule,
+  saveSettings,
+  scrollPostModalTop,
+  searchLocal,
+  setChartRange,
+  setExploreSearch,
+  setExploreSort,
+  setExploreView,
+  setFavPostType,
+  setFavSort,
+  setHomeType,
+  setSearchMode,
+  shareFilters,
+  shareFolder,
+  sharePost,
+  showMoreExplore,
+  skipSetup,
+  state,
+  submitSuggestion,
+  switchTab,
+  syncUrlFilters,
+  t,
+  testConnection,
+  testFromSettings,
+  toast,
+  toggleExploreType,
+  toggleFav,
+  toggleFilter,
+  toggleNotifs,
+  togglePostFav,
+});
+
 </script>
 </head>
 <body>
@@ -3159,6 +3284,15 @@ Object.assign(window, {
       <div style="margin-bottom:20px"><label style="font-size:14px;font-weight:600;display:block;margin-bottom:8px" data-i18n="worker_url_label">Worker Proxy URL</label><div class="connect-input-row"><input class="connect-input" id="settingsWorkerUrl" type="url" placeholder="https://xxx.workers.dev" autocomplete="off" spellcheck="false"></div></div>
       <div class="modal-actions"><button class="modal-btn modal-btn-primary" onclick="saveSettings()"><span>💾</span> <span data-i18n="save_settings">Save</span></button><button class="modal-btn modal-btn-secondary" onclick="testFromSettings()"><span>🔌</span> <span data-i18n="test_connection">Test</span></button></div>
       <div class="test-result" id="settingsTestResult"></div>
+      <div class="privacy-box">
+        <div class="privacy-head"><span class="privacy-badge">🛡️ <span data-i18n="no_tracking">No tracking</span></span><span class="privacy-title" data-i18n="privacy_title">Your data stays on your device</span></div>
+        <ul class="privacy-list">
+          <li><span data-i18n="privacy_local">📱 Saved locally</span> — <span data-i18n="privacy_local_desc">favourites, folders, settings and filters are stored in this browser's localStorage. Nothing is uploaded.</span></li>
+          <li><span data-i18n="privacy_worker">☁️ Worker (optional)</span> — <span data-i18n="privacy_worker_desc">if you connect your own Cloudflare Worker, only your search queries and the channels you open are sent to it. The Worker keeps a short-lived cache; it never stores your favourites.</span></li>
+          <li><span data-i18n="privacy_analytics">📊 Analytics</span> — <span data-i18n="privacy_analytics_desc">the page views are counted by Cloudflare Web Analytics (if the site is hosted there). No cookies, no fingerprinting, no third-party trackers.</span></li>
+        </ul>
+        <a class="privacy-link" href="https://github.com/mohsen-niksirat/tgexplorer#privacy" target="_blank" rel="noopener" data-i18n="privacy_read_more">Read the details →</a>
+      </div>
       <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border)"><button class="modal-btn modal-btn-secondary" onclick="resetApp()" style="color:var(--error)"><span>🔄</span> <span data-i18n="reset_app">Reset & Show Setup Guide</span></button></div>
       <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border);display:flex;gap:10px"><a class="modal-btn modal-btn-secondary" style="text-decoration:none" href="https://github.com/mohsen-niksirat" target="_blank" rel="noopener">🐙 GitHub</a><a class="modal-btn modal-btn-secondary" style="text-decoration:none" href="https://t.me/mohsenniksirat" target="_blank" rel="noopener">✈️ Telegram</a></div>
     </div>
