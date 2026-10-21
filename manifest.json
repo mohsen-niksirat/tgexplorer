@@ -1,9 +1,9 @@
 {
   "name": "Telegram Explorer",
   "short_name": "TG Explorer",
-  "description": "Search and discover public Telegram channels and groups",
-  "start_url": "/tgexplorer/",
-  "scope": "/tgexplorer/",
+  "description": "Search and discover public Telegram channels and groups — browse them like Instagram Explore, filter by topic and language, and read the posts.",
+  "start_url": "./",
+  "scope": "./",
   "display": "standalone",
   "background_color": "#0a0a0a",
   "theme_color": "#0088cc",
@@ -40,12 +40,34 @@
       "purpose": "maskable"
     }
   ],
-  "screenshots": [],
+  "screenshots": [
+    {
+      "src": "docs/mobile.png",
+      "sizes": "412x823",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "The Explore grid on a phone"
+    },
+    {
+      "src": "docs/grid.png",
+      "sizes": "1280x900",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "The Explore grid"
+    },
+    {
+      "src": "docs/channel.png",
+      "sizes": "1280x900",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "A channel profile with the activity chart"
+    }
+  ],
   "shortcuts": [
     {
       "name": "Search",
       "short_name": "Search",
-      "url": "/tgexplorer/?action=search",
+      "url": "./?action=search",
       "icons": [
         {
           "src": "icons/icon-192.png",
@@ -56,7 +78,7 @@
     {
       "name": "Explore",
       "short_name": "Explore",
-      "url": "/tgexplorer/?action=explore",
+      "url": "./?action=explore",
       "icons": [
         {
           "src": "icons/icon-192.png",
@@ -64,5 +86,12 @@
         }
       ]
     }
+  ],
+  "id": "./",
+  "prefer_related_applications": false,
+  "display_override": [
+    "window-controls-overlay",
+    "standalone",
+    "browser"
   ]
 }

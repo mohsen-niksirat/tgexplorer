@@ -5,6 +5,12 @@ Full version history of Telegram Explorer. The latest release is summarized in t
 
 ## v1.7.0
 
+- 📲 **A real PWA** — the manifest is complete (relative `start_url`, `scope`
+  and `id`, so it works under any path), the screenshots are declared, and the
+  app registers a **periodic background sync**: the service worker checks the
+  favourite channels for new posts and shows a **local notification** when one
+  of them posts something new — no push server, no account, nothing leaves
+  the device.
 - 🆕 **Suggest a channel — and let a bot add it** — the app's "Suggest a
   channel" dialog now opens an issue with the `channel-suggestion` label.
   A GitHub Action reads the suggestion, checks the channel against `t.me`

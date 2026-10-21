@@ -167,6 +167,33 @@ test.describe('Telegram Explorer - e2e', () => {
     await expect(page.locator('#modalTitle')).toContainText(/BBC/i);
   });
 
+  test('the service worker watches the favourite channels for new posts', async ({ page }) => {
+    // A favourite channel, so the watch list is not empty.
+    await page.evaluate(() => {
+      localStorage.setItem('tgexp_favs', JSON.stringify([{ username: 'bbcpersian', title: 'BBC Persian' }]));
+    });
+    await page.reload();
+    await page.waitForTimeout(2500);
+
+    const result = await page.evaluate(async () => {
+      const reg = await navigator.serviceWorker.ready;
+      const names = await caches.keys();
+      const cache = await caches.open(names.find(n => n.startsWith('tgexplorer-')) || names[0]);
+      const watch = await cache.match('/tg-watchlist');
+      const seen = await cache.match('/tg-seen');
+      return {
+        periodicSync: 'periodicSync' in reg,
+        watch: watch ? JSON.parse(await watch.text()) : null,
+        seen: seen ? JSON.parse(await seen.text()) : null,
+      };
+    });
+
+    // The watch list holds the favourites...
+    expect(result.watch).toContain('bbcpersian');
+    // ...and the worker knows which posts it has already seen.
+    expect(result.seen.bbcpersian.length).toBeGreaterThan(0);
+  });
+
   test('language switching updates the document', async ({ page }) => {
     await page.locator('#langSelect').selectOption('fa');
 
