@@ -54,9 +54,9 @@ Full version history of Telegram Explorer. The latest release is summarized in t
   (`aria-label`), a visible `:focus-visible` ring was added (including inputs
   that previously reset their outline), modals are marked
   `role="dialog" aria-modal="true"`, and channel cards in the grid, list and
-  Explore views are focusable controls (`tabindex`/`role="button"`) that open
-  on Enter. Tertiary text contrast was raised in both light (2.85:1 → 4.6:1)
-  and dark (3.03:1 → 4.6:1) themes.
+  Explore views (both the tiles and the list rows) are focusable controls
+  (`tabindex`/`role="button"`) that open on Enter. Tertiary text contrast
+  was raised in both light (2.85:1 → 4.6:1) and dark (3.03:1 → 4.6:1) themes.
 - 🌐 **7-language UI stays in sync** — `applyLang()` also updates `aria-label`s
   via `data-i18n-aria-label`.
 

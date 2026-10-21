@@ -1369,7 +1369,7 @@ function exploreListViewHtml(items,colors){
     const thumb=img?`<img src="${img}" alt="" loading="lazy" onerror="this.style.display='none'">`:`<div style="width:100%;height:100%;background:${color};display:flex;align-items:center;justify-content:center;font-size:22px;color:#fff;font-weight:700">${initial}</div>`;
     const onclick=posts.length?`openPostModal('${ch.username}')`:`openChannel('${ch.username}')`;
     const badge=post?(post.hasVideo?'🎬':(post.image?'🖼':'📝')):'';
-    return `<div class="explore-list-item" onclick="${onclick}"><div class="explore-list-thumb">${thumb}</div><div class="explore-list-body"><div class="explore-list-title">${escHtml(ch.title||ch.username)}</div><div class="explore-list-sub">@${escHtml(ch.username)} ${badge?`· ${badge}`:''}</div></div><div class="explore-list-count">📊 ${posts.length}</div></div>`;
+    return `<div class="explore-list-item" tabindex="0" role="button" aria-label="Open ${escAttr(ch.title||ch.username)}" onclick="${onclick}" onkeydown="if(event.key==='Enter'){this.click()}"><div class="explore-list-thumb">${thumb}</div><div class="explore-list-body"><div class="explore-list-title">${escHtml(ch.title||ch.username)}</div><div class="explore-list-sub">@${escHtml(ch.username)} ${badge?`· ${badge}`:''}</div></div><div class="explore-list-count">📊 ${posts.length}</div></div>`;
   }).join('')}</div>`;
 }
 function setFavPostType(v){state.favPostType=v;localStorage.setItem('tgexp_favptype',v);renderFavorites()}

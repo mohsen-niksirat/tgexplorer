@@ -94,9 +94,10 @@ This repo ships a ready-made [`worker.js`](worker.js) + [`wrangler.toml`](wrangl
   accessible name (`aria-label`), a visible `:focus-visible` ring was added
   (including inputs that previously reset their outline), modals are marked
   `role="dialog" aria-modal="true"`, and channel cards in the grid, list and
-  Explore views are real focusable controls (`tabindex`/`role="button"`) that
-  open on <kbd>Enter</kbd>. Tertiary text contrast was raised in both light
-  (2.85:1 → 4.6:1) and dark (3.03:1 → 4.6:1) themes
+  Explore views (both the tiles and the list rows) are real focusable
+  controls (`tabindex`/`role="button"`) that open on <kbd>Enter</kbd>.
+  Tertiary text contrast was raised in both light (2.85:1 → 4.6:1) and dark
+  (3.03:1 → 4.6:1) themes
 - 🌐 **7-language UI stays in sync** — `applyLang()` also updates
   `aria-label`s via `data-i18n-aria-label`, so assistive technology reads the
   search field in the active language
