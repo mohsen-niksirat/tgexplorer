@@ -44,6 +44,21 @@ This repo ships a ready-made [`worker.js`](worker.js) + [`wrangler.toml`](wrangl
 
 ### v1.7.0
 
+- ⚡ **Faster first paint** — the Cloudflare Web Analytics beacon no longer
+  blocks the page (it cost **5.6 s** of main-thread time on a phone), the
+  Telegram WebApp SDK is loaded once the app is interactive, the data files
+  are downloaded in parallel with the HTML instead of after it, and the
+  Explore grid renders 12 cards at a time instead of all 116 — a big cut in
+  the style and layout work
+- ♿ **Contrast fixed on every filled element** — the active chips, the
+  tabs and the primary button used white text on the accent colour, which
+  is only 2.08:1 in the dark theme and 3.89:1 in the light one. They now
+  use a dedicated accent background with a matching text colour, and the
+  cards lost their clashing `aria-label`s, so the Lighthouse accessibility
+  score went from 91 to **100**
+- 🧪 **Lighthouse in CI** — a new job runs Lighthouse on the mobile
+  emulation and fails the build when a budget is missed, so a performance
+  or accessibility regression cannot slip through
 - 💬 **Search inside the posts** — a second search mode next to the search box
   looks for a topic in the **text of the posts** instead of the channel
   names: "which channels talked about this?". The results are grouped by

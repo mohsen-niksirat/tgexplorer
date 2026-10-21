@@ -30,7 +30,9 @@ test.describe('Telegram Explorer - e2e', () => {
   test('explore filters narrow the results and end up in the URL', async ({ page }) => {
     const cards = page.locator('.explore-item, .channel-card');
     await expect(cards.first()).toBeVisible();
-    const before = await cards.count();
+    // The grid is paginated, so count the whole result set, not the cards
+    // that happen to be on the page.
+    const before = await page.evaluate(() => window.state.searchResults.length);
 
     // No filter is active yet.
     await expect(page.locator('#filterBar')).not.toHaveClass(/show/);
@@ -42,7 +44,7 @@ test.describe('Telegram Explorer - e2e', () => {
     await expect(page).toHaveURL(/cats=news/);
     await expect(page.locator('.cat-chip[data-cat="news"]')).toHaveClass(/active/);
 
-    const after = await cards.count();
+    const after = await page.evaluate(() => window.state.searchResults.length);
     expect(after).toBeGreaterThan(0);
     expect(after).toBeLessThan(before);
 
