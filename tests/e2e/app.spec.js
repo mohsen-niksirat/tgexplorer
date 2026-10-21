@@ -88,11 +88,55 @@ test.describe('Telegram Explorer - e2e', () => {
     const cards = page.locator('.explore-item, .channel-card, .list-item');
     await expect(cards.first()).toBeVisible();
 
+    // Cards must be real focusable controls (tabindex + button role), so
+    // keyboard users can reach them without a mouse.
+    await expect(cards.first()).toHaveAttribute('tabindex', '0');
+    await expect(cards.first()).toHaveAttribute('role', 'button');
+
     // Focusing a card and tabbing forward must leave focus on a visible,
     // focusable element (i.e. the grid is reachable and does not trap focus).
     await cards.first().focus();
-    await page.keyboard.press('Tab');
+    await expect(page.locator(':focus')).toHaveCount(1);
     const focusedTag = await page.evaluate(() => document.activeElement?.tagName || '');
     expect(focusedTag).not.toBe('BODY');
+  });
+
+  test('pressing Enter on a focused card opens the channel modal', async ({ page }) => {
+    const searchInput = page.locator('#searchInput');
+    await searchInput.fill('bbc');
+    await searchInput.press('Enter');
+    await page.keyboard.press('Escape');
+
+    const cards = page.locator('.explore-item, .channel-card, .list-item');
+    await expect(cards.first()).toBeVisible();
+
+    // Keyboard activation: Enter on a focused card must open its modal.
+    await cards.first().focus();
+    await page.keyboard.press('Enter');
+    await expect(page.locator('#channelOverlay')).toHaveClass(/open/);
+
+    // Escape closes it again.
+    await page.keyboard.press('Escape');
+    await expect(page.locator('#channelOverlay')).not.toHaveClass(/open/);
+  });
+
+  test('icon-only buttons expose accessible names', async ({ page }) => {
+    // Every modal close button is icon-only (✕) and needs an aria-label.
+    const closeButtons = page.locator('.modal-close');
+    const count = await closeButtons.count();
+    expect(count).toBeGreaterThan(0);
+    for (let i = 0; i < count; i++) {
+      const label = await closeButtons.nth(i).getAttribute('aria-label');
+      expect(label).toBeTruthy();
+    }
+
+    // The view-toggle buttons are icons too (⊞ / ☰ / ⊡).
+    const viewButtons = page.locator('.view-btn');
+    const viewCount = await viewButtons.count();
+    expect(viewCount).toBeGreaterThan(0);
+    for (let i = 0; i < viewCount; i++) {
+      const label = await viewButtons.nth(i).getAttribute('aria-label');
+      expect(label).toBeTruthy();
+    }
   });
 });

@@ -3,6 +3,28 @@
 Full version history of Telegram Explorer. The latest release is summarized in the
 [README](README.md#-changelog).
 
+## v1.7.0
+
+- 🧪 **Playwright e2e suite + CI** — 7 browser tests (page load, local search,
+  channel modal, language switch, keyboard focus, Enter-to-open, accessible
+  names) run on every push to `master` via GitHub Actions, plus a
+  `verify-channels` job that uploads the channel-health report as an artifact.
+- 🩺 **Channel health report** — `verify_channels.js` now writes
+  `verify_channels_report.json` (per-channel status, member tracking, dead /
+  suspicious / renamed / duplicate lists) and can auto-prune confirmed-dead
+  channels into `channels-deprecated.js` via `--prune`. A two-stage check
+  double-checks `Telegram: Contact` hits against the plain profile page, so
+  live channels with the web preview disabled are no longer treated as dead.
+- ♿ **Accessibility (WCAG 2.1 AA)** — icon-only buttons have accessible names
+  (`aria-label`), a visible `:focus-visible` ring was added (including inputs
+  that previously reset their outline), modals are marked
+  `role="dialog" aria-modal="true"`, and channel cards in the grid, list and
+  Explore views are focusable controls (`tabindex`/`role="button"`) that open
+  on Enter. Tertiary text contrast was raised in both light (2.85:1 → 4.6:1)
+  and dark (3.03:1 → 4.6:1) themes.
+- 🌐 **7-language UI stays in sync** — `applyLang()` also updates `aria-label`s
+  via `data-i18n-aria-label`.
+
 ## v1.6.0
 
 - 📡 **+37 verified channels (114 → 151)** — every candidate validated live

@@ -16,9 +16,9 @@
 <meta name="apple-mobile-web-app-title" content="TG Explorer">
 <link rel="apple-touch-icon" href="icons/icon-192.png">
 <style>
-:root{--bg-primary:#fff;--bg-secondary:#f5f5f7;--bg-card:#fff;--bg-hover:#f0f0f2;--bg-input:#f0f0f2;--bg-overlay:rgba(0,0,0,.5);--text-primary:#1a1a1a;--text-secondary:#6b6b6b;--text-tertiary:#999;--accent:#0088cc;--accent-light:#e6f4ff;--accent-dark:#0066aa;--border:#e5e5e5;--shadow:0 2px 12px rgba(0,0,0,.08);--shadow-lg:0 8px 32px rgba(0,0,0,.12);--radius:16px;--radius-sm:10px;--radius-xs:6px;--transition:.25s cubic-bezier(.4,0,.2,1);--font:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;--max-w:1200px;--header-h:64px;--gradient:linear-gradient(135deg,#0088cc 0%,#00b2ff 100%);--success:#34c759;--error:#ff3b30;--warning:#ff9500}
-[data-theme="dark"]{--bg-primary:#0a0a0a;--bg-secondary:#141414;--bg-card:#1a1a1a;--bg-hover:#242424;--bg-input:#1e1e1e;--text-primary:#f0f0f0;--text-secondary:#999;--text-tertiary:#666;--accent:#39bfff;--accent-light:#0d2a3a;--accent-dark:#60ccff;--border:#2a2a2a;--shadow:0 2px 12px rgba(0,0,0,.3);--shadow-lg:0 8px 32px rgba(0,0,0,.4)}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{font-family:var(--font);background:var(--bg-secondary);color:var(--text-primary);line-height:1.6;min-height:100vh;transition:background var(--transition),color var(--transition);-webkit-font-smoothing:antialiased}a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}button{cursor:pointer;border:none;background:none;font-family:inherit}input,textarea{font-family:inherit}img{max-width:100%;display:block}
+:root{--bg-primary:#fff;--bg-secondary:#f5f5f7;--bg-card:#fff;--bg-hover:#f0f0f2;--bg-input:#f0f0f2;--bg-overlay:rgba(0,0,0,.5);--text-primary:#1a1a1a;--text-secondary:#6b6b6b;--text-tertiary:#767676;--accent:#0088cc;--accent-light:#e6f4ff;--accent-dark:#0066aa;--border:#e5e5e5;--shadow:0 2px 12px rgba(0,0,0,.08);--shadow-lg:0 8px 32px rgba(0,0,0,.12);--radius:16px;--radius-sm:10px;--radius-xs:6px;--transition:.25s cubic-bezier(.4,0,.2,1);--font:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;--max-w:1200px;--header-h:64px;--gradient:linear-gradient(135deg,#0088cc 0%,#00b2ff 100%);--success:#34c759;--error:#ff3b30;--warning:#ff9500}
+[data-theme="dark"]{--bg-primary:#0a0a0a;--bg-secondary:#141414;--bg-card:#1a1a1a;--bg-hover:#242424;--bg-input:#1e1e1e;--text-primary:#f0f0f0;--text-secondary:#999;--text-tertiary:#8f8f8f;--accent:#39bfff;--accent-light:#0d2a3a;--accent-dark:#60ccff;--border:#2a2a2a;--shadow:0 2px 12px rgba(0,0,0,.3);--shadow-lg:0 8px 32px rgba(0,0,0,.4)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}:focus-visible{outline:2px solid var(--accent);outline-offset:2px}body{font-family:var(--font);background:var(--bg-secondary);color:var(--text-primary);line-height:1.6;min-height:100vh;transition:background var(--transition),color var(--transition);-webkit-font-smoothing:antialiased}a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}button{cursor:pointer;border:none;background:none;font-family:inherit}input,textarea{font-family:inherit}img{max-width:100%;display:block}
 .header{position:sticky;top:0;z-index:100;background:var(--bg-primary);border-bottom:1px solid var(--border);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);height:var(--header-h);display:flex;align-items:center;padding:0 20px}.header-inner{max-width:var(--max-w);margin:0 auto;width:100%;display:flex;align-items:center;gap:16px}.logo{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:700;color:var(--accent);white-space:nowrap;flex-shrink:0}.logo-icon{width:36px;height:36px;background:var(--gradient);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px}.header-actions{display:flex;align-items:center;gap:8px;margin-left:auto;flex-shrink:0}.icon-btn{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--text-secondary);transition:all var(--transition);font-size:20px;position:relative}.icon-btn:hover{background:var(--bg-hover);color:var(--text-primary)}.icon-btn .badge{position:absolute;top:2px;right:2px;width:16px;height:16px;border-radius:50%;background:var(--error);color:#fff;font-size:10px;display:flex;align-items:center;justify-content:center;font-weight:700}.lang-select{padding:6px 10px;border-radius:var(--radius-xs);background:var(--bg-input);color:var(--text-primary);border:1px solid var(--border);font-size:13px;font-weight:500;outline:none;cursor:pointer}
 .conn-badge{display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:20px;font-size:12px;font-weight:600;background:var(--bg-hover);color:var(--text-secondary);cursor:pointer;transition:all var(--transition)}.conn-badge:hover{background:var(--accent-light);color:var(--accent)}.conn-badge .dot{width:8px;height:8px;border-radius:50%;background:var(--text-tertiary)}.conn-badge.connected .dot{background:var(--success)}
 .setup-screen{min-height:calc(100vh - var(--header-h));display:flex;align-items:center;justify-content:center;padding:40px 20px}.setup-card{background:var(--bg-primary);border:1px solid var(--border);border-radius:24px;max-width:680px;width:100%;overflow:hidden;box-shadow:var(--shadow-lg)}.setup-header{background:var(--gradient);padding:40px 32px 32px;text-align:center;position:relative}.setup-header::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}.setup-header *{position:relative}.setup-emoji{font-size:56px;margin-bottom:16px}.setup-header h1{font-size:28px;color:#fff;font-weight:800;margin-bottom:8px}.setup-header p{color:rgba(255,255,255,.85);font-size:15px}.setup-body{padding:32px}.setup-steps{counter-reset:step}.setup-step{position:relative;padding-left:52px;padding-bottom:28px;border-left:2px solid var(--border);margin-left:16px}.setup-step:last-child{border-left-color:transparent;padding-bottom:0}.setup-step::before{counter-increment:step;content:counter(step);position:absolute;left:-17px;top:0;width:32px;height:32px;border-radius:50%;background:var(--gradient);color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700}.setup-step h3{font-size:16px;font-weight:700;margin-bottom:6px}.setup-step p{font-size:14px;color:var(--text-secondary);margin-bottom:10px;line-height:1.6}.setup-step code{display:inline-block;background:var(--bg-hover);padding:2px 8px;border-radius:4px;font-size:13px;color:var(--accent);font-family:'SF Mono','Fira Code',monospace}.setup-link{display:inline-flex;align-items:center;gap:6px;background:var(--accent-light);color:var(--accent);padding:8px 16px;border-radius:8px;font-size:13px;font-weight:600;transition:all var(--transition)}.setup-link:hover{background:var(--accent);color:#fff;text-decoration:none}.code-details{margin:12px 0}.code-summary{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:var(--bg-hover);border:1px solid var(--border);border-radius:10px;cursor:pointer;font-size:14px;font-weight:600;color:var(--text-primary);transition:all var(--transition);list-style:none}.code-summary::-webkit-details-marker{display:none}.code-summary::before{content:'▶';font-size:12px;margin-right:8px;transition:transform var(--transition);color:var(--text-secondary)}.code-details[open] .code-summary::before{transform:rotate(90deg)}.code-details[open] .code-summary{border-radius:10px 10px 0 0;border-bottom:none}.code-block{background:#1a1a2e;border-radius:0 0 12px 12px;overflow:hidden;border:1px solid #2a2a3e;border-top:none;margin:0}.code-header{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:#16162a;border-bottom:1px solid #2a2a3e}.code-header span{color:#888;font-size:12px}.copy-btn{background:rgba(255,255,255,.1);color:#fff;padding:4px 12px;border-radius:6px;font-size:12px;font-weight:600;transition:all var(--transition)}.copy-btn:hover{background:rgba(255,255,255,.2)}.copy-btn.copied{background:var(--success)}.code-content{padding:16px;overflow-x:auto;font-family:'SF Mono','Fira Code','Consolas',monospace;font-size:12.5px;line-height:1.6;color:#e0e0e0;white-space:pre;tab-size:2;max-height:300px;overflow-y:auto}.connect-area{margin-top:28px;padding-top:24px;border-top:1px solid var(--border)}.connect-area h3{font-size:18px;font-weight:700;margin-bottom:12px}.connect-input-row{display:flex;gap:10px;margin-bottom:16px}.connect-input{flex:1;padding:14px 16px;border-radius:12px;border:2px solid var(--border);background:var(--bg-input);color:var(--text-primary);font-size:15px;outline:none;transition:border-color var(--transition)}.connect-input:focus{border-color:var(--accent)}.connect-input::placeholder{color:var(--text-tertiary)}.connect-test-btn{padding:14px 24px;border-radius:12px;background:var(--gradient);color:#fff;font-size:15px;font-weight:700;transition:all var(--transition);white-space:nowrap;display:flex;align-items:center;gap:8px}.connect-test-btn:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(0,136,204,.3)}.connect-test-btn:disabled{opacity:.6;cursor:not-allowed;transform:none}.test-result{padding:14px 18px;border-radius:12px;font-size:14px;font-weight:500;display:none;align-items:center;gap:10px}.test-result.show{display:flex}.test-result.success{background:#e8f9ef;color:#1a7d36;border:1px solid #b4e4c4}.test-result.error{background:#fef0f0;color:#d32f2f;border:1px solid #f5c6c6}[data-theme="dark"] .test-result.success{background:#0d2818;color:#4ade80;border-color:#166534}[data-theme="dark"] .test-result.error{background:#2d1215;color:#ff6b6b;border-color:#7f1d1d}.skip-btn{display:block;margin:20px auto 0;color:var(--text-secondary);font-size:14px;padding:10px 24px;border-radius:10px;transition:all var(--transition)}.skip-btn:hover{background:var(--bg-hover);color:var(--text-primary)}
@@ -98,6 +98,9 @@ body[data-fs="large"] .home-feed-text-clamped{-webkit-line-clamp:3}
 .ac-avatar{width:30px;height:30px;border-radius:50%;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
 .ac-title{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--text-primary)}
 .ac-user{font-size:11px;color:var(--text-secondary)}
+/* A11y: these inputs/selects reset `outline:none` for mouse focus, so restore
+   a visible focus ring for keyboard navigation (WCAG 2.4.7). */
+.lang-select:focus-visible,.connect-input:focus-visible,.search-input:focus-visible,.folder-new input:focus-visible,.folder-new-form input:focus-visible,.folder-add-channel input:focus-visible,.sug-field:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 </style>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
@@ -152,7 +155,7 @@ body[data-fs="large"] .home-feed-text-clamped{-webkit-line-clamp:3}
     <h1 data-i18n="hero_title">Explore Telegram Channels</h1>
     <p data-i18n="hero_subtitle">Search and discover public channels and groups across Telegram</p>
     <div class="search-box">
-      <input class="search-input" id="searchInput" type="text" data-i18n-placeholder="search_placeholder" placeholder="Search channels, topics, groups..." autocomplete="off">
+      <input class="search-input" id="searchInput" type="text" data-i18n-placeholder="search_placeholder" data-i18n-aria-label="search_placeholder" aria-label="Search channels, topics, groups..." autocomplete="off">
       <button class="search-btn" id="searchBtn" data-i18n="search_btn">🔍 Search</button>
     </div>
     <div class="search-tags" id="searchTags">
@@ -180,18 +183,18 @@ body[data-fs="large"] .home-feed-text-clamped{-webkit-line-clamp:3}
   <div class="lang-filter" id="langFilter"><button class="lang-chip active" data-lang="all">🌐 <span data-i18n="all">All</span></button><button class="lang-chip" data-lang="fa">🇮🇷 فارسی</button><button class="lang-chip" data-lang="en">🇬🇧 English</button></div>
   <div class="results-header" id="resultsHeader" style="display:none">
     <span class="results-count" id="resultsCount"></span>
-    <div class="view-toggle"><button class="view-btn active" data-view="grid">⊞</button><button class="view-btn" data-view="list">☰</button><button class="view-btn" data-view="explore">⊡</button></div>
+    <div class="view-toggle" role="group" aria-label="View mode"><button class="view-btn active" data-view="grid" aria-label="Grid view" title="Grid">⊞</button><button class="view-btn" data-view="list" aria-label="List view" title="List">☰</button><button class="view-btn" data-view="explore" aria-label="Explore view" title="Explore">⊡</button></div>
   </div>
   <div id="content"><div class="loading"><div class="spinner"></div><span data-i18n="loading">Loading...</span></div></div>
 </main>
 
 <!-- SETTINGS MODAL -->
-<div class="modal-overlay" id="settingsOverlay">
+<div class="modal-overlay" id="settingsOverlay" role="dialog" aria-modal="true" aria-label="Settings">
   <div class="modal" style="max-width:520px">
     <div class="modal-header">
       <div class="modal-avatar" style="background:var(--gradient)">⚙️</div>
       <div><div class="modal-title" data-i18n="settings">Settings</div><div class="modal-user" data-i18n="settings_sub">Configure your proxy connection</div></div>
-      <button class="modal-close" onclick="closeSettings()">✕</button>
+      <button class="modal-close" aria-label="Close" onclick="closeSettings()">✕</button>
     </div>
     <div class="modal-body">
       <a class="modal-btn modal-btn-primary" style="text-decoration:none;display:flex;justify-content:center;margin-bottom:20px" href="https://t.me/telgexplorerbot" target="_blank" rel="noopener"><span>🚀</span> <span data-i18n="open_telegram">Open in Telegram</span></a>
@@ -204,17 +207,17 @@ body[data-fs="large"] .home-feed-text-clamped{-webkit-line-clamp:3}
       <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border);display:flex;gap:10px"><a class="modal-btn modal-btn-secondary" style="text-decoration:none" href="https://github.com/mohsen-niksirat" target="_blank" rel="noopener">🐙 GitHub</a><a class="modal-btn modal-btn-secondary" style="text-decoration:none" href="https://t.me/mohsenniksirat" target="_blank" rel="noopener">✈️ Telegram</a></div>
     </div>
   </div>
-    <button id="postScrollTop" class="post-scroll-top" onclick="scrollPostModalTop()" title="بازگشت به بالا">↑</button>
+    <button id="postScrollTop" class="post-scroll-top" onclick="scrollPostModalTop()" title="بازگشت به بالا" aria-label="بازگشت به بالا">↑</button>
   </div>
 </div>
 
 <!-- FULL TEXT POPUP -->
-<div class="post-fulltext-overlay" id="fullTextOverlay" onclick="if(event.target===this)closeFullText()">
+<div class="post-fulltext-overlay" id="fullTextOverlay" role="dialog" aria-modal="true" aria-label="Full text" onclick="if(event.target===this)closeFullText()">
   <div class="post-fulltext">
     <div class="post-fulltext-head">
       <div class="home-feed-avatar" id="fullTextAvatar" style="width:36px;height:36px;font-size:15px">📝</div>
       <div style="flex:1;min-width:0"><div class="home-feed-title" id="fullTextTitle"></div><div class="home-feed-user" id="fullTextUser"></div></div>
-      <button class="modal-close" style="margin:0" onclick="closeFullText()">✕</button>
+      <button class="modal-close" style="margin:0" aria-label="Close" onclick="closeFullText()">✕</button>
     </div>
     <div class="post-fulltext-body" id="fullTextBody"></div>
     <div class="post-fulltext-actions">
@@ -225,19 +228,19 @@ body[data-fs="large"] .home-feed-text-clamped{-webkit-line-clamp:3}
 </div>
 
 <!-- CHANNEL DETAIL MODAL -->
-<div class="modal-overlay" id="postOverlay" onclick="if(event.target===this)closePostModal()">
+<div class="modal-overlay" id="postOverlay" role="dialog" aria-modal="true" aria-label="Post" onclick="if(event.target===this)closePostModal()">
   <div class="modal" style="max-width:640px">
     <div class="modal-header" id="postModalHead"></div>
-    <button class="modal-close" style="position:absolute;top:16px;left:16px;z-index:5" onclick="closePostModal()">✕</button>
+    <button class="modal-close" style="position:absolute;top:16px;left:16px;z-index:5" aria-label="Close" onclick="closePostModal()">✕</button>
     <div class="modal-body" id="postModalBody"></div>
   </div>
 </div>
-<div class="modal-overlay" id="channelOverlay">
+<div class="modal-overlay" id="channelOverlay" role="dialog" aria-modal="true" aria-label="Channel details">
   <div class="modal" id="modal">
     <div class="modal-header">
       <div class="modal-avatar" id="modalAvatar">T</div>
       <div><div class="modal-title" id="modalTitle"></div><div class="modal-user" id="modalUser"></div><div class="modal-members-display" id="modalMembers"></div></div>
-      <button class="modal-close" onclick="closeChannelModal()">✕</button>
+      <button class="modal-close" aria-label="Close" onclick="closeChannelModal()">✕</button>
     </div>
     <div class="modal-body">
       <div class="modal-desc" id="modalDesc"></div>
@@ -261,12 +264,12 @@ body[data-fs="large"] .home-feed-text-clamped{-webkit-line-clamp:3}
 
 
 <!-- FOLDER PICKER MODAL -->
-<div class="modal-overlay" id="folderPicker">
+<div class="modal-overlay" id="folderPicker" role="dialog" aria-modal="true" aria-label="Add to folder">
   <div class="modal" style="max-width:420px">
     <div class="modal-header">
       <div class="modal-avatar" style="background:var(--gradient)">🗂</div>
       <div><div class="modal-title">افزودن به فولدر</div><div class="modal-user" id="folderPickerLabel"></div></div>
-      <button class="modal-close" onclick="closeFolderPicker()">✕</button>
+      <button class="modal-close" aria-label="Close" onclick="closeFolderPicker()">✕</button>
     </div>
     <div class="modal-body">
       <div id="folderPickerList"></div>
@@ -279,12 +282,12 @@ body[data-fs="large"] .home-feed-text-clamped{-webkit-line-clamp:3}
   </div>
 </div>
 <!-- NOTIFICATIONS MODAL -->
-<div class="modal-overlay" id="notifOverlay">
+<div class="modal-overlay" id="notifOverlay" role="dialog" aria-modal="true" aria-label="Notifications">
   <div class="modal" style="max-width:480px">
     <div class="modal-header">
       <div class="modal-avatar" style="background:var(--gradient)">🔔</div>
       <div><div class="modal-title" data-i18n="notifications">Notifications</div><div class="modal-user" data-i18n="notif_sub">Updates from your saved channels</div></div>
-      <button class="modal-close" onclick="closeNotifModal()">✕</button>
+      <button class="modal-close" aria-label="Close" onclick="closeNotifModal()">✕</button>
     </div>
     <div class="modal-body">
       <div id="notifContent"><div class="empty-state"><div class="empty-icon">🔔</div><h3 data-i18n="no_notifs">No notifications yet</h3><p data-i18n="no_notifs_desc">Save channels as favorites to track updates</p></div></div>
@@ -292,12 +295,12 @@ body[data-fs="large"] .home-feed-text-clamped{-webkit-line-clamp:3}
   </div>
 </div>
 
-<div class="modal-overlay" id="suggestOverlay">
+<div class="modal-overlay" id="suggestOverlay" role="dialog" aria-modal="true" aria-label="Suggest a channel">
   <div class="modal" style="max-width:480px">
     <div class="modal-header">
       <div class="modal-avatar" style="background:var(--gradient)">💡</div>
       <div><div class="modal-title" data-i18n="suggest_channel">💡 Suggest a channel</div><div class="modal-user">github.com/mohsen-niksirat/tgexplorer</div></div>
-      <button class="modal-close" onclick="closeSuggestModal()">✕</button>
+      <button class="modal-close" aria-label="Close" onclick="closeSuggestModal()">✕</button>
     </div>
     <div class="modal-body">
       <label class="sug-label">Username (@)</label><input class="sug-field" id="sugUsername" placeholder="username" autocomplete="off">
@@ -467,7 +470,7 @@ document.getElementById('langFilter').addEventListener('click',e=>{const chip=e.
 // THEME & LANG
 // ============================================================
 function applyTheme(theme){document.documentElement.setAttribute('data-theme',theme);document.getElementById('themeToggle').textContent=theme==='dark'?'☀️':'🌙';try{if(window.Telegram&&Telegram.WebApp)Telegram.WebApp.setHeaderColor(theme==='dark'?'#0a0a0a':'#ffffff')}catch(e){}}
-function applyLang(lang){const t=I18N[lang]||I18N.en;document.documentElement.lang=lang;document.documentElement.dir=RTL_LANGS.includes(lang)?'rtl':'ltr';document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.dataset.i18n;if(t[k])el.textContent=t[k]});document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{const k=el.dataset.i18nPlaceholder;if(t[k])el.placeholder=t[k]})}
+function applyLang(lang){const t=I18N[lang]||I18N.en;document.documentElement.lang=lang;document.documentElement.dir=RTL_LANGS.includes(lang)?'rtl':'ltr';document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.dataset.i18n;if(t[k])el.textContent=t[k]});document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{const k=el.dataset.i18nPlaceholder;if(t[k])el.placeholder=t[k]});document.querySelectorAll('[data-i18n-aria-label]').forEach(el=>{const k=el.dataset.i18nAriaLabel;if(t[k])el.setAttribute('aria-label',t[k])})}
 function initTelegramWebApp(){
   if(!window.Telegram||!Telegram.WebApp)return;
   if(!Telegram.WebApp.initData)return;
@@ -717,9 +720,9 @@ function openFeedPost(index){
 // ============================================================
 function renderResults(){if(window._sharedFolder)return;const content=document.getElementById('content');const results=state.searchResults;if(!results.length){content.innerHTML=renderEmpty(t('no_results'),t('no_results_desc'));return}if(state.currentView==='explore')renderExploreView(content,results);else if(state.currentView==='list')renderListView(content,results);else renderGridView(content,results)}
 
-function renderGridView(container,items){container.innerHTML=`<div class="results-grid">${items.map(ch=>`<div class="channel-card" onclick="openChannel('${ch.username}')"><div class="card-banner"><div class="card-banner-overlay"></div><div class="card-avatar" style="${avatarGrad(ch.username)}">${ch.avatar?`<img src="${ch.avatar}" alt="" loading="lazy">`:ch.title[0].toUpperCase()}</div></div><div class="card-body"><div class="card-title">${escHtml(ch.title)}</div><div class="card-username">@${escHtml(ch.username)}<span class="lang-badge ${ch.lang==='fa'?'fa':'en'}">${ch.lang==='fa'?'🇮🇷 فارسی':'🇬🇧 EN'}</span></div>${ch.tags?.length?`<div class="card-tags">${ch.tags.slice(0,3).map(tg=>`<span class="card-tag">${tg}</span>`).join('')}</div>`:''}<div class="card-desc">${escHtml(ch.description||ch.title)}</div><div class="card-footer"><div class="card-members">👥 ${ch.members||'0'} ${t('members')}</div><div class="card-actions"><button class="card-action-btn ${isFav(ch.username)?'favorited':''}" onclick="event.stopPropagation();toggleFav('${ch.username}','${escAttr(ch.title)}')">${isFav(ch.username)?'❤️':'🤍'}</button><button class="card-action-btn" onclick="event.stopPropagation();copyLink('${ch.username}')">🔗</button><button class="card-action-btn" onclick="event.stopPropagation();openFolderPicker('ch','${ch.username}','','${escAttr(ch.title)}')">🗂</button></div></div></div></div>`).join('')}</div>`}
+function renderGridView(container,items){container.innerHTML=`<div class="results-grid">${items.map(ch=>`<div class="channel-card" tabindex="0" role="button" aria-label="Open channel @${escAttr(ch.username)}" onclick="openChannel('${ch.username}')" onkeydown="if(event.key==='Enter'){openChannel('${ch.username}')}"><div class="card-banner"><div class="card-banner-overlay"></div><div class="card-avatar" style="${avatarGrad(ch.username)}">${ch.avatar?`<img src="${ch.avatar}" alt="" loading="lazy">`:ch.title[0].toUpperCase()}</div></div><div class="card-body"><div class="card-title">${escHtml(ch.title)}</div><div class="card-username">@${escHtml(ch.username)}<span class="lang-badge ${ch.lang==='fa'?'fa':'en'}">${ch.lang==='fa'?'🇮🇷 فارسی':'🇬🇧 EN'}</span></div>${ch.tags?.length?`<div class="card-tags">${ch.tags.slice(0,3).map(tg=>`<span class="card-tag">${tg}</span>`).join('')}</div>`:''}<div class="card-desc">${escHtml(ch.description||ch.title)}</div><div class="card-footer"><div class="card-members">👥 ${ch.members||'0'} ${t('members')}</div><div class="card-actions"><button class="card-action-btn ${isFav(ch.username)?'favorited':''}" aria-label="${isFav(ch.username)?'Unsave':'Save'} channel" title="${isFav(ch.username)?'Unsave':'Save'}" onclick="event.stopPropagation();toggleFav('${ch.username}','${escAttr(ch.title)}')">${isFav(ch.username)?'❤️':'🤍'}</button><button class="card-action-btn" aria-label="Copy link" title="Copy link" onclick="event.stopPropagation();copyLink('${ch.username}')">🔗</button><button class="card-action-btn" aria-label="Add to folder" title="Add to folder" onclick="event.stopPropagation();openFolderPicker('ch','${ch.username}','','${escAttr(ch.title)}')">🗂</button></div></div></div></div>`).join('')}</div>`}
 
-function renderListView(container,items){container.innerHTML=`<div class="results-list">${items.map(ch=>`<div class="list-item" onclick="openChannel('${ch.username}')"><div class="list-avatar" style="${avatarGrad(ch.username)}">${ch.avatar?`<img src="${ch.avatar}" alt="" loading="lazy">`:ch.title[0].toUpperCase()}</div><div class="list-info"><div class="list-title">${escHtml(ch.title)}</div><div class="list-user">@${escHtml(ch.username)}</div><div class="list-desc">${escHtml(ch.description||'')}</div></div><div class="list-meta"><span class="list-members">👥 ${ch.members||'0'}</span><button class="card-action-btn ${isFav(ch.username)?'favorited':''}" onclick="event.stopPropagation();toggleFav('${ch.username}','${escAttr(ch.title)}')">${isFav(ch.username)?'❤️':'🤍'}</button></div></div>`).join('')}</div>`}
+function renderListView(container,items){container.innerHTML=`<div class="results-list">${items.map(ch=>`<div class="list-item" tabindex="0" role="button" aria-label="Open channel @${escAttr(ch.username)}" onclick="openChannel('${ch.username}')" onkeydown="if(event.key==='Enter'){openChannel('${ch.username}')}"><div class="list-avatar" style="${avatarGrad(ch.username)}">${ch.avatar?`<img src="${ch.avatar}" alt="" loading="lazy">`:ch.title[0].toUpperCase()}</div><div class="list-info"><div class="list-title">${escHtml(ch.title)}</div><div class="list-user">@${escHtml(ch.username)}</div><div class="list-desc">${escHtml(ch.description||'')}</div></div><div class="list-meta"><span class="list-members">👥 ${ch.members||'0'}</span><button class="card-action-btn ${isFav(ch.username)?'favorited':''}" aria-label="${isFav(ch.username)?'Unsave':'Save'} channel" title="${isFav(ch.username)?'Unsave':'Save'}" onclick="event.stopPropagation();toggleFav('${ch.username}','${escAttr(ch.title)}')">${isFav(ch.username)?'❤️':'🤍'}</button></div></div>`).join('')}</div>`}
 
 function getChannelPosts(username){
   try{
@@ -775,7 +778,7 @@ function renderExploreView(container,items){
     // Text-only post: centered, larger text in the card body
     if(post&&!post.image&&!post.hasVideo&&post.text){
       const textMax=420,more=post.text.length>textMax;
-      return `<div class="explore-item explore-item-text" onclick="${onclick}" style="aspect-ratio:3/4">
+      return `<div class="explore-item explore-item-text" tabindex="0" role="button" aria-label="Open ${escAttr(ch.title||ch.username)}" onclick="${onclick}" onkeydown="if(event.key==='Enter'){${onclick}}" style="aspect-ratio:3/4">
         ${head}
         <div class="explore-item-textbody"><span>${escHtml(post.text.slice(0,textMax))}${more?' …':''}</span></div>
         <div class="explore-item-foot"><span class="feed-type-badge">📝</span><span style="font-size:11px;color:var(--text-secondary)">👥 ${ch.members||'0'}</span></div>
@@ -783,7 +786,7 @@ function renderExploreView(container,items){
     }
     const imgHtml=img?`<img src="${img}" alt="" loading="lazy" onerror="this.style.display='none'">`:`<div style="width:100%;height:100%;background:${color};display:flex;align-items:center;justify-content:center;font-size:36px;color:#fff;font-weight:700">${initial}</div>`;
     const previewText=post&&post.text?post.text.slice(0,200):'';
-    return `<div class="explore-item" onclick="${onclick}" style="aspect-ratio:3/4">
+    return `<div class="explore-item" tabindex="0" role="button" aria-label="Open ${escAttr(ch.title||ch.username)}" onclick="${onclick}" onkeydown="if(event.key==='Enter'){${onclick}}" style="aspect-ratio:3/4">
       ${imgHtml}
       ${head}
       ${post?`<div class="feed-type-badge text-preview-badge">${post.hasVideo?'🎬':(post.image?'🖼':'📝')}</div>`:''}
@@ -1178,7 +1181,7 @@ function openNotifModal(){
   if(!state.workerUrl){content.innerHTML=`<div class="empty-state"><div class="empty-icon">📡</div><p>Connect proxy first</p></div>`;return}
   if(!state.favorites.length){content.innerHTML=`<div class="empty-state"><div class="empty-icon">❤️</div><h3>${t('no_favorites')}</h3><p>${t('no_favorites_desc')}</p></div>`;return}
   if(!state.notifUpdates.length){content.innerHTML=`<div class="empty-state"><div class="empty-icon">✅</div><h3>${t('notif_empty')}</h3></div>`;return}
-  content.innerHTML=state.notifUpdates.map(u=>`<div class="list-item" onclick="closeNotifModal();setTimeout(()=>openChannel('${u.username}'),300)"><div class="list-avatar" style="${avatarGrad(u.username)}">${u.username[0].toUpperCase()}</div><div class="list-info"><div class="list-title">@${escHtml(u.username)}</div><div class="list-desc">${u.newCount} ${t('new_posts')}</div></div><div class="list-meta"><span style="color:var(--accent);font-weight:700">+${u.newCount}</span></div></div>`).join('');
+  content.innerHTML=state.notifUpdates.map(u=>`<div class="list-item" tabindex="0" role="button" onclick="closeNotifModal();setTimeout(()=>openChannel('${u.username}'),300)" onkeydown="if(event.key==='Enter'){this.click()}"><div class="list-avatar" style="${avatarGrad(u.username)}">${u.username[0].toUpperCase()}</div><div class="list-info"><div class="list-title">@${escHtml(u.username)}</div><div class="list-desc">${u.newCount} ${t('new_posts')}</div></div><div class="list-meta"><span style="color:var(--accent);font-weight:700">+${u.newCount}</span></div></div>`).join('');
   document.getElementById('notifBadge').style.display='none';
 }
 function closeNotifModal(){document.getElementById('notifOverlay').classList.remove('open');document.body.style.overflow=''}
@@ -1399,7 +1402,7 @@ function favPostTypeHtml(){
 
 function savedPostTileHtml(pf){
   const img=goodImg(pf.image);
-  return '<div class="explore-item" style="aspect-ratio:3/4" onclick="openSavedPost(\''+pf.username+'\','+pf.postId+')">'+
+  return '<div class="explore-item" tabindex="0" role="button" style="aspect-ratio:3/4" onclick="openSavedPost(\''+pf.username+'\','+pf.postId+')" onkeydown="if(event.key===\'Enter\'){this.click()}">'+
     (img?'<img src="'+img+'" loading="lazy" onerror="this.style.display=&#39;none&#39;">':'<div style="width:100%;height:100%;background:linear-gradient(135deg,#e91e63,#9c27b0);display:flex;align-items:center;justify-content:center;font-size:28px;color:#fff;font-weight:700">'+(pf.channelTitle||'?')[0].toUpperCase()+'</div>')+
     (pf.hasVideo?'<div class="feed-video-badge">▶</div>':'')+
     '<div class="explore-item-overlay"><div class="explore-item-info"><div class="explore-stat">'+escHtml(pf.channelTitle||pf.username)+'</div><div class="explore-label">'+(pf.text?pf.text.slice(0,28):'ذخیره‌شده')+'</div></div></div></div>';
@@ -1445,8 +1448,8 @@ function folderChannelCardsHtml(items,folderId){
   const unknown=items.filter(it=>it.type==='ch').map(it=>({username:it.username,ch:getAllChannels().find(c=>c.username===it.username)})).filter(x=>!x.ch);
   const rm=folderId?'<button class="card-action-btn" title="حذف از فولدر" onclick="event.stopPropagation();removeFolderItem(\''+folderId+'\',\'ch\',\'{u}\',null)">🗑</button>':'';
   let html='';
-  if(known.length)html+='<div class="folder-sec-title">📢 کانال‌ها</div><div class="results-grid">'+known.map(x=>'<div class="channel-card" onclick="openChannel(\''+x.ch.username+'\')"><div class="card-banner"><div class="card-banner-overlay"></div><div class="card-avatar" style="'+avatarGrad(x.ch.username)+'">'+x.ch.title[0].toUpperCase()+'</div></div><div class="card-body"><div class="card-title">'+escHtml(x.ch.title)+'</div><div class="card-username">@'+escHtml(x.ch.username)+'</div><div class="card-footer"><div class="card-members">👥 '+(x.ch.members||'0')+'</div><div class="card-actions">'+(folderId?rm.replace('{u}',x.ch.username):'')+'</div></div></div></div>').join('')+'</div>';
-  if(unknown.length)html+='<div class="folder-sec-title">📢 کانال‌های خارج از دیتابیس</div><div class="results-grid">'+unknown.map(x=>'<div class="channel-card" onclick="openChannel(\''+x.username+'\')"><div class="card-banner"><div class="card-banner-overlay"></div><div class="card-avatar" style="'+avatarGrad(x.username)+'">?</div></div><div class="card-body"><div class="card-title">@'+escHtml(x.username)+'</div><div class="card-username" style="color:var(--text-secondary)">خارج از دیتابیس</div><div class="card-footer"><div class="card-members">—</div><div class="card-actions">'+(folderId?rm.replace('{u}',x.username):'')+'<button class="card-action-btn" title="باز کردن در تلگرام" onclick="event.stopPropagation();window.open(\'https://t.me/'+x.username+'\',\'_blank\')">✈️</button><button class="card-action-btn" onclick="event.stopPropagation();copyLink(\''+x.username+'\')">🔗</button></div></div></div></div>').join('')+'</div>';
+  if(known.length)html+='<div class="folder-sec-title">📢 کانال‌ها</div><div class="results-grid">'+known.map(x=>'<div class="channel-card" tabindex="0" role="button" onclick="openChannel(\''+x.ch.username+'\')" onkeydown="if(event.key===\'Enter\'){this.click()}"><div class="card-banner"><div class="card-banner-overlay"></div><div class="card-avatar" style="'+avatarGrad(x.ch.username)+'">'+x.ch.title[0].toUpperCase()+'</div></div><div class="card-body"><div class="card-title">'+escHtml(x.ch.title)+'</div><div class="card-username">@'+escHtml(x.ch.username)+'</div><div class="card-footer"><div class="card-members">👥 '+(x.ch.members||'0')+'</div><div class="card-actions">'+(folderId?rm.replace('{u}',x.ch.username):'')+'</div></div></div></div>').join('')+'</div>';
+  if(unknown.length)html+='<div class="folder-sec-title">📢 کانال‌های خارج از دیتابیس</div><div class="results-grid">'+unknown.map(x=>'<div class="channel-card" tabindex="0" role="button" onclick="openChannel(\''+x.username+'\')" onkeydown="if(event.key===\'Enter\'){this.click()}"><div class="card-banner"><div class="card-banner-overlay"></div><div class="card-avatar" style="'+avatarGrad(x.username)+'">?</div></div><div class="card-body"><div class="card-title">@'+escHtml(x.username)+'</div><div class="card-username" style="color:var(--text-secondary)">خارج از دیتابیس</div><div class="card-footer"><div class="card-members">—</div><div class="card-actions">'+(folderId?rm.replace('{u}',x.username):'')+'<button class="card-action-btn" title="باز کردن در تلگرام" onclick="event.stopPropagation();window.open(\'https://t.me/'+x.username+'\',\'_blank\')">✈️</button><button class="card-action-btn" aria-label="کپی لینک" title="کپی لینک" onclick="event.stopPropagation();copyLink(\''+x.username+'\')">🔗</button></div></div></div></div>').join('')+'</div>';
   return html;
 }
 function parseJinaFirstPost(md){
@@ -1600,7 +1603,7 @@ function renderSharedFolder(f){
   if(posts.length)html+='<div class="folder-sec-title">🖼 پست‌ها</div><div class="explore-grid">'+posts.map(p=>{
     const img=p.image;
     const idx=Math.max(0,getChannelPosts(p.username).findIndex(x=>String(x.id)===String(p.postId)));
-    return '<div class="explore-item" style="aspect-ratio:3/4" onclick="openPostModal(\''+p.username+'\','+idx+')">'+
+    return '<div class="explore-item" tabindex="0" role="button" style="aspect-ratio:3/4" onclick="openPostModal(\''+p.username+'\','+idx+')" onkeydown="if(event.key===\'Enter\'){this.click()}">'+
       (img?'<img src="'+img+'" loading="lazy" onerror="this.style.display=&#39;none&#39;">':'<div style="width:100%;height:100%;background:#0088cc;display:flex;align-items:center;justify-content:center;font-size:28px;color:#fff;font-weight:700">'+(p.ch.title||'?')[0].toUpperCase()+'</div>')+
       (p.hasVideo?'<div class="feed-video-badge">▶</div>':'')+
       '<div class="explore-item-overlay"><div class="explore-item-info"><div class="explore-stat">'+escHtml(p.ch.title||p.username)+'</div><div class="explore-label">'+(p.text?escHtml(p.text.slice(0,28)):'')+'</div></div></div></div>';
@@ -1664,7 +1667,7 @@ html+='<div class="folder-rule"><div class="folder-rule-head">🤖 فیلتر خ
   html+=folderChannelCardsHtml(f.items,f.id);
     if(f.rule){
       const auto=autoFolderChannels(f);
-      if(auto.length)html+='<div class="folder-sec-title lps-head"><span>🤖 کانال‌های خودکار</span><button class="folder-refresh-btn" title="افزودن همه" onclick="addAutoAll(\''+f.id+'\')">➕ همه</button></div><div class="results-grid">'+auto.map(c=>'<div class="channel-card" onclick="openChannel(\''+c.username+'\')"><div class="card-banner"><div class="card-banner-overlay"></div><div class="card-avatar" style="'+avatarGrad(c.username)+'">'+c.title[0].toUpperCase()+'</div></div><div class="card-body"><div class="card-title">'+escHtml(c.title)+'</div><div class="card-username">@'+escHtml(c.username)+'</div><div class="card-footer"><div class="card-members">👥 '+(c.members||'0')+'</div><div class="card-actions"><button class="card-action-btn" title="افزودن به فولدر" onclick="event.stopPropagation();addAutoOne(\''+f.id+'\',\''+c.username+'\')">➕</button></div></div></div></div>').join('')+'</div>';
+      if(auto.length)html+='<div class="folder-sec-title lps-head"><span>🤖 کانال‌های خودکار</span><button class="folder-refresh-btn" title="افزودن همه" onclick="addAutoAll(\''+f.id+'\')">➕ همه</button></div><div class="results-grid">'+auto.map(c=>'<div class="channel-card" tabindex="0" role="button" onclick="openChannel(\''+c.username+'\')" onkeydown="if(event.key===\'Enter\'){this.click()}"><div class="card-banner"><div class="card-banner-overlay"></div><div class="card-avatar" style="'+avatarGrad(c.username)+'">'+c.title[0].toUpperCase()+'</div></div><div class="card-body"><div class="card-title">'+escHtml(c.title)+'</div><div class="card-username">@'+escHtml(c.username)+'</div><div class="card-footer"><div class="card-members">👥 '+(c.members||'0')+'</div><div class="card-actions"><button class="card-action-btn" title="افزودن به فولدر" onclick="event.stopPropagation();addAutoOne(\''+f.id+'\',\''+c.username+'\')">➕</button></div></div></div></div>').join('')+'</div>';
       else html+='<div class="folder-rule-empty">🤖 کانالی با این قانون یافت نشد</div>';
     }
 
@@ -1685,7 +1688,7 @@ html+='<div class="folder-rule"><div class="folder-rule-head">🤖 فیلتر خ
     if(f.items.some(it=>it.type==='ch'&&it.latestPost&&(!it.latestPost.ts||Date.now()-it.latestPost.ts>1800000)))refreshFolderPosts(f.id,true);    if(posts.length)html+='<div class="folder-sec-title">🖼 پست‌ها</div>'+(state.exploreView==='list'?'<div class="explore-list">'+posts.map(p=>folderPostRowHtml(p,f)).join('')+'</div>':'<div class="explore-grid">'+posts.map(p=>{
       const img=p.image;
       const idx=Math.max(0,getChannelPosts(p.username).findIndex(x=>x.id===p.postId));
-      return '<div class="explore-item" style="aspect-ratio:3/4;position:relative" onclick="openPostModal(\''+p.username+'\','+idx+')">'+
+      return '<div class="explore-item" tabindex="0" role="button" style="aspect-ratio:3/4;position:relative" onclick="openPostModal(\''+p.username+'\','+idx+')" onkeydown="if(event.key===\'Enter\'){this.click()}">'+
         (img?'<img src="'+img+'" loading="lazy" onerror="this.style.display=&#39;none&#39;">':'<div style="width:100%;height:100%;background:#0088cc;display:flex;align-items:center;justify-content:center;font-size:28px;color:#fff;font-weight:700">'+(p.ch.title||'?')[0].toUpperCase()+'</div>')+
         (p.hasVideo?'<div class="feed-video-badge">▶</div>':'')+
         '<div class="explore-item-overlay"><div class="explore-item-info"><div class="explore-stat">'+escHtml(p.ch.title||p.username)+'</div><div class="explore-label">'+(p.text?escHtml(p.text.slice(0,28)):'')+'</div></div></div>'+
@@ -1717,7 +1720,7 @@ html+='<div class="folder-rule"><div class="folder-rule-head">🤖 فیلتر خ
   if(state.livePosts&&state.livePosts.length){
     liveHtml='<div class="folder-sec-title" style="margin-top:18px"><span>🆕 پست‌های جدید</span><button class="folder-del" title="بستن" onclick="clearLivePosts()">✕</button></div><div class="explore-grid">'+state.livePosts.map(lp=>{
       const img=lp.image;
-      return '<div class="explore-item" style="aspect-ratio:3/4" onclick="openLivePost('+JSON.stringify(lp).replace(/"/g,'&quot;')+')">'+
+      return '<div class="explore-item" tabindex="0" role="button" style="aspect-ratio:3/4" onclick="openLivePost('+JSON.stringify(lp).replace(/"/g,'&quot;')+')" onkeydown="if(event.key===\'Enter\'){this.click()}">'+
         (img?'<img src="'+img+'" loading="lazy" onerror="this.style.display=&#39;none&#39;">':'<div style="width:100%;height:100%;background:linear-gradient(135deg,#00c6ff,#0072ff);display:flex;align-items:center;justify-content:center;font-size:28px;color:#fff;font-weight:700">'+(lp.channelTitle||'?')[0].toUpperCase()+'</div>')+
         (lp.hasVideo?'<div class="feed-video-badge">▶</div>':'')+
         '<div class="explore-item-overlay"><div class="explore-item-info"><div class="explore-stat">'+escHtml(lp.channelTitle||lp.username)+'</div><div class="explore-label">'+(lp.text?escHtml(lp.text.slice(0,28)):'')+'</div></div></div></div>';
@@ -1773,7 +1776,7 @@ function renderHomeFeedChunk(reset){
 function homeFeedGridItemHtml(x){
   const ch=getAllChannels().find(c=>c.username===x.username)||{username:x.username,title:x.channelTitle};
   const img=goodImg(x.image);
-  return '<div class="explore-item" style="aspect-ratio:3/4" onclick="openHomePost(\''+x.username+'\',\''+x.id+'\')">'+
+  return '<div class="explore-item" tabindex="0" role="button" style="aspect-ratio:3/4" onclick="openHomePost(\''+x.username+'\',\''+x.id+'\')" onkeydown="if(event.key===\'Enter\'){this.click()}">'+
     (img?'<img src="'+img+'" loading="lazy" onerror="this.style.display=&#39;none&#39;">':'<div style="width:100%;height:100%;background:linear-gradient(135deg,#0088cc,#005e8c);display:flex;align-items:center;justify-content:center;font-size:28px;color:#fff;font-weight:700">'+escHtml((ch.title||x.username||'?')[0].toUpperCase())+'</div>')+
     (x.hasVideo?'<div class="feed-video-badge">▶</div>':'')+
     '<div class="explore-item-overlay"><div class="explore-item-info"><div class="explore-stat">'+escHtml(x.channelTitle||x.username)+'</div><div class="explore-label">'+(x.text?escHtml(x.text.slice(0,28)):'')+'</div></div></div></div>';
