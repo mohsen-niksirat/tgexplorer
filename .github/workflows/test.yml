@@ -53,3 +53,31 @@ jobs:
           name: verify_channels_report
           path: verify_channels_report.json
           retention-days: 7
+
+  # GitHub Pages publishes the `main` branch, but the app is developed and
+  # validated on `master`. This job fast-forwards `main` to `master` once
+  # the tests are green, so the live site always serves the tested code.
+  deploy-pages:
+    needs: [e2e, verify-channels]
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Fast-forward main to master
+        run: |
+          set -e
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git fetch origin master main
+          # Only a fast-forward is allowed — main must never diverge.
+          if ! git merge-base --is-ancestor origin/main origin/master; then
+            echo "::error::origin/main is not an ancestor of origin/master — refusing to force-push"
+            exit 1
+          fi
+          git push origin origin/master:main
+          echo "main is now up to date with master"
