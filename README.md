@@ -44,6 +44,15 @@ This repo ships a ready-made [`worker.js`](worker.js) + [`wrangler.toml`](wrangl
 
 ### v1.7.0
 
+- 🎛️ **Advanced Explore filters** — category, language and content type
+  (photo / video / text) are now **multi-select**: pick *news + technology* and
+  *Persian + English* at the same time instead of one value per axis. A filter
+  bar shows what is active and offers **Clear** and **Share**. The whole
+  filter set (plus the sort order) is mirrored into the URL
+  (`?cats=news,tech&langs=fa&types=image&sort=posts`), so a filtered view can
+  be bookmarked, shared or opened on another device — the back/forward buttons
+  work as well. The Explore sort is now labelled by what it actually does:
+  last activity / post count / A-Z
 - 🩺 **Reliable dead-channel detection** — `verify_channels.js` no longer
   guesses from the page title. The Telegram profile page itself is now the
   source of truth: a subscriber/member count, an avatar or a real title means

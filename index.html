@@ -99,6 +99,20 @@ body[data-fs="large"] .home-feed-text-clamped{-webkit-line-clamp:3}
 .ac-title{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--text-primary)}
 .ac-user{font-size:11px;color:var(--text-secondary)}
 /* ============================================================
+   ADVANCED EXPLORE FILTERS
+   Multi-select category / language / content type. The active
+   filter set is mirrored into the URL so a filtered view can be
+   linked and shared.
+   ============================================================ */
+.filter-bar{display:none;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 14px;margin-bottom:16px;background:var(--bg-secondary);border:1px solid var(--border);border-radius:14px;font-size:13px}
+.filter-bar.show{display:flex}
+.filter-bar-label{font-weight:700;color:var(--text-secondary);white-space:nowrap}
+.filter-summary{flex:1;min-width:120px;color:var(--text-primary);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.filter-btn{background:var(--bg-primary);border:1px solid var(--border);border-radius:20px;padding:6px 14px;font-size:12.5px;font-weight:600;color:var(--text-secondary);cursor:pointer;transition:all var(--transition);white-space:nowrap}
+.filter-btn:hover{border-color:var(--accent);color:var(--accent)}
+.filter-btn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+.filter-btn.primary:hover{opacity:.92;color:#fff}
+/* ============================================================
    OFFLINE / FALLBACK STATUS BANNER
    Shown when the network is down, or when the configured Worker
    proxy cannot be reached and the app falls back to local data.
@@ -201,6 +215,12 @@ body[data-fs="large"] .home-feed-text-clamped{-webkit-line-clamp:3}
   </nav>
   <div class="categories-bar" id="categoriesBar"></div>
   <div class="lang-filter" id="langFilter"><button class="lang-chip active" data-lang="all">🌐 <span data-i18n="all">All</span></button><button class="lang-chip" data-lang="fa">🇮🇷 فارسی</button><button class="lang-chip" data-lang="en">🇬🇧 English</button></div>
+  <div class="filter-bar" id="filterBar">
+    <span class="filter-bar-label" data-i18n="filters">⚙️ Filters</span>
+    <span class="filter-summary" id="filterSummary"></span>
+    <button class="filter-btn" id="clearFiltersBtn" onclick="clearFilters()">✕ Clear</button>
+    <button class="filter-btn primary" id="shareFiltersBtn" onclick="shareFilters()">🔗 Share</button>
+  </div>
   <div class="results-header" id="resultsHeader" style="display:none">
     <span class="results-count" id="resultsCount"></span>
     <div class="view-toggle" role="group" aria-label="View mode"><button class="view-btn active" data-view="grid" aria-label="Grid view" title="Grid">⊞</button><button class="view-btn" data-view="list" aria-label="List view" title="List">☰</button><button class="view-btn" data-view="explore" aria-label="Explore view" title="Explore">⊡</button></div>
@@ -360,7 +380,7 @@ import { state } from './js/state.js';
 // ============================================================
 // INIT
 // ============================================================
-document.addEventListener('DOMContentLoaded',()=>{applyTheme(state.theme);applyLang(state.lang);applyFontSize();initTelegramWebApp();watchTgBackButton();document.getElementById('workerCodeBlock').textContent=WORKER_CODE;document.getElementById('langSelect').value=state.lang;document.querySelectorAll('.lang-chip').forEach(el=>el.classList.toggle('active',el.dataset.lang===state.searchLang));showApp();if(!state.workerUrl&&!localStorage.getItem('tgexp_setup_hint')&&!localStorage.getItem('tgexp_setup_skipped')){localStorage.setItem('tgexp_setup_hint','1');setTimeout(()=>toast(t('proxy_hint')),1500)}bindEvents();registerSW();checkPWA();checkSharedFolder();initNotifs();initNetStatus()});
+document.addEventListener('DOMContentLoaded',()=>{applyTheme(state.theme);applyLang(state.lang);applyFontSize();initTelegramWebApp();watchTgBackButton();document.getElementById('workerCodeBlock').textContent=WORKER_CODE;document.getElementById('langSelect').value=state.lang;readUrlFilters(false);syncUrlFilters(false);renderFilterChips();renderFilterBar();showApp();if(!state.workerUrl&&!localStorage.getItem('tgexp_setup_hint')&&!localStorage.getItem('tgexp_setup_skipped')){localStorage.setItem('tgexp_setup_hint','1');setTimeout(()=>toast(t('proxy_hint')),1500)}bindEvents();registerSW();checkPWA();checkSharedFolder();initNotifs();initNetStatus();window.addEventListener('popstate',()=>{readUrlFilters(true);renderFilterChips();renderFilterBar();applyFiltersToView()})});
 
 // ============================================================
 // EVENTS
@@ -373,11 +393,12 @@ function bindEvents(){
   document.getElementById('acList').addEventListener('mousedown',e=>{const item=e.target.closest('.ac-item');if(item){pickAutocomplete(item.dataset.username)}});
   document.getElementById('searchTags').addEventListener('click',e=>{const tag=e.target.closest('.search-tag');if(!tag)return;if(tag.id==='randomChip'){openRandomChannel();return}document.getElementById('searchInput').value=tag.dataset.query;doSearch()});
   document.getElementById('navTabs').addEventListener('click',e=>{const tab=e.target.closest('.nav-tab');if(tab)switchTab(tab.dataset.tab)});
-  document.getElementById('categoriesBar').addEventListener('click',e=>{const chip=e.target.closest('.cat-chip');if(chip){state.currentCategory=chip.dataset.cat;renderCategories();loadExplore()}});
-document.getElementById('langFilter').addEventListener('click',e=>{const chip=e.target.closest('.lang-chip');if(chip){state.searchLang=chip.dataset.lang;localStorage.setItem('tgexp_search_lang',state.searchLang);document.querySelectorAll('.lang-chip').forEach(el=>el.classList.toggle('active',el===chip));if(state.currentTab==='search')doSearch();else if(state.currentTab==='explore')loadExplore()}});
+  document.getElementById('categoriesBar').addEventListener('click',e=>{const chip=e.target.closest('.cat-chip');if(!chip)return;if(chip.dataset.cat==='all'){if(state.filterCats.length){state.filterCats=[];saveFilters();syncUrlFilters(true);renderFilterBar();renderFilterChips();applyFiltersToView()}return}toggleFilter('cats',chip.dataset.cat)});
+  document.getElementById('categoriesBar').addEventListener('keydown',e=>{const chip=e.target.closest('.cat-chip');if(!chip)return;if(e.key==='Enter'||e.key===' '){e.preventDefault();chip.click()}});
+document.getElementById('langFilter').addEventListener('click',e=>{const chip=e.target.closest('.lang-chip');if(!chip)return;if(chip.dataset.lang==='all'){if(state.filterLangs.length){state.filterLangs=[];saveFilters();syncUrlFilters(true);renderFilterBar();renderFilterChips();applyFiltersToView()}return}toggleFilter('langs',chip.dataset.lang)});
   document.querySelector('.view-toggle')?.addEventListener('click',e=>{const btn=e.target.closest('.view-btn');if(btn){document.querySelectorAll('.view-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');state.currentView=btn.dataset.view;renderResults()}});
   document.getElementById('themeToggle').addEventListener('click',()=>{state.theme=state.theme==='dark'?'light':'dark';applyTheme(state.theme);localStorage.setItem('tgexp_theme',state.theme)});
-  document.getElementById('langSelect').addEventListener('change',e=>{state.lang=e.target.value;applyLang(state.lang);localStorage.setItem('tgexp_lang',state.lang);renderCategories();renderResults()});
+  document.getElementById('langSelect').addEventListener('change',e=>{state.lang=e.target.value;applyLang(state.lang);localStorage.setItem('tgexp_lang',state.lang);renderCategories();renderFilterBar();renderResults()});
   document.getElementById('settingsBtn').addEventListener('click',openSettings);
   document.getElementById('connBadge').addEventListener('click',openSettings);
   document.getElementById('notifBtn').addEventListener('click',openNotifModal);
@@ -467,7 +488,7 @@ function copyWorkerCode(){navigator.clipboard.writeText(WORKER_CODE).then(()=>{c
 // ============================================================
 // TABS
 // ============================================================
-function switchTab(tab){window._sharedFolder=null;state.currentTab=tab;document.querySelectorAll('.nav-tab').forEach(el=>el.classList.toggle('active',el.dataset.tab===tab));document.getElementById('heroSection').style.display=(tab==='home'||tab==='favorites'||tab==='feed')?'none':'';document.getElementById('categoriesBar').style.display=(tab==='explore'||tab==='feed')?'':'none';document.getElementById('langFilter').style.display=(tab==='explore'||tab==='search')?'':'none';document.getElementById('resultsHeader').style.display='none';if(tab==='home')loadHomeFeed();else if(tab==='explore')loadExplore();else if(tab==='feed')loadFeed();else if(tab==='search')renderResults();else if(tab==='favorites')renderFavorites()}
+function switchTab(tab){window._sharedFolder=null;state.currentTab=tab;document.querySelectorAll('.nav-tab').forEach(el=>el.classList.toggle('active',el.dataset.tab===tab));document.getElementById('heroSection').style.display=(tab==='home'||tab==='favorites'||tab==='feed')?'none':'';document.getElementById('categoriesBar').style.display=(tab==='explore'||tab==='feed')?'':'none';document.getElementById('langFilter').style.display=(tab==='explore'||tab==='search')?'':'none';document.getElementById('resultsHeader').style.display='none';renderFilterBar();if(tab==='home')loadHomeFeed();else if(tab==='explore')loadExplore();else if(tab==='feed')loadFeed();else if(tab==='search')renderResults();else if(tab==='favorites')renderFavorites()}
 
 // ============================================================
 // SEARCH
@@ -539,7 +560,7 @@ async function retryNetwork(){
 async function doSearch(){const query=document.getElementById('searchInput').value.trim();if(!query)return;state.searchQuery=query;state.currentTab='search';document.querySelectorAll('.nav-tab').forEach(el=>el.classList.toggle('active',el.dataset.tab==='search'));document.getElementById('categoriesBar').style.display='none';document.getElementById('resultsHeader').style.display='flex';document.getElementById('content').innerHTML=renderSkeletons(6);let results=[];let live=false;if(state.workerUrl&&!isOffline()){const data=await fetchWorker(`/api/search?q=${encodeURIComponent(query)}&lang=${state.lang}`);if(data&&data.results){results=data.results;live=true}else{setNetBanner('fallback',t('net_fallback'));results=searchLocal(query)}}else{results=searchLocal(query);if(isOffline())setNetBanner('offline',t('net_offline'))}state.searchResults=results;document.getElementById('resultsCount').textContent=`${live?t('search_live'):t('search_local')} — ${results.length} ${t('results_for')} "${query}"`;renderResults()}
 function normalizeText(x){return (x||'').toLowerCase().replace(/ي/g,'ی').replace(/ك/g,'ک').replace(/[‌​]/g,' ').replace(/\s+/g,' ').trim()}
 function fuzzyScore(q,t){if(!q||!t)return 0;if(t===q)return 100;if(t.indexOf(q)===0)return 90;if(t.indexOf(q)>-1)return 80;let score=0,ti=0,m=0;for(const ch of q){const idx=t.indexOf(ch,ti);if(idx===-1){if(m===0)return 0;break}score+=10;m++;ti=idx+1}return m>=2?score:0}
-function searchLocal(q){q=(q||'').trim();if(!q)return[];const lang=state.searchLang||'all';let base=getAllChannels();if(lang!=='all')base=base.filter(ch=>ch.lang===lang);const nq=normalizeText(q);const scored=base.map(ch=>{const hay=normalizeText([ch.title,ch.username,ch.description,(ch.tags||[]).join(' ')].join(' '));return{ch,score:fuzzyScore(nq,hay)}}).filter(x=>x.score>0);scored.sort((a,b)=>b.score-a.score);return scored.map(x=>x.ch)}
+function searchLocal(q){q=(q||'').trim();if(!q)return[];const f=filterState();let base=getAllChannels();if(f.langs.length)base=base.filter(ch=>f.langs.includes(ch.lang||'en'));const nq=normalizeText(q);const scored=base.map(ch=>{const hay=normalizeText([ch.title,ch.username,ch.description,(ch.tags||[]).join(' ')].join(' '));return{ch,score:fuzzyScore(nq,hay)}}).filter(x=>x.score>0);scored.sort((a,b)=>b.score-a.score);return scored.map(x=>x.ch)}
 // ============================================================
 // SEARCH AUTOCOMPLETE (instant local DB suggestions)
 // ============================================================
@@ -579,7 +600,7 @@ function openRandomChannel(){
 // ============================================================
 // EXPLORE
 // ============================================================
-async function loadExplore(){const content=document.getElementById('content');content.innerHTML=renderSkeletons(9);let channels=[];let live=false;const localOnly=['podcast','cinema'];if(state.workerUrl&&!localOnly.includes(state.currentCategory)&&!isOffline()){const url=state.currentCategory==='all'?`/api/trending?page=1&lang=${state.searchLang}`:`/api/trending?cat=${state.currentCategory}&page=1&lang=${state.searchLang}`;const data=await fetchWorker(url);if(data&&data.channels&&data.channels.length){channels=data.channels;live=true}else{setNetBanner('fallback',t('net_fallback'))}}if(!channels.length)channels=getLocalExplore(state.currentCategory);if(isOffline())setNetBanner('offline',t('net_offline'));else if(live)setNetBanner('ok');state.searchResults=channels;if(state.currentTab==='explore')state.currentView='explore';renderResults()}
+async function loadExplore(){const content=document.getElementById('content');content.innerHTML=renderSkeletons(9);let channels=[];let live=false;const f=filterState();const localOnly=['podcast','cinema'];const qCat=f.cats.length===1?f.cats[0]:'all';const qLang=f.langs.length===1?f.langs[0]:(state.lang||'en');if(state.workerUrl&&!localOnly.includes(qCat)&&!isOffline()){const url=qCat==='all'?`/api/trending?page=1&lang=${qLang}`:`/api/trending?cat=${qCat}&page=1&lang=${qLang}`;const data=await fetchWorker(url);if(data&&data.channels&&data.channels.length){channels=data.channels;live=true}else{setNetBanner('fallback',t('net_fallback'))}}if(!channels.length){channels=getLocalExplore();channels=applyExploreFilters(channels)}else{channels=applyExploreFilters(channels,true)}if(isOffline())setNetBanner('offline',t('net_offline'));else if(live)setNetBanner('ok');state.searchResults=channels;if(state.currentTab==='explore')state.currentView='explore';renderResults()}
 
 // ============================================================
 // FEED (Instagram-like)
@@ -597,6 +618,18 @@ function buildLocalFeedPool(category){
   for(let i=posts.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));const tmp=posts[i];posts[i]=posts[j];posts[j]=tmp}
   return posts;
 }
+// Narrow a feed down to the active category filter. The Worker query can
+// only express one category, so a multi-select is applied here.
+function filterFeedPosts(posts){
+  const f=filterState();
+  if(!f.cats.length)return posts;
+  const tagsOf=new Map(getAllChannels().map(c=>[c.username,c.tags||[]]));
+  return posts.filter(p=>{
+    const tags=tagsOf.get(p.channel);
+    if(!tags)return true;
+    return f.cats.some(c=>tags.includes(c));
+  });
+}
 async function loadFeed(){
   const content=document.getElementById('content');
   content.innerHTML=renderSkeletons(9);
@@ -605,7 +638,7 @@ async function loadFeed(){
     if(state.workerUrl&&!isOffline()){
       const cat=state.currentCategory;
       const data=await fetchWorker(`/api/explore-feed?cat=${cat}&page=1&limit=30`);
-      if(data&&data.posts&&data.posts.length){state.feedPool=data.posts.slice();state.feedMode='worker'}
+      if(data&&data.posts&&data.posts.length){state.feedPool=filterFeedPosts(data.posts.slice());state.feedMode='worker'}
       else{state.feedMode='local';setNetBanner('fallback',t('net_fallback'))}
     }else{
       state.feedMode='local';
@@ -726,7 +759,7 @@ async function loadFullChannelPosts(username){
 }
 function renderExploreView(container,items){
   const colors=['#0088cc','#e91e63','#9c27b0','#ff9800','#4caf50','#00bcd4','#795548','#607d8b','#f44336','#3f51b5'];
-  const type=state.exploreType||'all';
+  const type='all';
   const typeOf=ch=>{
     const p=getChannelPosts(ch.username)[0];
     if(!p)return 'all';
@@ -735,7 +768,8 @@ function renderExploreView(container,items){
     return 'text';
   };
   const types=[['all',t('all')],['video',t('clip')],['image',t('image')],['text',t('text')]];
-  const bar='<div class="etype-bar">'+types.map(t=>'<button class="etype-chip '+(type===t[0]?'active':'')+'" onclick="state.exploreType=\''+t[0]+'\';localStorage.setItem(\'tgexp_etype\',state.exploreType);renderResults()">'+t[1]+'</button>').join('')+viewToggleHtml()+'</div>';
+  const f=filterState();
+  const bar='<div class="etype-bar" id="etypeBar">'+types.map(ty=>'<button class="etype-chip '+((f.types.length===0&&ty[0]==='all')||f.types.includes(ty[0])?'active':'')+'" data-type="'+ty[0]+'" aria-pressed="'+((f.types.length===0&&ty[0]==='all')||f.types.includes(ty[0]))+'" onclick="toggleExploreType(\''+ty[0]+'\')">'+ty[1]+'</button>').join('')+viewToggleHtml()+'</div>';
   let filtered=sortExplore(type==='all'?items:items.filter(ch=>typeOf(ch)===type));
   if(state.exploreView==='list'&&state.exploreSearch){const q=state.exploreSearch.toLowerCase();filtered=filtered.filter(ch=>(ch.title||'').toLowerCase().includes(q)||(ch.username||'').toLowerCase().includes(q));}
   const searchHtml=state.exploreView==='list'?'<div style="padding:0 8px 10px"><input class="sug-field" style="width:100%" placeholder="'+t('instant_search')+'" value="'+escAttr(state.exploreSearch)+'" oninput="setExploreSearch(this.value)"></div>':'';
@@ -1327,7 +1361,138 @@ function sortPosts(list){
   else if(s==='type')arr.sort((a,b)=>((b.hasVideo?2:(b.image?1:0))-((a.hasVideo?2:(a.image?1:0)))));
   return arr;
 }
-function setExploreSort(v){state.exploreSort=v;localStorage.setItem('tgexp_esort',v);renderResults()}
+function setExploreSort(v){state.exploreSort=v;localStorage.setItem('tgexp_esort',v);syncUrlFilters(true);renderResults()}
+// ============================================================
+// ADVANCED EXPLORE FILTERS
+// ------------------------------------------------------------
+// Category, language and content type are multi-select. The whole
+// filter set is mirrored into the URL (?cats=&langs=&types=&sort=)
+// so a filtered view can be linked and shared.
+// ============================================================
+const FILTER_STORAGE={cats:'tgexp_fcats',langs:'tgexp_flangs',types:'tgexp_ftypes'};
+function filterState(){return{cats:state.filterCats||[],langs:state.filterLangs||[],types:state.filterTypes||[]}}
+function hasActiveFilters(){const f=filterState();return !!(f.cats.length||f.langs.length||f.types.length)}
+function saveFilters(){
+  const f=filterState();
+  localStorage.setItem(FILTER_STORAGE.cats,JSON.stringify(f.cats));
+  localStorage.setItem(FILTER_STORAGE.langs,JSON.stringify(f.langs));
+  localStorage.setItem(FILTER_STORAGE.types,JSON.stringify(f.types));
+  // Keep the legacy single-select values in sync for the code paths that
+  // can only express one value (the Worker query, the feed).
+  state.currentCategory=f.cats.length===1?f.cats[0]:'all';
+  state.searchLang=f.langs.length===1?f.langs[0]:'all';
+  state.exploreType=f.types.length===1?f.types[0]:'all';
+  localStorage.setItem('tgexp_search_lang',state.searchLang);
+  localStorage.setItem('tgexp_etype',state.exploreType);
+}
+// Toggle one value inside one filter group.
+function toggleFilter(kind,value){
+  const key=kind==='cats'?'filterCats':kind==='langs'?'filterLangs':'filterTypes';
+  const arr=(state[key]||[]).slice();
+  const i=arr.indexOf(value);
+  if(i===-1)arr.push(value);else arr.splice(i,1);
+  state[key]=arr;
+  saveFilters();
+  syncUrlFilters(true);
+  renderFilterBar();
+  renderFilterChips();
+  applyFiltersToView();
+}
+function clearFilters(){
+  state.filterCats=[];
+  state.filterLangs=[];
+  state.filterTypes=[];
+  saveFilters();
+  syncUrlFilters(true);
+  renderFilterBar();
+  renderFilterChips();
+  applyFiltersToView();
+}
+// The content type of a channel, derived from its latest post.
+function channelContentType(ch){
+  const p=getChannelPosts(ch.username)[0];
+  if(!p)return 'all';
+  if(p.hasVideo)return 'video';
+  if(p.image)return 'image';
+  return 'text';
+}
+function matchesFilters(ch,f){
+  if(f.cats.length&&!f.cats.some(c=>(ch.tags||[]).includes(c)))return false;
+  if(f.langs.length&&!f.langs.includes(ch.lang||'en'))return false;
+  if(f.types.length&&!f.types.includes(channelContentType(ch)))return false;
+  return true;
+}
+// Narrow a result set down to the active filters.
+function applyExploreFilters(list,skipLang){
+  const f=filterState();
+  if(!f.cats.length&&!f.langs.length&&!f.types.length)return list;
+  const eff=skipLang?Object.assign({},f,{langs:[]}):f;
+  return list.filter(ch=>matchesFilters(ch,eff));
+}
+// --- URL <-> filter state ---------------------------------------
+function syncUrlFilters(push){
+  const f=filterState();
+  // Built by hand so the separator stays a readable comma instead of %2C.
+  const parts=[];
+  if(f.cats.length)parts.push('cats='+f.cats.join(','));
+  if(f.langs.length)parts.push('langs='+f.langs.join(','));
+  if(f.types.length)parts.push('types='+f.types.join(','));
+  if(state.exploreSort&&state.exploreSort!=='name')parts.push('sort='+state.exploreSort);
+  const q=parts.join('&');
+  const url=location.pathname+(q?'?'+q:'')+location.hash;
+  try{
+    if(push)history.pushState(null,'',url);
+    else history.replaceState(null,'',url);
+  }catch(e){location.replace(url)}
+}
+// Read the filters from the URL. `reset` makes the URL authoritative
+// (used for the browser back/forward buttons).
+function readUrlFilters(reset){
+  const p=new URLSearchParams(location.search);
+  const split=v=>v?v.split(',').map(s=>s.trim()).filter(Boolean):[];
+  const cats=split(p.get('cats'));
+  const langs=split(p.get('langs'));
+  const types=split(p.get('types'));
+  const sort=p.get('sort');
+  if(reset||cats.length)state.filterCats=cats;
+  if(reset||langs.length)state.filterLangs=langs;
+  if(reset||types.length)state.filterTypes=types;
+  if(sort){state.exploreSort=sort;localStorage.setItem('tgexp_esort',sort)}
+  saveFilters();
+}
+// Share the current filter set as a link.
+async function shareFilters(){
+  const url=location.href;
+  if(navigator.share){
+    try{await navigator.share({title:t('share_filters'),url});return}
+    catch(e){if(e&&e.name==='AbortError')return}
+  }
+  try{await navigator.clipboard.writeText(url);toast('🔗 '+t('toast_link_copied'))}
+  catch(e){toast('⚠️ '+t('toast_copy_fail'))}
+}
+// Toggle a content type (image / video / text). "All" clears the selection.
+function toggleExploreType(ty){
+  if(ty==='all'){
+    if(!state.filterTypes.length)return;
+    state.filterTypes=[];
+  }else{
+    const arr=(state.filterTypes||[]).slice();
+    const i=arr.indexOf(ty);
+    if(i===-1)arr.push(ty);else arr.splice(i,1);
+    state.filterTypes=arr;
+  }
+  saveFilters();
+  syncUrlFilters(true);
+  renderFilterBar();
+  renderFilterChips();
+  applyFiltersToView();
+}
+// Re-render the current view with the new filters.
+function applyFiltersToView(){
+  if(state.currentTab==='explore'){loadExplore();return}
+  if(state.currentTab==='search'){doSearch();return}
+  renderResults();
+}
 function sortExplore(list){
   const s=state.exploreSort||'name';
   const arr=list.slice();
@@ -1340,7 +1505,7 @@ function sortExplore(list){
 }
 function exploreSortHtml(){
   const s=state.exploreSort||'name';
-  const opts='<option value="newest"'+(s==='newest'?' selected':'')+'>'+t('newest')+'</option>'+'<option value="oldest"'+(s==='oldest'?' selected':'')+'>'+t('oldest')+'</option>'+'<option value="name"'+(s==='name'?' selected':'')+'>'+t('by_name')+'</option>'+'<option value="name-desc"'+(s==='name-desc'?' selected':'')+'>'+t('by_name_desc')+'</option>'+'<option value="posts"'+(s==='posts'?' selected':'')+'>'+t('by_posts')+'</option>' ;
+  const opts='<option value="newest"'+(s==='newest'?' selected':'')+'>'+t('by_activity')+'</option>'+'<option value="oldest"'+(s==='oldest'?' selected':'')+'>'+t('oldest')+'</option>'+'<option value="name"'+(s==='name'?' selected':'')+'>'+t('by_name')+'</option>'+'<option value="name-desc"'+(s==='name-desc'?' selected':'')+'>'+t('by_name_desc')+'</option>'+'<option value="posts"'+(s==='posts'?' selected':'')+'>'+t('by_posts')+'</option>' ;
   return '<div style="display:flex;gap:8px;margin-bottom:12px;align-items:center"><span style="font-size:13px;color:var(--text-secondary);white-space:nowrap">'+t('sort')+':</span><select class="sug-field" style="flex:1;margin-bottom:0" onchange="setExploreSort(this.value)">'+opts+'</select></div>';
 }
 function setExploreView(v){
@@ -2156,7 +2321,56 @@ function createSmartFolders(){
 // ============================================================
 // CATEGORIES
 // ============================================================
-function renderCategories(){const cats=[{id:'all',icon:'🌐',nameKey:'all'},{id:'tech',icon:'💻',nameKey:'cat_tech'},{id:'news',icon:'📰',nameKey:'cat_news'},{id:'crypto',icon:'🪙',nameKey:'cat_crypto'},{id:'entertainment',icon:'🎬',nameKey:'cat_entertainment'},{id:'science',icon:'🔬',nameKey:'cat_science'},{id:'gaming',icon:'🎮',nameKey:'cat_gaming'},{id:'music',icon:'🎵',nameKey:'cat_music'},{id:'art',icon:'🎨',nameKey:'cat_art'},{id:'sports',icon:'⚽',nameKey:'cat_sports'},{id:'education',icon:'📚',nameKey:'cat_education'},{id:'meme',icon:'😂',nameKey:'cat_meme'},{id:'food',icon:'🍕',nameKey:'cat_food'},{id:'travel',icon:'✈️',nameKey:'cat_travel'},{id:'photography',icon:'📷',nameKey:'cat_photography'},{id:'podcast',icon:'🎙️',nameKey:'cat_podcast'},{id:'cinema',icon:'🎥',nameKey:'cat_cinema'}];document.getElementById('categoriesBar').innerHTML=cats.map(c=>`<div class="cat-chip ${state.currentCategory===c.id?'active':''}" data-cat="${c.id}"><span class="cat-icon">${c.icon}</span> ${t(c.nameKey)}</div>`).join('')}
+function exploreCategories(){return[{id:'all',icon:'🌐',nameKey:'all'},{id:'tech',icon:'💻',nameKey:'cat_tech'},{id:'news',icon:'📰',nameKey:'cat_news'},{id:'crypto',icon:'🪙',nameKey:'cat_crypto'},{id:'entertainment',icon:'🎬',nameKey:'cat_entertainment'},{id:'science',icon:'🔬',nameKey:'cat_science'},{id:'gaming',icon:'🎮',nameKey:'cat_gaming'},{id:'music',icon:'🎵',nameKey:'cat_music'},{id:'art',icon:'🎨',nameKey:'cat_art'},{id:'sports',icon:'⚽',nameKey:'cat_sports'},{id:'education',icon:'📚',nameKey:'cat_education'},{id:'meme',icon:'😂',nameKey:'cat_meme'},{id:'food',icon:'🍕',nameKey:'cat_food'},{id:'travel',icon:'✈️',nameKey:'cat_travel'},{id:'photography',icon:'📷',nameKey:'cat_photography'},{id:'podcast',icon:'🎙️',nameKey:'cat_podcast'},{id:'cinema',icon:'🎥',nameKey:'cat_cinema'}]}
+function categoryLabel(id){const c=exploreCategories().find(x=>x.id===id);return c?c.icon+' '+t(c.nameKey):id}
+function langLabel(code){return code==='fa'?'🇮🇷 فارسی':code==='en'?'🇬🇧 English':code.toUpperCase()}
+function typeLabel(ty){return ty==='image'?t('image'):ty==='video'?t('clip'):ty==='text'?t('text'):t('all')}
+// Render the category + language chips according to the active filters.
+function renderFilterChips(){
+  const f=filterState();
+  const bar=document.getElementById('categoriesBar');
+  if(bar){
+    bar.innerHTML=exploreCategories().map(c=>{
+      const active=c.id==='all'?f.cats.length===0:f.cats.includes(c.id);
+      return `<div class="cat-chip ${active?'active':''}" data-cat="${c.id}" role="button" tabindex="0" aria-pressed="${active}"><span class="cat-icon">${c.icon}</span> ${t(c.nameKey)}</div>`;
+    }).join('');
+  }
+  document.querySelectorAll('.lang-chip').forEach(el=>{
+    const l=el.dataset.lang;
+    const active=l==='all'?f.langs.length===0:f.langs.includes(l);
+    el.classList.toggle('active',active);
+    el.setAttribute('aria-pressed',String(active));
+  });
+  const etypeBar=document.querySelector('#etypeBar');
+  if(etypeBar){
+    etypeBar.querySelectorAll('.etype-chip').forEach(el=>{
+      const ty=el.dataset.type;
+      const active=f.types.includes(ty);
+      el.classList.toggle('active',active);
+      el.setAttribute('aria-pressed',String(active));
+    });
+  }
+}
+// The summary bar with the active filters and the share/clear actions.
+function renderFilterBar(){
+  const bar=document.getElementById('filterBar');
+  if(!bar)return;
+  const f=filterState();
+  const parts=[];
+  for(const c of f.cats)parts.push(categoryLabel(c));
+  for(const l of f.langs)parts.push(langLabel(l));
+  for(const ty of f.types)parts.push(typeLabel(ty));
+  // The bar only makes sense where the filters apply.
+  const visible=state.currentTab==='explore'||state.currentTab==='search';
+  bar.classList.toggle('show',parts.length>0&&visible);
+  const summary=document.getElementById('filterSummary');
+  if(summary)summary.textContent=parts.length?parts.join(' · '):t('filter_none');
+  const clearBtn=document.getElementById('clearFiltersBtn');
+  if(clearBtn)clearBtn.textContent=t('clear_filters');
+  const shareBtn=document.getElementById('shareFiltersBtn');
+  if(shareBtn)shareBtn.textContent=t('share_filters');
+}
+function renderCategories(){renderFilterChips()}
 
 // ============================================================
 // PWA
@@ -2171,7 +2385,7 @@ function checkPWA(){window.addEventListener('beforeinstallprompt',e=>{e.preventD
 const AVATAR_GRADS=[['#0ea5e9','#6366f1'],['#f97316','#ef4444'],['#22c55e','#0d9488'],['#a855f7','#ec4899'],['#eab308','#f97316'],['#06b6d4','#3b82f6'],['#f43f5e','#a855f7'],['#84cc16','#0ea5e9']];
 function avatarGrad(u){u=u||'';let h=0;for(let i=0;i<u.length;i++)h=(h*31+u.charCodeAt(i))>>>0;const g=AVATAR_GRADS[h%AVATAR_GRADS.length];return 'background:linear-gradient(135deg,'+g[0]+','+g[1]+')'}
 function getAllChannels(){const chs=CHANNEL_DB;if(typeof CHANNEL_AVATARS==='undefined')return chs;return chs.map(ch=>ch.avatar?ch:{...ch,avatar:CHANNEL_AVATARS[ch.username]||''})}
-function getLocalExplore(category){const all=getAllChannels();const byCat=category==='all'?all:all.filter(ch=>ch.tags?.includes(category));const lang=state.searchLang||'all';return lang==='all'?byCat:byCat.filter(ch=>ch.lang===lang)}
+function getLocalExplore(category){const all=getAllChannels();const f=filterState();let out=all;if(category&&category!=='all')out=out.filter(ch=>(ch.tags||[]).includes(category));else if(f.cats.length)out=out.filter(ch=>f.cats.some(c=>(ch.tags||[]).includes(c)));if(f.langs.length)out=out.filter(ch=>f.langs.includes(ch.lang||'en'));return out}
 
 // ============================================================
 // UTILS
@@ -2248,6 +2462,10 @@ function toast(msg){const container=document.getElementById('toastContainer');co
 function renderSkeletons(count){return`<div class="results-grid">${Array(count).fill('<div class="skeleton"></div>').join('')}</div>`}
 function renderEmpty(title,desc){return`<div class="empty-state"><div class="empty-icon">${title===t('no_favorites')?'❤️':'🔍'}</div><h3>${escHtml(title)}</h3><p>${escHtml(desc||'')}</p></div>`}
 
+
+
+
+
 // ============================================================
 // WINDOW BRIDGE
 // ----------------------------------------------------------
@@ -2258,6 +2476,9 @@ Object.assign(window, {
   addAutoAll,
   addAutoOne,
   addChannelToFolder,
+  applyExploreFilters,
+  applyFiltersToView,
+  clearFilters,
   clearFolderRule,
   clearLivePosts,
   closeChannelModal,
@@ -2281,6 +2502,7 @@ Object.assign(window, {
   cycleFontSize,
   deleteFolder,
   dismissSharedFolder,
+  doSearch,
   downloadPostMedia,
   editFolder,
   escAttr,
@@ -2288,6 +2510,7 @@ Object.assign(window, {
   exportPostsPdf,
   exportPostsTxt,
   fetchFavNewPosts,
+  filterState,
   folderExportJson,
   folderExportPdf,
   folderExportTxt,
@@ -2297,6 +2520,8 @@ Object.assign(window, {
   getLocalExplore,
   importBackup,
   importSharedFolder,
+  loadExplore,
+  loadFeed,
   loadSharedLivePosts,
   openChannel,
   openFeedPost,
@@ -2307,13 +2532,18 @@ Object.assign(window, {
   openSavedPost,
   openSuggestModal,
   pickFolderIcon,
+  readUrlFilters,
   refreshFolderPosts,
   removeFolderItem,
+  renderCategories,
   renderFavFiltered,
   renderFavorites,
+  renderFilterBar,
+  renderFilterChips,
   renderResults,
   resetApp,
   retryNetwork,
+  saveFilters,
   saveFolderRule,
   saveSettings,
   scrollPostModalTop,
@@ -2324,16 +2554,21 @@ Object.assign(window, {
   setFavPostType,
   setFavSort,
   setHomeType,
+  shareFilters,
   shareFolder,
   sharePost,
   skipSetup,
   state,
   submitSuggestion,
   switchTab,
+  syncUrlFilters,
   t,
   testConnection,
   testFromSettings,
+  toast,
+  toggleExploreType,
   toggleFav,
+  toggleFilter,
   toggleNotifs,
   togglePostFav,
 });

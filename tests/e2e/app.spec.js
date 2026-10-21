@@ -27,6 +27,49 @@ test.describe('Telegram Explorer - e2e', () => {
     await expect(page.locator('#mainContent')).toBeVisible();
   });
 
+  test('explore filters narrow the results and end up in the URL', async ({ page }) => {
+    const cards = page.locator('.explore-item, .channel-card');
+    await expect(cards.first()).toBeVisible();
+    const before = await cards.count();
+
+    // No filter is active yet.
+    await expect(page.locator('#filterBar')).not.toHaveClass(/show/);
+
+    await page.locator('.cat-chip[data-cat="news"]').click();
+
+    // The filter bar appears and the URL carries the filter.
+    await expect(page.locator('#filterBar')).toHaveClass(/show/);
+    await expect(page).toHaveURL(/cats=news/);
+    await expect(page.locator('.cat-chip[data-cat="news"]')).toHaveClass(/active/);
+
+    const after = await cards.count();
+    expect(after).toBeGreaterThan(0);
+    expect(after).toBeLessThan(before);
+
+    // Clicking the same chip again removes the filter.
+    await page.locator('.cat-chip[data-cat="news"]').click();
+    await expect(page.locator('#filterBar')).not.toHaveClass(/show/);
+    await expect(page).not.toHaveURL(/cats=/);
+  });
+
+  test('a filtered view can be shared through the URL', async ({ page }) => {
+    await page.goto('/?cats=news,tech&types=image');
+
+    // The chips and the summary bar reflect the URL.
+    await expect(page.locator('.cat-chip[data-cat="news"]')).toHaveClass(/active/);
+    await expect(page.locator('.cat-chip[data-cat="tech"]')).toHaveClass(/active/);
+    await expect(page.locator('#filterBar')).toHaveClass(/show/);
+
+    // ...and only channels of those categories are listed.
+    const shown = await page.locator('.explore-item, .channel-card').count();
+    expect(shown).toBeGreaterThan(0);
+
+    // The clear button resets everything, URL included.
+    await page.locator('#clearFiltersBtn').click();
+    await expect(page.locator('#filterBar')).not.toHaveClass(/show/);
+    await expect(page).not.toHaveURL(/cats=/);
+  });
+
   test('local search returns channel cards', async ({ page }) => {
     const searchInput = page.locator('#searchInput');
     await searchInput.fill('bbc');

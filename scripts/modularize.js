@@ -164,7 +164,17 @@ for (const mm of imports.matchAll(/import\s*\{([^}]*)\}/g)) {
 }
 
 const wanted = new Set([...calledFromMarkup, ...calledFromWindow]);
-for (const n of ['t', 'state', 'searchLocal', 'getAllChannels', 'getLocalExplore', 'getChannelPosts']) wanted.add(n);
+// Always publish the app's public API. The `defined` check below still
+// applies, so a name that does not exist can never be listed here.
+for (const n of [
+  't', 'state', 'toast',
+  'searchLocal', 'getAllChannels', 'getLocalExplore', 'getChannelPosts',
+  'renderResults', 'renderCategories', 'renderFilterChips', 'renderFilterBar',
+  'loadExplore', 'loadFeed', 'doSearch', 'switchTab',
+  'toggleFilter', 'toggleExploreType', 'clearFilters', 'shareFilters',
+  'filterState', 'saveFilters', 'syncUrlFilters', 'readUrlFilters',
+  'applyExploreFilters', 'applyFiltersToView',
+]) wanted.add(n);
 const WINDOW_EXPORTS = [...wanted]
   .filter(n => !BUILTINS.has(n) && defined.has(n))
   .sort();

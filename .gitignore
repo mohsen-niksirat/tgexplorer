@@ -17,5 +17,6 @@ verify_channels_report.json
 
 # Local test output / scratch files
 test-out.txt
+verify-out.txt
 *.bak
 source-app.html
