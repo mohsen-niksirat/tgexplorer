@@ -5,6 +5,18 @@ Full version history of Telegram Explorer. The latest release is summarized in t
 
 ## v1.7.0
 
+- 🩺 **Reliable dead-channel detection** — `verify_channels.js` no longer
+  guesses from the page title. The Telegram profile page itself is now the
+  source of truth: a subscriber/member count, an avatar or a real title means
+  the channel is alive (even when its web preview is disabled), while a user
+  icon means the username was taken over by a person and "buy this username"
+  means the username is vacant. The live title is extracted properly too, so
+  the rename report shows the real channel name instead of "<name> – Telegram".
+- 🗑 **29 dead channels removed (151 → 122)** — BBC News, Reuters, Forbes,
+  NASA, Netflix, Binance and 23 more no longer exist as public channels; their
+  usernames now belong to personal accounts (or are for sale on Fragment).
+  They were moved to `channels-deprecated.js` with their history intact, and
+  the channel-health CI job is green again.
 - 🧩 **Modularized app code** — the monolithic inline script is split into ES
   modules: `js/i18n.js` (all 7 languages + `applyLang()`/`t()`), `js/state.js`
   (the shared app state) and `js/worker-code.js` (the Worker source shown in

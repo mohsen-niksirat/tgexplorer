@@ -52,32 +52,87 @@ async function fetchTme(url) {
   return { ok: true, title: title.trim(), html };
 }
 
+// --- Telegram profile-page signals -------------------------------------
+// A channel/group profile carries a tgme_page_extra block with the
+// subscriber (or member) count. A plain user account instead renders a
+// user icon and a "Send Message" action. The page title alone is NOT a
+// reliable signal: a live channel with the web preview disabled shows
+// "Telegram: View @x" on both /s/x and /x, while a user shows
+// "Telegram: Contact @x".
+function profileKind(html) {
+  // 1) A plain user account renders the user icon (and "Send Message").
+  if (/tgme_icon_user/.test(html)) return 'user';
+  // 2) A vacant username that Telegram is selling on Fragment.
+  if (/buy this username|cost is\s*[\d.]+\s*BTC|fragment\.com\/username/i.test(html)) return 'vacant';
+  // 3) A channel/group: the subscriber count (or the @username when the
+  //    count is hidden), an avatar, or a real title.
+  if (/class="tgme_page_extra"/.test(html)) return 'channel';
+  if (/class="tgme_page_photo"/.test(html)) return 'channel';
+  if (/class="tgme_page_title"/.test(html)) return 'channel';
+  return 'unknown';
+}
+
+// The channel title as shown on the profile page (without the " – Telegram"
+// suffix the <title> tag adds).
+function extractChannelTitle(html) {
+  const m = html.match(/<div class="tgme_page_title"[^>]*>([\s\S]*?)<\/div>/);
+  if (!m) return null;
+  const t = m[1].replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+  return t || null;
+}
+
+// The live subscriber / member count ("2 517 026 subscribers" -> "2517026").
+function extractMemberCount(html) {
+  const i = html.indexOf('class="tgme_page_extra"');
+  if (i === -1) return null;
+  const extra = html.slice(i, i + 260);
+  const m = extra.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').match(/([\d][\d\s.,]*)\s*(subscribers?|members?)/i);
+  return m ? m[1].replace(/[\s,]/g, '') : null;
+}
+
 async function check(ch) {
   const url = 'https://t.me/s/' + encodeURIComponent(ch.username);
+  let r;
   try {
-    const r = await fetchTme(url);
-    if (!r.ok) return { ch, status: 'FAIL', reason: 'HTTP ' + r.status };
-    const title = r.title;
-    if (!r.html.includes('tgme_page')) return { ch, status: 'FAIL', reason: 'not a public channel page' };
-
-    // "Telegram: Contact @x" on the /s/ preview usually means the username is
-    // a user/bot — BUT some live channels disable the public preview and get
-    // the same page. Double-check the plain profile page before declaring dead.
-    if (/^Telegram: Contact/i.test(title)) {
-      const p = await fetchTme('https://t.me/' + encodeURIComponent(ch.username));
-      if (p.ok && p.title && !/^Telegram: Contact/i.test(p.title) && p.title !== 'Telegram') {
-        // Profile page shows a real title -> live channel with preview disabled.
-        return { ch, status: 'OK', reason: '"' + p.title.slice(0, 60) + '" (preview disabled)', members: null };
-      }
-      return { ch, status: 'USER', reason: '"' + title.slice(0, 60) + '"' };
-    }
-
-    // Extract the live member count so the report can track growth/decay.
-    const mm = r.html.match(/([\d.,]+[KkMm]?)\s*(?:members|subscriber|عضو)/i);
-    return { ch, status: 'OK', reason: '"' + title.slice(0, 60) + '"', members: mm ? mm[1] : null };
+    r = await fetchTme(url);
   } catch (e) {
     return { ch, status: 'ERR', reason: 'network: ' + e.message };
   }
+  if (!r.ok) return { ch, status: 'FAIL', reason: 'HTTP ' + r.status };
+  if (!r.html.includes('tgme_page')) return { ch, status: 'FAIL', reason: 'not a public channel page' };
+
+  const title = r.title;
+  // A working public preview (post widgets) proves the channel exists.
+  const widgets = (r.html.match(/tgme_widget_message_wrap/g) || []).length;
+  if (widgets > 0) {
+    const live = extractChannelTitle(r.html) || title.replace(/\s*[–-]\s*Telegram\s*$/i, '').trim();
+    return { ch, status: 'OK', reason: '"' + live.slice(0, 60) + '"', members: extractMemberCount(r.html) };
+  }
+
+  // No preview — the profile page tells a channel with the web preview
+  // disabled apart from a user account that took over the username.
+  let p;
+  try {
+    p = await fetchTme('https://t.me/' + encodeURIComponent(ch.username));
+  } catch (e) {
+    return { ch, status: 'ERR', reason: 'network: ' + e.message };
+  }
+  if (!p.ok) return { ch, status: 'ERR', reason: 'profile HTTP ' + p.status };
+
+  const kind = profileKind(p.html);
+  if (kind === 'channel') {
+    const live = extractChannelTitle(p.html) || p.title.replace(/\s*[–-]\s*Telegram\s*$/i, '').trim();
+    return {
+      ch,
+      status: 'OK',
+      reason: '"' + live.slice(0, 60) + '" (web preview disabled)',
+      members: extractMemberCount(p.html),
+    };
+  }
+  if (kind === 'vacant') {
+    return { ch, status: 'FAIL', reason: 'the username is for sale — no channel behind it' };
+  }
+  return { ch, status: 'USER', reason: 'the username now belongs to a user account, not a channel' };
 }
 
 function classify(results) {
@@ -100,7 +155,7 @@ function classify(results) {
   // Title drift: the live t.me title no longer matches the DB title.
   const renamed = results.filter(r => {
     if (r.status !== 'OK') return false;
-    const live = (r.reason || '').replace(/"/g, '').trim();
+    const live = ((r.reason || '').match(/^"([^"]*)"/) || [])[1] || '';
     const dbTitle = (r.title || '').trim();
     if (!live || !dbTitle) return false;
     return !live.toLowerCase().includes(dbTitle.toLowerCase()) &&
@@ -108,7 +163,7 @@ function classify(results) {
   }).map(r => ({
     username: r.username,
     dbTitle: r.title,
-    liveTitle: (r.reason || '').replace(/"/g, '').trim(),
+    liveTitle: ((r.reason || '').match(/^"([^"]*)"/) || [])[1] || '',
   }));
 
   return { byStatus, dead, suspicious, renamed };
