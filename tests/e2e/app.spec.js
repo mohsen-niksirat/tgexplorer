@@ -139,4 +139,67 @@ test.describe('Telegram Explorer - e2e', () => {
       expect(label).toBeTruthy();
     }
   });
+
+  test('offline mode shows a clear banner and still returns local results', async ({ page, context }) => {
+    // Simulate a dead network for everything EXCEPT the local data files
+    // (channels.js / posts.js), which the service worker serves from cache.
+    await context.route('**/*', route => {
+      const url = route.request().url();
+      if (/\/(channels|posts|avatars)\.js(\?|$)/.test(url)) return route.continue();
+      return route.abort('internetdisconnected');
+    });
+    // A real offline signal — navigator.onLine flips to false, which is what
+    // the app listens to for the offline banner.
+    await context.setOffline(true);
+
+    // The app must still boot (cached shell) and reach the content area.
+    await page.goto('/');
+    const heroVisible = await page.locator('#heroSection').isVisible();
+    if (!heroVisible) {
+      await page.evaluate(() => {
+        if (typeof window.skipSetup === 'function') window.skipSetup();
+      });
+    }
+    await expect(page.locator('#heroSection')).toBeVisible();
+
+    // Offline banner is visible and explains the situation.
+    const banner = page.locator('#netBanner');
+    await expect(banner).toHaveClass(/show/);
+    await expect(page.locator('#netBannerText')).toContainText(/offline/i);
+
+    // Local (cached) search still works — no "no results" dead end.
+    const searchInput = page.locator('#searchInput');
+    await searchInput.fill('bbc');
+    await searchInput.press('Enter');
+    await page.keyboard.press('Escape');
+
+    const cards = page.locator('.explore-item, .channel-card, .list-item');
+    await expect(cards.first()).toBeVisible();
+  });
+
+  test('unreachable worker falls back to the local database with a visible notice', async ({ page }) => {
+    // Point the app at a worker URL that cannot be reached. The local
+    // channel DB must still answer the search.
+    await page.goto('/');
+    await page.evaluate(() => {
+      localStorage.setItem('tgexp_worker', 'http://127.0.0.1:9/unreachable');
+    });
+    await page.reload();
+
+    // NOTE: do not call skipSetup() here — it clears the worker URL we just
+    // set, which is exactly what this test needs to keep.
+
+    // The fallback banner is shown (worker set but unreachable).
+    const banner = page.locator('#netBanner');
+    await expect(banner).toHaveClass(/show/);
+
+    // ...and the local database is used instead of an error screen.
+    const searchInput = page.locator('#searchInput');
+    await searchInput.fill('bbc');
+    await searchInput.press('Enter');
+    await page.keyboard.press('Escape');
+
+    const cards = page.locator('.explore-item, .channel-card, .list-item');
+    await expect(cards.first()).toBeVisible();
+  });
 });

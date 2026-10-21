@@ -98,6 +98,19 @@ body[data-fs="large"] .home-feed-text-clamped{-webkit-line-clamp:3}
 .ac-avatar{width:30px;height:30px;border-radius:50%;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
 .ac-title{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--text-primary)}
 .ac-user{font-size:11px;color:var(--text-secondary)}
+/* ============================================================
+   OFFLINE / FALLBACK STATUS BANNER
+   Shown when the network is down, or when the configured Worker
+   proxy cannot be reached and the app falls back to local data.
+   ============================================================ */
+.net-banner{display:none;align-items:center;gap:10px;padding:10px 20px;background:var(--warning);color:#fff;font-size:13.5px;font-weight:600;position:sticky;top:var(--header-h);z-index:99;line-height:1.5}
+.net-banner.show{display:flex}
+.net-banner-icon{font-size:16px;flex-shrink:0}
+.net-banner-text{flex:1;min-width:0}
+.net-banner-action{flex-shrink:0;background:rgba(255,255,255,.22);color:#fff;border:1px solid rgba(255,255,255,.4);border-radius:8px;padding:4px 12px;font-size:12.5px;font-weight:600;cursor:pointer;transition:background var(--transition)}
+.net-banner-action:hover{background:rgba(255,255,255,.34)}
+.net-banner.info{background:var(--accent)}
+@media (max-width:640px){.net-banner{padding:9px 14px;font-size:12.5px}.net-banner-action{display:none}}
 /* A11y: these inputs/selects reset `outline:none` for mouse focus, so restore
    a visible focus ring for keyboard navigation (WCAG 2.4.7). */
 .lang-select:focus-visible,.connect-input:focus-visible,.search-input:focus-visible,.folder-new input:focus-visible,.folder-new-form input:focus-visible,.folder-add-channel input:focus-visible,.sug-field:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
@@ -119,6 +132,13 @@ body[data-fs="large"] .home-feed-text-clamped{-webkit-line-clamp:3}
     </div>
   </div>
 </header>
+
+<!-- NETWORK / FALLBACK STATUS BANNER -->
+<div class="net-banner" id="netBanner" role="status" aria-live="polite">
+  <span class="net-banner-icon" id="netBannerIcon">📡</span>
+  <span class="net-banner-text" id="netBannerText">You are offline — showing cached data</span>
+  <button class="net-banner-action" id="netBannerAction" onclick="retryNetwork()">Retry</button>
+</div>
 
 <!-- SETUP SCREEN -->
 <div id="setupScreen" class="setup-screen" style="display:none">
@@ -428,6 +448,11 @@ I18N_UI.en.font_size='Font size';I18N_UI.fa.font_size='اندازهٔ فونت';
 I18N_UI.en.font_small='Small font';I18N_UI.fa.font_small='فونت کوچک';I18N_UI.ar.font_small='خط صغير';I18N_UI.zh.font_small='小字体';I18N_UI.ru.font_small='Мелкий шрифт';I18N_UI.es.font_small='Fuente pequeña';I18N_UI.fr.font_small='Petite police';
 I18N_UI.en.font_medium='Medium font';I18N_UI.fa.font_medium='فونت متوسط';I18N_UI.ar.font_medium='خط متوسط';I18N_UI.zh.font_medium='中字体';I18N_UI.ru.font_medium='Обычный шрифт';I18N_UI.es.font_medium='Fuente mediana';I18N_UI.fr.font_medium='Police moyenne';
 I18N_UI.en.font_large='Large font';I18N_UI.fa.font_large='فونت بزرگ';I18N_UI.ar.font_large='خط كبير';I18N_UI.zh.font_large='大字体';I18N_UI.ru.font_large='Крупный шрифт';I18N_UI.es.font_large='Fuente grande';I18N_UI.fr.font_large='Grande police';
+I18N_UI.en.net_offline='📴 You are offline — showing cached data';I18N_UI.fa.net_offline='📴 آفلاین هستید — داده‌های کش‌شده نمایش داده می‌شود';I18N_UI.ar.net_offline='📴 أنت غير متصل — يتم عرض البيانات المخزنة';I18N_UI.zh.net_offline='📴 您已离线 — 正在显示缓存数据';I18N_UI.ru.net_offline='📴 Вы офлайн — показываются кэшированные данные';I18N_UI.es.net_offline='📴 Estás sin conexión — mostrando datos en caché';I18N_UI.fr.net_offline='📴 Vous êtes hors ligne — données en cache affichées';
+I18N_UI.en.net_fallback='⚠️ Proxy unreachable — using the local channel database';I18N_UI.fa.net_fallback='⚠️ پراکسی در دسترس نیست — از دیتابیس محلی استفاده می‌شود';I18N_UI.ar.net_fallback='⚠️ الوسيط غير متاحر — يتم استخدام قاعدة البيانات المحلية';I18N_UI.zh.net_fallback='⚠️ 代理不可达 — 使用本地频道数据库';I18N_UI.ru.net_fallback='⚠️ Прокси недоступен — используется локальная база каналов';I18N_UI.es.net_fallback='⚠️ Proxy inaccesible — usando la base de datos local';I18N_UI.fr.net_fallback='⚠️ Proxy injoignable — base de données locale utilisée';
+I18N_UI.en.net_retry='Retry';I18N_UI.fa.net_retry='تلاش دوباره';I18N_UI.ar.net_retry='إعادة المحاولة';I18N_UI.zh.net_retry='重试';I18N_UI.ru.net_retry='Повторить';I18N_UI.es.net_retry='Reintentar';I18N_UI.fr.net_retry='Réessayer';
+I18N_UI.en.net_reconnected='✅ Proxy reconnected';I18N_UI.fa.net_reconnected='✅ دوباره وصل شد';I18N_UI.ar.net_reconnected='✅ تم إعادة الاتصال';I18N_UI.zh.net_reconnected='✅ 已重新连接';I18N_UI.ru.net_reconnected='✅ Соединение восстановлено';I18N_UI.es.net_reconnected='✅ Proxy reconectado';I18N_UI.fr.net_reconnected='✅ Proxy reconnecté';
+I18N_UI.en.net_still_down='⚠️ Proxy still unreachable';I18N_UI.fa.net_still_down='⚠️ پراکسی هنوز در دسترس نیست';I18N_UI.ar.net_still_down='⚠️ الوسيط لا يزال غير متاحر';I18N_UI.zh.net_still_down='⚠️ 代理仍不可达';I18N_UI.ru.net_still_down='⚠️ Прокси по-прежнему недоступен';I18N_UI.es.net_still_down='⚠️ El proxy sigue inaccesible';I18N_UI.fr.net_still_down='⚠️ Proxy toujours injoignable';
 I18N_UI.en.toast_md_copied='Copied as Markdown';I18N_UI.fa.toast_md_copied='به‌صورت Markdown کپی شد';I18N_UI.ar.toast_md_copied='تم النسخ بصيغة Markdown';I18N_UI.zh.toast_md_copied='已复制为 Markdown';I18N_UI.ru.toast_md_copied='Скопировано как Markdown';I18N_UI.es.toast_md_copied='Copiado como Markdown';I18N_UI.fr.toast_md_copied='Copié en Markdown';
 I18N_UI.en.copy_md='MD';I18N_UI.fa.copy_md='MD';I18N_UI.ar.copy_md='MD';I18N_UI.zh.copy_md='MD';I18N_UI.ru.copy_md='MD';I18N_UI.es.copy_md='MD';I18N_UI.fr.copy_md='MD';
 const RTL_LANGS=['fa','ar'];
@@ -436,7 +461,7 @@ let state={lang:localStorage.getItem('tgexp_lang')||'en',theme:localStorage.getI
 // ============================================================
 // INIT
 // ============================================================
-document.addEventListener('DOMContentLoaded',()=>{applyTheme(state.theme);applyLang(state.lang);applyFontSize();initTelegramWebApp();watchTgBackButton();document.getElementById('workerCodeBlock').textContent=WORKER_CODE;document.getElementById('langSelect').value=state.lang;document.querySelectorAll('.lang-chip').forEach(el=>el.classList.toggle('active',el.dataset.lang===state.searchLang));showApp();if(!state.workerUrl&&!localStorage.getItem('tgexp_setup_hint')&&!localStorage.getItem('tgexp_setup_skipped')){localStorage.setItem('tgexp_setup_hint','1');setTimeout(()=>toast(t('proxy_hint')),1500)}bindEvents();registerSW();checkPWA();checkSharedFolder();initNotifs()});
+document.addEventListener('DOMContentLoaded',()=>{applyTheme(state.theme);applyLang(state.lang);applyFontSize();initTelegramWebApp();watchTgBackButton();document.getElementById('workerCodeBlock').textContent=WORKER_CODE;document.getElementById('langSelect').value=state.lang;document.querySelectorAll('.lang-chip').forEach(el=>el.classList.toggle('active',el.dataset.lang===state.searchLang));showApp();if(!state.workerUrl&&!localStorage.getItem('tgexp_setup_hint')&&!localStorage.getItem('tgexp_setup_skipped')){localStorage.setItem('tgexp_setup_hint','1');setTimeout(()=>toast(t('proxy_hint')),1500)}bindEvents();registerSW();checkPWA();checkSharedFolder();initNotifs();initNetStatus()});
 
 // ============================================================
 // EVENTS
@@ -560,7 +585,71 @@ function switchTab(tab){window._sharedFolder=null;state.currentTab=tab;document.
 // ============================================================
 // SEARCH
 // ============================================================
-async function doSearch(){const query=document.getElementById('searchInput').value.trim();if(!query)return;state.searchQuery=query;state.currentTab='search';document.querySelectorAll('.nav-tab').forEach(el=>el.classList.toggle('active',el.dataset.tab==='search'));document.getElementById('categoriesBar').style.display='none';document.getElementById('resultsHeader').style.display='flex';document.getElementById('content').innerHTML=renderSkeletons(6);try{let results=[];if(state.workerUrl){const resp=await fetch(`${state.workerUrl}/api/search?q=${encodeURIComponent(query)}&lang=${state.lang}`);const data=await resp.json();results=data.results||[]}else{results=searchLocal(query)}state.searchResults=results;document.getElementById('resultsCount').textContent=`${state.workerUrl?t('search_live'):t('search_local')} — ${results.length} ${t('results_for')} "${query}"`;renderResults()}catch{document.getElementById('content').innerHTML=renderEmpty(t('no_results'),t('no_results_desc'))}}
+// ============================================================
+// NETWORK STATUS + WORKER FALLBACK
+// ------------------------------------------------------------
+// The app must degrade gracefully: when the network is down, or the
+// configured Worker proxy cannot be reached, we fall back to the
+// cached/local database and tell the user what happened.
+// ============================================================
+const NET_TIMEOUT = 12000;
+
+// Fetch a worker endpoint with a timeout. Returns null on any failure
+// (offline, DNS error, timeout, non-2xx, bad JSON) instead of throwing.
+async function fetchWorker(path, opts){
+  if(!state.workerUrl)return null;
+  try{
+    const ctrl=typeof AbortController!=='undefined'?new AbortController():null;
+    const timer=ctrl?setTimeout(()=>ctrl.abort(),opts&&opts.timeout||NET_TIMEOUT):null;
+    const init={...opts,headers:{'Accept':'application/json',...(opts&&opts.headers||{})}};
+    if(ctrl)init.signal=ctrl.signal;
+    const resp=await fetch(`${state.workerUrl}${path}`,init);
+    if(timer)clearTimeout(timer);
+    if(!resp.ok)return null;
+    return await resp.json();
+  }catch(e){return null}
+}
+
+// Show/hide the network status banner. `mode` is 'offline' | 'fallback' | 'ok'.
+function setNetBanner(mode,msg){
+  const banner=document.getElementById('netBanner');
+  const text=document.getElementById('netBannerText');
+  const icon=document.getElementById('netBannerIcon');
+  const action=document.getElementById('netBannerAction');
+  if(!banner)return;
+  if(mode==='ok'){banner.classList.remove('show','info');return}
+  banner.classList.add('show');
+  banner.classList.toggle('info',mode==='fallback');
+  icon.textContent=mode==='offline'?'📴':'⚠️';
+  text.textContent=msg||(mode==='offline'?t('net_offline'):t('net_fallback'));
+  action.textContent=t('net_retry');
+}
+
+// True when the browser reports no connectivity.
+function isOffline(){return typeof navigator!=='undefined'&&navigator.onLine===false}
+
+// Track connectivity changes and reflect them in the banner.
+function initNetStatus(){
+  if(typeof window==='undefined')return;
+  const update=()=>{
+    if(isOffline())setNetBanner('offline',t('net_offline'));
+    else if(!state.workerUrl)setNetBanner('ok');
+    else setNetBanner('ok');
+  };
+  window.addEventListener('offline',()=>setNetBanner('offline',t('net_offline')));
+  window.addEventListener('online',()=>{update();retryNetwork()});
+  update();
+}
+
+// Retry button: re-test the worker and refresh the current view.
+async function retryNetwork(){
+  if(!state.workerUrl){setNetBanner('ok');return}
+  const data=await fetchWorker('/api/ping',{timeout:8000});
+  if(data&&data.ok){setNetBanner('ok');state.workerUnreachable=false;loadExplore();toast('✅ '+t('net_reconnected'))}
+  else{setNetBanner('fallback',t('net_fallback'));toast('⚠️ '+t('net_still_down'))}
+}
+
+async function doSearch(){const query=document.getElementById('searchInput').value.trim();if(!query)return;state.searchQuery=query;state.currentTab='search';document.querySelectorAll('.nav-tab').forEach(el=>el.classList.toggle('active',el.dataset.tab==='search'));document.getElementById('categoriesBar').style.display='none';document.getElementById('resultsHeader').style.display='flex';document.getElementById('content').innerHTML=renderSkeletons(6);let results=[];let live=false;if(state.workerUrl&&!isOffline()){const data=await fetchWorker(`/api/search?q=${encodeURIComponent(query)}&lang=${state.lang}`);if(data&&data.results){results=data.results;live=true}else{setNetBanner('fallback',t('net_fallback'));results=searchLocal(query)}}else{results=searchLocal(query);if(isOffline())setNetBanner('offline',t('net_offline'))}state.searchResults=results;document.getElementById('resultsCount').textContent=`${live?t('search_live'):t('search_local')} — ${results.length} ${t('results_for')} "${query}"`;renderResults()}
 function normalizeText(x){return (x||'').toLowerCase().replace(/ي/g,'ی').replace(/ك/g,'ک').replace(/[‌​]/g,' ').replace(/\s+/g,' ').trim()}
 function fuzzyScore(q,t){if(!q||!t)return 0;if(t===q)return 100;if(t.indexOf(q)===0)return 90;if(t.indexOf(q)>-1)return 80;let score=0,ti=0,m=0;for(const ch of q){const idx=t.indexOf(ch,ti);if(idx===-1){if(m===0)return 0;break}score+=10;m++;ti=idx+1}return m>=2?score:0}
 function searchLocal(q){q=(q||'').trim();if(!q)return[];const lang=state.searchLang||'all';let base=getAllChannels();if(lang!=='all')base=base.filter(ch=>ch.lang===lang);const nq=normalizeText(q);const scored=base.map(ch=>{const hay=normalizeText([ch.title,ch.username,ch.description,(ch.tags||[]).join(' ')].join(' '));return{ch,score:fuzzyScore(nq,hay)}}).filter(x=>x.score>0);scored.sort((a,b)=>b.score-a.score);return scored.map(x=>x.ch)}
@@ -603,7 +692,7 @@ function openRandomChannel(){
 // ============================================================
 // EXPLORE
 // ============================================================
-async function loadExplore(){const content=document.getElementById('content');content.innerHTML=renderSkeletons(9);try{let channels=[];const localOnly=['podcast','cinema'];if(state.workerUrl&&!localOnly.includes(state.currentCategory)){const url=state.currentCategory==='all'?`${state.workerUrl}/api/trending?page=1&lang=${state.searchLang}`: `${state.workerUrl}/api/trending?cat=${state.currentCategory}&page=1&lang=${state.searchLang}`;const resp=await fetch(url);const data=await resp.json();channels=data.channels||[];if(!channels.length)channels=getLocalExplore(state.currentCategory)}else{channels=getLocalExplore(state.currentCategory)}state.searchResults=channels;if(state.currentTab==='explore')state.currentView='explore';renderResults()}catch{content.innerHTML=renderEmpty(t('no_results'),t('no_results_desc'))}}
+async function loadExplore(){const content=document.getElementById('content');content.innerHTML=renderSkeletons(9);let channels=[];let live=false;const localOnly=['podcast','cinema'];if(state.workerUrl&&!localOnly.includes(state.currentCategory)&&!isOffline()){const url=state.currentCategory==='all'?`/api/trending?page=1&lang=${state.searchLang}`:`/api/trending?cat=${state.currentCategory}&page=1&lang=${state.searchLang}`;const data=await fetchWorker(url);if(data&&data.channels&&data.channels.length){channels=data.channels;live=true}else{setNetBanner('fallback',t('net_fallback'))}}if(!channels.length)channels=getLocalExplore(state.currentCategory);if(isOffline())setNetBanner('offline',t('net_offline'));else if(live)setNetBanner('ok');state.searchResults=channels;if(state.currentTab==='explore')state.currentView='explore';renderResults()}
 
 // ============================================================
 // FEED (Instagram-like)
@@ -626,14 +715,14 @@ async function loadFeed(){
   content.innerHTML=renderSkeletons(9);
   state.feedPool=[];state.feedPage=0;state.feedDone=false;window._feedLoading=false;
   try{
-    if(state.workerUrl){
+    if(state.workerUrl&&!isOffline()){
       const cat=state.currentCategory;
-      const resp=await fetch(`${state.workerUrl}/api/explore-feed?cat=${cat}&page=1&limit=30`);
-      const data=await resp.json();
-      if(data.posts?.length)state.feedPool=data.posts.slice();
-      state.feedMode='worker';
+      const data=await fetchWorker(`/api/explore-feed?cat=${cat}&page=1&limit=30`);
+      if(data&&data.posts&&data.posts.length){state.feedPool=data.posts.slice();state.feedMode='worker'}
+      else{state.feedMode='local';setNetBanner('fallback',t('net_fallback'))}
     }else{
       state.feedMode='local';
+      if(isOffline())setNetBanner('offline',t('net_offline'));
     }
     if(!state.feedPool.length&&state.feedMode==='worker')state.feedMode='local';
     if(state.feedMode==='local'&&!state.feedPool.length)state.feedPool=buildLocalFeedPool(state.currentCategory);
@@ -659,10 +748,9 @@ async function appendFeedPosts(){
     // Extend the pool in worker mode when it runs out
     if(state.feedMode==='worker'&&state.feedPool.length<rendered+30){
       const next=(state.feedPage||1)+1;
-      const resp=await fetch(`${state.workerUrl}/api/explore-feed?cat=${state.currentCategory}&page=${next}&limit=30`);
-      const data=await resp.json();
-      if(data.posts?.length){state.feedPool.push(...data.posts);state.feedPage=next}
-      else state.feedDone=true;
+      const data=await fetchWorker(`/api/explore-feed?cat=${state.currentCategory}&page=${next}&limit=30`);
+      if(data&&data.posts&&data.posts.length){state.feedPool.push(...data.posts);state.feedPage=next}
+      else{state.feedDone=true;setNetBanner('fallback',t('net_fallback'))}
     }
     const have=state.feedPool.length;
     if(rendered>=have){
@@ -1160,20 +1248,19 @@ function renderChart(data){
 function startNotifPoll(){if(!state.workerUrl||!state.favorites.length)return;checkNotifications();setInterval(checkNotifications,5*60*1000)}
 async function checkNotifications(){
   if(!state.workerUrl||!state.favorites.length)return;
+  if(isOffline()){setNetBanner('offline',t('net_offline'));return}
   const channels=state.favorites.map(f=>f.username).join(',');
-  try{
-    const resp=await fetch(`${state.workerUrl}/api/notifications?channels=${channels}&since=${state.lastNotifCheck}`);
-    const data=await resp.json();
-    state.lastNotifCheck=Date.now();localStorage.setItem('tgexp_last_notif',state.lastNotifCheck);
-    if(data.updates?.length){
-      state.notifUpdates=data.updates;
-      const totalNew=data.updates.reduce((s,u)=>s+u.newCount,0);
-      const badge=document.getElementById('notifBadge');
-      badge.textContent=totalNew>9?'9+':totalNew;badge.style.display='';
-      // Toast
-      if(totalNew>0)toast(`🔔 ${totalNew} ${t('new_posts')}`);
-    }
-  }catch{}
+  const data=await fetchWorker(`/api/notifications?channels=${channels}&since=${state.lastNotifCheck}`);
+  if(!data){setNetBanner('fallback',t('net_fallback'));return}
+  state.lastNotifCheck=Date.now();localStorage.setItem('tgexp_last_notif',state.lastNotifCheck);
+  if(data.updates?.length){
+    state.notifUpdates=data.updates;
+    const totalNew=data.updates.reduce((s,u)=>s+u.newCount,0);
+    const badge=document.getElementById('notifBadge');
+    badge.textContent=totalNew>9?'9+':totalNew;badge.style.display='';
+    // Toast
+    if(totalNew>0)toast(`🔔 ${totalNew} ${t('new_posts')}`);
+  }
 }
 function openNotifModal(){
   document.getElementById('notifOverlay').classList.add('open');document.body.style.overflow='hidden';

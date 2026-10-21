@@ -44,11 +44,20 @@ This repo ships a ready-made [`worker.js`](worker.js) + [`wrangler.toml`](wrangl
 
 ### v1.7.0
 
-- 🧪 **Playwright e2e suite + CI** — 7 browser tests (page load, local search,
+- 📴 **Real offline mode + transparent worker fallback** — when the network is
+  down a clear banner explains that cached data is being shown (and the app
+  keeps working from the service-worker cache); when the configured Worker
+  proxy cannot be reached, search / Explore / Feed / notifications silently
+  fall back to the local channel database with a visible notice instead of a
+  misleading "no results" screen. A **Retry** button re-tests the proxy and
+  reloads the view. All worker calls now go through a single 12 s
+  timeout-guarded helper, so a dead proxy can no longer hang the UI. Available
+  in all 7 languages
+- 🧪 **Playwright e2e suite + CI** — 9 browser tests (page load, local search,
   channel modal, language switch, keyboard focus, Enter-to-open, accessible
-  names) run automatically on every push to `master` via GitHub Actions
-  (`.github/workflows/test.yml`), together with a `verify-channels` job that
-  uploads the channel-health report as an artifact
+  names, offline mode, worker fallback) run automatically on every push to
+  `master` via GitHub Actions (`.github/workflows/test.yml`), together with a
+  `verify-channels` job that uploads the channel-health report as an artifact
 - 🩺 **Channel health report** — `verify_channels.js` now writes
   `verify_channels_report.json` (per-channel status, member tracking, dead /
   suspicious / renamed / duplicate lists) and can auto-prune confirmed-dead

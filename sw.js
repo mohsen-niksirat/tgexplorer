@@ -3,19 +3,28 @@
 // Handles caching for offline support and PWA
 // ============================================================
 
-const CACHE_NAME = 'tgexplorer-202609021900';
+const CACHE_NAME = 'tgexplorer-202610210900';
 const STATIC_ASSETS = [
   './',
   './index.html',
   './manifest.json',
+  './channels.js',
+  './posts.js',
+  './avatars.js',
 ];
 
-// Install: cache static assets
+// Install: cache static assets. Data files are best-effort — a missing
+// posts.js/avatars.js must not abort the whole installation (the app
+// degrades to whatever is available).
 self.addEventListener('install', event => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => {
-      return cache.addAll(STATIC_ASSETS);
-    })
+    caches.open(CACHE_NAME).then(cache =>
+      Promise.all(
+        STATIC_ASSETS.map(url =>
+          cache.add(new Request(url, { cache: 'reload' })).catch(() => {})
+        )
+      )
+    )
   );
   self.skipWaiting();
 });
