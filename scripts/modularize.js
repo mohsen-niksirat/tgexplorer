@@ -26,10 +26,17 @@ const src = fs.readFileSync(SOURCE, 'utf8');
 const lines = src.split('\n');
 
 // ---- Locate the inline <script> block ----
+// The app lives in a <script type="module">; other inline scripts (the
+// Cloudflare beacon loader, for example) may follow it, so the module is
+// preferred over the last classic script.
 let scriptLine = -1, isModule = false;
 for (let i = lines.length - 1; i >= 0; i--) {
-  if (/^<script>\s*$/.test(lines[i])) { scriptLine = i; break; }
   if (/^<script type="module">\s*$/.test(lines[i])) { scriptLine = i; isModule = true; break; }
+}
+if (scriptLine === -1) {
+  for (let i = lines.length - 1; i >= 0; i--) {
+    if (/^<script>\s*$/.test(lines[i])) { scriptLine = i; break; }
+  }
 }
 if (scriptLine === -1) { console.error('inline <script> not found'); process.exit(1); }
 let scriptEnd = -1;

@@ -164,251 +164,20 @@ body[data-fs="large"] .home-feed-text-clamped{-webkit-line-clamp:3}
    a visible focus ring for keyboard navigation (WCAG 2.4.7). */
 .lang-select:focus-visible,.connect-input:focus-visible,.search-input:focus-visible,.folder-new input:focus-visible,.folder-new-form input:focus-visible,.folder-add-channel input:focus-visible,.sug-field:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 </style>
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-</head>
-<body>
-
-<!-- HEADER -->
-<header class="header">
-  <div class="header-inner">
-    <div class="logo"><div class="logo-icon">🔍</div><span data-i18n="app_name">Telegram Explorer</span></div>
-    <div class="header-actions">
-      <div class="conn-badge disconnected" id="connBadge" title="Connection"><span class="dot"></span><span id="connBadgeText">Offline</span></div>
-      <select class="lang-select" id="langSelect" aria-label="Language"><option value="en">🇬🇧 EN</option><option value="fa">🇮🇷 فا</option><option value="ar">🇸🇦 ع</option><option value="zh">🇨🇳 中</option><option value="ru">🇷🇺 РУ</option><option value="es">🇪🇸 ES</option><option value="fr">🇫🇷 FR</option></select>
-      <button class="icon-btn" id="notifBtn" title="Notifications" aria-label="Notifications">🔔<span class="badge" id="notifBadge" style="display:none">0</span></button>
-      <button class="icon-btn" id="themeToggle" title="Theme" aria-label="Theme">🌙</button>
-      <button class="icon-btn" id="settingsBtn" title="Settings" aria-label="Settings">⚙️</button>
-    </div>
-  </div>
-</header>
-
-<!-- NETWORK / FALLBACK STATUS BANNER -->
-<div class="net-banner" id="netBanner" role="status" aria-live="polite">
-  <span class="net-banner-icon" id="netBannerIcon">📡</span>
-  <span class="net-banner-text" id="netBannerText">You are offline — showing cached data</span>
-  <button class="net-banner-action" id="netBannerAction" onclick="retryNetwork()">Retry</button>
-</div>
-
-<!-- SETUP SCREEN -->
-<div id="setupScreen" class="setup-screen" style="display:none">
-  <div class="setup-card">
-    <div class="setup-header">
-      <div class="setup-emoji">🚀</div>
-      <h1 data-i18n="setup_title">Setup Your Proxy</h1>
-      <p data-i18n="setup_subtitle">Create your own Cloudflare Worker proxy to search Telegram</p>
-    </div>
-    <div class="setup-body">
-      <div class="setup-steps">
-        <div class="setup-step"><h3 data-i18n="s1_title">Create Cloudflare Account</h3><p data-i18n="s1_desc">Go to Cloudflare and create a free account (no credit card needed)</p><a href="https://dash.cloudflare.com/sign-up" target="_blank" rel="noopener" class="setup-link">🌐 dash.cloudflare.com/sign-up</a></div>
-        <div class="setup-step"><h3 data-i18n="s2_title">Create a Worker</h3><p data-i18n="s2_desc">After login: Workers & Pages → Create Application → Create Worker → Choose any name</p></div>
-        <div class="setup-step"><h3 data-i18n="s3_title">Paste the Code</h3><p data-i18n="s3_desc">Delete all existing code in the editor and paste this code:</p><details class="code-details"><summary class="code-summary"><span data-i18n="show_code">📄 Show/Hide Code</span><button class="copy-btn" onclick="event.stopPropagation();copyWorkerCode()" data-i18n="copy_code">📋 Copy Code</button></summary><div class="code-block"><div class="code-header"><span>worker.js</span></div><div class="code-content" id="workerCodeBlock"></div></div></details></div>
-        <div class="setup-step"><h3 data-i18n="s4_title">Save & Deploy</h3><p data-i18n="s4_desc">Click "Save and Deploy" button. Copy your worker URL (looks like <code>https://xxx.xxx.workers.dev</code>)</p></div>
-        <div class="setup-step"><h3 data-i18n="s5_title">Connect Here</h3><p data-i18n="s5_desc">Paste your worker URL below and test the connection:</p></div>
-      </div>
-      <div class="connect-area">
-        <h3 data-i18n="connect_title">🔗 Connect Your Proxy</h3>
-        <div class="connect-input-row">
-          <input class="connect-input" id="workerUrlInput" type="url" placeholder="https://your-worker.your-subdomain.workers.dev" autocomplete="off" spellcheck="false">
-          <button class="connect-test-btn" id="testBtn" onclick="testConnection()"><span id="testBtnIcon">🔌</span><span id="testBtnText" data-i18n="test_connection">Test</span></button>
-        </div>
-        <div class="test-result" id="testResult"></div>
-      </div>
-      <button class="skip-btn" onclick="skipSetup()" data-i18n="skip_setup">Skip for now (use limited mode)</button>
-    </div>
-  </div>
-</div>
-
-<!-- HERO SEARCH -->
-<section class="hero" id="heroSection" style="display:none">
-  <div class="hero-content">
-    <h1 data-i18n="hero_title">Explore Telegram Channels</h1>
-    <p data-i18n="hero_subtitle">Search and discover public channels and groups across Telegram</p>
-    <div class="search-box">
-      <input class="search-input" id="searchInput" type="text" data-i18n-placeholder="search_placeholder" data-i18n-aria-label="search_placeholder" aria-label="Search channels, topics, groups..." autocomplete="off">
-      <button class="search-btn" id="searchBtn" data-i18n="search_btn">🔍 Search</button>
-    </div>
-    <div class="search-modes" id="searchModes" role="group" aria-label="Search mode">
-      <button class="search-mode-btn active" data-mode="channels" aria-pressed="true" onclick="setSearchMode('channels')" data-i18n="psr_mode_channels">🔎 Channels</button>
-      <button class="search-mode-btn" data-mode="posts" aria-pressed="false" onclick="setSearchMode('posts')" data-i18n="psr_mode_posts">💬 Posts</button>
-    </div>
-    <div class="search-tags" id="searchTags">
-      <span class="search-tag" data-query="technology">💻 Technology</span>
-      <span class="search-tag" data-query="crypto">🪙 Crypto</span>
-      <span class="search-tag" data-query="news">📰 News</span>
-      <span class="search-tag" data-query="meme">😂 Memes</span>
-      <span class="search-tag" data-query="programming">👨‍💻 Programming</span>
-      <span class="search-tag" data-query="science">🔬 Science</span>
-      <span class="search-tag" id="randomChip">🎲 Random</span>
-    </div>
-    <div class="ac-list" id="acList" style="display:none"></div>
-  </div>
-</section>
-
-<!-- MAIN CONTENT -->
-<main class="container" id="mainContent" style="display:none">
-  <nav class="nav-tabs" id="navTabs">
-    <button class="nav-tab" data-tab="home" data-i18n="tab_home">🏠 Home</button><button class="nav-tab active" data-tab="explore" data-i18n="tab_explore">🌐 Explore</button>
-    <button class="nav-tab" data-tab="feed" data-i18n="tab_feed">📸 Feed</button>
-    <button class="nav-tab" data-tab="search" data-i18n="tab_search">🔍 Search</button>
-    <button class="nav-tab" data-tab="favorites" data-i18n="tab_favorites">❤️ Favorites</button>
-  </nav>
-  <div class="categories-bar" id="categoriesBar"></div>
-  <div class="lang-filter" id="langFilter"><button class="lang-chip active" data-lang="all">🌐 <span data-i18n="all">All</span></button><button class="lang-chip" data-lang="fa">🇮🇷 فارسی</button><button class="lang-chip" data-lang="en">🇬🇧 English</button></div>
-  <div class="filter-bar" id="filterBar">
-    <span class="filter-bar-label" data-i18n="filters">⚙️ Filters</span>
-    <span class="filter-summary" id="filterSummary"></span>
-    <button class="filter-btn" id="clearFiltersBtn" onclick="clearFilters()">✕ Clear</button>
-    <button class="filter-btn primary" id="shareFiltersBtn" onclick="shareFilters()">🔗 Share</button>
-  </div>
-  <div class="results-header" id="resultsHeader" style="display:none">
-    <span class="results-count" id="resultsCount"></span>
-    <div class="view-toggle" role="group" aria-label="View mode"><button class="view-btn active" data-view="grid" aria-label="Grid view" title="Grid">⊞</button><button class="view-btn" data-view="list" aria-label="List view" title="List">☰</button><button class="view-btn" data-view="explore" aria-label="Explore view" title="Explore">⊡</button></div>
-  </div>
-  <div id="content"><div class="loading"><div class="spinner"></div><span data-i18n="loading">Loading...</span></div></div>
-</main>
-
-<!-- SETTINGS MODAL -->
-<div class="modal-overlay" id="settingsOverlay" role="dialog" aria-modal="true" aria-label="Settings">
-  <div class="modal" style="max-width:520px">
-    <div class="modal-header">
-      <div class="modal-avatar" style="background:var(--gradient)">⚙️</div>
-      <div><div class="modal-title" data-i18n="settings">Settings</div><div class="modal-user" data-i18n="settings_sub">Configure your proxy connection</div></div>
-      <button class="modal-close" aria-label="Close" onclick="closeSettings()">✕</button>
-    </div>
-    <div class="modal-body">
-      <a class="modal-btn modal-btn-primary" style="text-decoration:none;display:flex;justify-content:center;margin-bottom:20px" href="https://t.me/telgexplorerbot" target="_blank" rel="noopener"><span>🚀</span> <span data-i18n="open_telegram">Open in Telegram</span></a>
-      <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border);display:flex;gap:10px;flex-wrap:wrap"><button class="modal-btn modal-btn-secondary" onclick="exportBackup()"><span data-i18n="backup_export">📥 Export data</span></button><button class="modal-btn modal-btn-secondary" onclick="document.getElementById('importFileInput').click()"><span data-i18n="backup_import">📤 Import data</span></button><input type="file" id="importFileInput" accept=".json,application/json" style="display:none" onchange="importBackup(event)"></div>
-      <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap"><button class="modal-btn modal-btn-secondary" id="notifToggleBtn" onclick="toggleNotifs()"></button><button class="modal-btn modal-btn-secondary" onclick="openSuggestModal()"><span data-i18n="suggest_channel">💡 Suggest a channel</span></button></div>
-      <div style="margin-bottom:20px"><label style="font-size:14px;font-weight:600;display:block;margin-bottom:8px" data-i18n="worker_url_label">Worker Proxy URL</label><div class="connect-input-row"><input class="connect-input" id="settingsWorkerUrl" type="url" placeholder="https://xxx.workers.dev" autocomplete="off" spellcheck="false"></div></div>
-      <div class="modal-actions"><button class="modal-btn modal-btn-primary" onclick="saveSettings()"><span>💾</span> <span data-i18n="save_settings">Save</span></button><button class="modal-btn modal-btn-secondary" onclick="testFromSettings()"><span>🔌</span> <span data-i18n="test_connection">Test</span></button></div>
-      <div class="test-result" id="settingsTestResult"></div>
-      <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border)"><button class="modal-btn modal-btn-secondary" onclick="resetApp()" style="color:var(--error)"><span>🔄</span> <span data-i18n="reset_app">Reset & Show Setup Guide</span></button></div>
-      <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border);display:flex;gap:10px"><a class="modal-btn modal-btn-secondary" style="text-decoration:none" href="https://github.com/mohsen-niksirat" target="_blank" rel="noopener">🐙 GitHub</a><a class="modal-btn modal-btn-secondary" style="text-decoration:none" href="https://t.me/mohsenniksirat" target="_blank" rel="noopener">✈️ Telegram</a></div>
-    </div>
-  </div>
-    <button id="postScrollTop" class="post-scroll-top" onclick="scrollPostModalTop()" title="بازگشت به بالا" aria-label="بازگشت به بالا">↑</button>
-  </div>
-</div>
-
-<!-- FULL TEXT POPUP -->
-<div class="post-fulltext-overlay" id="fullTextOverlay" role="dialog" aria-modal="true" aria-label="Full text" onclick="if(event.target===this)closeFullText()">
-  <div class="post-fulltext">
-    <div class="post-fulltext-head">
-      <div class="home-feed-avatar" id="fullTextAvatar" style="width:36px;height:36px;font-size:15px">📝</div>
-      <div style="flex:1;min-width:0"><div class="home-feed-title" id="fullTextTitle"></div><div class="home-feed-user" id="fullTextUser"></div></div>
-      <button class="modal-close" style="margin:0" aria-label="Close" onclick="closeFullText()">✕</button>
-    </div>
-    <div class="post-fulltext-body" id="fullTextBody"></div>
-    <div class="post-fulltext-actions">
-      <button class="modal-btn modal-btn-secondary" onclick="copyFullText()">📋 <span data-i18n="copy_text">Copy text</span></button>
-      <button class="modal-btn modal-btn-secondary" onclick="window.open(window._fullTextLink||'#','_blank')">🔗 <span data-i18n="watch_post">View post</span></button>
-    </div>
-  </div>
-</div>
-
-<!-- CHANNEL DETAIL MODAL -->
-<div class="modal-overlay" id="postOverlay" role="dialog" aria-modal="true" aria-label="Post" onclick="if(event.target===this)closePostModal()">
-  <div class="modal" style="max-width:640px">
-    <div class="modal-header" id="postModalHead"></div>
-    <button class="modal-close" style="position:absolute;top:16px;left:16px;z-index:5" aria-label="Close" onclick="closePostModal()">✕</button>
-    <div class="modal-body" id="postModalBody"></div>
-  </div>
-</div>
-<div class="modal-overlay" id="channelOverlay" role="dialog" aria-modal="true" aria-label="Channel details">
-  <div class="modal" id="modal">
-    <div class="modal-header">
-      <div class="modal-avatar" id="modalAvatar">T</div>
-      <div><div class="modal-title" id="modalTitle"></div><div class="modal-user" id="modalUser"></div><div class="modal-members-display" id="modalMembers"></div></div>
-      <button class="modal-close" aria-label="Close" onclick="closeChannelModal()">✕</button>
-    </div>
-    <div class="modal-body">
-      <div class="modal-desc" id="modalDesc"></div>
-      <!-- Stats -->
-      <div class="stats-grid" id="modalStats" style="display:none"></div>
-      <!-- Chart -->
-      <div class="chart-container" id="modalChart" style="display:none"><div class="chart-head"><h4 id="activityChartTitle" data-i18n="activity_chart">📊 Activity (7 days)</h4><div class="chart-range" role="group" aria-label="Chart range"><button class="chart-range-btn active" data-days="7" onclick="setChartRange(7)">7</button><button class="chart-range-btn" data-days="30" onclick="setChartRange(30)">30</button></div></div><canvas class="chart-canvas" id="activityChart"></canvas></div>
-      <!-- Content tags -->
-      <div class="modal-tags" id="modalTags" style="display:none"></div>
-      <!-- Actions -->
-      <div class="modal-actions">
-        <button class="modal-btn modal-btn-primary" id="modalOpenTg"><span>✈️</span> <span data-i18n="open_telegram">Open in Telegram</span></button>
-        <button class="modal-btn modal-btn-secondary" id="modalFavBtn"><span>❤️</span> <span data-i18n="save">Save</span></button><button class="modal-btn modal-btn-secondary" id="modalFolderBtn"><span>🗂</span> <span>Folder</span></button><button class="modal-btn modal-btn-secondary" id="modalShareBtn"><span>🔗</span> <span data-i18n="share_link">Share link</span></button>
-      </div>
-      <!-- Related -->
-      <div class="related-section" id="modalRelated" style="display:none"><h4 data-i18n="related_channels">🔗 Related Channels</h4><div class="related-chips" id="relatedChips"></div></div>
-      <!-- Posts -->
-      <div class="modal-posts-title" data-i18n="recent_posts">Recent Posts</div>
-      <div class="modal-posts" id="modalPosts"><div class="loading"><div class="spinner"></div></div></div>
-    </div>
-  </div>
-</div>
-
-
-<!-- FOLDER PICKER MODAL -->
-<div class="modal-overlay" id="folderPicker" role="dialog" aria-modal="true" aria-label="Add to folder">
-  <div class="modal" style="max-width:420px">
-    <div class="modal-header">
-      <div class="modal-avatar" style="background:var(--gradient)">🗂</div>
-      <div><div class="modal-title">افزودن به فولدر</div><div class="modal-user" id="folderPickerLabel"></div></div>
-      <button class="modal-close" aria-label="Close" onclick="closeFolderPicker()">✕</button>
-    </div>
-    <div class="modal-body">
-      <div id="folderPickerList"></div>
-      <div class="folder-new">
-        <input id="folderNewName" placeholder="نام فولدر جدید..." onkeydown="if(event.key==='Enter')createFolderFromPicker()">
-        <button class="modal-btn modal-btn-primary" onclick="createFolderFromPicker()">➕ ساخت</button>
-      </div>
-      <div id="folderIconRowPick"></div>
-    </div>
-  </div>
-</div>
-<!-- NOTIFICATIONS MODAL -->
-<div class="modal-overlay" id="notifOverlay" role="dialog" aria-modal="true" aria-label="Notifications">
-  <div class="modal" style="max-width:480px">
-    <div class="modal-header">
-      <div class="modal-avatar" style="background:var(--gradient)">🔔</div>
-      <div><div class="modal-title" data-i18n="notifications">Notifications</div><div class="modal-user" data-i18n="notif_sub">Updates from your saved channels</div></div>
-      <button class="modal-close" aria-label="Close" onclick="closeNotifModal()">✕</button>
-    </div>
-    <div class="modal-body">
-      <div id="notifContent"><div class="empty-state"><div class="empty-icon">🔔</div><h3 data-i18n="no_notifs">No notifications yet</h3><p data-i18n="no_notifs_desc">Save channels as favorites to track updates</p></div></div>
-    </div>
-  </div>
-</div>
-
-<div class="modal-overlay" id="suggestOverlay" role="dialog" aria-modal="true" aria-label="Suggest a channel">
-  <div class="modal" style="max-width:480px">
-    <div class="modal-header">
-      <div class="modal-avatar" style="background:var(--gradient)">💡</div>
-      <div><div class="modal-title" data-i18n="suggest_channel">💡 Suggest a channel</div><div class="modal-user">github.com/mohsen-niksirat/tgexplorer</div></div>
-      <button class="modal-close" aria-label="Close" onclick="closeSuggestModal()">✕</button>
-    </div>
-    <div class="modal-body">
-      <label class="sug-label">Username (@)</label><input class="sug-field" id="sugUsername" placeholder="username" autocomplete="off">
-      <label class="sug-label">Title</label><input class="sug-field" id="sugTitle" placeholder="Channel title" autocomplete="off">
-      <div class="sug-row">
-        <div style="flex:1"><label class="sug-label">Language</label><select class="sug-field" id="sugLang"><option value="fa">🇮🇷 فارسی</option><option value="en" selected>🇬🇧 English</option></select></div>
-        <div style="flex:1"><label class="sug-label">Category</label><select class="sug-field" id="sugCat"><option value="news">📰 News</option><option value="tech">💻 Tech</option><option value="crypto">🪙 Crypto</option><option value="entertainment">🎬 Entertainment</option><option value="science">🔬 Science</option><option value="sports">⚽ Sports</option><option value="music">🎵 Music</option><option value="education">📚 Education</option><option value="travel">✈️ Travel</option><option value="photography">📷 Photography</option></select></div>
-      </div>
-      <label class="sug-label">Description</label><textarea class="sug-field" id="sugDesc" rows="3" placeholder="What is this channel about?"></textarea>
-      <div class="modal-actions" style="margin-bottom:0"><button class="modal-btn modal-btn-primary" onclick="submitSuggestion()">💾 Submit</button><button class="modal-btn modal-btn-secondary" onclick="closeSuggestModal()">Cancel</button></div>
-      <div class="sug-result" id="sugResult" style="display:none"></div>
-    </div>
-  </div>
-</div>
-
-<!-- PWA INSTALL BANNER -->
-<div class="pwa-banner" id="pwaBanner">
-  <div class="pwa-banner-icon">📱</div>
-  <div class="pwa-banner-info"><div class="pwa-banner-title">Install Telegram Explorer</div><div class="pwa-banner-desc">Add to home screen for quick access</div></div>
-  <div class="pwa-banner-btns"><button class="pwa-btn pwa-btn-install" id="pwaInstallBtn">Install</button><button class="pwa-btn pwa-btn-dismiss" id="pwaDismissBtn">Later</button></div>
-</div>
-
-<div class="toast-container" id="toastContainer"></div>
-
-<script src="posts.js"></script>
-<script src="channels.js"></script>
-<script src="avatars.js"></script>
+    <!-- The Telegram WebApp SDK is only needed inside Telegram, so it is
+         loaded once the app is interactive instead of blocking the first
+         render. -->
+    <script>
+    window.addEventListener('load',function(){
+      var s=document.createElement('script');
+      s.src='https://telegram.org/js/telegram-web-app.js';
+      s.defer=true;
+      document.body.appendChild(s);
+    });
+    </script>
+<script src="posts.js" defer></script>
+<script src="channels.js" defer></script>
+<script src="avatars.js" defer></script>
 <script type="module">
 // ============================================================
 // MODULES
@@ -822,6 +591,16 @@ function openRandomChannel(){
 // ============================================================
 // EXPLORE
 // ============================================================
+// How many channels the Explore grid renders at once.
+const EXPLORE_PAGE=12;
+// Show the next page of the Explore grid.
+function showMoreExplore(){
+  state.explorePage=(state.explorePage||EXPLORE_PAGE)+EXPLORE_PAGE;
+  renderResults();
+}
+// Back to the first page (used when a filter or the sort changes).
+function resetExplorePage(){state.explorePage=EXPLORE_PAGE}
+
 async function loadExplore(){const content=document.getElementById('content');content.innerHTML=renderSkeletons(9);let channels=[];let live=false;const f=filterState();const localOnly=['podcast','cinema'];const qCat=f.cats.length===1?f.cats[0]:'all';const qLang=f.langs.length===1?f.langs[0]:(state.lang||'en');if(state.workerUrl&&!localOnly.includes(qCat)&&!isOffline()){const url=qCat==='all'?`/api/trending?page=1&lang=${qLang}`:`/api/trending?cat=${qCat}&page=1&lang=${qLang}`;const data=await fetchWorker(url);if(data&&data.channels&&data.channels.length){channels=data.channels;live=true}else{setNetBanner('fallback',t('net_fallback'))}}if(!channels.length){channels=getLocalExplore();channels=applyExploreFilters(channels)}else{channels=applyExploreFilters(channels,true)}if(isOffline())setNetBanner('offline',t('net_offline'));else if(live)setNetBanner('ok');state.searchResults=channels;if(state.currentTab==='explore')state.currentView='explore';renderResults()}
 
 // ============================================================
@@ -952,7 +731,7 @@ function renderResults(){if(window._sharedFolder)return;const content=document.g
 
 function renderGridView(container,items){container.innerHTML=`<div class="results-grid">${items.map(ch=>`<div class="channel-card" tabindex="0" role="button" onclick="openChannel('${ch.username}')" onkeydown="if(event.key==='Enter'){openChannel('${ch.username}')}"><div class="card-banner"><div class="card-banner-overlay"></div><div class="card-avatar" style="${avatarGrad(ch.username)}">${ch.avatar?`<img src="${ch.avatar}" alt="" loading="lazy">`:ch.title[0].toUpperCase()}</div></div><div class="card-body"><div class="card-title">${escHtml(ch.title)}</div><div class="card-username">@${escHtml(ch.username)}<span class="lang-badge ${ch.lang==='fa'?'fa':'en'}">${ch.lang==='fa'?'🇮🇷 فارسی':'🇬🇧 EN'}</span></div>${ch.tags?.length?`<div class="card-tags">${ch.tags.slice(0,3).map(tg=>`<span class="card-tag">${tg}</span>`).join('')}</div>`:''}<div class="card-desc">${escHtml(ch.description||ch.title)}</div><div class="card-footer"><div class="card-members">👥 ${ch.members||'0'} ${t('members')}</div><div class="card-actions"><button class="card-action-btn ${isFav(ch.username)?'favorited':''}" aria-label="${isFav(ch.username)?'Unsave':'Save'} channel" title="${isFav(ch.username)?'Unsave':'Save'}" onclick="event.stopPropagation();toggleFav('${ch.username}','${escAttr(ch.title)}')">${isFav(ch.username)?'❤️':'🤍'}</button><button class="card-action-btn" aria-label="Copy link" title="Copy link" onclick="event.stopPropagation();copyLink('${ch.username}')">🔗</button><button class="card-action-btn" aria-label="Add to folder" title="Add to folder" onclick="event.stopPropagation();openFolderPicker('ch','${ch.username}','','${escAttr(ch.title)}')">🗂</button></div></div></div></div>`).join('')}</div>`}
 
-function renderListView(container,items){container.innerHTML=`<div class="results-list">${items.map(ch=>`<div class="list-item" tabindex="0" role="button" onclick="openChannel('${ch.username}')" onkeydown="if(event.key==='Enter'){openChannel('${ch.username}')}"><div class="list-avatar" style="${avatarGrad(ch.username)}">${ch.avatar?`<img src="${ch.avatar}" alt="" loading="lazy">`:ch.title[0].toUpperCase()}</div><div class="list-info"><div class="list-title">${escHtml(ch.title)}</div><div class="list-user">@${escHtml(ch.username)}</div><div class="list-desc">${escHtml(ch.description||'')}</div></div><div class="list-meta"><span class="list-members">👥 ${ch.members||'0'}</span><button class="card-action-btn ${isFav(ch.username)?'favorited':''}" aria-label="${isFav(ch.username)?'Unsave':'Save'} channel" title="${isFav(ch.username)?'Unsave':'Save'}" onclick="event.stopPropagation();toggleFav('${ch.username}','${escAttr(ch.title)}')">${isFav(ch.username)?'❤️':'🤍'}</button></div></div>`).join('')}</div>`}
+function renderListView(container,items){const page=state.explorePage||EXPLORE_PAGE;const shown=items.slice(0,page);container.innerHTML=`<div class="results-list">${shown.map(ch=>`<div class="list-item" tabindex="0" role="button" onclick="openChannel('${ch.username}')" onkeydown="if(event.key==='Enter'){openChannel('${ch.username}')}"><div class="list-avatar" style="${avatarGrad(ch.username)}">${ch.avatar?`<img src="${ch.avatar}" alt="" loading="lazy">`:ch.title[0].toUpperCase()}</div><div class="list-info"><div class="list-title">${escHtml(ch.title)}</div><div class="list-user">@${escHtml(ch.username)}</div><div class="list-desc">${escHtml(ch.description||'')}</div></div><div class="list-meta"><span class="list-members">👥 ${ch.members||'0'}</span><button class="card-action-btn ${isFav(ch.username)?'favorited':''}" aria-label="${isFav(ch.username)?'Unsave':'Save'} channel" title="${isFav(ch.username)?'Unsave':'Save'}" onclick="event.stopPropagation();toggleFav('${ch.username}','${escAttr(ch.title)}')">${isFav(ch.username)?'❤️':'🤍'}</button></div></div>`).join('')}</div>`+(items.length>page?'<div class="explore-more"><button class="explore-more-btn" onclick="showMoreExplore()">'+escHtml(t('show_more_channels'))+'</button></div>':'')}
 
 function getChannelPosts(username){
   try{
@@ -993,9 +772,13 @@ function renderExploreView(container,items){
   const f=filterState();
   const bar='<div class="etype-bar" id="etypeBar">'+types.map(ty=>'<button class="etype-chip '+((f.types.length===0&&ty[0]==='all')||f.types.includes(ty[0])?'active':'')+'" data-type="'+ty[0]+'" aria-pressed="'+((f.types.length===0&&ty[0]==='all')||f.types.includes(ty[0]))+'" onclick="toggleExploreType(\''+ty[0]+'\')">'+ty[1]+'</button>').join('')+viewToggleHtml()+'</div>';
   let filtered=sortExplore(type==='all'?items:items.filter(ch=>typeOf(ch)===type));
+  const page=state.explorePage||EXPLORE_PAGE;
+  const shown=filtered.slice(0,page);
+  filtered=shown;
   if(state.exploreView==='list'&&state.exploreSearch){const q=state.exploreSearch.toLowerCase();filtered=filtered.filter(ch=>(ch.title||'').toLowerCase().includes(q)||(ch.username||'').toLowerCase().includes(q));}
   const searchHtml=state.exploreView==='list'?'<div style="padding:0 8px 10px"><input class="sug-field" style="width:100%" placeholder="'+t('instant_search')+'" value="'+escAttr(state.exploreSearch)+'" oninput="setExploreSearch(this.value)"></div>':'';
   const listBody=filtered.length?exploreListViewHtml(filtered,colors):'<div style="padding:24px;text-align:center;color:#888">"+t(no_match)+"</div>';
+  const more=items.length>page?'<div class="explore-more"><button class="explore-more-btn" onclick="showMoreExplore()">'+escHtml(t('show_more_channels'))+'</button></div>':'';
   container.innerHTML=bar+exploreSortHtml()+searchHtml+(state.exploreView==='list'?listBody:`<div class="explore-grid">${filtered.map((ch,i)=>{
     const posts=getChannelPosts(ch.username);
     const post=posts[0]||null;
@@ -1015,7 +798,7 @@ function renderExploreView(container,items){
         <div class="explore-item-foot"><span class="feed-type-badge">📝</span><span style="font-size:11px;color:var(--text-secondary)">👥 ${ch.members||'0'}</span></div>
       </div>`;
     }
-    const imgHtml=img?`<img src="${img}" alt="" loading="lazy" onerror="this.style.display='none'">`:`<div style="width:100%;height:100%;background:${color};display:flex;align-items:center;justify-content:center;font-size:36px;color:#fff;font-weight:700">${initial}</div>`;
+    const imgHtml=img?`<img src="${img}" alt="" loading="lazy" decoding="async"${i===0?' fetchpriority="high"':''} onerror="this.style.display='none'">`:`<div style="width:100%;height:100%;background:${color};display:flex;align-items:center;justify-content:center;font-size:36px;color:#fff;font-weight:700">${initial}</div>`;
     const previewText=post&&post.text?post.text.slice(0,200):'';
     return `<div class="explore-item" tabindex="0" role="button" onclick="${onclick}" onkeydown="if(event.key==='Enter'){${onclick}}" style="aspect-ratio:3/4">
       ${imgHtml}
@@ -1029,7 +812,7 @@ function renderExploreView(container,items){
         </div>
       </div>
     </div>`;
-  }).join('')}</div>`);
+  }).join('')}</div>`)+more;
 }function openPostModal(username, idx){
   idx=idx||0;
   const posts=getChannelPosts(username);
@@ -1704,7 +1487,7 @@ function sortPosts(list){
   else if(s==='type')arr.sort((a,b)=>((b.hasVideo?2:(b.image?1:0))-((a.hasVideo?2:(a.image?1:0)))));
   return arr;
 }
-function setExploreSort(v){state.exploreSort=v;localStorage.setItem('tgexp_esort',v);syncUrlFilters(true);renderResults()}
+function setExploreSort(v){state.exploreSort=v;localStorage.setItem('tgexp_esort',v);syncUrlFilters(true);resetExplorePage();renderResults()}
 // ============================================================
 // ADVANCED EXPLORE FILTERS
 // ------------------------------------------------------------
@@ -1737,6 +1520,7 @@ function toggleFilter(kind,value){
   state[key]=arr;
   saveFilters();
   syncUrlFilters(true);
+  resetExplorePage();
   renderFilterBar();
   renderFilterChips();
   applyFiltersToView();
@@ -1747,6 +1531,7 @@ function clearFilters(){
   state.filterTypes=[];
   saveFilters();
   syncUrlFilters(true);
+  resetExplorePage();
   renderFilterBar();
   renderFilterChips();
   applyFiltersToView();
@@ -1826,6 +1611,7 @@ function toggleExploreType(ty){
   }
   saveFilters();
   syncUrlFilters(true);
+  resetExplorePage();
   renderFilterBar();
   renderFilterChips();
   applyFiltersToView();
@@ -1852,7 +1638,7 @@ function exploreSortHtml(){
   return '<div style="display:flex;gap:8px;margin-bottom:12px;align-items:center"><span style="font-size:13px;color:var(--text-secondary);white-space:nowrap">'+t('sort')+':</span><select class="sug-field" style="flex:1;margin-bottom:0" aria-label="'+escAttr(t('sort'))+'" onchange="setExploreSort(this.value)">'+opts+'</select></div>';
 }
 function setExploreView(v){
-  state.exploreView=v;localStorage.setItem('tgexp_eview',v);
+  state.exploreView=v;localStorage.setItem('tgexp_eview',v);resetExplorePage();
   const tab=state.currentTab;
   if(tab==='favorites'){renderFavorites();return}
   if(tab==='home'){const hf=window._homeFeed;if(hf){hf.rendered=0;renderHomeFeedChunk(true)}return}
@@ -3143,10 +2929,374 @@ Object.assign(window, {
   togglePostFav,
 });
 
+
+// ============================================================
+// WINDOW BRIDGE
+// ----------------------------------------------------------
+// Inline `onclick="fn(...)"` handlers and the e2e suite expect the
+// app functions on `window` (as they were in the classic script).
+// ============================================================
+Object.assign(window, {
+  addAutoAll,
+  addAutoOne,
+  addChannelToFolder,
+  applyExploreFilters,
+  applyFiltersToView,
+  clearFilters,
+  clearFolderRule,
+  clearLivePosts,
+  closeChannelModal,
+  closeFolderPicker,
+  closeFullText,
+  closeNotifModal,
+  closePostModal,
+  closeSettings,
+  closeSuggestModal,
+  copyFullText,
+  copyLink,
+  copyPostLink,
+  copyPostMarkdown,
+  copyPostText,
+  copySuggestBody,
+  copyWorkerCode,
+  createFolderFromPicker,
+  createFolderFromTab,
+  createSmartFolders,
+  cycleFolderIcon,
+  cycleFontSize,
+  deepSearchPosts,
+  deleteFolder,
+  dismissSharedFolder,
+  doSearch,
+  downloadPostMedia,
+  editFolder,
+  escAttr,
+  exportBackup,
+  exportPostsPdf,
+  exportPostsTxt,
+  fetchFavNewPosts,
+  filterState,
+  folderExportJson,
+  folderExportPdf,
+  folderExportTxt,
+  fpToggle,
+  getAllChannels,
+  getChannelPosts,
+  getLocalExplore,
+  importBackup,
+  importSharedFolder,
+  loadExplore,
+  loadFeed,
+  loadSharedLivePosts,
+  openChannel,
+  openFeedPost,
+  openFolderPicker,
+  openHomePost,
+  openLivePost,
+  openPostModal,
+  openSavedPost,
+  openSuggestModal,
+  pickFolderIcon,
+  readUrlFilters,
+  refreshFolderPosts,
+  removeFolderItem,
+  renderCategories,
+  renderFavFiltered,
+  renderFavorites,
+  renderFilterBar,
+  renderFilterChips,
+  renderResults,
+  resetApp,
+  retryNetwork,
+  saveFilters,
+  saveFolderRule,
+  saveSettings,
+  scrollPostModalTop,
+  searchLocal,
+  setChartRange,
+  setExploreSearch,
+  setExploreSort,
+  setExploreView,
+  setFavPostType,
+  setFavSort,
+  setHomeType,
+  setSearchMode,
+  shareFilters,
+  shareFolder,
+  sharePost,
+  showMoreExplore,
+  skipSetup,
+  state,
+  submitSuggestion,
+  switchTab,
+  syncUrlFilters,
+  t,
+  testConnection,
+  testFromSettings,
+  toast,
+  toggleExploreType,
+  toggleFav,
+  toggleFilter,
+  toggleNotifs,
+  togglePostFav,
+});
+
 </script>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-inner">
+    <div class="logo"><div class="logo-icon">🔍</div><span data-i18n="app_name">Telegram Explorer</span></div>
+    <div class="header-actions">
+      <div class="conn-badge disconnected" id="connBadge" title="Connection"><span class="dot"></span><span id="connBadgeText">Offline</span></div>
+      <select class="lang-select" id="langSelect" aria-label="Language"><option value="en">🇬🇧 EN</option><option value="fa">🇮🇷 فا</option><option value="ar">🇸🇦 ع</option><option value="zh">🇨🇳 中</option><option value="ru">🇷🇺 РУ</option><option value="es">🇪🇸 ES</option><option value="fr">🇫🇷 FR</option></select>
+      <button class="icon-btn" id="notifBtn" title="Notifications" aria-label="Notifications">🔔<span class="badge" id="notifBadge" style="display:none">0</span></button>
+      <button class="icon-btn" id="themeToggle" title="Theme" aria-label="Theme">🌙</button>
+      <button class="icon-btn" id="settingsBtn" title="Settings" aria-label="Settings">⚙️</button>
+    </div>
+  </div>
+</header>
+
+<!-- NETWORK / FALLBACK STATUS BANNER -->
+<div class="net-banner" id="netBanner" role="status" aria-live="polite">
+  <span class="net-banner-icon" id="netBannerIcon">📡</span>
+  <span class="net-banner-text" id="netBannerText">You are offline — showing cached data</span>
+  <button class="net-banner-action" id="netBannerAction" onclick="retryNetwork()">Retry</button>
+</div>
+
+<!-- SETUP SCREEN -->
+<div id="setupScreen" class="setup-screen" style="display:none">
+  <div class="setup-card">
+    <div class="setup-header">
+      <div class="setup-emoji">🚀</div>
+      <h1 data-i18n="setup_title">Setup Your Proxy</h1>
+      <p data-i18n="setup_subtitle">Create your own Cloudflare Worker proxy to search Telegram</p>
+    </div>
+    <div class="setup-body">
+      <div class="setup-steps">
+        <div class="setup-step"><h3 data-i18n="s1_title">Create Cloudflare Account</h3><p data-i18n="s1_desc">Go to Cloudflare and create a free account (no credit card needed)</p><a href="https://dash.cloudflare.com/sign-up" target="_blank" rel="noopener" class="setup-link">🌐 dash.cloudflare.com/sign-up</a></div>
+        <div class="setup-step"><h3 data-i18n="s2_title">Create a Worker</h3><p data-i18n="s2_desc">After login: Workers & Pages → Create Application → Create Worker → Choose any name</p></div>
+        <div class="setup-step"><h3 data-i18n="s3_title">Paste the Code</h3><p data-i18n="s3_desc">Delete all existing code in the editor and paste this code:</p><details class="code-details"><summary class="code-summary"><span data-i18n="show_code">📄 Show/Hide Code</span><button class="copy-btn" onclick="event.stopPropagation();copyWorkerCode()" data-i18n="copy_code">📋 Copy Code</button></summary><div class="code-block"><div class="code-header"><span>worker.js</span></div><div class="code-content" id="workerCodeBlock"></div></div></details></div>
+        <div class="setup-step"><h3 data-i18n="s4_title">Save & Deploy</h3><p data-i18n="s4_desc">Click "Save and Deploy" button. Copy your worker URL (looks like <code>https://xxx.xxx.workers.dev</code>)</p></div>
+        <div class="setup-step"><h3 data-i18n="s5_title">Connect Here</h3><p data-i18n="s5_desc">Paste your worker URL below and test the connection:</p></div>
+      </div>
+      <div class="connect-area">
+        <h3 data-i18n="connect_title">🔗 Connect Your Proxy</h3>
+        <div class="connect-input-row">
+          <input class="connect-input" id="workerUrlInput" type="url" placeholder="https://your-worker.your-subdomain.workers.dev" autocomplete="off" spellcheck="false">
+          <button class="connect-test-btn" id="testBtn" onclick="testConnection()"><span id="testBtnIcon">🔌</span><span id="testBtnText" data-i18n="test_connection">Test</span></button>
+        </div>
+        <div class="test-result" id="testResult"></div>
+      </div>
+      <button class="skip-btn" onclick="skipSetup()" data-i18n="skip_setup">Skip for now (use limited mode)</button>
+    </div>
+  </div>
+</div>
+
+<!-- HERO SEARCH -->
+<section class="hero" id="heroSection" style="display:none">
+  <div class="hero-content">
+    <h1 data-i18n="hero_title">Explore Telegram Channels</h1>
+    <p data-i18n="hero_subtitle">Search and discover public channels and groups across Telegram</p>
+    <div class="search-box">
+      <input class="search-input" id="searchInput" type="text" data-i18n-placeholder="search_placeholder" data-i18n-aria-label="search_placeholder" aria-label="Search channels, topics, groups..." autocomplete="off">
+      <button class="search-btn" id="searchBtn" data-i18n="search_btn">🔍 Search</button>
+    </div>
+    <div class="search-modes" id="searchModes" role="group" aria-label="Search mode">
+      <button class="search-mode-btn active" data-mode="channels" aria-pressed="true" onclick="setSearchMode('channels')" data-i18n="psr_mode_channels">🔎 Channels</button>
+      <button class="search-mode-btn" data-mode="posts" aria-pressed="false" onclick="setSearchMode('posts')" data-i18n="psr_mode_posts">💬 Posts</button>
+    </div>
+    <div class="search-tags" id="searchTags">
+      <span class="search-tag" data-query="technology">💻 Technology</span>
+      <span class="search-tag" data-query="crypto">🪙 Crypto</span>
+      <span class="search-tag" data-query="news">📰 News</span>
+      <span class="search-tag" data-query="meme">😂 Memes</span>
+      <span class="search-tag" data-query="programming">👨‍💻 Programming</span>
+      <span class="search-tag" data-query="science">🔬 Science</span>
+      <span class="search-tag" id="randomChip">🎲 Random</span>
+    </div>
+    <div class="ac-list" id="acList" style="display:none"></div>
+  </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<main class="container" id="mainContent" style="display:none">
+  <nav class="nav-tabs" id="navTabs">
+    <button class="nav-tab" data-tab="home" data-i18n="tab_home">🏠 Home</button><button class="nav-tab active" data-tab="explore" data-i18n="tab_explore">🌐 Explore</button>
+    <button class="nav-tab" data-tab="feed" data-i18n="tab_feed">📸 Feed</button>
+    <button class="nav-tab" data-tab="search" data-i18n="tab_search">🔍 Search</button>
+    <button class="nav-tab" data-tab="favorites" data-i18n="tab_favorites">❤️ Favorites</button>
+  </nav>
+  <div class="categories-bar" id="categoriesBar"></div>
+  <div class="lang-filter" id="langFilter"><button class="lang-chip active" data-lang="all">🌐 <span data-i18n="all">All</span></button><button class="lang-chip" data-lang="fa">🇮🇷 فارسی</button><button class="lang-chip" data-lang="en">🇬🇧 English</button></div>
+  <div class="filter-bar" id="filterBar">
+    <span class="filter-bar-label" data-i18n="filters">⚙️ Filters</span>
+    <span class="filter-summary" id="filterSummary"></span>
+    <button class="filter-btn" id="clearFiltersBtn" onclick="clearFilters()">✕ Clear</button>
+    <button class="filter-btn primary" id="shareFiltersBtn" onclick="shareFilters()">🔗 Share</button>
+  </div>
+  <div class="results-header" id="resultsHeader" style="display:none">
+    <span class="results-count" id="resultsCount"></span>
+    <div class="view-toggle" role="group" aria-label="View mode"><button class="view-btn active" data-view="grid" aria-label="Grid view" title="Grid">⊞</button><button class="view-btn" data-view="list" aria-label="List view" title="List">☰</button><button class="view-btn" data-view="explore" aria-label="Explore view" title="Explore">⊡</button></div>
+  </div>
+  <div id="content"><div class="loading"><div class="spinner"></div><span data-i18n="loading">Loading...</span></div></div>
+</main>
+
+<!-- SETTINGS MODAL -->
+<div class="modal-overlay" id="settingsOverlay" role="dialog" aria-modal="true" aria-label="Settings">
+  <div class="modal" style="max-width:520px">
+    <div class="modal-header">
+      <div class="modal-avatar" style="background:var(--gradient)">⚙️</div>
+      <div><div class="modal-title" data-i18n="settings">Settings</div><div class="modal-user" data-i18n="settings_sub">Configure your proxy connection</div></div>
+      <button class="modal-close" aria-label="Close" onclick="closeSettings()">✕</button>
+    </div>
+    <div class="modal-body">
+      <a class="modal-btn modal-btn-primary" style="text-decoration:none;display:flex;justify-content:center;margin-bottom:20px" href="https://t.me/telgexplorerbot" target="_blank" rel="noopener"><span>🚀</span> <span data-i18n="open_telegram">Open in Telegram</span></a>
+      <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border);display:flex;gap:10px;flex-wrap:wrap"><button class="modal-btn modal-btn-secondary" onclick="exportBackup()"><span data-i18n="backup_export">📥 Export data</span></button><button class="modal-btn modal-btn-secondary" onclick="document.getElementById('importFileInput').click()"><span data-i18n="backup_import">📤 Import data</span></button><input type="file" id="importFileInput" accept=".json,application/json" style="display:none" onchange="importBackup(event)"></div>
+      <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap"><button class="modal-btn modal-btn-secondary" id="notifToggleBtn" onclick="toggleNotifs()"></button><button class="modal-btn modal-btn-secondary" onclick="openSuggestModal()"><span data-i18n="suggest_channel">💡 Suggest a channel</span></button></div>
+      <div style="margin-bottom:20px"><label style="font-size:14px;font-weight:600;display:block;margin-bottom:8px" data-i18n="worker_url_label">Worker Proxy URL</label><div class="connect-input-row"><input class="connect-input" id="settingsWorkerUrl" type="url" placeholder="https://xxx.workers.dev" autocomplete="off" spellcheck="false"></div></div>
+      <div class="modal-actions"><button class="modal-btn modal-btn-primary" onclick="saveSettings()"><span>💾</span> <span data-i18n="save_settings">Save</span></button><button class="modal-btn modal-btn-secondary" onclick="testFromSettings()"><span>🔌</span> <span data-i18n="test_connection">Test</span></button></div>
+      <div class="test-result" id="settingsTestResult"></div>
+      <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border)"><button class="modal-btn modal-btn-secondary" onclick="resetApp()" style="color:var(--error)"><span>🔄</span> <span data-i18n="reset_app">Reset & Show Setup Guide</span></button></div>
+      <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border);display:flex;gap:10px"><a class="modal-btn modal-btn-secondary" style="text-decoration:none" href="https://github.com/mohsen-niksirat" target="_blank" rel="noopener">🐙 GitHub</a><a class="modal-btn modal-btn-secondary" style="text-decoration:none" href="https://t.me/mohsenniksirat" target="_blank" rel="noopener">✈️ Telegram</a></div>
+    </div>
+  </div>
+    <button id="postScrollTop" class="post-scroll-top" onclick="scrollPostModalTop()" title="بازگشت به بالا" aria-label="بازگشت به بالا">↑</button>
+  </div>
+</div>
+
+<!-- FULL TEXT POPUP -->
+<div class="post-fulltext-overlay" id="fullTextOverlay" role="dialog" aria-modal="true" aria-label="Full text" onclick="if(event.target===this)closeFullText()">
+  <div class="post-fulltext">
+    <div class="post-fulltext-head">
+      <div class="home-feed-avatar" id="fullTextAvatar" style="width:36px;height:36px;font-size:15px">📝</div>
+      <div style="flex:1;min-width:0"><div class="home-feed-title" id="fullTextTitle"></div><div class="home-feed-user" id="fullTextUser"></div></div>
+      <button class="modal-close" style="margin:0" aria-label="Close" onclick="closeFullText()">✕</button>
+    </div>
+    <div class="post-fulltext-body" id="fullTextBody"></div>
+    <div class="post-fulltext-actions">
+      <button class="modal-btn modal-btn-secondary" onclick="copyFullText()">📋 <span data-i18n="copy_text">Copy text</span></button>
+      <button class="modal-btn modal-btn-secondary" onclick="window.open(window._fullTextLink||'#','_blank')">🔗 <span data-i18n="watch_post">View post</span></button>
+    </div>
+  </div>
+</div>
+
+<!-- CHANNEL DETAIL MODAL -->
+<div class="modal-overlay" id="postOverlay" role="dialog" aria-modal="true" aria-label="Post" onclick="if(event.target===this)closePostModal()">
+  <div class="modal" style="max-width:640px">
+    <div class="modal-header" id="postModalHead"></div>
+    <button class="modal-close" style="position:absolute;top:16px;left:16px;z-index:5" aria-label="Close" onclick="closePostModal()">✕</button>
+    <div class="modal-body" id="postModalBody"></div>
+  </div>
+</div>
+<div class="modal-overlay" id="channelOverlay" role="dialog" aria-modal="true" aria-label="Channel details">
+  <div class="modal" id="modal">
+    <div class="modal-header">
+      <div class="modal-avatar" id="modalAvatar">T</div>
+      <div><div class="modal-title" id="modalTitle"></div><div class="modal-user" id="modalUser"></div><div class="modal-members-display" id="modalMembers"></div></div>
+      <button class="modal-close" aria-label="Close" onclick="closeChannelModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-desc" id="modalDesc"></div>
+      <!-- Stats -->
+      <div class="stats-grid" id="modalStats" style="display:none"></div>
+      <!-- Chart -->
+      <div class="chart-container" id="modalChart" style="display:none"><div class="chart-head"><h4 id="activityChartTitle" data-i18n="activity_chart">📊 Activity (7 days)</h4><div class="chart-range" role="group" aria-label="Chart range"><button class="chart-range-btn active" data-days="7" onclick="setChartRange(7)">7</button><button class="chart-range-btn" data-days="30" onclick="setChartRange(30)">30</button></div></div><canvas class="chart-canvas" id="activityChart"></canvas></div>
+      <!-- Content tags -->
+      <div class="modal-tags" id="modalTags" style="display:none"></div>
+      <!-- Actions -->
+      <div class="modal-actions">
+        <button class="modal-btn modal-btn-primary" id="modalOpenTg"><span>✈️</span> <span data-i18n="open_telegram">Open in Telegram</span></button>
+        <button class="modal-btn modal-btn-secondary" id="modalFavBtn"><span>❤️</span> <span data-i18n="save">Save</span></button><button class="modal-btn modal-btn-secondary" id="modalFolderBtn"><span>🗂</span> <span>Folder</span></button><button class="modal-btn modal-btn-secondary" id="modalShareBtn"><span>🔗</span> <span data-i18n="share_link">Share link</span></button>
+      </div>
+      <!-- Related -->
+      <div class="related-section" id="modalRelated" style="display:none"><h4 data-i18n="related_channels">🔗 Related Channels</h4><div class="related-chips" id="relatedChips"></div></div>
+      <!-- Posts -->
+      <div class="modal-posts-title" data-i18n="recent_posts">Recent Posts</div>
+      <div class="modal-posts" id="modalPosts"><div class="loading"><div class="spinner"></div></div></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- FOLDER PICKER MODAL -->
+<div class="modal-overlay" id="folderPicker" role="dialog" aria-modal="true" aria-label="Add to folder">
+  <div class="modal" style="max-width:420px">
+    <div class="modal-header">
+      <div class="modal-avatar" style="background:var(--gradient)">🗂</div>
+      <div><div class="modal-title">افزودن به فولدر</div><div class="modal-user" id="folderPickerLabel"></div></div>
+      <button class="modal-close" aria-label="Close" onclick="closeFolderPicker()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div id="folderPickerList"></div>
+      <div class="folder-new">
+        <input id="folderNewName" placeholder="نام فولدر جدید..." onkeydown="if(event.key==='Enter')createFolderFromPicker()">
+        <button class="modal-btn modal-btn-primary" onclick="createFolderFromPicker()">➕ ساخت</button>
+      </div>
+      <div id="folderIconRowPick"></div>
+    </div>
+  </div>
+</div>
+<!-- NOTIFICATIONS MODAL -->
+<div class="modal-overlay" id="notifOverlay" role="dialog" aria-modal="true" aria-label="Notifications">
+  <div class="modal" style="max-width:480px">
+    <div class="modal-header">
+      <div class="modal-avatar" style="background:var(--gradient)">🔔</div>
+      <div><div class="modal-title" data-i18n="notifications">Notifications</div><div class="modal-user" data-i18n="notif_sub">Updates from your saved channels</div></div>
+      <button class="modal-close" aria-label="Close" onclick="closeNotifModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div id="notifContent"><div class="empty-state"><div class="empty-icon">🔔</div><h3 data-i18n="no_notifs">No notifications yet</h3><p data-i18n="no_notifs_desc">Save channels as favorites to track updates</p></div></div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="suggestOverlay" role="dialog" aria-modal="true" aria-label="Suggest a channel">
+  <div class="modal" style="max-width:480px">
+    <div class="modal-header">
+      <div class="modal-avatar" style="background:var(--gradient)">💡</div>
+      <div><div class="modal-title" data-i18n="suggest_channel">💡 Suggest a channel</div><div class="modal-user">github.com/mohsen-niksirat/tgexplorer</div></div>
+      <button class="modal-close" aria-label="Close" onclick="closeSuggestModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <label class="sug-label">Username (@)</label><input class="sug-field" id="sugUsername" placeholder="username" autocomplete="off">
+      <label class="sug-label">Title</label><input class="sug-field" id="sugTitle" placeholder="Channel title" autocomplete="off">
+      <div class="sug-row">
+        <div style="flex:1"><label class="sug-label">Language</label><select class="sug-field" id="sugLang"><option value="fa">🇮🇷 فارسی</option><option value="en" selected>🇬🇧 English</option></select></div>
+        <div style="flex:1"><label class="sug-label">Category</label><select class="sug-field" id="sugCat"><option value="news">📰 News</option><option value="tech">💻 Tech</option><option value="crypto">🪙 Crypto</option><option value="entertainment">🎬 Entertainment</option><option value="science">🔬 Science</option><option value="sports">⚽ Sports</option><option value="music">🎵 Music</option><option value="education">📚 Education</option><option value="travel">✈️ Travel</option><option value="photography">📷 Photography</option></select></div>
+      </div>
+      <label class="sug-label">Description</label><textarea class="sug-field" id="sugDesc" rows="3" placeholder="What is this channel about?"></textarea>
+      <div class="modal-actions" style="margin-bottom:0"><button class="modal-btn modal-btn-primary" onclick="submitSuggestion()">💾 Submit</button><button class="modal-btn modal-btn-secondary" onclick="closeSuggestModal()">Cancel</button></div>
+      <div class="sug-result" id="sugResult" style="display:none"></div>
+    </div>
+  </div>
+</div>
+
+<!-- PWA INSTALL BANNER -->
+<div class="pwa-banner" id="pwaBanner">
+  <div class="pwa-banner-icon">📱</div>
+  <div class="pwa-banner-info"><div class="pwa-banner-title">Install Telegram Explorer</div><div class="pwa-banner-desc">Add to home screen for quick access</div></div>
+  <div class="pwa-banner-btns"><button class="pwa-btn pwa-btn-install" id="pwaInstallBtn">Install</button><button class="pwa-btn pwa-btn-dismiss" id="pwaDismissBtn">Later</button></div>
+</div>
+
+<div class="toast-container" id="toastContainer"></div>
+
+
 <button id="scrollTopBtn" class="scroll-top" onclick="scrollToTop()" title="بالا">↑</button>
-<!-- Cloudflare Web Analytics -->
-<script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "ed5603fcf9b64b4abe5e3ac1c82c0069"}'></script>
-<!-- End Cloudflare Web Analytics -->
+<!-- Cloudflare Web Analytics - injected after the load event, so the
+     third-party script can never block the first render. -->
+<script>
+(function(){
+  window.addEventListener('load',function(){
+    var s=document.createElement('script');
+    s.src='https://static.cloudflareinsights.com/beacon.min.js';
+    s.setAttribute('data-cf-beacon','{"token": "ed5603fcf9b64b4abe5e3ac1c82c0069"}');
+    s.defer=true;
+    document.body.appendChild(s);
+  });
+})();
+</script>
 </body>
 </html>

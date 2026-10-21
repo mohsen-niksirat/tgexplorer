@@ -42,7 +42,7 @@ s = s.replace(OLD_TAIL, "  const more=items.length>page?'<div class=\"explore-mo
 
 // close the grid div and add the button
 const OLD_END = "  }).join('')}</div>`);";
-const NEW_END = "  }).join('')}</div>`)+more);";
+const NEW_END = "  }).join('')}</div>`)+more;";
 if (!s.includes(OLD_END)) { console.error('the end of the explore grid was not found'); process.exit(1); }
 s = s.replace(OLD_END, NEW_END);
 
