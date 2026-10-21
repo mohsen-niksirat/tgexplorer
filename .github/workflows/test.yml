@@ -54,6 +54,47 @@ jobs:
           path: verify_channels_report.json
           retention-days: 7
 
+  # Lighthouse budget: the app has to stay fast and accessible on a phone.
+  # The budgets live in scripts/check-lighthouse.js, so they can be tuned in
+  # one place.
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: |
+          npm ci
+          npm install --no-save lighthouse wait-on
+
+      - name: Run Lighthouse
+        run: |
+          npx serve . -p 3000 &
+          npx wait-on http://localhost:3000 --timeout=60000
+          npx lighthouse http://localhost:3000/ \
+            --only-categories=performance,accessibility \
+            --form-factor=mobile \
+            --screenEmulation.mobile \
+            --throttling-method=simulate \
+            --output=json \
+            --output-path=lighthouse-report.json \
+            --chrome-flags="--headless=new --no-sandbox --disable-gpu" \
+            --quiet
+
+      - name: Check the budgets
+        run: node scripts/check-lighthouse.js lighthouse-report.json
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lighthouse-report
+          path: lighthouse-report.json
+          retention-days: 7
+
   # GitHub Pages publishes the `main` branch, but the app is developed and
   # validated on `master`. This job fast-forwards `main` to `master` once
   # the tests are green, so the live site always serves the tested code.
