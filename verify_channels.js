@@ -83,14 +83,38 @@ function extractChannelTitle(html) {
 
 // The live subscriber / member count ("2 517 026 subscribers" -> "2517026").
 function extractMemberCount(html) {
+  const info = extractMemberInfo(html);
+  return info ? info.count : null;
+}
+
+// The count together with its unit: a channel has "subscribers", a group
+// has "members".
+function extractMemberInfo(html) {
   const i = html.indexOf('class="tgme_page_extra"');
   if (i === -1) return null;
   const extra = html.slice(i, i + 260);
-  const m = extra.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').match(/([\d][\d\s.,]*)\s*(subscribers?|members?)/i);
-  return m ? m[1].replace(/[\s,]/g, '') : null;
+  const m = extra.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ')
+    .match(/([\d][\d\s.,]*)\s*(subscribers?|members?)/i);
+  if (!m) return null;
+  return { count: m[1].replace(/[\s,]/g, ''), unit: /member/i.test(m[2]) ? 'members' : 'subscribers' };
 }
 
-async function check(ch) {
+// The description of a channel, as shown on its profile page.
+function extractDescription(html) {
+  const m = html.match(/<meta property="og:description" content="([^"]*)"/i) ||
+    html.match(/<meta name="description" content="([^"]*)"/i);
+  if (!m) return '';
+  return decodeEntities(m[1]).replace(/\s+/g, ' ').trim().slice(0, 220);
+}
+
+function decodeEntities(s) {
+  return String(s || '')
+    .replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&nbsp;/g, ' ');
+}
+
+async function check(ch, opts) {
+  opts = opts || {};
   const url = 'https://t.me/s/' + encodeURIComponent(ch.username);
   let r;
   try {
@@ -106,7 +130,23 @@ async function check(ch) {
   const widgets = (r.html.match(/tgme_widget_message_wrap/g) || []).length;
   if (widgets > 0) {
     const live = extractChannelTitle(r.html) || title.replace(/\s*[–-]\s*Telegram\s*$/i, '').trim();
-    return { ch, status: 'OK', reason: '"' + live.slice(0, 60) + '"', members: extractMemberCount(r.html) };
+    let info = extractMemberInfo(r.html);
+    if (!info && opts.profile) {
+      // The count of a channel with a web preview is only on its profile page.
+      try {
+        const prof = await fetchTme('https://t.me/' + encodeURIComponent(ch.username));
+        if (prof.ok) info = extractMemberInfo(prof.html);
+      } catch (e) { /* the count is optional */ }
+    }
+    if (info && info.unit === 'members') {
+      return { ch, status: 'GROUP', reason: 'it is a group, not a channel' };
+    }
+    return {
+      ch, status: 'OK', reason: '"' + live.slice(0, 60) + '"',
+      members: info ? info.count : null,
+      title: live,
+      description: extractDescription(r.html),
+    };
   }
 
   // No preview — the profile page tells a channel with the web preview
@@ -122,11 +162,18 @@ async function check(ch) {
   const kind = profileKind(p.html);
   if (kind === 'channel') {
     const live = extractChannelTitle(p.html) || p.title.replace(/\s*[–-]\s*Telegram\s*$/i, '').trim();
+    const info = extractMemberInfo(p.html);
+    // A group shows "N members, N online" — that is not a channel.
+    if (info && info.unit === 'members') {
+      return { ch, status: 'GROUP', reason: 'it is a group, not a channel' };
+    }
     return {
       ch,
       status: 'OK',
       reason: '"' + live.slice(0, 60) + '" (web preview disabled)',
-      members: extractMemberCount(p.html),
+      members: info ? info.count : null,
+      title: live,
+      description: extractDescription(p.html),
     };
   }
   if (kind === 'vacant') {
@@ -136,8 +183,11 @@ async function check(ch) {
 }
 
 function classify(results) {
-  const byStatus = { OK: [], USER: [], FAIL: [], ERR: [] };
-  for (const r of results) byStatus[r.status].push(r);
+  const byStatus = { OK: [], USER: [], FAIL: [], ERR: [], GROUP: [] };
+  for (const r of results) {
+    if (!byStatus[r.status]) byStatus[r.status] = [];
+    byStatus[r.status].push(r);
+  }
 
   // USER/FAIL: candidates to remove from the active DB (move to deprecated).
   const dead = byStatus.USER.concat(byStatus.FAIL).map(r => ({
@@ -224,7 +274,7 @@ async function main() {
   const jsonOnly = args.includes('--json');
 
   console.log('Checking ' + db.length + ' channels on t.me...\n');
-  const counts = { OK: 0, USER: 0, FAIL: 0, ERR: 0 };
+  const counts = { OK: 0, USER: 0, FAIL: 0, ERR: 0, GROUP: 0 };
   const results = [];
   for (const ch of db) {
     const res = await check(ch);
@@ -237,7 +287,7 @@ async function main() {
       status: res.status,
       reason: res.reason,
     });
-    const mark = { OK: '  OK  ', USER: ' USER ', FAIL: ' FAIL ', ERR: ' ERR  ' }[res.status];
+    const mark = { OK: '  OK  ', USER: ' USER ', FAIL: ' FAIL ', ERR: ' ERR  ', GROUP: ' GROUP' }[res.status] || ' ??   ';
     console.log(mark + ' @' + ch.username.padEnd(22) + res.reason);
     await new Promise(r => setTimeout(r, 300));
   }
@@ -272,10 +322,15 @@ async function main() {
   if (jsonOnly) {
     console.log(JSON.stringify(summary, null, 2));
   } else {
-    const bad = results.filter(r => r.status !== 'OK');
+    const bad = results.filter(r => r.status !== 'OK' && r.status !== 'GROUP');
     if (bad.length) {
       console.log('\nChannels to fix/remove from channels.js:');
       bad.forEach(b => console.log('  - ' + b.username + '  [' + b.status + '] ' + b.reason));
+    }
+    const groups = results.filter(r => r.status === 'GROUP');
+    if (groups.length) {
+      console.log('\nGroups (still public, but they are groups rather than channels):');
+      groups.forEach(g => console.log('  - ' + g.username));
     }
     if (summary.renamed.length) {
       console.log('\nPossible renames (live title differs from DB title):');
@@ -292,11 +347,13 @@ async function main() {
 
   // Exit code: fail on USER/FAIL (dead channels). ERR alone does not fail the
   // build — transient network errors should not block CI, they are reported.
+  // A group is not a channel, but it still has a public web preview and the
+  // app shows its posts - so it is reported, but it does not fail the build.
   const failCount = counts.USER + counts.FAIL;
   process.exit(failCount > 0 ? 1 : 0);
 }
 
-module.exports = { check, fetchTme, parseMembers, profileKind, extractMemberCount };
+module.exports = { check, fetchTme, parseMembers, profileKind, extractMemberCount, extractMemberInfo, extractDescription };
 
 if (require.main === module) {
   main();

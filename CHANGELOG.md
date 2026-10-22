@@ -5,6 +5,13 @@ Full version history of Telegram Explorer. The latest release is summarized in t
 
 ## v1.7.0
 
+- ➕ **9 more verified channels (122 → 131)** — Telegram News, Stack Overflow,
+  Linux Foundation, Xiaomi, Qualcomm, Times of India, Juventus, Overwatch and
+  a Persian cooking channel, added with their live title, subscriber count
+  and description. The verification now also tells a **group** ("N members")
+  apart from a **channel** ("N subscribers"), and rejects squatted
+  usernames — Telegram sells and parks usernames, and those pages look like a
+  channel with subscribers.
 - 📲 **A real PWA** — the manifest is complete (relative `start_url`, `scope`
   and `id`, so it works under any path), the screenshots are declared, and the
   app registers a **periodic background sync**: the service worker checks the

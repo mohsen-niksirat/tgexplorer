@@ -100,6 +100,13 @@ too. If you hit a limit, the endpoints keep working from the cache.
 
 ### v1.7.0
 
+- ➕ **9 more verified channels (122 → 131)** — Telegram News, Stack Overflow,
+  Linux Foundation, Xiaomi, Qualcomm, Times of India, Juventus, Overwatch and
+  a Persian cooking channel, added with their live title, subscriber count
+  and description. The verification now also tells a **group** ("N members")
+  apart from a **channel** ("N subscribers"), and rejects squatted
+  usernames — Telegram sells and parks usernames, and those pages look like a
+  channel with subscribers
 - 📲 **A real PWA** — the manifest is complete (relative `start_url`, `scope`
   and `id`, so it works under any path), the screenshots are declared, and the
   app registers a **periodic background sync**: the service worker checks the
@@ -326,7 +333,7 @@ too. If you hit a limit, the endpoints keep working from the cache.
 
 ### Option 1: Local mode (default — no setup)
 
-Just open `index.html` (or deploy to GitHub Pages). The app starts with a **verified database of 122 real channels** and full fuzzy search + language filter — no worker, no API key.
+Just open `index.html` (or deploy to GitHub Pages). The app starts with a **verified database of 131 real channels** and full fuzzy search + language filter — no worker, no API key.
 
 ### Option 2: With Cloudflare Worker (full power — live Telegram search)
 
@@ -476,7 +483,7 @@ tgexplorer/
 │   ├── i18n.js          #   all UI strings for the 7 languages + applyLang()/t()
 │   ├── state.js         #   the single mutable app state (localStorage)
 │   └── worker-code.js   #   the Worker source shown in the setup screen
-├── channels.js          # Verified channel database (122 channels)
+├── channels.js          # Verified channel database (131 channels)
 ├── posts.js             # Inline seed: latest 12 posts per channel (generated)
 ├── posts/               # Full archive, one JSON per channel (lazy-loaded)
 ├── avatars.js           # Channel avatar map (generated)

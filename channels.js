@@ -145,5 +145,14 @@ const CHANNEL_DB = [
   {username:'spotifynews',title:'Spotify News',members:'532',description:'Spotify news and updates',tags:['music'],lang:'en'},
   {username:'skysportsfootball',title:'Sky Sports Football',members:'45',description:'Sky Sports football coverage',tags:['sports','football'],lang:'en'},
   {username:'bbcbreaking',title:'BBC Breaking',members:'457',description:'Breaking news from the BBC',tags:['news'],lang:'en'},
-];
+
+  {username:'telegram',title:'Telegram News',members:'9.3M',description:'The official Telegram on Telegram. Much recursion. Very Telegram. Wow.',tags:['news'],lang:'en'},
+  {username:'stackoverflow',title:'Stackoverflow',members:'2.2K',description:'Where engineers, developers, and programmers would hang out together',tags:['tech'],lang:'en'},
+  {username:'linuxfoundation',title:'Linux Foundation',members:'286',description:'The Linux Foundation is a non-profit consortium dedicated to fostering the growth of Linux. (unofficial)',tags:['tech'],lang:'en'},
+  {username:'xiaomi',title:'Xiaomi Global™ News',members:'27.8K',description:'Independent News Source All Upcoming Devices, News, Apps and More. :) 👥Xiaomi Global Chat @XiaomiEN 📦Want to Buy Xiaomi Products? Find them at Admin - @CloudFlare',tags:['news'],lang:'en'},
+  {username:'qualcomm',title:'QUALCOMM',members:'128',description:'QUALCOMM',tags:['tech'],lang:'en'},
+  {username:'timesofindia',title:'Times of India',members:'36.5K',description:'Official Channel for The Times of India news & campaigns. For suggestions & collaboration, pls email to campaign@timesgroup.com. To get your copy, https://subscribe.timesgroup.com',tags:['news'],lang:'en'},
+  {username:'juventus',title:'Juventus',members:'26.6K',description:'Telegram\'s biggest channel about Juventus FC Ads: @Source_Ads, https://telega.io/c/juventus Admin: @cobbl',tags:['sports'],lang:'en'},
+  {username:'overwatch',title:'Overwatch',members:'4.1K',description:'پوشش دقیق و لحظه ای اخبار اورواچ و بلیزارد اینترتینمنت لینک گروه اورواچ فارسی👇 t.me/+7vsi2aRcHD5lODk0 تاسیس : 24/May/2016',tags:['gaming'],lang:'fa'},
+  {username:'cooking',title:'وصفات طبخ وحلويات',members:'4.7K',description:'..',tags:['food'],lang:'fa'},];
 

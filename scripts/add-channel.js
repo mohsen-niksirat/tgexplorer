@@ -45,9 +45,10 @@ const entry = "  {username:'" + esc(username) + "',title:'" + esc(title) +
   "',members:'0',description:'" + esc(description || title) +
   "',tags:['" + esc(category) + "'],lang:'" + esc(lang) + "'},";
 
-const marker = '\n];\n';
-const at = src.lastIndexOf(marker);
-if (at === -1) { console.error('could not find the end of CHANNEL_DB'); process.exit(1); }
+// The array ends with "];", possibly followed by a newline.
+const m = /\]\;\s*$/.exec(src);
+if (!m) { console.error('could not find the end of CHANNEL_DB'); process.exit(1); }
+const at = m.index;
 
 const out = src.slice(0, at) + '\n' + entry + src.slice(at);
 fs.writeFileSync(file, out, 'utf8');
