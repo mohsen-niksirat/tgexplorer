@@ -111,9 +111,22 @@ const imports = [
 ].join('\n');
 
 // Strip the previous bridge block so it can be rebuilt.
-kept = kept.join('\n')
-  .replace(/\n?\/\/ ={10,}\n\/\/ WINDOW BRIDGE[\s\S]*?Object\.assign\(window, \{[\s\S]*?\}\);\n?/, '\n')
-  .split('\n');
+// The block is found by index in the joined text, not by a regular
+// expression: the file may use CRLF line endings, which a pattern with \n
+// would not match.
+{
+  let text = kept.join('\n');
+  const marker = text.indexOf('// WINDOW BRIDGE');
+  if (marker !== -1) {
+    const sepStart = text.lastIndexOf('// =', marker);
+    const bridgeEnd = text.indexOf('});', marker);
+    if (sepStart !== -1 && bridgeEnd !== -1) {
+      text = text.slice(0, sepStart) + text.slice(bridgeEnd + 3);
+    }
+  }
+  // Repeated runs must not pile up empty lines.
+  kept = text.replace(/\n{3,}/g, '\n\n').split('\n');
+}
 
 // ---------------------------------------------------------
 // Publish the app's functions on `window`.
