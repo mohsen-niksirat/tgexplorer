@@ -214,6 +214,28 @@ test.describe('Telegram Explorer - e2e', () => {
     expect(await pixels()).not.toBe(before);
   });
 
+  test('two channels can be compared side by side', async ({ page }) => {
+    await page.evaluate(() => window.openChannel('bbcpersian'));
+    await page.waitForTimeout(1000);
+    await page.locator('#modalCompareBtn').click();
+
+    const overlay = page.locator('#compareOverlay');
+    await expect(overlay).toHaveClass(/open/);
+
+    // The first channel is on the left, the second one is picked from the list.
+    await expect(page.locator('#compareColA')).toContainText(/BBC/i);
+    await page.locator('#compareSelect').selectOption('tabnak');
+    await page.waitForTimeout(600);
+
+    await expect(page.locator('#compareColB')).toContainText(/tabnak/i);
+    // Both charts are drawn.
+    await expect(page.locator('#compareChartA')).toBeVisible();
+    await expect(page.locator('#compareChartB')).toBeVisible();
+
+    await page.locator('#compareOverlay .modal-close').click();
+    await expect(overlay).not.toHaveClass(/open/);
+  });
+
   test('language switching updates the document', async ({ page }) => {
     await page.locator('#langSelect').selectOption('fa');
 

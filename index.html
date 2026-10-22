@@ -60,7 +60,7 @@
 .loading{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 20px;color:var(--text-secondary)}.spinner{width:40px;height:40px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;margin-bottom:16px}@keyframes spin{to{transform:rotate(360deg)}}.empty-state{text-align:center;padding:60px 20px;color:var(--text-secondary)}.empty-state .empty-icon{font-size:64px;margin-bottom:16px}.empty-state h3{font-size:18px;color:var(--text-primary);margin-bottom:8px}.empty-state p{font-size:14px}
 .results-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px}.results-count{font-size:14px;color:var(--text-secondary)}.view-toggle{display:flex;gap:4px;background:var(--bg-primary);border:1px solid var(--border);border-radius:8px;padding:3px}.view-btn{width:32px;height:32px;border-radius:6px;display:flex;align-items:center;justify-content:center;color:var(--text-secondary);transition:all var(--transition);font-size:16px}.view-btn.active{background:var(--accent-strong);color:var(--on-accent)}
 .skeleton{background:linear-gradient(90deg,var(--bg-hover) 25%,var(--bg-secondary) 50%,var(--bg-hover) 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:var(--radius);height:240px}@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
-.toast-container{position:fixed;bottom:24px;right:24px;z-index:300;display:flex;flex-direction:column;gap:8px}.toast{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 20px;font-size:14px;box-shadow:var(--shadow-lg);animation:slideIn .3s ease,fadeOut .3s ease 2.7s;display:flex;align-items:center;gap:8px}@keyframes slideIn{from{transform:translateX(100%);opacity:0}}@keyframes fadeOut{to{opacity:0;transform:translateY(10px)}}
+.toast-container{position:fixed;bottom:24px;right:24px;z-index:300;display:flex;flex-direction:column;gap:8px;pointer-events:none}.toast{pointer-events:auto}.toast{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 20px;font-size:14px;box-shadow:var(--shadow-lg);animation:slideIn .3s ease,fadeOut .3s ease 2.7s;display:flex;align-items:center;gap:8px}@keyframes slideIn{from{transform:translateX(100%);opacity:0}}@keyframes fadeOut{to{opacity:0;transform:translateY(10px)}}
 .pwa-banner{position:fixed;bottom:0;left:0;right:0;background:var(--bg-primary);border-top:1px solid var(--border);padding:16px 20px;display:none;align-items:center;gap:16px;z-index:150;box-shadow:0 -4px 20px rgba(0,0,0,.1)}.pwa-banner.show{display:flex}.pwa-banner-icon{width:48px;height:48px;border-radius:12px;background:var(--gradient);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0}.pwa-banner-info{flex:1}.pwa-banner-title{font-size:15px;font-weight:700}.pwa-banner-desc{font-size:13px;color:var(--text-secondary)}.pwa-banner-btns{display:flex;gap:8px}.pwa-btn{padding:10px 20px;border-radius:10px;font-size:14px;font-weight:600;transition:all var(--transition)}.pwa-btn-install{background:var(--gradient);color:#fff}.pwa-btn-install:hover{box-shadow:0 4px 16px rgba(0,136,204,.3)}.pwa-btn-dismiss{color:var(--text-secondary)}.pwa-btn-dismiss:hover{background:var(--bg-hover)}
 .footer{text-align:center;padding:24px 20px;color:var(--text-tertiary);font-size:13px}.footer a{color:var(--accent)}
 @media(max-width:768px){.hero{padding:16px 12px 14px}.hero h1{font-size:18px}.hero p{font-size:12.5px}.search-tags{display:none}.search-box{flex-direction:column}.search-btn{justify-content:center}.results-grid{grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}.explore-grid{grid-template-columns:repeat(3,1fr);gap:3px}.modal{border-radius:20px 20px 0 0}.list-meta{display:none}.nav-tab{padding:10px 14px;font-size:13px}.connect-input-row{flex-direction:column}.setup-body{padding:24px 20px}.stats-grid{grid-template-columns:repeat(2,1fr)}.pwa-banner{flex-wrap:wrap}.pwa-banner-btns{width:100%}.pwa-btn{flex:1;text-align:center}}@media(max-width:480px){.results-grid{grid-template-columns:1fr}.explore-grid{grid-template-columns:repeat(2,1fr)}.header-inner{gap:10px}.logo span{display:none}.stats-grid{grid-template-columns:1fr 1fr}}
@@ -110,6 +110,29 @@ body[data-fs="large"] .home-feed-text-clamped{-webkit-line-clamp:3}
 .ac-avatar{width:30px;height:30px;border-radius:50%;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0}
 .ac-title{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--text-primary)}
 .ac-user{font-size:11px;color:var(--text-secondary)}
+/* ============================================================
+   COMPARE TWO CHANNELS
+   ============================================================ */
+.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+@media (max-width:640px){.compare-grid{grid-template-columns:1fr}}
+.compare-col{background:var(--bg-secondary);border:1px solid var(--border);border-radius:14px;padding:14px}
+.compare-head{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.compare-avatar{width:42px;height:42px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;overflow:hidden}
+.compare-name{font-size:14px;font-weight:700;line-height:1.3}
+.compare-user{font-size:11.5px;color:var(--text-tertiary)}
+.compare-stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.compare-stat{background:var(--bg-primary);border-radius:10px;padding:8px 10px;text-align:center}
+.compare-stat b{display:block;font-size:16px;font-weight:800;color:var(--accent)}
+.compare-stat span{font-size:10.5px;color:var(--text-secondary)}
+.compare-chart{width:100%;height:120px;display:block}
+.compare-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px}
+.compare-tag{font-size:10.5px;padding:2px 8px;border-radius:12px;background:var(--bg-hover);border:1px solid var(--border);color:var(--text-secondary)}
+.compare-picker{position:relative}
+
+
+
+
+.compare-empty{text-align:center;color:var(--text-tertiary);font-size:12.5px;padding:26px 10px}
 /* ============================================================
    PRIVACY BOX (Settings)
    ============================================================ */
@@ -1091,6 +1114,7 @@ function openChannel(username){
   document.getElementById('modalFolderBtn').onclick=()=>openFolderPicker('ch',username,'',ch.title||username);
   document.getElementById('modalShareBtn').onclick=()=>shareChannelLink(username);
   document.getElementById('modalSharePageBtn').onclick=()=>shareChannelPage(username);
+  document.getElementById('modalCompareBtn').onclick=()=>openCompare(username);
   updateModalFav(username);
   const posts=getChannelPosts(username);
   const postsEl=document.getElementById('modalPosts');
@@ -1167,6 +1191,118 @@ async function archivedActivity(username,days){
     out.push({date:key,posts:counts[key]||0});
   }
   return out;
+}
+
+// ============================================================
+// COMPARE TWO CHANNELS
+// ============================================================
+let compareA='',compareB='';
+
+function openCompare(username){
+  compareA=username;
+  compareB='';
+  fillCompareSelect();
+  renderCompare();
+  document.getElementById('compareOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeCompare(){
+  document.getElementById('compareOverlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+function pickCompareChannel(username){
+  compareB=username;
+  const select=document.getElementById('compareSelect');
+  if(select)select.value=username||'';
+  renderCompare();
+}
+// The list of channels to compare with.
+function fillCompareSelect(){
+  const select=document.getElementById('compareSelect');
+  if(!select)return;
+  const channels=getAllChannels().filter(c=>c.username.toLowerCase()!==compareA.toLowerCase());
+  select.innerHTML='<option value="">'+escHtml(t('compare_pick'))+'</option>'+
+    channels.map(c=>'<option value="'+escAttr(c.username)+'">'+escHtml(c.title||c.username)+' (@'+escHtml(c.username)+')</option>').join('');
+  select.value=compareB&&channels.some(c=>c.username===compareB)?compareB:'';
+}
+function compareColumn(username,canvasId){
+  if(!username)return '<div class="compare-empty">'+escHtml(t('compare_pick'))+'</div>';
+  const ch=getAllChannels().find(c=>c.username===username)||{username,title:username};
+  const posts=getChannelPosts(username);
+  const days=chartRange||7;
+  const activity=channelActivity(username,days);
+  const total=activity.reduce((s,d)=>s+d.posts,0);
+  const active=activity.filter(d=>d.posts>0).length;
+  const perDay=(total/days).toFixed(1);
+  const kw=postKeywords(posts,5);
+  return '<div class="compare-head">'+
+      '<div class="compare-avatar" style="'+avatarGrad(username)+'">'+escHtml((ch.title||username)[0].toUpperCase())+'</div>'+
+      '<div><div class="compare-name">'+escHtml(ch.title||username)+'</div><div class="compare-user">@'+escHtml(username)+(ch.members?' · 👥 '+escHtml(ch.members):'')+'</div></div>'+
+    '</div>'+
+    '<div class="compare-stats">'+
+      '<div class="compare-stat"><b>'+perDay+'</b><span>'+escHtml(t('posts_per_day'))+'</span></div>'+
+      '<div class="compare-stat"><b>'+posts.length+'</b><span>'+escHtml(t('total_posts'))+'</span></div>'+
+      '<div class="compare-stat"><b>'+active+'/'+days+'</b><span>'+escHtml(t('active_days'))+'</span></div>'+
+      '<div class="compare-stat"><b>'+total+'</b><span>'+escHtml(t('total_posts'))+'</span></div>'+
+    '</div>'+
+    '<canvas class="compare-chart" id="'+canvasId+'"></canvas>'+
+    (kw.length?'<div class="compare-tags">'+kw.map(k=>'<span class="compare-tag">'+escHtml(k[0])+' · '+k[1]+'</span>').join('')+'</div>':'');
+}
+function renderCompare(){
+  const a=document.getElementById('compareColA');
+  const b=document.getElementById('compareColB');
+  if(!a||!b)return;
+  a.innerHTML=compareColumn(compareA,'compareChartA');
+  b.innerHTML=compareColumn(compareB,'compareChartB');
+  for(const [id,username] of [['compareChartA',compareA],['compareChartB',compareB]]){
+    const canvas=document.getElementById(id);
+    if(!canvas||!username)continue;
+    const activity=channelActivity(username,chartRange||7);
+    drawCompareChart(canvas,activity);
+  }
+}
+// A small chart for the compare view (the profile chart draws into its own
+// canvas, so it cannot be reused here).
+function drawCompareChart(canvas,data){
+  const ctx=canvas.getContext('2d');
+  const dpr=window.devicePixelRatio||1;
+  const rect=canvas.getBoundingClientRect();
+  if(!rect.width)return;
+  canvas.width=rect.width*dpr;canvas.height=rect.height*dpr;
+  ctx.scale(dpr,dpr);
+  const W=rect.width,H=rect.height;
+  const padding={top:8,right:6,bottom:18,left:6};
+  const chartW=W-padding.left-padding.right;
+  const chartH=H-padding.top-padding.bottom;
+  const values=data.map(d=>d.posts);
+  const maxVal=Math.max(...values,1);
+  const stepX=chartW/(values.length-1||1);
+  ctx.strokeStyle=getComputedStyle(document.documentElement).getPropertyValue('--border').trim()||'#e5e5e5';
+  ctx.lineWidth=0.5;
+  for(let i=0;i<=3;i++){
+    const y=padding.top+chartH*(1-i/3);
+    ctx.beginPath();ctx.moveTo(padding.left,y);ctx.lineTo(W-padding.right,y);ctx.stroke();
+  }
+  const gradient=ctx.createLinearGradient(0,padding.top,0,H-padding.bottom);
+  gradient.addColorStop(0,'rgba(0,136,204,0.35)');
+  gradient.addColorStop(1,'rgba(0,136,204,0.02)');
+  ctx.beginPath();
+  ctx.moveTo(padding.left,padding.top+chartH);
+  values.forEach((v,i)=>{
+    const x=padding.left+i*stepX;
+    const y=padding.top+chartH-(v/maxVal)*chartH;
+    ctx.lineTo(x,y);
+  });
+  ctx.lineTo(padding.left+stepX*(values.length-1),padding.top+chartH);
+  ctx.closePath();
+  ctx.fillStyle=gradient;ctx.fill();
+  ctx.beginPath();
+  values.forEach((v,i)=>{
+    const x=padding.left+i*stepX;
+    const y=padding.top+chartH-(v/maxVal)*chartH;
+    if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);
+  });
+  ctx.strokeStyle='#0088cc';ctx.lineWidth=2;ctx.stroke();
 }
 
 // ============================================================
@@ -2758,6 +2894,33 @@ function renderEmpty(title,desc){return`<div class="empty-state"><div class="emp
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // ============================================================
 // WINDOW BRIDGE
 // ----------------------------------------------------------
@@ -2774,6 +2937,7 @@ Object.assign(window, {
   clearFolderRule,
   clearLivePosts,
   closeChannelModal,
+  closeCompare,
   closeFolderPicker,
   closeFullText,
   closeNotifModal,
@@ -2824,674 +2988,7 @@ Object.assign(window, {
   openPostModal,
   openSavedPost,
   openSuggestModal,
-  pickFolderIcon,
-  readUrlFilters,
-  refreshFolderPosts,
-  removeFolderItem,
-  renderCategories,
-  renderFavFiltered,
-  renderFavorites,
-  renderFilterBar,
-  renderFilterChips,
-  renderResults,
-  resetApp,
-  retryNetwork,
-  saveFilters,
-  saveFolderRule,
-  saveSettings,
-  scrollPostModalTop,
-  searchLocal,
-  setChartRange,
-  setExploreSearch,
-  setExploreSort,
-  setExploreView,
-  setFavPostType,
-  setFavSort,
-  setHomeType,
-  setSearchMode,
-  shareFilters,
-  shareFolder,
-  sharePost,
-  showMoreExplore,
-  skipSetup,
-  state,
-  submitSuggestion,
-  switchTab,
-  syncUrlFilters,
-  t,
-  testConnection,
-  testFromSettings,
-  toast,
-  toggleExploreType,
-  toggleFav,
-  toggleFilter,
-  toggleNotifs,
-  togglePostFav,
-});
-
-// ============================================================
-// WINDOW BRIDGE
-// ----------------------------------------------------------
-// Inline `onclick="fn(...)"` handlers and the e2e suite expect the
-// app functions on `window` (as they were in the classic script).
-// ============================================================
-Object.assign(window, {
-  addAutoAll,
-  addAutoOne,
-  addChannelToFolder,
-  applyExploreFilters,
-  applyFiltersToView,
-  clearFilters,
-  clearFolderRule,
-  clearLivePosts,
-  closeChannelModal,
-  closeFolderPicker,
-  closeFullText,
-  closeNotifModal,
-  closePostModal,
-  closeSettings,
-  closeSuggestModal,
-  copyFullText,
-  copyLink,
-  copyPostLink,
-  copyPostMarkdown,
-  copyPostText,
-  copySuggestBody,
-  copyWorkerCode,
-  createFolderFromPicker,
-  createFolderFromTab,
-  createSmartFolders,
-  cycleFolderIcon,
-  cycleFontSize,
-  deepSearchPosts,
-  deleteFolder,
-  dismissSharedFolder,
-  doSearch,
-  downloadPostMedia,
-  editFolder,
-  escAttr,
-  exportBackup,
-  exportPostsPdf,
-  exportPostsTxt,
-  fetchFavNewPosts,
-  filterState,
-  folderExportJson,
-  folderExportPdf,
-  folderExportTxt,
-  fpToggle,
-  getAllChannels,
-  getChannelPosts,
-  getLocalExplore,
-  importBackup,
-  importSharedFolder,
-  loadExplore,
-  loadFeed,
-  loadSharedLivePosts,
-  openChannel,
-  openFeedPost,
-  openFolderPicker,
-  openHomePost,
-  openLivePost,
-  openPostModal,
-  openSavedPost,
-  openSuggestModal,
-  pickFolderIcon,
-  readUrlFilters,
-  refreshFolderPosts,
-  removeFolderItem,
-  renderCategories,
-  renderFavFiltered,
-  renderFavorites,
-  renderFilterBar,
-  renderFilterChips,
-  renderResults,
-  resetApp,
-  retryNetwork,
-  saveFilters,
-  saveFolderRule,
-  saveSettings,
-  scrollPostModalTop,
-  searchLocal,
-  setChartRange,
-  setExploreSearch,
-  setExploreSort,
-  setExploreView,
-  setFavPostType,
-  setFavSort,
-  setHomeType,
-  setSearchMode,
-  shareFilters,
-  shareFolder,
-  sharePost,
-  showMoreExplore,
-  skipSetup,
-  state,
-  submitSuggestion,
-  switchTab,
-  syncUrlFilters,
-  t,
-  testConnection,
-  testFromSettings,
-  toast,
-  toggleExploreType,
-  toggleFav,
-  toggleFilter,
-  toggleNotifs,
-  togglePostFav,
-});
-
-// ============================================================
-// WINDOW BRIDGE
-// ----------------------------------------------------------
-// Inline `onclick="fn(...)"` handlers and the e2e suite expect the
-// app functions on `window` (as they were in the classic script).
-// ============================================================
-Object.assign(window, {
-  addAutoAll,
-  addAutoOne,
-  addChannelToFolder,
-  applyExploreFilters,
-  applyFiltersToView,
-  clearFilters,
-  clearFolderRule,
-  clearLivePosts,
-  closeChannelModal,
-  closeFolderPicker,
-  closeFullText,
-  closeNotifModal,
-  closePostModal,
-  closeSettings,
-  closeSuggestModal,
-  copyFullText,
-  copyLink,
-  copyPostLink,
-  copyPostMarkdown,
-  copyPostText,
-  copySuggestBody,
-  copyWorkerCode,
-  createFolderFromPicker,
-  createFolderFromTab,
-  createSmartFolders,
-  cycleFolderIcon,
-  cycleFontSize,
-  deepSearchPosts,
-  deleteFolder,
-  dismissSharedFolder,
-  doSearch,
-  downloadPostMedia,
-  editFolder,
-  escAttr,
-  exportBackup,
-  exportPostsPdf,
-  exportPostsTxt,
-  fetchFavNewPosts,
-  filterState,
-  folderExportJson,
-  folderExportPdf,
-  folderExportTxt,
-  fpToggle,
-  getAllChannels,
-  getChannelPosts,
-  getLocalExplore,
-  importBackup,
-  importSharedFolder,
-  loadExplore,
-  loadFeed,
-  loadSharedLivePosts,
-  openChannel,
-  openFeedPost,
-  openFolderPicker,
-  openHomePost,
-  openLivePost,
-  openPostModal,
-  openSavedPost,
-  openSuggestModal,
-  pickFolderIcon,
-  readUrlFilters,
-  refreshFolderPosts,
-  removeFolderItem,
-  renderCategories,
-  renderFavFiltered,
-  renderFavorites,
-  renderFilterBar,
-  renderFilterChips,
-  renderResults,
-  resetApp,
-  retryNetwork,
-  saveFilters,
-  saveFolderRule,
-  saveSettings,
-  scrollPostModalTop,
-  searchLocal,
-  setChartRange,
-  setExploreSearch,
-  setExploreSort,
-  setExploreView,
-  setFavPostType,
-  setFavSort,
-  setHomeType,
-  setSearchMode,
-  shareFilters,
-  shareFolder,
-  sharePost,
-  showMoreExplore,
-  skipSetup,
-  state,
-  submitSuggestion,
-  switchTab,
-  syncUrlFilters,
-  t,
-  testConnection,
-  testFromSettings,
-  toast,
-  toggleExploreType,
-  toggleFav,
-  toggleFilter,
-  toggleNotifs,
-  togglePostFav,
-});
-
-// ============================================================
-// WINDOW BRIDGE
-// ----------------------------------------------------------
-// Inline `onclick="fn(...)"` handlers and the e2e suite expect the
-// app functions on `window` (as they were in the classic script).
-// ============================================================
-Object.assign(window, {
-  addAutoAll,
-  addAutoOne,
-  addChannelToFolder,
-  applyExploreFilters,
-  applyFiltersToView,
-  clearFilters,
-  clearFolderRule,
-  clearLivePosts,
-  closeChannelModal,
-  closeFolderPicker,
-  closeFullText,
-  closeNotifModal,
-  closePostModal,
-  closeSettings,
-  closeSuggestModal,
-  copyFullText,
-  copyLink,
-  copyPostLink,
-  copyPostMarkdown,
-  copyPostText,
-  copySuggestBody,
-  copyWorkerCode,
-  createFolderFromPicker,
-  createFolderFromTab,
-  createSmartFolders,
-  cycleFolderIcon,
-  cycleFontSize,
-  deepSearchPosts,
-  deleteFolder,
-  dismissSharedFolder,
-  doSearch,
-  downloadPostMedia,
-  editFolder,
-  escAttr,
-  exportBackup,
-  exportPostsPdf,
-  exportPostsTxt,
-  fetchFavNewPosts,
-  filterState,
-  folderExportJson,
-  folderExportPdf,
-  folderExportTxt,
-  fpToggle,
-  getAllChannels,
-  getChannelPosts,
-  getLocalExplore,
-  importBackup,
-  importSharedFolder,
-  loadExplore,
-  loadFeed,
-  loadSharedLivePosts,
-  openChannel,
-  openFeedPost,
-  openFolderPicker,
-  openHomePost,
-  openLivePost,
-  openPostModal,
-  openSavedPost,
-  openSuggestModal,
-  pickFolderIcon,
-  readUrlFilters,
-  refreshFolderPosts,
-  removeFolderItem,
-  renderCategories,
-  renderFavFiltered,
-  renderFavorites,
-  renderFilterBar,
-  renderFilterChips,
-  renderResults,
-  resetApp,
-  retryNetwork,
-  saveFilters,
-  saveFolderRule,
-  saveSettings,
-  scrollPostModalTop,
-  searchLocal,
-  setChartRange,
-  setExploreSearch,
-  setExploreSort,
-  setExploreView,
-  setFavPostType,
-  setFavSort,
-  setHomeType,
-  setSearchMode,
-  shareFilters,
-  shareFolder,
-  sharePost,
-  showMoreExplore,
-  skipSetup,
-  state,
-  submitSuggestion,
-  switchTab,
-  syncUrlFilters,
-  t,
-  testConnection,
-  testFromSettings,
-  toast,
-  toggleExploreType,
-  toggleFav,
-  toggleFilter,
-  toggleNotifs,
-  togglePostFav,
-});
-
-// ============================================================
-// WINDOW BRIDGE
-// ----------------------------------------------------------
-// Inline `onclick="fn(...)"` handlers and the e2e suite expect the
-// app functions on `window` (as they were in the classic script).
-// ============================================================
-Object.assign(window, {
-  addAutoAll,
-  addAutoOne,
-  addChannelToFolder,
-  applyExploreFilters,
-  applyFiltersToView,
-  clearFilters,
-  clearFolderRule,
-  clearLivePosts,
-  closeChannelModal,
-  closeFolderPicker,
-  closeFullText,
-  closeNotifModal,
-  closePostModal,
-  closeSettings,
-  closeSuggestModal,
-  copyFullText,
-  copyLink,
-  copyPostLink,
-  copyPostMarkdown,
-  copyPostText,
-  copySuggestBody,
-  copyWorkerCode,
-  createFolderFromPicker,
-  createFolderFromTab,
-  createSmartFolders,
-  cycleFolderIcon,
-  cycleFontSize,
-  deepSearchPosts,
-  deleteFolder,
-  dismissSharedFolder,
-  doSearch,
-  downloadPostMedia,
-  editFolder,
-  escAttr,
-  exportBackup,
-  exportPostsPdf,
-  exportPostsTxt,
-  fetchFavNewPosts,
-  filterState,
-  folderExportJson,
-  folderExportPdf,
-  folderExportTxt,
-  fpToggle,
-  getAllChannels,
-  getChannelPosts,
-  getLocalExplore,
-  importBackup,
-  importSharedFolder,
-  loadExplore,
-  loadFeed,
-  loadSharedLivePosts,
-  openChannel,
-  openFeedPost,
-  openFolderPicker,
-  openHomePost,
-  openLivePost,
-  openPostModal,
-  openSavedPost,
-  openSuggestModal,
-  pickFolderIcon,
-  readUrlFilters,
-  refreshFolderPosts,
-  removeFolderItem,
-  renderCategories,
-  renderFavFiltered,
-  renderFavorites,
-  renderFilterBar,
-  renderFilterChips,
-  renderResults,
-  resetApp,
-  retryNetwork,
-  saveFilters,
-  saveFolderRule,
-  saveSettings,
-  scrollPostModalTop,
-  searchLocal,
-  setChartRange,
-  setExploreSearch,
-  setExploreSort,
-  setExploreView,
-  setFavPostType,
-  setFavSort,
-  setHomeType,
-  setSearchMode,
-  shareFilters,
-  shareFolder,
-  sharePost,
-  showMoreExplore,
-  skipSetup,
-  state,
-  submitSuggestion,
-  switchTab,
-  syncUrlFilters,
-  t,
-  testConnection,
-  testFromSettings,
-  toast,
-  toggleExploreType,
-  toggleFav,
-  toggleFilter,
-  toggleNotifs,
-  togglePostFav,
-});
-
-
-// ============================================================
-// WINDOW BRIDGE
-// ----------------------------------------------------------
-// Inline `onclick="fn(...)"` handlers and the e2e suite expect the
-// app functions on `window` (as they were in the classic script).
-// ============================================================
-Object.assign(window, {
-  addAutoAll,
-  addAutoOne,
-  addChannelToFolder,
-  applyExploreFilters,
-  applyFiltersToView,
-  clearFilters,
-  clearFolderRule,
-  clearLivePosts,
-  closeChannelModal,
-  closeFolderPicker,
-  closeFullText,
-  closeNotifModal,
-  closePostModal,
-  closeSettings,
-  closeSuggestModal,
-  copyFullText,
-  copyLink,
-  copyPostLink,
-  copyPostMarkdown,
-  copyPostText,
-  copySuggestBody,
-  copyWorkerCode,
-  createFolderFromPicker,
-  createFolderFromTab,
-  createSmartFolders,
-  cycleFolderIcon,
-  cycleFontSize,
-  deepSearchPosts,
-  deleteFolder,
-  dismissSharedFolder,
-  doSearch,
-  downloadPostMedia,
-  editFolder,
-  escAttr,
-  exportBackup,
-  exportPostsPdf,
-  exportPostsTxt,
-  fetchFavNewPosts,
-  filterState,
-  folderExportJson,
-  folderExportPdf,
-  folderExportTxt,
-  fpToggle,
-  getAllChannels,
-  getChannelPosts,
-  getLocalExplore,
-  importBackup,
-  importSharedFolder,
-  loadExplore,
-  loadFeed,
-  loadSharedLivePosts,
-  openChannel,
-  openFeedPost,
-  openFolderPicker,
-  openHomePost,
-  openLivePost,
-  openPostModal,
-  openSavedPost,
-  openSuggestModal,
-  pickFolderIcon,
-  readUrlFilters,
-  refreshFolderPosts,
-  removeFolderItem,
-  renderCategories,
-  renderFavFiltered,
-  renderFavorites,
-  renderFilterBar,
-  renderFilterChips,
-  renderResults,
-  resetApp,
-  retryNetwork,
-  saveFilters,
-  saveFolderRule,
-  saveSettings,
-  scrollPostModalTop,
-  searchLocal,
-  setChartRange,
-  setExploreSearch,
-  setExploreSort,
-  setExploreView,
-  setFavPostType,
-  setFavSort,
-  setHomeType,
-  setSearchMode,
-  shareFilters,
-  shareFolder,
-  sharePost,
-  showMoreExplore,
-  skipSetup,
-  state,
-  submitSuggestion,
-  switchTab,
-  syncUrlFilters,
-  t,
-  testConnection,
-  testFromSettings,
-  toast,
-  toggleExploreType,
-  toggleFav,
-  toggleFilter,
-  toggleNotifs,
-  togglePostFav,
-});
-
-
-// ============================================================
-// WINDOW BRIDGE
-// ----------------------------------------------------------
-// Inline `onclick="fn(...)"` handlers and the e2e suite expect the
-// app functions on `window` (as they were in the classic script).
-// ============================================================
-Object.assign(window, {
-  addAutoAll,
-  addAutoOne,
-  addChannelToFolder,
-  applyExploreFilters,
-  applyFiltersToView,
-  clearFilters,
-  clearFolderRule,
-  clearLivePosts,
-  closeChannelModal,
-  closeFolderPicker,
-  closeFullText,
-  closeNotifModal,
-  closePostModal,
-  closeSettings,
-  closeSuggestModal,
-  copyFullText,
-  copyLink,
-  copyPostLink,
-  copyPostMarkdown,
-  copyPostText,
-  copySuggestBody,
-  copyWorkerCode,
-  createFolderFromPicker,
-  createFolderFromTab,
-  createSmartFolders,
-  cycleFolderIcon,
-  cycleFontSize,
-  deepSearchPosts,
-  deleteFolder,
-  dismissSharedFolder,
-  doSearch,
-  downloadPostMedia,
-  editFolder,
-  escAttr,
-  exportBackup,
-  exportPostsPdf,
-  exportPostsTxt,
-  fetchFavNewPosts,
-  filterState,
-  folderExportJson,
-  folderExportPdf,
-  folderExportTxt,
-  fpToggle,
-  getAllChannels,
-  getChannelPosts,
-  getLocalExplore,
-  importBackup,
-  importSharedFolder,
-  loadExplore,
-  loadFeed,
-  loadSharedLivePosts,
-  openChannel,
-  openFeedPost,
-  openFolderPicker,
-  openHomePost,
-  openLivePost,
-  openPostModal,
-  openSavedPost,
-  openSuggestModal,
+  pickCompareChannel,
   pickFolderIcon,
   readUrlFilters,
   refreshFolderPosts,
@@ -3688,6 +3185,27 @@ Object.assign(window, {
   </div>
 </div>
 
+<!-- COMPARE TWO CHANNELS -->
+<div class="modal-overlay" id="compareOverlay" style="z-index:210" role="dialog" aria-modal="true" aria-label="Compare channels">
+  <div class="modal" style="max-width:760px">
+    <div class="modal-header">
+      <div class="modal-avatar" style="background:var(--accent-gradient)">⚖️</div>
+      <div><div class="modal-title" data-i18n="compare_title">Compare channels</div><div class="modal-user" data-i18n="compare_sub">Two channels, side by side</div></div>
+      <button class="modal-close" aria-label="Close" onclick="closeCompare()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="compare-grid">
+        <div class="compare-col" id="compareColA"></div>
+        <div class="compare-col" id="compareColB"></div>
+      </div>
+      <div class="compare-picker">
+        <label class="sug-label" for="compareSelect" data-i18n="compare_pick">Pick a channel to compare</label>
+        <select class="sug-field" id="compareSelect" aria-label="Compare with" onchange="pickCompareChannel(this.value)"></select>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- CHANNEL DETAIL MODAL -->
 <div class="modal-overlay" id="postOverlay" role="dialog" aria-modal="true" aria-label="Post" onclick="if(event.target===this)closePostModal()">
   <div class="modal" style="max-width:640px">
@@ -3714,7 +3232,7 @@ Object.assign(window, {
       <!-- Actions -->
       <div class="modal-actions">
         <button class="modal-btn modal-btn-primary" id="modalOpenTg"><span>✈️</span> <span data-i18n="open_telegram">Open in Telegram</span></button>
-        <button class="modal-btn modal-btn-secondary" id="modalFavBtn"><span>❤️</span> <span data-i18n="save">Save</span></button><button class="modal-btn modal-btn-secondary" id="modalFolderBtn"><span>🗂</span> <span>Folder</span></button><button class="modal-btn modal-btn-secondary" id="modalShareBtn"><span>🔗</span> <span data-i18n="share_link">Share link</span></button><button class="modal-btn modal-btn-secondary" id="modalSharePageBtn"><span>📄</span> <span data-i18n="share_page">Share page</span></button>
+        <button class="modal-btn modal-btn-secondary" id="modalFavBtn"><span>❤️</span> <span data-i18n="save">Save</span></button><button class="modal-btn modal-btn-secondary" id="modalFolderBtn"><span>🗂</span> <span>Folder</span></button><button class="modal-btn modal-btn-secondary" id="modalShareBtn"><span>🔗</span> <span data-i18n="share_link">Share link</span></button><button class="modal-btn modal-btn-secondary" id="modalSharePageBtn"><span>📄</span> <span data-i18n="share_page">Share page</span></button><button class="modal-btn modal-btn-secondary" id="modalCompareBtn"><span>⚖️</span> <span data-i18n="compare">Compare</span></button>
       </div>
       <!-- Related -->
       <div class="related-section" id="modalRelated" style="display:none"><h4 data-i18n="related_channels">🔗 Related Channels</h4><div class="related-chips" id="relatedChips"></div></div>

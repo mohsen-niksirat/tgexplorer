@@ -100,6 +100,10 @@ too. If you hit a limit, the endpoints keep working from the cache.
 
 ### v1.7.0
 
+- ⚖️ **Compare two channels** — the channel modal has a **Compare** button
+  that opens a side-by-side view: the activity chart, the statistics and the
+  content tags of both channels next to each other, so you can see at a
+  glance which one is more active and what it talks about
 - 🗜 **A compressed monthly archive** — the post archive only keeps a rolling
   three-day window, so the statistics would be lost. The crawler now also
   writes `archive/<month>.json.gz` — the post count per channel per day for

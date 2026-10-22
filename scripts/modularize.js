@@ -110,19 +110,20 @@ const imports = [
   '',
 ].join('\n');
 
-// Strip the previous bridge block so it can be rebuilt.
+// Strip the previous bridge block(s) so they can be rebuilt.
 // The block is found by index in the joined text, not by a regular
 // expression: the file may use CRLF line endings, which a pattern with \n
-// would not match.
+// would not match. Every occurrence is removed - an earlier version only
+// removed the first one and the file grew a new bridge on every run.
 {
   let text = kept.join('\n');
-  const marker = text.indexOf('// WINDOW BRIDGE');
-  if (marker !== -1) {
+  for (;;) {
+    const marker = text.indexOf('// WINDOW BRIDGE');
+    if (marker === -1) break;
     const sepStart = text.lastIndexOf('// =', marker);
     const bridgeEnd = text.indexOf('});', marker);
-    if (sepStart !== -1 && bridgeEnd !== -1) {
-      text = text.slice(0, sepStart) + text.slice(bridgeEnd + 3);
-    }
+    if (sepStart === -1 || bridgeEnd === -1) break;
+    text = text.slice(0, sepStart) + text.slice(bridgeEnd + 3);
   }
   // Repeated runs must not pile up empty lines.
   kept = text.replace(/\n{3,}/g, '\n\n').split('\n');
