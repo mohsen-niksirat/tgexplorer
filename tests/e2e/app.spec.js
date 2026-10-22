@@ -115,7 +115,7 @@ test.describe('Telegram Explorer - e2e', () => {
 
     // The activity chart is drawn on a canvas and can switch between the
     // 7 and the 30 day window.
-    await expect(page.locator('.chart-range-btn')).toHaveCount(2);
+    await expect(page.locator('.chart-range-btn')).toHaveCount(3);
     await expect(page.locator('#activityChartTitle')).toContainText('7');
     await page.locator('.chart-range-btn[data-days="30"]').click();
     await expect(page.locator('#activityChartTitle')).toContainText('30');
@@ -192,6 +192,26 @@ test.describe('Telegram Explorer - e2e', () => {
     expect(result.watch).toContain('bbcpersian');
     // ...and the worker knows which posts it has already seen.
     expect(result.seen.bbcpersian.length).toBeGreaterThan(0);
+  });
+
+  test('the activity chart reads the monthly archive for the long range', async ({ page }) => {
+    await page.evaluate(() => window.openChannel('bbcpersian'));
+    await page.waitForTimeout(1200);
+
+    await expect(page.locator('.chart-range-btn[data-days="90"]')).toBeVisible();
+
+    const pixels = () => page.evaluate(() => {
+      const c = document.getElementById('activityChart');
+      return c.getContext('2d').getImageData(0, 0, c.width, c.height).data.join(',').length;
+    });
+
+    const before = await pixels();
+    await page.locator('.chart-range-btn[data-days="90"]').click();
+    await page.waitForTimeout(1500);
+
+    await expect(page.locator('#activityChartTitle')).toContainText('90');
+    // The chart was redrawn from the archive.
+    expect(await pixels()).not.toBe(before);
   });
 
   test('language switching updates the document', async ({ page }) => {

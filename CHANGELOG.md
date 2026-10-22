@@ -5,6 +5,12 @@ Full version history of Telegram Explorer. The latest release is summarized in t
 
 ## v1.7.0
 
+- 🗜 **A compressed monthly archive** — the post archive only keeps a rolling
+  three-day window, so the statistics would be lost. The crawler now also
+  writes `archive/<month>.json.gz` — the post count per channel per day for
+  the whole month, compressed to about **1 KB**. The activity chart has a
+  **90-day** view that reads it, so the history survives without the
+  repository growing.
 - 🌍 **The translations are complete now** — the seven languages live in one
   JSON file per language under `i18n/`, and `scripts/check-i18n.js` fails the
   build when a string is missing in any of them. **152 strings** were missing

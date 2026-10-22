@@ -239,6 +239,7 @@
     "net_reconnected": "✅ تم إعادة الاتصال",
     "net_still_down": "⚠️ الوسيط لا يزال غير متاحر",
     "toast_md_copied": "تم النسخ بصيغة Markdown",
-    "copy_md": "MD"
+    "copy_md": "MD",
+    "activity_90d": "📊 النشاط (90 يوماً)"
   }
 }

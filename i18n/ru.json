@@ -239,6 +239,7 @@
     "net_reconnected": "✅ Соединение восстановлено",
     "net_still_down": "⚠️ Прокси по-прежнему недоступен",
     "toast_md_copied": "Скопировано как Markdown",
-    "copy_md": "MD"
+    "copy_md": "MD",
+    "activity_90d": "📊 Активность (90 дней)"
   }
 }

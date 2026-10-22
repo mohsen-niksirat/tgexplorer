@@ -1123,6 +1123,52 @@ function renderLocalRelated(username){
 
 function updateModalFav(u){const btn=document.getElementById('modalFavBtn');btn.querySelector('span:first-child').textContent=isFav(u)?'❤️':'🤍'}
 
+// The monthly archives: the post count per channel per day, gzipped.
+// Loaded lazily and only when a long range is asked for.
+let archiveCache=null;
+async function loadArchives(){
+  if(archiveCache)return archiveCache;
+  const out={channels:{},months:[]};
+  try{
+    const idx=await fetch('archive/index.json').then(r=>r.ok?r.json():null);
+    if(!idx||!idx.months||!idx.months.length)return (archiveCache=out);
+    out.months=idx.months;
+    for(const month of idx.months.slice(-4)){
+      const res=await fetch('archive/'+month+'.json.gz');
+      if(!res.ok)continue;
+      let text;
+      if(typeof DecompressionStream!=='undefined'){
+        const stream=res.body.pipeThrough(new DecompressionStream('gzip'));
+        text=await new Response(stream).text();
+      }else{
+        // No Compression Streams: the archive cannot be read.
+        continue;
+      }
+      const data=JSON.parse(text);
+      for(const [u,days] of Object.entries(data.channels||{})){
+        out.channels[u]=Object.assign({},out.channels[u],days);
+      }
+    }
+  }catch(e){}
+  return (archiveCache=out);
+}
+
+// The daily post counts of a channel for the last N days, from the archive.
+async function archivedActivity(username,days){
+  const archives=await loadArchives();
+  const counts=archives.channels[username];
+  if(!counts)return null;
+  const today=new Date();
+  today.setUTCHours(0,0,0,0);
+  const out=[];
+  for(let i=days-1;i>=0;i--){
+    const d=new Date(today.getTime()-i*86400000);
+    const key=d.toISOString().slice(0,10);
+    out.push({date:key,posts:counts[key]||0});
+  }
+  return out;
+}
+
 // ============================================================
 // CHANNEL PROFILE — activity, stats, content tags
 // ------------------------------------------------------------
@@ -1220,10 +1266,22 @@ function renderChannelProfile(username){
   }
 }
 
-// Switch the activity chart between the 7 and 30 day window.
-function setChartRange(days){
+// Switch the activity chart between the 7, 30 and 90 day window.
+// The 90 day window comes from the monthly archive.
+async function setChartRange(days){
   chartRange=days;
-  if(chartUsername)renderChannelProfile(chartUsername);
+  document.querySelectorAll('.chart-range-btn').forEach(b=>b.classList.toggle('active',Number(b.dataset.days)===days));
+  const title=document.getElementById('activityChartTitle');
+  if(title)title.textContent=days===90?t('activity_90d'):(days===30?t('activity_30d'):t('activity_chart'));
+  if(!chartUsername)return;
+  if(days>30){
+    const archived=await archivedActivity(chartUsername,days);
+    if(archived){
+      renderChart(archived);
+      return;
+    }
+  }
+  renderChannelProfile(chartUsername);
 }
 
 // Share a direct link to the channel.
@@ -2698,116 +2756,7 @@ function renderEmpty(title,desc){return`<div class="empty-state"><div class="emp
 
 
 
-// ============================================================
-// WINDOW BRIDGE
-// ----------------------------------------------------------
-// Inline `onclick="fn(...)"` handlers and the e2e suite expect the
-// app functions on `window` (as they were in the classic script).
-// ============================================================
-Object.assign(window, {
-  addAutoAll,
-  addAutoOne,
-  addChannelToFolder,
-  applyExploreFilters,
-  applyFiltersToView,
-  clearFilters,
-  clearFolderRule,
-  clearLivePosts,
-  closeChannelModal,
-  closeFolderPicker,
-  closeFullText,
-  closeNotifModal,
-  closePostModal,
-  closeSettings,
-  closeSuggestModal,
-  copyFullText,
-  copyLink,
-  copyPostLink,
-  copyPostMarkdown,
-  copyPostText,
-  copySuggestBody,
-  copyWorkerCode,
-  createFolderFromPicker,
-  createFolderFromTab,
-  createSmartFolders,
-  cycleFolderIcon,
-  cycleFontSize,
-  deepSearchPosts,
-  deleteFolder,
-  dismissSharedFolder,
-  doSearch,
-  downloadPostMedia,
-  editFolder,
-  escAttr,
-  exportBackup,
-  exportPostsPdf,
-  exportPostsTxt,
-  fetchFavNewPosts,
-  filterState,
-  folderExportJson,
-  folderExportPdf,
-  folderExportTxt,
-  fpToggle,
-  getAllChannels,
-  getChannelPosts,
-  getLocalExplore,
-  importBackup,
-  importSharedFolder,
-  loadExplore,
-  loadFeed,
-  loadSharedLivePosts,
-  openChannel,
-  openFeedPost,
-  openFolderPicker,
-  openHomePost,
-  openLivePost,
-  openPostModal,
-  openSavedPost,
-  openSuggestModal,
-  pickFolderIcon,
-  readUrlFilters,
-  refreshFolderPosts,
-  removeFolderItem,
-  renderCategories,
-  renderFavFiltered,
-  renderFavorites,
-  renderFilterBar,
-  renderFilterChips,
-  renderResults,
-  resetApp,
-  retryNetwork,
-  saveFilters,
-  saveFolderRule,
-  saveSettings,
-  scrollPostModalTop,
-  searchLocal,
-  setChartRange,
-  setExploreSearch,
-  setExploreSort,
-  setExploreView,
-  setFavPostType,
-  setFavSort,
-  setHomeType,
-  setSearchMode,
-  shareFilters,
-  shareFolder,
-  sharePost,
-  showMoreExplore,
-  skipSetup,
-  state,
-  submitSuggestion,
-  switchTab,
-  syncUrlFilters,
-  t,
-  testConnection,
-  testFromSettings,
-  toast,
-  toggleExploreType,
-  toggleFav,
-  toggleFilter,
-  toggleNotifs,
-  togglePostFav,
-});
+
 
 // ============================================================
 // WINDOW BRIDGE
@@ -3252,6 +3201,118 @@ Object.assign(window, {
   toggleNotifs,
   togglePostFav,
 });
+
+// ============================================================
+// WINDOW BRIDGE
+// ----------------------------------------------------------
+// Inline `onclick="fn(...)"` handlers and the e2e suite expect the
+// app functions on `window` (as they were in the classic script).
+// ============================================================
+Object.assign(window, {
+  addAutoAll,
+  addAutoOne,
+  addChannelToFolder,
+  applyExploreFilters,
+  applyFiltersToView,
+  clearFilters,
+  clearFolderRule,
+  clearLivePosts,
+  closeChannelModal,
+  closeFolderPicker,
+  closeFullText,
+  closeNotifModal,
+  closePostModal,
+  closeSettings,
+  closeSuggestModal,
+  copyFullText,
+  copyLink,
+  copyPostLink,
+  copyPostMarkdown,
+  copyPostText,
+  copySuggestBody,
+  copyWorkerCode,
+  createFolderFromPicker,
+  createFolderFromTab,
+  createSmartFolders,
+  cycleFolderIcon,
+  cycleFontSize,
+  deepSearchPosts,
+  deleteFolder,
+  dismissSharedFolder,
+  doSearch,
+  downloadPostMedia,
+  editFolder,
+  escAttr,
+  exportBackup,
+  exportPostsPdf,
+  exportPostsTxt,
+  fetchFavNewPosts,
+  filterState,
+  folderExportJson,
+  folderExportPdf,
+  folderExportTxt,
+  fpToggle,
+  getAllChannels,
+  getChannelPosts,
+  getLocalExplore,
+  importBackup,
+  importSharedFolder,
+  loadExplore,
+  loadFeed,
+  loadSharedLivePosts,
+  openChannel,
+  openFeedPost,
+  openFolderPicker,
+  openHomePost,
+  openLivePost,
+  openPostModal,
+  openSavedPost,
+  openSuggestModal,
+  pickFolderIcon,
+  readUrlFilters,
+  refreshFolderPosts,
+  removeFolderItem,
+  renderCategories,
+  renderFavFiltered,
+  renderFavorites,
+  renderFilterBar,
+  renderFilterChips,
+  renderResults,
+  resetApp,
+  retryNetwork,
+  saveFilters,
+  saveFolderRule,
+  saveSettings,
+  scrollPostModalTop,
+  searchLocal,
+  setChartRange,
+  setExploreSearch,
+  setExploreSort,
+  setExploreView,
+  setFavPostType,
+  setFavSort,
+  setHomeType,
+  setSearchMode,
+  shareFilters,
+  shareFolder,
+  sharePost,
+  showMoreExplore,
+  skipSetup,
+  state,
+  submitSuggestion,
+  switchTab,
+  syncUrlFilters,
+  t,
+  testConnection,
+  testFromSettings,
+  toast,
+  toggleExploreType,
+  toggleFav,
+  toggleFilter,
+  toggleNotifs,
+  togglePostFav,
+});
+
 
 // ============================================================
 // WINDOW BRIDGE
@@ -3647,7 +3708,7 @@ Object.assign(window, {
       <!-- Stats -->
       <div class="stats-grid" id="modalStats" style="display:none"></div>
       <!-- Chart -->
-      <div class="chart-container" id="modalChart" style="display:none"><div class="chart-head"><h4 id="activityChartTitle" data-i18n="activity_chart">📊 Activity (7 days)</h4><div class="chart-range" role="group" aria-label="Chart range"><button class="chart-range-btn active" data-days="7" onclick="setChartRange(7)">7</button><button class="chart-range-btn" data-days="30" onclick="setChartRange(30)">30</button></div></div><canvas class="chart-canvas" id="activityChart"></canvas></div>
+      <div class="chart-container" id="modalChart" style="display:none"><div class="chart-head"><h4 id="activityChartTitle" data-i18n="activity_chart">📊 Activity (7 days)</h4><div class="chart-range" role="group" aria-label="Chart range"><button class="chart-range-btn active" data-days="7" onclick="setChartRange(7)">7</button><button class="chart-range-btn" data-days="30" onclick="setChartRange(30)">30</button><button class="chart-range-btn" data-days="90" onclick="setChartRange(90)">90</button></div></div><canvas class="chart-canvas" id="activityChart"></canvas></div>
       <!-- Content tags -->
       <div class="modal-tags" id="modalTags" style="display:none"></div>
       <!-- Actions -->

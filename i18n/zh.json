@@ -239,6 +239,7 @@
     "net_reconnected": "✅ 已重新连接",
     "net_still_down": "⚠️ 代理仍不可达",
     "toast_md_copied": "已复制为 Markdown",
-    "copy_md": "MD"
+    "copy_md": "MD",
+    "activity_90d": "📊 活跃度（90 天）"
   }
 }

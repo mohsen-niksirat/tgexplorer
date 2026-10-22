@@ -239,6 +239,7 @@
     "net_reconnected": "✅ Proxy reconnecté",
     "net_still_down": "⚠️ Proxy toujours injoignable",
     "toast_md_copied": "Copié en Markdown",
-    "copy_md": "MD"
+    "copy_md": "MD",
+    "activity_90d": "📊 Activité (90 jours)"
   }
 }

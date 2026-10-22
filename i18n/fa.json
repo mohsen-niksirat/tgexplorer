@@ -239,6 +239,7 @@
     "net_reconnected": "✅ دوباره وصل شد",
     "net_still_down": "⚠️ پراکسی هنوز در دسترس نیست",
     "toast_md_copied": "به‌صورت Markdown کپی شد",
-    "copy_md": "MD"
+    "copy_md": "MD",
+    "activity_90d": "📊 فعالیت (۹۰ روز)"
   }
 }
