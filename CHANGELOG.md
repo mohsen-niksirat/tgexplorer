@@ -5,6 +5,13 @@ Full version history of Telegram Explorer. The latest release is summarized in t
 
 ## v1.7.0
 
+- 🌍 **The translations are complete now** — the seven languages live in one
+  JSON file per language under `i18n/`, and `scripts/check-i18n.js` fails the
+  build when a string is missing in any of them. **152 strings** were missing
+  in Arabic, Chinese, Russian, Spanish and French (the home feed, the
+  notifications, the backup and the whole suggestion dialog) and are
+  translated now. The English "👥 Members" label was a placeholder that was
+  never filled in.
 - ➕ **9 more verified channels (122 → 131)** — Telegram News, Stack Overflow,
   Linux Foundation, Xiaomi, Qualcomm, Times of India, Juventus, Overwatch and
   a Persian cooking channel, added with their live title, subscriber count

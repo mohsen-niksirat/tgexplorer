@@ -28,6 +28,8 @@ jobs:
           node scripts/check-all-scripts.js
           node scripts/check-bridge.js
           node scripts/check-worker-sync.js
+          node scripts/check-i18n.js
+          node scripts/check-i18n-runtime.js
 
       - name: Run e2e tests
         run: npm test
