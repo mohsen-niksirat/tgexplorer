@@ -139,7 +139,8 @@
     "no_activity": "此期间没有活动",
     "never": "从未",
     "activity_30d": "📊 活跃度（30 天）",
-    "share_link": "🔗 分享链接"
+    "share_link": "🔗 分享链接",
+    "compare": "⚖️ 比较"
   },
   "ui": {
     "all": "全部",
@@ -240,6 +241,9 @@
     "net_still_down": "⚠️ 代理仍不可达",
     "toast_md_copied": "已复制为 Markdown",
     "copy_md": "MD",
-    "activity_90d": "📊 活跃度（90 天）"
+    "activity_90d": "📊 活跃度（90 天）",
+    "compare_title": "比较频道",
+    "compare_sub": "两个频道，并排对比",
+    "compare_pick": "选择一个要比较的频道"
   }
 }

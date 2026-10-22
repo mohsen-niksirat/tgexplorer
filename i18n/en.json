@@ -139,7 +139,8 @@
     "no_activity": "No activity in this period",
     "never": "Never",
     "activity_30d": "📊 Activity (30 days)",
-    "share_link": "🔗 Share link"
+    "share_link": "🔗 Share link",
+    "compare": "⚖️ Compare"
   },
   "ui": {
     "all": "All",
@@ -240,6 +241,9 @@
     "net_still_down": "⚠️ Proxy still unreachable",
     "toast_md_copied": "Copied as Markdown",
     "copy_md": "MD",
-    "activity_90d": "📊 Activity (90 days)"
+    "activity_90d": "📊 Activity (90 days)",
+    "compare_title": "Compare channels",
+    "compare_sub": "Two channels, side by side",
+    "compare_pick": "Pick a channel to compare"
   }
 }

@@ -139,7 +139,8 @@
     "no_activity": "Sin actividad en este periodo",
     "never": "Nunca",
     "activity_30d": "📊 Actividad (30 días)",
-    "share_link": "🔗 Compartir enlace"
+    "share_link": "🔗 Compartir enlace",
+    "compare": "⚖️ Comparar"
   },
   "ui": {
     "all": "Todo",
@@ -240,6 +241,9 @@
     "net_still_down": "⚠️ El proxy sigue inaccesible",
     "toast_md_copied": "Copiado como Markdown",
     "copy_md": "MD",
-    "activity_90d": "📊 Actividad (90 días)"
+    "activity_90d": "📊 Actividad (90 días)",
+    "compare_title": "Comparar canales",
+    "compare_sub": "Dos canales, uno al lado del otro",
+    "compare_pick": "Elige un canal para comparar"
   }
 }

@@ -139,7 +139,8 @@
     "no_activity": "Aucune activité sur cette période",
     "never": "Jamais",
     "activity_30d": "📊 Activité (30 jours)",
-    "share_link": "🔗 Partager le lien"
+    "share_link": "🔗 Partager le lien",
+    "compare": "⚖️ Comparer"
   },
   "ui": {
     "all": "Tout",
@@ -240,6 +241,9 @@
     "net_still_down": "⚠️ Proxy toujours injoignable",
     "toast_md_copied": "Copié en Markdown",
     "copy_md": "MD",
-    "activity_90d": "📊 Activité (90 jours)"
+    "activity_90d": "📊 Activité (90 jours)",
+    "compare_title": "Comparer des chaînes",
+    "compare_sub": "Deux chaînes, côte à côte",
+    "compare_pick": "Choisissez une chaîne à comparer"
   }
 }
