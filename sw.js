@@ -9,6 +9,7 @@ const STATIC_ASSETS = [
   './index.html',
   './manifest.json',
   './channels.js',
+  './posts.js',
   './avatars.js',
   './js/i18n.js',
   './js/state.js',

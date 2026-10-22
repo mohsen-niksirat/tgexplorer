@@ -43,21 +43,21 @@
   "screenshots": [
     {
       "src": "docs/mobile.png",
-      "sizes": "412x823",
+      "sizes": "824x1646",
       "type": "image/png",
       "form_factor": "narrow",
       "label": "The Explore grid on a phone"
     },
     {
       "src": "docs/grid.png",
-      "sizes": "1280x900",
+      "sizes": "2560x1800",
       "type": "image/png",
       "form_factor": "wide",
       "label": "The Explore grid"
     },
     {
       "src": "docs/channel.png",
-      "sizes": "1280x900",
+      "sizes": "2560x1800",
       "type": "image/png",
       "form_factor": "wide",
       "label": "A channel profile with the activity chart"

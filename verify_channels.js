@@ -277,7 +277,10 @@ async function main() {
   const counts = { OK: 0, USER: 0, FAIL: 0, ERR: 0, GROUP: 0 };
   const results = [];
   for (const ch of db) {
-    const res = await check(ch);
+    // Ask for the profile page too: a channel with a web preview only shows
+    // its subscriber count there, and without it the report had no member
+    // counts at all (and could not tell a group from a channel).
+    const res = await check(ch, { profile: true });
     counts[res.status]++;
     results.push({
       username: res.ch.username,

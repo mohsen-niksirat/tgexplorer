@@ -123,7 +123,7 @@ export default {
     }
 
     try {
-      if (path === '/api/ping') return j({ ok: true, ts: Date.now(), version: '3.2', hasApi: !!(env && env.TG_API_HASH) });
+      if (path === '/api/ping') return j({ ok: true, ts: Date.now(), version: '3.3', hasApi: !!(env && env.TG_API_HASH) });
       if (path === '/api/version') return j({ version: '3.3', name: 'tgexplorer-worker', endpoints: ['/api/ping', '/api/search', '/api/searchPosts', '/api/trending', '/api/explore-feed', '/api/channel', '/api/posts', '/api/related', '/api/stats', '/api/categories', '/api/notifications', '/api/version'], builtAt: BUILD_TIME });
 
       if (path === '/api/search') return await handleSearch(url, env);
@@ -141,7 +141,7 @@ export default {
 
       // Avatar proxy endpoint
       if (path.startsWith('/api/avatar/')) {
-        const username = path.split('/api/avatar/')[1];
+        const username = path.split('/api/avatar/')[1].replace(/[^a-zA-Z0-9_]/g, '');
         const avatar = await getChannelAvatar(username);
         if (avatar) return j({ username, avatar, hasAvatar: true });
         return j({ username, avatar: null, hasAvatar: false });
@@ -169,7 +169,8 @@ async function handleSearchPosts(url, env) {
   if (cached) return j(cached);
 
   const needle = query.toLowerCase();
-  const channels = getTrendingChannels('all').slice(0, 60);
+  // 8 batches x 6 channels = 48 subrequests, inside the free-plan budget of 50.
+  const channels = getTrendingChannels('all').slice(0, 48);
   const matches = [];
   let checked = 0;
 
@@ -225,7 +226,7 @@ async function handleSearch(url, env) {
   // Direct channel match: if t.me/s/{query} has posts, the exact name is a real channel
   if (tmeResults.length === 0 && parsePosts(tmeHtml, query).length > 0) {
     const direct = parseChannelPage(tmeHtml, query);
-    direct.username = query;
+    direct.username = query.replace(/[^a-zA-Z0-9_]/g, '');
     direct.source = 'direct';
     tmeResults.push(direct);
   }
@@ -309,16 +310,20 @@ async function handleChannel(username) {
 // ============================================================
 async function handlePosts(username, url) {
   const u = username.replace(/[^a-zA-Z0-9_]/g, '');
-  const page = parseInt(url.searchParams.get('page') || '1');
-  const cacheKey = `posts:${u}:${page}`;
+  const before = (url.searchParams.get('before') || '').replace(/[^0-9]/g, '');
+  const page = parseInt(url.searchParams.get('page') || '1', 10) || 1;
+  const cacheKey = `posts:${u}:${before || page}`;
   const cached = cacheGet(cacheKey);
   if (cached) return j(cached);
 
-  const html = await fetchHtml(`https://t.me/s/${u}?page=${page}`);
+  // t.me paginates with ?before=<message id>; ?page=N is ignored by the site,
+  // so every "page" used to return the same latest posts.
+  const target = `https://t.me/s/${u}${before ? '?before=' + before : ''}`;
+  const html = await fetchHtml(target);
   if (!html) return j({ error: 'Not found' }, 404);
 
   const posts = parsePosts(html, u);
-  const result = { channel: u, page, posts, total: posts.length };
+  const result = { channel: u, page, before: before || null, posts, total: posts.length };
   cacheSet(cacheKey, result);
   return j(result);
 }
@@ -357,7 +362,9 @@ async function handleStats(username) {
   const days = [];
   for (let k = 6; k >= 0; k--) {
     const key = new Date(now - k * 864e5).toISOString().split('T')[0];
-    days.push({ date: key, posts: perDay[key] || 0, views: (perDay[key] || 0) * 1000 });
+    // t.me exposes no per-post view counts, so do not invent one: null tells
+    // the client (and any other consumer) that the number is unavailable.
+    days.push({ date: key, posts: perDay[key] || 0, views: null });
   }
 
   const avatar = await getChannelAvatar(u);
@@ -606,10 +613,11 @@ function parseChannelPage(html, username) {
   const title = extractMeta(html, 'og:title') || extractMeta(html, 'title') || username;
   const desc = extractMeta(html, 'og:description') || '';
   const image = extractMeta(html, 'og:image') || '';
-  const mm = html.match(/([\d,.]+[KkMm]?)\s*(?:members|subscriber|member|عضو)/i);
+  // t.me formats large counts both as "1.6M" and as "2 517 026 subscribers".
+  const mm = html.match(/([\d][\d\s.,]*[KkMm]?)\s*(?:members|subscribers?|member|عضو)/i);
   return {
     username, title: decodeEntities(title), description: decodeEntities(desc),
-    image, members: mm ? mm[1] : '0', link: `https://t.me/${username}`
+    image, members: mm ? mm[1].replace(/\s+/g, ' ').trim() : '0', link: `https://t.me/${username}`
   };
 }
 
@@ -621,13 +629,15 @@ function parsePosts(html, username) {
     const block = mb[0];
     const idm = block.match(/class="tgme_widget_message[^"]*"[^>]*data-post="([^"]+)"/);
     if (!idm) continue;
-    const id = idm[1];
+    // data-post is "channel/123"; the rest of the app compares numeric ids
+    // (Number(p.id)), so keep only the message number here.
+    const id = idm[1].split('/').pop();
     const tm = block.match(/class="tgme_widget_message_text[^>]*>([\s\S]*?)<\/div>/);
     const text = tm ? tm[1].replace(/<[^>]+>/g, '').trim() : '';
     const dm = block.match(/<time[^>]+datetime="([^"]+)"/);
     const im = block.match(/background-image:\s*url\(['"]?(https?:\/\/[^'") \s]+)['"]?\)/);
     const vm = block.match(/<video[^>]*src="([^"]+)"/);
-    const post = { id, link: `https://t.me/${username}/${id.split('/').pop()}`, date: dm ? dm[1] : '' };
+    const post = { id, link: `https://t.me/${username}/${id}`, date: dm ? dm[1] : '' };
     if (text) post.text = decodeEntities(text.substring(0, 300));
     if (vm) { post.video = vm[1]; post.hasVideo = true; }
     if (im) post.image = im[1];
@@ -648,7 +658,8 @@ async function searchGoogle(query, lang) {
   for (const s of sources) {
     try {
       const resp = await fetch(s.url, {
-        headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36', 'Accept': 'text/html', 'Accept-Language': 'en-US,en;q=0.9,fa;q=0.8' }
+        headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36', 'Accept': 'text/html', 'Accept-Language': 'en-US,en;q=0.9,fa;q=0.8' },
+        signal: AbortSignal.timeout(8000)
       });
       const html = await resp.text();
       const results = [], seen = new Set();
@@ -683,7 +694,7 @@ async function searchGoogle(query, lang) {
 
 // CURATED CHANNELS
 // ============================================================
-function getTrendingChannels(cat){const a={tech:[{username:'digiato',title:'دیجیاتو',members:'500K'},{username:'technolife',title:'تکنولایف',members:'350K'},{username:'github',title:'GitHub Community',members:'1M'},{username:'javascript',title:'JavaScript',members:'600K'},{username:'google',title:'Google',members:'1.2M'},{username:'microsoft',title:'Microsoft',members:'900K'},{username:'technews',title:'Tech News',members:'300K'},{username:'spacex',title:'SpaceX',members:'1.2M'}],news:[{username:'bbcpersian',title:'BBC Persian',members:'1.6M'},{username:'radiofarda',title:'رادیو فردا',members:'1.1M'},{username:'khamenei_ir',title:'دفتر حفظ و نشر آثار رهبری',members:'1.6M'},{username:'tabnak',title:'تابناک',members:'900K'},{username:'khabaronline',title:'خبر آنلاین',members:'800K'},{username:'manototv',title:'تلویزیون منوتو',members:'800K'},{username:'nytimes',title:'The New York Times',members:'1.4M'},{username:'guardian',title:'The Guardian',members:'1M'},{username:'skynews',title:'Sky News',members:'1M'},{username:'france24',title:'FRANCE 24',members:'900K'},{username:'aljazeera',title:'AL JAZEERA',members:'1.2M'},{username:'reddit',title:'Reddit',members:'1.5M'}],crypto:[{username:'arzdigital',title:'ارزدیجیتال',members:'400K'},{username:'crypto',title:'Crypto',members:'500K'},{username:'bitcoin',title:'Bitcoin',members:'700K'},{username:'cointelegraph',title:'Cointelegraph',members:'600K'},{username:'altcoin',title:'Altcoins Channel',members:'400K'},{username:'blockchain',title:'Blockchain.com',members:'450K'}],entertainment:[{username:'filimo',title:'کانال رسمی فیلیمو',members:'600K'},{username:'telewebion',title:'تلوبیون',members:'400K'},{username:'netflix',title:'Netflix',members:'2M'},{username:'series',title:'Movies & Series',members:'900K'},{username:'primevideo',title:'Prime Video',members:'800K'}],science:[{username:'science',title:'Science',members:'700K'},{username:'nature',title:'Nature',members:'400K'},{username:'astronomy',title:'Astronomy',members:'300K'},{username:'physics',title:'Physics',members:'250K'},{username:'biology',title:'Biology',members:'250K'},{username:'chemistry',title:'Chemistry',members:'200K'}],gaming:[{username:'nintendo',title:'Nintendo',members:'800K'},{username:'fortnite',title:'Fortnite',members:'500K'}],music:[{username:'radiojavan',title:'Radio Javan',members:'800K'},{username:'spotify',title:'Spotify',members:'1.5M'},{username:'billboard',title:'Billboard',members:'700K'}],art:[{username:'dribbble',title:'Dribbble',members:'400K'},{username:'design',title:'Design',members:'500K'},{username:'digitalart',title:'NFT DigitalArt',members:'350K'},{username:'unsplash',title:'Unsplash',members:'400K'},{username:'photography',title:'Photography',members:'700K'}],sports:[{username:'varzesh3',title:'ورزش سه',members:'1.2M'},{username:'football360',title:'فوتبال ۳۶۰',members:'600K'},{username:'chelseafc',title:'Chelsea FC',members:'600K'},{username:'skysports',title:'Sky Sports',members:'1.2M'},{username:'ufc',title:'UFC',members:'800K'}],education:[{username:'duolingo',title:'Duolingo',members:'700K'},{username:'bbclearningenglish',title:'BBC Learning English',members:'600K'},{username:'englishgrammar',title:'Advanced Grammar',members:'300K'},{username:'vocabulary',title:'Vocabulary',members:'400K'}],meme:[{username:'memes',title:'Memes',members:'1M'}],food:[{username:'baking',title:'Baking',members:'300K'},{username:'foodporn',title:'FoodPorn',members:'500K'}],travel:[{username:'natgeotravel',title:'Nat Geo Travel',members:'800K'},{username:'travel',title:'Travel',members:'500K'}],};return cat==='all'?Object.values(a).flat():(a[cat]||[])}
+function getTrendingChannels(cat){const a={tech:[{username:'digiato',title:'دیجیاتو',members:'500K'},{username:'technolife',title:'تکنولایف',members:'350K'},{username:'github',title:'GitHub Community',members:'1M'},{username:'javascript',title:'JavaScript',members:'600K'},{username:'google',title:'Google',members:'1.2M'},{username:'microsoft',title:'Microsoft',members:'900K'},{username:'technews',title:'Tech News',members:'300K'},{username:'spacex',title:'SpaceX',members:'1.2M'}],news:[{username:'bbcpersian',title:'BBC Persian',members:'1.6M'},{username:'radiofarda',title:'رادیو فردا',members:'1.1M'},{username:'khamenei_ir',title:'دفتر حفظ و نشر آثار رهبری',members:'1.6M'},{username:'tabnak',title:'تابناک',members:'900K'},{username:'khabaronline',title:'خبر آنلاین',members:'800K'},{username:'manototv',title:'تلویزیون منوتو',members:'800K'},{username:'nytimes',title:'The New York Times',members:'1.4M'},{username:'guardian',title:'The Guardian',members:'1M'},{username:'skynews',title:'Sky News',members:'1M'},{username:'france24',title:'FRANCE 24',members:'900K'},{username:'aljazeera',title:'AL JAZEERA',members:'1.2M'},{username:'reddit',title:'Reddit',members:'1.5M'}],crypto:[{username:'arzdigital',title:'ارزدیجیتال',members:'400K'},{username:'crypto',title:'Crypto',members:'500K'},{username:'bitcoin',title:'Bitcoin',members:'700K'},{username:'cointelegraph',title:'Cointelegraph',members:'600K'},{username:'altcoin',title:'Altcoins Channel',members:'400K'},{username:'blockchain',title:'Blockchain.com',members:'450K'}],entertainment:[{username:'filimo',title:'کانال رسمی فیلیمو',members:'600K'},{username:'telewebion',title:'تلوبیون',members:'400K'},{username:'netflix',title:'Netflix',members:'2M'},{username:'series',title:'Movies & Series',members:'900K'},{username:'primevideo',title:'Prime Video',members:'800K'}],science:[{username:'science',title:'Science',members:'700K'},{username:'nature',title:'Nature',members:'400K'},{username:'astronomy',title:'Astronomy',members:'300K'},{username:'physics',title:'Physics',members:'250K'},{username:'biology',title:'Biology',members:'250K'},{username:'chemistry',title:'Chemistry',members:'200K'}],gaming:[{username:'nintendo',title:'Nintendo',members:'800K'},{username:'fortnite',title:'Fortnite',members:'500K'}],music:[{username:'radiojavan',title:'Radio Javan',members:'800K'},{username:'spotify',title:'Spotify',members:'1.5M'},{username:'billboard',title:'Billboard',members:'700K'}],art:[{username:'dribbble',title:'Dribbble',members:'400K'},{username:'design',title:'Design',members:'500K'},{username:'digitalart',title:'NFT DigitalArt',members:'350K'},{username:'unsplash',title:'Unsplash',members:'400K'},{username:'photography',title:'Photography',members:'700K'}],sports:[{username:'varzesh3',title:'ورزش سه',members:'1.2M'},{username:'football360',title:'فوتبال ۳۶۰',members:'600K'},{username:'chelseafc',title:'Chelsea FC',members:'600K'},{username:'skysports',title:'Sky Sports',members:'1.2M'},{username:'ufc',title:'UFC',members:'800K'}],education:[{username:'duolingo',title:'Duolingo',members:'700K'},{username:'bbclearningenglish',title:'BBC Learning English',members:'600K'},{username:'englishgrammar',title:'Advanced Grammar',members:'300K'},{username:'vocabulary',title:'Vocabulary',members:'400K'}],meme:[{username:'memes',title:'Memes',members:'1M'}],food:[{username:'baking',title:'Baking',members:'300K'},{username:'foodporn',title:'FoodPorn',members:'500K'}],travel:[{username:'natgeotravel',title:'Nat Geo Travel',members:'800K'},{username:'travel',title:'Travel',members:'500K'}],podcast:[{username:'ted',title:'TED',members:'3M'},{username:'npr',title:'NPR',members:'1M'},{username:'podcast',title:'Podcast',members:'200K'},{username:'audible',title:'Audible',members:'300K'}],cinema:[{username:'imdb',title:'IMDb',members:'1M'},{username:'netflix',title:'Netflix',members:'2M'},{username:'marvel',title:'Marvel',members:'2M'},{username:'warnerbros',title:'Warner Bros.',members:'1M'}],};return cat==='all'?Object.values(a).flat():(a[cat]||[])}
 
 
 // ============================================================
@@ -693,7 +704,9 @@ async function fetchHtml(url) {
   try {
     const r = await fetch(url, {
       headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36', 'Accept': 'text/html', 'Accept-Language': 'en-US,en;q=0.9,fa;q=0.8' },
-      redirect: 'follow'
+      redirect: 'follow',
+      // Without a deadline a hung upstream keeps the whole request open.
+      signal: AbortSignal.timeout(10000)
     });
     return r.ok ? await r.text() : '';
   } catch { return ''; }

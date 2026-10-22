@@ -249,7 +249,9 @@ document.getElementById('langFilter').addEventListener('click',e=>{const chip=e.
   document.getElementById('connBadge').addEventListener('click',openSettings);
   document.getElementById('notifBtn').addEventListener('click',openNotifModal);
   document.getElementById('workerUrlInput').addEventListener('keydown',e=>{if(e.key==='Enter')testConnection()});
-  document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeSettings();closePostModal();closeChannelModal();closeNotifModal();closeFolderPicker();closeSuggestModal();closeFullText()}});
+  // Escape closes only the topmost overlay: closing every modal at once also
+  // threw away the channel page the user came from.
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeTopOverlay()});
   document.getElementById('channelOverlay').addEventListener('click',e=>{if(e.target===e.currentTarget)closeChannelModal()});
   document.getElementById('folderPicker').addEventListener('click',e=>{if(e.target===e.currentTarget)closeFolderPicker()});
   document.getElementById('suggestOverlay').addEventListener('click',e=>{if(e.target===e.currentTarget)closeSuggestModal()});
@@ -279,7 +281,7 @@ function initTelegramWebApp(){
 }
 function syncTgBackButton(){
   if(!window.Telegram||!Telegram.WebApp)return;
-  const ids=['postOverlay','channelOverlay','settingsOverlay','notifOverlay','folderPicker','suggestOverlay'];
+  const ids=['postOverlay','channelOverlay','settingsOverlay','notifOverlay','folderPicker','suggestOverlay','compareOverlay'];
   const open=ids.some(id=>{const el=document.getElementById(id);return el&&el.classList.contains('open')});
   try{if(open)Telegram.WebApp.BackButton.show();else Telegram.WebApp.BackButton.hide()}catch(e){}
 }
@@ -288,19 +290,29 @@ function watchTgBackButton(){
   const obs=new MutationObserver(()=>syncTgBackButton());
   try{obs.observe(document.body,{subtree:true,attributes:true,attributeFilter:['class']})}catch(e){}
 }
-function tgGoBack(){
-  const ids=['postOverlay','channelOverlay','settingsOverlay','notifOverlay','folderPicker','suggestOverlay'];
-  for(const id of ids){
+// Overlays in stacking order (topmost first). Escape and the Telegram back
+// button should dismiss one layer at a time.
+function closeTopOverlay(){
+  const order=[
+    ['compareOverlay',closeCompare],
+    ['fullTextOverlay',closeFullText],
+    ['suggestOverlay',closeSuggestModal],
+    ['notifOverlay',closeNotifModal],
+    ['folderPicker',closeFolderPicker],
+    ['postOverlay',closePostModal],
+    ['channelOverlay',closeChannelModal],
+    ['settingsOverlay',closeSettings],
+  ];
+  for(const [id,fn] of order){
     const el=document.getElementById(id);
-    if(el&&el.classList.contains('open')){
-      if(id==='postOverlay')closePostModal();
-      else if(id==='channelOverlay')closeChannelModal();
-      else if(id==='settingsOverlay')closeSettings();
-      else if(id==='notifOverlay')closeNotifModal();
-      else closeFolderPicker();
-      return;
-    }
+    if(el&&el.classList.contains('open')){fn();return true}
   }
+  return false;
+}
+function tgGoBack(){
+  // Same one-layer-at-a-time rule as Escape. The old hand-written chain also
+  // closed the folder picker when the suggest dialog was the open one.
+  closeTopOverlay();
 }
 
 
@@ -516,10 +528,7 @@ function setSearchMode(mode){
   const input=document.getElementById('searchInput');
   if(input)input.placeholder=mode==='posts'?t('psr_placeholder'):t('search_placeholder');
   const query=input?input.value.trim():'';
-  if(query){
-    if(mode==='posts')doPostSearch(query);
-    else doSearch();
-  }
+  if(query)doSearch();
 }
 
 // ------------------------------------------------------------
@@ -580,11 +589,16 @@ function initNetStatus(){
 async function retryNetwork(){
   if(!state.workerUrl){setNetBanner('ok');return}
   const data=await fetchWorker('/api/ping',{timeout:8000});
-  if(data&&data.ok){setNetBanner('ok');state.workerUnreachable=false;loadExplore();toast('✅ '+t('net_reconnected'))}
+  if(data&&data.ok){
+    setNetBanner('ok');state.workerUnreachable=false;
+    // Refresh whatever the user is looking at, not always Explore.
+    switchTab(state.currentTab);
+    toast('✅ '+t('net_reconnected'));
+  }
   else{setNetBanner('fallback',t('net_fallback'));toast('⚠️ '+t('net_still_down'))}
 }
 
-async function doSearch(){const query=document.getElementById('searchInput').value.trim();if(!query)return;if(postSearchMode==='posts'){doPostSearch(query);return}state.searchQuery=query;state.currentTab='search';document.querySelectorAll('.nav-tab').forEach(el=>el.classList.toggle('active',el.dataset.tab==='search'));document.getElementById('categoriesBar').style.display='none';document.getElementById('resultsHeader').style.display='flex';document.getElementById('content').innerHTML=renderSkeletons(6);let results=[];let live=false;if(state.workerUrl&&!isOffline()){const data=await fetchWorker(`/api/search?q=${encodeURIComponent(query)}&lang=${state.lang}`);if(data&&data.results){results=data.results;live=true}else{setNetBanner('fallback',t('net_fallback'));results=searchLocal(query)}}else{results=searchLocal(query);if(isOffline())setNetBanner('offline',t('net_offline'))}state.searchResults=results;document.getElementById('resultsCount').textContent=`${live?t('search_live'):t('search_local')} — ${results.length} ${t('results_for')} "${query}"`;renderResults()}
+async function doSearch(){const query=document.getElementById('searchInput').value.trim();if(!query)return;state.searchQuery=query;state.currentTab='search';document.querySelectorAll('.nav-tab').forEach(el=>el.classList.toggle('active',el.dataset.tab==='search'));document.getElementById('categoriesBar').style.display='none';document.getElementById('resultsHeader').style.display='flex';if(postSearchMode==='posts'){doPostSearch(query);return}document.getElementById('content').innerHTML=renderSkeletons(6);let results=[];let live=false;if(state.workerUrl&&!isOffline()){const data=await fetchWorker(`/api/search?q=${encodeURIComponent(query)}&lang=${state.lang}`);if(data&&data.results){results=data.results;live=true}else{setNetBanner('fallback',t('net_fallback'));results=searchLocal(query)}}else{results=searchLocal(query);if(isOffline())setNetBanner('offline',t('net_offline'))}state.searchResults=results;document.getElementById('resultsCount').textContent=`${live?t('search_live'):t('search_local')} — ${results.length} ${t('results_for')} "${query}"`;renderResults()}
 function normalizeText(x){return (x||'').toLowerCase().replace(/ي/g,'ی').replace(/ك/g,'ک').replace(/[‌​]/g,' ').replace(/\s+/g,' ').trim()}
 function fuzzyScore(q,t){if(!q||!t)return 0;if(t===q)return 100;if(t.indexOf(q)===0)return 90;if(t.indexOf(q)>-1)return 80;let score=0,ti=0,m=0;for(const ch of q){const idx=t.indexOf(ch,ti);if(idx===-1){if(m===0)return 0;break}score+=10;m++;ti=idx+1}return m>=2?score:0}
 function searchLocal(q){q=(q||'').trim();if(!q)return[];const f=filterState();let base=getAllChannels();if(f.langs.length)base=base.filter(ch=>f.langs.includes(ch.lang||'en'));const nq=normalizeText(q);const scored=base.map(ch=>{const hay=normalizeText([ch.title,ch.username,ch.description,(ch.tags||[]).join(' ')].join(' '));return{ch,score:fuzzyScore(nq,hay)}}).filter(x=>x.score>0);scored.sort((a,b)=>b.score-a.score);return scored.map(x=>x.ch)}
@@ -688,18 +702,22 @@ async function loadFeed(){
       return;
     }
     state.feedPage=1;
+    window._feedRendered=Math.min(30,state.feedPool.length);
     renderFeedView(content,state.feedPool.slice(0,30));
   }catch(err){
     // worker failed — fall back to local feed
     state.feedMode='local';
     state.feedPool=buildLocalFeedPool(state.currentCategory);
-    if(state.feedPool.length){state.feedPage=1;renderFeedView(content,state.feedPool.slice(0,30))}
+    if(state.feedPool.length){state.feedPage=1;window._feedRendered=Math.min(30,state.feedPool.length);renderFeedView(content,state.feedPool.slice(0,30))}
     else content.innerHTML=renderEmpty(t('no_results'),t('no_results_desc'));
   }
 }
 async function appendFeedPosts(){
   if(state.currentTab!=='feed'||state.feedDone||window._feedLoading)return;
-  const rendered=(state.feedPage||1)*30;
+  // Count what is already in the DOM. state.feedPage only tracks the worker
+  // page, so using it here made the local feed append the same 30 posts again
+  // on every scroll.
+  const rendered=window._feedRendered||30;
   window._feedLoading=true;
   try{
     // Extend the pool in worker mode when it runs out
@@ -712,7 +730,7 @@ async function appendFeedPosts(){
     const have=state.feedPool.length;
     if(rendered>=have){
       if(state.feedMode==='local'||state.feedDone){
-        if(rendered>=have)state.feedDone=true;
+        state.feedDone=true;
         window._feedLoading=false;return;
       }
     }
@@ -723,6 +741,7 @@ async function appendFeedPosts(){
     const html=state.exploreView==='list'?chunk.map((p,i)=>feedRowHtml(p,rendered+i)).join(''):chunk.map((p,i)=>feedItemHtml(p,rendered+i)).join('');
     if(grid)grid.insertAdjacentHTML('beforeend',html);
     else if(list)list.insertAdjacentHTML('beforeend',html);
+    window._feedRendered=rendered+chunk.length;
     window._feedPosts=state.feedPool.slice(0,rendered+chunk.length);
   }finally{window._feedLoading=false}
 }
@@ -756,7 +775,12 @@ function openFeedPost(index){
   const posts=window._feedPosts||[];
   const p=posts[index];
   if(!p)return;
-  if(getChannelPosts(p.channel).length){openPostModal(p.channel,0);return}
+  const list=getChannelPosts(p.channel);
+  if(list.length){
+    let at=list.findIndex(x=>String(x.id)===String(p.id));
+    if(at<0)at=0;
+    openPostModal(p.channel,at);return;
+  }
   if(p.channel)openChannel(p.channel);
 }
 
@@ -765,9 +789,9 @@ function openFeedPost(index){
 // ============================================================
 function renderResults(){if(window._sharedFolder)return;const content=document.getElementById('content');const results=state.searchResults;if(!results.length){content.innerHTML=renderEmpty(t('no_results'),t('no_results_desc'));return}if(state.currentView==='explore')renderExploreView(content,results);else if(state.currentView==='list')renderListView(content,results);else renderGridView(content,results)}
 
-function renderGridView(container,items){container.innerHTML=`<div class="results-grid">${items.map(ch=>`<div class="channel-card" tabindex="0" role="button" onclick="openChannel('${ch.username}')" onkeydown="if(event.key==='Enter'){openChannel('${ch.username}')}"><div class="card-banner"><div class="card-banner-overlay"></div><div class="card-avatar" style="${avatarGrad(ch.username)}">${ch.avatar?`<img src="${ch.avatar}" alt="" loading="lazy">`:ch.title[0].toUpperCase()}</div></div><div class="card-body"><div class="card-title">${escHtml(ch.title)}</div><div class="card-username">@${escHtml(ch.username)}<span class="lang-badge ${ch.lang==='fa'?'fa':'en'}">${ch.lang==='fa'?'🇮🇷 فارسی':'🇬🇧 EN'}</span></div>${ch.tags?.length?`<div class="card-tags">${ch.tags.slice(0,3).map(tg=>`<span class="card-tag">${tg}</span>`).join('')}</div>`:''}<div class="card-desc">${escHtml(ch.description||ch.title)}</div><div class="card-footer"><div class="card-members">👥 ${ch.members||'0'} ${t('members')}</div><div class="card-actions"><button class="card-action-btn ${isFav(ch.username)?'favorited':''}" aria-label="${isFav(ch.username)?'Unsave':'Save'} channel" title="${isFav(ch.username)?'Unsave':'Save'}" onclick="event.stopPropagation();toggleFav('${ch.username}','${escAttr(ch.title)}')">${isFav(ch.username)?'❤️':'🤍'}</button><button class="card-action-btn" aria-label="Copy link" title="Copy link" onclick="event.stopPropagation();copyLink('${ch.username}')">🔗</button><button class="card-action-btn" aria-label="Add to folder" title="Add to folder" onclick="event.stopPropagation();openFolderPicker('ch','${ch.username}','','${escAttr(ch.title)}')">🗂</button></div></div></div></div>`).join('')}</div>`}
+function renderGridView(container,items){container.innerHTML=`<div class="results-grid">${items.map(ch=>`<div class="channel-card" tabindex="0" role="button" onclick="openChannel('${ch.username}')" onkeydown="if(event.key==='Enter'){openChannel('${ch.username}')}"><div class="card-banner"><div class="card-banner-overlay"></div><div class="card-avatar" style="${avatarGrad(ch.username)}">${ch.avatar?`<img src="${ch.avatar}" alt="" loading="lazy">`:(ch.title||ch.username||'?')[0].toUpperCase()}</div></div><div class="card-body"><div class="card-title">${escHtml(ch.title)}</div><div class="card-username">@${escHtml(ch.username)}<span class="lang-badge ${ch.lang==='fa'?'fa':'en'}">${ch.lang==='fa'?'🇮🇷 فارسی':'🇬🇧 EN'}</span></div>${ch.tags?.length?`<div class="card-tags">${ch.tags.slice(0,3).map(tg=>`<span class="card-tag">${tg}</span>`).join('')}</div>`:''}<div class="card-desc">${escHtml(ch.description||ch.title)}</div><div class="card-footer"><div class="card-members">👥 ${ch.members||'0'} ${t('members')}</div><div class="card-actions"><button class="card-action-btn ${isFav(ch.username)?'favorited':''}" aria-label="${isFav(ch.username)?'Unsave':'Save'} channel" title="${isFav(ch.username)?'Unsave':'Save'}" onclick="event.stopPropagation();toggleFav('${ch.username}','${escAttr(ch.title)}')">${isFav(ch.username)?'❤️':'🤍'}</button><button class="card-action-btn" aria-label="Copy link" title="Copy link" onclick="event.stopPropagation();copyLink('${ch.username}')">🔗</button><button class="card-action-btn" aria-label="Add to folder" title="Add to folder" onclick="event.stopPropagation();openFolderPicker('ch','${ch.username}','','${escAttr(ch.title)}')">🗂</button></div></div></div></div>`).join('')}</div>`}
 
-function renderListView(container,items){const page=state.explorePage||EXPLORE_PAGE;const shown=items.slice(0,page);container.innerHTML=`<div class="results-list">${shown.map(ch=>`<div class="list-item" tabindex="0" role="button" onclick="openChannel('${ch.username}')" onkeydown="if(event.key==='Enter'){openChannel('${ch.username}')}"><div class="list-avatar" style="${avatarGrad(ch.username)}">${ch.avatar?`<img src="${ch.avatar}" alt="" loading="lazy">`:ch.title[0].toUpperCase()}</div><div class="list-info"><div class="list-title">${escHtml(ch.title)}</div><div class="list-user">@${escHtml(ch.username)}</div><div class="list-desc">${escHtml(ch.description||'')}</div></div><div class="list-meta"><span class="list-members">👥 ${ch.members||'0'}</span><button class="card-action-btn ${isFav(ch.username)?'favorited':''}" aria-label="${isFav(ch.username)?'Unsave':'Save'} channel" title="${isFav(ch.username)?'Unsave':'Save'}" onclick="event.stopPropagation();toggleFav('${ch.username}','${escAttr(ch.title)}')">${isFav(ch.username)?'❤️':'🤍'}</button></div></div>`).join('')}</div>`+(items.length>page?'<div class="explore-more"><button class="explore-more-btn" onclick="showMoreExplore()">'+escHtml(t('show_more_channels'))+'</button></div>':'')}
+function renderListView(container,items){const page=state.explorePage||EXPLORE_PAGE;const shown=items.slice(0,page);container.innerHTML=`<div class="results-list">${shown.map(ch=>`<div class="list-item" tabindex="0" role="button" onclick="openChannel('${ch.username}')" onkeydown="if(event.key==='Enter'){openChannel('${ch.username}')}"><div class="list-avatar" style="${avatarGrad(ch.username)}">${ch.avatar?`<img src="${ch.avatar}" alt="" loading="lazy">`:(ch.title||ch.username||'?')[0].toUpperCase()}</div><div class="list-info"><div class="list-title">${escHtml(ch.title)}</div><div class="list-user">@${escHtml(ch.username)}</div><div class="list-desc">${escHtml(ch.description||'')}</div></div><div class="list-meta"><span class="list-members">👥 ${ch.members||'0'}</span><button class="card-action-btn ${isFav(ch.username)?'favorited':''}" aria-label="${isFav(ch.username)?'Unsave':'Save'} channel" title="${isFav(ch.username)?'Unsave':'Save'}" onclick="event.stopPropagation();toggleFav('${ch.username}','${escAttr(ch.title)}')">${isFav(ch.username)?'❤️':'🤍'}</button></div></div>`).join('')}</div>`+(items.length>page?'<div class="explore-more"><button class="explore-more-btn" onclick="showMoreExplore()">'+escHtml(t('show_more_channels'))+'</button></div>':'')}
 
 function getChannelPosts(username){
   try{
@@ -808,13 +832,17 @@ function renderExploreView(container,items){
   const f=filterState();
   const bar='<div class="etype-bar" id="etypeBar">'+types.map(ty=>'<button class="etype-chip '+((f.types.length===0&&ty[0]==='all')||f.types.includes(ty[0])?'active':'')+'" data-type="'+ty[0]+'" aria-pressed="'+((f.types.length===0&&ty[0]==='all')||f.types.includes(ty[0]))+'" onclick="toggleExploreType(\''+ty[0]+'\')">'+ty[1]+'</button>').join('')+viewToggleHtml()+'</div>';
   let filtered=sortExplore(type==='all'?items:items.filter(ch=>typeOf(ch)===type));
+  // The instant list search has to look at every channel, not just the
+  // ones already on screen — otherwise a match beyond the first page is
+  // invisible.
+  if(state.exploreView==='list'&&state.exploreSearch){const q=state.exploreSearch.toLowerCase();filtered=filtered.filter(ch=>(ch.title||'').toLowerCase().includes(q)||(ch.username||'').toLowerCase().includes(q));}
   const page=state.explorePage||EXPLORE_PAGE;
+  const totalFiltered=filtered.length;
   const shown=filtered.slice(0,page);
   filtered=shown;
-  if(state.exploreView==='list'&&state.exploreSearch){const q=state.exploreSearch.toLowerCase();filtered=filtered.filter(ch=>(ch.title||'').toLowerCase().includes(q)||(ch.username||'').toLowerCase().includes(q));}
-  const searchHtml=state.exploreView==='list'?'<div style="padding:0 8px 10px"><input class="sug-field" style="width:100%" placeholder="'+t('instant_search')+'" value="'+escAttr(state.exploreSearch)+'" oninput="setExploreSearch(this.value)"></div>':'';
-  const listBody=filtered.length?exploreListViewHtml(filtered,colors):'<div style="padding:24px;text-align:center;color:#888">"+t(no_match)+"</div>';
-  const more=items.length>page?'<div class="explore-more"><button class="explore-more-btn" onclick="showMoreExplore()">'+escHtml(t('show_more_channels'))+'</button></div>':'';
+  const searchHtml=state.exploreView==='list'?'<div style="padding:0 8px 10px"><input class="sug-field" id="exploreSearchInput" style="width:100%" placeholder="'+t('instant_search')+'" value="'+escAttr(state.exploreSearch)+'" oninput="setExploreSearch(this.value)"></div>':'';
+  const listBody=filtered.length?exploreListViewHtml(filtered,colors):'<div style="padding:24px;text-align:center;color:#888">'+escHtml(t('no_match'))+'</div>';
+  const more=totalFiltered>page?'<div class="explore-more"><button class="explore-more-btn" onclick="showMoreExplore()">'+escHtml(t('show_more_channels'))+'</button></div>':'';
   container.innerHTML=bar+exploreSortHtml()+searchHtml+(state.exploreView==='list'?listBody:`<div class="explore-grid">${filtered.map((ch,i)=>{
     const posts=getChannelPosts(ch.username);
     const post=posts[0]||null;
@@ -868,9 +896,9 @@ function renderExploreView(container,items){
   };
 }
 function postItemHtml(p,ch,username,autoplay){
-  const dateTxt=p.date?new Date(p.date).toLocaleString('fa-IR',{dateStyle:'medium',timeStyle:'short'}):'';
+  const dateTxt=p.date?new Date(p.date).toLocaleString(dateLocale(),{dateStyle:'medium',timeStyle:'short'}):'';
   const text=(p.text||'').slice(0,500)+(p.text&&p.text.length>500?'…':'');
-  const pimg=goodImg(p.image);const mediaHtml=p.video?`<video src="${p.video}" poster="${pimg||''}" ${autoplay?'autoplay':'preload="metadata"'} controls muted playsinline class="post-modal-video-el"></video>`:(pimg?`<img src="${pimg}" alt="" class="post-modal-img" loading="lazy" onerror="this.style.display='none'">`:(p.hasVideo?`<div class="post-modal-video">▶ ویدیو</div>`:''));
+  const pimg=goodImg(p.image);const mediaHtml=p.video?`<video src="${p.video}" poster="${pimg||''}" ${autoplay?'autoplay':'preload="metadata"'} controls muted playsinline class="post-modal-video-el"></video>`:(pimg?`<img src="${pimg}" alt="" class="post-modal-img" loading="lazy" onerror="this.style.display='none'">`:(p.hasVideo?`<div class="post-modal-video">${escHtml(t('video'))}</div>`:''));
   return `<div class="post-feed-item">
     ${mediaHtml}
     ${dateTxt?`<div class="post-modal-date">🕐 ${dateTxt}</div>`:''}
@@ -896,15 +924,15 @@ function renderPostModal(){
     <div class="post-head-link">
       <div class="modal-avatar" style="${avatarGrad(username)}">${(ch.title||username)[0].toUpperCase()}</div>
       <div>
-        <div class="modal-title post-title-click" title="مشاهده کانال" onclick="closePostModal();openChannel('${username}')">${escHtml(ch.title||username)} ↗</div>
-        <div class="modal-user"><span class="post-user-click" title="مشاهده کانال" onclick="closePostModal();openChannel('${username}')">@${escHtml(username)}</span> <span class="post-modal-members">${ch.members?('👥 '+ch.members):''}</span></div>
+        <div class="modal-title post-title-click" title="${escAttr(t('view_channel'))}" onclick="closePostModal();openChannel('${username}')">${escHtml(ch.title||username)} ↗</div>
+        <div class="modal-user"><span class="post-user-click" title="${escAttr(t('view_channel'))}" onclick="closePostModal();openChannel('${username}')">@${escHtml(username)}</span> <span class="post-modal-members">${ch.members?('👥 '+ch.members):''}</span></div>
       </div>
       <button class="fs-toggle" id="fsToggleBtn" title="${escAttr(t('font_size'))}" onclick="cycleFontSize()">A</button>
     </div>`;
   const body=document.getElementById('postModalBody');
   const slice=posts.slice(0,ctx.rendered);
   const html=slice.map((p,i)=>postItemHtml(p,ch,username,i===0)).join('<div class="post-feed-divider"></div>');
-  const end=ctx.hasMore===false?'<div class="post-feed-end">— پایان پست‌ها —</div>':'';
+  const end=ctx.hasMore===false?'<div class="post-feed-end">'+escHtml(t('end_posts'))+'</div>':'';
   body.innerHTML=html+end;
   const scroller=document.querySelector('#postOverlay .modal');
   if(scroller)scroller.scrollTop=0;
@@ -1030,14 +1058,16 @@ function parseJinaPosts(md){
 }async function fetchOlderPosts(ctx){
   ctx.loading=true;
   const body=document.getElementById('postModalBody');
-  body.insertAdjacentHTML('beforeend','<div class="post-feed-loading" id="postFeedLoading">⏳ در حال دریافت پست‌های قدیمی‌تر...</div>');
+  body.insertAdjacentHTML('beforeend','<div class="post-feed-loading" id="postFeedLoading">'+escHtml(t('loading_older'))+'</div>');
   let newPosts=[];
   try{
     if(state.workerUrl){
-      const page=(ctx.page||0)+1;
-      const r=await fetch(state.workerUrl+'/api/posts/'+encodeURIComponent(ctx.username)+'?page='+page,{signal:AbortSignal.timeout(10000)});
+      const before=ctx.beforeId||(ctx.posts.length?String(ctx.posts[ctx.posts.length-1].id):'');
+      const qs=before?'?before='+encodeURIComponent(before):'?page='+((ctx.page||0)+1);
+      const r=await fetch(state.workerUrl+'/api/posts/'+encodeURIComponent(ctx.username)+qs,{signal:AbortSignal.timeout(10000)});
       if(r.ok){const d=await r.json();newPosts=(d.posts||[]).filter(p=>p&&p.id)}
-      ctx.page=page;
+      ctx.page=(ctx.page||0)+1;
+      if(newPosts.length&&before)ctx.beforeId=String(newPosts[newPosts.length-1].id);
     }else{
       // Local mode: use the full per-channel archive (posts/<username>.json)
       const full=await loadFullChannelPosts(ctx.username);
@@ -1046,7 +1076,7 @@ function parseJinaPosts(md){
         newPosts=before?full.filter(p=>Number(p.id)<Number(before)):full.slice(0);
         if(!newPosts.length){
           const loader=document.getElementById('postFeedLoading');if(loader)loader.remove();
-          if(!body.querySelector('.post-feed-end'))body.insertAdjacentHTML('beforeend','<div class="post-feed-end">— پایان پست‌ها —</div>');
+          if(!body.querySelector('.post-feed-end'))body.insertAdjacentHTML('beforeend','<div class="post-feed-end">'+escHtml(t('end_posts'))+'</div>');
           ctx.hasMore=false;ctx.loading=false;return;
         }
       }else{
@@ -1087,7 +1117,7 @@ function parseJinaPosts(md){
     ctx.hasMore=true;
   }else{
     ctx.hasMore=false;
-    if(!body.querySelector('.post-feed-end'))body.insertAdjacentHTML('beforeend','<div class="post-feed-end">— پایان پست‌ها —</div>');
+    if(!body.querySelector('.post-feed-end'))body.insertAdjacentHTML('beforeend','<div class="post-feed-end">'+escHtml(t('end_posts'))+'</div>');
   }
   ctx.loading=false;
   autoFillPostFeed();
@@ -1121,7 +1151,7 @@ function openChannel(username){
   if(posts.length){
     postsEl.innerHTML=posts.slice(0,5).map(p=>'<div class="post-card"><div class="post-text">'+escHtml((p.text||'').slice(0,120))+'</div>'+(p.image?'<img class="post-img" src="'+p.image+'" loading="lazy" onerror="this.style.display=&#39;none&#39;">':'')+'</div>').join('');
   }else{
-    postsEl.innerHTML='<div class="empty-state" style="padding:20px"><div class="empty-icon">📭</div><p>پستی در دسترس نیست</p></div>';
+    postsEl.innerHTML='<div class="empty-state" style="padding:20px"><div class="empty-icon">📭</div><p>'+escHtml(t('no_posts'))+'</p></div>';
   }
   renderLocalRelated(username);
   document.getElementById('channelOverlay').classList.add('open');
@@ -1243,7 +1273,7 @@ function compareColumn(username,canvasId){
       '<div class="compare-stat"><b>'+perDay+'</b><span>'+escHtml(t('posts_per_day'))+'</span></div>'+
       '<div class="compare-stat"><b>'+posts.length+'</b><span>'+escHtml(t('total_posts'))+'</span></div>'+
       '<div class="compare-stat"><b>'+active+'/'+days+'</b><span>'+escHtml(t('active_days'))+'</span></div>'+
-      '<div class="compare-stat"><b>'+total+'</b><span>'+escHtml(t('total_posts'))+'</span></div>'+
+      '<div class="compare-stat"><b>'+total+'</b><span>'+escHtml(t('posts_in_range',days))+'</span></div>'+
     '</div>'+
     '<canvas class="compare-chart" id="'+canvasId+'"></canvas>'+
     (kw.length?'<div class="compare-tags">'+kw.map(k=>'<span class="compare-tag">'+escHtml(k[0])+' · '+k[1]+'</span>').join('')+'</div>':'');
@@ -1386,7 +1416,7 @@ function renderChannelProfile(username){
   }
 
   const title=document.getElementById('activityChartTitle');
-  if(title)title.textContent=days===30?t('activity_30d'):t('activity_chart');
+  if(title)title.textContent=days===90?t('activity_90d'):(days===30?t('activity_30d'):t('activity_chart'));
   document.querySelectorAll('.chart-range-btn').forEach(b=>b.classList.toggle('active',Number(b.dataset.days)===days));
   if(chartEl){
     if(total>0){renderChart(activity)}
@@ -1550,7 +1580,7 @@ function closeNotifModal(){document.getElementById('notifOverlay').classList.rem
 // ============================================================
 // FAVORITES
 // ============================================================
-function toggleFav(username,title){const idx=state.favorites.findIndex(f=>f.username===username);if(idx>-1){state.favorites.splice(idx,1);toast(t('removed_fav'))}else{const ch=state.searchResults.find(c=>c.username===username)||{username,title};state.favorites.push(ch);toast(t('saved'))}localStorage.setItem('tgexp_favs',JSON.stringify(state.favorites));renderResults()}
+function toggleFav(username,title){const idx=state.favorites.findIndex(f=>f.username===username);if(idx>-1){state.favorites.splice(idx,1);toast(t('removed_fav'))}else{const ch=(state.searchResults||[]).find(c=>c.username===username)||getAllChannels().find(c=>c.username===username)||{username,title};state.favorites.push(ch);toast(t('saved'))}localStorage.setItem('tgexp_favs',JSON.stringify(state.favorites));if(state.currentTab==='favorites')renderFavorites();else renderResults()}
 function isFav(username){return state.favorites.some(f=>f.username===username)}
 function isPostFav(username,postId){return state.postFavs.some(f=>f.username===username&&f.postId===postId)}
 function savePostFavs(){localStorage.setItem('tgexp_post_favs',JSON.stringify(state.postFavs))}
@@ -1694,7 +1724,7 @@ function sortChannels(list){
   const s=state.favSort||'name';
   const arr=list.slice();
   if(s==='name')arr.sort((a,b)=>(a.title||a.username||'').localeCompare(b.title||b.username||'','fa'));
-  else if(s==='name-desc')arr.sort((a,b)=>(b.title||a.username||'').localeCompare(a.title||b.username||'','fa'));
+  else if(s==='name-desc')arr.sort((a,b)=>(b.title||b.username||'').localeCompare(a.title||a.username||'','fa'));
   else if(s==='posts')arr.sort((a,b)=>(getChannelPosts(b.username).length-getChannelPosts(a.username).length));
   return arr;
 }
@@ -1852,7 +1882,7 @@ function sortExplore(list){
   const s=state.exploreSort||'name';
   const arr=list.slice();
   if(s==='name')arr.sort((a,b)=>(a.title||a.username||'').localeCompare(b.title||b.username||'','fa'));
-  else if(s==='name-desc')arr.sort((a,b)=>(b.title||a.username||'').localeCompare(a.title||b.username||'','fa'));
+  else if(s==='name-desc')arr.sort((a,b)=>(b.title||b.username||'').localeCompare(a.title||a.username||'','fa'));
   else if(s==='posts')arr.sort((a,b)=>(getChannelPosts(b.username).length-getChannelPosts(a.username).length));
   else if(s==='newest')arr.sort((a,b)=>((getChannelPosts(b.username)[0]||{}).date||'').localeCompare((getChannelPosts(a.username)[0]||{}).date||''));
   else if(s==='oldest')arr.sort((a,b)=>((getChannelPosts(a.username)[0]||{}).date||'').localeCompare((getChannelPosts(b.username)[0]||{}).date||''));
@@ -1874,6 +1904,9 @@ function setExploreView(v){
 function setExploreSearch(v){
   state.exploreSearch=v;localStorage.setItem('tgexp_esearch',v);
   renderResults();
+  // renderResults rebuilds the whole view, so keep the caret in the search box
+  const inp=document.getElementById('exploreSearchInput');
+  if(inp){inp.focus();const n=inp.value.length;try{inp.setSelectionRange(n,n)}catch(e){}}
 }
 function viewToggleHtml(){
   return '<div class="view-toggle"><button title="نمای گرید" class="'+(state.exploreView==='grid'?'active':'')+'" onclick="setExploreView(\'grid\')">▦</button><button title="نمای لیست" class="'+(state.exploreView==='list'?'active':'')+'" onclick="setExploreView(\'list\')">☰</button></div>';
@@ -1949,7 +1982,7 @@ function folderChannelCardsHtml(items,folderId){
   const unknown=items.filter(it=>it.type==='ch').map(it=>({username:it.username,ch:getAllChannels().find(c=>c.username===it.username)})).filter(x=>!x.ch);
   const rm=folderId?'<button class="card-action-btn" title="حذف از فولدر" onclick="event.stopPropagation();removeFolderItem(\''+folderId+'\',\'ch\',\'{u}\',null)">🗑</button>':'';
   let html='';
-  if(known.length)html+='<div class="folder-sec-title">📢 کانال‌ها</div><div class="results-grid">'+known.map(x=>'<div class="channel-card" tabindex="0" role="button" onclick="openChannel(\''+x.ch.username+'\')" onkeydown="if(event.key===\'Enter\'){this.click()}"><div class="card-banner"><div class="card-banner-overlay"></div><div class="card-avatar" style="'+avatarGrad(x.ch.username)+'">'+x.ch.title[0].toUpperCase()+'</div></div><div class="card-body"><div class="card-title">'+escHtml(x.ch.title)+'</div><div class="card-username">@'+escHtml(x.ch.username)+'</div><div class="card-footer"><div class="card-members">👥 '+(x.ch.members||'0')+'</div><div class="card-actions">'+(folderId?rm.replace('{u}',x.ch.username):'')+'</div></div></div></div>').join('')+'</div>';
+  if(known.length)html+='<div class="folder-sec-title">📢 کانال‌ها</div><div class="results-grid">'+known.map(x=>'<div class="channel-card" tabindex="0" role="button" onclick="openChannel(\''+x.ch.username+'\')" onkeydown="if(event.key===\'Enter\'){this.click()}"><div class="card-banner"><div class="card-banner-overlay"></div><div class="card-avatar" style="'+avatarGrad(x.ch.username)+'">'+(x.ch.title||x.ch.username||'?')[0].toUpperCase()+'</div></div><div class="card-body"><div class="card-title">'+escHtml(x.ch.title)+'</div><div class="card-username">@'+escHtml(x.ch.username)+'</div><div class="card-footer"><div class="card-members">👥 '+(x.ch.members||'0')+'</div><div class="card-actions">'+(folderId?rm.replace('{u}',x.ch.username):'')+'</div></div></div></div>').join('')+'</div>';
   if(unknown.length)html+='<div class="folder-sec-title">📢 کانال‌های خارج از دیتابیس</div><div class="results-grid">'+unknown.map(x=>'<div class="channel-card" tabindex="0" role="button" onclick="openChannel(\''+x.username+'\')" onkeydown="if(event.key===\'Enter\'){this.click()}"><div class="card-banner"><div class="card-banner-overlay"></div><div class="card-avatar" style="'+avatarGrad(x.username)+'">?</div></div><div class="card-body"><div class="card-title">@'+escHtml(x.username)+'</div><div class="card-username" style="color:var(--text-secondary)">خارج از دیتابیس</div><div class="card-footer"><div class="card-members">—</div><div class="card-actions">'+(folderId?rm.replace('{u}',x.username):'')+'<button class="card-action-btn" title="باز کردن در تلگرام" onclick="event.stopPropagation();window.open(\'https://t.me/'+x.username+'\',\'_blank\')">✈️</button><button class="card-action-btn" aria-label="کپی لینک" title="کپی لینک" onclick="event.stopPropagation();copyLink(\''+x.username+'\')">🔗</button></div></div></div></div>').join('')+'</div>';
   return html;
 }
@@ -1991,9 +2024,12 @@ function refreshFolderPosts(folderId,silent){
   items.forEach(it=>{
     fetchLatestPost(it.username).then(p=>{
       if(p)it.latestPost={id:String(p.id),image:p.image||'',date:p.date||'',text:p.text||'',ts:Date.now()};
+      // Stamp the attempt even when the fetch failed, otherwise
+      // renderFavorites() keeps re-triggering this refresh in a loop.
+      it.checkedTs=Date.now();
       done++;
       if(done===items.length){saveFolders();if(state.openFolder===folderId)renderFavorites()}
-    });
+    }).catch(()=>{it.checkedTs=Date.now();done++;if(done===items.length){saveFolders();if(state.openFolder===folderId)renderFavorites()}});
   });
 }
 
@@ -2119,26 +2155,41 @@ function folderExportJson(id){
   downloadBlob(JSON.stringify({app:'tgexplorer_folder',folder:{name:f.name,icon:f.icon||'📁',items:f.items},exportedAt:new Date().toISOString()},null,2),'tgexplorer-folder-'+f.name.replace(/[^\w؀-ۿ-]+/g,'_')+'.json','application/json');
   toast('💾 '+t('toast_folder_saved',f.name));
 }
-function folderExportPdf(id){
-  const f=state.folders.find(x=>x.id===id);if(!f)return;
-  // Minimal, dependency-free PDF: a single Helvetica text page.
-  const lines=folderExportLines(f).split('\n');
+// A tiny single-page PDF. Helvetica/WinAnsi cannot draw non-Latin text, so
+// anything outside Latin-1 is replaced; the /Length and the xref table need
+// byte offsets, not JavaScript string lengths.
+function buildPdf(lines){
   const esc=s=>String(s).replace(/\\/g,'\\\\').replace(/\(/g,'\\(').replace(/\)/g,'\\)');
-  const body=lines.slice(0,48).map((l,i)=>`BT /F1 11 Tf 40 ${750-i*16} Td (${esc(l.slice(0,95))}) Tj ET`).join('\n');
+  const enc=new TextEncoder();
+  const byteLen=s=>enc.encode(s).length;
+  const body=lines.slice(0,48).map((l,i)=>{
+    const safe=String(l).replace(/[^\x20-\x7E\xA0-\xFF]/g,'?').slice(0,95);
+    return `BT /F1 11 Tf 40 ${750-i*16} Td (${esc(safe)}) Tj ET`;
+  }).join('\n');
   const objects=[
     '<< /Type /Catalog /Pages 2 0 R >>',
     '<< /Type /Pages /Kids [3 0 R] /Count 1 >>',
     '<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 4 0 R >> >> /Contents 5 0 R >>',
     '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>',
-    `<< /Length ${body.length} >>\nstream\n${body}\nendstream`,
+    `<< /Length ${byteLen(body)} >>\nstream\n${body}\nendstream`,
   ];
   let pdf='%PDF-1.4\n';
+  let bytes=byteLen(pdf);
   const offsets=[];
-  objects.forEach((o,i)=>{offsets.push(pdf.length);pdf+=`${i+1} 0 obj\n${o}\nendobj\n`});
-  const xrefPos=pdf.length;
-  pdf+='xref\n0 '+objects.length+'\n0000000000 65535 f \n';
+  objects.forEach((o,i)=>{
+    offsets.push(bytes);
+    const chunk=`${i+1} 0 obj\n${o}\nendobj\n`;
+    pdf+=chunk;bytes+=byteLen(chunk);
+  });
+  const xrefPos=bytes;
+  pdf+='xref\n0 '+(objects.length+1)+'\n0000000000 65535 f \n';
   for(const off of offsets)pdf+=String(off).padStart(10,'0')+' 00000 n \n';
   pdf+=`trailer\n<< /Size ${objects.length+1} /Root 1 0 R >>\nstartxref\n${xrefPos}\n%%EOF`;
+  return pdf;
+}
+function folderExportPdf(id){
+  const f=state.folders.find(x=>x.id===id);if(!f)return;
+  const pdf=buildPdf(folderExportLines(f).split('\n'));
   downloadBlob(pdf,'tgexplorer-folder-'+f.name.replace(/[^\w؀-ۿ-]+/g,'_')+'.pdf','application/pdf');
   toast('🖨 '+t('toast_folder_saved',f.name));
 }
@@ -2156,23 +2207,7 @@ function exportPostsPdf(){
   const lines=['Saved posts — Telegram Explorer',''];
   for(const it of items)lines.push('@'+it.username+'/'+it.postId+' '+(it.text||'').replace(/\s+/g,' ').trim().slice(0,90));
   if(!items.length)lines.push('(no saved posts)');
-  const esc=s=>String(s).replace(/\\/g,'\\\\').replace(/\(/g,'\\(').replace(/\)/g,'\\)');
-  const body=lines.slice(0,48).map((l,i)=>`BT /F1 11 Tf 40 ${750-i*16} Td (${esc(l.slice(0,95))}) Tj ET`).join('\n');
-  const objects=[
-    '<< /Type /Catalog /Pages 2 0 R >>',
-    '<< /Type /Pages /Kids [3 0 R] /Count 1 >>',
-    '<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 4 0 R >> >> /Contents 5 0 R >>',
-    '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>',
-    `<< /Length ${body.length} >>\nstream\n${body}\nendstream`,
-  ];
-  let pdf='%PDF-1.4\n';
-  const offsets=[];
-  objects.forEach((o,i)=>{offsets.push(pdf.length);pdf+=`${i+1} 0 obj\n${o}\nendobj\n`});
-  const xrefPos=pdf.length;
-  pdf+='xref\n0 '+objects.length+'\n0000000000 65535 f \n';
-  for(const off of offsets)pdf+=String(off).padStart(10,'0')+' 00000 n \n';
-  pdf+=`trailer\n<< /Size ${objects.length+1} /Root 1 0 R >>\nstartxref\n${xrefPos}\n%%EOF`;
-  downloadBlob(pdf,'tgexplorer-posts.pdf','application/pdf');
+  downloadBlob(buildPdf(lines),'tgexplorer-posts.pdf','application/pdf');
   toast('🖨 '+t('toast_post_saved'));
 }
 
@@ -2180,7 +2215,14 @@ function decodeSharedFolder(p){
   try{
     const obj=JSON.parse(b64urlDecode(p));
     if(!obj||typeof obj!=='object'||typeof obj.n!=='string'||!Array.isArray(obj.items))return null;
-    const items=obj.items.filter(it=>Array.isArray(it)&&(it[0]==='c'||it[0]==='p')&&typeof it[1]==='string'&&it[1]).map(it=>it[0]==='c'?{type:'ch',username:it[1],postId:null,label:''}:{type:'post',username:it[1],postId:(it[2]||'').toString(),label:it[3]||''});
+    // A shared link comes from somebody else, so keep the username to the
+    // charset Telegram allows: it is interpolated into inline handlers.
+    const clean=u=>String(u||'').replace(/[^A-Za-z0-9_]/g,'');
+    const items=obj.items.filter(it=>Array.isArray(it)&&(it[0]==='c'||it[0]==='p')&&typeof it[1]==='string'&&it[1]).map(it=>{
+      const username=clean(it[1]);
+      const postId=String(it[2]||'').replace(/[^0-9]/g,'');
+      return it[0]==='c'?{type:'ch',username,postId:null,label:''}:{type:'post',username,postId,label:String(it[3]||'').slice(0,80)};
+    }).filter(it=>it.username);
     return {name:obj.n.slice(0,40),icon:typeof obj.i==='string'?obj.i:'📁',items};
   }catch(e){return null}
 }
@@ -2294,7 +2336,7 @@ html+='<div class="folder-rule"><div class="folder-rule-head">🤖 فیلتر خ
         '<div class="latest-post-actions"><button class="card-action-btn" title="باز کردن در تلگرام" onclick="event.stopPropagation();window.open(\''+link+'\',\'_blank\')">✈️</button>'+
         '<button class="card-action-btn" title="کپی لینک" onclick="event.stopPropagation();copyPostLink(\''+it.username+'\',\''+lp.id+'\')">🔗</button></div></div>';
     }).join('');
-    if(f.items.some(it=>it.type==='ch'&&it.latestPost&&(!it.latestPost.ts||Date.now()-it.latestPost.ts>1800000)))refreshFolderPosts(f.id,true);    if(posts.length)html+='<div class="folder-sec-title">🖼 پست‌ها</div>'+(state.exploreView==='list'?'<div class="explore-list">'+posts.map(p=>folderPostRowHtml(p,f)).join('')+'</div>':'<div class="explore-grid">'+posts.map(p=>{
+    if(f.items.some(it=>it.type==='ch'&&(!it.checkedTs||Date.now()-it.checkedTs>1800000)))refreshFolderPosts(f.id,true);    if(posts.length)html+='<div class="folder-sec-title">🖼 پست‌ها</div>'+(state.exploreView==='list'?'<div class="explore-list">'+posts.map(p=>folderPostRowHtml(p,f)).join('')+'</div>':'<div class="explore-grid">'+posts.map(p=>{
       const img=p.image;
       const idx=Math.max(0,getChannelPosts(p.username).findIndex(x=>x.id===p.postId));
       return '<div class="explore-item" tabindex="0" role="button" style="aspect-ratio:3/4;position:relative" onclick="openPostModal(\''+p.username+'\','+idx+')" onkeydown="if(event.key===\'Enter\'){this.click()}">'+
@@ -2429,11 +2471,11 @@ function closeFullText(){document.getElementById('fullTextOverlay').classList.re
 function copyFullText(){const txt=document.getElementById('fullTextBody').textContent;if(!txt)return;navigator.clipboard.writeText(txt).then(()=>toast('📋 '+t('toast_text_copied')))}
 function homeFeedItemHtml(x){
   const ch=getAllChannels().find(c=>c.username===x.username)||{username:x.username,title:x.channelTitle};
-  const dateTxt=x.date?new Date(x.date).toLocaleString('fa-IR',{dateStyle:'medium',timeStyle:'short'}):'';
+  const dateTxt=x.date?new Date(x.date).toLocaleString(dateLocale(),{dateStyle:'medium',timeStyle:'short'}):'';
   let media='';
   if(x.hasVideo&&x.video)media='<video src="'+x.video+'" poster="'+(x.image||'')+'" preload="metadata" controls muted playsinline></video>';
   else if(x.image)media='<img src="'+x.image+'" alt="" loading="lazy" onerror="this.style.display=&#39;none&#39;">';
-  else if(x.hasVideo)media='<div class="home-feed-media-text">▶ ویدیو</div>';
+  else if(x.hasVideo)media='<div class="home-feed-media-text">'+escHtml(t('video'))+'</div>';
   const longText=x.text&&x.text.length>260;
   if(longText)window._homeTexts[x.username+'_'+x.id]=x.text;
   const openTxt='event.stopPropagation();openHomeFullText(\''+x.username+'\',\''+x.id+'\')';
@@ -2536,6 +2578,14 @@ function exportBackup(){
 }
 function importBackup(ev){
   const file=ev.target.files&&ev.target.files[0];if(!file)return;
+  // A backup file can come from anywhere, so normalise the usernames before
+  // they reach the inline handlers (see decodeSharedFolder for the reason).
+  const cleanUser=u=>String(u==null?'':u).replace(/[^A-Za-z0-9_]/g,'');
+  const cleanItems=list=>Array.isArray(list)?list.filter(it=>it&&typeof it==='object').map(it=>{
+    if(typeof it.username==='string')it.username=cleanUser(it.username);
+    if(Array.isArray(it.items))it.items=cleanItems(it.items);
+    return it;
+  }).filter(it=>it.username||it.id):[];
   const reader=new FileReader();
   reader.onload=()=>{
     try{
@@ -2545,14 +2595,15 @@ function importBackup(ev){
         if(!d.folder||!d.folder.name)throw new Error('bad');
         const f=d.folder;
         if(!Array.isArray(f.items))f.items=[];
+        f.items=cleanItems(f.items);
         if(state.folders.some(x=>x.id===f.id))f.id='f'+Date.now();
         state.folders.push(f);saveFolders();
         toast('✅ '+t('toast_folder_restored', f.name));
         renderFavorites();return;
       }
-      if(Array.isArray(d.favorites)){state.favorites=d.favorites;localStorage.setItem('tgexp_favs',JSON.stringify(d.favorites))}
+      if(Array.isArray(d.favorites)){state.favorites=cleanItems(d.favorites);localStorage.setItem('tgexp_favs',JSON.stringify(state.favorites))}
       if(Array.isArray(d.postFavs)){state.postFavs=d.postFavs;localStorage.setItem('tgexp_post_favs',JSON.stringify(d.postFavs))}
-      if(Array.isArray(d.folders)){state.folders=d.folders;saveFolders()}
+      if(Array.isArray(d.folders)){state.folders=d.folders.map(f=>{if(f&&Array.isArray(f.items))f.items=cleanItems(f.items);return f}).filter(Boolean);saveFolders()}
       toast('✅ '+t('backup_imported'));
       renderFavorites();
     }catch(e){toast('⚠️ '+t('backup_invalid'))}
@@ -2788,8 +2839,22 @@ function getLocalExplore(category){const all=getAllChannels();const f=filterStat
 // UTILS
 // ============================================================
 function goodImg(u){return u&&!/\/img\/emoji\//i.test(u)?u:''}
+const DATE_LOCALES={en:'en-GB',fa:'fa-IR',ar:'ar-EG',zh:'zh-CN',ru:'ru-RU',es:'es-ES',fr:'fr-FR'};
+function dateLocale(){return DATE_LOCALES[state.lang]||'en-GB'}
 function escHtml(str){const el=document.createElement('div');el.textContent=str||'';return el.innerHTML}
-function escAttr(str){return(str||'').replace(/'/g,"\\'").replace(/"/g,'&quot;')}
+// Escape for both HTML attribute values and the single-quoted JS strings
+// inside inline onclick handlers. Backslashes must be doubled first, or a
+// title ending in "\" escapes the closing quote and breaks the handler.
+function escAttr(str){
+  return String(str==null?'':str)
+    .replace(/\\/g,'\\\\')
+    .replace(/'/g,"\\'")
+    .replace(/&/g,'&amp;')
+    .replace(/"/g,'&quot;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/[\r\n]+/g,' ');
+}
 function copyLink(username){navigator.clipboard.writeText(`https://t.me/${username}`).then(()=>toast(t('copied')))}
 function copyPostLink(username,postId){const url=`https://t.me/${username}/${postId}`;navigator.clipboard.writeText(url).then(()=>toast('🔗 '+t('toast_link_copied_post')))}
 function copyPostText(username,postId){const list=getChannelPosts(username);const p=list.find(x=>x.id===postId);const text=(p&&p.text)?p.text:'';if(!text){toast('📋 '+t('toast_no_text'));return}navigator.clipboard.writeText(text).then(()=>toast('📋 '+t('toast_text_copied'))).catch(()=>{const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();toast('📋 '+t('toast_text_copied'))})}
@@ -2855,9 +2920,24 @@ function copyPostMarkdown(username,postId){
   if(!md){toast('📋 '+t('toast_no_text'));return}
   navigator.clipboard.writeText(md).then(()=>toast('📝 '+t('toast_md_copied'))).catch(()=>toast('❌ '+t('toast_copy_fail')));
 }
-function toast(msg){const container=document.getElementById('toastContainer');const el=document.createElement('div');el.className='toast';el.innerHTML=`<span>✅</span> ${escHtml(msg)}`;container.appendChild(el);setTimeout(()=>el.remove(),3000)}
+// Do not stack a second icon on a message that already starts with one.
+function toast(msg){
+  const container=document.getElementById('toastContainer');
+  const el=document.createElement('div');el.className='toast';
+  const text=String(msg==null?'':msg);
+  const hasIcon=/^[\u2190-\u2BFF\u2600-\u27BF\u{1F000}-\u{1FAFF}\uFE0F]/u.test(text);
+  el.innerHTML=hasIcon?escHtml(text):`<span>✅</span> ${escHtml(text)}`;
+  container.appendChild(el);setTimeout(()=>el.remove(),3000)
+}
 function renderSkeletons(count){return`<div class="results-grid">${Array(count).fill('<div class="skeleton"></div>').join('')}</div>`}
-function renderEmpty(title,desc){return`<div class="empty-state"><div class="empty-icon">${title===t('no_favorites')?'❤️':'🔍'}</div><h3>${escHtml(title)}</h3><p>${escHtml(desc||'')}</p></div>`}
+// Some call sites pass an emoji as the first argument (e.g. renderEmpty('🗂','…')).
+// Use it as the icon and keep the heading text empty in that case.
+function renderEmpty(title,desc){
+  const text=String(title==null?'':title);
+  const emojiOnly=/^[\p{Extended_Pictographic}\uFE0F\u200D]+$/u.test(text.trim());
+  const icon=emojiOnly?text.trim():(text===t('no_favorites')?'❤️':'🔍');
+  return`<div class="empty-state"><div class="empty-icon">${icon}</div>${emojiOnly?'':`<h3>${escHtml(text)}</h3>`}<p>${escHtml(desc||'')}</p></div>`;
+}
 
 
 
@@ -3165,8 +3245,6 @@ Object.assign(window, {
       <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border);display:flex;gap:10px"><a class="modal-btn modal-btn-secondary" style="text-decoration:none" href="https://github.com/mohsen-niksirat" target="_blank" rel="noopener">🐙 GitHub</a><a class="modal-btn modal-btn-secondary" style="text-decoration:none" href="https://t.me/mohsenniksirat" target="_blank" rel="noopener">✈️ Telegram</a></div>
     </div>
   </div>
-    <button id="postScrollTop" class="post-scroll-top" onclick="scrollPostModalTop()" title="بازگشت به بالا" aria-label="بازگشت به بالا">↑</button>
-  </div>
 </div>
 
 <!-- FULL TEXT POPUP -->
@@ -3186,7 +3264,7 @@ Object.assign(window, {
 </div>
 
 <!-- COMPARE TWO CHANNELS -->
-<div class="modal-overlay" id="compareOverlay" style="z-index:210" role="dialog" aria-modal="true" aria-label="Compare channels">
+<div class="modal-overlay" id="compareOverlay" style="z-index:210" role="dialog" aria-modal="true" aria-label="Compare channels" onclick="if(event.target===this)closeCompare()">
   <div class="modal" style="max-width:760px">
     <div class="modal-header">
       <div class="modal-avatar" style="background:var(--accent-gradient)">⚖️</div>
@@ -3212,6 +3290,7 @@ Object.assign(window, {
     <div class="modal-header" id="postModalHead"></div>
     <button class="modal-close" style="position:absolute;top:16px;left:16px;z-index:5" aria-label="Close" onclick="closePostModal()">✕</button>
     <div class="modal-body" id="postModalBody"></div>
+    <button id="postScrollTop" class="post-scroll-top" onclick="scrollPostModalTop()" title="Back to top" aria-label="Back to top">↑</button>
   </div>
 </div>
 <div class="modal-overlay" id="channelOverlay" role="dialog" aria-modal="true" aria-label="Channel details">

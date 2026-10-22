@@ -26,7 +26,7 @@ jobs:
           set -e
           node crawl_posts.js
 
-          git add posts.js posts
+          git add posts.js posts archive
           if git diff --cached --quiet; then
             echo "No data changes — nothing to push"
             exit 0
@@ -50,7 +50,7 @@ jobs:
           # Push to the branch the app is developed on. The workflow used to
           # push to `main` while the code lived on `master`, so every crawl
           # landed on a branch that was never deployed.
-          bash scripts/push-branch.sh master posts.js posts sw.js
+          bash scripts/push-branch.sh master posts.js posts archive sw.js
 
       - name: Report failure (GitHub Issue)
         if: failure()
