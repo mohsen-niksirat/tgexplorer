@@ -177,14 +177,26 @@ test.describe('Telegram Explorer - e2e', () => {
 
     const result = await page.evaluate(async () => {
       const reg = await navigator.serviceWorker.ready;
+      // The watch state lives in its own cache ('tgexplorer-state') so a
+      // version bump does not wipe it — look through every cache for it.
       const names = await caches.keys();
-      const cache = await caches.open(names.find(n => n.startsWith('tgexplorer-')) || names[0]);
-      const watch = await cache.match('/tg-watchlist');
-      const seen = await cache.match('/tg-seen');
+      let watch = null;
+      let seen = null;
+      for (const name of names) {
+        const cache = await caches.open(name);
+        if (!watch) {
+          const res = await cache.match('/tg-watchlist');
+          if (res) watch = JSON.parse(await res.text());
+        }
+        if (!seen) {
+          const res = await cache.match('/tg-seen');
+          if (res) seen = JSON.parse(await res.text());
+        }
+      }
       return {
         periodicSync: 'periodicSync' in reg,
-        watch: watch ? JSON.parse(await watch.text()) : null,
-        seen: seen ? JSON.parse(await seen.text()) : null,
+        watch,
+        seen,
       };
     });
 

@@ -169,8 +169,9 @@ async function handleSearchPosts(url, env) {
   if (cached) return j(cached);
 
   const needle = query.toLowerCase();
-  // 8 batches x 6 channels = 48 subrequests, inside the free-plan budget of 50.
-  const channels = getTrendingChannels('all').slice(0, 48);
+  // 7 batches x 6 channels = 42 subrequests, plus the KV get/set — comfortably
+  // inside the free-plan budget of 50 (the old 48 left no headroom).
+  const channels = getTrendingChannels('all').slice(0, 42);
   const matches = [];
   let checked = 0;
 
@@ -312,7 +313,9 @@ async function handlePosts(username, url) {
   const u = username.replace(/[^a-zA-Z0-9_]/g, '');
   const before = (url.searchParams.get('before') || '').replace(/[^0-9]/g, '');
   const page = parseInt(url.searchParams.get('page') || '1', 10) || 1;
-  const cacheKey = `posts:${u}:${before || page}`;
+  // `?before=` and `?page=` address different slices of the archive —
+  // keep them in separate cache slots or they shadow each other.
+  const cacheKey = before ? `posts:${u}:b${before}` : `posts:${u}:p${page}`;
   const cached = cacheGet(cacheKey);
   if (cached) return j(cached);
 
@@ -344,7 +347,16 @@ async function handleStats(username) {
   const ph = await fetchHtml(`https://t.me/s/${u}`);
   const posts = ph ? parsePosts(ph, u) : [];
 
-  const postsPerDay = Math.round(posts.length / 7 * 10) / 10;
+  // The fetched page is the latest ~20 posts, not a fixed 7-day window.
+  // Measure the real span between the oldest and newest dated post.
+  let postsPerDay = 0;
+  const ts = posts.map(p => (p.date ? Date.parse(p.date) : NaN)).filter(t => !isNaN(t));
+  if (ts.length >= 2) {
+    const spanDays = Math.max(1, (Math.max(...ts) - Math.min(...ts)) / 864e5);
+    postsPerDay = Math.round(ts.length / spanDays * 10) / 10;
+  } else {
+    postsPerDay = Math.round(posts.length / 7 * 10) / 10;
+  }
   const withImages = posts.filter(p => p.image).length;
   const mediaRatio = posts.length > 0 ? Math.round(withImages / posts.length * 100) : 0;
 
@@ -421,7 +433,7 @@ async function handleTrending(url, env) {
   const lang = url.searchParams.get('lang') || 'en';
   const page = parseInt(url.searchParams.get('page') || '1');
 
-  const cacheKey = `trending:${cat}:${page}`;
+  const cacheKey = `trending:${cat}:${page}:${lang}`;
   const cached = await cacheGet2(env, cacheKey);
   if (cached) return j(cached);
 
@@ -464,7 +476,7 @@ async function handleExploreFeed(url) {
   const page = parseInt(url.searchParams.get('page') || '1');
   const limit = parseInt(url.searchParams.get('limit') || '30');
 
-  const cacheKey = `explore:${cat}:${page}`;
+  const cacheKey = `explore:${cat}:${page}:${limit}`;
   const cached = cacheGet(cacheKey);
   if (cached) return j(cached);
 
@@ -495,9 +507,20 @@ async function handleExploreFeed(url) {
   const results = await Promise.all(fetches);
   for (const r of results) allPosts.push(...r);
 
-  // Shuffle for variety
+  // Shuffle for variety — but deterministically per category, so page 2
+  // continues where page 1 stopped instead of reshuffling (a fresh random
+  // order per request would duplicate and drop posts across pages).
+  let seed = 2166136261;
+  for (let i = 0; i < cat.length; i++) seed = Math.imul(seed ^ cat.charCodeAt(i), 16777619) >>> 0;
+  const rand = () => {
+    seed = (seed + 0x6d2b79f5) >>> 0;
+    let t = seed;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
   for (let i = allPosts.length - 1; i > 0; i--) {
-    const j2 = Math.floor(Math.random() * (i + 1));
+    const j2 = Math.floor(rand() * (i + 1));
     [allPosts[i], allPosts[j2]] = [allPosts[j2], allPosts[i]];
   }
 
@@ -547,7 +570,8 @@ async function handleNotifications(url) {
         const t = x.date ? Date.parse(x.date) : 0;
         return t > since;
       }) : [];
-      if (np.length) up.push({ username: u, newCount: np.length, latestPost: np[0] });
+      // parsePosts returns oldest-first; the last entry is the newest.
+      if (np.length) up.push({ username: u, newCount: np.length, latestPost: np[np.length - 1] });
     } catch {}
   }
   return j({ checked: chs.length, since, updates: up, checkedAt: Date.now() });
@@ -722,6 +746,20 @@ function extractMeta(html, name) {
 }
 
 function extractNumber(t) { const m = t.match(/([\d,.]+[KkMm]?)/); return m ? m[1] : '0'; }
-function decodeEntities(s) { return s.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&#x27;/g, "'").replace(/\n/g, ' ').trim(); }
+// Decode the named entities last: `&amp;` must be expanded after the others
+// or "&amp;lt;" would be decoded twice and become "<".
+function decodeEntities(s) {
+  return s
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#x27;/gi, "'")
+    .replace(/&#39;/g, "'")
+    .replace(/&#(\d+);/g, (m, n) => String.fromCodePoint(Number(n)))
+    .replace(/&amp;/g, '&')
+    .replace(/\n/g, ' ')
+    .trim();
+}
 function mergeResults(...arrays) { const seen = new Set(), merged = []; for (const arr of arrays) for (const i of arr) { const k = (i.username || '').toLowerCase(); if (k && !seen.has(k)) { seen.add(k); merged.push(i); } } return merged; }
 function j(data, status = 200) { return new Response(JSON.stringify(data), { status, headers: { 'Content-Type': 'application/json', ...CORS_HEADERS } }); }

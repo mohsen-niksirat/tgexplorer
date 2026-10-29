@@ -1419,7 +1419,10 @@ function renderChannelProfile(username){
   if(title)title.textContent=days===90?t('activity_90d'):(days===30?t('activity_30d'):t('activity_chart'));
   document.querySelectorAll('.chart-range-btn').forEach(b=>b.classList.toggle('active',Number(b.dataset.days)===days));
   if(chartEl){
-    if(total>0){renderChart(activity)}
+    // Show the chart whenever the channel has any posts at all — an empty
+    // window (e.g. a quiet week) still renders as a flat line, so the range
+    // buttons stay usable. Only a channel with no posts hides the section.
+    if(posts.length || total>0){renderChart(activity)}
     else{chartEl.style.display='none'}
   }
 

@@ -205,7 +205,8 @@ too. If you hit a limit, the endpoints keep working from the cache.
 - 🧩 **Modularized app code** — the monolithic inline script is split into ES
   modules: `js/i18n.js` (all 7 languages + `applyLang()`/`t()`), `js/state.js`
   (the shared app state) and `js/worker-code.js` (the Worker source shown in
-  the setup screen). `index.html` now loads a `<script type="module">` and
+  the setup screen — generated from `worker.js` by
+  `scripts/build-worker-code.js`, and checked byte-for-byte in CI). `index.html` now loads a `<script type="module">` and
   re-publishes the app functions on `window` through a generated bridge, so
   every inline `onclick="…"` handler keeps working exactly as before. The
   service worker now serves `js/*.js` network-first and pre-caches them, so
@@ -499,7 +500,7 @@ tgexplorer/
 ├── js/                  # ES modules extracted from the inline script
 │   ├── i18n.js          #   all UI strings for the 7 languages + applyLang()/t()
 │   ├── state.js         #   the single mutable app state (localStorage)
-│   └── worker-code.js   #   the Worker source shown in the setup screen
+│   └── worker-code.js   #   Worker source for the setup screen (generated)
 ├── channels.js          # Verified channel database (131 channels)
 ├── posts.js             # Inline seed: latest 12 posts per channel (generated)
 ├── posts/               # Full archive, one JSON per channel (lazy-loaded)

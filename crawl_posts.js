@@ -15,7 +15,23 @@ const RETENTION_DAYS = 3;  // "live" window: posts older than N days are dropped
                            // digest preserves counters so Explore stays rich)
 const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
 
-function esc(s){ return String(s||'').replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/&quot;/g,'"').replace(/&#39;/g,"'").replace(/<br\s*\/?>/gi,'\n').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim(); }
+// Strip markup first, then decode entities — decoding &lt; before the tag
+// stripper would let escaped text ("a < b > c") be eaten as a tag, and
+// decoding &amp; first would turn "&amp;lt;" into "<" (double decode).
+function esc(s){
+  return String(s||'')
+    .replace(/<br\s*\/?>/gi,'\n')
+    .replace(/<[^>]+>/g,' ')
+    .replace(/&nbsp;/g,' ')
+    .replace(/&lt;/g,'<')
+    .replace(/&gt;/g,'>')
+    .replace(/&quot;/g,'"')
+    .replace(/&#0?39;/g,"'")
+    .replace(/&#(\d+);/g,(m,n)=>String.fromCodePoint(Number(n)))
+    .replace(/&amp;/g,'&')
+    .replace(/\s+/g,' ')
+    .trim();
+}
 
 function parsePosts(html, username){
   const posts = [];
@@ -124,40 +140,48 @@ async function fetchPosts(ch){
   // repository growing: one gzipped file per month.
   const ARCHIVE_DIR = path.join(__dirname, 'archive');
   const monthKey = new Date().toISOString().slice(0, 7);
-  const archiveFile = path.join(ARCHIVE_DIR, monthKey + '.json.gz');
 
   fs.mkdirSync(ARCHIVE_DIR, { recursive: true });
-  let monthArchive = { month: monthKey, updated: new Date().toISOString(), channels: {} };
-  if (fs.existsSync(archiveFile)) {
-    try {
-      const raw = zlib.gunzipSync(fs.readFileSync(archiveFile)).toString('utf8');
-      const old = JSON.parse(raw);
-      if (old && old.channels) monthArchive.channels = old.channels;
-    } catch (e) { /* a broken archive is simply rebuilt */ }
-  }
 
-  // Count the posts of this run per day and merge them into the month.
-  const dayCounts = new Map();
+  // Bucket this run's posts by the month they were actually posted in. A
+  // crawl that crosses a month boundary files the older posts under their
+  // own month instead of dropping them from the statistics.
+  const byMonth = new Map(); // month -> { channels: { username: { day: count } } }
   for (const [u, posts] of Object.entries(archive)) {
     for (const p of posts) {
       if (!p.date) continue;
       const day = String(p.date).slice(0, 10);
-      if (!day.startsWith(monthKey)) continue;
-      if (!dayCounts.has(u)) dayCounts.set(u, {});
-      dayCounts.get(u)[day] = (dayCounts.get(u)[day] || 0) + 1;
+      const month = day.slice(0, 7);
+      if (!/^\d{4}-\d{2}$/.test(month)) continue;
+      if (!byMonth.has(month)) byMonth.set(month, {});
+      const chans = byMonth.get(month);
+      if (!chans[u]) chans[u] = {};
+      chans[u][day] = (chans[u][day] || 0) + 1;
     }
   }
-  for (const [u, days] of dayCounts) {
-    if (!monthArchive.channels[u]) monthArchive.channels[u] = {};
-    for (const [day, n] of Object.entries(days)) {
-      // Each run recounts the whole retention window, so adding would count
-      // the same posts again every three hours (an ~8x inflation). Keep the
-      // largest count seen for the day instead: monotonic and idempotent.
-      monthArchive.channels[u][day] = Math.max(monthArchive.channels[u][day] || 0, n);
+
+  for (const [month, counts] of byMonth) {
+    const archiveFile = path.join(ARCHIVE_DIR, month + '.json.gz');
+    let monthArchive = { month, updated: new Date().toISOString(), channels: {} };
+    if (fs.existsSync(archiveFile)) {
+      try {
+        const raw = zlib.gunzipSync(fs.readFileSync(archiveFile)).toString('utf8');
+        const old = JSON.parse(raw);
+        if (old && old.channels) monthArchive.channels = old.channels;
+      } catch (e) { /* a broken archive is simply rebuilt */ }
     }
+    for (const [u, days] of Object.entries(counts)) {
+      if (!monthArchive.channels[u]) monthArchive.channels[u] = {};
+      for (const [day, n] of Object.entries(days)) {
+        // Each run recounts the whole retention window, so adding would count
+        // the same posts again every three hours (an ~8x inflation). Keep the
+        // largest count seen for the day instead: monotonic and idempotent.
+        monthArchive.channels[u][day] = Math.max(monthArchive.channels[u][day] || 0, n);
+      }
+    }
+    monthArchive.updated = new Date().toISOString();
+    fs.writeFileSync(archiveFile, zlib.gzipSync(Buffer.from(JSON.stringify(monthArchive), 'utf8')));
   }
-  monthArchive.updated = new Date().toISOString();
-  fs.writeFileSync(archiveFile, zlib.gzipSync(Buffer.from(JSON.stringify(monthArchive), 'utf8')));
 
   // An index of the months that exist, so the app can find them.
   const months = fs.readdirSync(ARCHIVE_DIR)
@@ -167,7 +191,8 @@ async function fetchPosts(ch){
   fs.writeFileSync(path.join(ARCHIVE_DIR, 'index.json'),
     JSON.stringify({ months, updated: new Date().toISOString() }, null, 2) + '\n', 'utf8');
 
-  const archiveSize = fs.statSync(archiveFile).size;
+  const archiveFile = path.join(ARCHIVE_DIR, monthKey + '.json.gz');
+  const archiveSize = fs.existsSync(archiveFile) ? fs.statSync(archiveFile).size : 0;
   console.log('\nMonthly archive: archive/' + monthKey + '.json.gz (' + Math.round(archiveSize / 1024) + ' KB, ' + months.length + ' month(s))');
 
   // Inline seed: latest 12 posts per channel only

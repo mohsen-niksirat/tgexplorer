@@ -10,6 +10,12 @@ const embeddedRaw = fs.readFileSync(path.join(ROOT, 'js', 'worker-code.js'), 'ut
 const from = embeddedRaw.indexOf('WORKER_CODE=`') + 'WORKER_CODE=`'.length;
 const embedded = embeddedRaw.slice(from, embeddedRaw.lastIndexOf('`;'));
 
+// Undo the escaping build-worker-code.js applies inside the template literal
+// (\\, \` and \${) and normalise line endings, so the embedded copy can be
+// compared byte-for-byte with the deployed source.
+const unescaped = embedded.replace(/\\([\\`$])/g, '$1').replace(/\r\n/g, '\n');
+const deployedNorm = deployed.replace(/\r\n/g, '\n');
+
 function routes(src) {
   const set = new Set();
   for (const re of [
@@ -49,4 +55,18 @@ for (const r of REQUIRED) {
 }
 
 console.log(ok ? '\nOK   both workers expose the routes the app needs' : '\nFAIL the workers drifted apart');
+
+// The setup screen must hand the user the *same* worker, not a stale fork.
+if (unescaped !== deployedNorm) {
+  ok = false;
+  let at = 0;
+  while (at < unescaped.length && unescaped[at] === deployedNorm[at]) at++;
+  console.log('\nFAIL js/worker-code.js differs from worker.js at char ' + at);
+  console.log('     embedded: ' + JSON.stringify(unescaped.slice(at, at + 80)));
+  console.log('     deployed: ' + JSON.stringify(deployedNorm.slice(at, at + 80)));
+  console.log('     run: node scripts/build-worker-code.js');
+} else {
+  console.log('OK   js/worker-code.js is an exact copy of worker.js');
+}
+
 process.exit(ok ? 0 : 1);

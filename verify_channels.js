@@ -236,8 +236,25 @@ function pruneDead(dead) {
   const removed = [];
   for (const line of lines) {
     const m = line.match(/\busername:'([^']+)'/);
-    if (m && deadSet.has(m[1])) removed.push(line.trim().replace(/,$/, ''));
-    else kept.push(line);
+    if (m && deadSet.has(m[1])) {
+      // A removed line may carry the array terminator on the same line
+      // (e.g. "  {...},];"); strip the entry but keep what follows it.
+      const entry = m[0];
+      const entryStart = line.indexOf(entry);
+      const entryEnd = line.indexOf('}', entryStart);
+      const tail = entryEnd !== -1 ? line.slice(entryEnd + 1).replace(/^,/, '') : '';
+      removed.push(line.slice(line.indexOf('{'), entryEnd + 1));
+      if (/^\s*\]/.test(tail)) kept.push(tail);
+    } else {
+      kept.push(line);
+    }
+  }
+  // If we removed the last element of the array the previous kept line
+  // still ends with a trailing comma before "];" — strip it so the file
+  // stays valid JavaScript.
+  const lastEntry = kept.findLastIndex(l => /},\s*$/.test(l));
+  if (lastEntry !== -1 && kept.slice(lastEntry + 1).every(l => l.trim() === '' || l.trim().startsWith(']'))) {
+    kept[lastEntry] = kept[lastEntry].replace(/},\s*$/, '}');
   }
   fs.writeFileSync(chPath, kept.join('\n'), 'utf8');
 

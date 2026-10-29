@@ -4,6 +4,10 @@
 // ============================================================
 
 const CACHE_NAME = 'tgexplorer-202610290056';
+// The watchlist/seen-post state lives in its own, deliberately unversioned
+// cache: `activate` purges every old shell cache, but the user's watch state
+// must survive a deploy.
+const STATE_CACHE = 'tgexplorer-state';
 const STATIC_ASSETS = [
   './',
   './index.html',
@@ -36,8 +40,10 @@ self.addEventListener('install', event => {
 self.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys().then(keys => {
+      // The watchlist/seen cache is deliberately not versioned: purge every
+      // old shell cache, but keep the user's watch state alive.
       return Promise.all(
-        keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key))
+        keys.filter(key => key !== CACHE_NAME && key !== STATE_CACHE).map(key => caches.delete(key))
       );
     })
   );
@@ -131,11 +137,13 @@ self.addEventListener('fetch', event => {
 // channel, compares the post ids with the ones it saw last time and
 // shows a notification for the new ones.
 // ============================================================
+// Watchlist and seen-post state live in STATE_CACHE (declared at the top)
+// so the versioned cache purge on every deploy does not wipe them.
 const WATCH_KEY = '/tg-watchlist';
 const SEEN_KEY = '/tg-seen';
 
 async function storeWatchlist(channels) {
-  const cache = await caches.open(CACHE_NAME);
+  const cache = await caches.open(STATE_CACHE);
   await cache.put(WATCH_KEY, new Response(JSON.stringify(channels), {
     headers: { 'Content-Type': 'application/json' },
   }));
@@ -148,7 +156,7 @@ self.addEventListener('message', event => {
     event.waitUntil(storeWatchlist(data.channels));
   }
   if (data.type === 'seen' && data.seen) {
-    event.waitUntil(caches.open(CACHE_NAME).then(cache =>
+    event.waitUntil(caches.open(STATE_CACHE).then(cache =>
       cache.put(SEEN_KEY, new Response(JSON.stringify(data.seen), {
         headers: { 'Content-Type': 'application/json' },
       }))));
@@ -157,7 +165,7 @@ self.addEventListener('message', event => {
 
 // The sync itself.
 async function checkWatchedChannels() {
-  const cache = await caches.open(CACHE_NAME);
+  const cache = await caches.open(STATE_CACHE);
   const watchRes = await cache.match(WATCH_KEY);
   if (!watchRes) return;
   let channels = [];
@@ -202,6 +210,14 @@ async function checkWatchedChannels() {
 }
 
 self.addEventListener('sync', event => {
+  if (event.tag === 'tg-check-posts') {
+    event.waitUntil(checkWatchedChannels());
+  }
+});
+
+// Chrome dispatches a dedicated `periodicsync` event for the registration
+// made in index.html — the plain `sync` listener above never fires for it.
+self.addEventListener('periodicsync', event => {
   if (event.tag === 'tg-check-posts') {
     event.waitUntil(checkWatchedChannels());
   }

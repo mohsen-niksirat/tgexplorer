@@ -25,7 +25,7 @@ const WATCH_KEY = '/tg-watchlist';
 const SEEN_KEY = '/tg-seen';
 
 async function storeWatchlist(channels) {
-  const cache = await caches.open(CACHE_NAME);
+  const cache = await caches.open(STATE_CACHE);
   await cache.put(WATCH_KEY, new Response(JSON.stringify(channels), {
     headers: { 'Content-Type': 'application/json' },
   }));
@@ -38,7 +38,7 @@ self.addEventListener('message', event => {
     event.waitUntil(storeWatchlist(data.channels));
   }
   if (data.type === 'seen' && data.seen) {
-    event.waitUntil(caches.open(CACHE_NAME).then(cache =>
+    event.waitUntil(caches.open(STATE_CACHE).then(cache =>
       cache.put(SEEN_KEY, new Response(JSON.stringify(data.seen), {
         headers: { 'Content-Type': 'application/json' },
       }))));
@@ -47,7 +47,7 @@ self.addEventListener('message', event => {
 
 // The sync itself.
 async function checkWatchedChannels() {
-  const cache = await caches.open(CACHE_NAME);
+  const cache = await caches.open(STATE_CACHE);
   const watchRes = await cache.match(WATCH_KEY);
   if (!watchRes) return;
   let channels = [];
@@ -92,6 +92,12 @@ async function checkWatchedChannels() {
 }
 
 self.addEventListener('sync', event => {
+  if (event.tag === 'tg-check-posts') {
+    event.waitUntil(checkWatchedChannels());
+  }
+});
+
+self.addEventListener('periodicsync', event => {
   if (event.tag === 'tg-check-posts') {
     event.waitUntil(checkWatchedChannels());
   }
