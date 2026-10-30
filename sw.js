@@ -3,7 +3,7 @@
 // Handles caching for offline support and PWA
 // ============================================================
 
-const CACHE_NAME = 'tgexplorer-202610301803';
+const CACHE_NAME = 'tgexplorer-202610302218';
 // The watchlist/seen-post state lives in its own, deliberately unversioned
 // cache: `activate` purges every old shell cache, but the user's watch state
 // must survive a deploy.
