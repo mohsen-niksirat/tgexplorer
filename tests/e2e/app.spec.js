@@ -309,6 +309,30 @@ test.describe('Telegram Explorer - e2e', () => {
     await expect(page.locator('#channelOverlay.open, #postOverlay.open')).toHaveCount(0);
   });
 
+  test('thumbnail failures retry the original and leave the placeholder visible', async ({ page }) => {
+    const result = await page.evaluate(() => {
+      const tile = document.createElement('div');
+      tile.className = 'feed-item';
+      tile.innerHTML = '<div class="tile-ph">B</div>';
+      const image = document.createElement('img');
+      image.src = 'https://proxy.invalid/thumb.webp';
+      image.dataset.fb = 'https://origin.invalid/image.jpg';
+      tile.append(image);
+
+      window.imgFail(image);
+      const fallbackSrc = image.src;
+      const retried = image.dataset.fbTried;
+
+      window.imgFail(image);
+      return { fallbackSrc, retried, hidden: image.classList.contains('img-dead'), noMedia: tile.classList.contains('no-media') };
+    });
+
+    expect(result.fallbackSrc).toBe('https://origin.invalid/image.jpg');
+    expect(result.retried).toBe('1');
+    expect(result.hidden).toBe(true);
+    expect(result.noMedia).toBe(true);
+  });
+
   test('icon-only buttons expose accessible names', async ({ page }) => {
     // Every modal close button is icon-only (✕) and needs an aria-label.
     const closeButtons = page.locator('.modal-close');
