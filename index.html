@@ -12,6 +12,10 @@
   <link rel="icon" href="icons/favicon-32x32.png" type="image/png" sizes="32x32">
   <link rel="icon" href="icons/favicon-16x16.png" type="image/png" sizes="16x16">
 <link rel="manifest" href="manifest.json">
+<!-- Image hosts: Telegram's CDN for originals, wsrv.nl for resized thumbnails. -->
+<link rel="preconnect" href="https://cdn4.telesco.pe">
+<link rel="preconnect" href="https://wsrv.nl">
+<link rel="dns-prefetch" href="https://cdn4.telesco.pe">
 <meta name="theme-color" content="#0088cc">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -88,6 +92,27 @@
 .explore-item-foot{display:flex;align-items:center;justify-content:space-between;padding:6px 10px;border-top:1px solid var(--border);flex-shrink:0}
 .explore-item-foot .feed-type-badge{position:static;background:var(--accent-light);color:var(--accent);font-size:12px}
 .text-preview-badge{position:absolute;top:auto;bottom:10px;right:8px;z-index:3}
+/* ---------- Image loading placeholders ----------
+   Telegram's CDN (cdn4.telesco.pe) can be slow or unreachable on some
+   networks. Every thumbnail keeps a gradient + channel initial painted behind
+   the <img>, so a slow or failed image degrades into a branded tile instead of
+   an empty dark box. */
+.tile-ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:34px;font-weight:800;color:rgba(255,255,255,.92);overflow:hidden;user-select:none;line-height:1}
+.explore-list-thumb,.latest-post-thumb,.post-thumb{position:relative}
+.explore-list-thumb>.tile-ph,.latest-post-thumb>.tile-ph,.post-thumb>.tile-ph{font-size:18px}
+.explore-item>img,.feed-item>img,.explore-list-thumb>img,.latest-post-thumb>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.card-avatar>img,.list-avatar>img,.modal-avatar>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.list-avatar,.modal-avatar{position:relative}
+.av-initial{position:relative}
+img.img-dead{display:none!important}
+/* Feed grid: the channel chip stays visible without hovering, the post text
+   still appears on hover. */
+.feed-item-overlay{opacity:1;background:none;pointer-events:none}
+.feed-item:hover .feed-item-overlay{background:linear-gradient(to top,rgba(0,0,0,.7) 0%,transparent 55%)}
+.feed-post-text{opacity:0;transition:opacity .25s ease}
+.feed-item:hover .feed-post-text,.feed-item.no-media .feed-post-text{opacity:1}
+.feed-channel-name{align-self:flex-start;max-width:100%;padding:3px 10px 3px 4px;border-radius:20px;background:rgba(0,0,0,.55);backdrop-filter:blur(4px)}
+.feed-item.no-media .feed-item-overlay{background:linear-gradient(to top,rgba(0,0,0,.85) 0%,rgba(0,0,0,.25) 60%,transparent 100%)}
 .post-fulltext-overlay{position:fixed;inset:0;background:var(--bg-overlay);z-index:400;display:none;align-items:center;justify-content:center;padding:24px;backdrop-filter:blur(4px)}
 .post-fulltext-overlay.open{display:flex}
 .post-fulltext{background:var(--bg-primary);border-radius:20px;max-width:560px;width:100%;max-height:80vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:var(--shadow-lg)}
@@ -747,10 +772,9 @@ async function appendFeedPosts(){
 }
 
 function feedItemHtml(p,i){
-  const colors=['#e91e63','#9c27b0','#3f51b5','#0088cc','#009688','#4caf50','#ff9800','#795548','#607d8b','#f44336'];
-  const color=colors[i%colors.length];
   const initial=(p.channelTitle||p.channel||'?')[0].toUpperCase();
-  const img=goodImg(p.image);const imgHtml=img?`<img src="${img}" alt="" loading="lazy" onerror="this.style.display='none'">`:`<div style="width:100%;height:100%;background:${color};display:flex;align-items:center;justify-content:center;font-size:32px;color:#fff;font-weight:700">${initial}</div>`;
+  const img=goodImg(p.image);
+  const imgHtml=tileImg(img,p.channel,initial,{w:400,eager:i<6});
   const videoBadge=p.hasVideo?`<div class="feed-video-badge">▶ Video</div>`:'';
   const text=p.text?p.text.substring(0,80)+(p.text.length>80?'...':''):'';
   return `<div class="feed-item" onclick="openFeedPost(${i})" data-index="${i}">
@@ -789,9 +813,9 @@ function openFeedPost(index){
 // ============================================================
 function renderResults(){if(window._sharedFolder)return;const content=document.getElementById('content');const results=state.searchResults;if(!results.length){content.innerHTML=renderEmpty(t('no_results'),t('no_results_desc'));return}if(state.currentView==='explore')renderExploreView(content,results);else if(state.currentView==='list')renderListView(content,results);else renderGridView(content,results)}
 
-function renderGridView(container,items){container.innerHTML=`<div class="results-grid">${items.map(ch=>`<div class="channel-card" tabindex="0" role="button" onclick="openChannel('${ch.username}')" onkeydown="if(event.key==='Enter'){openChannel('${ch.username}')}"><div class="card-banner"><div class="card-banner-overlay"></div><div class="card-avatar" style="${avatarGrad(ch.username)}">${ch.avatar?`<img src="${ch.avatar}" alt="" loading="lazy">`:(ch.title||ch.username||'?')[0].toUpperCase()}</div></div><div class="card-body"><div class="card-title">${escHtml(ch.title)}</div><div class="card-username">@${escHtml(ch.username)}<span class="lang-badge ${ch.lang==='fa'?'fa':'en'}">${ch.lang==='fa'?'🇮🇷 فارسی':'🇬🇧 EN'}</span></div>${ch.tags?.length?`<div class="card-tags">${ch.tags.slice(0,3).map(tg=>`<span class="card-tag">${tg}</span>`).join('')}</div>`:''}<div class="card-desc">${escHtml(ch.description||ch.title)}</div><div class="card-footer"><div class="card-members">👥 ${ch.members||'0'} ${t('members')}</div><div class="card-actions"><button class="card-action-btn ${isFav(ch.username)?'favorited':''}" aria-label="${isFav(ch.username)?'Unsave':'Save'} channel" title="${isFav(ch.username)?'Unsave':'Save'}" onclick="event.stopPropagation();toggleFav('${ch.username}','${escAttr(ch.title)}')">${isFav(ch.username)?'❤️':'🤍'}</button><button class="card-action-btn" aria-label="Copy link" title="Copy link" onclick="event.stopPropagation();copyLink('${ch.username}')">🔗</button><button class="card-action-btn" aria-label="Add to folder" title="Add to folder" onclick="event.stopPropagation();openFolderPicker('ch','${ch.username}','','${escAttr(ch.title)}')">🗂</button></div></div></div></div>`).join('')}</div>`}
+function renderGridView(container,items){container.innerHTML=`<div class="results-grid">${items.map(ch=>`<div class="channel-card" tabindex="0" role="button" onclick="openChannel('${ch.username}')" onkeydown="if(event.key==='Enter'){openChannel('${ch.username}')}"><div class="card-banner"><div class="card-banner-overlay"></div><div class="card-avatar" style="${avatarGrad(ch.username)}">${avatarInner(ch.avatar,ch.title||ch.username,120)}</div></div><div class="card-body"><div class="card-title">${escHtml(ch.title)}</div><div class="card-username">@${escHtml(ch.username)}<span class="lang-badge ${ch.lang==='fa'?'fa':'en'}">${ch.lang==='fa'?'🇮🇷 فارسی':'🇬🇧 EN'}</span></div>${ch.tags?.length?`<div class="card-tags">${ch.tags.slice(0,3).map(tg=>`<span class="card-tag">${tg}</span>`).join('')}</div>`:''}<div class="card-desc">${escHtml(ch.description||ch.title)}</div><div class="card-footer"><div class="card-members">👥 ${ch.members||'0'} ${t('members')}</div><div class="card-actions"><button class="card-action-btn ${isFav(ch.username)?'favorited':''}" aria-label="${isFav(ch.username)?'Unsave':'Save'} channel" title="${isFav(ch.username)?'Unsave':'Save'}" onclick="event.stopPropagation();toggleFav('${ch.username}','${escAttr(ch.title)}')">${isFav(ch.username)?'❤️':'🤍'}</button><button class="card-action-btn" aria-label="Copy link" title="Copy link" onclick="event.stopPropagation();copyLink('${ch.username}')">🔗</button><button class="card-action-btn" aria-label="Add to folder" title="Add to folder" onclick="event.stopPropagation();openFolderPicker('ch','${ch.username}','','${escAttr(ch.title)}')">🗂</button></div></div></div></div>`).join('')}</div>`}
 
-function renderListView(container,items){const page=state.explorePage||EXPLORE_PAGE;const shown=items.slice(0,page);container.innerHTML=`<div class="results-list">${shown.map(ch=>`<div class="list-item" tabindex="0" role="button" onclick="openChannel('${ch.username}')" onkeydown="if(event.key==='Enter'){openChannel('${ch.username}')}"><div class="list-avatar" style="${avatarGrad(ch.username)}">${ch.avatar?`<img src="${ch.avatar}" alt="" loading="lazy">`:(ch.title||ch.username||'?')[0].toUpperCase()}</div><div class="list-info"><div class="list-title">${escHtml(ch.title)}</div><div class="list-user">@${escHtml(ch.username)}</div><div class="list-desc">${escHtml(ch.description||'')}</div></div><div class="list-meta"><span class="list-members">👥 ${ch.members||'0'}</span><button class="card-action-btn ${isFav(ch.username)?'favorited':''}" aria-label="${isFav(ch.username)?'Unsave':'Save'} channel" title="${isFav(ch.username)?'Unsave':'Save'}" onclick="event.stopPropagation();toggleFav('${ch.username}','${escAttr(ch.title)}')">${isFav(ch.username)?'❤️':'🤍'}</button></div></div>`).join('')}</div>`+(items.length>page?'<div class="explore-more"><button class="explore-more-btn" onclick="showMoreExplore()">'+escHtml(t('show_more_channels'))+'</button></div>':'')}
+function renderListView(container,items){const page=state.explorePage||EXPLORE_PAGE;const shown=items.slice(0,page);container.innerHTML=`<div class="results-list">${shown.map(ch=>`<div class="list-item" tabindex="0" role="button" onclick="openChannel('${ch.username}')" onkeydown="if(event.key==='Enter'){openChannel('${ch.username}')}"><div class="list-avatar" style="${avatarGrad(ch.username)}">${avatarInner(ch.avatar,ch.title||ch.username,120)}</div><div class="list-info"><div class="list-title">${escHtml(ch.title)}</div><div class="list-user">@${escHtml(ch.username)}</div><div class="list-desc">${escHtml(ch.description||'')}</div></div><div class="list-meta"><span class="list-members">👥 ${ch.members||'0'}</span><button class="card-action-btn ${isFav(ch.username)?'favorited':''}" aria-label="${isFav(ch.username)?'Unsave':'Save'} channel" title="${isFav(ch.username)?'Unsave':'Save'}" onclick="event.stopPropagation();toggleFav('${ch.username}','${escAttr(ch.title)}')">${isFav(ch.username)?'❤️':'🤍'}</button></div></div>`).join('')}</div>`+(items.length>page?'<div class="explore-more"><button class="explore-more-btn" onclick="showMoreExplore()">'+escHtml(t('show_more_channels'))+'</button></div>':'')}
 
 function getChannelPosts(username){
   try{
@@ -847,7 +871,6 @@ function renderExploreView(container,items){
     const posts=getChannelPosts(ch.username);
     const post=posts[0]||null;
     const img=goodImg((post&&post.image)||ch.image)||ch.avatar||'';
-    const color=colors[i%colors.length];
     const initial=(ch.title||ch.username||'?')[0].toUpperCase();
     const chName=escHtml(ch.title||ch.username);
     const onclick=posts.length?`openPostModal('${ch.username}')`:`openChannel('${ch.username}')`;
@@ -862,7 +885,7 @@ function renderExploreView(container,items){
         <div class="explore-item-foot"><span class="feed-type-badge">📝</span><span style="font-size:11px;color:var(--text-secondary)">👥 ${ch.members||'0'}</span></div>
       </div>`;
     }
-    const imgHtml=img?`<img src="${img}" alt="" loading="lazy" decoding="async"${i===0?' fetchpriority="high"':''} onerror="this.style.display='none'">`:`<div style="width:100%;height:100%;background:${color};display:flex;align-items:center;justify-content:center;font-size:36px;color:#fff;font-weight:700">${initial}</div>`;
+    const imgHtml=tileImg(img,ch.username,initial,{eager:i<6,w:400});
     const previewText=post&&post.text?post.text.slice(0,200):'';
     return `<div class="explore-item" tabindex="0" role="button" onclick="${onclick}" onkeydown="if(event.key==='Enter'){${onclick}}" style="aspect-ratio:3/4">
       ${imgHtml}
@@ -898,7 +921,7 @@ function renderExploreView(container,items){
 function postItemHtml(p,ch,username,autoplay){
   const dateTxt=p.date?new Date(p.date).toLocaleString(dateLocale(),{dateStyle:'medium',timeStyle:'short'}):'';
   const text=(p.text||'').slice(0,500)+(p.text&&p.text.length>500?'…':'');
-  const pimg=goodImg(p.image);const mediaHtml=p.video?`<video src="${p.video}" poster="${pimg||''}" ${autoplay?'autoplay':'preload="metadata"'} controls muted playsinline class="post-modal-video-el"></video>`:(pimg?`<img src="${pimg}" alt="" class="post-modal-img" loading="lazy" onerror="this.style.display='none'">`:(p.hasVideo?`<div class="post-modal-video">${escHtml(t('video'))}</div>`:''));
+  const pimg=goodImg(p.image);const mediaHtml=p.video?`<video src="${p.video}" poster="${pimg||''}" ${autoplay?'autoplay':'preload="metadata"'} controls muted playsinline class="post-modal-video-el"></video>`:(pimg?`<img src="${pimg}" data-fb="${escAttr(thumbUrl(pimg,800))}" alt="" class="post-modal-img" loading="lazy" onerror="imgFail(this)">`:(p.hasVideo?`<div class="post-modal-video">${escHtml(t('video'))}</div>`:''));
   return `<div class="post-feed-item">
     ${mediaHtml}
     ${dateTxt?`<div class="post-modal-date">🕐 ${dateTxt}</div>`:''}
@@ -1134,7 +1157,7 @@ function closePostModal(){document.querySelectorAll('#postModalBody video').forE
 function closeChannelModal(){document.getElementById('channelOverlay').classList.remove('open');document.body.style.overflow=''}
 function openChannel(username){
   const ch=getAllChannels().find(c=>c.username===username)||{username,title:username};
-  const avEl=document.getElementById('modalAvatar');avEl.style.cssText=avatarGrad(username);if(ch.avatar){avEl.innerHTML='<img src="'+ch.avatar+'" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:50%">'}else{avEl.textContent=(ch.title||username)[0].toUpperCase()}
+  const avEl=document.getElementById('modalAvatar');avEl.style.cssText=avatarGrad(username);avEl.innerHTML=avatarInner(ch.avatar,ch.title||username,160)
   document.getElementById('modalTitle').textContent=ch.title||username;
   document.getElementById('modalUser').textContent='@'+username;
   document.getElementById('modalMembers').textContent=ch.members?('👥 '+ch.members):'';
@@ -1149,7 +1172,7 @@ function openChannel(username){
   const posts=getChannelPosts(username);
   const postsEl=document.getElementById('modalPosts');
   if(posts.length){
-    postsEl.innerHTML=posts.slice(0,5).map(p=>'<div class="post-card"><div class="post-text">'+escHtml((p.text||'').slice(0,120))+'</div>'+(p.image?'<img class="post-img" src="'+p.image+'" loading="lazy" onerror="this.style.display=&#39;none&#39;">':'')+'</div>').join('');
+    postsEl.innerHTML=posts.slice(0,5).map(p=>'<div class="post-card"><div class="post-text">'+escHtml((p.text||'').slice(0,120))+'</div>'+(p.image?'<img class="post-img" src="'+thumbUrl(p.image,400)+'" data-fb="'+escAttr(p.image)+'" loading="lazy" onerror="imgFail(this)">':'')+'</div>').join('');
   }else{
     postsEl.innerHTML='<div class="empty-state" style="padding:20px"><div class="empty-icon">📭</div><p>'+escHtml(t('no_posts'))+'</p></div>';
   }
@@ -1920,9 +1943,8 @@ function exploreListViewHtml(items,colors){
     const posts=getChannelPosts(ch.username);
     const post=posts[0]||null;
     const img=goodImg((post&&post.image)||ch.image)||ch.avatar||'';
-    const color=colors[i%colors.length];
     const initial=(ch.title||ch.username||'?')[0].toUpperCase();
-    const thumb=img?`<img src="${img}" alt="" loading="lazy" onerror="this.style.display='none'">`:`<div style="width:100%;height:100%;background:${color};display:flex;align-items:center;justify-content:center;font-size:22px;color:#fff;font-weight:700">${initial}</div>`;
+    const thumb=tileImg(img,ch.username,initial,{w:120});
     const onclick=posts.length?`openPostModal('${ch.username}')`:`openChannel('${ch.username}')`;
     const badge=post?(post.hasVideo?'🎬':(post.image?'🖼':'📝')):'';
     return `<div class="explore-list-item" tabindex="0" role="button" onclick="${onclick}" onkeydown="if(event.key==='Enter'){this.click()}"><div class="explore-list-thumb">${thumb}</div><div class="explore-list-body"><div class="explore-list-title">${escHtml(ch.title||ch.username)}</div><div class="explore-list-sub">@${escHtml(ch.username)} ${badge?`· ${badge}`:''}</div></div><div class="explore-list-count">📊 ${posts.length}</div></div>`;
@@ -1940,14 +1962,14 @@ function favPostTypeHtml(){
 function savedPostTileHtml(pf){
   const img=goodImg(pf.image);
   return '<div class="explore-item" tabindex="0" role="button" style="aspect-ratio:3/4" onclick="openSavedPost(\''+pf.username+'\','+pf.postId+')" onkeydown="if(event.key===\'Enter\'){this.click()}">'+
-    (img?'<img src="'+img+'" loading="lazy" onerror="this.style.display=&#39;none&#39;">':'<div style="width:100%;height:100%;background:linear-gradient(135deg,#e91e63,#9c27b0);display:flex;align-items:center;justify-content:center;font-size:28px;color:#fff;font-weight:700">'+(pf.channelTitle||'?')[0].toUpperCase()+'</div>')+
+    tileImg(img,pf.username,(pf.channelTitle||pf.username||'?')[0].toUpperCase(),{w:400})+
     (pf.hasVideo?'<div class="feed-video-badge">▶</div>':'')+
     '<div class="explore-item-overlay"><div class="explore-item-info"><div class="explore-stat">'+escHtml(pf.channelTitle||pf.username)+'</div><div class="explore-label">'+(pf.text?pf.text.slice(0,28):'ذخیره‌شده')+'</div></div></div></div>';
 }
 function savedPostRowHtml(pf){
   const img=goodImg(pf.image);
   return '<div class="explore-list-item" onclick="openSavedPost(\''+pf.username+'\','+pf.postId+')">'+
-    '<div class="explore-list-thumb">'+(img?'<img src="'+img+'" loading="lazy" onerror="this.style.display=&#39;none&#39;">':'<div style="width:100%;height:100%;background:linear-gradient(135deg,#e91e63,#9c27b0);display:flex;align-items:center;justify-content:center;font-size:20px;color:#fff;font-weight:700">'+(pf.channelTitle||'?')[0].toUpperCase()+'</div>')+'</div>'+
+    '<div class="explore-list-thumb">'+tileImg(img,pf.username,(pf.channelTitle||pf.username||'?')[0].toUpperCase(),{w:120})+'</div>'+
     '<div class="explore-list-body"><div class="explore-list-title">'+escHtml(pf.channelTitle||pf.username)+'</div><div class="explore-list-sub">'+(pf.text?escHtml(pf.text.slice(0,90)):'')+'</div></div>'+
     '<div class="explore-list-count">'+(pf.hasVideo?'🎬':(img?'🖼':'📝'))+'</div></div>';
 }
@@ -1955,7 +1977,7 @@ function folderPostRowHtml(p,f){
   const img=goodImg(p.image);
   const idx=Math.max(0,getChannelPosts(p.username).findIndex(x=>x.id===p.postId));
   return '<div class="explore-list-item" onclick="openPostModal(\''+p.username+'\','+idx+')">'+
-    '<div class="explore-list-thumb">'+(img?'<img src="'+img+'" loading="lazy" onerror="this.style.display=&#39;none&#39;">':'<div style="width:100%;height:100%;background:#0088cc;display:flex;align-items:center;justify-content:center;font-size:20px;color:#fff;font-weight:700">'+(p.ch.title||'?')[0].toUpperCase()+'</div>')+'</div>'+
+    '<div class="explore-list-thumb">'+tileImg(img,p.username,(p.ch.title||p.username||'?')[0].toUpperCase(),{w:120})+'</div>'+
     '<div class="explore-list-body"><div class="explore-list-title">'+escHtml(p.ch.title||p.username)+'</div><div class="explore-list-sub">'+(p.text?escHtml(p.text.slice(0,90)):'')+'</div></div>'+
     '<button class="folder-remove-btn" style="position:static;flex-shrink:0;margin-right:4px" title="حذف از فولدر" onclick="event.stopPropagation();removeFolderItem(\''+f.id+'\',\'post\',\''+p.username+'\',\''+p.postId+'\')">🗑</button></div>';
 }
@@ -1963,7 +1985,7 @@ function feedRowHtml(p,i){
   const ch=getAllChannels().find(c=>c.username===p.channel)||{username:p.channel,title:p.channelTitle||p.channel};
   const img=goodImg(p.image);
   return '<div class="explore-list-item" onclick="openFeedPost('+i+')">'+
-    '<div class="explore-list-thumb">'+(img?'<img src="'+img+'" loading="lazy" onerror="this.style.display=&#39;none&#39;">':'<div style="width:100%;height:100%;background:linear-gradient(135deg,#0088cc,#005e8c);display:flex;align-items:center;justify-content:center;font-size:20px;color:#fff;font-weight:700">'+escHtml((ch.title||'?')[0].toUpperCase())+'</div>')+'</div>'+
+    '<div class="explore-list-thumb">'+tileImg(img,p.channel,(ch.title||p.channel||'?')[0].toUpperCase(),{w:120})+'</div>'+
     '<div class="explore-list-body"><div class="explore-list-title">'+escHtml(ch.title||p.channel)+'</div><div class="explore-list-sub">@'+escHtml(p.channel||'')+(p.text?' · '+escHtml(p.text.slice(0,90)):'')+'</div></div>'+
     (p.hasVideo?'<div class="explore-list-count">🎬</div>':(img?'<div class="explore-list-count">🖼</div>':'<div class="explore-list-count">📝</div>'))+'</div>';
 }
@@ -2250,7 +2272,7 @@ function renderSharedFolder(f){
     const img=p.image;
     const idx=Math.max(0,getChannelPosts(p.username).findIndex(x=>String(x.id)===String(p.postId)));
     return '<div class="explore-item" tabindex="0" role="button" style="aspect-ratio:3/4" onclick="openPostModal(\''+p.username+'\','+idx+')" onkeydown="if(event.key===\'Enter\'){this.click()}">'+
-      (img?'<img src="'+img+'" loading="lazy" onerror="this.style.display=&#39;none&#39;">':'<div style="width:100%;height:100%;background:#0088cc;display:flex;align-items:center;justify-content:center;font-size:28px;color:#fff;font-weight:700">'+(p.ch.title||'?')[0].toUpperCase()+'</div>')+
+      tileImg(img,p.username,(p.ch.title||p.username||'?')[0].toUpperCase(),{w:400})+
       (p.hasVideo?'<div class="feed-video-badge">▶</div>':'')+
       '<div class="explore-item-overlay"><div class="explore-item-info"><div class="explore-stat">'+escHtml(p.ch.title||p.username)+'</div><div class="explore-label">'+(p.text?escHtml(p.text.slice(0,28)):'')+'</div></div></div></div>';
   }).join('')+'</div>';
@@ -2332,7 +2354,7 @@ html+='<div class="folder-rule"><div class="folder-rule-head">🤖 فیلتر خ
       const link='https://t.me/'+it.username+'/'+lp.id;
       const fb=(lch?lch.title:'@'+it.username)[0].toUpperCase();
       return '<div class="latest-post-card" onclick="window.open(\''+link+'\',\'_blank\')">'+
-        '<div class="latest-post-thumb">'+(lp.image?'<img src="'+lp.image+'" loading="lazy" onerror="this.style.display=&#39;none&#39;">':'<div class="latest-post-thumb-fb">'+fb+'</div>')+'</div>'+
+        '<div class="latest-post-thumb">'+tileImg(lp.image,it.username,fb,{w:200})+'</div>'+
         '<div class="latest-post-body"><div class="latest-post-title">'+(lch?escHtml(lch.title):'@'+escHtml(it.username))+'</div>'+
         '<div class="latest-post-text">'+escHtml((lp.text||'').slice(0,120))+'</div>'+
         '<div class="latest-post-meta">'+escHtml(lp.date||'')+'</div></div>'+
@@ -2343,7 +2365,7 @@ html+='<div class="folder-rule"><div class="folder-rule-head">🤖 فیلتر خ
       const img=p.image;
       const idx=Math.max(0,getChannelPosts(p.username).findIndex(x=>x.id===p.postId));
       return '<div class="explore-item" tabindex="0" role="button" style="aspect-ratio:3/4;position:relative" onclick="openPostModal(\''+p.username+'\','+idx+')" onkeydown="if(event.key===\'Enter\'){this.click()}">'+
-        (img?'<img src="'+img+'" loading="lazy" onerror="this.style.display=&#39;none&#39;">':'<div style="width:100%;height:100%;background:#0088cc;display:flex;align-items:center;justify-content:center;font-size:28px;color:#fff;font-weight:700">'+(p.ch.title||'?')[0].toUpperCase()+'</div>')+
+        tileImg(img,p.username,(p.ch.title||p.username||'?')[0].toUpperCase(),{w:400})+
         (p.hasVideo?'<div class="feed-video-badge">▶</div>':'')+
         '<div class="explore-item-overlay"><div class="explore-item-info"><div class="explore-stat">'+escHtml(p.ch.title||p.username)+'</div><div class="explore-label">'+(p.text?escHtml(p.text.slice(0,28)):'')+'</div></div></div>'+
         '<button class="folder-remove-btn" title="حذف از فولدر" onclick="event.stopPropagation();removeFolderItem(\''+f.id+'\',\'post\',\''+p.username+'\',\''+p.postId+'\')">🗑</button></div>';
@@ -2375,7 +2397,7 @@ html+='<div class="folder-rule"><div class="folder-rule-head">🤖 فیلتر خ
     liveHtml='<div class="folder-sec-title" style="margin-top:18px"><span>🆕 پست‌های جدید</span><button class="folder-del" title="بستن" onclick="clearLivePosts()">✕</button></div><div class="explore-grid">'+state.livePosts.map(lp=>{
       const img=lp.image;
       return '<div class="explore-item" tabindex="0" role="button" style="aspect-ratio:3/4" onclick="openLivePost('+JSON.stringify(lp).replace(/"/g,'&quot;')+')" onkeydown="if(event.key===\'Enter\'){this.click()}">'+
-        (img?'<img src="'+img+'" loading="lazy" onerror="this.style.display=&#39;none&#39;">':'<div style="width:100%;height:100%;background:linear-gradient(135deg,#00c6ff,#0072ff);display:flex;align-items:center;justify-content:center;font-size:28px;color:#fff;font-weight:700">'+(lp.channelTitle||'?')[0].toUpperCase()+'</div>')+
+        tileImg(img,lp.username,(lp.channelTitle||lp.username||'?')[0].toUpperCase(),{w:400})+
         (lp.hasVideo?'<div class="feed-video-badge">▶</div>':'')+
         '<div class="explore-item-overlay"><div class="explore-item-info"><div class="explore-stat">'+escHtml(lp.channelTitle||lp.username)+'</div><div class="explore-label">'+(lp.text?escHtml(lp.text.slice(0,28)):'')+'</div></div></div></div>';
     }).join('')+'</div>';
@@ -2431,7 +2453,7 @@ function homeFeedGridItemHtml(x){
   const ch=getAllChannels().find(c=>c.username===x.username)||{username:x.username,title:x.channelTitle};
   const img=goodImg(x.image);
   return '<div class="explore-item" tabindex="0" role="button" style="aspect-ratio:3/4" onclick="openHomePost(\''+x.username+'\',\''+x.id+'\')" onkeydown="if(event.key===\'Enter\'){this.click()}">'+
-    (img?'<img src="'+img+'" loading="lazy" onerror="this.style.display=&#39;none&#39;">':'<div style="width:100%;height:100%;background:linear-gradient(135deg,#0088cc,#005e8c);display:flex;align-items:center;justify-content:center;font-size:28px;color:#fff;font-weight:700">'+escHtml((ch.title||x.username||'?')[0].toUpperCase())+'</div>')+
+    tileImg(img,x.username,(ch.title||x.username||'?')[0].toUpperCase(),{w:400})+
     (x.hasVideo?'<div class="feed-video-badge">▶</div>':'')+
     '<div class="explore-item-overlay"><div class="explore-item-info"><div class="explore-stat">'+escHtml(x.channelTitle||x.username)+'</div><div class="explore-label">'+(x.text?escHtml(x.text.slice(0,28)):'')+'</div></div></div></div>';
 }
@@ -2477,7 +2499,7 @@ function homeFeedItemHtml(x){
   const dateTxt=x.date?new Date(x.date).toLocaleString(dateLocale(),{dateStyle:'medium',timeStyle:'short'}):'';
   let media='';
   if(x.hasVideo&&x.video)media='<video src="'+x.video+'" poster="'+(x.image||'')+'" preload="metadata" controls muted playsinline></video>';
-  else if(x.image)media='<img src="'+x.image+'" alt="" loading="lazy" onerror="this.style.display=&#39;none&#39;">';
+  else if(x.image)media='<img src="'+thumbUrl(x.image,800)+'" data-fb="'+escAttr(x.image)+'" alt="" loading="lazy" onerror="imgFail(this)">';
   else if(x.hasVideo)media='<div class="home-feed-media-text">'+escHtml(t('video'))+'</div>';
   const longText=x.text&&x.text.length>260;
   if(longText)window._homeTexts[x.username+'_'+x.id]=x.text;
@@ -2662,7 +2684,7 @@ function loadSharedLivePosts(){
       const fb=escHtml((title||'?')[0].toUpperCase());
       const link='https://t.me/'+it.username+'/'+p.id;
       cards.push('<div class="latest-post-card" onclick="window.open(\''+link+'\',\'_blank\')">'+
-        '<div class="latest-post-thumb">'+(p.image?'<img src="'+p.image+'" loading="lazy" onerror="this.style.display=&#39;none&#39;">':'<div class="latest-post-thumb-fb">'+fb+'</div>')+'</div>'+
+        '<div class="latest-post-thumb">'+tileImg(p.image,it.username,(title||'?')[0].toUpperCase(),{w:200})+'</div>'+
         '<div class="latest-post-body"><div class="latest-post-title">'+escHtml(title)+'</div>'+
         '<div class="latest-post-text">'+escHtml((p.text||'').slice(0,120))+'</div>'+
         '<div class="latest-post-meta">'+escHtml(p.date||'')+'</div></div>'+
@@ -2834,7 +2856,43 @@ function checkPWA(){window.addEventListener('beforeinstallprompt',e=>{e.preventD
 // LOCAL DATA (fallback)
 // ============================================================
 const AVATAR_GRADS=[['#0ea5e9','#6366f1'],['#f97316','#ef4444'],['#22c55e','#0d9488'],['#a855f7','#ec4899'],['#eab308','#f97316'],['#06b6d4','#3b82f6'],['#f43f5e','#a855f7'],['#84cc16','#0ea5e9']];
-function avatarGrad(u){u=u||'';let h=0;for(let i=0;i<u.length;i++)h=(h*31+u.charCodeAt(i))>>>0;const g=AVATAR_GRADS[h%AVATAR_GRADS.length];return 'background:linear-gradient(135deg,'+g[0]+','+g[1]+')'}
+function avatarGradCss(u){u=u||'';let h=0;for(let i=0;i<u.length;i++)h=(h*31+u.charCodeAt(i))>>>0;const g=AVATAR_GRADS[h%AVATAR_GRADS.length];return 'linear-gradient(135deg,'+g[0]+','+g[1]+')'}
+function avatarGrad(u){return 'background:'+avatarGradCss(u)}
+// Grid thumbnails go through wsrv.nl: a 400px WebP weighs ~15KB instead of the
+// ~70KB original JPEG from Telegram's CDN, which is slow or unreachable on
+// some networks. If the proxy fails, imgFail() retries the original URL and
+// then leaves the gradient placeholder visible.
+const IMG_PROXY='https://wsrv.nl/?url=';
+function thumbUrl(u,w){
+  u=u||'';
+  if(!/^https?:/i.test(u)||u.indexOf(IMG_PROXY)===0)return u;
+  return IMG_PROXY+encodeURIComponent(u)+'&w='+(w||400)+'&output=webp&q=75&we';
+}
+// Gradient + initial painted behind every thumbnail.
+function tilePh(user,initial){return '<div class="tile-ph" style="background:'+avatarGradCss(user)+'">'+escHtml(initial||'')+'</div>'}
+// Avatar bubble: the initial stays painted underneath, so a stale/broken
+// avatar URL still shows the channel letter instead of a broken-image icon.
+function avatarInner(u,title,size){
+  const initial=(title||u||'?')[0].toUpperCase();
+  return '<span class="av-initial">'+escHtml(initial)+'</span>'+(u?'<img src="'+escAttr(thumbUrl(u,size||120))+'" data-fb="'+escAttr(u)+'" alt="" loading="lazy" onerror="imgFail(this)">':'');
+}
+function tileImg(u,user,initial,opts){
+  opts=opts||{};
+  const ph=tilePh(user,initial);
+  if(!u)return ph;
+  const src=thumbUrl(u,opts.w||400);
+  const fb=src===u?'':' data-fb="'+escAttr(u)+'"';
+  return ph+'<img src="'+escAttr(src)+'"'+fb+' alt="" loading="'+(opts.eager?'eager':'lazy')+'" decoding="async" onerror="imgFail(this)">';
+}
+// Called by every thumbnail's onerror: try the original URL once, then hide the
+// image so the gradient placeholder underneath shows through.
+function imgFail(el){
+  const fb=el.getAttribute('data-fb');
+  if(fb&&!el.dataset.fbTried){el.dataset.fbTried='1';el.src=fb;return}
+  el.classList.add('img-dead');
+  const p=el.parentElement;
+  if(p)p.classList.add('no-media');
+}
 function getAllChannels(){const chs=CHANNEL_DB;if(typeof CHANNEL_AVATARS==='undefined')return chs;return chs.map(ch=>ch.avatar?ch:{...ch,avatar:CHANNEL_AVATARS[ch.username]||''})}
 function getLocalExplore(category){const all=getAllChannels();const f=filterState();let out=all;if(category&&category!=='all')out=out.filter(ch=>(ch.tags||[]).includes(category));else if(f.cats.length)out=out.filter(ch=>f.cats.some(c=>(ch.tags||[]).includes(c)));if(f.langs.length)out=out.filter(ch=>f.langs.includes(ch.lang||'en'));return out}
 
