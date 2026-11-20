@@ -3,6 +3,16 @@
 Full version history of Telegram Explorer. The latest release is summarized in the
 [README](README.md#-changelog).
 
+## v1.8.0 (2026-11-20)
+
+- **Design system** — Telegram-native tokens (`themeParams` integration), flat surfaces with no decorative gradients or glassmorphism, and a dark theme that is no longer pitch black.
+- **Icons** — every UI emoji replaced by a single consistent `20×20` inline SVG icon set.
+- **Mobile** — marketing hero removed on mobile, bottom tab bar (`Home` / `Explore` / `Feed` / `Favorites`), Explore controls consolidated into a Filters bottom sheet with swipe-to-close and Telegram `BackButton` support, and **12 channel cards** visible above the fold at `390×844`.
+- **Feed** — text-only posts render as flat text-excerpt tiles (`--bg-secondary`, `--border-subtle`, `--radius-md`), removing the gradient initial-letter tiles.
+- **Motion** — tab content fade, image fade-in on load, and card press scale (`0.98`), using `transform`/`opacity` only and disabled under `prefers-reduced-motion`.
+- **Performance** — worker setup code, Compare, and Export modules are lazy-loaded on demand; `posts.js` no longer blocks first paint; Explore renders in chunks (`6` cards synchronously, rest in `requestAnimationFrame`, cutting longest boot task `885 ms → 192 ms` and local FCP `1.5 s → 1.1 s`). Cold-load Lighthouse performance is still limited by the inline module and style/layout cost; repeat visits are served from the service-worker cache.
+- **Accessibility** — stays at **100**; contrast fixes (`--text-tertiary` now `≥ 4.5:1` in both themes).
+
 ## v1.7.0
 
 - ⚖️ **Compare two channels** — the channel modal has a **Compare** button

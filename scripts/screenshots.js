@@ -24,7 +24,7 @@ const BASE = process.env.BASE_URL || 'http://localhost:3000';
     colorScheme: 'dark',
   });
   const page = await context.newPage();
-  await page.goto(BASE, { waitUntil: 'load' });
+  await page.goto(BASE, { waitUntil: 'domcontentloaded' });
   await page.evaluate(() => { if (typeof window.skipSetup === 'function') window.skipSetup(); });
   await page.waitForTimeout(3500);
 
@@ -57,7 +57,7 @@ const BASE = process.env.BASE_URL || 'http://localhost:3000';
     hasTouch: true,
   });
   const mpage = await mobile.newPage();
-  await mpage.goto(BASE, { waitUntil: 'load' });
+  await mpage.goto(BASE, { waitUntil: 'domcontentloaded' });
   await mpage.evaluate(() => { if (typeof window.skipSetup === 'function') window.skipSetup(); });
   await mpage.waitForTimeout(3500);
   await mpage.screenshot({ path: path.join(OUT, 'mobile.png') });
