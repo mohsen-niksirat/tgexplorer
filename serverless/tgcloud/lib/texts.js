@@ -41,6 +41,42 @@ export function buildExploreKeyboard(lang, channelUsername) {
   };
 }
 
+export function buildChannelCardKeyboard(lang, username) {
+  const appUrl = `${APP_URL}?channel=${encodeURIComponent(username)}`;
+  const tgUrl = `https://t.me/${encodeURIComponent(username)}`;
+  const openAppText = isFa(lang) ? '📂 باز کردن در TGExplorer' : '📂 Open in TGExplorer';
+  const openTgText = isFa(lang) ? '🔗 باز کردن در تلگرام' : '🔗 Open in Telegram';
+  return {
+    inline_keyboard: [
+      [{ text: openAppText, web_app: { url: appUrl } }],
+      [{ text: openTgText, url: tgUrl }],
+    ],
+  };
+}
+
+export function formatChannelCardCaption(lang, card) {
+  const lines = [];
+  lines.push(card.title || `@${card.username}`);
+  lines.push(card.subs ? `@${card.username} · ${card.subs}` : `@${card.username}`);
+  if (card.description) {
+    const clean = card.description.replace(/\s+/g, ' ').trim();
+    const trunc = clean.length > 200 ? clean.slice(0, 197) + '…' : clean;
+    lines.push('');
+    lines.push(trunc);
+  }
+  if (card.verified) {
+    lines.push('');
+    lines.push(isFa(lang) ? '✅ تأییدشده در TGExplorer' : '✅ Verified in TGExplorer');
+  }
+  return lines.join('\n');
+}
+
+export function channelNotFoundText(lang) {
+  return isFa(lang)
+    ? 'کانال یافت نشد یا عمومی نیست.'
+    : 'Channel not found or not public.';
+}
+
 export function welcomeText(lang) {
   if (isFa(lang)) {
     return (

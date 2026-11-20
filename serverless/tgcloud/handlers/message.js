@@ -1,13 +1,20 @@
 import { db, api } from 'sdk';
 import { sql } from 'sdk/db';
-import { users } from '../schema.js';
+import { users, channelOpens } from '../schema.js';
+import { getChannelCardData, parseChannelStartParam } from '../lib/channel.js';
 import {
   BOT_USERNAME,
+  buildChannelCardKeyboard,
   buildExploreKeyboard,
+  channelNotFoundText,
   fallbackText,
+  formatChannelCardCaption,
   helpText,
   welcomeText,
 } from '../lib/texts.js';
+
+// Owner's numeric Telegram user ID for /stats (read your ID from the `users` table):
+export const OWNER_ID = 0; // <-- PLACEHOLDER: replace 0 with owner's telegram_id
 
 function parseCommand(text, isGroup) {
   if (!text || !text.startsWith('/')) return null;
@@ -19,11 +26,6 @@ function parseCommand(text, isGroup) {
   if (isGroup && target !== BOT_USERNAME.toLowerCase()) return null;
   const param = parts[1] || '';
   return { cmd, param };
-}
-
-function extractChannelDeepLink(param) {
-  const m = String(param || '').match(/^channel_([A-Za-z0-9_]{3,64})$/);
-  return m ? m[1] : '';
 }
 
 async function upsertUser(from, startParam) {
@@ -62,11 +64,78 @@ export default async function (message) {
     if (isPrivate) {
       await upsertUser(message.from, parsed.param);
     }
-    const channelUsername = parsed.cmd === 'start' ? extractChannelDeepLink(parsed.param) : '';
+
+    if (parsed.cmd === 'start' && parsed.param) {
+      const channelUsername = parseChannelStartParam(parsed.param);
+      if (channelUsername) {
+        await db
+          .insert(channelOpens)
+          .values({
+            username: channelUsername,
+            userId: message.from?.id || 0,
+          })
+          .run();
+
+        const card = await getChannelCardData(channelUsername);
+        if (!card.found) {
+          await api.sendMessage({
+            chat_id: message.chat.id,
+            text: channelNotFoundText(lang),
+            reply_markup: buildExploreKeyboard(lang, ''),
+          });
+          return;
+        }
+
+        const caption = formatChannelCardCaption(lang, card);
+        const reply_markup = buildChannelCardKeyboard(lang, channelUsername);
+        if (card.image && /^https?:\/\//i.test(card.image)) {
+          try {
+            await api.sendPhoto({
+              chat_id: message.chat.id,
+              photo: card.image,
+              caption,
+              reply_markup,
+            });
+            return;
+          } catch (e) {}
+        }
+        await api.sendMessage({
+          chat_id: message.chat.id,
+          text: caption,
+          reply_markup,
+        });
+        return;
+      }
+    }
+
     await api.sendMessage({
       chat_id: message.chat.id,
       text: welcomeText(lang),
-      reply_markup: buildExploreKeyboard(lang, channelUsername),
+      reply_markup: buildExploreKeyboard(lang, ''),
+    });
+    return;
+  }
+
+  if (parsed && parsed.cmd === 'stats') {
+    if (isPrivate && OWNER_ID && message.from?.id === OWNER_ID) {
+      const totalUsers = await db.$count(users);
+      const totalOpens = await db.$count(channelOpens);
+      const topRows = await db.all(
+        sql`SELECT username, COUNT(*) AS opens FROM channel_opens GROUP BY username ORDER BY opens DESC LIMIT 10`
+      );
+      const topLines = topRows.length
+        ? topRows.map((r, i) => `${i + 1}. @${r.username} — ${r.opens}`).join('\n')
+        : '(none yet)';
+      await api.sendMessage({
+        chat_id: message.chat.id,
+        text: `📊 TGExplorer Bot Stats\n\nTotal users: ${totalUsers}\nTotal channel opens: ${totalOpens}\n\nTop 10 channels:\n${topLines}`,
+      });
+      return;
+    }
+    await api.sendMessage({
+      chat_id: message.chat.id,
+      text: helpText(lang),
+      reply_markup: buildExploreKeyboard(lang, ''),
     });
     return;
   }
