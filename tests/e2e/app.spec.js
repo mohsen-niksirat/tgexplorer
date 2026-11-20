@@ -392,6 +392,14 @@ test.describe('Telegram Explorer - e2e', () => {
     const badges = page.locator('.feed-grid .feed-item .feed-video-badge');
     await expect(badges).toHaveCount(count);
   });
+
+  test('loading the app with ?startapp=channel_<username> opens that channel sheet', async ({ page }) => {
+    await page.goto('/?startapp=channel_bbcpersian');
+    await page.waitForTimeout(1500);
+    await expect(page.locator('#channelOverlay')).toHaveClass(/open/);
+    await expect(page.locator('#modalTitle')).toContainText(/BBC/i);
+    await expect(page.locator('#modalShareBotBtn')).toBeVisible();
+  });
 });
 
 /**

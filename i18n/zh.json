@@ -141,7 +141,8 @@
     "never": "从未",
     "activity_30d": "活跃度（30 天）",
     "share_link": "分享链接",
-    "compare": "比较"
+    "compare": "比较",
+    "share_bot": "通过机器人分享"
   },
   "ui": {
     "all": "全部",

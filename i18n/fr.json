@@ -141,7 +141,8 @@
     "never": "Jamais",
     "activity_30d": "Activité (30 jours)",
     "share_link": "Partager le lien",
-    "compare": "Comparer"
+    "compare": "Comparer",
+    "share_bot": "Partager via le bot"
   },
   "ui": {
     "all": "Tout",
