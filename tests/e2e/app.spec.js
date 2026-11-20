@@ -378,6 +378,20 @@ test.describe('Telegram Explorer - e2e', () => {
     const cards = page.locator('.explore-item, .channel-card, .list-item');
     await expect(cards.first()).toBeVisible();
   });
+
+  test('in Feed, selecting the Videos chip leaves only video tiles visible', async ({ page }) => {
+    await page.evaluate(() => window.switchTab('feed'));
+    const videoChip = page.locator('#feedTypeBar .etype-chip[data-type="video"]');
+    await expect(videoChip).toBeVisible();
+    await videoChip.click();
+    await expect(videoChip).toHaveClass(/active/);
+
+    const items = page.locator('.feed-grid .feed-item');
+    const count = await items.count();
+    expect(count).toBeGreaterThan(0);
+    const badges = page.locator('.feed-grid .feed-item .feed-video-badge');
+    await expect(badges).toHaveCount(count);
+  });
 });
 
 /**

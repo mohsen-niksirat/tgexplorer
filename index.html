@@ -1351,7 +1351,18 @@ img.img-dead { display: none !important; }
   flex-shrink: 0;
 }
 .explore-item-foot .feed-type-badge { position: static; background: var(--accent-light); color: var(--accent); font-size: 11px; }
-.text-preview-badge { position: absolute; top: auto; bottom: 8px; right: 8px; z-index: 3; }
+.text-preview-badge, .feed-type-badge.text-preview-badge {
+  position: absolute;
+  top: auto;
+  bottom: 8px;
+  right: 8px;
+  left: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  z-index: 3;
+}
 
 /* Feed Grid & Cards */
 .feed-grid {
@@ -1439,14 +1450,17 @@ img.img-dead { display: none !important; }
   position: absolute;
   top: 8px;
   right: 8px;
+  bottom: auto;
+  left: auto;
   background: rgba(0, 0, 0, 0.6);
   color: #fff;
-  padding: 3px 8px;
+  padding: 4px;
   border-radius: var(--radius-xs);
   font-size: 11px;
   font-weight: 600;
-  display: flex;
+  display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 4px;
   z-index: 3;
 }
@@ -2863,6 +2877,59 @@ function filterFeedPosts(posts){
     return f.cats.some(c=>tags.includes(c));
   });
 }
+function feedPostType(p){
+  if(p&&p.hasVideo)return 'video';
+  if(p&&goodImg(p.image))return 'image';
+  return 'text';
+}
+function filterFeedByType(posts){
+  const types=state.feedTypes||[];
+  if(!types.length)return posts;
+  return posts.filter(p=>types.includes(feedPostType(p)));
+}
+function feedTypeBarHtml(){
+  const types=[['all',t('all')],['video',t('clip')],['image',t('image')],['text',t('text')]];
+  const active=state.feedTypes||[];
+  return '<div class="etype-bar" id="feedTypeBar" style="margin-bottom:10px">'+
+    types.map(ty=>{
+      const on=(active.length===0&&ty[0]==='all')||active.includes(ty[0]);
+      return '<button class="etype-chip'+(on?' active':'')+'" data-type="'+ty[0]+'" aria-pressed="'+on+'" onclick="toggleFeedType(\''+ty[0]+'\')">'+ty[1]+'</button>';
+    }).join('')+
+    viewToggleHtml()+
+    '</div>';
+}
+async function ensureFeedMatches(minCount){
+  if(state.feedMode!=='worker'||state.feedDone)return;
+  let guard=0;
+  while(!state.feedDone&&filterFeedByType(state.feedPool).length<minCount&&guard<12){
+    guard++;
+    const next=(state.feedPage||1)+1;
+    const data=await fetchWorker(`/api/explore-feed?cat=${state.currentCategory}&page=${next}&limit=30`);
+    if(data&&data.posts&&data.posts.length){
+      state.feedPool.push(...filterFeedPosts(data.posts));
+      state.feedPage=next;
+    }else{
+      state.feedDone=true;
+      if(!state.feedPool.length)setNetBanner('fallback',t('net_fallback'));
+    }
+  }
+}
+async function toggleFeedType(ty){
+  if(ty==='all'){
+    if(!state.feedTypes.length)return;
+    state.feedTypes=[];
+  }else{
+    const arr=(state.feedTypes||[]).slice();
+    const i=arr.indexOf(ty);
+    if(i===-1)arr.push(ty);else arr.splice(i,1);
+    state.feedTypes=arr;
+  }
+  localStorage.setItem('tgexp_feed_types',JSON.stringify(state.feedTypes));
+  if(state.feedMode==='worker'&&!state.feedDone)await ensureFeedMatches(18);
+  const filtered=filterFeedByType(state.feedPool);
+  window._feedRendered=Math.min(30,filtered.length);
+  renderFeedView(document.getElementById('content'),filtered.slice(0,30));
+}
 async function loadFeed(){await ensurePostsLoaded();
   const content=document.getElementById('content');
   content.innerHTML=renderSkeletons(9);
@@ -2871,7 +2938,7 @@ async function loadFeed(){await ensurePostsLoaded();
     if(state.workerUrl&&!isOffline()){
       const cat=state.currentCategory;
       const data=await fetchWorker(`/api/explore-feed?cat=${cat}&page=1&limit=30`);
-      if(data&&data.posts&&data.posts.length){state.feedPool=filterFeedPosts(data.posts.slice());state.feedMode='worker'}
+      if(data&&data.posts&&data.posts.length){state.feedPool=filterFeedPosts(data.posts.slice());state.feedMode='worker';state.feedPage=1}
       else{state.feedMode='local';setNetBanner('fallback',t('net_fallback'))}
     }else{
       state.feedMode='local';
@@ -2883,40 +2950,37 @@ async function loadFeed(){await ensurePostsLoaded();
       content.innerHTML=`<div class="empty-state"><div class="empty-icon"></div><h3>Connect proxy to load feed</h3><p>Set up your Cloudflare Worker to see image posts from channels</p></div>`;
       return;
     }
-    state.feedPage=1;
-    window._feedRendered=Math.min(30,state.feedPool.length);
-    renderFeedView(content,state.feedPool.slice(0,30));
+    if(state.feedMode==='worker')await ensureFeedMatches(18);
+    const filtered=filterFeedByType(state.feedPool);
+    window._feedRendered=Math.min(30,filtered.length);
+    renderFeedView(content,filtered.slice(0,30));
   }catch(err){
-    // worker failed — fall back to local feed
     state.feedMode='local';
     state.feedPool=buildLocalFeedPool(state.currentCategory);
-    if(state.feedPool.length){state.feedPage=1;window._feedRendered=Math.min(30,state.feedPool.length);renderFeedView(content,state.feedPool.slice(0,30))}
-    else content.innerHTML=renderEmpty(t('no_results'),t('no_results_desc'));
+    if(state.feedPool.length){
+      const filtered=filterFeedByType(state.feedPool);
+      window._feedRendered=Math.min(30,filtered.length);
+      renderFeedView(content,filtered.slice(0,30));
+    }else content.innerHTML=renderEmpty(t('no_results'),t('no_results_desc'));
   }
 }
 async function appendFeedPosts(){
   if(state.currentTab!=='feed'||state.feedDone||window._feedLoading)return;
-  // Count what is already in the DOM. state.feedPage only tracks the worker
-  // page, so using it here made the local feed append the same 30 posts again
-  // on every scroll.
   const rendered=window._feedRendered||30;
   window._feedLoading=true;
   try{
-    // Extend the pool in worker mode when it runs out
-    if(state.feedMode==='worker'&&state.feedPool.length<rendered+30){
-      const next=(state.feedPage||1)+1;
-      const data=await fetchWorker(`/api/explore-feed?cat=${state.currentCategory}&page=${next}&limit=30`);
-      if(data&&data.posts&&data.posts.length){state.feedPool.push(...data.posts);state.feedPage=next}
-      else{state.feedDone=true;setNetBanner('fallback',t('net_fallback'))}
+    if(state.feedMode==='worker'){
+      await ensureFeedMatches(rendered+30);
     }
-    const have=state.feedPool.length;
+    const filtered=filterFeedByType(state.feedPool);
+    const have=filtered.length;
     if(rendered>=have){
       if(state.feedMode==='local'||state.feedDone){
         state.feedDone=true;
         window._feedLoading=false;return;
       }
     }
-    const chunk=state.feedPool.slice(rendered,rendered+30);
+    const chunk=filtered.slice(rendered,rendered+30);
     if(!chunk.length){state.feedDone=true;window._feedLoading=false;return}
     const grid=document.querySelector('.feed-grid');
     const list=document.querySelector('.explore-list');
@@ -2924,7 +2988,7 @@ async function appendFeedPosts(){
     if(grid)grid.insertAdjacentHTML('beforeend',html);
     else if(list)list.insertAdjacentHTML('beforeend',html);
     window._feedRendered=rendered+chunk.length;
-    window._feedPosts=state.feedPool.slice(0,rendered+chunk.length);
+    window._feedPosts=filtered.slice(0,rendered+chunk.length);
   }finally{window._feedLoading=false}
 }
 
@@ -2962,8 +3026,13 @@ function feedItemHtml(p,i){
   </div>`;
 }
 function renderFeedView(container,posts){
-  container.innerHTML='<div style="display:flex;justify-content:flex-end;margin-bottom:10px">'+viewToggleHtml()+'</div>'+(state.exploreView==='list'?'<div class="explore-list">'+posts.map((p,i)=>feedRowHtml(p,i)).join('')+'</div>':`<div class="feed-grid">${posts.map((p,i)=>feedItemHtml(p,i)).join('')}</div>`);
-  // Store posts for modal
+  const bar=feedTypeBarHtml();
+  if(!posts.length){
+    container.innerHTML=bar+renderEmpty(t('no_results'),t('no_results_desc'));
+    window._feedPosts=[];
+    return;
+  }
+  container.innerHTML=bar+(state.exploreView==='list'?'<div class="explore-list">'+posts.map((p,i)=>feedRowHtml(p,i)).join('')+'</div>':`<div class="feed-grid">${posts.map((p,i)=>feedItemHtml(p,i)).join('')}</div>`);
   window._feedPosts=posts;
 }
 
@@ -4004,7 +4073,7 @@ function setExploreView(v){
   const tab=state.currentTab;
   if(tab==='favorites'){renderFavorites();return}
   if(tab==='home'){const hf=window._homeFeed;if(hf){hf.rendered=0;renderHomeFeedChunk(true)}return}
-  if(tab==='feed'){if(window._feedPosts)renderFeedView(document.getElementById('content'),window._feedPosts);return}
+  if(tab==='feed'){const fl=filterFeedByType(state.feedPool||[]);renderFeedView(document.getElementById('content'),fl.slice(0,window._feedRendered||30));return}
   renderResults();
 }
 function setExploreSearch(v){
@@ -5215,6 +5284,7 @@ Object.assign(window, {
   testFromSettings,
   toast,
   toggleExploreType,
+  toggleFeedType,
   toggleFav,
   toggleFilter,
   toggleNotifs,

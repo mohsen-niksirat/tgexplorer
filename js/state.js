@@ -73,6 +73,7 @@ export let state={
   feedPage:0,
   feedDone:false,
   feedMode:'local',
+  feedTypes:readList('tgexp_feed_types',null,'all'),
   fontSize:localStorage.getItem('tgexp_fs')||'medium',
   // --- multi-select Explore filters ---
   filterCats:readList('tgexp_fcats',localStorage.getItem('tgexp_cat'),'all'),
