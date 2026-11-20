@@ -40,13 +40,13 @@
   /* Typography Colors */
   --text-primary: var(--tg-theme-text-color, #0f1419);
   --text-secondary: var(--tg-theme-hint-color, #545b61);
-  --text-tertiary: #8e959b;
+  --text-tertiary: #5c636a;
   --text-inverse: #ffffff;
 
   /* Accent & Interactive (Single Brand Accent) */
   --accent: var(--tg-theme-button-color, #0e6eb8);
   --accent-light: rgba(14, 110, 184, 0.08);
-  --accent-dark: #1b6dae;
+  --accent-hover: color-mix(in srgb, var(--accent) 85%, #000000);
   --accent-strong: var(--tg-theme-button-color, #0e6eb8);
   --on-accent: var(--tg-theme-button-text-color, #ffffff);
   --accent-gradient: var(--accent);
@@ -87,7 +87,7 @@
   --transition: var(--duration-fast) var(--ease-out);
 
   /* Typography Stack */
-  --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, "Vazirmatn", sans-serif;
+  --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, system-ui, sans-serif;
   --max-w: 1100px;
   --header-h: 52px;
   --nav-h: 54px;
@@ -107,12 +107,12 @@
 
   --text-primary: var(--tg-theme-text-color, #ffffff);
   --text-secondary: var(--tg-theme-hint-color, #9ea6ad);
-  --text-tertiary: #676e75;
+  --text-tertiary: #949da6;
   --text-inverse: #0f1419;
 
   --accent: var(--tg-theme-link-color, #58b8ff);
   --accent-light: rgba(88, 184, 255, 0.14);
-  --accent-dark: #2289d6;
+  --accent-hover: color-mix(in srgb, var(--accent) 85%, #ffffff);
   --accent-strong: var(--tg-theme-button-color, #0e6eb8);
   --on-accent: var(--tg-theme-button-text-color, #ffffff);
   --accent-gradient: var(--accent);
@@ -734,7 +734,8 @@ button:active, .cat-chip:active, .lang-chip:active, .channel-card:active, .explo
   height: 100px;
   background: var(--bg-secondary);
   position: relative;
-  overflow: hidden;
+  overflow: visible;
+  z-index: 1;
 }
 .card-banner img { width: 100%; height: 100%; object-fit: cover; }
 .card-banner-overlay {
@@ -2034,6 +2035,120 @@ body { overflow-x: clip; }
   .icon-btn { width: 40px; height: 40px; min-width: 40px; min-height: 40px; }
 }
 
+
+/* Unified 20x20 1.75px-stroke SVG Icon Rules */
+.ui-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  display: inline-block;
+  vertical-align: middle;
+}
+.nav-tab.active .ui-icon {
+  stroke-width: 2.1;
+}
+.card-action-btn.favorited .ui-icon,
+.post-fav-saved .ui-icon {
+  fill: currentColor;
+}
+
+/* Stage 3 Hero Elimination on Mobile & One-Line Title Row on Desktop */
+.hero p,
+.search-tags {
+  display: none !important;
+}
+.hero {
+  padding: 6px 12px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+.hero-content {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.hero h1 {
+  font-size: 15px;
+  font-weight: 700;
+  margin: 0;
+  white-space: nowrap;
+  margin-inline-end: auto;
+}
+.hero .search-box {
+  flex: 1;
+  min-width: 200px;
+  padding: 2px 4px;
+}
+.hero .search-input {
+  padding: 6px 10px;
+  min-height: 40px;
+}
+.hero .search-btn {
+  min-height: 40px;
+  min-width: 72px;
+  padding: 6px 12px;
+}
+.hero .search-modes {
+  margin-top: 0;
+}
+.hero .search-mode-btn {
+  min-height: 40px;
+  padding: 6px 12px;
+}
+@media (max-width: 768px) {
+  .hero h1 {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+  .container {
+    padding-top: 6px;
+  }
+  .categories-bar,
+  .lang-filter {
+    padding-bottom: 2px;
+    margin-bottom: 4px;
+    gap: 6px;
+  }
+  .cat-chip,
+  .lang-chip {
+    min-height: 44px;
+    padding: 6px 12px;
+    font-size: 12px;
+    margin: 0;
+  }
+  .etype-bar {
+    margin-bottom: 4px;
+    gap: 6px;
+  }
+  .etype-chip {
+    min-height: 44px;
+    padding: 6px 8px;
+    font-size: 12px;
+  }
+  .view-toggle button,
+  .view-btn {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
+  }
+  .sug-field {
+    min-height: 40px;
+    padding: 6px 10px;
+    margin-bottom: 4px;
+    font-size: 13px;
+  }
+}
+
 /* RTL Adjustments */
 [dir="rtl"] .search-box { flex-direction: row-reverse; }
 [dir="rtl"] .card-body { text-align: right; }
@@ -2109,7 +2224,7 @@ document.getElementById('langFilter').addEventListener('click',e=>{const chip=e.
 // ============================================================
 // THEME & LANG
 // ============================================================
-function applyTheme(theme){document.documentElement.setAttribute('data-theme',theme);document.getElementById('themeToggle').textContent=theme==='dark'?'☀️':'🌙';try{if(window.Telegram&&Telegram.WebApp)Telegram.WebApp.setHeaderColor(theme==='dark'?'#0a0a0a':'#ffffff')}catch(e){}}
+function applyTheme(theme){document.documentElement.setAttribute('data-theme',theme);const tb=document.getElementById('themeToggle');if(tb)tb.innerHTML=theme==='dark'?"<svg class=\"ui-icon\" viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"10\" cy=\"10\" r=\"3.5\"/><path d=\"M10 2.5v2M10 15.5v2M2.5 10h2M15.5 10h2M4.7 4.7l1.4 1.4M13.9 13.9l1.4 1.4M15.3 4.7l-1.4 1.4M6.1 13.9l-1.4 1.4\"/></svg>":"<svg class=\"ui-icon\" viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M16.5 11.5A6.5 6.5 0 0 1 8.5 3.5a6.5 6.5 0 1 0 8 8z\"/></svg>";try{if(window.Telegram&&Telegram.WebApp)Telegram.WebApp.setHeaderColor(theme==='dark'?'#17212b':'#ffffff')}catch(e){}}
 function initTelegramWebApp(){
   if(!window.Telegram||!Telegram.WebApp)return;
   if(!Telegram.WebApp.initData)return;
@@ -2128,7 +2243,7 @@ function initTelegramWebApp(){
 }
 function syncTgBackButton(){
   if(!window.Telegram||!Telegram.WebApp)return;
-  const ids=['postOverlay','channelOverlay','settingsOverlay','notifOverlay','folderPicker','suggestOverlay','compareOverlay'];
+  const ids=['postOverlay','channelOverlay','settingsOverlay','notifOverlay','folderPicker','suggestOverlay','compareOverlay','fullTextOverlay'];
   const open=ids.some(id=>{const el=document.getElementById(id);return el&&el.classList.contains('open')});
   try{if(open)Telegram.WebApp.BackButton.show();else Telegram.WebApp.BackButton.hide()}catch(e){}
 }
@@ -2156,6 +2271,44 @@ function closeTopOverlay(){
   }
   return false;
 }
+
+function triggerHapticLight(){
+  try{if(window.Telegram&&Telegram.WebApp&&Telegram.WebApp.HapticFeedback)Telegram.WebApp.HapticFeedback.impactOccurred('light')}catch(e){}
+}
+function initSheetSwipeDown(){
+  document.querySelectorAll('.modal-overlay .modal').forEach(modal=>{
+    let startY=0,currentY=0,dragging=false;
+    modal.addEventListener('pointerdown',e=>{
+      const inHeader=e.target.closest('.modal-header')||e.offsetY<=28;
+      if(!inHeader||e.target.closest('button,a,input,select,textarea'))return;
+      if(modal.scrollTop>0)return;
+      dragging=true;startY=e.clientY;currentY=0;
+      modal.style.transition='none';
+    });
+    window.addEventListener('pointermove',e=>{
+      if(!dragging)return;
+      const dy=Math.max(0,e.clientY-startY);
+      currentY=dy;
+      modal.style.transform='translateY('+dy+'px)';
+    });
+    const endDrag=()=>{
+      if(!dragging)return;
+      dragging=false;
+      modal.style.transition='transform var(--duration-sheet) var(--ease-sheet)';
+      if(currentY>80){
+        modal.style.transform='translateY(100%)';
+        setTimeout(()=>{modal.style.transform='';modal.style.transition='';closeTopOverlay()},220);
+      }else{
+        modal.style.transform='';
+        setTimeout(()=>{modal.style.transition=''},260);
+      }
+    };
+    window.addEventListener('pointerup',endDrag);
+    window.addEventListener('pointercancel',endDrag);
+  });
+}
+document.addEventListener('DOMContentLoaded',initSheetSwipeDown);
+
 function tgGoBack(){
   // Same one-layer-at-a-time rule as Escape. The old hand-written chain also
   // closed the folder picker when the suggest dialog was the open one.
@@ -2174,7 +2327,7 @@ function resetApp(){localStorage.removeItem('tgexp_worker');localStorage.removeI
 // ============================================================
 // CONNECTION
 // ============================================================
-async function testConnection(){const input=document.getElementById('workerUrlInput');const btn=document.getElementById('testBtn');const result=document.getElementById('testResult');let url=input.value.trim().replace(/\/+$/,'');if(!url){input.focus();return}if(!url.startsWith('http'))url='https://'+url;input.value=url;btn.disabled=true;document.getElementById('testBtnIcon').textContent='⏳';document.getElementById('testBtnText').textContent=t('testing');result.className='test-result';result.style.display='none';try{const resp=await fetch(`${url}/api/ping`,{signal:AbortSignal.timeout(10000)});const data=await resp.json();if(data.ok){result.className='test-result success show';result.innerHTML=t('test_ok');state.workerUrl=url;localStorage.setItem('tgexp_worker',url);updateConnBadge();setTimeout(()=>showApp(),1200)}else throw 0}catch{result.className='test-result error show';result.innerHTML=t('test_fail')}finally{btn.disabled=false;document.getElementById('testBtnIcon').textContent='🔌';document.getElementById('testBtnText').textContent=t('test_connection')}}
+async function testConnection(){const input=document.getElementById('workerUrlInput');const btn=document.getElementById('testBtn');const result=document.getElementById('testResult');let url=input.value.trim().replace(/\/+$/,'');if(!url){input.focus();return}if(!url.startsWith('http'))url='https://'+url;input.value=url;btn.disabled=true;document.getElementById('testBtnIcon').textContent='';document.getElementById('testBtnText').textContent=t('testing');result.className='test-result';result.style.display='none';try{const resp=await fetch(`${url}/api/ping`,{signal:AbortSignal.timeout(10000)});const data=await resp.json();if(data.ok){result.className='test-result success show';result.innerHTML=t('test_ok');state.workerUrl=url;localStorage.setItem('tgexp_worker',url);updateConnBadge();setTimeout(()=>showApp(),1200)}else throw 0}catch{result.className='test-result error show';result.innerHTML=t('test_fail')}finally{btn.disabled=false;document.getElementById('testBtnIcon').textContent='';document.getElementById('testBtnText').textContent=t('test_connection')}}
 async function testFromSettings(){const input=document.getElementById('settingsWorkerUrl');const result=document.getElementById('settingsTestResult');let url=input.value.trim().replace(/\/+$/,'');if(!url)return;if(!url.startsWith('http'))url='https://'+url;input.value=url;result.className='test-result';result.style.display='none';try{const resp=await fetch(`${url}/api/ping`,{signal:AbortSignal.timeout(10000)});const data=await resp.json();if(data.ok){result.className='test-result success show';result.innerHTML=t('test_ok')}else throw 0}catch{result.className='test-result error show';result.innerHTML=t('test_fail')}}
 function updateConnBadge(){const badge=document.getElementById('connBadge');const text=document.getElementById('connBadgeText');if(state.workerUrl){badge.className='conn-badge connected';text.textContent=t('connected')}else{badge.className='conn-badge disconnected';text.textContent=t('disconnected')}}
 
@@ -2183,17 +2336,17 @@ function updateConnBadge(){const badge=document.getElementById('connBadge');cons
 // ============================================================
 function openSettings(){document.getElementById('settingsWorkerUrl').value=state.workerUrl;document.getElementById('settingsTestResult').className='test-result';const nb=document.getElementById('notifToggleBtn');if(nb)nb.textContent=state.notifEnabled?t('notif_on'):t('notif_off');document.getElementById('settingsOverlay').classList.add('open');document.body.style.overflow='hidden'}
 function closeSettings(){document.getElementById('settingsOverlay').classList.remove('open');document.body.style.overflow=''}
-function saveSettings(){const url=document.getElementById('settingsWorkerUrl').value.trim().replace(/\/+$/,'');state.workerUrl=url.startsWith('http')?url:(url?'https://'+url:'');localStorage.setItem('tgexp_worker',state.workerUrl);updateConnBadge();closeSettings();toast('💾 '+t('saved'));if(state.workerUrl)loadExplore()}
+function saveSettings(){const url=document.getElementById('settingsWorkerUrl').value.trim().replace(/\/+$/,'');state.workerUrl=url.startsWith('http')?url:(url?'https://'+url:'');localStorage.setItem('tgexp_worker',state.workerUrl);updateConnBadge();closeSettings();toast(' '+t('saved'));if(state.workerUrl)loadExplore()}
 
 // ============================================================
 // COPY WORKER CODE
 // ============================================================
-function copyWorkerCode(){navigator.clipboard.writeText(WORKER_CODE).then(()=>{const btn=document.querySelector('.copy-btn');btn.textContent='✅ Copied!';btn.classList.add('copied');toast(t('code_copied'));setTimeout(()=>{btn.textContent=t('copy_code');btn.classList.remove('copied')},2000)})}
+function copyWorkerCode(){navigator.clipboard.writeText(WORKER_CODE).then(()=>{const btn=document.querySelector('.copy-btn');btn.textContent=' Copied!';btn.classList.add('copied');toast(t('code_copied'));setTimeout(()=>{btn.textContent=t('copy_code');btn.classList.remove('copied')},2000)})}
 
 // ============================================================
 // TABS
 // ============================================================
-function switchTab(tab){window._sharedFolder=null;state.currentTab=tab;document.querySelectorAll('.nav-tab').forEach(el=>el.classList.toggle('active',el.dataset.tab===tab));document.getElementById('heroSection').style.display=(tab==='home'||tab==='favorites'||tab==='feed')?'none':'';document.getElementById('categoriesBar').style.display=(tab==='explore'||tab==='feed')?'':'none';document.getElementById('langFilter').style.display=(tab==='explore'||tab==='search')?'':'none';document.getElementById('resultsHeader').style.display='none';renderFilterBar();if(tab==='home')loadHomeFeed();else if(tab==='explore')loadExplore();else if(tab==='feed')loadFeed();else if(tab==='search')renderResults();else if(tab==='favorites')renderFavorites()}
+function switchTab(tab){triggerHapticLight();window._sharedFolder=null;state.currentTab=tab;document.querySelectorAll('.nav-tab').forEach(el=>el.classList.toggle('active',el.dataset.tab===tab));document.getElementById('heroSection').style.display=(tab==='home'||tab==='favorites'||tab==='feed')?'none':'';document.getElementById('categoriesBar').style.display=(tab==='explore'||tab==='feed')?'':'none';document.getElementById('langFilter').style.display=(tab==='explore'||tab==='search')?'':'none';document.getElementById('resultsHeader').style.display='none';renderFilterBar();if(tab==='home')loadHomeFeed();else if(tab==='explore')loadExplore();else if(tab==='feed')loadFeed();else if(tab==='search')renderResults();else if(tab==='favorites')renderFavorites()}
 
 // ============================================================
 // SEARCH
@@ -2411,7 +2564,7 @@ function setNetBanner(mode,msg){
   if(mode==='ok'){banner.classList.remove('show','info');return}
   banner.classList.add('show');
   banner.classList.toggle('info',mode==='fallback');
-  icon.textContent=mode==='offline'?'📴':'⚠️';
+  icon.innerHTML='<svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7.5a10 10 0 0 1 14 0M5.5 10.5a6.5 6.5 0 0 1 9 0M8 13.5a3 3 0 0 1 4 0"/><circle cx="10" cy="16" r="0.8"/></svg>';
   text.textContent=msg||(mode==='offline'?t('net_offline'):t('net_fallback'));
   action.textContent=t('net_retry');
 }
@@ -2440,9 +2593,9 @@ async function retryNetwork(){
     setNetBanner('ok');state.workerUnreachable=false;
     // Refresh whatever the user is looking at, not always Explore.
     switchTab(state.currentTab);
-    toast('✅ '+t('net_reconnected'));
+    toast(' '+t('net_reconnected'));
   }
-  else{setNetBanner('fallback',t('net_fallback'));toast('⚠️ '+t('net_still_down'))}
+  else{setNetBanner('fallback',t('net_fallback'));toast(' '+t('net_still_down'))}
 }
 
 async function doSearch(){const query=document.getElementById('searchInput').value.trim();if(!query)return;state.searchQuery=query;state.currentTab='search';document.querySelectorAll('.nav-tab').forEach(el=>el.classList.toggle('active',el.dataset.tab==='search'));document.getElementById('categoriesBar').style.display='none';document.getElementById('resultsHeader').style.display='flex';if(postSearchMode==='posts'){doPostSearch(query);return}document.getElementById('content').innerHTML=renderSkeletons(6);let results=[];let live=false;if(state.workerUrl&&!isOffline()){const data=await fetchWorker(`/api/search?q=${encodeURIComponent(query)}&lang=${state.lang}`);if(data&&data.results){results=data.results;live=true}else{setNetBanner('fallback',t('net_fallback'));results=searchLocal(query)}}else{results=searchLocal(query);if(isOffline())setNetBanner('offline',t('net_offline'))}state.searchResults=results;document.getElementById('resultsCount').textContent=`${live?t('search_live'):t('search_local')} — ${results.length} ${t('results_for')} "${query}"`;renderResults()}
@@ -2464,7 +2617,7 @@ function onSearchType(){
     if(!hits.length){list.style.display='none';return}
     list.innerHTML=hits.map(ch=>`<div class="ac-item" data-username="${escAttr(ch.username)}">
       <div class="ac-avatar" style="${avatarGrad(ch.username)}">${escHtml((ch.title||ch.username||'?')[0].toUpperCase())}</div>
-      <div style="min-width:0"><div class="ac-title">${escHtml(ch.title||ch.username)}</div><div class="ac-user">@${escHtml(ch.username)} · 👥 ${ch.members||'0'}</div></div>
+      <div style="min-width:0"><div class="ac-title">${escHtml(ch.title||ch.username)}</div><div class="ac-user">@${escHtml(ch.username)} ·  ${ch.members||'0'}</div></div>
     </div>`).join('');
     list.style.display='block';
   },120);
@@ -2545,7 +2698,7 @@ async function loadFeed(){
     if(!state.feedPool.length&&state.feedMode==='worker')state.feedMode='local';
     if(state.feedMode==='local'&&!state.feedPool.length)state.feedPool=buildLocalFeedPool(state.currentCategory);
     if(!state.feedPool.length){
-      content.innerHTML=`<div class="empty-state"><div class="empty-icon">📡</div><h3>Connect proxy to load feed</h3><p>Set up your Cloudflare Worker to see image posts from channels</p></div>`;
+      content.innerHTML=`<div class="empty-state"><div class="empty-icon"></div><h3>Connect proxy to load feed</h3><p>Set up your Cloudflare Worker to see image posts from channels</p></div>`;
       return;
     }
     state.feedPage=1;
@@ -2635,9 +2788,9 @@ function openFeedPost(index){
 // ============================================================
 function renderResults(){if(window._sharedFolder)return;const content=document.getElementById('content');const results=state.searchResults;if(!results.length){content.innerHTML=renderEmpty(t('no_results'),t('no_results_desc'));return}if(state.currentView==='explore')renderExploreView(content,results);else if(state.currentView==='list')renderListView(content,results);else renderGridView(content,results)}
 
-function renderGridView(container,items){container.innerHTML=`<div class="results-grid">${items.map(ch=>`<div class="channel-card" tabindex="0" role="button" onclick="openChannel('${ch.username}')" onkeydown="if(event.key==='Enter'){openChannel('${ch.username}')}"><div class="card-banner"><div class="card-banner-overlay"></div><div class="card-avatar" style="${avatarGrad(ch.username)}">${avatarInner(ch.avatar,ch.title||ch.username,120)}</div></div><div class="card-body"><div class="card-title">${escHtml(ch.title)}</div><div class="card-username">@${escHtml(ch.username)}<span class="lang-badge ${ch.lang==='fa'?'fa':'en'}">${ch.lang==='fa'?'🇮🇷 فارسی':'🇬🇧 EN'}</span></div>${ch.tags?.length?`<div class="card-tags">${ch.tags.slice(0,3).map(tg=>`<span class="card-tag">${tg}</span>`).join('')}</div>`:''}<div class="card-desc">${escHtml(ch.description||ch.title)}</div><div class="card-footer"><div class="card-members">👥 ${ch.members||'0'} ${t('members')}</div><div class="card-actions"><button class="card-action-btn ${isFav(ch.username)?'favorited':''}" aria-label="${isFav(ch.username)?'Unsave':'Save'} channel" title="${isFav(ch.username)?'Unsave':'Save'}" onclick="event.stopPropagation();toggleFav('${ch.username}','${escAttr(ch.title)}')">${isFav(ch.username)?'❤️':'🤍'}</button><button class="card-action-btn" aria-label="Copy link" title="Copy link" onclick="event.stopPropagation();copyLink('${ch.username}')">🔗</button><button class="card-action-btn" aria-label="Add to folder" title="Add to folder" onclick="event.stopPropagation();openFolderPicker('ch','${ch.username}','','${escAttr(ch.title)}')">🗂</button></div></div></div></div>`).join('')}</div>`}
+function renderGridView(container,items){container.innerHTML=`<div class="results-grid">${items.map(ch=>`<div class="channel-card" tabindex="0" role="button" onclick="openChannel('${ch.username}')" onkeydown="if(event.key==='Enter'){openChannel('${ch.username}')}"><div class="card-banner"><div class="card-banner-overlay"></div><div class="card-avatar" style="${avatarGrad(ch.username)}">${avatarInner(ch.avatar,ch.title||ch.username,120)}</div></div><div class="card-body"><div class="card-title">${escHtml(ch.title)}</div><div class="card-username">@${escHtml(ch.username)}<span class="lang-badge ${ch.lang==='fa'?'fa':'en'}">${ch.lang==='fa'?' فارسی':' EN'}</span></div>${ch.tags?.length?`<div class="card-tags">${ch.tags.slice(0,3).map(tg=>`<span class="card-tag">${tg}</span>`).join('')}</div>`:''}<div class="card-desc">${escHtml(ch.description||ch.title)}</div><div class="card-footer"><div class="card-members"> ${ch.members||'0'} ${t('members')}</div><div class="card-actions"><button class="card-action-btn ${isFav(ch.username)?'favorited':''}" aria-label="${isFav(ch.username)?'Unsave':'Save'} channel" title="${isFav(ch.username)?'Unsave':'Save'}" onclick="event.stopPropagation();toggleFav('${ch.username}','${escAttr(ch.title)}')">${isFav(ch.username)?'<svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="currentColor" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 16.5s-6-3.8-6-8.2A3.5 3.5 0 0 1 10 6a3.5 3.5 0 0 1 6 2.3c0 4.4-6 8.2-6 8.2z"/></svg>':'<svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 16.5s-6-3.8-6-8.2A3.5 3.5 0 0 1 10 6a3.5 3.5 0 0 1 6 2.3c0 4.4-6 8.2-6 8.2z"/></svg>'}</button><button class="card-action-btn" aria-label="Copy link" title="Copy link" onclick="event.stopPropagation();copyLink('${ch.username}')"><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 11.5l3-3M7 13l-1.5 1.5a2.5 2.5 0 0 1-3.5-3.5L3.5 9.5a2.5 2.5 0 0 1 3.5 0M13 7l1.5-1.5a2.5 2.5 0 0 1 3.5 3.5L16.5 10.5a2.5 2.5 0 0 1-3.5 0"/></svg></button><button class="card-action-btn" aria-label="Add to folder" title="Add to folder" onclick="event.stopPropagation();openFolderPicker('ch','${ch.username}','','${escAttr(ch.title)}')"><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5.5A1.5 1.5 0 0 1 4.5 4h3.2l1.8 2h6A1.5 1.5 0 0 1 17 7.5v7a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 3 14.5v-9z"/></svg></button></div></div></div></div>`).join('')}</div>`}
 
-function renderListView(container,items){const page=state.explorePage||EXPLORE_PAGE;const shown=items.slice(0,page);container.innerHTML=`<div class="results-list">${shown.map(ch=>`<div class="list-item" tabindex="0" role="button" onclick="openChannel('${ch.username}')" onkeydown="if(event.key==='Enter'){openChannel('${ch.username}')}"><div class="list-avatar" style="${avatarGrad(ch.username)}">${avatarInner(ch.avatar,ch.title||ch.username,120)}</div><div class="list-info"><div class="list-title">${escHtml(ch.title)}</div><div class="list-user">@${escHtml(ch.username)}</div><div class="list-desc">${escHtml(ch.description||'')}</div></div><div class="list-meta"><span class="list-members">👥 ${ch.members||'0'}</span><button class="card-action-btn ${isFav(ch.username)?'favorited':''}" aria-label="${isFav(ch.username)?'Unsave':'Save'} channel" title="${isFav(ch.username)?'Unsave':'Save'}" onclick="event.stopPropagation();toggleFav('${ch.username}','${escAttr(ch.title)}')">${isFav(ch.username)?'❤️':'🤍'}</button></div></div>`).join('')}</div>`+(items.length>page?'<div class="explore-more"><button class="explore-more-btn" onclick="showMoreExplore()">'+escHtml(t('show_more_channels'))+'</button></div>':'')}
+function renderListView(container,items){const page=state.explorePage||EXPLORE_PAGE;const shown=items.slice(0,page);container.innerHTML=`<div class="results-list">${shown.map(ch=>`<div class="list-item" tabindex="0" role="button" onclick="openChannel('${ch.username}')" onkeydown="if(event.key==='Enter'){openChannel('${ch.username}')}"><div class="list-avatar" style="${avatarGrad(ch.username)}">${avatarInner(ch.avatar,ch.title||ch.username,120)}</div><div class="list-info"><div class="list-title">${escHtml(ch.title)}</div><div class="list-user">@${escHtml(ch.username)}</div><div class="list-desc">${escHtml(ch.description||'')}</div></div><div class="list-meta"><span class="list-members"> ${ch.members||'0'}</span><button class="card-action-btn ${isFav(ch.username)?'favorited':''}" aria-label="${isFav(ch.username)?'Unsave':'Save'} channel" title="${isFav(ch.username)?'Unsave':'Save'}" onclick="event.stopPropagation();toggleFav('${ch.username}','${escAttr(ch.title)}')">${isFav(ch.username)?'<svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="currentColor" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 16.5s-6-3.8-6-8.2A3.5 3.5 0 0 1 10 6a3.5 3.5 0 0 1 6 2.3c0 4.4-6 8.2-6 8.2z"/></svg>':'<svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 16.5s-6-3.8-6-8.2A3.5 3.5 0 0 1 10 6a3.5 3.5 0 0 1 6 2.3c0 4.4-6 8.2-6 8.2z"/></svg>'}</button></div></div>`).join('')}</div>`+(items.length>page?'<div class="explore-more"><button class="explore-more-btn" onclick="showMoreExplore()">'+escHtml(t('show_more_channels'))+'</button></div>':'')}
 
 function getChannelPosts(username){
   try{
@@ -2704,7 +2857,7 @@ function renderExploreView(container,items){
       return `<div class="explore-item explore-item-text" tabindex="0" role="button" onclick="${onclick}" onkeydown="if(event.key==='Enter'){${onclick}}" style="aspect-ratio:3/4">
         ${head}
         <div class="explore-item-textbody"><span>${escHtml(post.text.slice(0,textMax))}${more?' …':''}</span></div>
-        <div class="explore-item-foot"><span class="feed-type-badge">📝</span><span style="font-size:11px;color:var(--text-secondary)">👥 ${ch.members||'0'}</span></div>
+        <div class="explore-item-foot"><span class="feed-type-badge"><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="12" height="14" rx="1.5"/><path d="M7 7h6M7 10h6M7 13h4"/></svg></span><span style="font-size:11px;color:var(--text-secondary)"> ${ch.members||'0'}</span></div>
       </div>`;
     }
     const imgHtml=tileImg(img,ch.username,initial,{eager:i<6,w:400});
@@ -2712,7 +2865,7 @@ function renderExploreView(container,items){
     return `<div class="explore-item" tabindex="0" role="button" onclick="${onclick}" onkeydown="if(event.key==='Enter'){${onclick}}" style="aspect-ratio:3/4">
       ${imgHtml}
       ${head}
-      ${post?`<div class="feed-type-badge text-preview-badge">${post.hasVideo?'🎬':(post.image?'🖼':'📝')}</div>`:''}
+      ${post?`<div class="feed-type-badge text-preview-badge">${post.hasVideo?'<svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="11" height="11" rx="1.5"/><path d="M13.5 8.5l4-2.5v8l-4-2.5"/></svg>':(post.image?'<svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3.5" width="14" height="13" rx="1.5"/><circle cx="7.5" cy="7.5" r="1.2"/><path d="M17 13l-3.5-3.5L6 16.5"/></svg>':'<svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="12" height="14" rx="1.5"/><path d="M7 7h6M7 10h6M7 13h4"/></svg>')}</div>`:''}
       ${previewText?`<div class="card-text-preview">${escHtml(previewText)}${post.text.length>200?' …':''}</div>`:''}
       <div class="explore-item-overlay">
         <div class="explore-item-info">
@@ -2746,19 +2899,19 @@ function postItemHtml(p,ch,username,autoplay){
   const pimg=goodImg(p.image);const mediaHtml=p.video?`<video src="${p.video}" poster="${pimg||''}" ${autoplay?'autoplay':'preload="metadata"'} controls muted playsinline class="post-modal-video-el"></video>`:(pimg?`<img src="${pimg}" data-fb="${escAttr(thumbUrl(pimg,800))}" alt="" class="post-modal-img" loading="lazy" onerror="imgFail(this)">`:(p.hasVideo?`<div class="post-modal-video">${escHtml(t('video'))}</div>`:''));
   return `<div class="post-feed-item">
     ${mediaHtml}
-    ${dateTxt?`<div class="post-modal-date">🕐 ${dateTxt}</div>`:''}
+    ${dateTxt?`<div class="post-modal-date"> ${dateTxt}</div>`:''}
     ${text?`<div class="post-modal-text">${escHtml(text)}</div>`:''}
     <div class="post-modal-actions">
-      <button class="modal-btn modal-btn-primary" onclick="openChannel('${username}')">📢 ${t('open_telegram')||'Open in Telegram'}</button>
-      <button class="modal-btn modal-btn-secondary" onclick="window.open('https://t.me/${username}/${p.id}','_blank')">🔗 ${t('watch_post')}</button>
+      <button class="modal-btn modal-btn-primary" onclick="openChannel('${username}')"> ${t('open_telegram')||'Open in Telegram'}</button>
+      <button class="modal-btn modal-btn-secondary" onclick="window.open('https://t.me/${username}/${p.id}','_blank')"> ${t('watch_post')}</button>
     </div>
     <div class="post-modal-share">
-      <button class="modal-btn modal-btn-secondary" onclick="sharePost('${username}','${p.id}')">📤 ${t('share')}</button><button class="modal-btn modal-btn-secondary" onclick="copyPostText('${username}','${p.id}')">📋 ${t('copy_text')}</button>
-      <button class="modal-btn modal-btn-secondary" onclick="copyPostLink('${username}','${p.id}')">🔗 ${t('copy_link')}</button>
-      ${(p.video||goodImg(p.image))?`<button class="modal-btn modal-btn-secondary" onclick="downloadPostMedia('${username}','${p.id}')">⬇️ ${t('download')}</button>`:''}
-      <button class="modal-btn modal-btn-secondary" onclick="copyPostMarkdown('${username}','${p.id}')">📝 ${t('copy_md')}</button>
-      <button class="modal-btn modal-btn-secondary ${isPostFav(username,p.id)?'post-fav-saved':''}" onclick="togglePostFav('${username}','${p.id}')">${isPostFav(username,p.id)?'❤️':'🤍'} ${t('save')}</button>
-      <button class="modal-btn modal-btn-secondary" onclick="openFolderPicker('post','${username}','${p.id}','${escAttr(ch.title)}')">🗂 ${t('folder_btn')}</button>
+      <button class="modal-btn modal-btn-secondary" onclick="sharePost('${username}','${p.id}')"> ${t('share')}</button><button class="modal-btn modal-btn-secondary" onclick="copyPostText('${username}','${p.id}')"> ${t('copy_text')}</button>
+      <button class="modal-btn modal-btn-secondary" onclick="copyPostLink('${username}','${p.id}')"> ${t('copy_link')}</button>
+      ${(p.video||goodImg(p.image))?`<button class="modal-btn modal-btn-secondary" onclick="downloadPostMedia('${username}','${p.id}')"><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3.5v9M6.5 9.5L10 13l3.5-3.5M4 16h12"/></svg>  ${t('download')}</button>`:''}
+      <button class="modal-btn modal-btn-secondary" onclick="copyPostMarkdown('${username}','${p.id}')"> ${t('copy_md')}</button>
+      <button class="modal-btn modal-btn-secondary ${isPostFav(username,p.id)?'post-fav-saved':''}" onclick="togglePostFav('${username}','${p.id}')">${isPostFav(username,p.id)?'<svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="currentColor" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 16.5s-6-3.8-6-8.2A3.5 3.5 0 0 1 10 6a3.5 3.5 0 0 1 6 2.3c0 4.4-6 8.2-6 8.2z"/></svg>':'<svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 16.5s-6-3.8-6-8.2A3.5 3.5 0 0 1 10 6a3.5 3.5 0 0 1 6 2.3c0 4.4-6 8.2-6 8.2z"/></svg>'} ${t('save')}</button>
+      <button class="modal-btn modal-btn-secondary" onclick="openFolderPicker('post','${username}','${p.id}','${escAttr(ch.title)}')"> ${t('folder_btn')}</button>
     </div>
   </div>`;
 }
@@ -2770,7 +2923,7 @@ function renderPostModal(){
       <div class="modal-avatar" style="${avatarGrad(username)}">${(ch.title||username)[0].toUpperCase()}</div>
       <div>
         <div class="modal-title post-title-click" title="${escAttr(t('view_channel'))}" onclick="closePostModal();openChannel('${username}')">${escHtml(ch.title||username)} ↗</div>
-        <div class="modal-user"><span class="post-user-click" title="${escAttr(t('view_channel'))}" onclick="closePostModal();openChannel('${username}')">@${escHtml(username)}</span> <span class="post-modal-members">${ch.members?('👥 '+ch.members):''}</span></div>
+        <div class="modal-user"><span class="post-user-click" title="${escAttr(t('view_channel'))}" onclick="closePostModal();openChannel('${username}')">@${escHtml(username)}</span> <span class="post-modal-members">${ch.members?(' '+ch.members):''}</span></div>
       </div>
       <button class="fs-toggle" id="fsToggleBtn" title="${escAttr(t('font_size'))}" onclick="cycleFontSize()">A</button>
     </div>`;
@@ -2982,7 +3135,7 @@ function openChannel(username){
   const avEl=document.getElementById('modalAvatar');avEl.style.cssText=avatarGrad(username);avEl.innerHTML=avatarInner(ch.avatar,ch.title||username,160)
   document.getElementById('modalTitle').textContent=ch.title||username;
   document.getElementById('modalUser').textContent='@'+username;
-  document.getElementById('modalMembers').textContent=ch.members?('👥 '+ch.members):'';
+  document.getElementById('modalMembers').textContent=ch.members?(' '+ch.members):'';
   document.getElementById('modalDesc').textContent=ch.description||'';
   document.getElementById('modalOpenTg').onclick=()=>window.open('https://t.me/'+username,'_blank');
   document.getElementById('modalFavBtn').onclick=()=>{toggleFav(username,ch.title||username);updateModalFav(username)};
@@ -2996,7 +3149,7 @@ function openChannel(username){
   if(posts.length){
     postsEl.innerHTML=posts.slice(0,5).map(p=>'<div class="post-card"><div class="post-text">'+escHtml((p.text||'').slice(0,120))+'</div>'+(p.image?'<img class="post-img" src="'+thumbUrl(p.image,400)+'" data-fb="'+escAttr(p.image)+'" loading="lazy" onerror="imgFail(this)">':'')+'</div>').join('');
   }else{
-    postsEl.innerHTML='<div class="empty-state" style="padding:20px"><div class="empty-icon">📭</div><p>'+escHtml(t('no_posts'))+'</p></div>';
+    postsEl.innerHTML='<div class="empty-state" style="padding:20px"><div class="empty-icon"></div><p>'+escHtml(t('no_posts'))+'</p></div>';
   }
   renderLocalRelated(username);
   document.getElementById('channelOverlay').classList.add('open');
@@ -3020,7 +3173,7 @@ function renderLocalRelated(username){
   wrap.style.display='';
 }
 
-function updateModalFav(u){const btn=document.getElementById('modalFavBtn');btn.querySelector('span:first-child').textContent=isFav(u)?'❤️':'🤍'}
+function updateModalFav(u){const btn=document.getElementById('modalFavBtn');btn.querySelector('span:first-child').innerHTML=isFav(u)?'<svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="currentColor" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 16.5s-6-3.8-6-8.2A3.5 3.5 0 0 1 10 6a3.5 3.5 0 0 1 6 2.3c0 4.4-6 8.2-6 8.2z"/></svg>':'<svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 16.5s-6-3.8-6-8.2A3.5 3.5 0 0 1 10 6a3.5 3.5 0 0 1 6 2.3c0 4.4-6 8.2-6 8.2z"/></svg>'}
 
 // The monthly archives: the post count per channel per day, gzipped.
 // Loaded lazily and only when a long range is asked for.
@@ -3112,7 +3265,7 @@ function compareColumn(username,canvasId){
   const kw=postKeywords(posts,5);
   return '<div class="compare-head">'+
       '<div class="compare-avatar" style="'+avatarGrad(username)+'">'+escHtml((ch.title||username)[0].toUpperCase())+'</div>'+
-      '<div><div class="compare-name">'+escHtml(ch.title||username)+'</div><div class="compare-user">@'+escHtml(username)+(ch.members?' · 👥 '+escHtml(ch.members):'')+'</div></div>'+
+      '<div><div class="compare-name">'+escHtml(ch.title||username)+'</div><div class="compare-user">@'+escHtml(username)+(ch.members?' ·  '+escHtml(ch.members):'')+'</div></div>'+
     '</div>'+
     '<div class="compare-stats">'+
       '<div class="compare-stat"><b>'+perDay+'</b><span>'+escHtml(t('posts_per_day'))+'</span></div>'+
@@ -3305,8 +3458,8 @@ async function shareChannelLink(username){
     try{await navigator.share({title:'@'+username,url});return}
     catch(e){if(e&&e.name==='AbortError')return}
   }
-  try{await navigator.clipboard.writeText(url);toast('🔗 '+t('toast_link_copied'))}
-  catch(e){toast('⚠️ '+t('toast_copy_fail'))}
+  try{await navigator.clipboard.writeText(url);toast(' '+t('toast_link_copied'))}
+  catch(e){toast(' '+t('toast_copy_fail'))}
 }
 
 // Copy the link to the share page of a channel (the one with the rich
@@ -3318,8 +3471,8 @@ async function shareChannelPage(username){
     try{await navigator.share({title:'@'+username,url});return}
     catch(e){if(e&&e.name==='AbortError')return}
   }
-  try{await navigator.clipboard.writeText(url);toast('🔗 '+t('toast_link_copied'))}
-  catch(e){toast('⚠️ '+t('toast_copy_fail'))}
+  try{await navigator.clipboard.writeText(url);toast(' '+t('toast_link_copied'))}
+  catch(e){toast(' '+t('toast_copy_fail'))}
 }
 // ============================================================
 // CHART (Canvas)
@@ -3411,15 +3564,15 @@ async function checkNotifications(){
     const badge=document.getElementById('notifBadge');
     badge.textContent=totalNew>9?'9+':totalNew;badge.style.display='';
     // Toast
-    if(totalNew>0)toast(`🔔 ${totalNew} ${t('new_posts')}`);
+    if(totalNew>0)toast(` ${totalNew} ${t('new_posts')}`);
   }
 }
 function openNotifModal(){
   document.getElementById('notifOverlay').classList.add('open');document.body.style.overflow='hidden';
   const content=document.getElementById('notifContent');
-  if(!state.workerUrl){content.innerHTML=`<div class="empty-state"><div class="empty-icon">📡</div><p>Connect proxy first</p></div>`;return}
-  if(!state.favorites.length){content.innerHTML=`<div class="empty-state"><div class="empty-icon">❤️</div><h3>${t('no_favorites')}</h3><p>${t('no_favorites_desc')}</p></div>`;return}
-  if(!state.notifUpdates.length){content.innerHTML=`<div class="empty-state"><div class="empty-icon">✅</div><h3>${t('notif_empty')}</h3></div>`;return}
+  if(!state.workerUrl){content.innerHTML=`<div class="empty-state"><div class="empty-icon"></div><p>Connect proxy first</p></div>`;return}
+  if(!state.favorites.length){content.innerHTML=`<div class="empty-state"><div class="empty-icon"></div><h3>${t('no_favorites')}</h3><p>${t('no_favorites_desc')}</p></div>`;return}
+  if(!state.notifUpdates.length){content.innerHTML=`<div class="empty-state"><div class="empty-icon"></div><h3>${t('notif_empty')}</h3></div>`;return}
   content.innerHTML=state.notifUpdates.map(u=>`<div class="list-item" tabindex="0" role="button" onclick="closeNotifModal();setTimeout(()=>openChannel('${u.username}'),300)" onkeydown="if(event.key==='Enter'){this.click()}"><div class="list-avatar" style="${avatarGrad(u.username)}">${u.username[0].toUpperCase()}</div><div class="list-info"><div class="list-title">@${escHtml(u.username)}</div><div class="list-desc">${u.newCount} ${t('new_posts')}</div></div><div class="list-meta"><span style="color:var(--accent);font-weight:700">+${u.newCount}</span></div></div>`).join('');
   document.getElementById('notifBadge').style.display='none';
 }
@@ -3428,18 +3581,18 @@ function closeNotifModal(){document.getElementById('notifOverlay').classList.rem
 // ============================================================
 // FAVORITES
 // ============================================================
-function toggleFav(username,title){const idx=state.favorites.findIndex(f=>f.username===username);if(idx>-1){state.favorites.splice(idx,1);toast(t('removed_fav'))}else{const ch=(state.searchResults||[]).find(c=>c.username===username)||getAllChannels().find(c=>c.username===username)||{username,title};state.favorites.push(ch);toast(t('saved'))}localStorage.setItem('tgexp_favs',JSON.stringify(state.favorites));if(state.currentTab==='favorites')renderFavorites();else renderResults()}
+function toggleFav(username,title){triggerHapticLight();const idx=state.favorites.findIndex(f=>f.username===username);if(idx>-1){state.favorites.splice(idx,1);toast(t('removed_fav'))}else{const ch=(state.searchResults||[]).find(c=>c.username===username)||getAllChannels().find(c=>c.username===username)||{username,title};state.favorites.push(ch);toast(t('saved'))}localStorage.setItem('tgexp_favs',JSON.stringify(state.favorites));if(state.currentTab==='favorites')renderFavorites();else renderResults()}
 function isFav(username){return state.favorites.some(f=>f.username===username)}
 function isPostFav(username,postId){return state.postFavs.some(f=>f.username===username&&f.postId===postId)}
 function savePostFavs(){localStorage.setItem('tgexp_post_favs',JSON.stringify(state.postFavs))}
-function togglePostFav(username,postId){
+function togglePostFav(username,postId){triggerHapticLight();
   const idx=state.postFavs.findIndex(f=>f.username===username&&f.postId===postId);
   const ctx=window._postCtx;const p=(ctx&&ctx.posts.find(x=>x.id===postId))||{};
-  if(idx>-1){state.postFavs.splice(idx,1);toast('💔 '+t('toast_fav_removed'))}
+  if(idx>-1){state.postFavs.splice(idx,1);toast(' '+t('toast_fav_removed'))}
   else{
     const ch=getAllChannels().find(c=>c.username===username)||{username,title:username};
     state.postFavs.push({username,postId,channelTitle:ch.title||username,text:(p.text||'').slice(0,120),image:p.image||'',date:p.date||'',hasVideo:p.hasVideo||false});
-    toast('❤️ '+t('toast_post_saved'))
+    toast(' '+t('toast_post_saved'))
   }
   savePostFavs();
   if(ctx)renderPostModal();
@@ -3463,25 +3616,25 @@ function folderHas(folderId,type,username,postId){const f=state.folders.find(x=>
 function toggleFolderItem(folderId,type,username,postId,label){
   const f=state.folders.find(x=>x.id===folderId);if(!f)return;
   const i=f.items.findIndex(it=>it.type===type&&it.username===username&&it.postId===(postId||null));
-  if(i>-1){f.items.splice(i,1);toast('🗂️ '+t('toast_removed_folder'))}
-  else{f.items.push({type,username,postId:postId||null,label:label||username});toast('🗂️ '+t('toast_added_to_folder', f.name))}
+  if(i>-1){f.items.splice(i,1);toast(' '+t('toast_removed_folder'))}
+  else{f.items.push({type,username,postId:postId||null,label:label||username});toast(' '+t('toast_added_to_folder', f.name))}
   saveFolders();renderFolderPickerList();
 }
 function removeFolderItem(folderId,type,username,postId){
   const f=state.folders.find(x=>x.id===folderId);if(!f)return;
   const i=f.items.findIndex(it=>it.type===type&&it.username===username&&it.postId===(postId||null));
-  if(i>-1){f.items.splice(i,1);saveFolders();toast('🗑️ '+t('toast_removed_folder'));renderFavorites()}
+  if(i>-1){f.items.splice(i,1);saveFolders();toast(' '+t('toast_removed_folder'));renderFavorites()}
 }
 function createFolder(name,icon){
   name=(name||'').trim();if(!name)return null;
-  const f={id:'f'+Date.now(),name,icon:icon||'📁',items:[]};
+  const f={id:'f'+Date.now(),name,icon:icon||'',items:[]};
   state.folders.push(f);saveFolders();return f.id;
 }
 function deleteFolder(id){
   const f=state.folders.find(x=>x.id===id);if(!f)return;
   state.folders=state.folders.filter(x=>x.id!==id);saveFolders();
   if(state.openFolder===id)state.openFolder='';
-  toast('🗑️ '+t('toast_folder_deleted'));renderFavorites();
+  toast(' '+t('toast_folder_deleted'));renderFavorites();
 }
 function openFolderPicker(type,username,postId,label){
   window._fp={type,username,postId:postId||null,label:label||username};
@@ -3508,22 +3661,22 @@ function renderFolderPickerList(){
         '<span class="folder-picker-icon">'+f.icon+'</span>'+
         '<span class="folder-picker-name">'+escHtml(f.name)+'</span>'+
         '<span class="folder-picker-count">'+f.items.length+'</span>'+
-        '<span class="folder-picker-check">'+(has?'✓':'+')+'</span></div>';
+        '<span class="folder-picker-check">'+(has?'':'+')+'</span></div>';
     }).join('');
   }
 }
 function createFolderFromPicker(){
   const input=document.getElementById('folderNewName');
   const id=createFolder(input.value,state.folderIcon);
-  if(id){input.value='';state.folderIcon='📁';renderFolderPickerList();toast('📁 '+t('toast_folder_created'))}
+  if(id){input.value='';state.folderIcon='';renderFolderPickerList();toast(' '+t('toast_folder_created'))}
 }
 function createFolderFromTab(){
   const input=document.getElementById('folderNewInput');
   if(!input)return;
   const id=createFolder(input.value,state.folderIcon);
-  if(id){input.value='';state.folderIcon='📁';toast('📁 '+t('toast_folder_created'));renderFavorites()}
+  if(id){input.value='';state.folderIcon='';toast(' '+t('toast_folder_created'));renderFavorites()}
 }
-const FOLDER_ICONS=['📁','⭐','🔥','❤️','🎬','🎮','📰','💻','📚','🎵','✈️','🍕','🔬','⚽','🖼','💼'];
+const FOLDER_ICONS=['#','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O'];
 function folderIconRow(){
   return '<div class="folder-icon-row">'+FOLDER_ICONS.map(ic=>'<span class="folder-icon-opt '+(state.folderIcon===ic?'active':'')+'" onclick="pickFolderIcon(\''+ic+'\',this)">'+ic+'</span>').join('')+'</div>';
 }
@@ -3557,7 +3710,7 @@ function saveRename(id,name){
   const el=document.getElementById('folderName_'+id);
   const input=el?el.previousElementSibling:null;
   if(input&&input.tagName==='INPUT')input.remove();
-  if(trimmed&&trimmed!==f.name){f.name=trimmed;saveFolders();toast('✏️ '+t('toast_folder_renamed'));renderFavorites()}
+  if(trimmed&&trimmed!==f.name){f.name=trimmed;saveFolders();toast(' '+t('toast_folder_renamed'));renderFavorites()}
   else if(el){el.style.display=''}
 }
 function setFavSort(v){state.favSort=v;localStorage.setItem('tgexp_favsort',v);renderFavorites()}
@@ -3699,8 +3852,8 @@ async function shareFilters(){
     try{await navigator.share({title:t('share_filters'),url});return}
     catch(e){if(e&&e.name==='AbortError')return}
   }
-  try{await navigator.clipboard.writeText(url);toast('🔗 '+t('toast_link_copied'))}
-  catch(e){toast('⚠️ '+t('toast_copy_fail'))}
+  try{await navigator.clipboard.writeText(url);toast(' '+t('toast_link_copied'))}
+  catch(e){toast(' '+t('toast_copy_fail'))}
 }
 // Toggle a content type (image / video / text). "All" clears the selection.
 function toggleExploreType(ty){
@@ -3757,7 +3910,7 @@ function setExploreSearch(v){
   if(inp){inp.focus();const n=inp.value.length;try{inp.setSelectionRange(n,n)}catch(e){}}
 }
 function viewToggleHtml(){
-  return '<div class="view-toggle"><button title="نمای گرید" class="'+(state.exploreView==='grid'?'active':'')+'" onclick="setExploreView(\'grid\')">▦</button><button title="نمای لیست" class="'+(state.exploreView==='list'?'active':'')+'" onclick="setExploreView(\'list\')">☰</button></div>';
+  return '<div class="view-toggle"><button title="Grid" aria-label="Grid view" class="'+(state.exploreView==='grid'?'active':'')+'" onclick="setExploreView(\'grid\')"><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="6" height="6" rx="1"/><rect x="11" y="3" width="6" height="6" rx="1"/><rect x="3" y="11" width="6" height="6" rx="1"/><rect x="11" y="11" width="6" height="6" rx="1"/></svg></button><button title="List" aria-label="List view" class="'+(state.exploreView==='list'?'active':'')+'" onclick="setExploreView(\'list\')"><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h12M4 10h12M4 14h12"/></svg></button></div>';
 }
 
 function exploreListViewHtml(items,colors){
@@ -3768,8 +3921,8 @@ function exploreListViewHtml(items,colors){
     const initial=(ch.title||ch.username||'?')[0].toUpperCase();
     const thumb=tileImg(img,ch.username,initial,{w:120});
     const onclick=posts.length?`openPostModal('${ch.username}')`:`openChannel('${ch.username}')`;
-    const badge=post?(post.hasVideo?'🎬':(post.image?'🖼':'📝')):'';
-    return `<div class="explore-list-item" tabindex="0" role="button" onclick="${onclick}" onkeydown="if(event.key==='Enter'){this.click()}"><div class="explore-list-thumb">${thumb}</div><div class="explore-list-body"><div class="explore-list-title">${escHtml(ch.title||ch.username)}</div><div class="explore-list-sub">@${escHtml(ch.username)} ${badge?`· ${badge}`:''}</div></div><div class="explore-list-count">📊 ${posts.length}</div></div>`;
+    const badge=post?(post.hasVideo?'<svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="11" height="11" rx="1.5"/><path d="M13.5 8.5l4-2.5v8l-4-2.5"/></svg>':(post.image?'<svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3.5" width="14" height="13" rx="1.5"/><circle cx="7.5" cy="7.5" r="1.2"/><path d="M17 13l-3.5-3.5L6 16.5"/></svg>':'<svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="12" height="14" rx="1.5"/><path d="M7 7h6M7 10h6M7 13h4"/></svg>')):'';
+    return `<div class="explore-list-item" tabindex="0" role="button" onclick="${onclick}" onkeydown="if(event.key==='Enter'){this.click()}"><div class="explore-list-thumb">${thumb}</div><div class="explore-list-body"><div class="explore-list-title">${escHtml(ch.title||ch.username)}</div><div class="explore-list-sub">@${escHtml(ch.username)} ${badge?`· ${badge}`:''}</div></div><div class="explore-list-count"> ${posts.length}</div></div>`;
   }).join('')}</div>`;
 }
 function setFavPostType(v){state.favPostType=v;localStorage.setItem('tgexp_favptype',v);renderFavorites()}
@@ -3793,7 +3946,7 @@ function savedPostRowHtml(pf){
   return '<div class="explore-list-item" onclick="openSavedPost(\''+pf.username+'\','+pf.postId+')">'+
     '<div class="explore-list-thumb">'+tileImg(img,pf.username,(pf.channelTitle||pf.username||'?')[0].toUpperCase(),{w:120})+'</div>'+
     '<div class="explore-list-body"><div class="explore-list-title">'+escHtml(pf.channelTitle||pf.username)+'</div><div class="explore-list-sub">'+(pf.text?escHtml(pf.text.slice(0,90)):'')+'</div></div>'+
-    '<div class="explore-list-count">'+(pf.hasVideo?'🎬':(img?'🖼':'📝'))+'</div></div>';
+    '<div class="explore-list-count">'+(pf.hasVideo?'<svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="11" height="11" rx="1.5"/><path d="M13.5 8.5l4-2.5v8l-4-2.5"/></svg>':(img?'<svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3.5" width="14" height="13" rx="1.5"/><circle cx="7.5" cy="7.5" r="1.2"/><path d="M17 13l-3.5-3.5L6 16.5"/></svg>':'<svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="12" height="14" rx="1.5"/><path d="M7 7h6M7 10h6M7 13h4"/></svg>'))+'</div></div>';
 }
 function folderPostRowHtml(p,f){
   const img=goodImg(p.image);
@@ -3801,7 +3954,7 @@ function folderPostRowHtml(p,f){
   return '<div class="explore-list-item" onclick="openPostModal(\''+p.username+'\','+idx+')">'+
     '<div class="explore-list-thumb">'+tileImg(img,p.username,(p.ch.title||p.username||'?')[0].toUpperCase(),{w:120})+'</div>'+
     '<div class="explore-list-body"><div class="explore-list-title">'+escHtml(p.ch.title||p.username)+'</div><div class="explore-list-sub">'+(p.text?escHtml(p.text.slice(0,90)):'')+'</div></div>'+
-    '<button class="folder-remove-btn" style="position:static;flex-shrink:0;margin-right:4px" title="حذف از فولدر" onclick="event.stopPropagation();removeFolderItem(\''+f.id+'\',\'post\',\''+p.username+'\',\''+p.postId+'\')">🗑</button></div>';
+    '<button class="folder-remove-btn" style="position:static;flex-shrink:0;margin-right:4px" title="حذف از فولدر" onclick="event.stopPropagation();removeFolderItem(\''+f.id+'\',\'post\',\''+p.username+'\',\''+p.postId+'\')"><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h12M8 6V4h4v2M6 6v10a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V6"/></svg></button></div>';
 }
 function feedRowHtml(p,i){
   const ch=getAllChannels().find(c=>c.username===p.channel)||{username:p.channel,title:p.channelTitle||p.channel};
@@ -3809,7 +3962,7 @@ function feedRowHtml(p,i){
   return '<div class="explore-list-item" onclick="openFeedPost('+i+')">'+
     '<div class="explore-list-thumb">'+tileImg(img,p.channel,(ch.title||p.channel||'?')[0].toUpperCase(),{w:120})+'</div>'+
     '<div class="explore-list-body"><div class="explore-list-title">'+escHtml(ch.title||p.channel)+'</div><div class="explore-list-sub">@'+escHtml(p.channel||'')+(p.text?' · '+escHtml(p.text.slice(0,90)):'')+'</div></div>'+
-    (p.hasVideo?'<div class="explore-list-count">🎬</div>':(img?'<div class="explore-list-count">🖼</div>':'<div class="explore-list-count">📝</div>'))+'</div>';
+    (p.hasVideo?'<div class="explore-list-count"></div>':(img?'<div class="explore-list-count"></div>':'<div class="explore-list-count"></div>'))+'</div>';
 }
 function favStatsHtml(){
   const chs=state.favorites.length;
@@ -3817,7 +3970,7 @@ function favStatsHtml(){
   const v=posts.filter(p=>p.hasVideo).length;
   const im=posts.filter(p=>!p.hasVideo&&p.image).length;
   const tx=posts.filter(p=>!p.hasVideo&&!p.image).length;
-  return '<div class="fav-stats"><span>❤️ '+chs+' کانال</span><span>🖼 '+posts.length+' پست</span><span>🎬 '+v+'</span><span>🖼 '+im+'</span><span>📝 '+tx+'</span></div>';
+  return '<div class="fav-stats"><span> '+chs+' کانال</span><span> '+posts.length+' پست</span><span> '+v+'</span><span> '+im+'</span><span> '+tx+'</span></div>';
 }
 
 
@@ -3827,10 +3980,10 @@ function favStatsHtml(){
 function folderChannelCardsHtml(items,folderId){
   const known=items.filter(it=>it.type==='ch').map(it=>({username:it.username,ch:getAllChannels().find(c=>c.username===it.username)})).filter(x=>x.ch);
   const unknown=items.filter(it=>it.type==='ch').map(it=>({username:it.username,ch:getAllChannels().find(c=>c.username===it.username)})).filter(x=>!x.ch);
-  const rm=folderId?'<button class="card-action-btn" title="حذف از فولدر" onclick="event.stopPropagation();removeFolderItem(\''+folderId+'\',\'ch\',\'{u}\',null)">🗑</button>':'';
+  const rm=folderId?'<button class="card-action-btn" title="حذف از فولدر" onclick="event.stopPropagation();removeFolderItem(\''+folderId+'\',\'ch\',\'{u}\',null)"><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h12M8 6V4h4v2M6 6v10a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V6"/></svg></button>':'';
   let html='';
-  if(known.length)html+='<div class="folder-sec-title">📢 کانال‌ها</div><div class="results-grid">'+known.map(x=>'<div class="channel-card" tabindex="0" role="button" onclick="openChannel(\''+x.ch.username+'\')" onkeydown="if(event.key===\'Enter\'){this.click()}"><div class="card-banner"><div class="card-banner-overlay"></div><div class="card-avatar" style="'+avatarGrad(x.ch.username)+'">'+(x.ch.title||x.ch.username||'?')[0].toUpperCase()+'</div></div><div class="card-body"><div class="card-title">'+escHtml(x.ch.title)+'</div><div class="card-username">@'+escHtml(x.ch.username)+'</div><div class="card-footer"><div class="card-members">👥 '+(x.ch.members||'0')+'</div><div class="card-actions">'+(folderId?rm.replace('{u}',x.ch.username):'')+'</div></div></div></div>').join('')+'</div>';
-  if(unknown.length)html+='<div class="folder-sec-title">📢 کانال‌های خارج از دیتابیس</div><div class="results-grid">'+unknown.map(x=>'<div class="channel-card" tabindex="0" role="button" onclick="openChannel(\''+x.username+'\')" onkeydown="if(event.key===\'Enter\'){this.click()}"><div class="card-banner"><div class="card-banner-overlay"></div><div class="card-avatar" style="'+avatarGrad(x.username)+'">?</div></div><div class="card-body"><div class="card-title">@'+escHtml(x.username)+'</div><div class="card-username" style="color:var(--text-secondary)">خارج از دیتابیس</div><div class="card-footer"><div class="card-members">—</div><div class="card-actions">'+(folderId?rm.replace('{u}',x.username):'')+'<button class="card-action-btn" title="باز کردن در تلگرام" onclick="event.stopPropagation();window.open(\'https://t.me/'+x.username+'\',\'_blank\')">✈️</button><button class="card-action-btn" aria-label="کپی لینک" title="کپی لینک" onclick="event.stopPropagation();copyLink(\''+x.username+'\')">🔗</button></div></div></div></div>').join('')+'</div>';
+  if(known.length)html+='<div class="folder-sec-title"> کانال‌ها</div><div class="results-grid">'+known.map(x=>'<div class="channel-card" tabindex="0" role="button" onclick="openChannel(\''+x.ch.username+'\')" onkeydown="if(event.key===\'Enter\'){this.click()}"><div class="card-banner"><div class="card-banner-overlay"></div><div class="card-avatar" style="'+avatarGrad(x.ch.username)+'">'+(x.ch.title||x.ch.username||'?')[0].toUpperCase()+'</div></div><div class="card-body"><div class="card-title">'+escHtml(x.ch.title)+'</div><div class="card-username">@'+escHtml(x.ch.username)+'</div><div class="card-footer"><div class="card-members"> '+(x.ch.members||'0')+'</div><div class="card-actions">'+(folderId?rm.replace('{u}',x.ch.username):'')+'</div></div></div></div>').join('')+'</div>';
+  if(unknown.length)html+='<div class="folder-sec-title"> کانال‌های خارج از دیتابیس</div><div class="results-grid">'+unknown.map(x=>'<div class="channel-card" tabindex="0" role="button" onclick="openChannel(\''+x.username+'\')" onkeydown="if(event.key===\'Enter\'){this.click()}"><div class="card-banner"><div class="card-banner-overlay"></div><div class="card-avatar" style="'+avatarGrad(x.username)+'">?</div></div><div class="card-body"><div class="card-title">@'+escHtml(x.username)+'</div><div class="card-username" style="color:var(--text-secondary)">خارج از دیتابیس</div><div class="card-footer"><div class="card-members">—</div><div class="card-actions">'+(folderId?rm.replace('{u}',x.username):'')+'<button class="card-action-btn" title="باز کردن در تلگرام" onclick="event.stopPropagation();window.open(\'https://t.me/'+x.username+'\',\'_blank\')"><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 3L2.5 9l5 2 2 6.5 2.5-3.5 3.5 2.5L17 3z"/></svg></button><button class="card-action-btn" aria-label="کپی لینک" title="کپی لینک" onclick="event.stopPropagation();copyLink(\''+x.username+'\')"><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 11.5l3-3M7 13l-1.5 1.5a2.5 2.5 0 0 1-3.5-3.5L3.5 9.5a2.5 2.5 0 0 1 3.5 0M13 7l1.5-1.5a2.5 2.5 0 0 1 3.5 3.5L16.5 10.5a2.5 2.5 0 0 1-3.5 0"/></svg></button></div></div></div></div>').join('')+'</div>';
   return html;
 }
 function parseJinaFirstPost(md){
@@ -3866,7 +4019,7 @@ async function fetchLatestPost(u){
 function refreshFolderPosts(folderId,silent){
   const f=state.folders.find(x=>x.id===folderId);if(!f)return;
   const items=f.items.filter(it=>it.type==='ch');if(!items.length)return;
-  if(!silent)toast('🔄 '+t('toast_updating'));
+  if(!silent)toast(' '+t('toast_updating'));
   let done=0;
   items.forEach(it=>{
     fetchLatestPost(it.username).then(p=>{
@@ -3882,8 +4035,8 @@ function refreshFolderPosts(folderId,silent){
 
 async function fetchFavNewPosts(){
   const favs=state.favorites.slice(0,12);
-  if(!favs.length){toast('❤️ '+t('toast_save_channels_first'));return}
-  toast('⏳ '+t('toast_fetching_latest'));
+  if(!favs.length){toast(' '+t('toast_save_channels_first'));return}
+  toast(' '+t('toast_fetching_latest'));
   state.livePosts=[];
   for(const ch of favs){
     try{
@@ -3892,8 +4045,8 @@ async function fetchFavNewPosts(){
     }catch(e){}
   }
   renderFavorites();
-  if(state.livePosts.length)toast('✅ '+t('toast_posts_added', state.livePosts.length));
-  else toast('⚠️ '+t('toast_no_posts'));
+  if(state.livePosts.length)toast(' '+t('toast_posts_added', state.livePosts.length));
+  else toast(' '+t('toast_no_posts'));
 }
 function clearLivePosts(){state.livePosts=[];renderFavorites()}
 function openLivePost(lp){
@@ -3923,15 +4076,15 @@ function addChannelToFolder(folderId){
   const input=document.getElementById('folderAddChannel');
   if(!input)return;
   const u=parseChannelInput(input.value);
-  if(!u||!u.match(/^[A-Za-z0-9_]{5,32}$/)){toast('⚠️ '+t('toast_invalid_username'));input.focus();return}
-  if(['joinchat','share','s','proxy','addstickers','addtheme','invoice','boost','verify','giftcode'].includes(u.toLowerCase())){toast('⚠️ '+t('toast_not_channel_link'));return}
+  if(!u||!u.match(/^[A-Za-z0-9_]{5,32}$/)){toast(' '+t('toast_invalid_username'));input.focus();return}
+  if(['joinchat','share','s','proxy','addstickers','addtheme','invoice','boost','verify','giftcode'].includes(u.toLowerCase())){toast(' '+t('toast_not_channel_link'));return}
   const f=state.folders.find(x=>x.id===folderId);if(!f)return;
-  if(f.items.some(it=>it.type==='ch'&&it.username.toLowerCase()===u.toLowerCase())){toast('⚠️ '+t('toast_already_in_folder'));return}
+  if(f.items.some(it=>it.type==='ch'&&it.username.toLowerCase()===u.toLowerCase())){toast(' '+t('toast_already_in_folder'));return}
   const ch=getAllChannels().find(c=>c.username.toLowerCase()===u.toLowerCase());
   f.items.push({type:'ch',username:ch?ch.username:u,postId:null,label:ch?ch.title:'',latestPost:null});
   saveFolders();
   input.value='';
-  toast(ch?('✅ '+ch.title+' '+t('toast_added')):('✅ @'+u+' '+t('toast_added')));
+  toast(ch?(' '+ch.title+' '+t('toast_added')):(' @'+u+' '+t('toast_added')));
   renderFavorites();
   fetchLatestPost(u).then(p=>{
     if(!p)return;
@@ -3939,7 +4092,7 @@ function addChannelToFolder(folderId){
     const it=fi&&fi.items.find(i=>i.type==='ch'&&i.username.toLowerCase()===u.toLowerCase());
     if(it)it.latestPost={id:String(p.id),image:p.image||'',date:p.date||'',text:p.text||'',ts:Date.now()};
     saveFolders();
-    toast('🕒 '+t('toast_last_post', u));
+    toast(' '+t('toast_last_post', u));
     if(state.openFolder===folderId)renderFavorites();
   });
 
@@ -3954,10 +4107,10 @@ function b64urlEncode(str){const bytes=new TextEncoder().encode(str);let bin='';
 function b64urlDecode(str){str=str.replace(/-/g,'+').replace(/_/g,'/');while(str.length%4)str+='=';const bin=atob(str);const bytes=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)bytes[i]=bin.charCodeAt(i);return new TextDecoder().decode(bytes)}
 function shareFolder(id){
   const f=state.folders.find(x=>x.id===id);if(!f)return;
-  const payload={n:f.name,i:f.icon||'📁',items:f.items.map(it=>it.type==='ch'?['c',it.username]:['p',it.username,it.postId||'',it.label||''])};
+  const payload={n:f.name,i:f.icon||'',items:f.items.map(it=>it.type==='ch'?['c',it.username]:['p',it.username,it.postId||'',it.label||''])};
   const url=location.origin+location.pathname+'#folder='+b64urlEncode(JSON.stringify(payload));
   if(navigator.share){navigator.share({title:'Telegram Explorer — '+f.name,url}).catch(()=>{})}
-  else{navigator.clipboard.writeText(url).then(()=>toast('🔗 '+t('toast_link_copied'))).catch(()=>toast('⚠️ '+t('toast_copy_fail')))}
+  else{navigator.clipboard.writeText(url).then(()=>toast(' '+t('toast_link_copied'))).catch(()=>toast(' '+t('toast_copy_fail')))}
 }
 // Download a text/blob in the user's browser.
 function downloadBlob(content,filename,mime){
@@ -3970,7 +4123,7 @@ function downloadBlob(content,filename,mime){
 }
 // Human-readable lines for a folder: one entry per channel/post.
 function folderExportLines(f){
-  const lines=['📁 '+f.name+' — Telegram Explorer',''];
+  const lines=[' '+f.name+' — Telegram Explorer',''];
   const chans=f.items.filter(it=>it.type==='ch');
   const posts=f.items.filter(it=>it.type==='post');
   if(chans.length){
@@ -3995,12 +4148,12 @@ function folderExportLines(f){
 function folderExportTxt(id){
   const f=state.folders.find(x=>x.id===id);if(!f)return;
   downloadBlob(folderExportLines(f),'tgexplorer-folder-'+f.name.replace(/[^\w؀-ۿ-]+/g,'_')+'.txt','text/plain;charset=utf-8');
-  toast('📝 '+t('toast_folder_saved',f.name));
+  toast(' '+t('toast_folder_saved',f.name));
 }
 function folderExportJson(id){
   const f=state.folders.find(x=>x.id===id);if(!f)return;
-  downloadBlob(JSON.stringify({app:'tgexplorer_folder',folder:{name:f.name,icon:f.icon||'📁',items:f.items},exportedAt:new Date().toISOString()},null,2),'tgexplorer-folder-'+f.name.replace(/[^\w؀-ۿ-]+/g,'_')+'.json','application/json');
-  toast('💾 '+t('toast_folder_saved',f.name));
+  downloadBlob(JSON.stringify({app:'tgexplorer_folder',folder:{name:f.name,icon:f.icon||'',items:f.items},exportedAt:new Date().toISOString()},null,2),'tgexplorer-folder-'+f.name.replace(/[^\w؀-ۿ-]+/g,'_')+'.json','application/json');
+  toast(' '+t('toast_folder_saved',f.name));
 }
 // A tiny single-page PDF. Helvetica/WinAnsi cannot draw non-Latin text, so
 // anything outside Latin-1 is replaced; the /Length and the xref table need
@@ -4038,16 +4191,16 @@ function folderExportPdf(id){
   const f=state.folders.find(x=>x.id===id);if(!f)return;
   const pdf=buildPdf(folderExportLines(f).split('\n'));
   downloadBlob(pdf,'tgexplorer-folder-'+f.name.replace(/[^\w؀-ۿ-]+/g,'_')+'.pdf','application/pdf');
-  toast('🖨 '+t('toast_folder_saved',f.name));
+  toast(' '+t('toast_folder_saved',f.name));
 }
 // Export the saved-posts list (favorites → post tab).
 function exportPostsTxt(){
   const items=state.postFavs||[];
-  const lines=['🖼 Saved posts — Telegram Explorer',''];
+  const lines=[' Saved posts — Telegram Explorer',''];
   for(const it of items)lines.push('- @'+it.username+'/'+it.postId+((it.text||'').replace(/\s+/g,' ').trim()?' — '+it.text.replace(/\s+/g,' ').trim().slice(0,120):''));
   if(!items.length)lines.push('(no saved posts)');
   downloadBlob(lines.join('\n'),'tgexplorer-posts.txt','text/plain;charset=utf-8');
-  toast('📝 '+t('toast_post_saved'));
+  toast(' '+t('toast_post_saved'));
 }
 function exportPostsPdf(){
   const items=state.postFavs||[];
@@ -4055,7 +4208,7 @@ function exportPostsPdf(){
   for(const it of items)lines.push('@'+it.username+'/'+it.postId+' '+(it.text||'').replace(/\s+/g,' ').trim().slice(0,90));
   if(!items.length)lines.push('(no saved posts)');
   downloadBlob(buildPdf(lines),'tgexplorer-posts.pdf','application/pdf');
-  toast('🖨 '+t('toast_post_saved'));
+  toast(' '+t('toast_post_saved'));
 }
 
 function decodeSharedFolder(p){
@@ -4070,7 +4223,7 @@ function decodeSharedFolder(p){
       const postId=String(it[2]||'').replace(/[^0-9]/g,'');
       return it[0]==='c'?{type:'ch',username,postId:null,label:''}:{type:'post',username,postId,label:String(it[3]||'').slice(0,80)};
     }).filter(it=>it.username);
-    return {name:obj.n.slice(0,40),icon:typeof obj.i==='string'?obj.i:'📁',items};
+    return {name:obj.n.slice(0,40),icon:typeof obj.i==='string'?obj.i:'',items};
   }catch(e){return null}
 }
 function renderSharedFolder(f){
@@ -4079,18 +4232,18 @@ function renderSharedFolder(f){
   document.getElementById('heroSection').style.display='none';
   document.getElementById('mainContent').style.display='';
   document.getElementById('categoriesBar').style.display='none';
-  let html='<div style="padding:8px 0 20px"><button class="folder-back" onclick="dismissSharedFolder()">✕ بستن</button>'+
+  let html='<div style="padding:8px 0 20px"><button class="folder-back" onclick="dismissSharedFolder()"> بستن</button>'+
     '<div class="folder-detail-head"><button class="folder-icon-btn" title="تغییر آیکون" onclick="cycleFolderIcon(\''+f.id+'\')"><span style="font-size:26px">'+f.icon+'</span></button><span class="folder-detail-name">'+escHtml(f.name)+'</span><span class="folder-picker-count">'+f.items.length+' آیتم</span>'+
-    '<button class="modal-btn modal-btn-primary" style="max-width:190px;padding:10px" onclick="importSharedFolder()">📥 ذخیره در فولدرهای من</button></div>';
+    '<button class="modal-btn modal-btn-primary" style="max-width:190px;padding:10px" onclick="importSharedFolder()"> ذخیره در فولدرهای من</button></div>';
   const posts=f.items.filter(it=>it.type==='post').map(it=>{
     const list=getChannelPosts(it.username);
     const p=list.find(x=>String(x.id)===String(it.postId));
     const ch=getAllChannels().find(c=>c.username===it.username)||{username:it.username,title:it.label||it.username};
     return {username:it.username,postId:it.postId,ch,image:p?p.image:'',text:p?p.text:(it.label||''),hasVideo:p?p.hasVideo:false};
   });
-  if(!f.items.filter(it=>it.type==='ch').length&&!posts.length){html+='<div class="empty-state"><div class="empty-icon">🗂</div><h3>این فولدر خالی است</h3></div>'}
+  if(!f.items.filter(it=>it.type==='ch').length&&!posts.length){html+='<div class="empty-state"><div class="empty-icon"></div><h3>این فولدر خالی است</h3></div>'}
   html+='<div id="sharedLivePosts"></div>';html+=folderChannelCardsHtml(f.items);
-  if(posts.length)html+='<div class="folder-sec-title">🖼 پست‌ها</div><div class="explore-grid">'+posts.map(p=>{
+  if(posts.length)html+='<div class="folder-sec-title"> پست‌ها</div><div class="explore-grid">'+posts.map(p=>{
     const img=p.image;
     const idx=Math.max(0,getChannelPosts(p.username).findIndex(x=>String(x.id)===String(p.postId)));
     return '<div class="explore-item" tabindex="0" role="button" style="aspect-ratio:3/4" onclick="openPostModal(\''+p.username+'\','+idx+')" onkeydown="if(event.key===\'Enter\'){this.click()}">'+
@@ -4109,13 +4262,13 @@ function importSharedFolder(){
   const id=createFolder(name);
   if(!id)return;
   const target=state.folders.find(x=>x.id===id);
-  target.icon=f.icon||'📁';
+  target.icon=f.icon||'';
   target.items=f.items.map(it=>({type:it.type,username:it.username,postId:it.postId||null,label:it.label||null}));
   saveFolders();
   window._sharedFolder=null;location.hash='';
   state.favFolder=true;state.favPost=false;state.openFolder=id;
   switchTab('favorites');
-  toast('📥 '+t('toast_folder_saved', name));
+  toast(' '+t('toast_folder_saved', name));
 }
 function dismissSharedFolder(){window._sharedFolder=null;location.hash='';switchTab(state.currentTab)}
 // A shared link can point straight at a channel: ?channel=<username>
@@ -4130,7 +4283,7 @@ function checkSharedFolder(){
   const m=location.hash.match(/^#folder=(.+)$/);
   if(!m)return;
   const folder=decodeSharedFolder(m[1]);
-  if(!folder){toast('⚠️ '+t('toast_folder_invalid'));return}
+  if(!folder){toast(' '+t('toast_folder_invalid'));return}
   window._sharedFolder=folder;
   renderSharedFolder(folder);
 }
@@ -4142,20 +4295,20 @@ function renderFavFiltered(){
   const tmp=document.createElement('div');
   if(state.exploreView==='list')renderListView(tmp,sortChannels(list));else renderGridView(tmp,sortChannels(list));
   wrap.innerHTML=tmp.innerHTML;
-  if(!list.length)wrap.innerHTML=renderEmpty('🔍','موردی یافت نشد');
+  if(!list.length)wrap.innerHTML=renderEmpty('','موردی یافت نشد');
 }
 function renderFavorites(){
   const content=document.getElementById('content');
   const tab=state.favFolder?'folder':(state.favPost?'post':'ch');
   const mk=(id,icon,label)=>'<button class="fav-tab '+(tab===id?'active':'')+'" onclick="state.favPost='+(id==='post')+';state.favFolder='+(id==='folder')+';state.openFolder=\'\';renderFavorites()">'+icon+' '+label+'</button>';
-  const toggleHtml='<div class="fav-tabs">'+mk('ch','❤️',''+t('channels'))+mk('post','🖼',''+t('posts'))+mk('folder','🗂',''+t('folders'))+'</div>';
+  const toggleHtml='<div class="fav-tabs">'+mk('ch','',''+t('channels'))+mk('post','',''+t('posts'))+mk('folder','',''+t('folders'))+'</div>';
   if(state.openFolder){
     const f=state.folders.find(x=>x.id===state.openFolder);
     if(!f){state.openFolder='';return renderFavorites()}
-    let html=toggleHtml+'<div><button class="folder-back" onclick="state.openFolder=\'\';renderFavorites()">← بازگشت</button><div class="folder-detail-head"><button class="folder-icon-btn" title="تغییر آیکون" onclick="cycleFolderIcon(\''+f.id+'\')"><span style="font-size:26px">'+f.icon+'</span></button><span class="folder-detail-name" id="folderName_'+f.id+'">'+escHtml(f.name)+'</span><button class="folder-del" title="تغییر نام فولدر" onclick="editFolder(\''+f.id+'\')">✏️</button><span class="folder-picker-count">'+f.items.length+' آیتم</span><button class="folder-del" title="حذف فولدر" onclick="deleteFolder(\''+f.id+'\')">🗑</button><button class="folder-del" title="اشتراک‌گذاری فولدر" onclick="shareFolder(\''+f.id+'\')">🔗</button></div><div class="folder-export-row"><button class="modal-btn modal-btn-secondary" style="flex:1;padding:10px;font-size:13px" onclick="folderExportTxt(\''+f.id+'\')">📝 فایل متنی</button><button class="modal-btn modal-btn-secondary" style="flex:1;padding:10px;font-size:13px" onclick="folderExportPdf(\''+f.id+'\')">🖨 خروجی PDF</button><button class="modal-btn modal-btn-secondary" style="flex:1;padding:10px;font-size:13px" onclick="folderExportJson(\''+f.id+'\')">💾 JSON</button></div><div class="folder-add-channel"><input id="folderAddChannel" placeholder="لینک کانال (t.me/username)..." onkeydown="if(event.key==\'Enter\')addChannelToFolder(\''+f.id+'\')"><button class="modal-btn modal-btn-primary" style="max-width:130px;padding:10px" onclick="addChannelToFolder(\''+f.id+'\')">➕ افزودن</button></div>';
-html+='<div class="folder-rule"><div class="folder-rule-head">🤖 فیلتر خودکار — کانال‌ها طبق قانون اضافه می‌شوند</div><div class="folder-rule-row"><select id="folderRuleCat" class="sug-field" style="flex:1;margin-bottom:0">'+FOLDER_CATS.map(c=>'<option value="'+c[0]+'"'+(f.rule&&f.rule.cat===c[0]?' selected':'')+'>'+c[1]+'</option>').join('')+'</select><select id="folderRuleLang" class="sug-field" style="flex:1;margin-bottom:0"><option value="all"'+(f.rule&&f.rule.lang==='all'?' selected':'')+'>🌐 همه زبان‌ها</option><option value="fa"'+(f.rule&&f.rule.lang==='fa'?' selected':'')+'>🇮🇷 فارسی</option><option value="en"'+(f.rule&&f.rule.lang==='en'?' selected':'')+'>🇬🇧 English</option></select><button class="modal-btn modal-btn-secondary" style="flex:0 0 auto;padding:10px 14px;font-size:13px" onclick="saveFolderRule(\''+f.id+'\')">⚙️ فعال‌سازی</button>'+(f.rule?'<button class="modal-btn modal-btn-secondary" style="flex:0 0 auto;padding:10px 14px;font-size:13px" onclick="clearFolderRule(\''+f.id+'\')">✕</button>':'')+'</div></div>';
+    let html=toggleHtml+'<div><button class="folder-back" onclick="state.openFolder=\'\';renderFavorites()">← بازگشت</button><div class="folder-detail-head"><button class="folder-icon-btn" title="تغییر آیکون" onclick="cycleFolderIcon(\''+f.id+'\')"><span style="font-size:26px">'+f.icon+'</span></button><span class="folder-detail-name" id="folderName_'+f.id+'">'+escHtml(f.name)+'</span><button class="folder-del" title="تغییر نام فولدر" onclick="editFolder(\''+f.id+'\')"><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.5 3.5l3 3L7 16H4v-3l9.5-9.5z"/></svg></button><span class="folder-picker-count">'+f.items.length+' آیتم</span><button class="folder-del" title="حذف فولدر" onclick="deleteFolder(\''+f.id+'\')"><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h12M8 6V4h4v2M6 6v10a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V6"/></svg></button><button class="folder-del" title="اشتراک‌گذاری فولدر" onclick="shareFolder(\''+f.id+'\')"><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 11.5l3-3M7 13l-1.5 1.5a2.5 2.5 0 0 1-3.5-3.5L3.5 9.5a2.5 2.5 0 0 1 3.5 0M13 7l1.5-1.5a2.5 2.5 0 0 1 3.5 3.5L16.5 10.5a2.5 2.5 0 0 1-3.5 0"/></svg></button></div><div class="folder-export-row"><button class="modal-btn modal-btn-secondary" style="flex:1;padding:10px;font-size:13px" onclick="folderExportTxt(\''+f.id+'\')"> فایل متنی</button><button class="modal-btn modal-btn-secondary" style="flex:1;padding:10px;font-size:13px" onclick="folderExportPdf(\''+f.id+'\')"> خروجی PDF</button><button class="modal-btn modal-btn-secondary" style="flex:1;padding:10px;font-size:13px" onclick="folderExportJson(\''+f.id+'\')"> JSON</button></div><div class="folder-add-channel"><input id="folderAddChannel" placeholder="لینک کانال (t.me/username)..." onkeydown="if(event.key==\'Enter\')addChannelToFolder(\''+f.id+'\')"><button class="modal-btn modal-btn-primary" style="max-width:130px;padding:10px" onclick="addChannelToFolder(\''+f.id+'\')"> افزودن</button></div>';
+html+='<div class="folder-rule"><div class="folder-rule-head"> فیلتر خودکار — کانال‌ها طبق قانون اضافه می‌شوند</div><div class="folder-rule-row"><select id="folderRuleCat" class="sug-field" style="flex:1;margin-bottom:0">'+FOLDER_CATS.map(c=>'<option value="'+c[0]+'"'+(f.rule&&f.rule.cat===c[0]?' selected':'')+'>'+c[1]+'</option>').join('')+'</select><select id="folderRuleLang" class="sug-field" style="flex:1;margin-bottom:0"><option value="all"'+(f.rule&&f.rule.lang==='all'?' selected':'')+'> همه زبان‌ها</option><option value="fa"'+(f.rule&&f.rule.lang==='fa'?' selected':'')+'> فارسی</option><option value="en"'+(f.rule&&f.rule.lang==='en'?' selected':'')+'> English</option></select><button class="modal-btn modal-btn-secondary" style="flex:0 0 auto;padding:10px 14px;font-size:13px" onclick="saveFolderRule(\''+f.id+'\')"> فعال‌سازی</button>'+(f.rule?'<button class="modal-btn modal-btn-secondary" style="flex:0 0 auto;padding:10px 14px;font-size:13px" onclick="clearFolderRule(\''+f.id+'\')"></button>':'')+'</div></div>';
 
-    if(!f.items.length&&!f.rule){content.innerHTML=html+renderEmpty('🗂','این فولدر خالی است');return}
+    if(!f.items.length&&!f.rule){content.innerHTML=html+renderEmpty('','این فولدر خالی است');return}
     const posts=f.items.filter(it=>it.type==='post').map(it=>{
       const list=getChannelPosts(it.username);
       const p=list.find(x=>x.id===it.postId);
@@ -4165,12 +4318,12 @@ html+='<div class="folder-rule"><div class="folder-rule-head">🤖 فیلتر خ
   html+=folderChannelCardsHtml(f.items,f.id);
     if(f.rule){
       const auto=autoFolderChannels(f);
-      if(auto.length)html+='<div class="folder-sec-title lps-head"><span>🤖 کانال‌های خودکار</span><button class="folder-refresh-btn" title="افزودن همه" onclick="addAutoAll(\''+f.id+'\')">➕ همه</button></div><div class="results-grid">'+auto.map(c=>'<div class="channel-card" tabindex="0" role="button" onclick="openChannel(\''+c.username+'\')" onkeydown="if(event.key===\'Enter\'){this.click()}"><div class="card-banner"><div class="card-banner-overlay"></div><div class="card-avatar" style="'+avatarGrad(c.username)+'">'+c.title[0].toUpperCase()+'</div></div><div class="card-body"><div class="card-title">'+escHtml(c.title)+'</div><div class="card-username">@'+escHtml(c.username)+'</div><div class="card-footer"><div class="card-members">👥 '+(c.members||'0')+'</div><div class="card-actions"><button class="card-action-btn" title="افزودن به فولدر" onclick="event.stopPropagation();addAutoOne(\''+f.id+'\',\''+c.username+'\')">➕</button></div></div></div></div>').join('')+'</div>';
-      else html+='<div class="folder-rule-empty">🤖 کانالی با این قانون یافت نشد</div>';
+      if(auto.length)html+='<div class="folder-sec-title lps-head"><span> کانال‌های خودکار</span><button class="folder-refresh-btn" title="افزودن همه" onclick="addAutoAll(\''+f.id+'\')"> همه</button></div><div class="results-grid">'+auto.map(c=>'<div class="channel-card" tabindex="0" role="button" onclick="openChannel(\''+c.username+'\')" onkeydown="if(event.key===\'Enter\'){this.click()}"><div class="card-banner"><div class="card-banner-overlay"></div><div class="card-avatar" style="'+avatarGrad(c.username)+'">'+c.title[0].toUpperCase()+'</div></div><div class="card-body"><div class="card-title">'+escHtml(c.title)+'</div><div class="card-username">@'+escHtml(c.username)+'</div><div class="card-footer"><div class="card-members"> '+(c.members||'0')+'</div><div class="card-actions"><button class="card-action-btn" title="افزودن به فولدر" onclick="event.stopPropagation();addAutoOne(\''+f.id+'\',\''+c.username+'\')"><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 4v12M4 10h12"/></svg></button></div></div></div></div>').join('')+'</div>';
+      else html+='<div class="folder-rule-empty"> کانالی با این قانون یافت نشد</div>';
     }
 
         const lps=f.items.filter(it=>it.type==='ch'&&it.latestPost&&it.latestPost.id);
-    if(lps.length)html+='<div class="folder-sec-title lps-head"><span>🕒 آخرین پست</span><button class="folder-refresh-btn" title="بهروزرسانی پستها" onclick="refreshFolderPosts(\''+f.id+'\')">🔄</button></div>'+lps.map(it=>{
+    if(lps.length)html+='<div class="folder-sec-title lps-head"><span> آخرین پست</span><button class="folder-refresh-btn" title="بهروزرسانی پستها" onclick="refreshFolderPosts(\''+f.id+'\')"><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 10a6 6 0 1 1-1.8-4.3M16 3.5v3h-3"/></svg></button></div>'+lps.map(it=>{
       const lp=it.latestPost;
       const lch=getAllChannels().find(c=>c.username===it.username);
       const link='https://t.me/'+it.username+'/'+lp.id;
@@ -4180,34 +4333,34 @@ html+='<div class="folder-rule"><div class="folder-rule-head">🤖 فیلتر خ
         '<div class="latest-post-body"><div class="latest-post-title">'+(lch?escHtml(lch.title):'@'+escHtml(it.username))+'</div>'+
         '<div class="latest-post-text">'+escHtml((lp.text||'').slice(0,120))+'</div>'+
         '<div class="latest-post-meta">'+escHtml(lp.date||'')+'</div></div>'+
-        '<div class="latest-post-actions"><button class="card-action-btn" title="باز کردن در تلگرام" onclick="event.stopPropagation();window.open(\''+link+'\',\'_blank\')">✈️</button>'+
-        '<button class="card-action-btn" title="کپی لینک" onclick="event.stopPropagation();copyPostLink(\''+it.username+'\',\''+lp.id+'\')">🔗</button></div></div>';
+        '<div class="latest-post-actions"><button class="card-action-btn" title="باز کردن در تلگرام" onclick="event.stopPropagation();window.open(\''+link+'\',\'_blank\')"><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 3L2.5 9l5 2 2 6.5 2.5-3.5 3.5 2.5L17 3z"/></svg></button>'+
+        '<button class="card-action-btn" title="کپی لینک" onclick="event.stopPropagation();copyPostLink(\''+it.username+'\',\''+lp.id+'\')"><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 11.5l3-3M7 13l-1.5 1.5a2.5 2.5 0 0 1-3.5-3.5L3.5 9.5a2.5 2.5 0 0 1 3.5 0M13 7l1.5-1.5a2.5 2.5 0 0 1 3.5 3.5L16.5 10.5a2.5 2.5 0 0 1-3.5 0"/></svg></button></div></div>';
     }).join('');
-    if(f.items.some(it=>it.type==='ch'&&(!it.checkedTs||Date.now()-it.checkedTs>1800000)))refreshFolderPosts(f.id,true);    if(posts.length)html+='<div class="folder-sec-title">🖼 پست‌ها</div>'+(state.exploreView==='list'?'<div class="explore-list">'+posts.map(p=>folderPostRowHtml(p,f)).join('')+'</div>':'<div class="explore-grid">'+posts.map(p=>{
+    if(f.items.some(it=>it.type==='ch'&&(!it.checkedTs||Date.now()-it.checkedTs>1800000)))refreshFolderPosts(f.id,true);    if(posts.length)html+='<div class="folder-sec-title"> پست‌ها</div>'+(state.exploreView==='list'?'<div class="explore-list">'+posts.map(p=>folderPostRowHtml(p,f)).join('')+'</div>':'<div class="explore-grid">'+posts.map(p=>{
       const img=p.image;
       const idx=Math.max(0,getChannelPosts(p.username).findIndex(x=>x.id===p.postId));
       return '<div class="explore-item" tabindex="0" role="button" style="aspect-ratio:3/4;position:relative" onclick="openPostModal(\''+p.username+'\','+idx+')" onkeydown="if(event.key===\'Enter\'){this.click()}">'+
         tileImg(img,p.username,(p.ch.title||p.username||'?')[0].toUpperCase(),{w:400})+
         (p.hasVideo?'<div class="feed-video-badge">▶</div>':'')+
         '<div class="explore-item-overlay"><div class="explore-item-info"><div class="explore-stat">'+escHtml(p.ch.title||p.username)+'</div><div class="explore-label">'+(p.text?escHtml(p.text.slice(0,28)):'')+'</div></div></div>'+
-        '<button class="folder-remove-btn" title="حذف از فولدر" onclick="event.stopPropagation();removeFolderItem(\''+f.id+'\',\'post\',\''+p.username+'\',\''+p.postId+'\')">🗑</button></div>';
+        '<button class="folder-remove-btn" title="حذف از فولدر" onclick="event.stopPropagation();removeFolderItem(\''+f.id+'\',\'post\',\''+p.username+'\',\''+p.postId+'\')"><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h12M8 6V4h4v2M6 6v10a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V6"/></svg></button></div>';
     }).join('')+'</div>');
     content.innerHTML=html;
     return;
   }
   if(tab==='folder'){
     const tiles=state.folders.map(f=>'<div class="folder-card" onclick="state.openFolder=\''+f.id+'\';renderFavorites()"><div class="folder-card-icon">'+f.icon+'</div><div class="folder-card-name">'+escHtml(f.name)+'</div><div class="folder-card-count">'+f.items.length+' آیتم</div></div>').join('');
-    const newForm='<div class="folder-smart"><button class="modal-btn modal-btn-secondary" onclick="createSmartFolders()">🤖 فولدر هوشمند — اخبار فارسی · تکنولوژی · ورزش</button></div><div class="folder-new-form"><input id="folderNewInput" placeholder="نام فولدر جدید..." onkeydown="if(event.key===\'Enter\')createFolderFromTab()"><button class="modal-btn modal-btn-primary" onclick="createFolderFromTab()">➕ ساخت</button></div>'+folderIconRow();
-    if(!state.folders.length){content.innerHTML=toggleHtml+renderEmpty('🗂','هنوز فولدری نساخته‌اید')+newForm;return}
+    const newForm='<div class="folder-smart"><button class="modal-btn modal-btn-secondary" onclick="createSmartFolders()"> فولدر هوشمند — اخبار فارسی · تکنولوژی · ورزش</button></div><div class="folder-new-form"><input id="folderNewInput" placeholder="نام فولدر جدید..." onkeydown="if(event.key===\'Enter\')createFolderFromTab()"><button class="modal-btn modal-btn-primary" onclick="createFolderFromTab()"> ساخت</button></div>'+folderIconRow();
+    if(!state.folders.length){content.innerHTML=toggleHtml+renderEmpty('','هنوز فولدری نساخته‌اید')+newForm;return}
     content.innerHTML=toggleHtml+'<div class="folder-grid">'+tiles+'</div>'+newForm;
     return;
   }
   if(state.favPost){
-    if(!state.postFavs.length){content.innerHTML=toggleHtml+renderEmpty('🖼','هنوز پستی ذخیره نکرده‌اید');return}
+    if(!state.postFavs.length){content.innerHTML=toggleHtml+renderEmpty('','هنوز پستی ذخیره نکرده‌اید');return}
     const pfList=sortPosts(state.postFavs.filter(pf=>state.favPostType==='all'||favTypeOf(pf)===state.favPostType));
-    if(!pfList.length){content.innerHTML=toggleHtml+favStatsHtml()+favPostTypeHtml()+renderEmpty('🖼','پستی با این فیلتر یافت نشد');return}
+    if(!pfList.length){content.innerHTML=toggleHtml+favStatsHtml()+favPostTypeHtml()+renderEmpty('','پستی با این فیلتر یافت نشد');return}
     const pfHtml=(state.exploreView==='list'?'<div class="explore-list">'+pfList.map(savedPostRowHtml).join('')+'</div>':'<div class="explore-grid">'+pfList.map(savedPostTileHtml).join('')+'</div>');
-    content.innerHTML=toggleHtml+favStatsHtml()+favPostTypeHtml()+favSortHtml('post')+'<div class="folder-export-row"><button class="modal-btn modal-btn-secondary" style="flex:1;padding:10px;font-size:13px" onclick="exportPostsTxt()">📝 فایل متنی</button><button class="modal-btn modal-btn-secondary" style="flex:1;padding:10px;font-size:13px" onclick="exportPostsPdf()">🖨 خروجی PDF</button></div><div style="display:flex;justify-content:flex-end;margin-bottom:10px">'+viewToggleHtml()+'</div>'+pfHtml;
+    content.innerHTML=toggleHtml+favStatsHtml()+favPostTypeHtml()+favSortHtml('post')+'<div class="folder-export-row"><button class="modal-btn modal-btn-secondary" style="flex:1;padding:10px;font-size:13px" onclick="exportPostsTxt()"> فایل متنی</button><button class="modal-btn modal-btn-secondary" style="flex:1;padding:10px;font-size:13px" onclick="exportPostsPdf()"> خروجی PDF</button></div><div style="display:flex;justify-content:flex-end;margin-bottom:10px">'+viewToggleHtml()+'</div>'+pfHtml;
     return;
   }
   if(!state.favorites.length){content.innerHTML=toggleHtml+renderEmpty(t('no_favorites'),t('no_favorites_desc'));return}
@@ -4216,7 +4369,7 @@ html+='<div class="folder-rule"><div class="folder-rule-head">🤖 فیلتر خ
   if(state.exploreView==='list')renderListView(tmp,state.searchResults);else renderGridView(tmp,state.searchResults);
   let liveHtml='';
   if(state.livePosts&&state.livePosts.length){
-    liveHtml='<div class="folder-sec-title" style="margin-top:18px"><span>🆕 پست‌های جدید</span><button class="folder-del" title="بستن" onclick="clearLivePosts()">✕</button></div><div class="explore-grid">'+state.livePosts.map(lp=>{
+    liveHtml='<div class="folder-sec-title" style="margin-top:18px"><span> پست‌های جدید</span><button class="folder-del" title="بستن" onclick="clearLivePosts()"></button></div><div class="explore-grid">'+state.livePosts.map(lp=>{
       const img=lp.image;
       return '<div class="explore-item" tabindex="0" role="button" style="aspect-ratio:3/4" onclick="openLivePost('+JSON.stringify(lp).replace(/"/g,'&quot;')+')" onkeydown="if(event.key===\'Enter\'){this.click()}">'+
         tileImg(img,lp.username,(lp.channelTitle||lp.username||'?')[0].toUpperCase(),{w:400})+
@@ -4224,7 +4377,7 @@ html+='<div class="folder-rule"><div class="folder-rule-head">🤖 فیلتر خ
         '<div class="explore-item-overlay"><div class="explore-item-info"><div class="explore-stat">'+escHtml(lp.channelTitle||lp.username)+'</div><div class="explore-label">'+(lp.text?escHtml(lp.text.slice(0,28)):'')+'</div></div></div></div>';
     }).join('')+'</div>';
   }
-  content.innerHTML=toggleHtml+'<input id="favSearch" class="sug-field" style="margin-bottom:10px" placeholder="🔍 جستجو در کانال‌های ذخیره‌شده..." oninput="renderFavFiltered()">'+favSortHtml('ch')+'<div style="display:flex;gap:8px;align-items:center;margin-bottom:10px">'+viewToggleHtml()+'</div><div style="display:flex;gap:8px;margin-bottom:12px"><button class="modal-btn modal-btn-primary" style="flex:1;padding:10px" onclick="fetchFavNewPosts()">🆕 پست‌های جدید</button></div>'+liveHtml+'<div id="favGridWrap">'+tmp.innerHTML+'</div>';
+  content.innerHTML=toggleHtml+'<input id="favSearch" class="sug-field" style="margin-bottom:10px" placeholder=" جستجو در کانال‌های ذخیره‌شده..." oninput="renderFavFiltered()">'+favSortHtml('ch')+'<div style="display:flex;gap:8px;align-items:center;margin-bottom:10px">'+viewToggleHtml()+'</div><div style="display:flex;gap:8px;margin-bottom:12px"><button class="modal-btn modal-btn-primary" style="flex:1;padding:10px" onclick="fetchFavNewPosts()"> پست‌های جدید</button></div>'+liveHtml+'<div id="favGridWrap">'+tmp.innerHTML+'</div>';
 
 }
 
@@ -4235,7 +4388,7 @@ html+='<div class="folder-rule"><div class="folder-rule-head">🤖 فیلتر خ
 function loadHomeFeed(){
   const content=document.getElementById('content');
   if(!state.favorites.length){
-    content.innerHTML='<div class="empty-state"><div class="empty-icon">🏠</div><h3>'+escHtml(t('home_empty_title'))+'</h3><p>'+escHtml(t('home_empty_desc'))+'</p><button class="modal-btn modal-btn-primary" style="max-width:220px;margin:16px auto 0" onclick="switchTab(\'explore\')">'+t('tab_explore')+'</button></div>';
+    content.innerHTML='<div class="empty-state"><div class="empty-icon"></div><h3>'+escHtml(t('home_empty_title'))+'</h3><p>'+escHtml(t('home_empty_desc'))+'</p><button class="modal-btn modal-btn-primary" style="max-width:220px;margin:16px auto 0" onclick="switchTab(\'explore\')">'+t('tab_explore')+'</button></div>';
     return;
   }
   content.innerHTML=renderSkeletons(6);
@@ -4315,7 +4468,7 @@ function openFullText(username,title,text,link){
   ov.classList.add('open');document.body.style.overflow='hidden';
 }
 function closeFullText(){document.getElementById('fullTextOverlay').classList.remove('open');document.body.style.overflow=''}
-function copyFullText(){const txt=document.getElementById('fullTextBody').textContent;if(!txt)return;navigator.clipboard.writeText(txt).then(()=>toast('📋 '+t('toast_text_copied')))}
+function copyFullText(){const txt=document.getElementById('fullTextBody').textContent;if(!txt)return;navigator.clipboard.writeText(txt).then(()=>toast(' '+t('toast_text_copied')))}
 function homeFeedItemHtml(x){
   const ch=getAllChannels().find(c=>c.username===x.username)||{username:x.username,title:x.channelTitle};
   const dateTxt=x.date?new Date(x.date).toLocaleString(dateLocale(),{dateStyle:'medium',timeStyle:'short'}):'';
@@ -4327,7 +4480,7 @@ function homeFeedItemHtml(x){
   if(longText)window._homeTexts[x.username+'_'+x.id]=x.text;
   const openTxt='event.stopPropagation();openHomeFullText(\''+x.username+'\',\''+x.id+'\')';
   const textHtml=x.text?'<div class="home-feed-text'+(longText?' home-feed-text-clamped':'')+'" style="cursor:'+(longText?'pointer':'inherit')+'" onclick="'+(longText?openTxt:'')+'">'+escHtml(x.text.slice(0,600))+(longText?' …':'')+'</div>'
-    +(longText?'<button class="post-text-more" style="margin:0 14px 12px" onclick="'+openTxt+'">📄 '+t('show_more')+'</button>':''):'';
+    +(longText?'<button class="post-text-more" style="margin:0 14px 12px" onclick="'+openTxt+'"> '+t('show_more')+'</button>':''):'';
   return '<div class="home-feed-item" onclick="openHomePost(\''+x.username+'\',\''+x.id+'\')">'+
     '<div class="home-feed-head"><div class="home-feed-avatar" style="'+avatarGrad(x.username)+'">'+escHtml((ch.title||x.username)[0].toUpperCase())+'</div>'+
     '<div class="home-feed-title">'+escHtml(ch.title||x.username)+'<div class="home-feed-user">@'+escHtml(x.username)+'</div></div>'+
@@ -4364,20 +4517,20 @@ async function toggleNotifs(){
   if(state.notifEnabled){
     state.notifEnabled=false;localStorage.setItem('tgexp_notif_enabled','0');
     if(btn)btn.textContent=t('notif_off');
-    toast('🔔 '+t('notif_disabled_toast'));
+    toast(' '+t('notif_disabled_toast'));
     return;
   }
-  if(!('Notification' in window)){toast('⚠️ '+t('notif_unsupported'));return}
+  if(!('Notification' in window)){toast(' '+t('notif_unsupported'));return}
   try{
     const perm=await Notification.requestPermission();
     if(perm==='granted'){
       state.notifEnabled=true;localStorage.setItem('tgexp_notif_enabled','1');
       state.notifSeen={};localStorage.setItem('tgexp_notif_seen','{}');
       if(btn)btn.textContent=t('notif_on');
-      toast('✅ '+t('notif_enabled_toast'));
+      toast(' '+t('notif_enabled_toast'));
       checkFavNotifs(true);
-    }else{toast('⚠️ '+t('notif_denied'))}
-  }catch(e){toast('⚠️ '+t('notif_denied'))}
+    }else{toast(' '+t('notif_denied'))}
+  }catch(e){toast(' '+t('notif_denied'))}
 }
 async function checkFavNotifs(force){
   if(!state.notifEnabled||!state.favorites.length)return;
@@ -4421,7 +4574,7 @@ function exportBackup(){
   a.download='tgexplorer-backup-'+new Date().toISOString().slice(0,10)+'.json';
   document.body.appendChild(a);a.click();a.remove();
   setTimeout(()=>URL.revokeObjectURL(a.href),5000);
-  toast('📥 '+t('backup_done'));
+  toast(' '+t('backup_done'));
 }
 function importBackup(ev){
   const file=ev.target.files&&ev.target.files[0];if(!file)return;
@@ -4445,15 +4598,15 @@ function importBackup(ev){
         f.items=cleanItems(f.items);
         if(state.folders.some(x=>x.id===f.id))f.id='f'+Date.now();
         state.folders.push(f);saveFolders();
-        toast('✅ '+t('toast_folder_restored', f.name));
+        toast(' '+t('toast_folder_restored', f.name));
         renderFavorites();return;
       }
       if(Array.isArray(d.favorites)){state.favorites=cleanItems(d.favorites);localStorage.setItem('tgexp_favs',JSON.stringify(state.favorites))}
       if(Array.isArray(d.postFavs)){state.postFavs=d.postFavs;localStorage.setItem('tgexp_post_favs',JSON.stringify(d.postFavs))}
       if(Array.isArray(d.folders)){state.folders=d.folders.map(f=>{if(f&&Array.isArray(f.items))f.items=cleanItems(f.items);return f}).filter(Boolean);saveFolders()}
-      toast('✅ '+t('backup_imported'));
+      toast(' '+t('backup_imported'));
       renderFavorites();
-    }catch(e){toast('⚠️ '+t('backup_invalid'))}
+    }catch(e){toast(' '+t('backup_invalid'))}
   };
   reader.readAsText(file);
   ev.target.value='';
@@ -4470,9 +4623,9 @@ function submitSuggestion(){
   const lang=document.getElementById('sugLang').value;
   const cat=document.getElementById('sugCat').value;
   const desc=document.getElementById('sugDesc').value.trim();
-  if(!u||!u.match(/^[A-Za-z0-9_]{5,32}$/)){toast('⚠️ '+t('sug_bad_username'));return}
-  if(['joinchat','share','s','proxy','addstickers','addtheme','invoice','boost','verify','giftcode'].includes(u.toLowerCase())){toast('⚠️ '+t('sug_not_channel'));return}
-  if(getAllChannels().some(c=>c.username.toLowerCase()===u.toLowerCase())){toast('⚠️ '+t('sug_exists'));return}
+  if(!u||!u.match(/^[A-Za-z0-9_]{5,32}$/)){toast(' '+t('sug_bad_username'));return}
+  if(['joinchat','share','s','proxy','addstickers','addtheme','invoice','boost','verify','giftcode'].includes(u.toLowerCase())){toast(' '+t('sug_not_channel'));return}
+  if(getAllChannels().some(c=>c.username.toLowerCase()===u.toLowerCase())){toast(' '+t('sug_exists'));return}
   const s={username:u,title,lang,cat,desc,ts:Date.now()};
   const list=JSON.parse(localStorage.getItem('tgexp_suggestions')||'[]');
   list.push(s);localStorage.setItem('tgexp_suggestions',JSON.stringify(list));
@@ -4481,10 +4634,10 @@ function submitSuggestion(){
   const url='https://github.com/mohsen-niksirat/tgexplorer/issues/new?title='+encodeURIComponent('Channel suggestion: '+u)+'&labels=channel-suggestion&body='+encodeURIComponent(body);
   const res=document.getElementById('sugResult');
   res.style.display='flex';
-  res.innerHTML='<div>✅ '+t('sug_done')+'</div><div style="display:flex;gap:10px"><button class="modal-btn modal-btn-secondary" onclick="copySuggestBody()">📋 '+t('sug_copy')+'</button><a class="modal-btn modal-btn-primary" style="text-decoration:none" target="_blank" rel="noopener" href="'+url+'">🐙 '+t('sug_open_issue')+'</a></div>';
+  res.innerHTML='<div> '+t('sug_done')+'</div><div style="display:flex;gap:10px"><button class="modal-btn modal-btn-secondary" onclick="copySuggestBody()"> '+t('sug_copy')+'</button><a class="modal-btn modal-btn-primary" style="text-decoration:none" target="_blank" rel="noopener" href="'+url+'"> '+t('sug_open_issue')+'</a></div>';
   ['sugUsername','sugTitle','sugDesc'].forEach(id=>{const el=document.getElementById(id);if(el)el.value=''});
 }
-function copySuggestBody(){navigator.clipboard.writeText(window._lastSuggestBody||'').then(()=>toast('📋 '+t('sug_copied')))}
+function copySuggestBody(){navigator.clipboard.writeText(window._lastSuggestBody||'').then(()=>toast(' '+t('sug_copied')))}
 
 // ============================================================
 // SHARED FOLDER LIVE POSTS
@@ -4494,7 +4647,7 @@ function loadSharedLivePosts(){
   const chs=f.items.filter(it=>it.type==='ch').slice(0,12);
   const holder=document.getElementById('sharedLivePosts');
   if(!chs.length||!holder)return;
-  holder.innerHTML='<div class="folder-sec-title"><span>🕒 '+t('latest_live')+'</span></div><div class="live-posts-loading">⏳ '+t('fetching')+'</div>';
+  holder.innerHTML='<div class="folder-sec-title"><span> '+t('latest_live')+'</span></div><div class="live-posts-loading"> '+t('fetching')+'</div>';
   Promise.allSettled(chs.map(it=>fetchLatestPost(it.username))).then(results=>{
     const cards=[];
     results.forEach((r,i)=>{
@@ -4510,10 +4663,10 @@ function loadSharedLivePosts(){
         '<div class="latest-post-body"><div class="latest-post-title">'+escHtml(title)+'</div>'+
         '<div class="latest-post-text">'+escHtml((p.text||'').slice(0,120))+'</div>'+
         '<div class="latest-post-meta">'+escHtml(p.date||'')+'</div></div>'+
-        '<div class="latest-post-actions"><button class="card-action-btn" title="Open" onclick="event.stopPropagation();window.open(\''+link+'\',\'_blank\')">✈️</button>'+
-        '<button class="card-action-btn" title="Copy" onclick="event.stopPropagation();copyPostLink(\''+it.username+'\',\''+p.id+'\')">🔗</button></div></div>');
+        '<div class="latest-post-actions"><button class="card-action-btn" title="Open" onclick="event.stopPropagation();window.open(\''+link+'\',\'_blank\')"><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 3L2.5 9l5 2 2 6.5 2.5-3.5 3.5 2.5L17 3z"/></svg></button>'+
+        '<button class="card-action-btn" title="Copy" onclick="event.stopPropagation();copyPostLink(\''+it.username+'\',\''+p.id+'\')"><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 11.5l3-3M7 13l-1.5 1.5a2.5 2.5 0 0 1-3.5-3.5L3.5 9.5a2.5 2.5 0 0 1 3.5 0M13 7l1.5-1.5a2.5 2.5 0 0 1 3.5 3.5L16.5 10.5a2.5 2.5 0 0 1-3.5 0"/></svg></button></div></div>');
     });
-    if(cards.length)holder.innerHTML='<div class="folder-sec-title lps-head"><span>🕒 '+t('latest_live')+'</span><button class="folder-refresh-btn" title="Refresh" onclick="loadSharedLivePosts()">🔄</button></div>'+cards.join('');
+    if(cards.length)holder.innerHTML='<div class="folder-sec-title lps-head"><span> '+t('latest_live')+'</span><button class="folder-refresh-btn" title="Refresh" onclick="loadSharedLivePosts()"><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 10a6 6 0 1 1-1.8-4.3M16 3.5v3h-3"/></svg></button></div>'+cards.join('');
     else holder.innerHTML='';
   });
 }
@@ -4522,7 +4675,7 @@ function loadSharedLivePosts(){
 // ============================================================
 // FOLDER AUTO-FILTER (smart rules)
 // ============================================================
-const FOLDER_CATS=[['all','همه'],['news','📰 اخبار'],['tech','💻 تکنولوژی'],['crypto','🪙 ارز دیجیتال'],['entertainment','🎬 سرگرمی'],['science','🔬 علم'],['gaming','🎮 بازی'],['music','🎵 موسیقی'],['art','🎨 هنر'],['sports','⚽ ورزش'],['education','📚 آموزش'],['meme','😂 میم'],['food','🍕 غذا'],['travel','✈️ سفر'],['photography','📷 عکاسی']];
+const FOLDER_CATS=[['all','همه'],['news',' اخبار'],['tech',' تکنولوژی'],['crypto',' ارز دیجیتال'],['entertainment',' سرگرمی'],['science',' علم'],['gaming',' بازی'],['music',' موسیقی'],['art',' هنر'],['sports',' ورزش'],['education',' آموزش'],['meme',' میم'],['food',' غذا'],['travel',' سفر'],['photography',' عکاسی']];
 function autoFolderChannels(f){
   if(!f.rule)return[];
   const {cat,lang}=f.rule;
@@ -4532,7 +4685,7 @@ function autoFolderChannels(f){
 function saveFolderRule(id){
   const f=state.folders.find(x=>x.id===id);if(!f)return;
   f.rule={cat:document.getElementById('folderRuleCat').value,lang:document.getElementById('folderRuleLang').value};
-  saveFolders();toast('🤖 '+t('toast_filter_on'));renderFavorites();
+  saveFolders();toast(' '+t('toast_filter_on'));renderFavorites();
 }
 function clearFolderRule(id){
   const f=state.folders.find(x=>x.id===id);if(!f)return;
@@ -4547,14 +4700,14 @@ function addAutoAll(id){
       f.items.push({type:'ch',username:c.username,postId:null,label:c.title,latestPost:null});added++;
     }
   });
-  saveFolders();toast('➕ '+t('toast_ch_added_n', added));renderFavorites();
+  saveFolders();toast(' '+t('toast_ch_added_n', added));renderFavorites();
 }
 function addAutoOne(id,username){
   const f=state.folders.find(x=>x.id===id);if(!f)return;
-  if(f.items.some(it=>it.type==='ch'&&it.username.toLowerCase()===username.toLowerCase())){toast('⚠️ '+t('toast_already_in_folder'));return}
+  if(f.items.some(it=>it.type==='ch'&&it.username.toLowerCase()===username.toLowerCase())){toast(' '+t('toast_already_in_folder'));return}
   const c=getAllChannels().find(x=>x.username.toLowerCase()===username.toLowerCase());
   f.items.push({type:'ch',username:c?c.username:username,postId:null,label:c?c.title:'',latestPost:null});
-  saveFolders();toast('✅ '+t('toast_ch_added'));renderFavorites();
+  saveFolders();toast(' '+t('toast_ch_added'));renderFavorites();
 }
 
 // ============================================================
@@ -4562,9 +4715,9 @@ function addAutoOne(id,username){
 // ============================================================
 function createSmartFolders(){
   const presets=[
-    {name:'📰 اخبار فارسی',icon:'📰',rule:{cat:'news',lang:'fa'}},
-    {name:'💻 تکنولوژی',icon:'💻',rule:{cat:'tech',lang:'all'}},
-    {name:'⚽ ورزش',icon:'⚽',rule:{cat:'sports',lang:'all'}}
+    {name:' اخبار فارسی',icon:'',rule:{cat:'news',lang:'fa'}},
+    {name:' تکنولوژی',icon:'',rule:{cat:'tech',lang:'all'}},
+    {name:' ورزش',icon:'',rule:{cat:'sports',lang:'all'}}
   ];
   let made=0,exists=0;
   presets.forEach(p=>{
@@ -4575,16 +4728,16 @@ function createSmartFolders(){
     f.rule=p.rule;f.items=[];made++;
   });
   saveFolders();
-  toast(made?('🤖 '+t('toast_smartfolders', made)):t('toast_smartfolders_exist'));
+  toast(made?(' '+t('toast_smartfolders', made)):t('toast_smartfolders_exist'));
   renderFavorites();
 }
 
 // ============================================================
 // CATEGORIES
 // ============================================================
-function exploreCategories(){return[{id:'all',icon:'🌐',nameKey:'all'},{id:'tech',icon:'💻',nameKey:'cat_tech'},{id:'news',icon:'📰',nameKey:'cat_news'},{id:'crypto',icon:'🪙',nameKey:'cat_crypto'},{id:'entertainment',icon:'🎬',nameKey:'cat_entertainment'},{id:'science',icon:'🔬',nameKey:'cat_science'},{id:'gaming',icon:'🎮',nameKey:'cat_gaming'},{id:'music',icon:'🎵',nameKey:'cat_music'},{id:'art',icon:'🎨',nameKey:'cat_art'},{id:'sports',icon:'⚽',nameKey:'cat_sports'},{id:'education',icon:'📚',nameKey:'cat_education'},{id:'meme',icon:'😂',nameKey:'cat_meme'},{id:'food',icon:'🍕',nameKey:'cat_food'},{id:'travel',icon:'✈️',nameKey:'cat_travel'},{id:'photography',icon:'📷',nameKey:'cat_photography'},{id:'podcast',icon:'🎙️',nameKey:'cat_podcast'},{id:'cinema',icon:'🎥',nameKey:'cat_cinema'}]}
+function exploreCategories(){return[{id:'all',icon:'<svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10" cy="10" r="7"/><path d="M3 10h14M10 3a11 11 0 0 1 3 7 11 11 0 0 1-3 7 11 11 0 0 1-3-7 11 11 0 0 1 3-7z"/></svg>',nameKey:'all'},{id:'tech',icon:'<svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 10.5V4.5a1 1 0 0 1 1-1h6l6 6-6 6-6-6z"/><circle cx="7" cy="7" r="1"/></svg>',nameKey:'cat_tech'},{id:'news',icon:'<svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="12" height="14" rx="1.5"/><path d="M7 7h6M7 10h6M7 13h4"/></svg>',nameKey:'cat_news'},{id:'crypto',icon:'<svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 16V9M10 16V4M16 16v-6"/></svg>',nameKey:'cat_crypto'},{id:'entertainment',icon:'<svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="11" height="11" rx="1.5"/><path d="M13.5 8.5l4-2.5v8l-4-2.5"/></svg>',nameKey:'cat_entertainment'},{id:'science',icon:'<svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10" cy="10" r="7"/><path d="M3 10h14M10 3a11 11 0 0 1 3 7 11 11 0 0 1-3 7 11 11 0 0 1-3-7 11 11 0 0 1 3-7z"/></svg>',nameKey:'cat_science'},{id:'gaming',icon:'<svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="6" height="6" rx="1"/><rect x="11" y="3" width="6" height="6" rx="1"/><rect x="3" y="11" width="6" height="6" rx="1"/><rect x="11" y="11" width="6" height="6" rx="1"/></svg>',nameKey:'cat_gaming'},{id:'music',icon:'<svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 10.5V4.5a1 1 0 0 1 1-1h6l6 6-6 6-6-6z"/><circle cx="7" cy="7" r="1"/></svg>',nameKey:'cat_music'},{id:'art',icon:'<svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3.5" width="14" height="13" rx="1.5"/><circle cx="7.5" cy="7.5" r="1.2"/><path d="M17 13l-3.5-3.5L6 16.5"/></svg>',nameKey:'cat_art'},{id:'sports',icon:'<svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 10.5V4.5a1 1 0 0 1 1-1h6l6 6-6 6-6-6z"/><circle cx="7" cy="7" r="1"/></svg>',nameKey:'cat_sports'},{id:'education',icon:'<svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="12" height="14" rx="1.5"/><path d="M7 7h6M7 10h6M7 13h4"/></svg>',nameKey:'cat_education'},{id:'meme',icon:'<svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3.5" width="14" height="13" rx="1.5"/><circle cx="7.5" cy="7.5" r="1.2"/><path d="M17 13l-3.5-3.5L6 16.5"/></svg>',nameKey:'cat_meme'},{id:'food',icon:'<svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 10.5V4.5a1 1 0 0 1 1-1h6l6 6-6 6-6-6z"/><circle cx="7" cy="7" r="1"/></svg>',nameKey:'cat_food'},{id:'travel',icon:'<svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 3L2.5 9l5 2 2 6.5 2.5-3.5 3.5 2.5L17 3z"/></svg>',nameKey:'cat_travel'},{id:'photography',icon:'<svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3.5" width="14" height="13" rx="1.5"/><circle cx="7.5" cy="7.5" r="1.2"/><path d="M17 13l-3.5-3.5L6 16.5"/></svg>',nameKey:'cat_photography'},{id:'podcast',icon:'<svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7.5a10 10 0 0 1 14 0M5.5 10.5a6.5 6.5 0 0 1 9 0M8 13.5a3 3 0 0 1 4 0"/><circle cx="10" cy="16" r="0.8"/></svg>',nameKey:'cat_podcast'},{id:'cinema',icon:'<svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="11" height="11" rx="1.5"/><path d="M13.5 8.5l4-2.5v8l-4-2.5"/></svg>',nameKey:'cat_cinema'}]}
 function categoryLabel(id){const c=exploreCategories().find(x=>x.id===id);return c?c.icon+' '+t(c.nameKey):id}
-function langLabel(code){return code==='fa'?'🇮🇷 فارسی':code==='en'?'🇬🇧 English':code.toUpperCase()}
+function langLabel(code){return code==='fa'?' فارسی':code==='en'?' English':code.toUpperCase()}
 function typeLabel(ty){return ty==='image'?t('image'):ty==='video'?t('clip'):ty==='text'?t('text'):t('all')}
 // Render the category + language chips according to the active filters.
 function renderFilterChips(){
@@ -4672,7 +4825,7 @@ async function registerPeriodicSync(){
   }catch(e){}
 }
 function registerSW(){if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{})}}
-function checkPWA(){window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;const banner=document.getElementById('pwaBanner');if(!localStorage.getItem('tgexp_pwa_dismissed')){banner.classList.add('show')}});document.getElementById('pwaInstallBtn').addEventListener('click',async()=>{if(!deferredPrompt)return;deferredPrompt.prompt();const result=await deferredPrompt.userChoice;if(result.outcome==='accepted'){toast('🎉 App installed!')}deferredPrompt=null;document.getElementById('pwaBanner').classList.remove('show')});document.getElementById('pwaDismissBtn').addEventListener('click',()=>{document.getElementById('pwaBanner').classList.remove('show');localStorage.setItem('tgexp_pwa_dismissed','1')})}
+function checkPWA(){window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;const banner=document.getElementById('pwaBanner');if(!localStorage.getItem('tgexp_pwa_dismissed')){banner.classList.add('show')}});document.getElementById('pwaInstallBtn').addEventListener('click',async()=>{if(!deferredPrompt)return;deferredPrompt.prompt();const result=await deferredPrompt.userChoice;if(result.outcome==='accepted'){toast(' App installed!')}deferredPrompt=null;document.getElementById('pwaBanner').classList.remove('show')});document.getElementById('pwaDismissBtn').addEventListener('click',()=>{document.getElementById('pwaBanner').classList.remove('show');localStorage.setItem('tgexp_pwa_dismissed','1')})}
 
 // ============================================================
 // LOCAL DATA (fallback)
@@ -4739,8 +4892,8 @@ function escAttr(str){
     .replace(/[\r\n]+/g,' ');
 }
 function copyLink(username){navigator.clipboard.writeText(`https://t.me/${username}`).then(()=>toast(t('copied')))}
-function copyPostLink(username,postId){const url=`https://t.me/${username}/${postId}`;navigator.clipboard.writeText(url).then(()=>toast('🔗 '+t('toast_link_copied_post')))}
-function copyPostText(username,postId){const list=getChannelPosts(username);const p=list.find(x=>x.id===postId);const text=(p&&p.text)?p.text:'';if(!text){toast('📋 '+t('toast_no_text'));return}navigator.clipboard.writeText(text).then(()=>toast('📋 '+t('toast_text_copied'))).catch(()=>{const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();toast('📋 '+t('toast_text_copied'))})}
+function copyPostLink(username,postId){const url=`https://t.me/${username}/${postId}`;navigator.clipboard.writeText(url).then(()=>toast(' '+t('toast_link_copied_post')))}
+function copyPostText(username,postId){const list=getChannelPosts(username);const p=list.find(x=>x.id===postId);const text=(p&&p.text)?p.text:'';if(!text){toast(' '+t('toast_no_text'));return}navigator.clipboard.writeText(text).then(()=>toast(' '+t('toast_text_copied'))).catch(()=>{const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();toast(' '+t('toast_text_copied'))})}
 window.addEventListener('scroll',()=>{const b=document.getElementById('scrollTopBtn');if(b)b.style.display=window.scrollY>400?'flex':'none'},{passive:true});
 function scrollToTop(){window.scrollTo({top:0,behavior:'smooth'})}
 function sharePost(username,postId){const url=`https://t.me/${username}/${postId}`;const title=username;if(navigator.share){navigator.share({title,url}).catch(()=>{})}else{copyPostLink(username,postId)}}
@@ -4751,11 +4904,11 @@ async function downloadPostMedia(username,postId){
   const list=getChannelPosts(username);
   const p=list.find(x=>String(x.id)===String(postId));
   const url=p?(p.video||goodImg(p.image)):'';
-  if(!url){toast('⚠️ '+t('toast_no_media'));return}
+  if(!url){toast(' '+t('toast_no_media'));return}
   const ext=p.video?(/\.mp4/i.test(url)?'mp4':'mp4'):(/\.jpe?g/i.test(url)?'jpg':/\.png/i.test(url)?'png':'jpg');
   const name=(username+'_'+postId+'.'+ext).replace(/[^a-zA-Z0-9._-]/g,'_');
   try{
-    toast('⏳ '+t('toast_downloading'));
+    toast(' '+t('toast_downloading'));
     const r=await fetch(url,{signal:AbortSignal.timeout(30000)});
     if(!r.ok)throw 0;
     const blob=await r.blob();
@@ -4763,7 +4916,7 @@ async function downloadPostMedia(username,postId){
     a.href=URL.createObjectURL(blob);a.download=name;
     document.body.appendChild(a);a.click();a.remove();
     setTimeout(()=>URL.revokeObjectURL(a.href),10000);
-    toast('✅ '+name);
+    toast(' '+name);
   }catch(e){
     // CORS fallback: open in a new tab so the browser can save it
     window.open(url,'_blank');
@@ -4781,7 +4934,7 @@ function cycleFontSize(){
   applyFontSize();
   const btn=document.getElementById('fsToggleBtn');
   if(btn){btn.textContent=state.fontSize==='small'?'A-':state.fontSize==='large'?'A+':'A'}
-  toast('🔤 '+t('font_'+state.fontSize));
+  toast(' '+t('font_'+state.fontSize));
 }
 // ============================================================
 // COPY POST AS MARKDOWN
@@ -4800,26 +4953,24 @@ function postToMarkdown(username,postId){
 }
 function copyPostMarkdown(username,postId){
   const md=postToMarkdown(username,postId);
-  if(!md){toast('📋 '+t('toast_no_text'));return}
-  navigator.clipboard.writeText(md).then(()=>toast('📝 '+t('toast_md_copied'))).catch(()=>toast('❌ '+t('toast_copy_fail')));
+  if(!md){toast(' '+t('toast_no_text'));return}
+  navigator.clipboard.writeText(md).then(()=>toast(' '+t('toast_md_copied'))).catch(()=>toast(' '+t('toast_copy_fail')));
 }
 // Do not stack a second icon on a message that already starts with one.
 function toast(msg){
   const container=document.getElementById('toastContainer');
   const el=document.createElement('div');el.className='toast';
-  const text=String(msg==null?'':msg);
-  const hasIcon=/^[\u2190-\u2BFF\u2600-\u27BF\u{1F000}-\u{1FAFF}\uFE0F]/u.test(text);
-  el.innerHTML=hasIcon?escHtml(text):`<span>✅</span> ${escHtml(text)}`;
-  container.appendChild(el);setTimeout(()=>el.remove(),3000)
+  const text=String(msg==null?'':msg).trim();
+  el.innerHTML='<svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5l4 4 8-8"/></svg> <span>'+escHtml(text)+'</span>';
+  container.appendChild(el);setTimeout(()=>el.remove(),3000);
 }
 function renderSkeletons(count){return`<div class="results-grid">${Array(count).fill('<div class="skeleton"></div>').join('')}</div>`}
-// Some call sites pass an emoji as the first argument (e.g. renderEmpty('🗂','…')).
+// Some call sites pass an emoji as the first argument (e.g. renderEmpty('','…')).
 // Use it as the icon and keep the heading text empty in that case.
 function renderEmpty(title,desc){
-  const text=String(title==null?'':title);
-  const emojiOnly=/^[\p{Extended_Pictographic}\uFE0F\u200D]+$/u.test(text.trim());
-  const icon=emojiOnly?text.trim():(text===t('no_favorites')?'❤️':'🔍');
-  return`<div class="empty-state"><div class="empty-icon">${icon}</div>${emojiOnly?'':`<h3>${escHtml(text)}</h3>`}<p>${escHtml(desc||'')}</p></div>`;
+  const text=String(title==null?'':title).trim();
+  const icon=text===t('no_favorites')?'<svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 16.5s-6-3.8-6-8.2A3.5 3.5 0 0 1 10 6a3.5 3.5 0 0 1 6 2.3c0 4.4-6 8.2-6 8.2z"/></svg>':'<svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="9" r="5.5"/><path d="M13.2 13.2L17 17"/></svg>';
+  return '<div class="empty-state"><div class="empty-icon">'+icon+'</div>'+(text?'<h3>'+escHtml(text)+'</h3>':'')+'<p>'+escHtml(desc||'')+'</p></div>';
 }
 
 
@@ -5005,20 +5156,20 @@ Object.assign(window, {
 <!-- HEADER -->
 <header class="header">
   <div class="header-inner">
-    <div class="logo"><div class="logo-icon">🔍</div><span data-i18n="app_name">Telegram Explorer</span></div>
+    <div class="logo"><div class="logo-icon"><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="9" r="5.5"/><path d="M13.2 13.2L17 17"/></svg></div><span data-i18n="app_name">Telegram Explorer</span></div>
     <div class="header-actions">
       <div class="conn-badge disconnected" id="connBadge" title="Connection"><span class="dot"></span><span id="connBadgeText">Offline</span></div>
-      <select class="lang-select" id="langSelect" aria-label="Language"><option value="en">🇬🇧 EN</option><option value="fa">🇮🇷 فا</option><option value="ar">🇸🇦 ع</option><option value="zh">🇨🇳 中</option><option value="ru">🇷🇺 РУ</option><option value="es">🇪🇸 ES</option><option value="fr">🇫🇷 FR</option></select>
-      <button class="icon-btn" id="notifBtn" title="Notifications" aria-label="Notifications">🔔<span class="badge" id="notifBadge" style="display:none">0</span></button>
-      <button class="icon-btn" id="themeToggle" title="Theme" aria-label="Theme">🌙</button>
-      <button class="icon-btn" id="settingsBtn" title="Settings" aria-label="Settings">⚙️</button>
+      <select class="lang-select" id="langSelect" aria-label="Language"><option value="en"> EN</option><option value="fa"> فا</option><option value="ar"> ع</option><option value="zh"> 中</option><option value="ru"> РУ</option><option value="es"> ES</option><option value="fr"> FR</option></select>
+      <button class="icon-btn" id="notifBtn" title="Notifications" aria-label="Notifications"><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3a5 5 0 0 0-5 5v3.5L3.5 13v1h13v-1L15 11.5V8a5 5 0 0 0-5-5zM8.5 16.5a1.5 1.5 0 0 0 3 0"/></svg><span class="badge" id="notifBadge" style="display:none">0</span></button>
+      <button class="icon-btn" id="themeToggle" title="Theme" aria-label="Theme"><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16.5 11.5A6.5 6.5 0 0 1 8.5 3.5a6.5 6.5 0 1 0 8 8z"/></svg></button>
+      <button class="icon-btn" id="settingsBtn" title="Settings" aria-label="Settings"><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14"/><circle cx="7" cy="6" r="1.75" fill="var(--bg-primary)"/><circle cx="13" cy="10" r="1.75" fill="var(--bg-primary)"/><circle cx="8" cy="14" r="1.75" fill="var(--bg-primary)"/></svg></button>
     </div>
   </div>
 </header>
 
 <!-- NETWORK / FALLBACK STATUS BANNER -->
 <div class="net-banner" id="netBanner" role="status" aria-live="polite">
-  <span class="net-banner-icon" id="netBannerIcon">📡</span>
+  <span class="net-banner-icon" id="netBannerIcon"><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7.5a10 10 0 0 1 14 0M5.5 10.5a6.5 6.5 0 0 1 9 0M8 13.5a3 3 0 0 1 4 0"/><circle cx="10" cy="16" r="0.8"/></svg></span>
   <span class="net-banner-text" id="netBannerText">You are offline — showing cached data</span>
   <button class="net-banner-action" id="netBannerAction" onclick="retryNetwork()">Retry</button>
 </div>
@@ -5027,23 +5178,23 @@ Object.assign(window, {
 <div id="setupScreen" class="setup-screen" style="display:none">
   <div class="setup-card">
     <div class="setup-header">
-      <div class="setup-emoji">🚀</div>
+      <div class="setup-emoji"></div>
       <h1 data-i18n="setup_title">Setup Your Proxy</h1>
       <p data-i18n="setup_subtitle">Create your own Cloudflare Worker proxy to search Telegram</p>
     </div>
     <div class="setup-body">
       <div class="setup-steps">
-        <div class="setup-step"><h3 data-i18n="s1_title">Create Cloudflare Account</h3><p data-i18n="s1_desc">Go to Cloudflare and create a free account (no credit card needed)</p><a href="https://dash.cloudflare.com/sign-up" target="_blank" rel="noopener" class="setup-link">🌐 dash.cloudflare.com/sign-up</a></div>
+        <div class="setup-step"><h3 data-i18n="s1_title">Create Cloudflare Account</h3><p data-i18n="s1_desc">Go to Cloudflare and create a free account (no credit card needed)</p><a href="https://dash.cloudflare.com/sign-up" target="_blank" rel="noopener" class="setup-link"> dash.cloudflare.com/sign-up</a></div>
         <div class="setup-step"><h3 data-i18n="s2_title">Create a Worker</h3><p data-i18n="s2_desc">After login: Workers & Pages → Create Application → Create Worker → Choose any name</p></div>
-        <div class="setup-step"><h3 data-i18n="s3_title">Paste the Code</h3><p data-i18n="s3_desc">Delete all existing code in the editor and paste this code:</p><details class="code-details"><summary class="code-summary"><span data-i18n="show_code">📄 Show/Hide Code</span><button class="copy-btn" onclick="event.stopPropagation();copyWorkerCode()" data-i18n="copy_code">📋 Copy Code</button></summary><div class="code-block"><div class="code-header"><span>worker.js</span></div><div class="code-content" id="workerCodeBlock"></div></div></details></div>
+        <div class="setup-step"><h3 data-i18n="s3_title">Paste the Code</h3><p data-i18n="s3_desc">Delete all existing code in the editor and paste this code:</p><details class="code-details"><summary class="code-summary"><span data-i18n="show_code"> Show/Hide Code</span><button class="copy-btn" onclick="event.stopPropagation();copyWorkerCode()" data-i18n="copy_code"> Copy Code</button></summary><div class="code-block"><div class="code-header"><span>worker.js</span></div><div class="code-content" id="workerCodeBlock"></div></div></details></div>
         <div class="setup-step"><h3 data-i18n="s4_title">Save & Deploy</h3><p data-i18n="s4_desc">Click "Save and Deploy" button. Copy your worker URL (looks like <code>https://xxx.xxx.workers.dev</code>)</p></div>
         <div class="setup-step"><h3 data-i18n="s5_title">Connect Here</h3><p data-i18n="s5_desc">Paste your worker URL below and test the connection:</p></div>
       </div>
       <div class="connect-area">
-        <h3 data-i18n="connect_title">🔗 Connect Your Proxy</h3>
+        <h3 data-i18n="connect_title"> Connect Your Proxy</h3>
         <div class="connect-input-row">
           <input class="connect-input" id="workerUrlInput" type="url" placeholder="https://your-worker.your-subdomain.workers.dev" autocomplete="off" spellcheck="false">
-          <button class="connect-test-btn" id="testBtn" onclick="testConnection()"><span id="testBtnIcon">🔌</span><span id="testBtnText" data-i18n="test_connection">Test</span></button>
+          <button class="connect-test-btn" id="testBtn" onclick="testConnection()"><span id="testBtnIcon"></span><span id="testBtnText" data-i18n="test_connection">Test</span></button>
         </div>
         <div class="test-result" id="testResult"></div>
       </div>
@@ -5053,80 +5204,80 @@ Object.assign(window, {
 </div>
 
 <!-- HERO SEARCH -->
-<section class="hero" id="heroSection" style="display:none">
+<section class="hero" id="heroSection">
   <div class="hero-content">
     <h1 data-i18n="hero_title">Explore Telegram Channels</h1>
     <p data-i18n="hero_subtitle">Search and discover public channels and groups across Telegram</p>
     <div class="search-box">
       <input class="search-input" id="searchInput" type="text" data-i18n-placeholder="search_placeholder" data-i18n-aria-label="search_placeholder" aria-label="Search channels, topics, groups..." autocomplete="off">
-      <button class="search-btn" id="searchBtn" data-i18n="search_btn">🔍 Search</button>
+      <button class="search-btn" id="searchBtn" data-i18n="search_btn"><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="9" r="5.5"/><path d="M13.2 13.2L17 17"/></svg><span class="i18n-lbl">Search</span></button>
     </div>
     <div class="search-modes" id="searchModes" role="group" aria-label="Search mode">
-      <button class="search-mode-btn active" data-mode="channels" aria-pressed="true" onclick="setSearchMode('channels')" data-i18n="psr_mode_channels">🔎 Channels</button>
-      <button class="search-mode-btn" data-mode="posts" aria-pressed="false" onclick="setSearchMode('posts')" data-i18n="psr_mode_posts">💬 Posts</button>
+      <button class="search-mode-btn active" data-mode="channels" aria-pressed="true" onclick="setSearchMode('channels')" data-i18n="psr_mode_channels"><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10" cy="10" r="7"/><path d="M3 10h14M10 3a11 11 0 0 1 3 7 11 11 0 0 1-3 7 11 11 0 0 1-3-7 11 11 0 0 1 3-7z"/></svg><span class="i18n-lbl">Channels</span></button>
+      <button class="search-mode-btn" data-mode="posts" aria-pressed="false" onclick="setSearchMode('posts')" data-i18n="psr_mode_posts"><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="12" height="14" rx="1.5"/><path d="M7 7h6M7 10h6M7 13h4"/></svg><span class="i18n-lbl">Posts</span></button>
     </div>
     <div class="search-tags" id="searchTags">
-      <span class="search-tag" data-query="technology">💻 Technology</span>
-      <span class="search-tag" data-query="crypto">🪙 Crypto</span>
-      <span class="search-tag" data-query="news">📰 News</span>
-      <span class="search-tag" data-query="meme">😂 Memes</span>
-      <span class="search-tag" data-query="programming">👨‍💻 Programming</span>
-      <span class="search-tag" data-query="science">🔬 Science</span>
-      <span class="search-tag" id="randomChip">🎲 Random</span>
+      <span class="search-tag" data-query="technology"> Technology</span>
+      <span class="search-tag" data-query="crypto"> Crypto</span>
+      <span class="search-tag" data-query="news"> News</span>
+      <span class="search-tag" data-query="meme"> Memes</span>
+      <span class="search-tag" data-query="programming"> Programming</span>
+      <span class="search-tag" data-query="science"> Science</span>
+      <span class="search-tag" id="randomChip"> Random</span>
     </div>
     <div class="ac-list" id="acList" style="display:none"></div>
   </div>
 </section>
 
 <!-- MAIN CONTENT -->
-<main class="container" id="mainContent" style="display:none">
+<main class="container" id="mainContent">
   <nav class="nav-tabs" id="navTabs">
-    <button class="nav-tab" data-tab="home" data-i18n="tab_home">🏠 Home</button><button class="nav-tab active" data-tab="explore" data-i18n="tab_explore">🌐 Explore</button>
-    <button class="nav-tab" data-tab="feed" data-i18n="tab_feed">📸 Feed</button>
-    <button class="nav-tab" data-tab="search" data-i18n="tab_search">🔍 Search</button>
-    <button class="nav-tab" data-tab="favorites" data-i18n="tab_favorites">❤️ Favorites</button>
+    <button class="nav-tab" data-tab="home" data-i18n="tab_home"><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9.5L10 3l7 6.5V16a1 1 0 0 1-1 1h-4v-4H8v4H4a1 1 0 0 1-1-1V9.5z"/></svg><span class="i18n-lbl">Home</span></button>
+    <button class="nav-tab active" data-tab="explore" data-i18n="tab_explore"><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10" cy="10" r="7"/><path d="M3 10h14M10 3a11 11 0 0 1 3 7 11 11 0 0 1-3 7 11 11 0 0 1-3-7 11 11 0 0 1 3-7z"/></svg><span class="i18n-lbl">Explore</span></button>
+    <button class="nav-tab" data-tab="feed" data-i18n="tab_feed"><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="6" height="6" rx="1"/><rect x="11" y="3" width="6" height="6" rx="1"/><rect x="3" y="11" width="6" height="6" rx="1"/><rect x="11" y="11" width="6" height="6" rx="1"/></svg><span class="i18n-lbl">Feed</span></button>
+    <button class="nav-tab" data-tab="favorites" data-i18n="tab_favorites"><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 16.5s-6-3.8-6-8.2A3.5 3.5 0 0 1 10 6a3.5 3.5 0 0 1 6 2.3c0 4.4-6 8.2-6 8.2z"/></svg><span class="i18n-lbl">Favorites</span></button>
   </nav>
-  <div class="categories-bar" id="categoriesBar"></div>
-  <div class="lang-filter" id="langFilter"><button class="lang-chip active" data-lang="all">🌐 <span data-i18n="all">All</span></button><button class="lang-chip" data-lang="fa">🇮🇷 فارسی</button><button class="lang-chip" data-lang="en">🇬🇧 English</button></div>
+  <div class="categories-bar" id="categoriesBar" style="min-height:46px"></div>
+  <div class="lang-filter" id="langFilter"><button class="lang-chip active" data-lang="all"> <span data-i18n="all">All</span></button><button class="lang-chip" data-lang="fa"> فارسی</button><button class="lang-chip" data-lang="en"> English</button></div>
   <div class="filter-bar" id="filterBar">
-    <span class="filter-bar-label" data-i18n="filters">⚙️ Filters</span>
+    <span class="filter-bar-label" data-i18n="filters"> Filters</span>
     <span class="filter-summary" id="filterSummary"></span>
-    <button class="filter-btn" id="clearFiltersBtn" onclick="clearFilters()">✕ Clear</button>
-    <button class="filter-btn primary" id="shareFiltersBtn" onclick="shareFilters()">🔗 Share</button>
+    <button class="filter-btn" id="clearFiltersBtn" onclick="clearFilters()"> Clear</button>
+    <button class="filter-btn primary" id="shareFiltersBtn" onclick="shareFilters()"> Share</button>
   </div>
   <div class="results-header" id="resultsHeader" style="display:none">
     <span class="results-count" id="resultsCount"></span>
-    <div class="view-toggle" role="group" aria-label="View mode"><button class="view-btn active" data-view="grid" aria-label="Grid view" title="Grid">⊞</button><button class="view-btn" data-view="list" aria-label="List view" title="List">☰</button><button class="view-btn" data-view="explore" aria-label="Explore view" title="Explore">⊡</button></div>
+    <div class="view-toggle" role="group" aria-label="View mode"><button class="view-btn active" data-view="grid" aria-label="Grid view" title="Grid"><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="6" height="6" rx="1"/><rect x="11" y="3" width="6" height="6" rx="1"/><rect x="3" y="11" width="6" height="6" rx="1"/><rect x="11" y="11" width="6" height="6" rx="1"/></svg></button><button class="view-btn" data-view="list" aria-label="List view" title="List"><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h12M4 10h12M4 14h12"/></svg></button><button class="view-btn" data-view="explore" aria-label="Explore view" title="Explore"><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10" cy="10" r="7"/><path d="M3 10h14M10 3a11 11 0 0 1 3 7 11 11 0 0 1-3 7 11 11 0 0 1-3-7 11 11 0 0 1 3-7z"/></svg></button></div>
   </div>
-  <div id="content"><div class="loading"><div class="spinner"></div><span data-i18n="loading">Loading...</span></div></div>
+  <div id="content" style="min-height:80vh"><div class="loading"><div class="spinner"></div><span data-i18n="loading">Loading...</span></div></div>
 </main>
 
 <!-- SETTINGS MODAL -->
 <div class="modal-overlay" id="settingsOverlay" role="dialog" aria-modal="true" aria-label="Settings">
   <div class="modal" style="max-width:520px">
     <div class="modal-header">
-      <div class="modal-avatar" style="background:var(--gradient)">⚙️</div>
+      <div class="modal-avatar" style="background:var(--accent-strong)"><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14"/><circle cx="7" cy="6" r="1.75" fill="var(--bg-primary)"/><circle cx="13" cy="10" r="1.75" fill="var(--bg-primary)"/><circle cx="8" cy="14" r="1.75" fill="var(--bg-primary)"/></svg></div>
       <div><div class="modal-title" data-i18n="settings">Settings</div><div class="modal-user" data-i18n="settings_sub">Configure your proxy connection</div></div>
-      <button class="modal-close" aria-label="Close" onclick="closeSettings()">✕</button>
+      <button class="modal-close" aria-label="Close" onclick="closeSettings()"><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15"/></svg></button>
     </div>
     <div class="modal-body">
-      <a class="modal-btn modal-btn-primary" style="text-decoration:none;display:flex;justify-content:center;margin-bottom:20px" href="https://t.me/telgexplorerbot" target="_blank" rel="noopener"><span>🚀</span> <span data-i18n="open_telegram">Open in Telegram</span></a>
-      <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border);display:flex;gap:10px;flex-wrap:wrap"><button class="modal-btn modal-btn-secondary" onclick="exportBackup()"><span data-i18n="backup_export">📥 Export data</span></button><button class="modal-btn modal-btn-secondary" onclick="document.getElementById('importFileInput').click()"><span data-i18n="backup_import">📤 Import data</span></button><input type="file" id="importFileInput" accept=".json,application/json" style="display:none" onchange="importBackup(event)"></div>
-      <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap"><button class="modal-btn modal-btn-secondary" id="notifToggleBtn" onclick="toggleNotifs()"></button><button class="modal-btn modal-btn-secondary" onclick="openSuggestModal()"><span data-i18n="suggest_channel">💡 Suggest a channel</span></button></div>
+      <a class="modal-btn modal-btn-primary" style="text-decoration:none;display:flex;justify-content:center;margin-bottom:20px" href="https://t.me/telgexplorerbot" target="_blank" rel="noopener"><span><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 3L2.5 9l5 2 2 6.5 2.5-3.5 3.5 2.5L17 3z"/></svg></span> <span data-i18n="open_telegram">Open in Telegram</span></a>
+      <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border);display:flex;gap:10px;flex-wrap:wrap"><button class="modal-btn modal-btn-secondary" onclick="exportBackup()"><span data-i18n="backup_export"> Export data</span></button><button class="modal-btn modal-btn-secondary" onclick="document.getElementById('importFileInput').click()"><span data-i18n="backup_import"> Import data</span></button><input type="file" id="importFileInput" accept=".json,application/json" style="display:none" onchange="importBackup(event)"></div>
+      <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap"><button class="modal-btn modal-btn-secondary" id="notifToggleBtn" onclick="toggleNotifs()"></button><button class="modal-btn modal-btn-secondary" onclick="openSuggestModal()"><span data-i18n="suggest_channel"> Suggest a channel</span></button></div>
       <div style="margin-bottom:20px"><label style="font-size:14px;font-weight:600;display:block;margin-bottom:8px" data-i18n="worker_url_label">Worker Proxy URL</label><div class="connect-input-row"><input class="connect-input" id="settingsWorkerUrl" type="url" placeholder="https://xxx.workers.dev" autocomplete="off" spellcheck="false"></div></div>
-      <div class="modal-actions"><button class="modal-btn modal-btn-primary" onclick="saveSettings()"><span>💾</span> <span data-i18n="save_settings">Save</span></button><button class="modal-btn modal-btn-secondary" onclick="testFromSettings()"><span>🔌</span> <span data-i18n="test_connection">Test</span></button></div>
+      <div class="modal-actions"><button class="modal-btn modal-btn-primary" onclick="saveSettings()"><span><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5l4 4 8-8"/></svg></span> <span data-i18n="save_settings">Save</span></button><button class="modal-btn modal-btn-secondary" onclick="testFromSettings()"><span><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7.5a10 10 0 0 1 14 0M5.5 10.5a6.5 6.5 0 0 1 9 0M8 13.5a3 3 0 0 1 4 0"/><circle cx="10" cy="16" r="0.8"/></svg></span> <span data-i18n="test_connection">Test</span></button></div>
       <div class="test-result" id="settingsTestResult"></div>
       <div class="privacy-box">
-        <div class="privacy-head"><span class="privacy-badge">🛡️ <span data-i18n="no_tracking">No tracking</span></span><span class="privacy-title" data-i18n="privacy_title">Your data stays on your device</span></div>
+        <div class="privacy-head"><span class="privacy-badge"> <span data-i18n="no_tracking">No tracking</span></span><span class="privacy-title" data-i18n="privacy_title">Your data stays on your device</span></div>
         <ul class="privacy-list">
-          <li><span data-i18n="privacy_local">📱 Saved locally</span> — <span data-i18n="privacy_local_desc">favourites, folders, settings and filters are stored in this browser's localStorage. Nothing is uploaded.</span></li>
-          <li><span data-i18n="privacy_worker">☁️ Worker (optional)</span> — <span data-i18n="privacy_worker_desc">if you connect your own Cloudflare Worker, only your search queries and the channels you open are sent to it. The Worker keeps a short-lived cache; it never stores your favourites.</span></li>
-          <li><span data-i18n="privacy_analytics">📊 Analytics</span> — <span data-i18n="privacy_analytics_desc">the page views are counted by Cloudflare Web Analytics (if the site is hosted there). No cookies, no fingerprinting, no third-party trackers.</span></li>
+          <li><span data-i18n="privacy_local"> Saved locally</span> — <span data-i18n="privacy_local_desc">favourites, folders, settings and filters are stored in this browser's localStorage. Nothing is uploaded.</span></li>
+          <li><span data-i18n="privacy_worker"> Worker (optional)</span> — <span data-i18n="privacy_worker_desc">if you connect your own Cloudflare Worker, only your search queries and the channels you open are sent to it. The Worker keeps a short-lived cache; it never stores your favourites.</span></li>
+          <li><span data-i18n="privacy_analytics"> Analytics</span> — <span data-i18n="privacy_analytics_desc">the page views are counted by Cloudflare Web Analytics (if the site is hosted there). No cookies, no fingerprinting, no third-party trackers.</span></li>
         </ul>
         <a class="privacy-link" href="https://github.com/mohsen-niksirat/tgexplorer#privacy" target="_blank" rel="noopener" data-i18n="privacy_read_more">Read the details →</a>
       </div>
-      <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border)"><button class="modal-btn modal-btn-secondary" onclick="resetApp()" style="color:var(--error)"><span>🔄</span> <span data-i18n="reset_app">Reset & Show Setup Guide</span></button></div>
-      <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border);display:flex;gap:10px"><a class="modal-btn modal-btn-secondary" style="text-decoration:none" href="https://github.com/mohsen-niksirat" target="_blank" rel="noopener">🐙 GitHub</a><a class="modal-btn modal-btn-secondary" style="text-decoration:none" href="https://t.me/mohsenniksirat" target="_blank" rel="noopener">✈️ Telegram</a></div>
+      <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border)"><button class="modal-btn modal-btn-secondary" onclick="resetApp()" style="color:var(--error)"><span><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 10a6 6 0 1 1-1.8-4.3M16 3.5v3h-3"/></svg></span> <span data-i18n="reset_app">Reset & Show Setup Guide</span></button></div>
+      <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border);display:flex;gap:10px"><a class="modal-btn modal-btn-secondary" style="text-decoration:none" href="https://github.com/mohsen-niksirat" target="_blank" rel="noopener"> GitHub</a><a class="modal-btn modal-btn-secondary" style="text-decoration:none" href="https://t.me/mohsenniksirat" target="_blank" rel="noopener"> Telegram</a></div>
     </div>
   </div>
 </div>
@@ -5135,14 +5286,14 @@ Object.assign(window, {
 <div class="post-fulltext-overlay" id="fullTextOverlay" role="dialog" aria-modal="true" aria-label="Full text" onclick="if(event.target===this)closeFullText()">
   <div class="post-fulltext">
     <div class="post-fulltext-head">
-      <div class="home-feed-avatar" id="fullTextAvatar" style="width:36px;height:36px;font-size:15px">📝</div>
+      <div class="home-feed-avatar" id="fullTextAvatar" style="width:36px;height:36px;font-size:15px"></div>
       <div style="flex:1;min-width:0"><div class="home-feed-title" id="fullTextTitle"></div><div class="home-feed-user" id="fullTextUser"></div></div>
-      <button class="modal-close" style="margin:0" aria-label="Close" onclick="closeFullText()">✕</button>
+      <button class="modal-close" style="margin:0" aria-label="Close" onclick="closeFullText()"><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15"/></svg></button>
     </div>
     <div class="post-fulltext-body" id="fullTextBody"></div>
     <div class="post-fulltext-actions">
-      <button class="modal-btn modal-btn-secondary" onclick="copyFullText()">📋 <span data-i18n="copy_text">Copy text</span></button>
-      <button class="modal-btn modal-btn-secondary" onclick="window.open(window._fullTextLink||'#','_blank')">🔗 <span data-i18n="watch_post">View post</span></button>
+      <button class="modal-btn modal-btn-secondary" onclick="copyFullText()"> <span data-i18n="copy_text">Copy text</span></button>
+      <button class="modal-btn modal-btn-secondary" onclick="window.open(window._fullTextLink||'#','_blank')"> <span data-i18n="watch_post">View post</span></button>
     </div>
   </div>
 </div>
@@ -5151,9 +5302,9 @@ Object.assign(window, {
 <div class="modal-overlay" id="compareOverlay" style="z-index:210" role="dialog" aria-modal="true" aria-label="Compare channels" onclick="if(event.target===this)closeCompare()">
   <div class="modal" style="max-width:760px">
     <div class="modal-header">
-      <div class="modal-avatar" style="background:var(--accent-gradient)">⚖️</div>
+      <div class="modal-avatar" style="background:var(--accent-strong)"><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4v12M4 7l3-3 3 3M13 16V4M10 13l3 3 3-3"/></svg></div>
       <div><div class="modal-title" data-i18n="compare_title">Compare channels</div><div class="modal-user" data-i18n="compare_sub">Two channels, side by side</div></div>
-      <button class="modal-close" aria-label="Close" onclick="closeCompare()">✕</button>
+      <button class="modal-close" aria-label="Close" onclick="closeCompare()"><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15"/></svg></button>
     </div>
     <div class="modal-body">
       <div class="compare-grid">
@@ -5172,7 +5323,7 @@ Object.assign(window, {
 <div class="modal-overlay" id="postOverlay" role="dialog" aria-modal="true" aria-label="Post" onclick="if(event.target===this)closePostModal()">
   <div class="modal" style="max-width:640px">
     <div class="modal-header" id="postModalHead"></div>
-    <button class="modal-close" style="position:absolute;top:16px;left:16px;z-index:5" aria-label="Close" onclick="closePostModal()">✕</button>
+    <button class="modal-close" style="position:absolute;top:16px;left:16px;z-index:5" aria-label="Close" onclick="closePostModal()"><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15"/></svg></button>
     <div class="modal-body" id="postModalBody"></div>
     <button id="postScrollTop" class="post-scroll-top" onclick="scrollPostModalTop()" title="Back to top" aria-label="Back to top">↑</button>
   </div>
@@ -5182,23 +5333,23 @@ Object.assign(window, {
     <div class="modal-header">
       <div class="modal-avatar" id="modalAvatar">T</div>
       <div><div class="modal-title" id="modalTitle"></div><div class="modal-user" id="modalUser"></div><div class="modal-members-display" id="modalMembers"></div></div>
-      <button class="modal-close" aria-label="Close" onclick="closeChannelModal()">✕</button>
+      <button class="modal-close" aria-label="Close" onclick="closeChannelModal()"><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15"/></svg></button>
     </div>
     <div class="modal-body">
       <div class="modal-desc" id="modalDesc"></div>
       <!-- Stats -->
       <div class="stats-grid" id="modalStats" style="display:none"></div>
       <!-- Chart -->
-      <div class="chart-container" id="modalChart" style="display:none"><div class="chart-head"><h4 id="activityChartTitle" data-i18n="activity_chart">📊 Activity (7 days)</h4><div class="chart-range" role="group" aria-label="Chart range"><button class="chart-range-btn active" data-days="7" onclick="setChartRange(7)">7</button><button class="chart-range-btn" data-days="30" onclick="setChartRange(30)">30</button><button class="chart-range-btn" data-days="90" onclick="setChartRange(90)">90</button></div></div><canvas class="chart-canvas" id="activityChart"></canvas></div>
+      <div class="chart-container" id="modalChart" style="display:none"><div class="chart-head"><h4 id="activityChartTitle" data-i18n="activity_chart"> Activity (7 days)</h4><div class="chart-range" role="group" aria-label="Chart range"><button class="chart-range-btn active" data-days="7" onclick="setChartRange(7)">7</button><button class="chart-range-btn" data-days="30" onclick="setChartRange(30)">30</button><button class="chart-range-btn" data-days="90" onclick="setChartRange(90)">90</button></div></div><canvas class="chart-canvas" id="activityChart"></canvas></div>
       <!-- Content tags -->
       <div class="modal-tags" id="modalTags" style="display:none"></div>
       <!-- Actions -->
       <div class="modal-actions">
-        <button class="modal-btn modal-btn-primary" id="modalOpenTg"><span>✈️</span> <span data-i18n="open_telegram">Open in Telegram</span></button>
-        <button class="modal-btn modal-btn-secondary" id="modalFavBtn"><span>❤️</span> <span data-i18n="save">Save</span></button><button class="modal-btn modal-btn-secondary" id="modalFolderBtn"><span>🗂</span> <span>Folder</span></button><button class="modal-btn modal-btn-secondary" id="modalShareBtn"><span>🔗</span> <span data-i18n="share_link">Share link</span></button><button class="modal-btn modal-btn-secondary" id="modalSharePageBtn"><span>📄</span> <span data-i18n="share_page">Share page</span></button><button class="modal-btn modal-btn-secondary" id="modalCompareBtn"><span>⚖️</span> <span data-i18n="compare">Compare</span></button>
+        <button class="modal-btn modal-btn-primary" id="modalOpenTg"><span><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 3L2.5 9l5 2 2 6.5 2.5-3.5 3.5 2.5L17 3z"/></svg></span> <span data-i18n="open_telegram">Open in Telegram</span></button>
+        <button class="modal-btn modal-btn-secondary" id="modalFavBtn"><span><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 16.5s-6-3.8-6-8.2A3.5 3.5 0 0 1 10 6a3.5 3.5 0 0 1 6 2.3c0 4.4-6 8.2-6 8.2z"/></svg></span> <span data-i18n="save">Save</span></button><button class="modal-btn modal-btn-secondary" id="modalFolderBtn"><span><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5.5A1.5 1.5 0 0 1 4.5 4h3.2l1.8 2h6A1.5 1.5 0 0 1 17 7.5v7a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 3 14.5v-9z"/></svg></span> <span>Folder</span></button><button class="modal-btn modal-btn-secondary" id="modalShareBtn"><span><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 11.5l3-3M7 13l-1.5 1.5a2.5 2.5 0 0 1-3.5-3.5L3.5 9.5a2.5 2.5 0 0 1 3.5 0M13 7l1.5-1.5a2.5 2.5 0 0 1 3.5 3.5L16.5 10.5a2.5 2.5 0 0 1-3.5 0"/></svg></span> <span data-i18n="share_link">Share link</span></button><button class="modal-btn modal-btn-secondary" id="modalSharePageBtn"><span><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="12" height="14" rx="1.5"/><path d="M7 7h6M7 10h6M7 13h4"/></svg></span> <span data-i18n="share_page">Share page</span></button><button class="modal-btn modal-btn-secondary" id="modalCompareBtn"><span><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4v12M4 7l3-3 3 3M13 16V4M10 13l3 3 3-3"/></svg></span> <span data-i18n="compare">Compare</span></button>
       </div>
       <!-- Related -->
-      <div class="related-section" id="modalRelated" style="display:none"><h4 data-i18n="related_channels">🔗 Related Channels</h4><div class="related-chips" id="relatedChips"></div></div>
+      <div class="related-section" id="modalRelated" style="display:none"><h4 data-i18n="related_channels"> Related Channels</h4><div class="related-chips" id="relatedChips"></div></div>
       <!-- Posts -->
       <div class="modal-posts-title" data-i18n="recent_posts">Recent Posts</div>
       <div class="modal-posts" id="modalPosts"><div class="loading"><div class="spinner"></div></div></div>
@@ -5211,15 +5362,15 @@ Object.assign(window, {
 <div class="modal-overlay" id="folderPicker" role="dialog" aria-modal="true" aria-label="Add to folder">
   <div class="modal" style="max-width:420px">
     <div class="modal-header">
-      <div class="modal-avatar" style="background:var(--gradient)">🗂</div>
+      <div class="modal-avatar" style="background:var(--accent-strong)"><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5.5A1.5 1.5 0 0 1 4.5 4h3.2l1.8 2h6A1.5 1.5 0 0 1 17 7.5v7a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 3 14.5v-9z"/></svg></div>
       <div><div class="modal-title">افزودن به فولدر</div><div class="modal-user" id="folderPickerLabel"></div></div>
-      <button class="modal-close" aria-label="Close" onclick="closeFolderPicker()">✕</button>
+      <button class="modal-close" aria-label="Close" onclick="closeFolderPicker()"><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15"/></svg></button>
     </div>
     <div class="modal-body">
       <div id="folderPickerList"></div>
       <div class="folder-new">
         <input id="folderNewName" placeholder="نام فولدر جدید..." onkeydown="if(event.key==='Enter')createFolderFromPicker()">
-        <button class="modal-btn modal-btn-primary" onclick="createFolderFromPicker()">➕ ساخت</button>
+        <button class="modal-btn modal-btn-primary" onclick="createFolderFromPicker()"> ساخت</button>
       </div>
       <div id="folderIconRowPick"></div>
     </div>
@@ -5229,12 +5380,12 @@ Object.assign(window, {
 <div class="modal-overlay" id="notifOverlay" role="dialog" aria-modal="true" aria-label="Notifications">
   <div class="modal" style="max-width:480px">
     <div class="modal-header">
-      <div class="modal-avatar" style="background:var(--gradient)">🔔</div>
+      <div class="modal-avatar" style="background:var(--accent-strong)"><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3a5 5 0 0 0-5 5v3.5L3.5 13v1h13v-1L15 11.5V8a5 5 0 0 0-5-5zM8.5 16.5a1.5 1.5 0 0 0 3 0"/></svg></div>
       <div><div class="modal-title" data-i18n="notifications">Notifications</div><div class="modal-user" data-i18n="notif_sub">Updates from your saved channels</div></div>
-      <button class="modal-close" aria-label="Close" onclick="closeNotifModal()">✕</button>
+      <button class="modal-close" aria-label="Close" onclick="closeNotifModal()"><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15"/></svg></button>
     </div>
     <div class="modal-body">
-      <div id="notifContent"><div class="empty-state"><div class="empty-icon">🔔</div><h3 data-i18n="no_notifs">No notifications yet</h3><p data-i18n="no_notifs_desc">Save channels as favorites to track updates</p></div></div>
+      <div id="notifContent"><div class="empty-state"><div class="empty-icon"></div><h3 data-i18n="no_notifs">No notifications yet</h3><p data-i18n="no_notifs_desc">Save channels as favorites to track updates</p></div></div>
     </div>
   </div>
 </div>
@@ -5242,19 +5393,19 @@ Object.assign(window, {
 <div class="modal-overlay" id="suggestOverlay" role="dialog" aria-modal="true" aria-label="Suggest a channel">
   <div class="modal" style="max-width:480px">
     <div class="modal-header">
-      <div class="modal-avatar" style="background:var(--gradient)">💡</div>
-      <div><div class="modal-title" data-i18n="suggest_channel">💡 Suggest a channel</div><div class="modal-user">github.com/mohsen-niksirat/tgexplorer</div></div>
-      <button class="modal-close" aria-label="Close" onclick="closeSuggestModal()">✕</button>
+      <div class="modal-avatar" style="background:var(--accent-strong)"><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 4v12M4 10h12"/></svg></div>
+      <div><div class="modal-title" data-i18n="suggest_channel"> Suggest a channel</div><div class="modal-user">github.com/mohsen-niksirat/tgexplorer</div></div>
+      <button class="modal-close" aria-label="Close" onclick="closeSuggestModal()"><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15"/></svg></button>
     </div>
     <div class="modal-body">
       <label class="sug-label">Username (@)</label><input class="sug-field" id="sugUsername" placeholder="username" autocomplete="off">
       <label class="sug-label">Title</label><input class="sug-field" id="sugTitle" placeholder="Channel title" autocomplete="off">
       <div class="sug-row">
-        <div style="flex:1"><label class="sug-label">Language</label><select class="sug-field" id="sugLang"><option value="fa">🇮🇷 فارسی</option><option value="en" selected>🇬🇧 English</option></select></div>
-        <div style="flex:1"><label class="sug-label">Category</label><select class="sug-field" id="sugCat"><option value="news">📰 News</option><option value="tech">💻 Tech</option><option value="crypto">🪙 Crypto</option><option value="entertainment">🎬 Entertainment</option><option value="science">🔬 Science</option><option value="sports">⚽ Sports</option><option value="music">🎵 Music</option><option value="education">📚 Education</option><option value="travel">✈️ Travel</option><option value="photography">📷 Photography</option></select></div>
+        <div style="flex:1"><label class="sug-label">Language</label><select class="sug-field" id="sugLang"><option value="fa"> فارسی</option><option value="en" selected> English</option></select></div>
+        <div style="flex:1"><label class="sug-label">Category</label><select class="sug-field" id="sugCat"><option value="news"> News</option><option value="tech"> Tech</option><option value="crypto"> Crypto</option><option value="entertainment"> Entertainment</option><option value="science"> Science</option><option value="sports"> Sports</option><option value="music"> Music</option><option value="education"> Education</option><option value="travel"> Travel</option><option value="photography"> Photography</option></select></div>
       </div>
       <label class="sug-label">Description</label><textarea class="sug-field" id="sugDesc" rows="3" placeholder="What is this channel about?"></textarea>
-      <div class="modal-actions" style="margin-bottom:0"><button class="modal-btn modal-btn-primary" onclick="submitSuggestion()">💾 Submit</button><button class="modal-btn modal-btn-secondary" onclick="closeSuggestModal()">Cancel</button></div>
+      <div class="modal-actions" style="margin-bottom:0"><button class="modal-btn modal-btn-primary" onclick="submitSuggestion()"> Submit</button><button class="modal-btn modal-btn-secondary" onclick="closeSuggestModal()">Cancel</button></div>
       <div class="sug-result" id="sugResult" style="display:none"></div>
     </div>
   </div>
@@ -5262,7 +5413,7 @@ Object.assign(window, {
 
 <!-- PWA INSTALL BANNER -->
 <div class="pwa-banner" id="pwaBanner">
-  <div class="pwa-banner-icon">📱</div>
+  <div class="pwa-banner-icon"><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3.5v9M6.5 9.5L10 13l3.5-3.5M4 16h12"/></svg></div>
   <div class="pwa-banner-info"><div class="pwa-banner-title">Install Telegram Explorer</div><div class="pwa-banner-desc">Add to home screen for quick access</div></div>
   <div class="pwa-banner-btns"><button class="pwa-btn pwa-btn-install" id="pwaInstallBtn">Install</button><button class="pwa-btn pwa-btn-dismiss" id="pwaDismissBtn">Later</button></div>
 </div>

@@ -56,7 +56,7 @@ export let state={
   favPost:false,
   favFolder:false,
   openFolder:'',
-  folderIcon:'📁',
+  folderIcon:'folder',
   favSort:localStorage.getItem('tgexp_favsort')||'name',
   exploreSort:localStorage.getItem('tgexp_esort')||'name',
   exploreView:localStorage.getItem('tgexp_eview')||'grid',

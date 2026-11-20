@@ -39,13 +39,11 @@ const header = `// ============================================================
 // ============================================================
 import { state } from './state.js';
 
-export const I18N = {
-`;
+export const I18N={
+` + LANGS.map(l => '  ' + l + ': ' + obj(l, 'main', mainKeys) + ',').join('\n') + `
+};
 
-const middle = LANGS.map(l => '  ' + l + ': ' + obj(l, 'main', mainKeys) + ',').join('\n');
-
-const ui = `
-export const I18N_UI = {
+export const I18N_UI={
 ` + LANGS.map(l => '  ' + l + ': ' + obj(l, 'ui', uiKeys) + ',').join('\n') + `
 };
 
@@ -57,7 +55,20 @@ export function applyLang(lang) {
   document.documentElement.dir = RTL_LANGS.includes(lang) ? 'rtl' : 'ltr';
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const k = el.dataset.i18n;
-    if (t[k]) el.textContent = t[k];
+    if (!t[k]) return;
+    const svg = el.querySelector(':scope > svg');
+    if (svg) {
+      let span = el.querySelector(':scope > .i18n-lbl');
+      if (!span) {
+        Array.from(el.childNodes).forEach(n => { if (n !== svg) el.removeChild(n); });
+        span = document.createElement('span');
+        span.className = 'i18n-lbl';
+        el.appendChild(span);
+      }
+      span.textContent = t[k];
+    } else {
+      el.textContent = t[k];
+    }
   });
   document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
     const k = el.dataset.i18nPlaceholder;
@@ -84,7 +95,7 @@ export function t(key) {
 }
 `;
 
-const out = header + middle + '\n};\n' + ui;
+const out = header;
 fs.writeFileSync(path.join(ROOT, 'js', 'i18n.js'), out, 'utf8');
 console.log('wrote js/i18n.js (' + out.length + ' bytes)');
 console.log('  main: ' + mainKeys.length + ' keys, ui: ' + uiKeys.length + ' keys');
