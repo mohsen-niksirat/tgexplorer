@@ -65,8 +65,10 @@
   --radius-xs: 4px;
   --radius-sm: 8px;
   --radius: 12px;
+  --radius-md: 12px;
   --radius-lg: 16px;
   --radius-full: 9999px;
+  --text-base: 14px;
 
   /* Spacing Scale (4pt) */
   --space-1: 4px;
@@ -2156,6 +2158,178 @@ body { overflow-x: clip; }
 [dir="rtl"] .setup-step { padding-left: 0; padding-right: 44px; border-left: none; border-right: 2px solid var(--border); margin-left: 0; margin-right: 12px; }
 [dir="rtl"] .setup-step::before { left: auto; right: -14px; }
 
+/* Stage 4: Feed Text Tiles, Consolidated Explore Controls & Motion Polish */
+.feed-item-text {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 12px;
+  text-align: start;
+  aspect-ratio: 1;
+}
+.feed-item-text-body {
+  font-size: var(--text-base);
+  line-height: 1.5;
+  color: var(--text-primary);
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-break: break-word;
+}
+.feed-item-text-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border-subtle);
+}
+.feed-item-text .feed-channel-chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.feed-item-text .feed-avatar-sm {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  color: #fff;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.feed-item-text .feed-type-icon {
+  color: var(--text-tertiary);
+  flex-shrink: 0;
+  display: inline-flex;
+}
+
+.categories-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.categories-wrap .categories-bar {
+  flex: 1;
+  min-width: 0;
+  margin-bottom: 0;
+  padding-inline-end: 24px;
+  -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent);
+  mask-image: linear-gradient(to right, #000 calc(100% - 28px), transparent);
+}
+[dir="rtl"] .categories-wrap .categories-bar {
+  -webkit-mask-image: linear-gradient(to left, #000 calc(100% - 28px), transparent);
+  mask-image: linear-gradient(to left, #000 calc(100% - 28px), transparent);
+}
+.filters-sheet-btn {
+  display: none;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  font-size: 12.5px;
+  font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.filters-count-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: var(--radius-full);
+  background: var(--accent);
+  color: var(--on-accent);
+  font-size: 11px;
+  font-weight: 700;
+}
+.filters-count-badge:empty { display: none; }
+
+.explore-toolbar-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+.explore-toolbar-row .etype-bar {
+  flex: 1;
+  min-width: 260px;
+  margin-bottom: 0;
+}
+.explore-sort-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 190px;
+}
+.explore-sort-wrap .sug-field {
+  margin-bottom: 0;
+  min-height: 44px;
+}
+
+@media (max-width: 768px) {
+  .filters-sheet-btn { display: inline-flex; }
+  #langFilter { display: none !important; }
+  .explore-toolbar-row { display: none !important; }
+  .filter-bar { padding: 6px 10px; margin-bottom: 8px; gap: 6px; }
+}
+
+.filter-sheet-sec { margin-bottom: 16px; }
+.filter-sheet-lbl {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+.filter-sheet-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* Motion: Tab fade, Image fade-in, Card press 0.98 */
+@keyframes tabFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+.tab-fade-in {
+  animation: tabFadeIn var(--duration-fast) var(--ease-out);
+}
+.explore-item > img, .feed-item > img, .channel-card img {
+  opacity: 0;
+  transition: opacity var(--duration-fast) var(--ease-out), transform var(--transition);
+}
+.explore-item > img.img-loaded, .feed-item > img.img-loaded, .channel-card img.img-loaded {
+  opacity: 1;
+}
+.channel-card:active, .explore-item:active, .feed-item:active, .list-item:active {
+  transform: scale(0.98);
+  transition: transform var(--duration-instant) var(--ease-press);
+}
+
 /* Toasts */
 .toast-container { position: fixed; bottom: calc(var(--nav-h) + 16px); right: 16px; z-index: 300; display: flex; flex-direction: column; gap: 6px; pointer-events: none; }
 [dir="rtl"] .toast-container { right: auto; left: 16px; }
@@ -2243,7 +2417,7 @@ function initTelegramWebApp(){
 }
 function syncTgBackButton(){
   if(!window.Telegram||!Telegram.WebApp)return;
-  const ids=['postOverlay','channelOverlay','settingsOverlay','notifOverlay','folderPicker','suggestOverlay','compareOverlay','fullTextOverlay'];
+  const ids=['postOverlay','channelOverlay','settingsOverlay','notifOverlay','folderPicker','suggestOverlay','compareOverlay','fullTextOverlay','filtersOverlay'];
   const open=ids.some(id=>{const el=document.getElementById(id);return el&&el.classList.contains('open')});
   try{if(open)Telegram.WebApp.BackButton.show();else Telegram.WebApp.BackButton.hide()}catch(e){}
 }
@@ -2256,6 +2430,7 @@ function watchTgBackButton(){
 // button should dismiss one layer at a time.
 function closeTopOverlay(){
   const order=[
+    ['filtersOverlay',closeFiltersSheet],
     ['compareOverlay',closeCompare],
     ['fullTextOverlay',closeFullText],
     ['suggestOverlay',closeSuggestModal],
@@ -2346,7 +2521,7 @@ function copyWorkerCode(){navigator.clipboard.writeText(WORKER_CODE).then(()=>{c
 // ============================================================
 // TABS
 // ============================================================
-function switchTab(tab){triggerHapticLight();window._sharedFolder=null;state.currentTab=tab;document.querySelectorAll('.nav-tab').forEach(el=>el.classList.toggle('active',el.dataset.tab===tab));document.getElementById('heroSection').style.display=(tab==='home'||tab==='favorites'||tab==='feed')?'none':'';document.getElementById('categoriesBar').style.display=(tab==='explore'||tab==='feed')?'':'none';document.getElementById('langFilter').style.display=(tab==='explore'||tab==='search')?'':'none';document.getElementById('resultsHeader').style.display='none';renderFilterBar();if(tab==='home')loadHomeFeed();else if(tab==='explore')loadExplore();else if(tab==='feed')loadFeed();else if(tab==='search')renderResults();else if(tab==='favorites')renderFavorites()}
+function switchTab(tab){triggerHapticLight();window._sharedFolder=null;state.currentTab=tab;document.querySelectorAll('.nav-tab').forEach(el=>el.classList.toggle('active',el.dataset.tab===tab));document.getElementById('heroSection').style.display=(tab==='home'||tab==='favorites'||tab==='feed')?'none':'';const cw=document.getElementById('categoriesWrap');if(cw)cw.style.display=(tab==='explore'||tab==='feed')?'':'none';document.getElementById('categoriesBar').style.display=(tab==='explore'||tab==='feed')?'':'none';document.getElementById('langFilter').style.display=(tab==='explore'||tab==='search')?'':'none';document.getElementById('resultsHeader').style.display='none';renderFilterBar();const ce=document.getElementById('content');if(ce){ce.classList.remove('tab-fade-in');void ce.offsetWidth;ce.classList.add('tab-fade-in')}if(tab==='home')loadHomeFeed();else if(tab==='explore')loadExplore();else if(tab==='feed')loadFeed();else if(tab==='search')renderResults();else if(tab==='favorites')renderFavorites()}
 
 // ============================================================
 // SEARCH
@@ -2662,7 +2837,7 @@ function buildLocalFeedPool(category){
   const posts=[];
   for(const ch of chans){
     for(const p of getChannelPosts(ch.username)){
-      if(!p.image&&!p.hasVideo)continue;
+      if(!p.image&&!p.hasVideo&&!(p.text&&p.text.trim()))continue;
       posts.push({id:p.id,date:p.date||'',text:p.text||'',image:p.image||'',video:p.video||'',hasVideo:!!p.hasVideo,channel:ch.username,channelTitle:ch.title||ch.username,channelMembers:ch.members||'0',type:p.hasVideo?'video':'image'});
     }
   }
@@ -2749,15 +2924,30 @@ async function appendFeedPosts(){
 function feedItemHtml(p,i){
   const initial=(p.channelTitle||p.channel||'?')[0].toUpperCase();
   const img=goodImg(p.image);
-  const imgHtml=tileImg(img,p.channel,initial,{w:400,eager:i<6});
-  const videoBadge=p.hasVideo?`<div class="feed-video-badge">▶ Video</div>`:'';
-  const text=p.text?p.text.substring(0,80)+(p.text.length>80?'...':''):'';
+  const rawText=String(p.text||'').trim();
+  if(!img&&!p.hasVideo&&!rawText)return '';
+  if(!img&&!p.hasVideo){
+    const excerpt=rawText.length>180?rawText.slice(0,180)+'…':rawText;
+    return `<div class="feed-item feed-item-text" tabindex="0" role="button" onclick="openFeedPost(${i})" onkeydown="if(event.key==='Enter'){this.click()}" data-index="${i}">
+      <div class="feed-item-text-body">${escHtml(excerpt)}</div>
+      <div class="feed-item-text-foot">
+        <div class="feed-channel-chip">
+          <span class="feed-avatar-sm" style="${avatarGrad(p.channel)}">${escHtml(initial)}</span>
+          <span>@${escHtml(p.channel||'')}</span>
+        </div>
+        <span class="feed-type-icon" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="12" height="14" rx="1.5"/><path d="M7 7h6M7 10h6M7 13h4"/></svg></span>
+      </div>
+    </div>`;
+  }
+  const imgHtml=tileImg(img,p.channel,initial,{w:240,eager:i<3,priority:i===0});
+  const videoBadge=p.hasVideo?`<div class="feed-video-badge"><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="11" height="11" rx="1.5"/><path d="M13.5 8.5l4-2.5v8l-4-2.5"/></svg></div>`:'';
+  const text=rawText?rawText.substring(0,80)+(rawText.length>80?'...':''):'';
   return `<div class="feed-item" onclick="openFeedPost(${i})" data-index="${i}">
     ${imgHtml}
     ${videoBadge}
     <div class="feed-item-overlay">
       <div class="feed-channel-name">
-        <span class="feed-avatar-sm" style="${avatarGrad(p.channel)}">${initial}</span>
+        <span class="feed-avatar-sm" style="${avatarGrad(p.channel)}">${escHtml(initial)}</span>
         @${escHtml(p.channel||'')}
       </div>
       <div class="feed-post-text">${escHtml(text)}</div>
@@ -2840,9 +3030,9 @@ function renderExploreView(container,items){
   const shown=filtered.slice(0,page);
   filtered=shown;
   const searchHtml=state.exploreView==='list'?'<div style="padding:0 8px 10px"><input class="sug-field" id="exploreSearchInput" style="width:100%" placeholder="'+t('instant_search')+'" value="'+escAttr(state.exploreSearch)+'" oninput="setExploreSearch(this.value)"></div>':'';
-  const listBody=filtered.length?exploreListViewHtml(filtered,colors):'<div style="padding:24px;text-align:center;color:#888">'+escHtml(t('no_match'))+'</div>';
+  const listBody=filtered.length?exploreListViewHtml(filtered,colors):renderEmpty('',t('no_match'));
   const more=totalFiltered>page?'<div class="explore-more"><button class="explore-more-btn" onclick="showMoreExplore()">'+escHtml(t('show_more_channels'))+'</button></div>':'';
-  container.innerHTML=bar+exploreSortHtml()+searchHtml+(state.exploreView==='list'?listBody:`<div class="explore-grid">${filtered.map((ch,i)=>{
+  container.innerHTML='<div class="explore-toolbar-row">'+bar+exploreSortHtml()+'</div>'+searchHtml+(state.exploreView==='list'?listBody:`<div class="explore-grid">${filtered.map((ch,i)=>{
     const posts=getChannelPosts(ch.username);
     const post=posts[0]||null;
     const img=goodImg((post&&post.image)||ch.image)||ch.avatar||'';
@@ -2860,7 +3050,7 @@ function renderExploreView(container,items){
         <div class="explore-item-foot"><span class="feed-type-badge"><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="12" height="14" rx="1.5"/><path d="M7 7h6M7 10h6M7 13h4"/></svg></span><span style="font-size:11px;color:var(--text-secondary)"> ${ch.members||'0'}</span></div>
       </div>`;
     }
-    const imgHtml=tileImg(img,ch.username,initial,{eager:i<6,w:400});
+    const imgHtml=tileImg(img,ch.username,initial,{eager:i<3,priority:i===0,w:240});
     const previewText=post&&post.text?post.text.slice(0,200):'';
     return `<div class="explore-item" tabindex="0" role="button" onclick="${onclick}" onkeydown="if(event.key==='Enter'){${onclick}}" style="aspect-ratio:3/4">
       ${imgHtml}
@@ -3891,8 +4081,8 @@ function sortExplore(list){
 }
 function exploreSortHtml(){
   const s=state.exploreSort||'name';
-  const opts='<option value="newest"'+(s==='newest'?' selected':'')+'>'+t('by_activity')+'</option>'+'<option value="oldest"'+(s==='oldest'?' selected':'')+'>'+t('oldest')+'</option>'+'<option value="name"'+(s==='name'?' selected':'')+'>'+t('by_name')+'</option>'+'<option value="name-desc"'+(s==='name-desc'?' selected':'')+'>'+t('by_name_desc')+'</option>'+'<option value="posts"'+(s==='posts'?' selected':'')+'>'+t('by_posts')+'</option>' ;
-  return '<div style="display:flex;gap:8px;margin-bottom:12px;align-items:center"><span style="font-size:13px;color:var(--text-secondary);white-space:nowrap">'+t('sort')+':</span><select class="sug-field" style="flex:1;margin-bottom:0" aria-label="'+escAttr(t('sort'))+'" onchange="setExploreSort(this.value)">'+opts+'</select></div>';
+  const opts='<option value="newest"'+(s==='newest'?' selected':'')+'>'+t('by_activity')+'</option>'+'<option value="oldest"'+(s==='oldest'?' selected':'')+'>'+t('oldest')+'</option>'+'<option value="name"'+(s==='name'?' selected':'')+'>'+t('by_name')+'</option>'+'<option value="name-desc"'+(s==='name-desc'?' selected':'')+'>'+t('by_name_desc')+'</option>'+'<option value="posts"'+(s==='posts'?' selected':'')+'>'+t('by_posts')+'</option>';
+  return '<div class="explore-sort-wrap"><span style="font-size:13px;color:var(--text-secondary);white-space:nowrap">'+t('sort')+':</span><select class="sug-field" style="flex:1;margin-bottom:0" aria-label="'+escAttr(t('sort'))+'" onchange="setExploreSort(this.value)">'+opts+'</select></div>';
 }
 function setExploreView(v){
   state.exploreView=v;localStorage.setItem('tgexp_eview',v);resetExplorePage();
@@ -4427,10 +4617,20 @@ function renderHomeFeedChunk(reset){
 function homeFeedGridItemHtml(x){
   const ch=getAllChannels().find(c=>c.username===x.username)||{username:x.username,title:x.channelTitle};
   const img=goodImg(x.image);
+  const rawText=String(x.text||'').trim();
+  if(!img&&!x.hasVideo&&!rawText)return '';
+  const initial=(ch.title||x.username||'?')[0].toUpperCase();
+  if(!img&&!x.hasVideo){
+    const excerpt=rawText.length>180?rawText.slice(0,180)+'…':rawText;
+    return '<div class="feed-item feed-item-text" tabindex="0" role="button" onclick="openHomePost(\''+x.username+'\',\''+x.id+'\')" onkeydown="if(event.key===\'Enter\'){this.click()}">'+
+      '<div class="feed-item-text-body">'+escHtml(excerpt)+'</div>'+
+      '<div class="feed-item-text-foot"><div class="feed-channel-chip"><span class="feed-avatar-sm" style="'+avatarGrad(x.username)+'">'+escHtml(initial)+'</span><span>@'+escHtml(x.username)+'</span></div>'+
+      '<span class="feed-type-icon" aria-hidden="true"><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="12" height="14" rx="1.5"/><path d="M7 7h6M7 10h6M7 13h4"/></svg></span></div></div>';
+  }
   return '<div class="explore-item" tabindex="0" role="button" style="aspect-ratio:3/4" onclick="openHomePost(\''+x.username+'\',\''+x.id+'\')" onkeydown="if(event.key===\'Enter\'){this.click()}">'+
-    tileImg(img,x.username,(ch.title||x.username||'?')[0].toUpperCase(),{w:400})+
-    (x.hasVideo?'<div class="feed-video-badge">▶</div>':'')+
-    '<div class="explore-item-overlay"><div class="explore-item-info"><div class="explore-stat">'+escHtml(x.channelTitle||x.username)+'</div><div class="explore-label">'+(x.text?escHtml(x.text.slice(0,28)):'')+'</div></div></div></div>';
+    tileImg(img,x.username,initial,{w:240})+
+    (x.hasVideo?'<div class="feed-video-badge"><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="11" height="11" rx="1.5"/><path d="M13.5 8.5l4-2.5v8l-4-2.5"/></svg></div>':'')+
+    '<div class="explore-item-overlay"><div class="explore-item-info"><div class="explore-stat">'+escHtml(x.channelTitle||x.username)+'</div><div class="explore-label">'+(rawText?escHtml(rawText.slice(0,28)):'')+'</div></div></div></div>';
 }
 
 function homeHeaderHtml(all){
@@ -4774,7 +4974,11 @@ function renderFilterBar(){
   for(const c of f.cats)parts.push(categoryLabel(c));
   for(const l of f.langs)parts.push(langLabel(l));
   for(const ty of f.types)parts.push(typeLabel(ty));
-  // The bar only makes sense where the filters apply.
+  const sheetCount=f.langs.length+f.types.length+(state.exploreSort&&state.exploreSort!=='name'?1:0);
+  const btnBadge=document.getElementById('filtersBtnBadge');
+  if(btnBadge)btnBadge.textContent=sheetCount?String(sheetCount):'';
+  const barBadge=document.getElementById('filterBarBadge');
+  if(barBadge)barBadge.textContent=parts.length?String(parts.length):'';
   const visible=state.currentTab==='explore'||state.currentTab==='search';
   bar.classList.toggle('show',parts.length>0&&visible);
   const summary=document.getElementById('filterSummary');
@@ -4783,6 +4987,35 @@ function renderFilterBar(){
   if(clearBtn)clearBtn.textContent=t('clear_filters');
   const shareBtn=document.getElementById('shareFiltersBtn');
   if(shareBtn)shareBtn.textContent=t('share_filters');
+  if(document.getElementById('filtersOverlay')?.classList.contains('open'))renderFiltersSheet();
+}
+function openFiltersSheet(){
+  renderFiltersSheet();
+  document.getElementById('filtersOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeFiltersSheet(){
+  document.getElementById('filtersOverlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+function renderFiltersSheet(){
+  const body=document.getElementById('filtersSheetBody');
+  if(!body)return;
+  const f=filterState();
+  const langs=[['all',t('all')],['fa','فارسی'],['en','English']];
+  const types=[['all',t('all')],['video',t('clip')],['image',t('image')],['text',t('text')]];
+  const s=state.exploreSort||'name';
+  const sortOpts='<option value="newest"'+(s==='newest'?' selected':'')+'>'+t('by_activity')+'</option>'+'<option value="oldest"'+(s==='oldest'?' selected':'')+'>'+t('oldest')+'</option>'+'<option value="name"'+(s==='name'?' selected':'')+'>'+t('by_name')+'</option>'+'<option value="name-desc"'+(s==='name-desc'?' selected':'')+'>'+t('by_name_desc')+'</option>'+'<option value="posts"'+(s==='posts'?' selected':'')+'>'+t('by_posts')+'</option>';
+  body.innerHTML=
+    '<div class="filter-sheet-sec"><div class="filter-sheet-lbl">Language</div><div class="filter-sheet-chips">'+
+    langs.map(l=>'<button class="lang-chip '+((l[0]==='all'&&!f.langs.length)||f.langs.includes(l[0])?'active':'')+'" onclick="'+(l[0]==='all'?'state.filterLangs=[];saveFilters();syncUrlFilters(true);renderFilterBar();renderFilterChips();applyFiltersToView()':'toggleFilter(\'langs\',\''+l[0]+'\')')+'">'+escHtml(l[1])+'</button>').join('')+
+    '</div></div>'+
+    '<div class="filter-sheet-sec"><div class="filter-sheet-lbl">'+escHtml(t('by_type'))+'</div><div class="filter-sheet-chips">'+
+    types.map(ty=>'<button class="etype-chip '+((ty[0]==='all'&&!f.types.length)||f.types.includes(ty[0])?'active':'')+'" onclick="toggleExploreType(\''+ty[0]+'\')">'+escHtml(ty[1])+'</button>').join('')+
+    '</div></div>'+
+    '<div class="filter-sheet-sec"><div class="filter-sheet-lbl">'+escHtml(t('sort'))+'</div>'+
+    '<select class="sug-field" style="width:100%" aria-label="'+escAttr(t('sort'))+'" onchange="setExploreSort(this.value);renderFiltersSheet()">'+sortOpts+'</select></div>'+
+    '<div class="modal-actions" style="margin-bottom:0"><button class="modal-btn modal-btn-secondary" onclick="clearFilters()">'+escHtml(t('clear_filters'))+'</button><button class="modal-btn modal-btn-primary" onclick="closeFiltersSheet()">OK</button></div>';
 }
 function renderCategories(){renderFilterChips()}
 
@@ -4849,7 +5082,7 @@ function tilePh(user,initial){return '<div class="tile-ph" style="background:'+a
 // avatar URL still shows the channel letter instead of a broken-image icon.
 function avatarInner(u,title,size){
   const initial=(title||u||'?')[0].toUpperCase();
-  return '<span class="av-initial">'+escHtml(initial)+'</span>'+(u?'<img src="'+escAttr(thumbUrl(u,size||120))+'" data-fb="'+escAttr(u)+'" alt="" loading="lazy" onerror="imgFail(this)">':'');
+  return '<span class="av-initial">'+escHtml(initial)+'</span>'+(u?'<img src="'+escAttr(thumbUrl(u,size||120))+'" data-fb="'+escAttr(u)+'" alt="" loading="lazy" decoding="async" onload="this.classList.add(\'img-loaded\')" onerror="imgFail(this)">':'');
 }
 function tileImg(u,user,initial,opts){
   opts=opts||{};
@@ -4857,7 +5090,7 @@ function tileImg(u,user,initial,opts){
   if(!u)return ph;
   const src=thumbUrl(u,opts.w||400);
   const fb=src===u?'':' data-fb="'+escAttr(u)+'"';
-  return ph+'<img src="'+escAttr(src)+'"'+fb+' alt="" loading="'+(opts.eager?'eager':'lazy')+'" decoding="async" onerror="imgFail(this)">';
+  const prio=opts.priority?' fetchpriority="high"':'';return ph+'<img src="'+escAttr(src)+'"'+fb+' alt="" loading="'+(opts.eager?'eager':'lazy')+'" decoding="async"'+prio+' onload="this.classList.add(\'img-loaded\')" onerror="imgFail(this)">';
 }
 // Called by every thumbnail's onerror: try the original URL once, then hide the
 // image so the gradient placeholder underneath shows through.
@@ -5052,6 +5285,8 @@ Object.assign(window, {
   clearLivePosts,
   closeChannelModal,
   closeCompare,
+  closeFiltersSheet,
+  openFiltersSheet,
   closeFolderPicker,
   closeFullText,
   closeNotifModal,
@@ -5237,10 +5472,18 @@ Object.assign(window, {
     <button class="nav-tab" data-tab="feed" data-i18n="tab_feed"><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="6" height="6" rx="1"/><rect x="11" y="3" width="6" height="6" rx="1"/><rect x="3" y="11" width="6" height="6" rx="1"/><rect x="11" y="11" width="6" height="6" rx="1"/></svg><span class="i18n-lbl">Feed</span></button>
     <button class="nav-tab" data-tab="favorites" data-i18n="tab_favorites"><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 16.5s-6-3.8-6-8.2A3.5 3.5 0 0 1 10 6a3.5 3.5 0 0 1 6 2.3c0 4.4-6 8.2-6 8.2z"/></svg><span class="i18n-lbl">Favorites</span></button>
   </nav>
-  <div class="categories-bar" id="categoriesBar" style="min-height:46px"></div>
+  <div class="categories-wrap" id="categoriesWrap">
+    <div class="categories-bar" id="categoriesBar" style="min-height:46px"></div>
+    <button class="filters-sheet-btn" id="filtersSheetBtn" onclick="openFiltersSheet()" aria-label="Filters">
+      <svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h14M6 10h8M8 15h4"/></svg>
+      <span data-i18n="filters">Filters</span>
+      <span class="filters-count-badge" id="filtersBtnBadge"></span>
+    </button>
+  </div>
   <div class="lang-filter" id="langFilter"><button class="lang-chip active" data-lang="all"> <span data-i18n="all">All</span></button><button class="lang-chip" data-lang="fa"> فارسی</button><button class="lang-chip" data-lang="en"> English</button></div>
   <div class="filter-bar" id="filterBar">
     <span class="filter-bar-label" data-i18n="filters"> Filters</span>
+    <span class="filters-count-badge" id="filterBarBadge"></span>
     <span class="filter-summary" id="filterSummary"></span>
     <button class="filter-btn" id="clearFiltersBtn" onclick="clearFilters()"> Clear</button>
     <button class="filter-btn primary" id="shareFiltersBtn" onclick="shareFilters()"> Share</button>
@@ -5251,6 +5494,18 @@ Object.assign(window, {
   </div>
   <div id="content" style="min-height:80vh"><div class="loading"><div class="spinner"></div><span data-i18n="loading">Loading...</span></div></div>
 </main>
+
+<!-- FILTERS BOTTOM SHEET -->
+<div class="modal-overlay" id="filtersOverlay" role="dialog" aria-modal="true" aria-label="Filters">
+  <div class="modal" style="max-width:480px">
+    <div class="modal-header">
+      <div class="modal-avatar" style="background:var(--accent-strong)"><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5h14M6 10h8M8 15h4"/></svg></div>
+      <div><div class="modal-title" data-i18n="filters">Filters</div></div>
+      <button class="modal-close" aria-label="Close" onclick="closeFiltersSheet()"><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15"/></svg></button>
+    </div>
+    <div class="modal-body" id="filtersSheetBody"></div>
+  </div>
+</div>
 
 <!-- SETTINGS MODAL -->
 <div class="modal-overlay" id="settingsOverlay" role="dialog" aria-modal="true" aria-label="Settings">
