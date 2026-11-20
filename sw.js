@@ -30,7 +30,7 @@ self.addEventListener('install', event => {
     caches.open(CACHE_NAME).then(cache =>
       Promise.all(
         STATIC_ASSETS.map(url =>
-          cache.add(new Request(url, { cache: 'reload' })).catch(() => {})
+          cache.add(new Request(url, { cache: 'default' })).catch(() => {})
         )
       )
     )

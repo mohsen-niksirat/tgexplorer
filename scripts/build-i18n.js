@@ -51,8 +51,11 @@ export const RTL_LANGS = ['fa', 'ar'];
 
 export function applyLang(lang) {
   const t = I18N[lang] || I18N.en;
+  const isRtl = RTL_LANGS.includes(lang) ? 'rtl' : 'ltr';
+  if (document.documentElement.lang === lang && document.documentElement.dir === isRtl && window._appliedLang === lang) return;
+  window._appliedLang = lang;
   document.documentElement.lang = lang;
-  document.documentElement.dir = RTL_LANGS.includes(lang) ? 'rtl' : 'ltr';
+  document.documentElement.dir = isRtl;
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const k = el.dataset.i18n;
     if (!t[k]) return;
