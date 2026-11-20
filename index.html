@@ -2402,7 +2402,7 @@ function ensurePostsLoaded() {
 // ============================================================
 // INIT
 // ============================================================
-document.addEventListener('DOMContentLoaded',()=>{applyTheme(state.theme);applyLang(state.lang);applyFontSize();initTelegramWebApp();watchTgBackButton();document.getElementById('langSelect').value=state.lang;readUrlFilters(false);syncUrlFilters(false);renderFilterChips();renderFilterBar();setSearchMode(state.searchMode==='posts'?'posts':'channels');showApp();requestAnimationFrame(()=>setTimeout(ensurePostsLoaded,0));if(!state.workerUrl&&!localStorage.getItem('tgexp_setup_hint')&&!localStorage.getItem('tgexp_setup_skipped')){localStorage.setItem('tgexp_setup_hint','1');setTimeout(()=>toast(t('proxy_hint')),1500)}bindEvents();registerSW();registerPeriodicSync();syncWatchList();checkPWA();checkSharedFolder();checkSharedChannel();initNotifs();initNetStatus();window.addEventListener('popstate',()=>{readUrlFilters(true);renderFilterChips();renderFilterBar();applyFiltersToView()})});
+document.addEventListener('DOMContentLoaded',()=>{applyTheme(state.theme);applyLang(state.lang);applyFontSize();initTelegramWebApp();watchTgBackButton();document.getElementById('langSelect').value=state.lang;readUrlFilters(false);syncUrlFilters(false);renderFilterChips();renderFilterBar();setSearchMode(state.searchMode==='posts'?'posts':'channels');showApp();window.addEventListener('load',()=>{if('requestIdleCallback'in window)requestIdleCallback(()=>ensurePostsLoaded(),{timeout:2500});else setTimeout(ensurePostsLoaded,500)});if(!state.workerUrl&&!localStorage.getItem('tgexp_setup_hint')&&!localStorage.getItem('tgexp_setup_skipped')){localStorage.setItem('tgexp_setup_hint','1');setTimeout(()=>toast(t('proxy_hint')),1500)}bindEvents();registerSW();registerPeriodicSync();syncWatchList();checkPWA();checkSharedFolder();checkSharedChannel();initNotifs();initNetStatus();window.addEventListener('popstate',()=>{readUrlFilters(true);renderFilterChips();renderFilterBar();applyFiltersToView()})});
 
 // ============================================================
 // EVENTS
@@ -2847,7 +2847,7 @@ function showMoreExplore(){
 // Back to the first page (used when a filter or the sort changes).
 function resetExplorePage(){state.explorePage=EXPLORE_PAGE}
 
-async function loadExplore(){const content=document.getElementById('content');content.innerHTML=renderSkeletons(9);let channels=[];let live=false;const f=filterState();if(f.types.length)await ensurePostsLoaded();const localOnly=['podcast','cinema'];const qCat=f.cats.length===1?f.cats[0]:'all';const qLang=f.langs.length===1?f.langs[0]:(state.lang||'en');if(state.workerUrl&&!localOnly.includes(qCat)&&!isOffline()){const url=qCat==='all'?`/api/trending?page=1&lang=${qLang}`:`/api/trending?cat=${qCat}&page=1&lang=${qLang}`;const data=await fetchWorker(url);if(data&&data.channels&&data.channels.length){channels=data.channels;live=true}else{setNetBanner('fallback',t('net_fallback'))}}if(!channels.length){channels=getLocalExplore();channels=applyExploreFilters(channels)}else{channels=applyExploreFilters(channels,true)}if(isOffline())setNetBanner('offline',t('net_offline'));else if(live)setNetBanner('ok');state.searchResults=channels;if(state.currentTab==='explore')state.currentView='explore';renderResults()}
+async function loadExplore(){const content=document.getElementById('content');let channels=[];let live=false;const f=filterState();if(f.types.length)await ensurePostsLoaded();const localOnly=['podcast','cinema'];const qCat=f.cats.length===1?f.cats[0]:'all';const qLang=f.langs.length===1?f.langs[0]:(state.lang||'en');if(state.workerUrl&&!localOnly.includes(qCat)&&!isOffline()){content.innerHTML=renderSkeletons(9);const url=qCat==='all'?`/api/trending?page=1&lang=${qLang}`:`/api/trending?cat=${qCat}&page=1&lang=${qLang}`;const data=await fetchWorker(url);if(data&&data.channels&&data.channels.length){channels=data.channels;live=true}else{setNetBanner('fallback',t('net_fallback'))}}if(!channels.length){channels=getLocalExplore();channels=applyExploreFilters(channels)}else{channels=applyExploreFilters(channels,true)}if(isOffline())setNetBanner('offline',t('net_offline'));else if(live)setNetBanner('ok');state.searchResults=channels;if(state.currentTab==='explore')state.currentView='explore';renderResults()}
 
 // ============================================================
 // FEED (Instagram-like)
@@ -3409,7 +3409,8 @@ function scrollPostModalTop(){
 function closePostModal(){document.querySelectorAll('#postModalBody video').forEach(function(v){try{v.pause();v.removeAttribute('src');v.load()}catch(e){}});document.getElementById('postOverlay').classList.remove('open');document.body.style.overflow='';const pbtn=document.getElementById('postScrollTop');if(pbtn)pbtn.style.display='none'}
 
 function closeChannelModal(){document.getElementById('channelOverlay').classList.remove('open');document.body.style.overflow=''}
-function openChannel(username){
+async function openChannel(username){
+  if(typeof CHANNEL_POSTS==='undefined')await ensurePostsLoaded();
   const ch=getAllChannels().find(c=>c.username===username)||{username,title:username};
   const avEl=document.getElementById('modalAvatar');avEl.style.cssText=avatarGrad(username);avEl.innerHTML=avatarInner(ch.avatar,ch.title||username,160)
   document.getElementById('modalTitle').textContent=ch.title||username;
@@ -5002,7 +5003,7 @@ function imgFail(el){
   const p=el.parentElement;
   if(p)p.classList.add('no-media');
 }
-function getAllChannels(){const chs=CHANNEL_DB;if(typeof CHANNEL_AVATARS==='undefined')return chs;return chs.map(ch=>ch.avatar?ch:{...ch,avatar:CHANNEL_AVATARS[ch.username]||''})}
+let _allChannelsCache=null;function getAllChannels(){if(_allChannelsCache)return _allChannelsCache;const chs=CHANNEL_DB;if(typeof CHANNEL_AVATARS==='undefined')return chs;_allChannelsCache=chs.map(ch=>ch.avatar?ch:{...ch,avatar:CHANNEL_AVATARS[ch.username]||''});return _allChannelsCache}
 function getLocalExplore(category){const all=getAllChannels();const f=filterState();let out=all;if(category&&category!=='all')out=out.filter(ch=>(ch.tags||[]).includes(category));else if(f.cats.length)out=out.filter(ch=>f.cats.some(c=>(ch.tags||[]).includes(c)));if(f.langs.length)out=out.filter(ch=>f.langs.includes(ch.lang||'en'));return out}
 
 // ============================================================
