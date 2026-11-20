@@ -2347,22 +2347,48 @@ body { overflow-x: clip; }
       document.body.appendChild(s);
     });
     </script>
-<script src="posts.js" defer></script>
 <script src="channels.js" defer></script>
 <script src="avatars.js" defer></script>
 <script type="module">
 // ============================================================
 // MODULES
 // ============================================================
-import { WORKER_CODE } from './js/worker-code.js';
 import { applyLang, t, I18N, I18N_UI, RTL_LANGS } from './js/i18n.js';
 import { state } from './js/state.js';
+
+let _workerCodePromise = null;
+async function getWorkerCode() {
+  if (!_workerCodePromise) _workerCodePromise = import('./js/worker-code.js').then(m => m.WORKER_CODE);
+  return _workerCodePromise;
+}
+let _postsLoadPromise = null;
+function ensurePostsLoaded() {
+  if (typeof CHANNEL_POSTS !== 'undefined') return Promise.resolve();
+  if (_postsLoadPromise) return _postsLoadPromise;
+  _postsLoadPromise = new Promise(resolve => {
+    const el = document.createElement('script');
+    el.src = 'posts.js';
+    el.async = true;
+    el.onload = () => {
+      try {
+        if (typeof syncWatchList === 'function') syncWatchList();
+        if (state.currentTab === 'explore' && !state.searchQuery && !window._sharedFolder) applyFiltersToView();
+        else if (state.currentTab === 'feed' && (!state.feedPool || !state.feedPool.length)) loadFeed();
+        else if (state.currentTab === 'home') loadHomeFeed();
+      } catch (e) {}
+      resolve();
+    };
+    el.onerror = () => resolve();
+    document.head.appendChild(el);
+  });
+  return _postsLoadPromise;
+}
 // ============================================================
 
 // ============================================================
 // INIT
 // ============================================================
-document.addEventListener('DOMContentLoaded',()=>{applyTheme(state.theme);applyLang(state.lang);applyFontSize();initTelegramWebApp();watchTgBackButton();document.getElementById('workerCodeBlock').textContent=WORKER_CODE;document.getElementById('langSelect').value=state.lang;readUrlFilters(false);syncUrlFilters(false);renderFilterChips();renderFilterBar();setSearchMode(state.searchMode==='posts'?'posts':'channels');showApp();if(!state.workerUrl&&!localStorage.getItem('tgexp_setup_hint')&&!localStorage.getItem('tgexp_setup_skipped')){localStorage.setItem('tgexp_setup_hint','1');setTimeout(()=>toast(t('proxy_hint')),1500)}bindEvents();registerSW();registerPeriodicSync();syncWatchList();checkPWA();checkSharedFolder();checkSharedChannel();initNotifs();initNetStatus();window.addEventListener('popstate',()=>{readUrlFilters(true);renderFilterChips();renderFilterBar();applyFiltersToView()})});
+document.addEventListener('DOMContentLoaded',()=>{applyTheme(state.theme);applyLang(state.lang);applyFontSize();initTelegramWebApp();watchTgBackButton();document.getElementById('langSelect').value=state.lang;readUrlFilters(false);syncUrlFilters(false);renderFilterChips();renderFilterBar();setSearchMode(state.searchMode==='posts'?'posts':'channels');showApp();requestAnimationFrame(()=>setTimeout(ensurePostsLoaded,0));if(!state.workerUrl&&!localStorage.getItem('tgexp_setup_hint')&&!localStorage.getItem('tgexp_setup_skipped')){localStorage.setItem('tgexp_setup_hint','1');setTimeout(()=>toast(t('proxy_hint')),1500)}bindEvents();registerSW();registerPeriodicSync();syncWatchList();checkPWA();checkSharedFolder();checkSharedChannel();initNotifs();initNetStatus();window.addEventListener('popstate',()=>{readUrlFilters(true);renderFilterChips();renderFilterBar();applyFiltersToView()})});
 
 // ============================================================
 // EVENTS
@@ -2494,7 +2520,7 @@ function tgGoBack(){
 // ============================================================
 // SETUP / APP
 // ============================================================
-function showSetup(){document.getElementById('setupScreen').style.display='';document.getElementById('heroSection').style.display='none';document.getElementById('mainContent').style.display='none';updateConnBadge()}
+function showSetup(){getWorkerCode().then(c=>{const b=document.getElementById('workerCodeBlock');if(b)b.textContent=c}).catch(()=>{});document.getElementById('setupScreen').style.display='';document.getElementById('heroSection').style.display='none';document.getElementById('mainContent').style.display='none';updateConnBadge()}
 function showApp(){document.getElementById('setupScreen').style.display='none';document.getElementById('heroSection').style.display='';document.getElementById('mainContent').style.display='';updateConnBadge();renderCategories();loadExplore();startNotifPoll()}
 function skipSetup(){state.workerUrl='';localStorage.setItem('tgexp_setup_skipped','1');showApp()}
 function resetApp(){localStorage.removeItem('tgexp_worker');localStorage.removeItem('tgexp_setup_skipped');state.workerUrl='';closeSettings();showSetup()}
@@ -2516,7 +2542,7 @@ function saveSettings(){const url=document.getElementById('settingsWorkerUrl').v
 // ============================================================
 // COPY WORKER CODE
 // ============================================================
-function copyWorkerCode(){navigator.clipboard.writeText(WORKER_CODE).then(()=>{const btn=document.querySelector('.copy-btn');btn.textContent=' Copied!';btn.classList.add('copied');toast(t('code_copied'));setTimeout(()=>{btn.textContent=t('copy_code');btn.classList.remove('copied')},2000)})}
+async function copyWorkerCode(){const code=await getWorkerCode();navigator.clipboard.writeText(code).then(()=>{const btn=document.querySelector('.copy-btn');btn.textContent=' Copied!';btn.classList.add('copied');toast(t('code_copied'));setTimeout(()=>{btn.textContent=t('copy_code');btn.classList.remove('copied')},2000)})}
 
 // ============================================================
 // TABS
@@ -2587,28 +2613,9 @@ function seedPostSources(){
 
 // Load the full per-channel archives (posts/<username>.json).
 async function loadArchiveSources(onProgress){
-  const seed=seedPostSources();
-  const names=Object.keys(seed);
-  const sources={...seed};
-  let done=0;
-  const CONCURRENCY=8;
-  let index=0;
-  async function worker(){
-    while(index<names.length){
-      const u=names[index++];
-      try{
-        const r=await fetch('posts/'+encodeURIComponent(u)+'.json',{signal:AbortSignal.timeout(10000)});
-        if(r.ok){
-          const arr=await r.json();
-          if(Array.isArray(arr)&&arr.length)sources[u]=arr;
-        }
-      }catch(e){}
-      done++;
-      if(onProgress)onProgress(done,names.length);
-    }
-  }
-  await Promise.all(Array.from({length:CONCURRENCY},worker));
-  return sources;
+  await ensurePostsLoaded();
+  const m=await import('./js/export.js');
+  return m.loadArchiveSources(seedPostSources(),onProgress);
 }
 
 // Group the hits by channel.
@@ -2671,7 +2678,7 @@ async function doPostSearch(query){
     }
     setNetBanner('fallback',t('net_fallback'));
   }
-  const sources=postSearchSources||seedPostSources();
+  await ensurePostsLoaded();const sources=postSearchSources||seedPostSources();
   postSearchHits=searchPostTexts(q,sources);
   renderPostSearchResults();
   const countEl=document.getElementById('resultsCount');
@@ -2826,7 +2833,7 @@ function showMoreExplore(){
 // Back to the first page (used when a filter or the sort changes).
 function resetExplorePage(){state.explorePage=EXPLORE_PAGE}
 
-async function loadExplore(){const content=document.getElementById('content');content.innerHTML=renderSkeletons(9);let channels=[];let live=false;const f=filterState();const localOnly=['podcast','cinema'];const qCat=f.cats.length===1?f.cats[0]:'all';const qLang=f.langs.length===1?f.langs[0]:(state.lang||'en');if(state.workerUrl&&!localOnly.includes(qCat)&&!isOffline()){const url=qCat==='all'?`/api/trending?page=1&lang=${qLang}`:`/api/trending?cat=${qCat}&page=1&lang=${qLang}`;const data=await fetchWorker(url);if(data&&data.channels&&data.channels.length){channels=data.channels;live=true}else{setNetBanner('fallback',t('net_fallback'))}}if(!channels.length){channels=getLocalExplore();channels=applyExploreFilters(channels)}else{channels=applyExploreFilters(channels,true)}if(isOffline())setNetBanner('offline',t('net_offline'));else if(live)setNetBanner('ok');state.searchResults=channels;if(state.currentTab==='explore')state.currentView='explore';renderResults()}
+async function loadExplore(){const content=document.getElementById('content');content.innerHTML=renderSkeletons(9);let channels=[];let live=false;const f=filterState();if(f.types.length)await ensurePostsLoaded();const localOnly=['podcast','cinema'];const qCat=f.cats.length===1?f.cats[0]:'all';const qLang=f.langs.length===1?f.langs[0]:(state.lang||'en');if(state.workerUrl&&!localOnly.includes(qCat)&&!isOffline()){const url=qCat==='all'?`/api/trending?page=1&lang=${qLang}`:`/api/trending?cat=${qCat}&page=1&lang=${qLang}`;const data=await fetchWorker(url);if(data&&data.channels&&data.channels.length){channels=data.channels;live=true}else{setNetBanner('fallback',t('net_fallback'))}}if(!channels.length){channels=getLocalExplore();channels=applyExploreFilters(channels)}else{channels=applyExploreFilters(channels,true)}if(isOffline())setNetBanner('offline',t('net_offline'));else if(live)setNetBanner('ok');state.searchResults=channels;if(state.currentTab==='explore')state.currentView='explore';renderResults()}
 
 // ============================================================
 // FEED (Instagram-like)
@@ -2856,7 +2863,7 @@ function filterFeedPosts(posts){
     return f.cats.some(c=>tags.includes(c));
   });
 }
-async function loadFeed(){
+async function loadFeed(){await ensurePostsLoaded();
   const content=document.getElementById('content');
   content.innerHTML=renderSkeletons(9);
   state.feedPool=[];state.feedPage=0;state.feedDone=false;window._feedLoading=false;
@@ -3032,7 +3039,7 @@ function renderExploreView(container,items){
   const searchHtml=state.exploreView==='list'?'<div style="padding:0 8px 10px"><input class="sug-field" id="exploreSearchInput" style="width:100%" placeholder="'+t('instant_search')+'" value="'+escAttr(state.exploreSearch)+'" oninput="setExploreSearch(this.value)"></div>':'';
   const listBody=filtered.length?exploreListViewHtml(filtered,colors):renderEmpty('',t('no_match'));
   const more=totalFiltered>page?'<div class="explore-more"><button class="explore-more-btn" onclick="showMoreExplore()">'+escHtml(t('show_more_channels'))+'</button></div>':'';
-  container.innerHTML='<div class="explore-toolbar-row">'+bar+exploreSortHtml()+'</div>'+searchHtml+(state.exploreView==='list'?listBody:`<div class="explore-grid">${filtered.map((ch,i)=>{
+  const renderExploreCard=(ch,i)=>{
     const posts=getChannelPosts(ch.username);
     const post=posts[0]||null;
     const img=goodImg((post&&post.image)||ch.image)||ch.avatar||'';
@@ -3064,8 +3071,21 @@ function renderExploreView(container,items){
         </div>
       </div>
     </div>`;
-  }).join('')}</div>`)+more;
-}function openPostModal(username, idx){
+  };
+  if(state.exploreView==='list'){
+    container.innerHTML='<div class="explore-toolbar-row">'+bar+exploreSortHtml()+'</div>'+searchHtml+listBody+more;
+    return;
+  }
+  const firstBatch=filtered.slice(0,6);
+  const restBatch=filtered.slice(6);
+  container.innerHTML='<div class="explore-toolbar-row">'+bar+exploreSortHtml()+'</div>'+searchHtml+'<div class="explore-grid" id="exploreGridChunk">'+firstBatch.map((ch,i)=>renderExploreCard(ch,i)).join('')+'</div>'+more;
+  if(restBatch.length){
+    requestAnimationFrame(()=>{
+      const grid=document.getElementById('exploreGridChunk');
+      if(grid)grid.insertAdjacentHTML('beforeend',restBatch.map((ch,i)=>renderExploreCard(ch,i+6)).join(''));
+    });
+  }
+}async function openPostModal(username, idx){await ensurePostsLoaded();
   idx=idx||0;
   const posts=getChannelPosts(username);
   if(!posts.length){openChannel(username);return}
@@ -3414,114 +3434,9 @@ async function archivedActivity(username,days){
 // ============================================================
 // COMPARE TWO CHANNELS
 // ============================================================
-let compareA='',compareB='';
-
-function openCompare(username){
-  compareA=username;
-  compareB='';
-  fillCompareSelect();
-  renderCompare();
-  document.getElementById('compareOverlay').classList.add('open');
-  document.body.style.overflow='hidden';
-}
-function closeCompare(){
-  document.getElementById('compareOverlay').classList.remove('open');
-  document.body.style.overflow='';
-}
-function pickCompareChannel(username){
-  compareB=username;
-  const select=document.getElementById('compareSelect');
-  if(select)select.value=username||'';
-  renderCompare();
-}
-// The list of channels to compare with.
-function fillCompareSelect(){
-  const select=document.getElementById('compareSelect');
-  if(!select)return;
-  const channels=getAllChannels().filter(c=>c.username.toLowerCase()!==compareA.toLowerCase());
-  select.innerHTML='<option value="">'+escHtml(t('compare_pick'))+'</option>'+
-    channels.map(c=>'<option value="'+escAttr(c.username)+'">'+escHtml(c.title||c.username)+' (@'+escHtml(c.username)+')</option>').join('');
-  select.value=compareB&&channels.some(c=>c.username===compareB)?compareB:'';
-}
-function compareColumn(username,canvasId){
-  if(!username)return '<div class="compare-empty">'+escHtml(t('compare_pick'))+'</div>';
-  const ch=getAllChannels().find(c=>c.username===username)||{username,title:username};
-  const posts=getChannelPosts(username);
-  const days=chartRange||7;
-  const activity=channelActivity(username,days);
-  const total=activity.reduce((s,d)=>s+d.posts,0);
-  const active=activity.filter(d=>d.posts>0).length;
-  const perDay=(total/days).toFixed(1);
-  const kw=postKeywords(posts,5);
-  return '<div class="compare-head">'+
-      '<div class="compare-avatar" style="'+avatarGrad(username)+'">'+escHtml((ch.title||username)[0].toUpperCase())+'</div>'+
-      '<div><div class="compare-name">'+escHtml(ch.title||username)+'</div><div class="compare-user">@'+escHtml(username)+(ch.members?' ·  '+escHtml(ch.members):'')+'</div></div>'+
-    '</div>'+
-    '<div class="compare-stats">'+
-      '<div class="compare-stat"><b>'+perDay+'</b><span>'+escHtml(t('posts_per_day'))+'</span></div>'+
-      '<div class="compare-stat"><b>'+posts.length+'</b><span>'+escHtml(t('total_posts'))+'</span></div>'+
-      '<div class="compare-stat"><b>'+active+'/'+days+'</b><span>'+escHtml(t('active_days'))+'</span></div>'+
-      '<div class="compare-stat"><b>'+total+'</b><span>'+escHtml(t('posts_in_range',days))+'</span></div>'+
-    '</div>'+
-    '<canvas class="compare-chart" id="'+canvasId+'"></canvas>'+
-    (kw.length?'<div class="compare-tags">'+kw.map(k=>'<span class="compare-tag">'+escHtml(k[0])+' · '+k[1]+'</span>').join('')+'</div>':'');
-}
-function renderCompare(){
-  const a=document.getElementById('compareColA');
-  const b=document.getElementById('compareColB');
-  if(!a||!b)return;
-  a.innerHTML=compareColumn(compareA,'compareChartA');
-  b.innerHTML=compareColumn(compareB,'compareChartB');
-  for(const [id,username] of [['compareChartA',compareA],['compareChartB',compareB]]){
-    const canvas=document.getElementById(id);
-    if(!canvas||!username)continue;
-    const activity=channelActivity(username,chartRange||7);
-    drawCompareChart(canvas,activity);
-  }
-}
-// A small chart for the compare view (the profile chart draws into its own
-// canvas, so it cannot be reused here).
-function drawCompareChart(canvas,data){
-  const ctx=canvas.getContext('2d');
-  const dpr=window.devicePixelRatio||1;
-  const rect=canvas.getBoundingClientRect();
-  if(!rect.width)return;
-  canvas.width=rect.width*dpr;canvas.height=rect.height*dpr;
-  ctx.scale(dpr,dpr);
-  const W=rect.width,H=rect.height;
-  const padding={top:8,right:6,bottom:18,left:6};
-  const chartW=W-padding.left-padding.right;
-  const chartH=H-padding.top-padding.bottom;
-  const values=data.map(d=>d.posts);
-  const maxVal=Math.max(...values,1);
-  const stepX=chartW/(values.length-1||1);
-  ctx.strokeStyle=getComputedStyle(document.documentElement).getPropertyValue('--border').trim()||'#e5e5e5';
-  ctx.lineWidth=0.5;
-  for(let i=0;i<=3;i++){
-    const y=padding.top+chartH*(1-i/3);
-    ctx.beginPath();ctx.moveTo(padding.left,y);ctx.lineTo(W-padding.right,y);ctx.stroke();
-  }
-  const gradient=ctx.createLinearGradient(0,padding.top,0,H-padding.bottom);
-  gradient.addColorStop(0,'rgba(0,136,204,0.35)');
-  gradient.addColorStop(1,'rgba(0,136,204,0.02)');
-  ctx.beginPath();
-  ctx.moveTo(padding.left,padding.top+chartH);
-  values.forEach((v,i)=>{
-    const x=padding.left+i*stepX;
-    const y=padding.top+chartH-(v/maxVal)*chartH;
-    ctx.lineTo(x,y);
-  });
-  ctx.lineTo(padding.left+stepX*(values.length-1),padding.top+chartH);
-  ctx.closePath();
-  ctx.fillStyle=gradient;ctx.fill();
-  ctx.beginPath();
-  values.forEach((v,i)=>{
-    const x=padding.left+i*stepX;
-    const y=padding.top+chartH-(v/maxVal)*chartH;
-    if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);
-  });
-  ctx.strokeStyle='#0088cc';ctx.lineWidth=2;ctx.stroke();
-}
+async function openCompare(username){return (await import('./js/compare.js')).openCompare(username)}
+async function closeCompare(){return (await import('./js/compare.js')).closeCompare()}
+async function pickCompareChannel(username){return (await import('./js/compare.js')).pickCompareChannel(username)}
 
 // ============================================================
 // CHANNEL PROFILE — activity, stats, content tags
@@ -4312,94 +4227,11 @@ function downloadBlob(content,filename,mime){
   setTimeout(()=>URL.revokeObjectURL(a.href),5000);
 }
 // Human-readable lines for a folder: one entry per channel/post.
-function folderExportLines(f){
-  const lines=[' '+f.name+' — Telegram Explorer',''];
-  const chans=f.items.filter(it=>it.type==='ch');
-  const posts=f.items.filter(it=>it.type==='post');
-  if(chans.length){
-    lines.push('Channels ('+chans.length+'):');
-    for(const it of chans){
-      const ch=getAllChannels().find(c=>c.username===it.username);
-      lines.push('- @'+it.username+(ch&&ch.title?' — '+ch.title:''));
-    }
-    lines.push('');
-  }
-  if(posts.length){
-    lines.push('Posts ('+posts.length+'):');
-    for(const it of posts){
-      const text=(it.label||'').replace(/\s+/g,' ').trim();
-      lines.push('- @'+it.username+'/'+it.postId+(text?' — '+text:''));
-    }
-    lines.push('');
-  }
-  if(!chans.length&&!posts.length)lines.push('(empty folder)');
-  return lines.join('\n');
-}
-function folderExportTxt(id){
-  const f=state.folders.find(x=>x.id===id);if(!f)return;
-  downloadBlob(folderExportLines(f),'tgexplorer-folder-'+f.name.replace(/[^\w؀-ۿ-]+/g,'_')+'.txt','text/plain;charset=utf-8');
-  toast(' '+t('toast_folder_saved',f.name));
-}
-function folderExportJson(id){
-  const f=state.folders.find(x=>x.id===id);if(!f)return;
-  downloadBlob(JSON.stringify({app:'tgexplorer_folder',folder:{name:f.name,icon:f.icon||'',items:f.items},exportedAt:new Date().toISOString()},null,2),'tgexplorer-folder-'+f.name.replace(/[^\w؀-ۿ-]+/g,'_')+'.json','application/json');
-  toast(' '+t('toast_folder_saved',f.name));
-}
-// A tiny single-page PDF. Helvetica/WinAnsi cannot draw non-Latin text, so
-// anything outside Latin-1 is replaced; the /Length and the xref table need
-// byte offsets, not JavaScript string lengths.
-function buildPdf(lines){
-  const esc=s=>String(s).replace(/\\/g,'\\\\').replace(/\(/g,'\\(').replace(/\)/g,'\\)');
-  const enc=new TextEncoder();
-  const byteLen=s=>enc.encode(s).length;
-  const body=lines.slice(0,48).map((l,i)=>{
-    const safe=String(l).replace(/[^\x20-\x7E\xA0-\xFF]/g,'?').slice(0,95);
-    return `BT /F1 11 Tf 40 ${750-i*16} Td (${esc(safe)}) Tj ET`;
-  }).join('\n');
-  const objects=[
-    '<< /Type /Catalog /Pages 2 0 R >>',
-    '<< /Type /Pages /Kids [3 0 R] /Count 1 >>',
-    '<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 4 0 R >> >> /Contents 5 0 R >>',
-    '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>',
-    `<< /Length ${byteLen(body)} >>\nstream\n${body}\nendstream`,
-  ];
-  let pdf='%PDF-1.4\n';
-  let bytes=byteLen(pdf);
-  const offsets=[];
-  objects.forEach((o,i)=>{
-    offsets.push(bytes);
-    const chunk=`${i+1} 0 obj\n${o}\nendobj\n`;
-    pdf+=chunk;bytes+=byteLen(chunk);
-  });
-  const xrefPos=bytes;
-  pdf+='xref\n0 '+(objects.length+1)+'\n0000000000 65535 f \n';
-  for(const off of offsets)pdf+=String(off).padStart(10,'0')+' 00000 n \n';
-  pdf+=`trailer\n<< /Size ${objects.length+1} /Root 1 0 R >>\nstartxref\n${xrefPos}\n%%EOF`;
-  return pdf;
-}
-function folderExportPdf(id){
-  const f=state.folders.find(x=>x.id===id);if(!f)return;
-  const pdf=buildPdf(folderExportLines(f).split('\n'));
-  downloadBlob(pdf,'tgexplorer-folder-'+f.name.replace(/[^\w؀-ۿ-]+/g,'_')+'.pdf','application/pdf');
-  toast(' '+t('toast_folder_saved',f.name));
-}
-// Export the saved-posts list (favorites → post tab).
-function exportPostsTxt(){
-  const items=state.postFavs||[];
-  const lines=[' Saved posts — Telegram Explorer',''];
-  for(const it of items)lines.push('- @'+it.username+'/'+it.postId+((it.text||'').replace(/\s+/g,' ').trim()?' — '+it.text.replace(/\s+/g,' ').trim().slice(0,120):''));
-  if(!items.length)lines.push('(no saved posts)');
-  downloadBlob(lines.join('\n'),'tgexplorer-posts.txt','text/plain;charset=utf-8');
-  toast(' '+t('toast_post_saved'));
-}
-function exportPostsPdf(){
-  const items=state.postFavs||[];
-  const lines=['Saved posts — Telegram Explorer',''];
-  for(const it of items)lines.push('@'+it.username+'/'+it.postId+' '+(it.text||'').replace(/\s+/g,' ').trim().slice(0,90));
-  if(!items.length)lines.push('(no saved posts)');
-  downloadBlob(buildPdf(lines),'tgexplorer-posts.pdf','application/pdf');
-  toast(' '+t('toast_post_saved'));
-}
+async function folderExportTxt(id){return (await import('./js/export.js')).folderExportTxt(id)}
+async function folderExportJson(id){return (await import('./js/export.js')).folderExportJson(id)}
+async function folderExportPdf(id){return (await import('./js/export.js')).folderExportPdf(id)}
+async function exportPostsTxt(){return (await import('./js/export.js')).exportPostsTxt()}
+async function exportPostsPdf(){return (await import('./js/export.js')).exportPostsPdf()}
 
 function decodeSharedFolder(p){
   try{
@@ -4575,7 +4407,7 @@ html+='<div class="folder-rule"><div class="folder-rule-head"> فیلتر خود
 // ============================================================
 // HOME FEED (merged favorites feed)
 // ============================================================
-function loadHomeFeed(){
+async function loadHomeFeed(){await ensurePostsLoaded();
   const content=document.getElementById('content');
   if(!state.favorites.length){
     content.innerHTML='<div class="empty-state"><div class="empty-icon"></div><h3>'+escHtml(t('home_empty_title'))+'</h3><p>'+escHtml(t('home_empty_desc'))+'</p><button class="modal-btn modal-btn-primary" style="max-width:220px;margin:16px auto 0" onclick="switchTab(\'explore\')">'+t('tab_explore')+'</button></div>';
@@ -5321,7 +5153,12 @@ Object.assign(window, {
   folderExportPdf,
   folderExportTxt,
   fpToggle,
+  avatarGrad,
+  channelActivity,
+  escHtml,
   getAllChannels,
+  getChannelPosts,
+  postKeywords,
   getChannelPosts,
   imgFail,
   getLocalExplore,

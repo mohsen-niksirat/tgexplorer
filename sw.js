@@ -3,7 +3,7 @@
 // Handles caching for offline support and PWA
 // ============================================================
 
-const CACHE_NAME = 'tgexplorer-202611201135';
+const CACHE_NAME = 'tgexplorer-202611201550';
 // The watchlist/seen-post state lives in its own, deliberately unversioned
 // cache: `activate` purges every old shell cache, but the user's watch state
 // must survive a deploy.
@@ -18,6 +18,8 @@ const STATIC_ASSETS = [
   './js/i18n.js',
   './js/state.js',
   './js/worker-code.js',
+  './js/compare.js',
+  './js/export.js',
 ];
 
 // Install: cache static assets. Data files are best-effort — a missing
