@@ -12,6 +12,9 @@ permissions:
 jobs:
   crawl:
     runs-on: ubuntu-latest
+    env:
+      NOTIFY_SECRET: ${{ secrets.NOTIFY_SECRET }}
+      APPROVED_CHANNELS_URL: ${{ secrets.APPROVED_CHANNELS_URL }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -23,10 +26,7 @@ jobs:
 
       - name: Sync bot-approved channels
         id: sync
-        if: secrets.APPROVED_CHANNELS_URL != '' && secrets.NOTIFY_SECRET != ''
-        env:
-          APPROVED_CHANNELS_URL: ${{ secrets.APPROVED_CHANNELS_URL }}
-          NOTIFY_SECRET: ${{ secrets.NOTIFY_SECRET }}
+        if: env.APPROVED_CHANNELS_URL != '' && env.NOTIFY_SECRET != ''
         run: node scripts/sync-approved-channels.js
 
       - name: Crawl, bump SW cache, commit and push
@@ -63,11 +63,9 @@ jobs:
           bash scripts/push-branch.sh main channels.js posts.js posts archive sw.js
 
       - name: Trigger bot new-post notifications
-        if: success() && secrets.NOTIFY_SECRET != ''
-        env:
-          NOTIFY_SECRET: ${{ secrets.NOTIFY_SECRET }}
+        if: success() && env.NOTIFY_SECRET != ''
         run: |
-          curl -sS -X POST "https://app8812852999.tgcloud.ai/api/checkNotifications" \
+          curl -sS -w "\nHTTP %{http_code}\n" -X POST "https://app8812852999.tgcloud.ai/api/checkNotifications" \
             -H "Content-Type: application/json" \
             -H "X-Notify-Secret: ${NOTIFY_SECRET}" \
             -d "{\"secret\":\"${NOTIFY_SECRET}\"}" || true
