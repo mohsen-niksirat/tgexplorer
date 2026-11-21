@@ -14,7 +14,7 @@ import {
 } from '../lib/texts.js';
 
 // Owner's numeric Telegram user ID for /stats (read your ID from the `users` table):
-export const OWNER_ID = 0; // <-- PLACEHOLDER: replace 0 with owner's telegram_id
+export const OWNER_ID = 65807806;
 
 function parseCommand(text, isGroup) {
   if (!text || !text.startsWith('/')) return null;
@@ -81,7 +81,7 @@ export default async function (message) {
           await api.sendMessage({
             chat_id: message.chat.id,
             text: channelNotFoundText(lang),
-            reply_markup: buildExploreKeyboard(lang, ''),
+            reply_markup: buildExploreKeyboard(lang, channelUsername),
           });
           return;
         }

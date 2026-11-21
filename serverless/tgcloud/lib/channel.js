@@ -56,7 +56,26 @@ export function parseTmeChannelHtml(html) {
   };
 }
 
-async function getVerifiedUsernames() {
+function parseChannelsJsEntries(text) {
+  const map = {};
+  const lines = String(text || '').split(/\r?\n/);
+  for (const line of lines) {
+    const um = line.match(/username\s*:\s*['"]([A-Za-z0-9_]+)['"]/);
+    if (!um) continue;
+    const u = um[1].toLowerCase();
+    const tm = line.match(/title\s*:\s*['"]([^'"]*)['"]/);
+    const mm = line.match(/members\s*:\s*['"]([^'"]*)['"]/);
+    const dm = line.match(/description\s*:\s*['"]([^'"]*)['"]/);
+    map[u] = {
+      title: tm ? tm[1] : um[1],
+      subs: mm ? `${mm[1]} subscribers` : '',
+      description: dm ? dm[1] : '',
+    };
+  }
+  return map;
+}
+
+async function getVerifiedChannelsMap() {
   const now = Math.floor(Date.now() / 1000);
   try {
     const cached = await db
@@ -65,7 +84,10 @@ async function getVerifiedUsernames() {
       .where(eq(channelCache.username, VERIFIED_KEY))
       .get();
     if (cached && now - (cached.fetchedAt || 0) < TTL_SEC && cached.description) {
-      return new Set(JSON.parse(cached.description));
+      const parsed = JSON.parse(cached.description);
+      if (parsed && !Array.isArray(parsed) && typeof parsed === 'object') {
+        return parsed;
+      }
     }
   } catch (e) {}
 
@@ -73,14 +95,10 @@ async function getVerifiedUsernames() {
     const res = await fetch(`${APP_URL}channels.js`);
     if (res.ok) {
       const text = await res.text();
-      const list = [];
-      const re = /username\s*:\s*['"]([A-Za-z0-9_]+)['"]/g;
-      let m;
-      while ((m = re.exec(text)) !== null) {
-        list.push(m[1].toLowerCase());
-      }
-      if (list.length) {
-        const json = JSON.stringify(list);
+      const map = parseChannelsJsEntries(text);
+      const count = Object.keys(map).length;
+      if (count) {
+        const json = JSON.stringify(map);
         await db
           .insert(channelCache)
           .values({
@@ -88,27 +106,28 @@ async function getVerifiedUsernames() {
             title: 'VERIFIED_DB',
             description: json,
             image: '',
-            subs: String(list.length),
+            subs: String(count),
             verified: true,
             fetchedAt: now,
           })
           .onConflictDoUpdate({
             target: channelCache.username,
-            set: { description: json, subs: String(list.length), fetchedAt: now },
+            set: { description: json, subs: String(count), fetchedAt: now },
           })
           .run();
-        return new Set(list);
+        return map;
       }
     }
   } catch (e) {}
 
-  return new Set();
+  return {};
 }
 
 export async function getChannelCardData(username) {
   const now = Math.floor(Date.now() / 1000);
-  const verifiedSet = await getVerifiedUsernames();
-  const isVerified = verifiedSet.has(username);
+  const verifiedMap = await getVerifiedChannelsMap();
+  const verifiedEntry = verifiedMap[username] || null;
+  const isVerified = Boolean(verifiedEntry);
 
   try {
     const cached = await db
@@ -130,13 +149,27 @@ export async function getChannelCardData(username) {
     }
   } catch (e) {}
 
+  let parsed = null;
   try {
     const res = await fetch(`https://t.me/${encodeURIComponent(username)}`);
-    if (!res.ok) return { found: false };
-    const html = await res.text();
-    const parsed = parseTmeChannelHtml(html);
-    if (!parsed) return { found: false };
+    if (res.ok) {
+      const html = await res.text();
+      parsed = parseTmeChannelHtml(html);
+    }
+  } catch (e) {}
 
+  if (!parsed && verifiedEntry) {
+    parsed = {
+      title: verifiedEntry.title || `@${username}`,
+      description: verifiedEntry.description || '',
+      image: '',
+      subs: verifiedEntry.subs || '',
+    };
+  }
+
+  if (!parsed) return { found: false };
+
+  try {
     await db
       .insert(channelCache)
       .values({
@@ -160,18 +193,16 @@ export async function getChannelCardData(username) {
         },
       })
       .run();
+  } catch (e) {}
 
-    return {
-      found: true,
-      username,
-      title: parsed.title,
-      description: parsed.description,
-      image: parsed.image,
-      subs: parsed.subs,
-      verified: isVerified,
-      cached: false,
-    };
-  } catch (e) {
-    return { found: false };
-  }
+  return {
+    found: true,
+    username,
+    title: parsed.title,
+    description: parsed.description,
+    image: parsed.image,
+    subs: parsed.subs,
+    verified: isVerified,
+    cached: false,
+  };
 }
