@@ -30,3 +30,18 @@ while ((m = re.exec(src)) !== null) {
     }
   }
 }
+
+// Guard against unescaped renderer interpolations in index.html
+const unescapedGuards = [
+  { name: 'raw ${tg} in card-tag', re: /\$\{tg\}/ },
+  { name: 'raw ${ch.members', re: /\$\{ch\.members/ },
+  { name: 'raw src="${p.video}"', re: /src="\$\{p\.video\}"/ },
+  { name: 'raw x.video in video src', re: /<video src="\'\+x\.video/ },
+];
+for (const g of unescapedGuards) {
+  if (g.re.test(src)) {
+    console.error('XSS guard failed: ' + g.name);
+    process.exit(1);
+  }
+}
+console.log('XSS renderer guard: OK');
