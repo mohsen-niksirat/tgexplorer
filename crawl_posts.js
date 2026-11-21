@@ -70,6 +70,19 @@ function escJsStr(s) {
     .trim();
 }
 
+function cleanTmeDescription(raw) {
+  let s = String(raw == null ? '' : raw)
+    .replace(/https?:\/\/\S+/gi, ' ')
+    .replace(/\b(?:www\.|t\.me\/)\S+/gi, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+  if (s.length <= 140) return s;
+  const slice = s.slice(0, 140);
+  const lastSpace = slice.lastIndexOf(' ');
+  const cut = lastSpace > 80 ? slice.slice(0, lastSpace) : slice;
+  return cut.replace(/[,.;:!?\s-]+$/, '') + '…';
+}
+
 function updateChannelsMetadata(metaMap) {
   const file = path.join(__dirname, 'channels.js');
   const src = fs.readFileSync(file, 'utf8');
@@ -82,16 +95,20 @@ function updateChannelsMetadata(metaMap) {
     const uname = um[1];
     const meta = metaMap.get(uname.toLowerCase());
     if (!meta) return line;
-    const trimmed = line.trim().replace(/,$/, '');
+    const trailingMatch = line.match(/(,?\s*\];|,)\s*$/);
+    const trailing = trailingMatch ? trailingMatch[1] : '';
+    const trimmed = line.trim().replace(/(,?\s*\];|,)\s*$/, '');
     let obj;
     try {
       obj = new Function('return ' + trimmed)();
     } catch (e) {
       return line;
     }
-    const nextTitle = meta.title || obj.title || '';
+    const curTitle = String(obj.title == null ? '' : obj.title).trim();
+    const curDesc = String(obj.description == null ? '' : obj.description).trim();
+    const nextTitle = curTitle ? obj.title : (meta.title || '');
     const nextMembers = meta.members || obj.members || '0';
-    const nextDesc = meta.description !== '' ? meta.description : (obj.description || '');
+    const nextDesc = curDesc ? obj.description : cleanTmeDescription(meta.description);
     if (nextTitle === obj.title && nextMembers === obj.members && nextDesc === obj.description) {
       return line;
     }
@@ -99,7 +116,6 @@ function updateChannelsMetadata(metaMap) {
     const indent = line.match(/^(\s*)/)[1];
     const tagsLiteral = JSON.stringify(obj.tags || []).replace(/"/g, "'");
     const langLiteral = escJsStr(obj.lang || 'en');
-    const trailing = line.trim().endsWith(',') ? ',' : '';
     return `${indent}{username:'${escJsStr(obj.username)}',title:'${escJsStr(nextTitle)}',members:'${escJsStr(nextMembers)}',description:'${escJsStr(nextDesc)}',tags:${tagsLiteral},lang:'${langLiteral}'}${trailing}`;
   });
 
