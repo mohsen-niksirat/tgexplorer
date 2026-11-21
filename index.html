@@ -2349,6 +2349,27 @@ body { overflow-x: clip; }
   transition: transform var(--duration-instant) var(--ease-press);
 }
 
+@media (min-width: 1024px) {
+  :root {
+    --max-w: 100%;
+  }
+  .header {
+    padding: 0 24px;
+  }
+  .hero {
+    padding: 10px 24px;
+  }
+  .container {
+    padding: 16px 24px 40px;
+  }
+  .explore-grid,
+  .feed-grid,
+  .home-feed-grid {
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 10px;
+  }
+}
+
 /* Toasts */
 .toast-container { position: fixed; bottom: calc(var(--nav-h) + 16px); right: 16px; z-index: 300; display: flex; flex-direction: column; gap: 6px; pointer-events: none; }
 [dir="rtl"] .toast-container { right: auto; left: 16px; }
@@ -2359,12 +2380,16 @@ body { overflow-x: clip; }
          loaded once the app is interactive instead of blocking the first
          render. -->
     <script>
-    if(!/^(localhost|127\.0\.0\.1)$/i.test(location.hostname)||location.search.includes('tgWebApp')||/Telegram/i.test(navigator.userAgent)){
-      window.addEventListener('load',function(){
+    if(!/^(localhost|127\.0\.0\.1)$/i.test(location.hostname)||/[?&](tgWebApp|startapp|channel)=/i.test(location.search)||/Telegram/i.test(navigator.userAgent)){
+      document.addEventListener('DOMContentLoaded',function(){
         var s=document.createElement('script');
         s.src='https://telegram.org/js/telegram-web-app.js';
         s.defer=true;
-        s.onload=function(){try{if(typeof window.checkSharedChannel==='function')window.checkSharedChannel()}catch(e){}};
+        s.onload=function(){
+          try{if(typeof window.initTelegramWebApp==='function')window.initTelegramWebApp()}catch(e){}
+          try{if(typeof window.watchTgBackButton==='function')window.watchTgBackButton()}catch(e){}
+          try{if(typeof window.checkSharedChannel==='function')window.checkSharedChannel()}catch(e){}
+        };
         document.body.appendChild(s);
       });
     }
@@ -2383,6 +2408,26 @@ let _workerCodePromise = null;
 async function getWorkerCode() {
   if (!_workerCodePromise) _workerCodePromise = import('./js/worker-code.js').then(m => m.WORKER_CODE);
   return _workerCodePromise;
+}
+let _channelsLoadPromise = null;
+function ensureChannelsLoaded() {
+  if (typeof CHANNEL_DB !== 'undefined') return Promise.resolve();
+  if (_channelsLoadPromise) return _channelsLoadPromise;
+  _channelsLoadPromise = new Promise(resolve => {
+    const existing = document.querySelector('script[src="channels.js"]');
+    if (existing) {
+      existing.addEventListener('load', () => resolve(), { once: true });
+      existing.addEventListener('error', () => resolve(), { once: true });
+      return;
+    }
+    const el = document.createElement('script');
+    el.src = 'channels.js';
+    el.async = true;
+    el.onload = () => resolve();
+    el.onerror = () => resolve();
+    document.head.appendChild(el);
+  });
+  return _channelsLoadPromise;
 }
 let _postsLoadPromise = null;
 function ensurePostsLoaded() {
@@ -2448,21 +2493,37 @@ document.getElementById('langFilter').addEventListener('click',e=>{const chip=e.
 // THEME & LANG
 // ============================================================
 function applyTheme(theme){if(document.documentElement.getAttribute('data-theme')!==theme)document.documentElement.setAttribute('data-theme',theme);const tb=document.getElementById('themeToggle');if(tb&&tb.dataset.theme!==theme){tb.dataset.theme=theme;tb.innerHTML=theme==='dark'?"<svg class=\"ui-icon\" viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><circle cx=\"10\" cy=\"10\" r=\"3.5\"/><path d=\"M10 2.5v2M10 15.5v2M2.5 10h2M15.5 10h2M4.7 4.7l1.4 1.4M13.9 13.9l1.4 1.4M15.3 4.7l-1.4 1.4M6.1 13.9l-1.4 1.4\"/></svg>":"<svg class=\"ui-icon\" viewBox=\"0 0 20 20\" width=\"20\" height=\"20\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M16.5 11.5A6.5 6.5 0 0 1 8.5 3.5a6.5 6.5 0 1 0 8 8z\"/></svg>"}try{if(window.Telegram&&Telegram.WebApp)Telegram.WebApp.setHeaderColor(theme==='dark'?'#17212b':'#ffffff')}catch(e){}}
+const DESKTOP_TG_PLATFORMS=new Set(['tdesktop','web','weba','webk']);
+let _tgWebAppInited=false;
 function initTelegramWebApp(){
+  if(_tgWebAppInited)return;
   if(!window.Telegram||!Telegram.WebApp)return;
-  if(!Telegram.WebApp.initData)return;
+  _tgWebAppInited=true;
   const wa=Telegram.WebApp;
-  wa.ready();
+  try{wa.ready()}catch(e){}
   try{wa.expand()}catch(e){}
+  const plat=String(wa.platform||'').toLowerCase();
+  if(typeof wa.requestFullscreen==='function'&&DESKTOP_TG_PLATFORMS.has(plat)){
+    try{wa.requestFullscreen()}catch(e){}
+  }
+  if(!wa.initData)return;
   try{if(wa.disableVerticalSwipes)wa.disableVerticalSwipes()}catch(e){}
   if(!localStorage.getItem('tgexp_theme')&&wa.colorScheme)applyTheme(wa.colorScheme==='dark'?'dark':'light');
   wa.onEvent('themeChanged',()=>{
     if(!localStorage.getItem('tgexp_theme')&&Telegram.WebApp.colorScheme)applyTheme(Telegram.WebApp.colorScheme==='dark'?'dark':'light');
     else{try{Telegram.WebApp.setHeaderColor(state.theme==='dark'?'#0a0a0a':'#ffffff')}catch(e){}}
   });
-  wa.onEvent('viewportChanged',()=>{try{Telegram.WebApp.expand()}catch(e){}});
-  wa.BackButton.onClick(tgGoBack);
-  syncTgBackButton();
+  wa.onEvent('viewportChanged',()=>{
+    try{Telegram.WebApp.expand()}catch(e){}
+    try{
+      if(state.currentTab==='explore'||state.currentTab==='search')renderResults();
+      else if(state.currentTab==='feed'){const fl=filterFeedByType(state.feedPool||[]);renderFeedView(document.getElementById('content'),fl.slice(0,window._feedRendered||30))}
+    }catch(e){}
+  });
+  if(wa.BackButton){
+    wa.BackButton.onClick(tgGoBack);
+    syncTgBackButton();
+  }
 }
 function syncTgBackButton(){
   if(!window.Telegram||!Telegram.WebApp)return;
@@ -2470,8 +2531,10 @@ function syncTgBackButton(){
   const open=ids.some(id=>{const el=document.getElementById(id);return el&&el.classList.contains('open')});
   try{if(open)Telegram.WebApp.BackButton.show();else Telegram.WebApp.BackButton.hide()}catch(e){}
 }
+let _tgBackWatched=false;
 function watchTgBackButton(){
-  if(!window.Telegram||!Telegram.WebApp)return;
+  if(_tgBackWatched||!window.Telegram||!Telegram.WebApp)return;
+  _tgBackWatched=true;
   const obs=new MutationObserver(()=>syncTgBackButton());
   try{obs.observe(document.body,{subtree:true,attributes:true,attributeFilter:['class']})}catch(e){}
 }
@@ -3107,11 +3170,10 @@ function renderExploreView(container,items){
   const page=state.explorePage||EXPLORE_PAGE;
   const totalFiltered=filtered.length;
   const isMobile=typeof window!=='undefined'&&window.matchMedia&&window.matchMedia('(max-width:768px)').matches;
-  const effPage=(isMobile&&!state.explorePage)?3:page;
-  const shown=filtered.slice(0,effPage);
+  const shown=filtered.slice(0,page);
   filtered=shown;
   const searchHtml=state.exploreView==='list'?'<div style="padding:0 8px 10px"><input class="sug-field" id="exploreSearchInput" style="width:100%" placeholder="'+t('instant_search')+'" value="'+escAttr(state.exploreSearch)+'" oninput="setExploreSearch(this.value)"></div>':'';
-  const more=totalFiltered>effPage?'<div class="explore-more"><button class="explore-more-btn" onclick="showMoreExplore()">'+escHtml(t('show_more_channels'))+'</button></div>':'';
+  const more=totalFiltered>page?'<div class="explore-more"><button class="explore-more-btn" onclick="showMoreExplore()">'+escHtml(t('show_more_channels'))+'</button></div>':'';
   let toolbarHtml='';
   if(!isMobile){
     const types=[['all',t('all')],['video',t('clip')],['image',t('image')],['text',t('text')]];
@@ -3410,8 +3472,11 @@ function closePostModal(){document.querySelectorAll('#postModalBody video').forE
 
 function closeChannelModal(){document.getElementById('channelOverlay').classList.remove('open');document.body.style.overflow=''}
 async function openChannel(username){
+  if(typeof CHANNEL_DB==='undefined')await ensureChannelsLoaded();
   if(typeof CHANNEL_POSTS==='undefined')await ensurePostsLoaded();
-  const ch=getAllChannels().find(c=>c.username===username)||{username,title:username};
+  const target=String(username||'').toLowerCase();
+  const ch=(typeof CHANNEL_DB!=='undefined'?getAllChannels():[]).find(c=>String(c.username||'').toLowerCase()===target)||{username,title:username};
+  username=ch.username||username;
   const avEl=document.getElementById('modalAvatar');avEl.style.cssText=avatarGrad(username);avEl.innerHTML=avatarInner(ch.avatar,ch.title||username,160)
   document.getElementById('modalTitle').textContent=ch.title||username;
   document.getElementById('modalUser').textContent='@'+username;
@@ -4383,6 +4448,7 @@ function dismissSharedFolder(){window._sharedFolder=null;location.hash='';switch
 // A shared link can point straight at a channel: ?channel=<username>,
 // Telegram.WebApp.initDataUnsafe.start_param (channel_<username>), or ?startapp=channel_<username>.
 let _sharedChannelOpened=false;
+let _pendingSharedChannel=null;
 function checkSharedChannel(){
   if(_sharedChannelOpened)return;
   const params=new URLSearchParams(location.search);
@@ -4395,7 +4461,16 @@ function checkSharedChannel(){
   const username=String(raw||'').replace(/[^a-zA-Z0-9_]/g,'');
   if(!username)return;
   _sharedChannelOpened=true;
-  setTimeout(()=>openChannel(username),600);
+  if(typeof CHANNEL_DB==='undefined'){
+    _pendingSharedChannel=username;
+    ensureChannelsLoaded().then(()=>{
+      const u=_pendingSharedChannel;
+      _pendingSharedChannel=null;
+      if(u)openChannel(u);
+    });
+    return;
+  }
+  setTimeout(()=>openChannel(username),0);
 }
 function checkSharedFolder(){
   const m=location.hash.match(/^#folder=(.+)$/);
@@ -5234,6 +5309,8 @@ Object.assign(window, {
   applyFiltersToView,
   clearFilters,
   checkSharedChannel,
+  initTelegramWebApp,
+  watchTgBackButton,
   shareChannelBot,
   clearFolderRule,
   clearLivePosts,

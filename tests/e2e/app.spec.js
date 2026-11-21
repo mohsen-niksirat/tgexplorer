@@ -400,6 +400,77 @@ test.describe('Telegram Explorer - e2e', () => {
     await expect(page.locator('#modalTitle')).toContainText(/BBC/i);
     await expect(page.locator('#modalShareBotBtn')).toBeVisible();
   });
+
+  test('stubbed Telegram.WebApp start_param after deferred SDK load opens channel and calls desktop expand/fullscreen', async ({ page }) => {
+    await page.route('https://telegram.org/js/telegram-web-app.js', async route => {
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/javascript',
+        body: `window.Telegram = {
+          WebApp: {
+            platform: 'tdesktop',
+            initData: 'stub',
+            initDataUnsafe: { start_param: 'channel_bbcpersian' },
+            ready() { window.__tgReady = true; },
+            expand() { window.__tgExpanded = true; },
+            requestFullscreen() { window.__tgFullscreen = true; },
+            setHeaderColor() {},
+            onEvent() {},
+            BackButton: { onClick() {}, show() {}, hide() {} }
+          }
+        };`,
+      });
+    });
+    await page.goto('/?tgWebApp=1');
+    await expect(page.locator('#channelOverlay')).toHaveClass(/open/, { timeout: 10000 });
+    await expect(page.locator('#modalTitle')).toContainText(/BBC/i);
+    const flags = await page.evaluate(() => ({
+      ready: !!window.__tgReady,
+      expanded: !!window.__tgExpanded,
+      fullscreen: !!window.__tgFullscreen,
+    }));
+    expect(flags).toEqual({ ready: true, expanded: true, fullscreen: true });
+  });
+
+  test('desktop viewport fills width and mobile 390x844 keeps 12 explore cards without requestFullscreen', async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.goto('/');
+    const desktop = await page.evaluate(() => {
+      const main = document.getElementById('mainContent');
+      const grid = document.getElementById('exploreGridChunk');
+      return {
+        mainWidth: main ? main.getBoundingClientRect().width : 0,
+        cols: grid ? getComputedStyle(grid).gridTemplateColumns.split(' ').length : 0,
+      };
+    });
+    expect(desktop.mainWidth).toBeGreaterThan(1150);
+    expect(desktop.cols).toBeGreaterThanOrEqual(4);
+
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.route('https://telegram.org/js/telegram-web-app.js', async route => {
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/javascript',
+        body: `window.Telegram = {
+          WebApp: {
+            platform: 'ios',
+            initData: 'stub',
+            initDataUnsafe: {},
+            ready() { window.__tgReadyMob = true; },
+            expand() { window.__tgExpandedMob = true; },
+            requestFullscreen() { window.__tgFullscreenMob = true; },
+            setHeaderColor() {},
+            onEvent() {},
+            BackButton: { onClick() {}, show() {}, hide() {} }
+          }
+        };`,
+      });
+    });
+    await page.goto('/?tgWebApp=1');
+    await expect(page.locator('.explore-item')).toHaveCount(12);
+    const mobFullscreen = await page.evaluate(() => !!window.__tgFullscreenMob);
+    expect(mobFullscreen).toBe(false);
+  });
 });
 
 /**

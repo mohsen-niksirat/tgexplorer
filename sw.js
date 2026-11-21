@@ -3,7 +3,7 @@
 // Handles caching for offline support and PWA
 // ============================================================
 
-const CACHE_NAME = 'tgexplorer-202611210215';
+const CACHE_NAME = 'tgexplorer-202611210520';
 // The watchlist/seen-post state lives in its own, deliberately unversioned
 // cache: `activate` purges every old shell cache, but the user's watch state
 // must survive a deploy.
@@ -55,6 +55,7 @@ self.addEventListener('activate', event => {
 // Fetch: network first for API, cache first for static
 self.addEventListener('fetch', event => {
   const url = new URL(event.request.url);
+  if (url.origin !== self.location.origin) return;
 
   // API requests: network only (don't cache)
   if (url.pathname.includes('/api/')) {
