@@ -120,9 +120,10 @@ function runFixtureTests() {
 
 async function fetchApprovedFromTgcloud() {
   const secret = process.env.NOTIFY_SECRET;
-  const cmd = secret
-    ? `npx tgcloud run endpoints/approvedChannels ${JSON.stringify(JSON.stringify({ secret }))}`
-    : 'npx tgcloud run endpoints/approvedChannels "{}" --ctx "{initData:{user:{id:65807806}}}"';
+  if (!secret) {
+    throw new Error('NOTIFY_SECRET is required for --tgcloud sync');
+  }
+  const cmd = `npx tgcloud run endpoints/approvedChannels ${JSON.stringify(JSON.stringify({ secret }))}`;
   const out = execSync(cmd, {
     cwd: path.join(ROOT, 'serverless'),
     encoding: 'utf8',
