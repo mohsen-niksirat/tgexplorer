@@ -33,11 +33,19 @@ export function isFa(lang) {
   return String(lang || '').toLowerCase().startsWith('fa');
 }
 
+export function suggestButtonText(lang) {
+  return isFa(lang) ? 'پیشنهاد کانال' : 'Suggest a channel';
+}
+
 export function buildExploreKeyboard(lang, channelUsername) {
   const url = channelUsername ? `${APP_URL}?channel=${encodeURIComponent(channelUsername)}` : APP_URL;
-  const text = isFa(lang) ? '🔍 باز کردن اکسپلور' : '🔍 Open Explore';
+  const text = isFa(lang) ? 'باز کردن اکسپلور' : 'Open Explore';
+  const rows = [[{ text, web_app: { url } }]];
+  if (!channelUsername) {
+    rows.push([{ text: suggestButtonText(lang), callback_data: 'suggest_start' }]);
+  }
   return {
-    inline_keyboard: [[{ text, web_app: { url } }]],
+    inline_keyboard: rows,
   };
 }
 
@@ -100,4 +108,67 @@ export function fallbackText(lang) {
   return isFa(lang)
     ? 'برای گشت‌وگذار در کانال‌ها، دکمه زیر را بزنید.'
     : 'Tap the button below to open TGExplorer.';
+}
+
+export function suggestPromptText(lang) {
+  return isFa(lang)
+    ? 'یوزرنیم یا لینک کانال عمومی را بفرستید (مثلاً @bbcpersian یا https://t.me/bbcpersian).\nبرای لغو، /cancel را بفرستید.'
+    : 'Send the public channel username or link (e.g. @bbcpersian or https://t.me/bbcpersian).\nSend /cancel to exit.';
+}
+
+export function suggestCancelledText(lang) {
+  return isFa(lang) ? 'پیشنهاد کانال لغو شد.' : 'Channel suggestion cancelled.';
+}
+
+export function suggestInvalidText(lang) {
+  return isFa(lang)
+    ? 'فرمت نام کاربری معتبر نیست. باید ۵ تا ۳۲ کاراکتر از حروف انگلیسی، عدد یا _ باشد (مثلاً @bbcpersian یا https://t.me/bbcpersian).'
+    : 'Invalid channel username format. Use 5–32 characters (letters, digits, or _), e.g. @bbcpersian or https://t.me/bbcpersian.';
+}
+
+export function suggestAlreadyListedText(lang, username) {
+  return isFa(lang)
+    ? `کانال @${username} قبلاً در TGExplorer ثبت شده است.`
+    : `@${username} is already listed in TGExplorer.`;
+}
+
+export function suggestAlreadySubmittedText(lang, username) {
+  return isFa(lang)
+    ? `کانال @${username} قبلاً پیشنهاد شده و در صف بررسی است.`
+    : `@${username} has already been submitted and is under review.`;
+}
+
+export function suggestRateLimitText(lang) {
+  return isFa(lang)
+    ? 'شما در حال حاضر ۳ پیشنهاد در انتظار بررسی دارید. لطفاً پس از بررسی آن‌ها دوباره تلاش کنید.'
+    : 'You already have 3 pending suggestions. Please wait for review before submitting another.';
+}
+
+export function suggestNotChannelText(lang) {
+  return isFa(lang)
+    ? 'این نام کاربری یک کانال عمومی تلگرام نیست (گروه، کاربر یا ربات پذیرفته نمی‌شود).'
+    : 'This username is not a public Telegram channel (groups, users, and bots are not accepted).';
+}
+
+export function suggestNotFoundText(lang) {
+  return isFa(lang)
+    ? 'کانال عمومی با این نام کاربری پیدا نشد.'
+    : 'Could not find a public channel with that username.';
+}
+
+export function suggestSubmittedText(lang, title, username) {
+  return isFa(lang)
+    ? `ممنون! کانال «${title}» (@${username}) ثبت شد و در صف بررسی است.`
+    : `Thank you! "${title}" (@${username}) has been submitted and is under review.`;
+}
+
+export function suggestDecisionUserText(lang, approved, title, username) {
+  if (isFa(lang)) {
+    return approved
+      ? `پیشنهاد شما برای کانال «${title}» (@${username}) تأیید و به فهرست ربات اضافه شد.`
+      : `پیشنهاد شما برای کانال «${title}» (@${username}) تأیید نشد.`;
+  }
+  return approved
+    ? `Your suggestion "${title}" (@${username}) was approved and added to TGExplorer bot search.`
+    : `Your suggestion "${title}" (@${username}) was not approved.`;
 }

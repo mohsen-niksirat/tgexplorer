@@ -1,7 +1,16 @@
 import { db, api } from 'sdk';
-import { sql } from 'sdk/db';
-import { users, channelOpens, inlineQueries, inlineShares } from '../schema.js';
+import { eq, sql } from 'sdk/db';
+import { users, channelOpens, inlineQueries, inlineShares, suggestions } from '../schema.js';
 import { getChannelCardData, parseChannelStartParam } from '../lib/channel.js';
+import {
+  buildModerationKeyboard,
+  clearUserPendingState,
+  formatModerationMessage,
+  getUserSuggestState,
+  handleSuggestInput,
+  OWNER_ID,
+  setUserPendingSuggest,
+} from '../lib/suggest.js';
 import {
   BOT_USERNAME,
   buildChannelCardKeyboard,
@@ -10,11 +19,10 @@ import {
   fallbackText,
   formatChannelCardCaption,
   helpText,
+  suggestCancelledText,
+  suggestPromptText,
   welcomeText,
 } from '../lib/texts.js';
-
-// Owner's numeric Telegram user ID for /stats (read your ID from the `users` table):
-export const OWNER_ID = 65807806;
 
 function parseCommand(text, isGroup) {
   if (!text || !text.startsWith('/')) return null;
@@ -59,6 +67,72 @@ export default async function (message) {
   if (isGroup && !parsed) return;
 
   const lang = message.from?.language_code || 'en';
+  const fromId = message.from?.id || 0;
+
+  if (parsed && isPrivate && fromId) {
+    await clearUserPendingState(fromId);
+  }
+
+  if (parsed && parsed.cmd === 'cancel' && isPrivate) {
+    await api.sendMessage({
+      chat_id: message.chat.id,
+      text: suggestCancelledText(lang),
+      reply_markup: buildExploreKeyboard(lang, ''),
+    });
+    return;
+  }
+
+  if (parsed && parsed.cmd === 'suggest' && isPrivate) {
+    await setUserPendingSuggest(fromId, lang);
+    await api.sendMessage({
+      chat_id: message.chat.id,
+      text: suggestPromptText(lang),
+    });
+    return { action: 'suggest_prompt' };
+  }
+
+  if (parsed && parsed.cmd === 'suggestions') {
+    if (isPrivate && OWNER_ID && fromId === OWNER_ID) {
+      const pendingCount = await db.$count(suggestions, eq(suggestions.status, 'pending'));
+      const approvedCount = await db.$count(suggestions, eq(suggestions.status, 'approved'));
+      const rejectedCount = await db.$count(suggestions, eq(suggestions.status, 'rejected'));
+      const pendingRows = await db
+        .select()
+        .from(suggestions)
+        .where(eq(suggestions.status, 'pending'))
+        .limit(10)
+        .all();
+
+      const header =
+        `Channel Suggestions\n\n` +
+        `Pending: ${pendingCount}\n` +
+        `Approved: ${approvedCount}\n` +
+        `Rejected: ${rejectedCount}`;
+      await api.sendMessage({
+        chat_id: message.chat.id,
+        text: pendingRows.length ? header : `${header}\n\nNo pending suggestions.`,
+      });
+      for (const row of pendingRows) {
+        await api.sendMessage({
+          chat_id: message.chat.id,
+          text: formatModerationMessage(row),
+          reply_markup: buildModerationKeyboard(row.id),
+        });
+      }
+      return {
+        pending: pendingCount,
+        approved: approvedCount,
+        rejected: rejectedCount,
+        shown: pendingRows.map(r => r.username),
+      };
+    }
+    await api.sendMessage({
+      chat_id: message.chat.id,
+      text: helpText(lang),
+      reply_markup: buildExploreKeyboard(lang, ''),
+    });
+    return;
+  }
 
   if (parsed && (parsed.cmd === 'start' || parsed.cmd === 'app')) {
     if (isPrivate) {
@@ -122,6 +196,8 @@ export default async function (message) {
       const totalOpens = await db.$count(channelOpens);
       const totalInlineQueries = await db.$count(inlineQueries);
       const totalInlineShares = await db.$count(inlineShares);
+      const pendingSuggestions = await db.$count(suggestions, eq(suggestions.status, 'pending'));
+      const approvedSuggestions = await db.$count(suggestions, eq(suggestions.status, 'approved'));
       const topRows = await db.all(
         sql`SELECT username, COUNT(*) AS opens FROM channel_opens GROUP BY username ORDER BY opens DESC LIMIT 10`
       );
@@ -139,7 +215,9 @@ export default async function (message) {
         `Total users: ${totalUsers}\n` +
         `Total channel opens: ${totalOpens}\n` +
         `Inline queries: ${totalInlineQueries}\n` +
-        `Inline shares: ${totalInlineShares}\n\n` +
+        `Inline shares: ${totalInlineShares}\n` +
+        `Pending suggestions: ${pendingSuggestions}\n` +
+        `Approved suggestions: ${approvedSuggestions}\n\n` +
         `Top 10 channels:\n${topLines}\n\n` +
         `Top 5 inline shared:\n${topShareLines}`;
       await api.sendMessage({
@@ -166,6 +244,9 @@ export default async function (message) {
   }
 
   if (isPrivate) {
+    if (fromId && (await getUserSuggestState(fromId))) {
+      return await handleSuggestInput(message.chat.id, fromId, lang, message.text || '');
+    }
     await api.sendMessage({
       chat_id: message.chat.id,
       text: fallbackText(lang),

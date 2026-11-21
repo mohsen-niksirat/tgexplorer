@@ -31,14 +31,21 @@ function scoreChannel(ch, q) {
   return -1;
 }
 
+function getUtcDayOfYear(date = new Date()) {
+  const start = Date.UTC(date.getUTCFullYear(), 0, 0);
+  const now = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate());
+  return Math.floor((now - start) / 86400000);
+}
+
 export function searchAndRankChannels(channels, rawQuery) {
   const q = String(rawQuery || '').trim().replace(/^@+/, '').toLowerCase();
   const list = Array.isArray(channels) ? channels : [];
 
   if (!q) {
-    return [...list].sort(
-      (a, b) => (b.membersCount || 0) - (a.membersCount || 0) || (a.order || 0) - (b.order || 0)
-    );
+    if (!list.length) return [];
+    const ordered = [...list].sort((a, b) => (a.order || 0) - (b.order || 0));
+    const offset = getUtcDayOfYear() % ordered.length;
+    return [...ordered.slice(offset), ...ordered.slice(0, offset)];
   }
 
   const matched = [];

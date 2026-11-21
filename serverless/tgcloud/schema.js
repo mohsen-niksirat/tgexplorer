@@ -1,11 +1,13 @@
 import { table, integer, text, boolean, sql } from 'sdk/db';
 
 export const users = table('users', {
-  telegramId:     integer('telegram_id').primaryKey(),
-  languageCode:   text('language_code'),
-  firstSeen:      integer('first_seen', { mode: 'timestamp' }).default(sql`(unixepoch())`),
-  lastSeen:       integer('last_seen', { mode: 'timestamp' }).default(sql`(unixepoch())`),
-  lastStartParam: text('last_start_param'),
+  telegramId:       integer('telegram_id').primaryKey(),
+  languageCode:     text('language_code'),
+  firstSeen:        integer('first_seen', { mode: 'timestamp' }).default(sql`(unixepoch())`),
+  lastSeen:         integer('last_seen', { mode: 'timestamp' }).default(sql`(unixepoch())`),
+  lastStartParam:   text('last_start_param'),
+  pendingState:     text('pending_state'),
+  pendingExpiresAt: integer('pending_expires_at'),
 });
 
 export const channelCache = table('channel_cache', {
@@ -38,4 +40,16 @@ export const inlineQueries = table('inline_queries', {
   userId:    integer('user_id').notNull(),
   query:     text('query'),
   createdAt: integer('created_at', { mode: 'timestamp' }).default(sql`(unixepoch())`),
+});
+
+export const suggestions = table('suggestions', {
+  id:          integer('id').primaryKey({ autoIncrement: true }),
+  username:    text('username').notNull().unique(),
+  title:       text('title'),
+  members:     integer('members').default(0),
+  description: text('description'),
+  submittedBy: integer('submitted_by').notNull(),
+  status:      text('status').notNull().default('pending'),
+  createdAt:   integer('created_at', { mode: 'timestamp' }).default(sql`(unixepoch())`),
+  decidedAt:   integer('decided_at'),
 });

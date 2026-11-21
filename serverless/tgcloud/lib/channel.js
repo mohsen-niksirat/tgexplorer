@@ -1,6 +1,6 @@
 import { db, fetch } from 'sdk';
 import { eq } from 'sdk/db';
-import { channelCache } from '../schema.js';
+import { channelCache, suggestions } from '../schema.js';
 import { APP_URL } from './texts.js';
 
 const TTL_SEC = 6 * 3600;
@@ -106,7 +106,15 @@ function parseChannelsJsEntries(text) {
   return map;
 }
 
-export async function getVerifiedChannelsMap() {
+export function formatMembersShort(n) {
+  const count = Number(n) || 0;
+  if (count <= 0) return '';
+  if (count >= 1000000) return `${(count / 1000000).toFixed(1).replace(/\.0$/, '')}M`;
+  if (count >= 1000) return `${(count / 1000).toFixed(1).replace(/\.0$/, '')}K`;
+  return String(count);
+}
+
+async function getBaseVerifiedChannelsMap() {
   const now = Math.floor(Date.now() / 1000);
   try {
     const cached = await db
@@ -155,6 +163,41 @@ export async function getVerifiedChannelsMap() {
   } catch (e) {}
 
   return {};
+}
+
+export async function getVerifiedChannelsMap() {
+  const baseMap = await getBaseVerifiedChannelsMap();
+  const merged = { ...baseMap };
+  let idx = Object.keys(merged).length;
+
+  try {
+    const approvedRows = await db
+      .select()
+      .from(suggestions)
+      .where(eq(suggestions.status, 'approved'))
+      .all();
+    for (const row of approvedRows) {
+      const u = String(row.username || '').toLowerCase();
+      if (!u || merged[u]) continue;
+      const members = formatMembersShort(row.members);
+      merged[u] = {
+        username: u,
+        title: row.title || `@${u}`,
+        members,
+        membersCount: Number(row.members) || 0,
+        subs: members ? `${members} subscribers` : '',
+        description: row.description || '',
+        tags: ['community'],
+        category: 'community',
+        lang: '',
+        avatar: '',
+        source: 'community',
+        order: idx++,
+      };
+    }
+  } catch (e) {}
+
+  return merged;
 }
 
 export async function getVerifiedChannelsList() {
