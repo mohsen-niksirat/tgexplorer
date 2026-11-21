@@ -143,6 +143,7 @@
     "share_link": "Compartir enlace",
     "compare": "Comparar",
     "share_bot": "Compartir vía bot",
+    "notify_in_bot": "Recibir notificaciones de nuevas publicaciones en el bot",
     "settings_fullscreen_desktop": "Pantalla completa en escritorio"
   },
   "ui": {

@@ -143,6 +143,7 @@
     "share_link": "Share link",
     "compare": "Compare",
     "share_bot": "Share via bot",
+    "notify_in_bot": "Get new-post notifications in the bot",
     "settings_fullscreen_desktop": "Fullscreen on desktop"
   },
   "ui": {

@@ -143,6 +143,7 @@
     "share_link": "分享链接",
     "compare": "比较",
     "share_bot": "通过机器人分享",
+    "notify_in_bot": "在机器人中接收新帖通知",
     "settings_fullscreen_desktop": "桌面端全屏"
   },
   "ui": {

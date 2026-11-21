@@ -143,6 +143,7 @@
     "share_link": "مشاركة الرابط",
     "compare": "قارن",
     "share_bot": "مشاركة عبر البوت",
+    "notify_in_bot": "تلقي إشعارات المنشورات الجديدة في البوت",
     "settings_fullscreen_desktop": "ملء الشاشة على سطح المكتب"
   },
   "ui": {

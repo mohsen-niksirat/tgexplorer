@@ -531,6 +531,15 @@ test.describe('Telegram Explorer - e2e', () => {
       stored: localStorage.getItem('tgexp_fullscreen_desktop'),
     }))).toEqual({ reqCount: 1, stored: '1' });
   });
+
+  test('channel modal shows "Get new-post notifications in the bot" button targeting start=notify_<username>', async ({ page }) => {
+    await page.evaluate(() => window.openChannel('bbcpersian'));
+    await expect(page.locator('#channelOverlay')).toHaveClass(/open/);
+    const btn = page.locator('#modalNotifyBotBtn');
+    await expect(btn).toBeVisible();
+    await expect(btn).toHaveAttribute('href', 'https://t.me/telgexplorerbot?start=notify_bbcpersian');
+    await expect(btn).toContainText('Get new-post notifications in the bot');
+  });
 });
 
 /**
