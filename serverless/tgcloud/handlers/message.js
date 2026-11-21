@@ -1,6 +1,6 @@
 import { db, api } from 'sdk';
 import { sql } from 'sdk/db';
-import { users, channelOpens } from '../schema.js';
+import { users, channelOpens, inlineQueries, inlineShares } from '../schema.js';
 import { getChannelCardData, parseChannelStartParam } from '../lib/channel.js';
 import {
   BOT_USERNAME,
@@ -120,17 +120,33 @@ export default async function (message) {
     if (isPrivate && OWNER_ID && message.from?.id === OWNER_ID) {
       const totalUsers = await db.$count(users);
       const totalOpens = await db.$count(channelOpens);
+      const totalInlineQueries = await db.$count(inlineQueries);
+      const totalInlineShares = await db.$count(inlineShares);
       const topRows = await db.all(
         sql`SELECT username, COUNT(*) AS opens FROM channel_opens GROUP BY username ORDER BY opens DESC LIMIT 10`
       );
       const topLines = topRows.length
         ? topRows.map((r, i) => `${i + 1}. @${r.username} — ${r.opens}`).join('\n')
         : '(none yet)';
+      const topShareRows = await db.all(
+        sql`SELECT username, COUNT(*) AS shares FROM inline_shares GROUP BY username ORDER BY shares DESC LIMIT 5`
+      );
+      const topShareLines = topShareRows.length
+        ? topShareRows.map((r, i) => `${i + 1}. @${r.username} — ${r.shares}`).join('\n')
+        : '(none yet)';
+      const statsText =
+        `TGExplorer Bot Stats\n\n` +
+        `Total users: ${totalUsers}\n` +
+        `Total channel opens: ${totalOpens}\n` +
+        `Inline queries: ${totalInlineQueries}\n` +
+        `Inline shares: ${totalInlineShares}\n\n` +
+        `Top 10 channels:\n${topLines}\n\n` +
+        `Top 5 inline shared:\n${topShareLines}`;
       await api.sendMessage({
         chat_id: message.chat.id,
-        text: `📊 TGExplorer Bot Stats\n\nTotal users: ${totalUsers}\nTotal channel opens: ${totalOpens}\n\nTop 10 channels:\n${topLines}`,
+        text: statsText,
       });
-      return;
+      return statsText;
     }
     await api.sendMessage({
       chat_id: message.chat.id,

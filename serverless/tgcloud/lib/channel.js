@@ -56,9 +56,21 @@ export function parseTmeChannelHtml(html) {
   };
 }
 
+function parseMembersCount(raw) {
+  const m = String(raw || '').trim().match(/^([0-9]+(?:\.[0-9]+)?)\s*([KMB])?$/i);
+  if (!m) return 0;
+  const num = parseFloat(m[1]) || 0;
+  const suffix = (m[2] || '').toUpperCase();
+  if (suffix === 'M') return Math.round(num * 1000000);
+  if (suffix === 'K') return Math.round(num * 1000);
+  if (suffix === 'B') return Math.round(num * 1000000000);
+  return Math.round(num);
+}
+
 function parseChannelsJsEntries(text) {
   const map = {};
   const lines = String(text || '').split(/\r?\n/);
+  let order = 0;
   for (const line of lines) {
     const um = line.match(/username\s*:\s*['"]([A-Za-z0-9_]+)['"]/);
     if (!um) continue;
@@ -66,16 +78,35 @@ function parseChannelsJsEntries(text) {
     const tm = line.match(/title\s*:\s*['"]([^'"]*)['"]/);
     const mm = line.match(/members\s*:\s*['"]([^'"]*)['"]/);
     const dm = line.match(/description\s*:\s*['"]([^'"]*)['"]/);
+    const lm = line.match(/lang\s*:\s*['"]([^'"]*)['"]/);
+    const cm = line.match(/category\s*:\s*['"]([^'"]*)['"]/);
+    const am = line.match(/avatar\s*:\s*['"]([^'"]*)['"]/);
+    const tagsm = line.match(/tags\s*:\s*\[([^\]]*)\]/);
+    const tags = tagsm
+      ? tagsm[1]
+          .split(',')
+          .map(s => s.replace(/['"\s]/g, '').trim())
+          .filter(Boolean)
+      : [];
+    const members = mm ? mm[1] : '';
     map[u] = {
+      username: u,
       title: tm ? tm[1] : um[1],
-      subs: mm ? `${mm[1]} subscribers` : '',
+      members,
+      membersCount: parseMembersCount(members),
+      subs: members ? `${members} subscribers` : '',
       description: dm ? dm[1] : '',
+      tags,
+      category: cm ? cm[1] : (tags[0] || ''),
+      lang: lm ? lm[1] : '',
+      avatar: am ? am[1] : '',
+      order: order++,
     };
   }
   return map;
 }
 
-async function getVerifiedChannelsMap() {
+export async function getVerifiedChannelsMap() {
   const now = Math.floor(Date.now() / 1000);
   try {
     const cached = await db
@@ -86,7 +117,10 @@ async function getVerifiedChannelsMap() {
     if (cached && now - (cached.fetchedAt || 0) < TTL_SEC && cached.description) {
       const parsed = JSON.parse(cached.description);
       if (parsed && !Array.isArray(parsed) && typeof parsed === 'object') {
-        return parsed;
+        const first = Object.values(parsed)[0];
+        if (first && Array.isArray(first.tags)) {
+          return parsed;
+        }
       }
     }
   } catch (e) {}
@@ -121,6 +155,11 @@ async function getVerifiedChannelsMap() {
   } catch (e) {}
 
   return {};
+}
+
+export async function getVerifiedChannelsList() {
+  const map = await getVerifiedChannelsMap();
+  return Object.values(map);
 }
 
 export async function getChannelCardData(username) {

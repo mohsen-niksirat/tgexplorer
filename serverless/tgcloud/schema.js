@@ -24,3 +24,18 @@ export const channelOpens = table('channel_opens', {
   userId:   integer('user_id').notNull(),
   openedAt: integer('opened_at', { mode: 'timestamp' }).default(sql`(unixepoch())`),
 });
+
+export const inlineShares = table('inline_shares', {
+  id:        integer('id').primaryKey({ autoIncrement: true }),
+  userId:    integer('user_id').notNull(),
+  query:     text('query'),
+  username:  text('username').notNull(),
+  createdAt: integer('created_at', { mode: 'timestamp' }).default(sql`(unixepoch())`),
+});
+
+export const inlineQueries = table('inline_queries', {
+  id:        integer('id').primaryKey({ autoIncrement: true }),
+  userId:    integer('user_id').notNull(),
+  query:     text('query'),
+  createdAt: integer('created_at', { mode: 'timestamp' }).default(sql`(unixepoch())`),
+});
