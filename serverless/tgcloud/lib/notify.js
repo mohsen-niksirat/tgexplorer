@@ -230,7 +230,7 @@ export async function checkNotifications({ postsMap, dryRun = false, sendFn, bat
   for (const s of allSubs) {
     const u = String(s.username || '').toLowerCase();
     if (!subsByChannel.has(u)) subsByChannel.set(u, []);
-    subsByChannel.get(u).push(s.userId);
+    subsByChannel.get(u).push(s);
   }
 
   const now = Math.floor(Date.now() / 1000);
@@ -239,7 +239,7 @@ export async function checkNotifications({ postsMap, dryRun = false, sendFn, bat
   let initializedChannels = 0;
   let updatedChannels = 0;
 
-  for (const [username, userIds] of subsByChannel.entries()) {
+  for (const [username, subs] of subsByChannel.entries()) {
     const posts = map[username];
     if (!Array.isArray(posts) || !posts.length) continue;
     checkedChannels++;
@@ -250,29 +250,60 @@ export async function checkNotifications({ postsMap, dryRun = false, sendFn, bat
       .where(eq(notifyState.username, username))
       .get();
 
-    const diff = findNewPosts(posts, stateRow?.lastPostId ?? null);
-    if (diff.newestId && !dryRun) {
-      await db
-        .insert(notifyState)
-        .values({ username, lastPostId: diff.newestId, updatedAt: now })
-        .onConflictDoUpdate({
-          target: notifyState.username,
-          set: { lastPostId: diff.newestId, updatedAt: now },
-        })
-        .run();
-    }
-
-    if (diff.initialized) {
+    const channelDiff = findNewPosts(posts, stateRow?.lastPostId ?? null);
+    if (channelDiff.initialized) {
+      if (channelDiff.newestId && !dryRun) {
+        await db
+          .insert(notifyState)
+          .values({ username, lastPostId: channelDiff.newestId, updatedAt: now })
+          .onConflictDoUpdate({
+            target: notifyState.username,
+            set: { lastPostId: channelDiff.newestId, updatedAt: now },
+          })
+          .run();
+        await db
+          .update(subscriptions)
+          .set({ lastPostId: channelDiff.newestId })
+          .where(eq(subscriptions.username, username))
+          .run();
+      }
       initializedChannels++;
       continue;
     }
 
-    if (!diff.newPosts.length) continue;
-    updatedChannels++;
+    let channelHadUpdates = false;
+    for (const sub of subs) {
+      const effectiveWatermark = sub.lastPostId ?? stateRow?.lastPostId ?? null;
+      if (sub.lastPostId == null && stateRow?.lastPostId && !dryRun) {
+        // Pin legacy/new subscription to the channel's pre-cycle watermark before advancing notifyState
+        await db
+          .update(subscriptions)
+          .set({ lastPostId: stateRow.lastPostId })
+          .where(eq(subscriptions.id, sub.id))
+          .run();
+      }
+      const subDiff = findNewPosts(posts, effectiveWatermark);
+      if (!subDiff.newPosts.length) continue;
+      channelHadUpdates = true;
+      if (!updatesByUser.has(sub.userId)) updatesByUser.set(sub.userId, []);
+      updatesByUser.get(sub.userId).push({
+        subId: sub.id,
+        username,
+        newPosts: subDiff.newPosts,
+        newestId: subDiff.newestId,
+      });
+    }
+    if (channelHadUpdates) updatedChannels++;
 
-    for (const uid of userIds) {
-      if (!updatesByUser.has(uid)) updatesByUser.set(uid, []);
-      updatesByUser.get(uid).push({ username, newPosts: diff.newPosts });
+    if (channelDiff.newestId && !dryRun) {
+      await db
+        .insert(notifyState)
+        .values({ username, lastPostId: channelDiff.newestId, updatedAt: now })
+        .onConflictDoUpdate({
+          target: notifyState.username,
+          set: { lastPostId: channelDiff.newestId, updatedAt: now },
+        })
+        .run();
     }
   }
 
@@ -291,27 +322,13 @@ export async function checkNotifications({ postsMap, dryRun = false, sendFn, bat
   const sender = sendFn || (params => api.sendMessage(params));
   const sortedEntries = [...updatesByUser.entries()].sort((a, b) => a[0] - b[0]);
 
-  let activeCursor = cursorUserId;
-  if (activeCursor === undefined && !dryRun) {
-    const cursorRow = await db
-      .select({ value: botConfig.value })
-      .from(botConfig)
-      .where(eq(botConfig.key, 'notify_cursor_user_id'))
-      .get();
-    if (cursorRow && cursorRow.value) {
-      activeCursor = Number(cursorRow.value) || 0;
-    }
-  }
-
-  const remainingEntries = activeCursor
-    ? sortedEntries.filter(([uid]) => uid > activeCursor)
-    : sortedEntries;
-  const batchEntries = remainingEntries.slice(0, batchSize);
-  const hasMore = remainingEntries.length > batchEntries.length;
+  const batchEntries = sortedEntries.slice(0, batchSize);
+  const hasMore = sortedEntries.length > batchEntries.length;
   const nextCursor = hasMore ? batchEntries[batchEntries.length - 1][0] : 0;
 
   let usersNotified = 0;
   let blockedCleaned = 0;
+  let transientErrors = 0;
   const messages = [];
 
   for (const [userId, items] of batchEntries) {
@@ -350,6 +367,13 @@ export async function checkNotifications({ postsMap, dryRun = false, sendFn, bat
       usersNotified++;
       messages.push(msgParams);
       for (const item of items) {
+        if (item.newestId) {
+          await db
+            .update(subscriptions)
+            .set({ lastPostId: item.newestId })
+            .where(eq(subscriptions.id, item.subId))
+            .run();
+        }
         await db
           .insert(notifyLog)
           .values({
@@ -364,6 +388,8 @@ export async function checkNotifications({ postsMap, dryRun = false, sendFn, bat
       if (isBlocked) {
         await db.delete(subscriptions).where(eq(subscriptions.userId, userId)).run();
         blockedCleaned++;
+      } else {
+        transientErrors++;
       }
     }
 
@@ -387,8 +413,9 @@ export async function checkNotifications({ postsMap, dryRun = false, sendFn, bat
     updatedChannels,
     usersNotified,
     blockedCleaned,
+    transientErrors,
     batchSize,
-    hasMore,
+    hasMore: hasMore || transientErrors > 0,
     nextCursor,
     messages,
   };

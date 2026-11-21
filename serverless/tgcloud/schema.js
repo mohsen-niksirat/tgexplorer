@@ -55,10 +55,11 @@ export const suggestions = table('suggestions', {
 });
 
 export const subscriptions = table('subscriptions', {
-  id:        integer('id').primaryKey({ autoIncrement: true }),
-  userId:    integer('user_id').notNull(),
-  username:  text('username').notNull(),
-  createdAt: integer('created_at', { mode: 'timestamp' }).default(sql`(unixepoch())`),
+  id:         integer('id').primaryKey({ autoIncrement: true }),
+  userId:     integer('user_id').notNull(),
+  username:   text('username').notNull(),
+  lastPostId: text('last_post_id'),
+  createdAt:  integer('created_at', { mode: 'timestamp' }).default(sql`(unixepoch())`),
 }, (t) => ({
   userChannelUq: unique('uq_subscriptions_user_channel').on(t.userId, t.username),
 }));
