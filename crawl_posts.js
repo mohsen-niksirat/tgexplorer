@@ -36,6 +36,82 @@ function esc(s){
     .trim();
 }
 
+function parseChannelMeta(html) {
+  if (!html || typeof html !== 'string') return null;
+  const tm = html.match(/<div class="tgme_channel_info_header_title"[^>]*>([\s\S]*?)<\/div>/i);
+  const cm = html.match(/<div class="tgme_channel_info_counter"[^>]*>([\s\S]*?)<\/div>/i);
+  const dm = html.match(/<div class="tgme_channel_info_description"[^>]*>([\s\S]*?)<\/div>/i);
+  if (!tm && !cm) return null;
+  const title = tm ? esc(tm[1]) : '';
+  let members = '';
+  if (cm) {
+    const raw = esc(cm[1]).replace(/\s+(?:subscribers?|members?).*$/i, '').trim();
+    if (/^[0-9]+(?:\.[0-9]+)?[KMB]$/i.test(raw)) {
+      members = raw.toUpperCase();
+    } else {
+      const digits = raw.replace(/[\s,]+/g, '');
+      if (/^\d+$/.test(digits)) {
+        const n = Number(digits);
+        members = n >= 1000000
+          ? (n / 1000000).toFixed(1).replace(/\.0$/, '') + 'M'
+          : (n >= 1000 ? (n / 1000).toFixed(1).replace(/\.0$/, '') + 'K' : String(n));
+      }
+    }
+  }
+  const description = dm ? esc(dm[1]) : '';
+  return { title, members, description };
+}
+
+function escJsStr(s) {
+  return String(s == null ? '' : s)
+    .replace(/\\/g, '\\\\')
+    .replace(/'/g, "\\'")
+    .replace(/[\r\n]+/g, ' ')
+    .trim();
+}
+
+function updateChannelsMetadata(metaMap) {
+  const file = path.join(__dirname, 'channels.js');
+  const src = fs.readFileSync(file, 'utf8');
+  const lines = src.split(/\r?\n/);
+  let updated = 0;
+
+  const outLines = lines.map(line => {
+    const um = line.match(/^\s*\{username:'([^']+)'/);
+    if (!um) return line;
+    const uname = um[1];
+    const meta = metaMap.get(uname.toLowerCase());
+    if (!meta) return line;
+    const trimmed = line.trim().replace(/,$/, '');
+    let obj;
+    try {
+      obj = new Function('return ' + trimmed)();
+    } catch (e) {
+      return line;
+    }
+    const nextTitle = meta.title || obj.title || '';
+    const nextMembers = meta.members || obj.members || '0';
+    const nextDesc = meta.description !== '' ? meta.description : (obj.description || '');
+    if (nextTitle === obj.title && nextMembers === obj.members && nextDesc === obj.description) {
+      return line;
+    }
+    updated++;
+    const indent = line.match(/^(\s*)/)[1];
+    const tagsLiteral = JSON.stringify(obj.tags || []).replace(/"/g, "'");
+    const langLiteral = escJsStr(obj.lang || 'en');
+    const trailing = line.trim().endsWith(',') ? ',' : '';
+    return `${indent}{username:'${escJsStr(obj.username)}',title:'${escJsStr(nextTitle)}',members:'${escJsStr(nextMembers)}',description:'${escJsStr(nextDesc)}',tags:${tagsLiteral},lang:'${langLiteral}'}${trailing}`;
+  });
+
+  if (updated > 0) {
+    const nextSrc = outLines.join('\n');
+    new Function(nextSrc + '; return CHANNEL_DB;')();
+    fs.writeFileSync(file, nextSrc, 'utf8');
+  }
+  console.log('metadata updated: ' + updated + ' channels');
+  return updated;
+}
+
 function parsePosts(html, username){
   const posts = [];
   const blocks = html.split('tgme_widget_message_wrap');
@@ -88,13 +164,16 @@ async function fetchPosts(ch){
   const all = [];
   let before = '';
   let ok = false;
+  let meta = null;
   try {
     for (let page = 0; page < 6 && all.length < MAX_POSTS; page++) {
       const url = 'https://t.me/s/' + encodeURIComponent(ch.username) + (before ? ('?before=' + before) : '');
       const r = await fetchWithRetry(url);
       if (!r || !r.ok) break;
       ok = true;
-      const posts = parsePosts(await r.text(), ch.username);
+      const html = await r.text();
+      if (page === 0) meta = parseChannelMeta(html);
+      const posts = parsePosts(html, ch.username);
       if (!posts.length) break;
       for (const p of posts) if (!all.some(x => x.id === p.id)) all.push(p);
       const minId = String(Math.min.apply(null, posts.map(p => Number(p.id))));
@@ -106,6 +185,7 @@ async function fetchPosts(ch){
   } catch (e) {}
   return {
     ok,
+    meta,
     posts: all.slice(0, MAX_POSTS).sort((a, b) => Number(b.id) - Number(a.id)),
   };
 }
@@ -116,6 +196,7 @@ async function fetchPosts(ch){
   fs.mkdirSync(POSTS_DIR, { recursive: true });
   const archive = {};   // full archive -> posts/<username>.json (lazy-loaded)
   const seed = {};      // latest 6 posts -> posts.js (inline, small)
+  const metaMap = new Map();
   let withPosts = 0;
   let nextIdx = 0;
   let doneCount = 0;
@@ -126,6 +207,7 @@ async function fetchPosts(ch){
       if (i >= db.length) break;
       const ch = db[i];
       const res = await fetchPosts(ch);
+      if (res.meta) metaMap.set(String(ch.username).toLowerCase(), res.meta);
       let posts = res.posts;
       if (!posts.length) {
         const prevFile = path.join(POSTS_DIR, ch.username + '.json');
@@ -241,4 +323,5 @@ async function fetchPosts(ch){
     + 'const CHANNEL_POSTS = ' + JSON.stringify(seed) + ';\n';
   fs.writeFileSync(path.join(__dirname, 'posts.js'), data);
   console.log('\n\nDone: ' + withPosts + '/' + db.length + ' channels, ' + total + ' archived posts (' + dropped + ' dropped by ' + RETENTION_DAYS + '-day retention), ' + seedTotal + ' seeded -> posts.js (' + Math.round(data.length / 1024) + ' KB)');
+  updateChannelsMetadata(metaMap);
 })();
