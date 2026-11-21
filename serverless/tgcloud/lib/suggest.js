@@ -251,3 +251,55 @@ export async function handleSuggestInput(chatId, userId, lang, rawText) {
     moderationKeyboard,
   };
 }
+
+const SUGGESTIONS_PAGE_SIZE = 10;
+
+export async function sendSuggestionsPage(chatId, offset = 0) {
+  const safeOffset = Math.max(0, Number(offset) || 0);
+  const pendingCount = await db.$count(suggestions, eq(suggestions.status, 'pending'));
+  const approvedCount = await db.$count(suggestions, eq(suggestions.status, 'approved'));
+  const rejectedCount = await db.$count(suggestions, eq(suggestions.status, 'rejected'));
+  const pendingRows = await db
+    .select()
+    .from(suggestions)
+    .where(eq(suggestions.status, 'pending'))
+    .limit(SUGGESTIONS_PAGE_SIZE)
+    .offset(safeOffset)
+    .all();
+
+  const header =
+    `Channel Suggestions\n\n` +
+    `Pending: ${pendingCount}\n` +
+    `Approved: ${approvedCount}\n` +
+    `Rejected: ${rejectedCount}`;
+  await api.sendMessage({
+    chat_id: chatId,
+    text: pendingRows.length ? header : `${header}\n\nNo pending suggestions.`,
+  });
+  for (const row of pendingRows) {
+    await api.sendMessage({
+      chat_id: chatId,
+      text: formatModerationMessage(row),
+      reply_markup: buildModerationKeyboard(row.id),
+    });
+  }
+  const nextOffset = safeOffset + SUGGESTIONS_PAGE_SIZE;
+  const hasMore = pendingCount > nextOffset;
+  if (hasMore) {
+    await api.sendMessage({
+      chat_id: chatId,
+      text: `Showing ${safeOffset + 1}-${safeOffset + pendingRows.length} of ${pendingCount} pending`,
+      reply_markup: {
+        inline_keyboard: [[{ text: 'Next 10', callback_data: `sug_page:${nextOffset}` }]],
+      },
+    });
+  }
+  return {
+    pending: pendingCount,
+    approved: approvedCount,
+    rejected: rejectedCount,
+    offset: safeOffset,
+    hasMore,
+    shown: pendingRows.map(r => r.username),
+  };
+}

@@ -10,13 +10,12 @@ import {
   subscribeUser,
 } from '../lib/notify.js';
 import {
-  buildModerationKeyboard,
   clearUserPendingState,
-  formatModerationMessage,
   getUserSuggestState,
   handleSuggestInput,
   OWNER_ID,
   parseSuggestedUsername,
+  sendSuggestionsPage,
   setUserPendingSuggest,
 } from '../lib/suggest.js';
 import {
@@ -103,38 +102,7 @@ export default async function (message) {
 
   if (parsed && parsed.cmd === 'suggestions') {
     if (isPrivate && OWNER_ID && fromId === OWNER_ID) {
-      const pendingCount = await db.$count(suggestions, eq(suggestions.status, 'pending'));
-      const approvedCount = await db.$count(suggestions, eq(suggestions.status, 'approved'));
-      const rejectedCount = await db.$count(suggestions, eq(suggestions.status, 'rejected'));
-      const pendingRows = await db
-        .select()
-        .from(suggestions)
-        .where(eq(suggestions.status, 'pending'))
-        .limit(10)
-        .all();
-
-      const header =
-        `Channel Suggestions\n\n` +
-        `Pending: ${pendingCount}\n` +
-        `Approved: ${approvedCount}\n` +
-        `Rejected: ${rejectedCount}`;
-      await api.sendMessage({
-        chat_id: message.chat.id,
-        text: pendingRows.length ? header : `${header}\n\nNo pending suggestions.`,
-      });
-      for (const row of pendingRows) {
-        await api.sendMessage({
-          chat_id: message.chat.id,
-          text: formatModerationMessage(row),
-          reply_markup: buildModerationKeyboard(row.id),
-        });
-      }
-      return {
-        pending: pendingCount,
-        approved: approvedCount,
-        rejected: rejectedCount,
-        shown: pendingRows.map(r => r.username),
-      };
+      return await sendSuggestionsPage(message.chat.id, 0);
     }
     await api.sendMessage({
       chat_id: message.chat.id,

@@ -1,6 +1,6 @@
 import { api, db, fetch } from 'sdk';
 import { and, eq } from 'sdk/db';
-import { notifyLog, notifyState, subscriptions, users } from '../schema.js';
+import { botConfig, notifyLog, notifyState, subscriptions, users } from '../schema.js';
 import { getVerifiedChannelsMap } from './channel.js';
 import { escapeHtml } from './inline.js';
 import {
@@ -201,7 +201,9 @@ function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-export async function checkNotifications({ postsMap, dryRun = false, sendFn } = {}) {
+export const DELIVERY_BATCH_SIZE = 25;
+
+export async function checkNotifications({ postsMap, dryRun = false, sendFn, batchSize = DELIVERY_BATCH_SIZE, cursorUserId } = {}) {
   let map = postsMap;
   if (!map) {
     const res = await fetch(`${APP_URL}posts.js`);
@@ -287,11 +289,32 @@ export async function checkNotifications({ postsMap, dryRun = false, sendFn } = 
 
   const verifiedMap = await getVerifiedChannelsMap();
   const sender = sendFn || (params => api.sendMessage(params));
+  const sortedEntries = [...updatesByUser.entries()].sort((a, b) => a[0] - b[0]);
+
+  let activeCursor = cursorUserId;
+  if (activeCursor === undefined && !dryRun) {
+    const cursorRow = await db
+      .select({ value: botConfig.value })
+      .from(botConfig)
+      .where(eq(botConfig.key, 'notify_cursor_user_id'))
+      .get();
+    if (cursorRow && cursorRow.value) {
+      activeCursor = Number(cursorRow.value) || 0;
+    }
+  }
+
+  const remainingEntries = activeCursor
+    ? sortedEntries.filter(([uid]) => uid > activeCursor)
+    : sortedEntries;
+  const batchEntries = remainingEntries.slice(0, batchSize);
+  const hasMore = remainingEntries.length > batchEntries.length;
+  const nextCursor = hasMore ? batchEntries[batchEntries.length - 1][0] : 0;
+
   let usersNotified = 0;
   let blockedCleaned = 0;
   const messages = [];
 
-  for (const [userId, items] of updatesByUser.entries()) {
+  for (const [userId, items] of batchEntries) {
     const userRow = await db
       .select({ languageCode: users.languageCode })
       .from(users)
@@ -347,12 +370,26 @@ export async function checkNotifications({ postsMap, dryRun = false, sendFn } = 
     await sleep(40);
   }
 
+  if (!dryRun) {
+    await db
+      .insert(botConfig)
+      .values({ key: 'notify_cursor_user_id', value: String(nextCursor), updatedAt: now })
+      .onConflictDoUpdate({
+        target: botConfig.key,
+        set: { value: String(nextCursor), updatedAt: now },
+      })
+      .run();
+  }
+
   return {
     checkedChannels,
     initializedChannels,
     updatedChannels,
     usersNotified,
     blockedCleaned,
+    batchSize,
+    hasMore,
+    nextCursor,
     messages,
   };
 }

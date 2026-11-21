@@ -10,6 +10,7 @@ import {
 import {
   formatModerationMessage,
   OWNER_ID,
+  sendSuggestionsPage,
   setUserPendingSuggest,
 } from '../lib/suggest.js';
 import {
@@ -85,6 +86,23 @@ export default async function (cq) {
       } catch (e) {}
     }
     return { action: 'unsub', username, userId: fromId };
+  }
+
+  const pageMatch = data.match(/^sug_page:(\d+)$/);
+  if (pageMatch) {
+    if (!OWNER_ID || fromId !== OWNER_ID) {
+      try {
+        await api.answerCallbackQuery({ callback_query_id: cq.id, text: 'Not allowed.', show_alert: true });
+      } catch (e) {}
+      return { allowed: false, userId: fromId };
+    }
+    try {
+      await api.answerCallbackQuery({ callback_query_id: cq.id });
+    } catch (e) {}
+    if (cq.message?.chat?.id) {
+      return await sendSuggestionsPage(cq.message.chat.id, Number(pageMatch[1]));
+    }
+    return { offset: Number(pageMatch[1]) };
   }
 
   const m = data.match(/^sug_(ok|no):(\d+)$/);
