@@ -149,7 +149,7 @@ test.describe('Telegram Explorer - e2e', () => {
     const searchInput = page.locator('#searchInput');
     await searchInput.fill(word);
     await searchInput.press('Enter');
-    await page.waitForTimeout(800);
+    await expect(page.locator('.psr-group').first()).toBeVisible();
 
     // The results are grouped by channel and the match is highlighted.
     expect(await page.locator('.psr-group').count()).toBeGreaterThan(0);
@@ -162,7 +162,6 @@ test.describe('Telegram Explorer - e2e', () => {
 
   test('a shared link opens the channel directly', async ({ page }) => {
     await page.goto('/?channel=bbcpersian');
-    await page.waitForTimeout(1500);
     await expect(page.locator('#channelOverlay')).toHaveClass(/open/);
     await expect(page.locator('#modalTitle')).toContainText(/BBC/i);
   });
@@ -173,7 +172,18 @@ test.describe('Telegram Explorer - e2e', () => {
       localStorage.setItem('tgexp_favs', JSON.stringify([{ username: 'bbcpersian', title: 'BBC Persian' }]));
     });
     await page.reload();
-    await page.waitForTimeout(2500);
+    await expect.poll(async () => page.evaluate(async () => {
+      const names = await caches.keys();
+      for (const name of names) {
+        const cache = await caches.open(name);
+        const s = await cache.match('/tgexplorer-seen');
+        if (s) {
+          const data = await s.json();
+          if (data && data.bbcpersian && data.bbcpersian.length) return true;
+        }
+      }
+      return false;
+    }), { timeout: 20000 }).toBe(true);
 
     const result = await page.evaluate(async () => {
       const reg = await navigator.serviceWorker.ready;
@@ -208,7 +218,7 @@ test.describe('Telegram Explorer - e2e', () => {
 
   test('the activity chart reads the monthly archive for the long range', async ({ page }) => {
     await page.evaluate(() => window.openChannel('bbcpersian'));
-    await page.waitForTimeout(1200);
+    await expect(page.locator('#channelOverlay')).toHaveClass(/open/);
 
     await expect(page.locator('.chart-range-btn[data-days="90"]')).toBeVisible();
 
@@ -219,16 +229,15 @@ test.describe('Telegram Explorer - e2e', () => {
 
     const before = await pixels();
     await page.locator('.chart-range-btn[data-days="90"]').click();
-    await page.waitForTimeout(1500);
 
     await expect(page.locator('#activityChartTitle')).toContainText('90');
     // The chart was redrawn from the archive.
-    expect(await pixels()).not.toBe(before);
+    await expect.poll(pixels).not.toBe(before);
   });
 
   test('two channels can be compared side by side', async ({ page }) => {
     await page.evaluate(() => window.openChannel('bbcpersian'));
-    await page.waitForTimeout(1000);
+    await expect(page.locator('#channelOverlay')).toHaveClass(/open/);
     await page.locator('#modalCompareBtn').click();
 
     const overlay = page.locator('#compareOverlay');
@@ -237,7 +246,6 @@ test.describe('Telegram Explorer - e2e', () => {
     // The first channel is on the left, the second one is picked from the list.
     await expect(page.locator('#compareColA')).toContainText(/BBC/i);
     await page.locator('#compareSelect').selectOption('tabnak');
-    await page.waitForTimeout(600);
 
     await expect(page.locator('#compareColB')).toContainText(/tabnak/i);
     // Both charts are drawn.
@@ -395,7 +403,6 @@ test.describe('Telegram Explorer - e2e', () => {
 
   test('loading the app with ?startapp=channel_<username> opens that channel sheet', async ({ page }) => {
     await page.goto('/?startapp=channel_bbcpersian');
-    await page.waitForTimeout(1500);
     await expect(page.locator('#channelOverlay')).toHaveClass(/open/);
     await expect(page.locator('#modalTitle')).toContainText(/BBC/i);
     await expect(page.locator('#modalShareBotBtn')).toBeVisible();
@@ -544,7 +551,7 @@ test.describe('Telegram Explorer - offline', () => {
       null,
       { timeout: 20000 }
     ).catch(() => {});
-    await page.waitForTimeout(2000);
+    await expect.poll(async () => page.evaluate(async () => (await caches.keys()).length)).toBeGreaterThan(0);
 
     // 2) Now simulate a dead network. The local data files are served by
     //    the service worker from its cache.
