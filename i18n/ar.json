@@ -142,7 +142,8 @@
     "activity_30d": "النشاط (30 يوماً)",
     "share_link": "مشاركة الرابط",
     "compare": "قارن",
-    "share_bot": "مشاركة عبر البوت"
+    "share_bot": "مشاركة عبر البوت",
+    "settings_fullscreen_desktop": "ملء الشاشة على سطح المكتب"
   },
   "ui": {
     "all": "الكل",

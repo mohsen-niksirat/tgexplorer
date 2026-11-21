@@ -142,7 +142,8 @@
     "activity_30d": "Actividad (30 días)",
     "share_link": "Compartir enlace",
     "compare": "Comparar",
-    "share_bot": "Compartir vía bot"
+    "share_bot": "Compartir vía bot",
+    "settings_fullscreen_desktop": "Pantalla completa en escritorio"
   },
   "ui": {
     "all": "Todo",

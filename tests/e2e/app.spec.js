@@ -470,6 +470,59 @@ test.describe('Telegram Explorer - e2e', () => {
     await expect(page.locator('.explore-item')).toHaveCount(12);
     const mobFullscreen = await page.evaluate(() => !!window.__tgFullscreenMob);
     expect(mobFullscreen).toBe(false);
+    await page.locator('#settingsBtn').click();
+    await expect(page.locator('#settingsOverlay')).toHaveClass(/open/);
+    await expect(page.locator('#fullscreenDesktopRow')).toBeHidden();
+  });
+
+  test('fullscreenDesktop setting controls requestFullscreen at boot and exitFullscreen immediately in Settings', async ({ page }) => {
+    await page.route('https://telegram.org/js/telegram-web-app.js', async route => {
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/javascript',
+        body: `window.__tgReqFsCount = 0; window.__tgExitFsCount = 0;
+        window.Telegram = {
+          WebApp: {
+            platform: 'tdesktop',
+            initData: 'stub',
+            ready() {},
+            expand() {},
+            requestFullscreen() { window.__tgReqFsCount++; },
+            exitFullscreen() { window.__tgExitFsCount++; },
+            setHeaderColor() {},
+            onEvent() {},
+            BackButton: { onClick() {}, show() {}, hide() {} }
+          }
+        };`,
+      });
+    });
+
+    await page.goto('/?tgWebApp=1');
+    await expect.poll(() => page.evaluate(() => window.__tgReqFsCount)).toBe(1);
+
+    await page.locator('#settingsBtn').click();
+    await expect(page.locator('#fullscreenDesktopRow')).toBeVisible();
+    await expect(page.locator('#fullscreenDesktopToggle')).toBeChecked();
+
+    await page.locator('#fullscreenDesktopRow').click();
+    await expect(page.locator('#fullscreenDesktopToggle')).not.toBeChecked();
+    expect(await page.evaluate(() => ({
+      exitCount: window.__tgExitFsCount,
+      stored: localStorage.getItem('tgexp_fullscreen_desktop'),
+    }))).toEqual({ exitCount: 1, stored: '0' });
+
+    await page.goto('/?tgWebApp=1');
+    await page.waitForSelector('#heroSection');
+    expect(await page.evaluate(() => window.__tgReqFsCount)).toBe(0);
+
+    await page.locator('#settingsBtn').click();
+    await expect(page.locator('#fullscreenDesktopToggle')).not.toBeChecked();
+    await page.locator('#fullscreenDesktopRow').click();
+    await expect(page.locator('#fullscreenDesktopToggle')).toBeChecked();
+    expect(await page.evaluate(() => ({
+      reqCount: window.__tgReqFsCount,
+      stored: localStorage.getItem('tgexp_fullscreen_desktop'),
+    }))).toEqual({ reqCount: 1, stored: '1' });
   });
 });
 

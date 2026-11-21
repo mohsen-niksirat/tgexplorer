@@ -67,6 +67,7 @@ export let state={
   notifUpdates:[],
   notifSeen:readJson('tgexp_notif_seen',{}),
   notifEnabled:localStorage.getItem('tgexp_notif_enabled')==='1',
+  fullscreenDesktop:localStorage.getItem('tgexp_fullscreen_desktop')!=='0',
   suggestions:readJson('tgexp_suggestions',[]),
   lastNotifCheck:parseInt(localStorage.getItem('tgexp_last_notif')||'0',10)||0,
   feedPool:[],

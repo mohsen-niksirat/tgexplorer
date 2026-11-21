@@ -142,7 +142,8 @@
     "activity_30d": "活跃度（30 天）",
     "share_link": "分享链接",
     "compare": "比较",
-    "share_bot": "通过机器人分享"
+    "share_bot": "通过机器人分享",
+    "settings_fullscreen_desktop": "桌面端全屏"
   },
   "ui": {
     "all": "全部",
