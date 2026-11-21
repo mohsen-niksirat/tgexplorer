@@ -7,6 +7,7 @@ Search and discover public Telegram channels and groups — like Instagram Explo
 [![Refresh Channel Avatars](https://github.com/mohsen-niksirat/tgexplorer/actions/workflows/avatars.yml/badge.svg)](https://github.com/mohsen-niksirat/tgexplorer/actions/workflows/avatars.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-0088cc.svg)](LICENSE)
 [![PWA](https://img.shields.io/badge/PWA-installable-0088cc.svg)](manifest.json)
+[![Telegram Bot](https://img.shields.io/badge/Bot-@telgexplorerbot-0088cc.svg)](https://t.me/telgexplorerbot)
 [![Languages](https://img.shields.io/badge/languages-7-0088cc.svg)](#-supported-languages)
 [![No tracking](https://img.shields.io/badge/no%20tracking-48bb78.svg)](#-privacy)
 
@@ -40,16 +41,26 @@ one actually posts — so you can find a channel by *topic*, *language* or
 
 - 🔍 **Smart Search** — fuzzy matching (typo-tolerant) + Persian/English language filter
 - 💬 **Search inside the posts** — find the channels that talked about a topic, not just the ones named after it
-- 🎛️ **Advanced filters** — multi-select category, language and content type, mirrored into the URL so a filtered view can be shared
-- 🏠 **Explore** — browse **verified** public channels by category (every one checked live against t.me)
-- 📊 **Channel profiles** — posts per day, active days, a 7/30-day activity chart and content tags
-- 🇮🇷 **Persian & English** channels — BBC Persian, Radio Farda, Tabnak, Varzesh3, Digiato/TechNolife tech + NYT, Guardian, Sky News, NASA-level English channels
-- 📱 **Instagram-like grid** view with language badges on every card
-- ❤️ **Favorites** — save channels locally
-- 🌙 **Dark / Light** mode · 🌍 **7 Languages** · 📱 **Responsive**
+- 🎛️ **Advanced filters** — multi-select category, language and content type in Explore, plus a dedicated **Feed post-type filter** (`All` / `Photos` / `Videos` / `Text`), mirrored into the URL so a filtered view can be shared
+- 🏠 **Explore (190 verified channels)** — browse public channels by category (every one checked live against `t.me`, with member counts refreshed automatically every 3 hours)
+- 🤖 **Telegram Bot & Mini App ([@telgexplorerbot](https://t.me/telgexplorerbot))** — full companion bot with inline channel search (`@telgexplorerbot <query>` in any chat), per-channel **new-post notifications** (`/notify` or the **"Get new-post notifications in the bot"** button in any channel modal), channel submissions (`/suggest`) with auto-sync into `channels.js`, and seamless Mini App deep-link handoff
+- 📊 **Channel profiles & side-by-side Compare** — posts per day, active days, a 7/30/90-day activity chart, content tags, and two-channel comparison
+- 🇮🇷 **Persian & English** channels — BBC Persian, Radio Farda, Tabnak, Varzesh3, Digiato, Technolife + NYT, Guardian, Sky News, Quanta, Hugging Face, and 180+ more
+- 📱 **Instagram-like grid & list views** with language badges on every card
+- ❤️ **Favorites & Smart Folders** — save channels/posts locally, organize into custom or auto-rule folders, and export to JSON/Text/PDF
+- 🌙 **Dark / Light** mode · 🌍 **7 Languages (248 UI strings)** · 📱 **Responsive + Desktop Mini App fullscreen toggle**
 - 🛡️ **No tracking** — everything stays in your browser, see the privacy section in Settings
-- 📄 **Works out of the box** — no worker required (local mode is the default)
-- 🧪 **`verify_channels.js`** — re-validate every channel in the database against t.me
+- 📄 **Works out of the box** — no worker required (local mode is the default, backed by split shell/data Service Worker caches with `stale-while-revalidate`)
+- 🧪 **`verify_channels.js` & 24 Playwright E2E tests** — automated channel validation and end-to-end browser verification in CI
+
+## 🤖 Telegram Bot & Mini App (`@telgexplorerbot`)
+
+Telegram Explorer ships with a serverless companion bot in [`serverless/`](serverless/) (built on Telegram Serverless / `tgcloud`) paired with the Mini App:
+
+- **Inline Mode (`@telgexplorerbot <query>`)** — search and share any channel card directly inside any Telegram chat. An empty query surfaces a daily-rotated featured list so smaller curated channels get equal visibility alongside huge ones.
+- **New-Post Notifications (`/notify`)** — subscribe to any channel via the **"Get new-post notifications in the bot"** button inside the app's channel modal (`https://t.me/telgexplorerbot?start=notify_<username>`), or toggle notifications directly on a bot channel card. Every 3-hour crawl triggers the bot to deliver new-post alerts with per-subscription watermarks.
+- **Suggest a Channel (`/suggest`)** — anyone can submit a public `@username` or `t.me/` link in the bot. The bot verifies it live against `t.me`, forwards it to the owner for one-tap approval, sends the submitter a ready-to-post promo kit on approval, and the next crawl workflow automatically syncs newly approved channels into `channels.js` and generates their `share/<username>.html` preview page.
+- **Deep Links & Handoff** — `https://t.me/telgexplorerbot?start=channel_<username>` shows a rich channel card in the bot with an **Open in App** Mini App button (`?startapp=channel_<username>`) that opens the exact channel sheet inside the Mini App.
 
 ## 🚀 Deploy your own Worker (optional)
 
@@ -97,6 +108,15 @@ too. If you hit a limit, the endpoints keep working from the cache.
 `curl https://<your-worker>/api/version`.
 
 ## 📦 Changelog
+
+### v1.8.1 (2026-11-21)
+
+- **Bot (`@telgexplorerbot`)** — full Telegram Serverless (`tgcloud`) companion bot with `/start`, `/help`, `/lang` (EN/FA), `/stats`, channel deep-link cards (`?start=channel_<username>`), inline mode (`@telgexplorerbot <query>` + daily-rotated featured list), `/suggest` channel submission with owner moderation + ready-to-post approval promo kit, and per-channel new-post subscriptions (`/notify`, per-subscription delivery watermarks across batches/transient errors)
+- **"Get new-post notifications in the bot" in channel modal** — one-tap bell action (`#modalNotifyBotBtn`, translated across all 7 languages, 248 UI strings) linking to `https://t.me/telgexplorerbot?start=notify_<username>` via `Telegram.WebApp.openTelegramLink` inside Telegram or standard link navigation on the web
+- **Approved-channel sync & crawl hardening** — bot-approved suggestions sync into `channels.js` (`190` verified channels) via `tgcloud run` (`scripts/sync-approved-channels.js`), crawl refreshes channel `members` (preserving curated titles/descriptions and only filling empty ones) and regenerates `share/*.html` (`190` pages) when channels change, and `crawl.yml` decouples sync/notify failures from the crawl
+- **Feed & Explore** — Feed post-type filter (`All` / `Photos` / `Videos` / `Text`), Explore type badge stretch fix, and XSS/URL validation hardening in renderers (`escHtml`, `safeMediaUrl`)
+- **Mini App & Service Worker** — Bot deep-link handoff (`?startapp=channel_<username>`), desktop Mini App sizing + fullscreen-on-desktop toggle, and split Service Worker caches (`CACHE_NAME = 'tgexplorer-shell-v1'` for shell + `DATA_CACHE = 'tgexplorer-data'` for data) using `stale-while-revalidate` so repeat visits transfer `0` blocking page bytes and crawls no longer invalidate the app shell
+- **CI & Tests** — `test.yml` targets `main`, Playwright sleeps replaced with condition waits (`24/24` passing in `~1.4m`), and historical one-off scripts archived under `scripts/archive/`
 
 ### v1.8.0 (2026-11-20)
 
@@ -361,7 +381,7 @@ too. If you hit a limit, the endpoints keep working from the cache.
 
 ### Option 1: Local mode (default — no setup)
 
-Just open `index.html` (or deploy to GitHub Pages). The app starts with a **verified database of 131 real channels** and full fuzzy search + language filter — no worker, no API key.
+Just open `index.html` (or deploy to GitHub Pages). The app starts with a **verified database of 190 real channels** and full fuzzy search + language filter — no worker, no API key.
 
 ### Option 2: With Cloudflare Worker (full power — live Telegram search)
 
@@ -416,9 +436,9 @@ Ranked by value/effort (community PRs welcome!):
 **Medium**
 - 💬 **Comments via discussion group** — link each channel post to its tg discussion thread
 - 🌐 **Full live mode** — real-time t.me scraping in the worker with pagination on Explore/Home too
-- 🤖 **Telegram bot companion** — @BotFather bot that sends new-post digests of favorites (pairs with GitHub Actions cron)
+- 🤖 **Telegram bot companion** — ✅ shipped in `serverless/` via [@telgexplorerbot](https://t.me/telgexplorerbot) (inline search, `/suggest` moderation + auto-sync, and `/notify` new-post alerts)
 - 🗂 **Shared folders → public pages** — publish a folder as a read-only page with OG image
-- 📈 **Real stats** — store per-day post counts over time (the 3-day retention makes historical charts need a KV/R2 counter table)
+- 📈 **Real stats** — ✅ shipped via `archive/<month>.json.gz` (monthly per-day post counts for 90-day charts)
 
 **Bigger**
 - 🔐 **Optional accounts** (Supabase free tier) — sync favorites/folders across devices
@@ -442,19 +462,21 @@ Ranked by value/effort (community PRs welcome!):
 | تب | کاربرد |
 |---|---|
 | 🏠 **خانه** | فید ترکیبی پست‌های کانال‌های موردعلاقه‌ات (جدیدترین اول) + آمار + فیلتر کلیپ/عکس/متن |
-| 🌐 **اکسپلور** | مرور کانال‌ها به‌سبک اینستاگرام — روی هر کادر بزنی مودال پست باز می‌شه با پست‌های قبلی همون کانال (اسکرول بی‌نهایت) |
-| 🎞️ **فید** | آخرین پست‌های کانال‌ها در قالب گرید تصویری |
-| 🔍 **جستجو** | جستجوی فارسی/انگلیسی — محلی (بدون نیاز به worker) یا زندهٔ کامل (با worker) |
+| 🌐 **اکسپلور** | مرور ۱۹۰ کانال معتبر به‌سبک اینستاگرام — با فیلتر چندتایی دسته‌بندی، زبان و نوع محتوا |
+| 🎞️ **فید** | آخرین پست‌های کانال‌ها در قالب گرید تصویری + فیلتر نوع پست (**همه / عکس / ویدیو / متن**) |
+| 🔍 **جستجو** | جستجوی فارسی/انگلیسی در نام کانال‌ها یا **متن پست‌ها** — محلی (بدون نیاز به worker) یا زندهٔ کامل (با worker) |
 | ❤️ **فاووریت‌ها** | کانال‌ها و پست‌های ذخیره‌شده + فولدرهای شخصی (با آیکون و قانون فیلتر خودکار) |
 
 ### ⚙️ قابلیت‌های کلیدی
 
+- 🤖 **ربات تلگرام (`@telgexplorerbot`)** — جستجوی اینلاین کانال در هر چتی (`@telgexplorerbot <عبارت>`)، اشتراک در نوتیفیکیشن پست‌های جدید هر کانال (`/notify` یا دکمهٔ **«دریافت نوتیفیکیشن پستهای جدید در بات»** داخل مودال کانال)، و پیشنهاد کانال جدید (`/suggest`) با تأیید مدیر و افزودن خودکار به برنامه
 - ❤️ ذخیرهٔ کانال و پست (دکمهٔ قلب روی کارت‌ها و داخل مودال پست)
+- ⚖️ مقایسهٔ دو کانال کنار هم (نمودار فعالیت ۷/۳۰/۹۰ روزه، آمار پست روزانه و تگ‌های محتوا)
 - 🗂 فولدرهای شخصی برای دسته‌بندی کانال‌ها/پست‌ها + اشتراک‌گذاری فولدر با لینک
 - 🤖 «فولدر هوشمند» — با یک کلیک فولدرهای آماده (اخبار فارسی، تکنولوژی، ورزش) ساخته می‌شه
-- 📥 خروجی/ورودی JSON برای بکاپ از تنظیمات
-- 🔔 اعلان پوش مرورگر برای پست‌های جدید کانال‌های فاووریت
-- 🌙 تم تاریک/روشن · 🌍 ۷ زبان · 📱 کاملاً ریسپانسیو
+- 📥 خروجی/ورودی JSON، متن و PDF برای بکاپ از تنظیمات و فولدرها
+- 🔔 اعلان پست‌های جدید هم از طریق ربات تلگرام (`@telgexplorerbot`) و هم پوش مرورگر
+- 🌙 تم تاریک/روشن · 🌍 ۷ زبان (۲۴۸ رشتهٔ ترجمه‌شده) · 📱 کاملاً ریسپانسیو + حالت تمام‌صفحهٔ قابل تنظیم در دسکتاپ
 
 ### ☁️ (اختیاری) اتصال Worker برای جستجوی زنده
 
@@ -472,35 +494,24 @@ Checks every channel in `channels.js` live against `t.me/s/<username>`:
 - `USER` — username exists but is a user/bot, not a channel
 - `FAIL` — no public channel with this username
 
-To add channels: use **⚙️ Settings → 💡 Suggest a channel** in the app (or
-open an issue with the [channel suggestion template](.github/ISSUE_TEMPLATE/suggest-channel.yml)).
-The suggestion is checked against `t.me` by a GitHub Action and, if it is a
-real public channel, a **pull request that adds it to `channels.js`** is
-opened automatically — you only have to merge it.
+To add channels:
+1. **Via the Telegram Bot ([@telgexplorerbot](https://t.me/telgexplorerbot))** — send `/suggest` (or tap **Suggest a channel**), submit `@username` or `https://t.me/<username>`. Once approved by the owner in Telegram, the next crawl workflow automatically syncs it into `channels.js` via `scripts/sync-approved-channels.js` and generates its `share/<username>.html` preview page.
+2. **By hand** — add an entry to `channels.js` (or run `node scripts/add-channel.js`), run `node scripts/generate-share-pages.js`, and verify with `node verify_channels.js`.
 
-To add a channel by hand: add an entry to `channels.js` and re-run the script.
+## 🤖 Automated crawl, sync & notifications (every 3 hours)
 
-## 🤖 Automated crawl (every 3 hours)
+A GitHub Actions workflow (`.github/workflows/crawl.yml`) runs **every 3 hours**
+(at `:17` — `00:17`, `03:17`, `06:17`, `09:17`, `12:17`, `15:17`, `18:17`, `21:17` UTC) in three decoupled stages:
 
-A GitHub Actions workflow (`.github/workflows/crawl.yml`) runs `node crawl_posts.js`
-**every 3 hours** (at :17 — 00:17, 03:17, 06:17, 09:17, 12:17, 15:17, 18:17, 21:17 UTC)
-and, if the posts changed, commits and pushes the new `posts.js` automatically.
+1. **Sync bot-approved channels (`continue-on-error: true`)** — runs `node scripts/sync-approved-channels.js --tgcloud` to pull any new owner-approved suggestions from `@telgexplorerbot` into `channels.js`.
+2. **Crawl posts & refresh member counts** — runs `node crawl_posts.js` to fetch the latest posts (`posts/<username>.json` + inline 6-post seed in `posts.js` + monthly counts in `archive/<month>.json.gz`), refreshes each channel's live `members` count in `channels.js` (preserving curated titles and descriptions), regenerates `share/<username>.html` if `channels.js` changed, and commits/pushes changes to `main`.
+3. **Trigger bot notifications (`continue-on-error: true`)** — invokes `npx tgcloud run endpoints/checkNotifications` so `@telgexplorerbot` delivers new-post alerts to subscribed users.
 
-Each crawl with new data also **bumps the service worker cache version** in
-`sw.js` to a unique per-run value, so every client immediately picks up the fresh
-posts (old caches are cleaned on SW activate). `posts.js` / `channels.js` are
-served **network-first**, so fresh data shows up even without waiting for a cache
-refresh. You can also trigger the workflow manually from the **Actions** tab.
+The Service Worker (`sw.js`) keeps the app shell (`CACHE_NAME = 'tgexplorer-shell-v1'`) separate from crawled data (`DATA_CACHE = 'tgexplorer-data'`) and serves both with `stale-while-revalidate`, so repeat visits load instantly from cache without crawl runs invalidating the app shell.
 
-Safety: if fewer than 10 channels are reachable (e.g. t.me blocking the runner),
-the crawler exits with an error and **keeps the existing `posts.js`** instead of
-wiping it. When no data changed, no commit is made. Run it locally anytime with
-`node crawl_posts.js`.
+Safety: if fewer than 10 channels are reachable (e.g. `t.me` blocking the runner), the crawler exits with an error and **keeps the existing `posts.js`** instead of wiping it. When no data changed, no commit is made. Run it locally anytime with `node crawl_posts.js`.
 
-A second workflow (**Refresh Channel Avatars**, daily at 05:23 UTC) runs
-`node fetch_avatars.js` and updates `avatars.js` — the local channel-avatar map
-that gives the app real avatars even **without a worker**. If a crawl run fails,
-the workflow automatically opens a GitHub Issue with a link to the failed logs.
+A second workflow (**Refresh Channel Avatars**, daily at `05:23` UTC) runs `node fetch_avatars.js` and updates `avatars.js` — the local channel-avatar map that gives the app real avatars even **without a worker**.
 
 ## 📁 Project Structure
 
@@ -508,22 +519,29 @@ the workflow automatically opens a GitHub Issue with a link to the failed logs.
 tgexplorer/
 ├── index.html           # Main app (HTML + CSS + the app module)
 ├── js/                  # ES modules extracted from the inline script
-│   ├── i18n.js          #   all UI strings for the 7 languages + applyLang()/t()
+│   ├── i18n.js          #   all 248 UI strings for the 7 languages (generated from i18n/*.json)
 │   ├── state.js         #   the single mutable app state (localStorage)
-│   └── worker-code.js   #   Worker source for the setup screen (generated)
-├── channels.js          # Verified channel database (131 channels)
-├── posts.js             # Inline seed: latest 12 posts per channel (generated)
-├── posts/               # Full archive, one JSON per channel (lazy-loaded)
+│   ├── compare.js       #   lazy-loaded side-by-side channel comparison module
+│   ├── export.js        #   lazy-loaded folder/saved-post export (JSON / Text / PDF)
+│   └── worker-code.js   #   Worker source for the setup screen (generated from worker.js)
+├── i18n/                # Source-of-truth translation JSON files (en, fa, ar, zh, ru, es, fr)
+├── channels.js          # Verified channel database (190 channels)
+├── posts.js             # Inline seed: latest 6 posts per channel (generated)
+├── posts/               # Full 3-day archive, one JSON per channel (lazy-loaded)
+├── archive/             # Monthly gzipped per-day post counts (<month>.json.gz + index.json)
+├── share/               # Static Open Graph share pages (share/<username>.html, 190 pages)
 ├── avatars.js           # Channel avatar map (generated)
-├── crawl_posts.js       # Post crawler (Node)
+├── serverless/          # @telgexplorerbot Telegram Serverless (tgcloud) bot
+│   └── tgcloud/         #   schema.js, handlers/, endpoints/, lib/
+├── crawl_posts.js       # Post crawler & member-count refresher (Node)
 ├── fetch_avatars.js     # Avatar refresher (Node)
 ├── verify_channels.js   # Channel validation script (Node)
 ├── worker.js            # Cloudflare Worker proxy
-├── sw.js                # Service Worker (PWA offline)
-├── scripts/             # Dev helpers (module split checks, usage scans)
+├── sw.js                # Service Worker (split shell + data caches, stale-while-revalidate)
+├── scripts/             # Build/sync tools + 7 CI static checks (archived one-offs in scripts/archive/)
 ├── manifest.json        # PWA manifest
 ├── icons/               # PWA icons
-└── tests/e2e/           # Playwright suite
+└── tests/e2e/           # 24 Playwright end-to-end browser tests
 ```
 
 ## 🛡️ Privacy
