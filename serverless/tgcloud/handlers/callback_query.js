@@ -1,6 +1,6 @@
 import { api, db } from 'sdk';
 import { eq } from 'sdk/db';
-import { suggestions, users } from '../schema.js';
+import { botConfig, suggestions, users } from '../schema.js';
 import {
   buildNotifyManagerPayload,
   getUserSubscriptions,
@@ -16,10 +16,30 @@ import {
 import {
   buildChannelCardKeyboard,
   notifyUnsubDoneText,
+  promoKitMessageHtml,
   subToggledToast,
   suggestDecisionUserText,
   suggestPromptText,
 } from '../lib/texts.js';
+
+async function incrementPromoKitsSent() {
+  const now = Math.floor(Date.now() / 1000);
+  const existing = await db
+    .select({ value: botConfig.value })
+    .from(botConfig)
+    .where(eq(botConfig.key, 'promo_kits_sent'))
+    .get();
+  const next = (parseInt(existing?.value || '0', 10) || 0) + 1;
+  await db
+    .insert(botConfig)
+    .values({ key: 'promo_kits_sent', value: String(next), updatedAt: now })
+    .onConflictDoUpdate({
+      target: botConfig.key,
+      set: { value: String(next), updatedAt: now },
+    })
+    .run();
+  return next;
+}
 
 export default async function (cq) {
   if (!cq || !cq.id) return null;
@@ -163,6 +183,8 @@ export default async function (cq) {
     } catch (e) {}
   }
 
+  let promoKitSent = false;
+  let promoKitText = '';
   try {
     const submitter = await db
       .select({ languageCode: users.languageCode })
@@ -170,11 +192,27 @@ export default async function (cq) {
       .where(eq(users.telegramId, row.submittedBy))
       .get();
     const userLang = submitter?.languageCode || 'en';
+    const displayTitle = row.title || '@' + row.username;
     await api.sendMessage({
       chat_id: row.submittedBy,
-      text: suggestDecisionUserText(userLang, isApprove, row.title || '@' + row.username, row.username),
+      text: suggestDecisionUserText(userLang, isApprove, displayTitle, row.username),
     });
+    if (isApprove) {
+      try {
+        promoKitText = promoKitMessageHtml(userLang, displayTitle, row.username);
+        await api.sendMessage({
+          chat_id: row.submittedBy,
+          text: promoKitText,
+          parse_mode: 'HTML',
+          disable_web_page_preview: true,
+        });
+        await incrementPromoKitsSent();
+        promoKitSent = true;
+      } catch (kitErr) {
+        console.warn('promo kit send failed:', kitErr?.message || kitErr);
+      }
+    }
   } catch (e) {}
 
-  return { id, username: row.username, status: nextStatus };
+  return { id, username: row.username, status: nextStatus, promoKitSent, promoKitText };
 }

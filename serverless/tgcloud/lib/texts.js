@@ -221,3 +221,38 @@ export function notifyInvalidChannelText(lang) {
     ? 'نام کاربری کانال معتبر نیست. مثال: /notify @bbcpersian'
     : 'Invalid channel username. Example: /notify @bbcpersian';
 }
+
+function escHtmlText(s) {
+  return String(s || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
+export function promoKitIntroText(lang) {
+  return isFa(lang)
+    ? 'می‌خواهید اطلاع‌رسانی کنید؟ این متن آماده را کپی و در کانال منتشر کنید:'
+    : "Want to announce it? Here's a ready-made post for the channel — just copy and publish:";
+}
+
+export function promoKitPostText(lang, title, username) {
+  const link = `https://t.me/${BOT_USERNAME}?start=channel_${username}`;
+  if (isFa(lang)) {
+    return (
+      `کانال «${title}» حالا در TGExplorer ثبت شده است!\n` +
+      `این کانال و صدها کانال خوب دیگر را اینجا ببینید: ${link}\n` +
+      `کانالی می‌شناسید؟ در @${BOT_USERNAME} پیشنهاد دهید`
+    );
+  }
+  return (
+    `${title} is now on TGExplorer!\n` +
+    `Discover it — and hundreds of other great channels — here: ${link}\n` +
+    `Got a channel? Suggest it in @${BOT_USERNAME}`
+  );
+}
+
+export function promoKitMessageHtml(lang, title, username) {
+  const intro = escHtmlText(promoKitIntroText(lang));
+  const body = escHtmlText(promoKitPostText(lang, title, username));
+  return `${intro}\n\n<pre>${body}</pre>`;
+}

@@ -1,6 +1,6 @@
 import { db, api } from 'sdk';
 import { eq, sql } from 'sdk/db';
-import { users, channelOpens, inlineQueries, inlineShares, suggestions, subscriptions, notifyLog } from '../schema.js';
+import { users, channelOpens, inlineQueries, inlineShares, suggestions, subscriptions, notifyLog, botConfig } from '../schema.js';
 import { getChannelCardData, parseChannelStartParam } from '../lib/channel.js';
 import {
   buildNotifyManagerPayload,
@@ -212,6 +212,12 @@ export default async function (message) {
       const subUsersRow = await db.get(sql`SELECT COUNT(DISTINCT user_id) AS c FROM subscriptions`);
       const subscribedUsers = Number(subUsersRow?.c || 0);
       const notificationsSent = await db.$count(notifyLog);
+      const promoRow = await db
+        .select({ value: botConfig.value })
+        .from(botConfig)
+        .where(eq(botConfig.key, 'promo_kits_sent'))
+        .get();
+      const promoKitsSent = parseInt(promoRow?.value || '0', 10) || 0;
       const topRows = await db.all(
         sql`SELECT username, COUNT(*) AS opens FROM channel_opens GROUP BY username ORDER BY opens DESC LIMIT 10`
       );
@@ -232,6 +238,7 @@ export default async function (message) {
         `Inline shares: ${totalInlineShares}\n` +
         `Pending suggestions: ${pendingSuggestions}\n` +
         `Approved suggestions: ${approvedSuggestions}\n` +
+        `Promo kits sent: ${promoKitsSent}\n` +
         `Active subscriptions: ${activeSubs}\n` +
         `Subscribed users: ${subscribedUsers}\n` +
         `Notifications sent: ${notificationsSent}\n\n` +
