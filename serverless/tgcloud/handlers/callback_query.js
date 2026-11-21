@@ -2,11 +2,23 @@ import { api, db } from 'sdk';
 import { eq } from 'sdk/db';
 import { suggestions, users } from '../schema.js';
 import {
+  buildNotifyManagerPayload,
+  getUserSubscriptions,
+  toggleUserSubscription,
+  unsubscribeUser,
+} from '../lib/notify.js';
+import {
   formatModerationMessage,
   OWNER_ID,
   setUserPendingSuggest,
 } from '../lib/suggest.js';
-import { suggestDecisionUserText, suggestPromptText } from '../lib/texts.js';
+import {
+  buildChannelCardKeyboard,
+  notifyUnsubDoneText,
+  subToggledToast,
+  suggestDecisionUserText,
+  suggestPromptText,
+} from '../lib/texts.js';
 
 export default async function (cq) {
   if (!cq || !cq.id) return null;
@@ -26,6 +38,53 @@ export default async function (cq) {
       });
     }
     return { action: 'suggest_start', userId: fromId };
+  }
+
+  const subMatch = data.match(/^sub_toggle:([a-z0-9_]{5,32})$/i);
+  if (subMatch) {
+    const username = subMatch[1].toLowerCase();
+    const subscribed = await toggleUserSubscription(fromId, username);
+    try {
+      await api.answerCallbackQuery({
+        callback_query_id: cq.id,
+        text: subToggledToast(lang, subscribed),
+      });
+    } catch (e) {}
+    if (cq.message?.chat?.id && cq.message?.message_id) {
+      try {
+        await api.editMessageReplyMarkup({
+          chat_id: cq.message.chat.id,
+          message_id: cq.message.message_id,
+          reply_markup: buildChannelCardKeyboard(lang, username, subscribed),
+        });
+      } catch (e) {}
+    }
+    return { action: 'sub_toggle', username, subscribed, userId: fromId };
+  }
+
+  const unsubMatch = data.match(/^unsub:([a-z0-9_]{5,32})$/i);
+  if (unsubMatch) {
+    const username = unsubMatch[1].toLowerCase();
+    await unsubscribeUser(fromId, username);
+    try {
+      await api.answerCallbackQuery({
+        callback_query_id: cq.id,
+        text: notifyUnsubDoneText(lang, username),
+      });
+    } catch (e) {}
+    if (cq.message?.chat?.id && cq.message?.message_id) {
+      const remaining = await getUserSubscriptions(fromId);
+      const mgr = buildNotifyManagerPayload(lang, remaining);
+      try {
+        await api.editMessageText({
+          chat_id: cq.message.chat.id,
+          message_id: cq.message.message_id,
+          text: mgr.text,
+          reply_markup: mgr.reply_markup,
+        });
+      } catch (e) {}
+    }
+    return { action: 'unsub', username, userId: fromId };
   }
 
   const m = data.match(/^sug_(ok|no):(\d+)$/);

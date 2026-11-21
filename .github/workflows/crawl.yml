@@ -52,6 +52,16 @@ jobs:
           # landed on a branch that was never deployed.
           bash scripts/push-branch.sh master posts.js posts archive sw.js
 
+      - name: Trigger bot new-post notifications
+        if: success() && secrets.NOTIFY_SECRET != ''
+        env:
+          NOTIFY_SECRET: ${{ secrets.NOTIFY_SECRET }}
+        run: |
+          curl -sS -X POST "https://app8812852999.tgcloud.ai/api/checkNotifications" \
+            -H "Content-Type: application/json" \
+            -H "X-Notify-Secret: ${NOTIFY_SECRET}" \
+            -d "{\"secret\":\"${NOTIFY_SECRET}\"}" || true
+
       - name: Report failure (GitHub Issue)
         if: failure()
         run: |

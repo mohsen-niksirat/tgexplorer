@@ -1,4 +1,4 @@
-import { table, integer, text, boolean, sql } from 'sdk/db';
+import { table, integer, text, boolean, unique, sql } from 'sdk/db';
 
 export const users = table('users', {
   telegramId:       integer('telegram_id').primaryKey(),
@@ -52,4 +52,33 @@ export const suggestions = table('suggestions', {
   status:      text('status').notNull().default('pending'),
   createdAt:   integer('created_at', { mode: 'timestamp' }).default(sql`(unixepoch())`),
   decidedAt:   integer('decided_at'),
+});
+
+export const subscriptions = table('subscriptions', {
+  id:        integer('id').primaryKey({ autoIncrement: true }),
+  userId:    integer('user_id').notNull(),
+  username:  text('username').notNull(),
+  createdAt: integer('created_at', { mode: 'timestamp' }).default(sql`(unixepoch())`),
+}, (t) => ({
+  userChannelUq: unique('uq_subscriptions_user_channel').on(t.userId, t.username),
+}));
+
+export const notifyState = table('notify_state', {
+  username:   text('username').primaryKey(),
+  lastPostId: text('last_post_id').notNull(),
+  updatedAt:  integer('updated_at').notNull(),
+});
+
+export const notifyLog = table('notify_log', {
+  id:         integer('id').primaryKey({ autoIncrement: true }),
+  userId:     integer('user_id').notNull(),
+  username:   text('username').notNull(),
+  postsCount: integer('posts_count').notNull(),
+  sentAt:     integer('sent_at', { mode: 'timestamp' }).default(sql`(unixepoch())`),
+});
+
+export const botConfig = table('bot_config', {
+  key:       text('key').primaryKey(),
+  value:     text('value').notNull(),
+  updatedAt: integer('updated_at').notNull(),
 });

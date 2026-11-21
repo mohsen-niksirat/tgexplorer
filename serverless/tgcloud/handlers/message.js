@@ -1,7 +1,14 @@
 import { db, api } from 'sdk';
 import { eq, sql } from 'sdk/db';
-import { users, channelOpens, inlineQueries, inlineShares, suggestions } from '../schema.js';
+import { users, channelOpens, inlineQueries, inlineShares, suggestions, subscriptions, notifyLog } from '../schema.js';
 import { getChannelCardData, parseChannelStartParam } from '../lib/channel.js';
+import {
+  buildNotifyManagerPayload,
+  getUserSubscriptions,
+  isUserSubscribed,
+  parseNotifyStartParam,
+  subscribeUser,
+} from '../lib/notify.js';
 import {
   buildModerationKeyboard,
   clearUserPendingState,
@@ -9,6 +16,7 @@ import {
   getUserSuggestState,
   handleSuggestInput,
   OWNER_ID,
+  parseSuggestedUsername,
   setUserPendingSuggest,
 } from '../lib/suggest.js';
 import {
@@ -19,6 +27,8 @@ import {
   fallbackText,
   formatChannelCardCaption,
   helpText,
+  notifyInvalidChannelText,
+  notifySubscribedText,
   suggestCancelledText,
   suggestPromptText,
   welcomeText,
@@ -140,13 +150,17 @@ export default async function (message) {
     }
 
     if (parsed.cmd === 'start' && parsed.param) {
-      const channelUsername = parseChannelStartParam(parsed.param);
+      const notifyUsername = parseNotifyStartParam(parsed.param);
+      if (notifyUsername && fromId) {
+        await subscribeUser(fromId, notifyUsername);
+      }
+      const channelUsername = notifyUsername || parseChannelStartParam(parsed.param);
       if (channelUsername) {
         await db
           .insert(channelOpens)
           .values({
             username: channelUsername,
-            userId: message.from?.id || 0,
+            userId: fromId,
           })
           .run();
 
@@ -160,8 +174,9 @@ export default async function (message) {
           return;
         }
 
+        const isSub = notifyUsername ? true : await isUserSubscribed(fromId, channelUsername);
         const caption = formatChannelCardCaption(lang, card);
-        const reply_markup = buildChannelCardKeyboard(lang, channelUsername);
+        const reply_markup = buildChannelCardKeyboard(lang, channelUsername, isSub);
         if (card.image && /^https?:\/\//i.test(card.image)) {
           try {
             await api.sendPhoto({
@@ -190,6 +205,33 @@ export default async function (message) {
     return;
   }
 
+  if (parsed && parsed.cmd === 'notify' && isPrivate) {
+    if (parsed.param) {
+      const target = parseSuggestedUsername(parsed.param);
+      if (!target) {
+        await api.sendMessage({
+          chat_id: message.chat.id,
+          text: notifyInvalidChannelText(lang),
+        });
+        return { action: 'notify_invalid' };
+      }
+      await subscribeUser(fromId, target);
+      await api.sendMessage({
+        chat_id: message.chat.id,
+        text: notifySubscribedText(lang, target),
+      });
+      return { action: 'notify_subscribed', username: target };
+    }
+    const subs = await getUserSubscriptions(fromId);
+    const mgr = buildNotifyManagerPayload(lang, subs);
+    await api.sendMessage({
+      chat_id: message.chat.id,
+      text: mgr.text,
+      reply_markup: mgr.reply_markup,
+    });
+    return { action: 'notify_list', count: subs.length, usernames: subs.map(s => s.username) };
+  }
+
   if (parsed && parsed.cmd === 'stats') {
     if (isPrivate && OWNER_ID && message.from?.id === OWNER_ID) {
       const totalUsers = await db.$count(users);
@@ -198,6 +240,10 @@ export default async function (message) {
       const totalInlineShares = await db.$count(inlineShares);
       const pendingSuggestions = await db.$count(suggestions, eq(suggestions.status, 'pending'));
       const approvedSuggestions = await db.$count(suggestions, eq(suggestions.status, 'approved'));
+      const activeSubs = await db.$count(subscriptions);
+      const subUsersRow = await db.get(sql`SELECT COUNT(DISTINCT user_id) AS c FROM subscriptions`);
+      const subscribedUsers = Number(subUsersRow?.c || 0);
+      const notificationsSent = await db.$count(notifyLog);
       const topRows = await db.all(
         sql`SELECT username, COUNT(*) AS opens FROM channel_opens GROUP BY username ORDER BY opens DESC LIMIT 10`
       );
@@ -217,7 +263,10 @@ export default async function (message) {
         `Inline queries: ${totalInlineQueries}\n` +
         `Inline shares: ${totalInlineShares}\n` +
         `Pending suggestions: ${pendingSuggestions}\n` +
-        `Approved suggestions: ${approvedSuggestions}\n\n` +
+        `Approved suggestions: ${approvedSuggestions}\n` +
+        `Active subscriptions: ${activeSubs}\n` +
+        `Subscribed users: ${subscribedUsers}\n` +
+        `Notifications sent: ${notificationsSent}\n\n` +
         `Top 10 channels:\n${topLines}\n\n` +
         `Top 5 inline shared:\n${topShareLines}`;
       await api.sendMessage({

@@ -49,15 +49,23 @@ export function buildExploreKeyboard(lang, channelUsername) {
   };
 }
 
-export function buildChannelCardKeyboard(lang, username) {
+export function subButtonText(lang, isSubscribed) {
+  if (isFa(lang)) {
+    return isSubscribed ? 'اطلاع‌رسانی: روشن' : 'اطلاع‌رسانی پست‌های جدید';
+  }
+  return isSubscribed ? 'Notifications: ON' : 'Notify me about new posts';
+}
+
+export function buildChannelCardKeyboard(lang, username, isSubscribed = false) {
   const appUrl = `${APP_URL}?channel=${encodeURIComponent(username)}`;
   const tgUrl = `https://t.me/${encodeURIComponent(username)}`;
-  const openAppText = isFa(lang) ? '📂 باز کردن در TGExplorer' : '📂 Open in TGExplorer';
-  const openTgText = isFa(lang) ? '🔗 باز کردن در تلگرام' : '🔗 Open in Telegram';
+  const openAppText = isFa(lang) ? 'باز کردن در TGExplorer' : 'Open in TGExplorer';
+  const openTgText = isFa(lang) ? 'باز کردن در تلگرام' : 'Open in Telegram';
   return {
     inline_keyboard: [
       [{ text: openAppText, web_app: { url: appUrl } }],
       [{ text: openTgText, url: tgUrl }],
+      [{ text: subButtonText(lang, isSubscribed), callback_data: `sub_toggle:${username}` }],
     ],
   };
 }
@@ -171,4 +179,45 @@ export function suggestDecisionUserText(lang, approved, title, username) {
   return approved
     ? `Your suggestion "${title}" (@${username}) was approved and added to TGExplorer bot search.`
     : `Your suggestion "${title}" (@${username}) was not approved.`;
+}
+
+export function subToggledToast(lang, subscribed) {
+  if (isFa(lang)) {
+    return subscribed ? 'اطلاع‌رسانی فعال شد.' : 'اطلاع‌رسانی غیرفعال شد.';
+  }
+  return subscribed ? 'Notifications enabled for this channel.' : 'Notifications turned off.';
+}
+
+export function notifyListHeader(lang, count) {
+  return isFa(lang)
+    ? `اشتراک‌های اطلاع‌رسانی شما (${count}):`
+    : `Your notification subscriptions (${count}):`;
+}
+
+export function notifyEmptyText(lang) {
+  return isFa(lang)
+    ? 'هنوز هیچ کانالی را برای اطلاع‌رسانی دنبال نکرده‌اید.\nکارت یک کانال را باز کنید و دکمه «اطلاع‌رسانی پست‌های جدید» را بزنید، یا بفرستید:\n/notify @username'
+    : 'You have no active notification subscriptions.\nOpen any channel card and tap "Notify me about new posts", or send:\n/notify @username';
+}
+
+export function notifyUnsubButton(lang, username) {
+  return isFa(lang) ? `لغو اشتراک @${username}` : `Unsubscribe @${username}`;
+}
+
+export function notifySubscribedText(lang, username) {
+  return isFa(lang)
+    ? `اطلاع‌رسانی پست‌های جدید برای @${username} فعال شد.`
+    : `Subscribed to new-post notifications for @${username}.`;
+}
+
+export function notifyUnsubDoneText(lang, username) {
+  return isFa(lang)
+    ? `اشتراک اطلاع‌رسانی @${username} لغو شد.`
+    : `Unsubscribed from @${username}.`;
+}
+
+export function notifyInvalidChannelText(lang) {
+  return isFa(lang)
+    ? 'نام کاربری کانال معتبر نیست. مثال: /notify @bbcpersian'
+    : 'Invalid channel username. Example: /notify @bbcpersian';
 }
