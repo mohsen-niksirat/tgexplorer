@@ -9,10 +9,13 @@ const zlib = require('zlib');
 const fn = new Function(fs.readFileSync(path.join(__dirname, 'channels.js'), 'utf8') + '; return CHANNEL_DB;');
 const db = fn();
 const MAX_POSTS = 50;      // full per-channel archive (posts/<username>.json)
-const SEED_POSTS = 12;     // inline posts.js seed (keeps index.html light)
+const SEED_POSTS = 6;      // inline posts.js seed (older posts load on demand from posts/<username>.json)
 const RETENTION_DAYS = 3;  // "live" window: posts older than N days are dropped
                            // from the archive each crawl (a kept lightweight
                            // digest preserves counters so Explore stays rich)
+const CONCURRENCY = 5;
+const FETCH_TIMEOUT_MS = 10000;
+const RETRY_BACKOFF_MS = 400;
 const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
 
 // Strip markup first, then decode entities — decoding &lt; before the tag
@@ -66,17 +69,31 @@ function parsePosts(html, username){
   return posts;
 }
 
+async function fetchWithRetry(url) {
+  for (let attempt = 0; attempt < 2; attempt++) {
+    try {
+      const r = await fetch(url, {
+        headers: { 'User-Agent': UA, 'Accept': 'text/html', 'Accept-Language': 'en' },
+        redirect: 'follow',
+        signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
+      });
+      if (r.ok || r.status === 404) return r;
+    } catch (e) {}
+    if (attempt === 0) await new Promise(r => setTimeout(r, RETRY_BACKOFF_MS));
+  }
+  return null;
+}
+
 async function fetchPosts(ch){
   const all = [];
   let before = '';
+  let ok = false;
   try {
     for (let page = 0; page < 6 && all.length < MAX_POSTS; page++) {
       const url = 'https://t.me/s/' + encodeURIComponent(ch.username) + (before ? ('?before=' + before) : '');
-      const r = await fetch(url, {
-        headers: { 'User-Agent': UA, 'Accept': 'text/html', 'Accept-Language': 'en' },
-        redirect: 'follow'
-      });
-      if (!r.ok) break;
+      const r = await fetchWithRetry(url);
+      if (!r || !r.ok) break;
+      ok = true;
       const posts = parsePosts(await r.text(), ch.username);
       if (!posts.length) break;
       for (const p of posts) if (!all.some(x => x.id === p.id)) all.push(p);
@@ -84,28 +101,52 @@ async function fetchPosts(ch){
       if (before && minId === before) break;
       before = minId;
       if (posts.length < 10) break;
-      await new Promise(r => setTimeout(r, 200));
+      await new Promise(r => setTimeout(r, 150));
     }
   } catch (e) {}
-  return all.slice(0, MAX_POSTS).sort((a, b) => Number(b.id) - Number(a.id));
+  return {
+    ok,
+    posts: all.slice(0, MAX_POSTS).sort((a, b) => Number(b.id) - Number(a.id)),
+  };
 }
 
 (async () => {
-  console.log('Fetching posts for ' + db.length + ' channels...');
+  console.log('Fetching posts for ' + db.length + ' channels (concurrency=' + CONCURRENCY + ')...');
+  const POSTS_DIR = path.join(__dirname, 'posts');
+  fs.mkdirSync(POSTS_DIR, { recursive: true });
   const archive = {};   // full archive -> posts/<username>.json (lazy-loaded)
-  const seed = {};      // latest 12 posts -> posts.js (inline, small)
+  const seed = {};      // latest 6 posts -> posts.js (inline, small)
   let withPosts = 0;
-  for (let i = 0; i < db.length; i++) {
-    const ch = db[i];
-    const posts = await fetchPosts(ch);
-    if (posts.length) {
-      archive[ch.username] = posts;
-      seed[ch.username] = posts.slice(0, SEED_POSTS);
-      withPosts++;
+  let nextIdx = 0;
+  let doneCount = 0;
+
+  async function worker() {
+    while (true) {
+      const i = nextIdx++;
+      if (i >= db.length) break;
+      const ch = db[i];
+      const res = await fetchPosts(ch);
+      let posts = res.posts;
+      if (!posts.length) {
+        const prevFile = path.join(POSTS_DIR, ch.username + '.json');
+        if (fs.existsSync(prevFile)) {
+          try {
+            const prev = JSON.parse(fs.readFileSync(prevFile, 'utf8'));
+            if (Array.isArray(prev) && prev.length) posts = prev;
+          } catch (e) {}
+        }
+      }
+      if (posts.length) {
+        archive[ch.username] = posts;
+        seed[ch.username] = posts.slice(0, SEED_POSTS);
+        withPosts++;
+      }
+      doneCount++;
+      process.stdout.write('\r  [' + doneCount + '/' + db.length + '] ' + ch.username + ' -> ' + posts.length + ' posts      ');
     }
-    process.stdout.write('\r  [' + (i + 1) + '/' + db.length + '] ' + ch.username + ' -> ' + posts.length + ' posts      ');
-    await new Promise(r => setTimeout(r, 250));
   }
+
+  await Promise.all(Array.from({ length: CONCURRENCY }, () => worker()));
   if (withPosts < 10) {
     console.log('Too few channels fetched (' + withPosts + ') - keeping existing posts.js, exit 1');
     process.exit(1);
@@ -125,8 +166,6 @@ async function fetchPosts(ch){
   }
   const total = Object.values(archive).reduce((a, p) => a + p.length, 0);
   // Full archive, one JSON file per channel (loaded on demand by the app)
-  const POSTS_DIR = path.join(__dirname, 'posts');
-  fs.mkdirSync(POSTS_DIR, { recursive: true });
   for (const [u, posts] of Object.entries(archive)) {
     fs.writeFileSync(path.join(POSTS_DIR, u + '.json'), JSON.stringify(posts));
   }

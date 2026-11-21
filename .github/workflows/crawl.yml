@@ -21,12 +21,20 @@ jobs:
         with:
           node-version: '24'
 
+      - name: Sync bot-approved channels
+        id: sync
+        if: secrets.APPROVED_CHANNELS_URL != '' && secrets.NOTIFY_SECRET != ''
+        env:
+          APPROVED_CHANNELS_URL: ${{ secrets.APPROVED_CHANNELS_URL }}
+          NOTIFY_SECRET: ${{ secrets.NOTIFY_SECRET }}
+        run: node scripts/sync-approved-channels.js
+
       - name: Crawl, bump SW cache, commit and push
         run: |
           set -e
           node crawl_posts.js
 
-          git add posts.js posts archive
+          git add channels.js posts.js posts archive
           if git diff --cached --quiet; then
             echo "No data changes — nothing to push"
             exit 0
@@ -45,12 +53,14 @@ jobs:
 
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git commit -m "chore: update channel posts $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          SYNC_N="${{ steps.sync.outputs.synced_count || '0' }}"
+          if [ "$SYNC_N" -gt 0 ] 2>/dev/null; then
+            git commit -m "chore(data): sync bot-approved channels (+${SYNC_N})"
+          else
+            git commit -m "chore: update channel posts $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          fi
 
-          # Push to the branch the app is developed on. The workflow used to
-          # push to `main` while the code lived on `master`, so every crawl
-          # landed on a branch that was never deployed.
-          bash scripts/push-branch.sh master posts.js posts archive sw.js
+          bash scripts/push-branch.sh main channels.js posts.js posts archive sw.js
 
       - name: Trigger bot new-post notifications
         if: success() && secrets.NOTIFY_SECRET != ''

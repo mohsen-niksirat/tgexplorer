@@ -210,5 +210,10 @@ const CHANNEL_DB = [
   {username:'zaihuapd',title:'在花🎗️科技圈',members:'291K',description:'分享 科技、AI、数码、互联网及前沿资讯，分享见闻与实用内容。 📌 群规 • 文明交流，理性讨论 • 禁止刷屏、广告推广、恶意引流 • 禁止黑产、色情、赌博等违规内容 • 禁止宗教政治、键政、人身攻击及恶意争吵 • 违规内容将被删除，严重者移出 📮 科技圈投稿： @zaihuabot 🛠 侵权｜申诉｜客服： @BiuAsstBot 📡 备用频道： @zaihuatg 🤝 广告合作： @zaihua_ad_bot',tags:['tech','ai'],lang:'zh'},
   {username:'zhetengsha',title:'折腾啥',members:'55K',description:'Power Users/Automators 折腾/讨论/分享各种开源工具/脚本/自动化工作流 👥 @zhetengsha_group 🎁 恰饭 https://t.me/zhetengsha/957 📌 合集 https://t.me/zhetengsha/2 📢 推广 @xream_bot Buy ads: https://telega.io/c/zhetengsha feedId:55438372655431680+userId:62307599601855488',tags:['tech'],lang:'zh'},
 
-  {username:'myleitner',title:'My Public Apps',members:'278',description:'معرفی اپ‌ها، ربات‌ها و ابزارهای کاربردی — @Mohsenniksirat',tags:['tech','persian'],lang:'fa'},];
+  {username:'myleitner',title:'My Public Apps',members:'278',description:'معرفی اپ‌ها، ربات‌ها و ابزارهای کاربردی — @Mohsenniksirat',tags:['tech','persian'],lang:'fa'},
+  {username:'thenews_persian',title:'Tech News',members:'118',description:'main channel : https://t.me/MyLeitner admin : @MohsenNiksirat',tags:[],lang:'en'},
+  {username:'wabetainfo',title:'WABetaInfo - WhatsApp beta news',members:'14.3K',description:'WABetaInfo is the main source where you can discover news and real-time updates about WhatsApp. Download WhatsApp beta: https://wabetainfo.com/download/ Join TestFlight: https://wabetainfo.com/testflight/',tags:[],lang:'en'},
+  {username:'toncoin',title:'Gram of TON',members:'6.1M',description:'GRAM is the native token of TON — The Open Network — an ultrafast, scalable blockchain integrated with Telegram.',tags:[],lang:'en'},
+  {username:'contest',title:'Telegram Contests',members:'295.7K',description:'Here we announce Telegram coding contests in Android Java, iOS Swift, JS, C/C++. Discussion: @contests',tags:[],lang:'en'},
+  {username:'news_hut',title:'هات نیوز | HotNews',members:'102.3K',description:'بدون هیچگونه گرایش و تمایلات سیاسی، همیشه سمت حقیقت و مردم.',tags:[],lang:'fa'},];
 
