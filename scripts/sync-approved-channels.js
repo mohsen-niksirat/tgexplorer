@@ -73,6 +73,13 @@ function applySyncToSource(channelsSrc, approvedList) {
   return { changed: true, added, nextSrc };
 }
 
+function parseTgcloudRunOutput(out) {
+  const m = String(out || '').match(/<\s*(\{[\s\S]*?\})\s+\d+ms/);
+  if (!m) throw new Error('Could not parse tgcloud run output:\n' + out);
+  const parsed = new Function('return ' + m[1])();
+  return parsed.channels || [];
+}
+
 function runFixtureTests() {
   const assert = require('assert');
   const sampleSrc = `const CHANNEL_DB = [\n  {username:'bbcpersian',title:'BBC Persian',members:'1.6M',description:'اخبار',tags:['news'],lang:'fa'},\n];\n`;
@@ -81,7 +88,13 @@ function runFixtureTests() {
   assert.strictEqual(detectLang('Tech News', 'main channel'), 'en');
   assert.strictEqual(detectLang('اخبار تکنولوژی', 'کانال خبری فارسی'), 'fa');
 
-  // 2. diff: new + already-present + duplicate + pending/rejected ignored
+  // 2. parse tgcloud run stdout format
+  const sampleStdout = `> approvedChannels({secret:'***'})\n- Running...\n< {ok:true,channels:[{username:'bbcpersian',title:'Dup',members:'999',description:'x'},{username:'new_fa_chan',title:'کانال جدید',members:'118',description:'توضیحات فارسی'}]}  55ms\n`;
+  const parsedFromCli = parseTgcloudRunOutput(sampleStdout);
+  assert.strictEqual(parsedFromCli.length, 2);
+  assert.strictEqual(parsedFromCli[1].username, 'new_fa_chan');
+
+  // 3. diff: new + already-present + duplicate + pending/rejected ignored
   const fixtures = [
     { username: 'bbcpersian', title: 'Duplicate existing', members: '999', description: 'x', status: 'approved' },
     { username: 'new_fa_chan', title: 'کانال جدید', members: '118', description: 'توضیحات فارسی', status: 'approved' },
@@ -106,15 +119,16 @@ function runFixtureTests() {
 }
 
 async function fetchApprovedFromTgcloud() {
-  const out = execSync('npx tgcloud run endpoints/approvedChannels "{}" --ctx "{initData:{user:{id:65807806}}}"', {
+  const secret = process.env.NOTIFY_SECRET;
+  const cmd = secret
+    ? `npx tgcloud run endpoints/approvedChannels ${JSON.stringify(JSON.stringify({ secret }))}`
+    : 'npx tgcloud run endpoints/approvedChannels "{}" --ctx "{initData:{user:{id:65807806}}}"';
+  const out = execSync(cmd, {
     cwd: path.join(ROOT, 'serverless'),
     encoding: 'utf8',
     stdio: ['ignore', 'pipe', 'pipe'],
   });
-  const m = out.match(/<\s*(\{[\s\S]*?\})\s+\d+ms/);
-  if (!m) throw new Error('Could not parse tgcloud run output:\n' + out);
-  const parsed = new Function('return ' + m[1])();
-  return parsed.channels || [];
+  return parseTgcloudRunOutput(out);
 }
 
 async function fetchApprovedFromHttp(url, secret) {
@@ -140,9 +154,12 @@ async function main() {
 
   let approved = [];
   const fileIdx = args.indexOf('--from-file');
+  const tgOutIdx = args.indexOf('--from-tgcloud-output');
   if (fileIdx !== -1 && args[fileIdx + 1]) {
     const raw = JSON.parse(fs.readFileSync(args[fileIdx + 1], 'utf8'));
     approved = Array.isArray(raw) ? raw : (raw.channels || []);
+  } else if (tgOutIdx !== -1 && args[tgOutIdx + 1]) {
+    approved = parseTgcloudRunOutput(fs.readFileSync(args[tgOutIdx + 1], 'utf8'));
   } else if (args.includes('--tgcloud')) {
     approved = await fetchApprovedFromTgcloud();
   } else {

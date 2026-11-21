@@ -13,8 +13,8 @@ jobs:
   crawl:
     runs-on: ubuntu-latest
     env:
+      TGCLOUD_TOKEN: ${{ secrets.TGCLOUD_TOKEN }}
       NOTIFY_SECRET: ${{ secrets.NOTIFY_SECRET }}
-      APPROVED_CHANNELS_URL: ${{ secrets.APPROVED_CHANNELS_URL }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -24,10 +24,20 @@ jobs:
         with:
           node-version: '24'
 
+      - name: Install serverless CLI
+        if: env.TGCLOUD_TOKEN != ''
+        run: npm --prefix serverless ci
+
       - name: Sync bot-approved channels
         id: sync
-        if: env.APPROVED_CHANNELS_URL != '' && env.NOTIFY_SECRET != ''
-        run: node scripts/sync-approved-channels.js
+        continue-on-error: true
+        if: env.TGCLOUD_TOKEN != '' && env.NOTIFY_SECRET != ''
+        run: |
+          cd serverless
+          npx tgcloud run endpoints/approvedChannels "{\"secret\":\"${NOTIFY_SECRET}\"}" > ../approved_raw.txt
+          cd ..
+          node scripts/sync-approved-channels.js --from-tgcloud-output approved_raw.txt
+          rm -f approved_raw.txt
 
       - name: Crawl, bump SW cache, commit and push
         run: |
@@ -63,12 +73,11 @@ jobs:
           bash scripts/push-branch.sh main channels.js posts.js posts archive sw.js
 
       - name: Trigger bot new-post notifications
-        if: success() && env.NOTIFY_SECRET != ''
+        continue-on-error: true
+        if: success() && env.TGCLOUD_TOKEN != ''
         run: |
-          curl -sS -w "\nHTTP %{http_code}\n" -X POST "https://app8812852999.tgcloud.ai/api/checkNotifications" \
-            -H "Content-Type: application/json" \
-            -H "X-Notify-Secret: ${NOTIFY_SECRET}" \
-            -d "{\"secret\":\"${NOTIFY_SECRET}\"}" || true
+          cd serverless
+          npx tgcloud run endpoints/checkNotifications "{\"secret\":\"${NOTIFY_SECRET}\"}"
 
       - name: Report failure (GitHub Issue)
         if: failure()
