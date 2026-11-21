@@ -54,17 +54,6 @@ jobs:
             exit 0
           fi
 
-          # Unique cache name per run -> old SW caches get cleaned on activate,
-          # so clients always pick up the freshly crawled data.
-          python3 - <<'PYEOF'
-          import re, datetime
-          ver = datetime.datetime.utcnow().strftime('%Y%m%d%H%M')
-          s = open('sw.js', encoding='utf-8').read()
-          s = re.sub(r"const CACHE_NAME = '[^']*'", f"const CACHE_NAME = 'tgexplorer-{ver}'", s, count=1)
-          open('sw.js', 'w', encoding='utf-8').write(s)
-          PYEOF
-          git add sw.js
-
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           SYNC_N="${{ steps.sync.outputs.synced_count || '0' }}"
@@ -74,7 +63,7 @@ jobs:
             git commit -m "chore: update channel posts $(date -u +%Y-%m-%dT%H:%M:%SZ)"
           fi
 
-          bash scripts/push-branch.sh main channels.js posts.js posts archive share sw.js
+          bash scripts/push-branch.sh main channels.js posts.js posts archive share
 
       - name: Trigger bot new-post notifications
         continue-on-error: true

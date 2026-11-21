@@ -3,56 +3,87 @@
 // Handles caching for offline support and PWA
 // ============================================================
 
-const CACHE_NAME = 'tgexplorer-202611210907';
-// The watchlist/seen-post state lives in its own, deliberately unversioned
-// cache: `activate` purges every old shell cache, but the user's watch state
-// must survive a deploy.
+const CACHE_NAME = 'tgexplorer-shell-v1';
+// The watchlist/seen-post state and crawled data live in their own unversioned
+// caches: `activate` purges old shell caches, while watch state and data
+// survive shell deploys and are refreshed via stale-while-revalidate.
 const STATE_CACHE = 'tgexplorer-state';
+const DATA_CACHE = 'tgexplorer-data';
 const STATIC_ASSETS = [
   './',
   './index.html',
   './manifest.json',
-  './channels.js',
-  './posts.js',
-  './avatars.js',
   './js/i18n.js',
   './js/state.js',
   './js/worker-code.js',
   './js/compare.js',
   './js/export.js',
 ];
+const DATA_ASSETS = [
+  './channels.js',
+  './posts.js',
+  './avatars.js',
+];
 
-// Install: cache static assets. Data files are best-effort — a missing
-// posts.js/avatars.js must not abort the whole installation (the app
-// degrades to whatever is available).
+// Install: cache static shell assets and best-effort warm the data cache.
 self.addEventListener('install', event => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then(cache =>
-      Promise.all(
-        STATIC_ASSETS.map(url =>
-          cache.add(new Request(url, { cache: 'default' })).catch(() => {})
+    Promise.all([
+      caches.open(CACHE_NAME).then(cache =>
+        Promise.all(
+          STATIC_ASSETS.map(url =>
+            cache.add(new Request(url, { cache: 'default' })).catch(() => {})
+          )
         )
-      )
-    )
+      ),
+      caches.open(DATA_CACHE).then(cache =>
+        Promise.all(
+          DATA_ASSETS.map(url =>
+            cache.match(url).then(hit => hit || cache.add(new Request(url, { cache: 'default' })).catch(() => {}))
+          )
+        )
+      ),
+    ])
   );
   self.skipWaiting();
 });
 
-// Activate: clean old caches
+// Activate: clean old shell caches while preserving state and data caches
 self.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys().then(keys => {
-      // The watchlist/seen cache is deliberately not versioned: purge every
-      // old shell cache, but keep the user's watch state alive.
       return Promise.all(
-        keys.filter(key => key !== CACHE_NAME && key !== STATE_CACHE).map(key => caches.delete(key))
+        keys
+          .filter(key => key !== CACHE_NAME && key !== STATE_CACHE && key !== DATA_CACHE)
+          .map(key => caches.delete(key))
       );
     })
   );
   self.clients.claim();
 });
 
-// Fetch: network first for API, cache first for static
+function staleWhileRevalidate(event, cacheName, fallbackFn) {
+  event.respondWith(
+    caches.open(cacheName).then(cache =>
+      cache.match(event.request).then(cached => {
+        const networkPromise = fetch(event.request).then(response => {
+          if (response && response.ok) {
+            cache.put(event.request, response.clone());
+          }
+          return response;
+        }).catch(() => cached || (fallbackFn ? fallbackFn() : undefined));
+
+        if (cached) {
+          event.waitUntil(networkPromise);
+          return cached;
+        }
+        return networkPromise;
+      })
+    )
+  );
+}
+
+// Fetch: network only for API, stale-while-revalidate for data & shell
 self.addEventListener('fetch', event => {
   const url = new URL(event.request.url);
   if (url.origin !== self.location.origin) return;
@@ -63,73 +94,32 @@ self.addEventListener('fetch', event => {
     return;
   }
 
-  // App shell (every navigation) and the manifest: network first so app
-  // updates (new features) show up on refresh — no stale cached copy. The
-  // root path "/" is a navigation too, so it must not fall through to the
-  // cache-first branch below: that would keep serving an old index.html
-  // until the cache version is bumped. Fall back to the cache only offline.
+  // App shell (navigations, index.html, manifest.json) & ES modules (js/*.js):
+  // stale-while-revalidate in CACHE_NAME so repeat visits render immediately
+  // without waiting for the network, while picking up updates in the background.
   if (event.request.mode === 'navigate'
-    || url.pathname.endsWith('/index.html') || url.pathname.endsWith('/manifest.json')) {
-    event.respondWith(
-      fetch(event.request).then(response => {
-        if (response.ok) {
-          const clone = response.clone();
-          caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
-        }
-        return response;
-      }).catch(() => caches.match(event.request).then(cached => cached || caches.match('./index.html')))
-    );
+    || url.pathname.endsWith('/index.html')
+    || url.pathname.endsWith('/manifest.json')) {
+    staleWhileRevalidate(event, CACHE_NAME, () => caches.match('./index.html'));
     return;
   }
 
-  // ES modules (js/*.js): network first, so a new deploy of a module is
-  // picked up on the next load instead of being pinned to a stale cached
-  // copy. Falls back to the cache when offline.
   if (url.pathname.includes('/js/') && url.pathname.endsWith('.js')) {
-    event.respondWith(
-      fetch(event.request).then(response => {
-        if (response.ok) {
-          const clone = response.clone();
-          caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
-        }
-        return response;
-      }).catch(() => caches.match(event.request))
-    );
+    staleWhileRevalidate(event, CACHE_NAME);
     return;
   }
 
   // Data files (posts.js / channels.js / avatars.js / posts/*.json):
-  // network first so crawls and avatar refreshes show up immediately —
-  // fall back to the cached copy only when offline.
+  // stale-while-revalidate in separate DATA_CACHE so crawls never invalidate
+  // the shell cache and repeat visits don't block on data downloads.
   if (url.pathname.endsWith('/posts.js') || url.pathname.endsWith('/channels.js') || url.pathname.endsWith('/avatars.js')
     || (url.pathname.includes('/posts/') && url.pathname.endsWith('.json'))) {
-    event.respondWith(
-      fetch(event.request).then(response => {
-        if (response.ok) {
-          const clone = response.clone();
-          caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
-        }
-        return response;
-      }).catch(() => caches.match(event.request))
-    );
+    staleWhileRevalidate(event, DATA_CACHE);
     return;
   }
 
-  // Static assets: cache first, then network
-  event.respondWith(
-    caches.match(event.request).then(cached => {
-      const fetchPromise = fetch(event.request).then(response => {
-        // Update cache
-        if (response.ok) {
-          const clone = response.clone();
-          caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
-        }
-        return response;
-      }).catch(() => cached);
-
-      return cached || fetchPromise;
-    })
-  );
+  // Other static assets (icons, etc.): stale-while-revalidate in CACHE_NAME
+  staleWhileRevalidate(event, CACHE_NAME);
 });
 
 // ============================================================
