@@ -3,6 +3,14 @@
 Full version history of Telegram Explorer. The latest release is summarized in the
 [README](README.md#-changelog).
 
+## v1.8.1 (2026-11-21)
+
+- **Bot (`@telgexplorerbot`)** — full Telegram Serverless (`tgcloud`) bot with `/start`, `/help`, `/lang` (EN/FA), `/stats`, channel deep-link cards (`?start=channel_<username>`), inline mode (`@telgexplorerbot <query>` + daily-rotated featured list), `/suggest` channel submission with owner moderation + ready-to-post approval promo kit, and per-channel new-post subscriptions (`/notify`, per-subscription delivery watermarks across batches/transient errors).
+- **Approved-channel sync & crawl hardening** — bot-approved suggestions sync into `channels.js` via `tgcloud run` (`scripts/sync-approved-channels.js`), crawl refreshes channel `title`/`members`/`description` and regenerates `share/*.html` pages when channels change, and `crawl.yml` decouples sync/notify failures from the crawl.
+- **Feed & Explore** — Feed post-type filter (`All` / `Photos` / `Videos` / `Text`), Explore type badge stretch fix, and XSS/URL validation hardening in renderers (`escHtml`, `safeMediaUrl`).
+- **Mini App & Performance** — Bot deep-link handoff (`?startapp=channel_<username>`), desktop Mini App sizing + fullscreen-on-desktop toggle, deferred `posts.js` loading + `getAllChannels` caching + LCP/caching optimizations, and removal of stale hardcoded preload.
+- **CI & Tests** — `test.yml` targets `main` (dropping redundant `deploy-pages` and stale `suggestions.yml`), Playwright sleeps replaced with condition waits (`23/23` in `1.3m`), and historical one-off scripts archived under `scripts/archive/`.
+
 ## v1.8.0 (2026-11-20)
 
 - **Design system** — Telegram-native tokens (`themeParams` integration), flat surfaces with no decorative gradients or glassmorphism, and a dark theme that is no longer pitch black.
