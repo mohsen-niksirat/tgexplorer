@@ -176,7 +176,7 @@ test.describe('Telegram Explorer - e2e', () => {
       const names = await caches.keys();
       for (const name of names) {
         const cache = await caches.open(name);
-        const s = await cache.match('/tgexplorer-seen');
+        const s = await cache.match('/tg-seen');
         if (s) {
           const data = await s.json();
           if (data && data.bbcpersian && data.bbcpersian.length) return true;
