@@ -239,7 +239,7 @@ too. If you hit a limit, the endpoints keep working from the cache.
 - 🧪 **Playwright e2e suite + CI** — 9 browser tests (page load, local search,
   channel modal, language switch, keyboard focus, Enter-to-open, accessible
   names, offline mode, worker fallback) run automatically on every push to
-  `master` via GitHub Actions (`.github/workflows/test.yml`), together with a
+  `main` via GitHub Actions (`.github/workflows/test.yml`), together with a
   `verify-channels` job that uploads the channel-health report as an artifact
 - 🩺 **Channel health report** — `verify_channels.js` now writes
   `verify_channels_report.json` (per-channel status, member tracking, dead /

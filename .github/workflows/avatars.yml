@@ -35,6 +35,4 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git commit -m "chore: refresh channel avatars $(date -u +%Y-%m-%dT%H:%M:%SZ)"
 
-          # Push to the branch the app is developed on — the workflow used to
-          # push to `main` while the code lived on `master`.
-          bash scripts/push-branch.sh master avatars.js
+          bash scripts/push-branch.sh main avatars.js
