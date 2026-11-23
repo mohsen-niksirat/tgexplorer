@@ -75,6 +75,10 @@ export let state={
   feedDone:false,
   feedMode:'local',
   feedTypes:readList('tgexp_feed_types',null,'all'),
+  feedDateRange:localStorage.getItem('tgexp_feed_date')||'all',
+  feedSort:localStorage.getItem('tgexp_feed_sort')||'default',
+  postDateRange:localStorage.getItem('tgexp_pdate')||'all',
+  postSort:localStorage.getItem('tgexp_psort')||'newest',
   fontSize:localStorage.getItem('tgexp_fs')||'medium',
   // --- multi-select Explore filters ---
   filterCats:readList('tgexp_fcats',localStorage.getItem('tgexp_cat'),'all'),

@@ -205,6 +205,7 @@ async function handleSearchPosts(url, env) {
           username: ch.username,
           title: ch.title || ch.username,
           date: p.date || '',
+          views: p.views || 0,
           excerpt: p.text.slice(Math.max(0, at - 90), at + needle.length + 90),
         });
         if (matches.length >= limit) break;
@@ -650,6 +651,19 @@ function parseChannelPage(html, username) {
   };
 }
 
+function parseViewsCount(raw) {
+  if (!raw) return 0;
+  const s = String(raw).trim().replace(/,/g, '');
+  const m = s.match(/^([\\d.]+)\\s*([KkMm])?$/);
+  if (!m) return parseInt(s.replace(/\\D+/g, ''), 10) || 0;
+  const n = parseFloat(m[1]);
+  if (!Number.isFinite(n)) return 0;
+  const unit = (m[2] || '').toUpperCase();
+  if (unit === 'M') return Math.round(n * 1e6);
+  if (unit === 'K') return Math.round(n * 1e3);
+  return Math.round(n);
+}
+
 function parsePosts(html, username) {
   const posts = [];
   const blockRe = /class="tgme_widget_message_wrap[^"]*"[\\s\\S]*?(?=class="tgme_widget_message_wrap|$)/gi;
@@ -664,9 +678,11 @@ function parsePosts(html, username) {
     const tm = block.match(/class="tgme_widget_message_text[^>]*>([\\s\\S]*?)<\\/div>/);
     const text = tm ? tm[1].replace(/<[^>]+>/g, '').trim() : '';
     const dm = block.match(/<time[^>]+datetime="([^"]+)"/);
+    const vwm = block.match(/class="tgme_widget_message_views"[^>]*>([^<]+)<\\/span>/i);
+    const views = vwm ? parseViewsCount(vwm[1]) : 0;
     const im = block.match(/background-image:\\s*url\\(['"]?(https?:\\/\\/[^'") \\s]+)['"]?\\)/);
     const vm = block.match(/<video[^>]*src="([^"]+)"/);
-    const post = { id, link: \`https://t.me/\${username}/\${id}\`, date: dm ? dm[1] : '' };
+    const post = { id, link: \`https://t.me/\${username}/\${id}\`, date: dm ? dm[1] : '', views };
     if (text) post.text = decodeEntities(text.substring(0, 300));
     if (vm) { post.video = vm[1]; post.hasVideo = true; }
     if (im) post.image = im[1];

@@ -144,7 +144,13 @@
     "compare": "Comparar",
     "share_bot": "Compartir vía bot",
     "notify_in_bot": "Recibir notificaciones de nuevas publicaciones en el bot",
-    "settings_fullscreen_desktop": "Pantalla completa en escritorio"
+    "settings_fullscreen_desktop": "Pantalla completa en escritorio",
+    "range_all": "Todo el tiempo",
+    "range_24h": "Últimas 24 h",
+    "range_7d": "Últimos 7 días",
+    "sort_newest": "Más recientes",
+    "sort_views": "Más vistos",
+    "views_unit": "vistas"
   },
   "ui": {
     "all": "Todo",

@@ -2728,6 +2728,67 @@ async function loadArchiveSources(onProgress){
   return m.loadArchiveSources(seedPostSources(),onProgress);
 }
 
+function formatCompactViews(v){
+  const n=Number(v)||0;
+  if(!n)return '';
+  if(n>=1e6)return (n/1e6).toFixed(1).replace(/\.0$/,'')+'M';
+  if(n>=1e3)return (n/1e3).toFixed(1).replace(/\.0$/,'')+'K';
+  return String(n);
+}
+function parseMembersCountNum(str){
+  if(!str)return 0;
+  const s=String(str).trim().replace(/,/g,'');
+  const m=s.match(/^([\d.]+)\s*([KkMm])?$/);
+  if(!m)return parseInt(s.replace(/\D+/g,''),10)||0;
+  const n=parseFloat(m[1])||0;
+  const u=(m[2]||'').toUpperCase();
+  return u==='M'?Math.round(n*1e6):u==='K'?Math.round(n*1e3):Math.round(n);
+}
+function filterAndSortPostHits(hits){
+  const range=state.postDateRange||'all';
+  const sort=state.postSort||'newest';
+  let list=(hits||[]).slice();
+  if(range==='24h'||range==='7d'){
+    let maxT=0;
+    for(const h of list){
+      const t=h.post&&h.post.date?Date.parse(h.post.date):0;
+      if(t>maxT)maxT=t;
+    }
+    const refNow=maxT||Date.now();
+    const windowMs=range==='24h'?864e5:7*864e5;
+    const cutoff=refNow-windowMs;
+    list=list.filter(h=>{
+      const t=h.post&&h.post.date?Date.parse(h.post.date):NaN;
+      return !isNaN(t)&&t>=cutoff;
+    });
+  }
+  const dbMap=new Map(getAllChannels().map(c=>[c.username,parseMembersCountNum(c.members)]));
+  list.sort((a,b)=>{
+    if(sort==='views'){
+      const va=Number(a.post&&a.post.views)||0;
+      const vb=Number(b.post&&b.post.views)||0;
+      if(vb!==va)return vb-va;
+      const ma=dbMap.get(a.username)||0;
+      const mb=dbMap.get(b.username)||0;
+      if(mb!==ma)return mb-ma;
+    }
+    const da=a.post&&a.post.date?Date.parse(a.post.date)||0:0;
+    const db=b.post&&b.post.date?Date.parse(b.post.date)||0:0;
+    return db-da;
+  });
+  return list;
+}
+function setPostDateRange(r){
+  state.postDateRange=r||'all';
+  localStorage.setItem('tgexp_pdate',state.postDateRange);
+  renderPostSearchResults();
+}
+function setPostSort(s){
+  state.postSort=s||'newest';
+  localStorage.setItem('tgexp_psort',state.postSort);
+  renderPostSearchResults();
+}
+
 // Group the hits by channel.
 function groupPostHits(hits){
   const groups=new Map();
@@ -2735,20 +2796,41 @@ function groupPostHits(hits){
     if(!groups.has(h.username))groups.set(h.username,[]);
     groups.get(h.username).push(h);
   }
-  return [...groups.entries()].map(([username,list])=>({username,list}));
+  const out=[...groups.entries()].map(([username,list])=>({username,list}));
+  if(state.postSort==='views'){
+    const dbMap=new Map(getAllChannels().map(c=>[c.username,parseMembersCountNum(c.members)]));
+    out.sort((a,b)=>{
+      const maxA=Math.max(0,...a.list.map(x=>Number(x.post&&x.post.views)||0));
+      const maxB=Math.max(0,...b.list.map(x=>Number(x.post&&x.post.views)||0));
+      if(maxB!==maxA)return maxB-maxA;
+      return (dbMap.get(b.username)||0)-(dbMap.get(a.username)||0);
+    });
+  }
+  return out;
 }
 
 // Render the post-search results.
 function renderPostSearchResults(){
   const content=document.getElementById('content');
-  const hits=postSearchHits;
+  const hits=filterAndSortPostHits(postSearchHits);
   const groups=groupPostHits(hits);
   const channels=new Set(hits.map(h=>h.username));
   const db=getAllChannels();
+  const countEl=document.getElementById('resultsCount');
+  if(countEl)countEl.textContent=t('psr_summary').replace('{0}',String(hits.length)).replace('{1}',String(channels.size));
+  const curRange=state.postDateRange||'all';
+  const curSort=state.postSort||'newest';
+  const ranges=[['all',t('range_all')],['24h',t('range_24h')],['7d',t('range_7d')]];
+  const sorts=[['newest',t('sort_newest')],['views',t('sort_views')]];
+  const filterBar='<div class="etype-bar" id="psrFilterBar" style="margin-bottom:10px;flex-wrap:wrap">'+
+    ranges.map(r=>'<button class="etype-chip'+(curRange===r[0]?' active':'')+'" data-range="'+r[0]+'" aria-pressed="'+(curRange===r[0])+'" onclick="setPostDateRange(\''+r[0]+'\')">'+escHtml(r[1])+'</button>').join('')+
+    '<span style="width:1px;height:18px;background:var(--border-subtle);margin:0 4px"></span>'+
+    sorts.map(s=>'<button class="etype-chip'+(curSort===s[0]?' active':'')+'" data-sort="'+s[0]+'" aria-pressed="'+(curSort===s[0])+'" onclick="setPostSort(\''+s[0]+'\')">'+escHtml(s[1])+'</button>').join('')+
+    '</div>';
   const head='<div class="psr-summary"><span>'+escHtml(t('psr_summary').replace('{0}',String(hits.length)).replace('{1}',String(channels.size)))+'</span>'+
-    '<button class="psr-deep-btn" id="psrDeepBtn" onclick="deepSearchPosts()">'+escHtml(t('psr_deep'))+'</button></div>';
+    '<button class="psr-deep-btn" id="psrDeepBtn" onclick="deepSearchPosts()">'+escHtml(t('psr_deep'))+'</button></div>'+filterBar;
   if(!hits.length){
-    content.innerHTML=head+renderEmpty(t('psr_empty'),t('psr_empty_desc'));
+    content.innerHTML='<div class="psr-wrap">'+head+renderEmpty(t('psr_empty'),t('psr_empty_desc'))+'</div>';
     return;
   }
   const body=groups.map(g=>{
@@ -2757,9 +2839,13 @@ function renderPostSearchResults(){
     const items=g.list.map(h=>{
       const text=h.post.text||'';
       const snippet=postSnippet(text,h.at,h.match.length,90);
+      const vStr=formatCompactViews(h.post.views);
+      const metaParts=[];
+      if(h.post.date)metaParts.push(escHtml(h.post.date.slice(0,16).replace('T',' ')));
+      if(vStr)metaParts.push(escHtml(vStr+' '+t('views_unit')));
       return '<div class="psr-hit" tabindex="0" role="button" onclick="openPostModal(\''+g.username+'\')" onkeydown="if(event.key===\'Enter\'){openPostModal(\''+g.username+'\')}">'+
         '<div class="psr-hit-text">'+snippet+'</div>'+
-        '<div class="psr-hit-meta">'+(h.post.date?escHtml(h.post.date.slice(0,16).replace('T',' ')):'')+'</div></div>';
+        '<div class="psr-hit-meta">'+metaParts.join(' · ')+'</div></div>';
     }).join('');
     return '<div class="psr-group"><div class="psr-channel" onclick="openChannel(\''+g.username+'\')">'+
       '<span style="'+avatarGrad(g.username)+';width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:700">'+escHtml((title||'?')[0].toUpperCase())+'</span>'+
@@ -2780,10 +2866,8 @@ async function doPostSearch(query){
   if(state.workerUrl&&!isOffline()){
     const data=await fetchWorker('/api/searchPosts?q='+encodeURIComponent(q));
     if(data&&Array.isArray(data.matches)){
-      postSearchHits=data.matches.map(m=>({username:m.username,post:{text:m.excerpt||'',date:m.date||''},match:q,at:Math.max(0,(m.excerpt||'').toLowerCase().indexOf(q.toLowerCase()))}));
+      postSearchHits=data.matches.map(m=>({username:m.username,post:{text:m.excerpt||'',date:m.date||'',views:m.views||0},match:q,at:Math.max(0,(m.excerpt||'').toLowerCase().indexOf(q.toLowerCase()))}));
       renderPostSearchResults();
-      const countEl=document.getElementById('resultsCount');
-      if(countEl)countEl.textContent=t('psr_summary').replace('{0}',String(postSearchHits.length)).replace('{1}',String(new Set(postSearchHits.map(h=>h.username)).size));
       return;
     }
     setNetBanner('fallback',t('net_fallback'));
@@ -2791,8 +2875,6 @@ async function doPostSearch(query){
   await ensurePostsLoaded();const sources=postSearchSources||seedPostSources();
   postSearchHits=searchPostTexts(q,sources);
   renderPostSearchResults();
-  const countEl=document.getElementById('resultsCount');
-  if(countEl)countEl.textContent=t('psr_summary').replace('{0}',String(postSearchHits.length)).replace('{1}',String(new Set(postSearchHits.map(h=>h.username)).size));
 }
 
 // Search the full per-channel archive as well.
@@ -2980,17 +3062,70 @@ function feedPostType(p){
 }
 function filterFeedByType(posts){
   const types=state.feedTypes||[];
-  if(!types.length)return posts;
-  return posts.filter(p=>types.includes(feedPostType(p)));
+  const range=state.feedDateRange||'all';
+  const sort=state.feedSort||'default';
+  let list=types.length?posts.filter(p=>types.includes(feedPostType(p))):posts.slice();
+  if(range==='24h'||range==='7d'){
+    let maxT=0;
+    for(const p of list){
+      const t=p&&p.date?Date.parse(p.date):0;
+      if(t>maxT)maxT=t;
+    }
+    const refNow=maxT||Date.now();
+    const windowMs=range==='24h'?864e5:7*864e5;
+    const cutoff=refNow-windowMs;
+    list=list.filter(p=>{
+      const t=p&&p.date?Date.parse(p.date):NaN;
+      return !isNaN(t)&&t>=cutoff;
+    });
+  }
+  if(sort==='newest'||sort==='views'){
+    const dbMap=new Map(getAllChannels().map(c=>[c.username,parseMembersCountNum(c.members)]));
+    list=list.slice().sort((a,b)=>{
+      if(sort==='views'){
+        const va=Number(a&&a.views)||0;
+        const vb=Number(b&&b.views)||0;
+        if(vb!==va)return vb-va;
+        const ma=dbMap.get(a&&a.channel)||0;
+        const mb=dbMap.get(b&&b.channel)||0;
+        if(mb!==ma)return mb-ma;
+      }
+      const da=a&&a.date?Date.parse(a.date)||0:0;
+      const db=b&&b.date?Date.parse(b.date)||0:0;
+      return db-da;
+    });
+  }
+  return list;
+}
+function setFeedDateRange(r){
+  state.feedDateRange=(state.feedDateRange===r&&r!=='all')?'all':(r||'all');
+  localStorage.setItem('tgexp_feed_date',state.feedDateRange);
+  const filtered=filterFeedByType(state.feedPool||[]);
+  window._feedRendered=Math.min(30,filtered.length);
+  renderFeedView(document.getElementById('content'),filtered.slice(0,30));
+}
+function setFeedSort(s){
+  state.feedSort=(state.feedSort===s)?'default':(s||'default');
+  localStorage.setItem('tgexp_feed_sort',state.feedSort);
+  const filtered=filterFeedByType(state.feedPool||[]);
+  window._feedRendered=Math.min(30,filtered.length);
+  renderFeedView(document.getElementById('content'),filtered.slice(0,30));
 }
 function feedTypeBarHtml(){
   const types=[['all',t('all')],['video',t('clip')],['image',t('image')],['text',t('text')]];
   const active=state.feedTypes||[];
-  return '<div class="etype-bar" id="feedTypeBar" style="margin-bottom:10px">'+
+  const curRange=state.feedDateRange||'all';
+  const curSort=state.feedSort||'default';
+  const ranges=[['24h',t('range_24h')],['7d',t('range_7d')]];
+  const sorts=[['newest',t('sort_newest')],['views',t('sort_views')]];
+  return '<div class="etype-bar" id="feedTypeBar" style="margin-bottom:10px;flex-wrap:wrap">'+
     types.map(ty=>{
       const on=(active.length===0&&ty[0]==='all')||active.includes(ty[0]);
       return '<button class="etype-chip'+(on?' active':'')+'" data-type="'+ty[0]+'" aria-pressed="'+on+'" onclick="toggleFeedType(\''+ty[0]+'\')">'+ty[1]+'</button>';
     }).join('')+
+    '<span style="width:1px;height:18px;background:var(--border-subtle);margin:0 4px"></span>'+
+    ranges.map(r=>'<button class="etype-chip'+(curRange===r[0]?' active':'')+'" data-feed-range="'+r[0]+'" aria-pressed="'+(curRange===r[0])+'" onclick="setFeedDateRange(\''+r[0]+'\')">'+escHtml(r[1])+'</button>').join('')+
+    sorts.map(s=>'<button class="etype-chip'+(curSort===s[0]?' active':'')+'" data-feed-sort="'+s[0]+'" aria-pressed="'+(curSort===s[0])+'" onclick="setFeedSort(\''+s[0]+'\')">'+escHtml(s[1])+'</button>').join('')+
     viewToggleHtml()+
     '</div>';
 }
@@ -5352,6 +5487,10 @@ Object.assign(window, {
   watchTgBackButton,
   openBotDeepLink,
   shareChannelBot,
+  setPostDateRange,
+  setPostSort,
+  setFeedDateRange,
+  setFeedSort,
   clearFolderRule,
   clearLivePosts,
   closeChannelModal,

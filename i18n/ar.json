@@ -144,7 +144,13 @@
     "compare": "قارن",
     "share_bot": "مشاركة عبر البوت",
     "notify_in_bot": "تلقي إشعارات المنشورات الجديدة في البوت",
-    "settings_fullscreen_desktop": "ملء الشاشة على سطح المكتب"
+    "settings_fullscreen_desktop": "ملء الشاشة على سطح المكتب",
+    "range_all": "كل الأوقات",
+    "range_24h": "آخر 24 ساعة",
+    "range_7d": "آخر 7 أيام",
+    "sort_newest": "الأحدث",
+    "sort_views": "الأكثر مشاهدة",
+    "views_unit": "مشاهدة"
   },
   "ui": {
     "all": "الكل",

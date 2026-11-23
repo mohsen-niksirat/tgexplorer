@@ -144,7 +144,13 @@
     "compare": "Сравнить",
     "share_bot": "Поделиться через бота",
     "notify_in_bot": "Уведомления о новых постах в боте",
-    "settings_fullscreen_desktop": "На весь экран на ПК"
+    "settings_fullscreen_desktop": "На весь экран на ПК",
+    "range_all": "За всё время",
+    "range_24h": "За 24 часа",
+    "range_7d": "За 7 дней",
+    "sort_newest": "Новые",
+    "sort_views": "По просмотрам",
+    "views_unit": "просм."
   },
   "ui": {
     "all": "Все",

@@ -144,7 +144,13 @@
     "compare": "比较",
     "share_bot": "通过机器人分享",
     "notify_in_bot": "在机器人中接收新帖通知",
-    "settings_fullscreen_desktop": "桌面端全屏"
+    "settings_fullscreen_desktop": "桌面端全屏",
+    "range_all": "全部时间",
+    "range_24h": "最近 24 小时",
+    "range_7d": "最近 7 天",
+    "sort_newest": "最新",
+    "sort_views": "最多浏览",
+    "views_unit": "次浏览"
   },
   "ui": {
     "all": "全部",

@@ -144,7 +144,13 @@
     "compare": "Compare",
     "share_bot": "Share via bot",
     "notify_in_bot": "Get new-post notifications in the bot",
-    "settings_fullscreen_desktop": "Fullscreen on desktop"
+    "settings_fullscreen_desktop": "Fullscreen on desktop",
+    "range_all": "All time",
+    "range_24h": "Last 24h",
+    "range_7d": "Last 7 days",
+    "sort_newest": "Newest",
+    "sort_views": "Most viewed",
+    "views_unit": "views"
   },
   "ui": {
     "all": "All",

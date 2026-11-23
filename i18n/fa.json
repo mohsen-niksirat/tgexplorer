@@ -144,7 +144,13 @@
     "compare": "مقایسه",
     "share_bot": "اشتراک با ربات",
     "notify_in_bot": "دریافت نوتیفیکیشن پستهای جدید در بات",
-    "settings_fullscreen_desktop": "تمام‌صفحه در دسکتاپ"
+    "settings_fullscreen_desktop": "تمام‌صفحه در دسکتاپ",
+    "range_all": "همهٔ زمان‌ها",
+    "range_24h": "۲۴ ساعت اخیر",
+    "range_7d": "۷ روز اخیر",
+    "sort_newest": "جدیدترین",
+    "sort_views": "پربازدیدترین",
+    "views_unit": "بازدید"
   },
   "ui": {
     "all": "همه",

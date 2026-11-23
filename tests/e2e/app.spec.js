@@ -540,6 +540,23 @@ test.describe('Telegram Explorer - e2e', () => {
     await expect(btn).toHaveAttribute('href', 'https://t.me/telgexplorerbot?start=notify_bbcpersian');
     await expect(btn).toContainText('Get new-post notifications in the bot');
   });
+
+  test('post search and feed support date-range filtering and popularity sort', async ({ page }) => {
+    await page.locator('.search-mode-btn[data-mode="posts"]').click();
+    const searchInput = page.locator('#searchInput');
+    await searchInput.fill('a');
+    await searchInput.press('Enter');
+    await expect(page.locator('#psrFilterBar')).toBeVisible();
+    await page.locator('#psrFilterBar [data-range="24h"]').click();
+    await expect(page.locator('#psrFilterBar [data-range="24h"]')).toHaveAttribute('aria-pressed', 'true');
+    await page.locator('#psrFilterBar [data-sort="views"]').click();
+    await expect(page.locator('#psrFilterBar [data-sort="views"]')).toHaveAttribute('aria-pressed', 'true');
+
+    await page.evaluate(() => window.switchTab('feed'));
+    await expect(page.locator('#feedTypeBar [data-feed-range="24h"]')).toBeVisible();
+    await page.locator('#feedTypeBar [data-feed-sort="views"]').click();
+    await expect(page.locator('#feedTypeBar [data-feed-sort="views"]')).toHaveAttribute('aria-pressed', 'true');
+  });
 });
 
 /**

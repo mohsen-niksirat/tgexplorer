@@ -128,6 +128,19 @@ function updateChannelsMetadata(metaMap) {
   return updated;
 }
 
+function parseViewsCount(raw) {
+  if (!raw) return 0;
+  const s = String(raw).trim().replace(/,/g, '');
+  const m = s.match(/^([\d.]+)\s*([KkMm])?$/);
+  if (!m) return parseInt(s.replace(/\D+/g, ''), 10) || 0;
+  const n = parseFloat(m[1]);
+  if (!Number.isFinite(n)) return 0;
+  const unit = (m[2] || '').toUpperCase();
+  if (unit === 'M') return Math.round(n * 1e6);
+  if (unit === 'K') return Math.round(n * 1e3);
+  return Math.round(n);
+}
+
 function parsePosts(html, username){
   const posts = [];
   const blocks = html.split('tgme_widget_message_wrap');
@@ -144,6 +157,8 @@ function parsePosts(html, username){
     if (image && /\/img\/emoji\//i.test(image)) image = '';
     const tm = b.match(/<time datetime="([^"]+)"/);
     const txtm = b.match(/class="tgme_widget_message_text[^"]*"[^>]*>([\s\S]*?)<\/div>/);
+    const vwm = b.match(/class="tgme_widget_message_views"[^>]*>([^<]+)<\/span>/i);
+    const views = vwm ? parseViewsCount(vwm[1]) : 0;
     let video='';
     const vm = b.match(/<video[^>]+src="([^"]+)"[^>]*class="[^"]*tgme_widget_message_video[^"]*"/);
     if (vm) video = vm[1];
@@ -155,7 +170,8 @@ function parsePosts(html, username){
       text: txtm ? esc(txtm[1]) : '',
       image,
       video,
-      hasVideo
+      hasVideo,
+      views
     });
   }
   return posts;
