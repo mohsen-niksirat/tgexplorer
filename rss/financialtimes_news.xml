@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>FT News (@financialtimes_news) — Telegram Explorer</title>
+    <link>https://mohsen-niksirat.github.io/tgexplorer/?channel=financialtimes_news</link>
+    <atom:link href="https://mohsen-niksirat.github.io/tgexplorer/rss/financialtimes_news.xml" rel="self" type="application/rss+xml"/>
+    <description>Financial Times — world business news</description>
+    <language>en</language>
+
+  </channel>
+</rss>

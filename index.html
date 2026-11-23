@@ -2625,10 +2625,22 @@ function skipSetup(){state.workerUrl='';localStorage.setItem('tgexp_setup_skippe
 function resetApp(){localStorage.removeItem('tgexp_worker');localStorage.removeItem('tgexp_setup_skipped');state.workerUrl='';closeSettings();showSetup()}
 
 // ============================================================
-// CONNECTION
+// CONNECTION (Multi-Worker Pool + Failover)
 // ============================================================
-async function testConnection(){const input=document.getElementById('workerUrlInput');const btn=document.getElementById('testBtn');const result=document.getElementById('testResult');let url=input.value.trim().replace(/\/+$/,'');if(!url){input.focus();return}if(!url.startsWith('http'))url='https://'+url;input.value=url;btn.disabled=true;document.getElementById('testBtnIcon').textContent='';document.getElementById('testBtnText').textContent=t('testing');result.className='test-result';result.style.display='none';try{const resp=await fetch(`${url}/api/ping`,{signal:AbortSignal.timeout(10000)});const data=await resp.json();if(data.ok){result.className='test-result success show';result.innerHTML=t('test_ok');state.workerUrl=url;localStorage.setItem('tgexp_worker',url);updateConnBadge();setTimeout(()=>showApp(),1200)}else throw 0}catch{result.className='test-result error show';result.innerHTML=t('test_fail')}finally{btn.disabled=false;document.getElementById('testBtnIcon').textContent='';document.getElementById('testBtnText').textContent=t('test_connection')}}
-async function testFromSettings(){const input=document.getElementById('settingsWorkerUrl');const result=document.getElementById('settingsTestResult');let url=input.value.trim().replace(/\/+$/,'');if(!url)return;if(!url.startsWith('http'))url='https://'+url;input.value=url;result.className='test-result';result.style.display='none';try{const resp=await fetch(`${url}/api/ping`,{signal:AbortSignal.timeout(10000)});const data=await resp.json();if(data.ok){result.className='test-result success show';result.innerHTML=t('test_ok')}else throw 0}catch{result.className='test-result error show';result.innerHTML=t('test_fail')}}
+let _workerRrIdx=0;
+function parseWorkerUrls(raw){
+  if(!raw)return [];
+  return String(raw)
+    .split(/[\s,;]+/)
+    .map(u=>u.trim().replace(/\/+$/,''))
+    .filter(Boolean)
+    .map(u=>u.startsWith('http')?u:'https://'+u);
+}
+function getPrimaryWorkerUrl(){
+  return parseWorkerUrls(state.workerUrl)[0]||'';
+}
+async function testConnection(){const input=document.getElementById('workerUrlInput');const btn=document.getElementById('testBtn');const result=document.getElementById('testResult');const urls=parseWorkerUrls(input.value);if(!urls.length){input.focus();return}const normalized=urls.join(', ');input.value=normalized;btn.disabled=true;document.getElementById('testBtnIcon').textContent='';document.getElementById('testBtnText').textContent=t('testing');result.className='test-result';result.style.display='none';try{let anyOk=false;for(const u of urls){try{const resp=await fetch(`${u}/api/ping`,{signal:AbortSignal.timeout(10000)});const data=await resp.json();if(data&&data.ok){anyOk=true;break}}catch(e){}}if(anyOk){result.className='test-result success show';result.innerHTML=t('test_ok');state.workerUrl=normalized;localStorage.setItem('tgexp_worker',normalized);updateConnBadge();setTimeout(()=>showApp(),1200)}else throw 0}catch{result.className='test-result error show';result.innerHTML=t('test_fail')}finally{btn.disabled=false;document.getElementById('testBtnIcon').textContent='';document.getElementById('testBtnText').textContent=t('test_connection')}}
+async function testFromSettings(){const input=document.getElementById('settingsWorkerUrl');const result=document.getElementById('settingsTestResult');const urls=parseWorkerUrls(input.value);if(!urls.length)return;input.value=urls.join(', ');result.className='test-result';result.style.display='none';try{let anyOk=false;for(const u of urls){try{const resp=await fetch(`${u}/api/ping`,{signal:AbortSignal.timeout(10000)});const data=await resp.json();if(data&&data.ok){anyOk=true;break}}catch(e){}}if(anyOk){result.className='test-result success show';result.innerHTML=t('test_ok')}else throw 0}catch{result.className='test-result error show';result.innerHTML=t('test_fail')}}
 function updateConnBadge(){const badge=document.getElementById('connBadge');const text=document.getElementById('connBadgeText');if(state.workerUrl){badge.className='conn-badge connected';text.textContent=t('connected')}else if(!badge.classList.contains('disconnected')){badge.className='conn-badge disconnected';text.textContent=t('disconnected')}}
 
 // ============================================================
@@ -2647,7 +2659,7 @@ function toggleFullscreenDesktop(enabled){
   }
 }
 function closeSettings(){document.getElementById('settingsOverlay').classList.remove('open');document.body.style.overflow=''}
-function saveSettings(){const url=document.getElementById('settingsWorkerUrl').value.trim().replace(/\/+$/,'');state.workerUrl=url.startsWith('http')?url:(url?'https://'+url:'');localStorage.setItem('tgexp_worker',state.workerUrl);updateConnBadge();closeSettings();toast(' '+t('saved'));if(state.workerUrl)loadExplore()}
+function saveSettings(){const urls=parseWorkerUrls(document.getElementById('settingsWorkerUrl').value);state.workerUrl=urls.join(', ');localStorage.setItem('tgexp_worker',state.workerUrl);updateConnBadge();closeSettings();toast(' '+t('saved'));if(state.workerUrl)loadExplore()}
 
 // ============================================================
 // COPY WORKER CODE
@@ -2912,20 +2924,30 @@ function setSearchMode(mode){
 // ============================================================
 const NET_TIMEOUT = 12000;
 
-// Fetch a worker endpoint with a timeout. Returns null on any failure
-// (offline, DNS error, timeout, non-2xx, bad JSON) instead of throwing.
+// Fetch a worker endpoint with a timeout and multi-worker load-balancing / failover.
+// If state.workerUrl contains multiple comma/space-separated URLs, rotates across
+// them and fails over to the next URL on 429, 5xx, timeout, or network error.
 async function fetchWorker(path, opts){
-  if(!state.workerUrl)return null;
-  try{
-    const ctrl=typeof AbortController!=='undefined'?new AbortController():null;
-    const timer=ctrl?setTimeout(()=>ctrl.abort(),opts&&opts.timeout||NET_TIMEOUT):null;
-    const init={...opts,headers:{'Accept':'application/json',...(opts&&opts.headers||{})}};
-    if(ctrl)init.signal=ctrl.signal;
-    const resp=await fetch(`${state.workerUrl}${path}`,init);
-    if(timer)clearTimeout(timer);
-    if(!resp.ok)return null;
-    return await resp.json();
-  }catch(e){return null}
+  const urls=parseWorkerUrls(state.workerUrl);
+  if(!urls.length)return null;
+  const start=(_workerRrIdx++)%urls.length;
+  for(let k=0;k<urls.length;k++){
+    const baseUrl=urls[(start+k)%urls.length];
+    try{
+      const ctrl=typeof AbortController!=='undefined'?new AbortController():null;
+      const timer=ctrl?setTimeout(()=>ctrl.abort(),opts&&opts.timeout||NET_TIMEOUT):null;
+      const init={...opts,headers:{'Accept':'application/json',...(opts&&opts.headers||{})}};
+      if(ctrl)init.signal=ctrl.signal;
+      const resp=await fetch(`${baseUrl}${path}`,init);
+      if(timer)clearTimeout(timer);
+      if(!resp.ok){
+        if(resp.status===429||resp.status>=500)continue;
+        return null;
+      }
+      return await resp.json();
+    }catch(e){continue}
+  }
+  return null;
 }
 
 // Show/hide the network status banner. `mode` is 'offline' | 'fallback' | 'ok'.
@@ -2975,7 +2997,52 @@ async function retryNetwork(){
 async function doSearch(){const query=document.getElementById('searchInput').value.trim();if(!query)return;state.searchQuery=query;state.currentTab='search';document.querySelectorAll('.nav-tab').forEach(el=>el.classList.toggle('active',el.dataset.tab==='search'));document.getElementById('categoriesBar').style.display='none';document.getElementById('resultsHeader').style.display='flex';if(postSearchMode==='posts'){doPostSearch(query);return}document.getElementById('content').innerHTML=renderSkeletons(6);let results=[];let live=false;if(state.workerUrl&&!isOffline()){const data=await fetchWorker(`/api/search?q=${encodeURIComponent(query)}&lang=${state.lang}`);if(data&&data.results){results=data.results;live=true}else{setNetBanner('fallback',t('net_fallback'));results=searchLocal(query)}}else{results=searchLocal(query);if(isOffline())setNetBanner('offline',t('net_offline'))}state.searchResults=results;document.getElementById('resultsCount').textContent=`${live?t('search_live'):t('search_local')} — ${results.length} ${t('results_for')} "${query}"`;renderResults()}
 function normalizeText(x){return (x||'').toLowerCase().replace(/ي/g,'ی').replace(/ك/g,'ک').replace(/[‌​]/g,' ').replace(/\s+/g,' ').trim()}
 function fuzzyScore(q,t){if(!q||!t)return 0;if(t===q)return 100;if(t.indexOf(q)===0)return 90;if(t.indexOf(q)>-1)return 80;let score=0,ti=0,m=0;for(const ch of q){const idx=t.indexOf(ch,ti);if(idx===-1){if(m===0)return 0;break}score+=10;m++;ti=idx+1}return m>=2?score:0}
-function searchLocal(q){q=(q||'').trim();if(!q)return[];const f=filterState();let base=getAllChannels();if(f.langs.length)base=base.filter(ch=>f.langs.includes(ch.lang||'en'));const nq=normalizeText(q);const scored=base.map(ch=>{const hay=normalizeText([ch.title,ch.username,ch.description,(ch.tags||[]).join(' ')].join(' '));return{ch,score:fuzzyScore(nq,hay)}}).filter(x=>x.score>0);scored.sort((a,b)=>b.score-a.score);return scored.map(x=>x.ch)}
+const SEMANTIC_CLUSTERS=[
+  ['programming','coding','developer','software','code','dev','python','javascript','golang','linux','github','api','frontend','backend','webdev','برنامه نویسی','برنامه‌نویسی','کدنویسی','توسعه نرم افزار','توسعه‌دهنده','پایتون','جاوااسکریپت','لینوکس','گیت هاب','سورس کد','فرانت','بک اند','مهندسی نرم افزار'],
+  ['ai','artificial intelligence','chatgpt','gpt','llm','openai','claude','gemini','prompt','machine learning','deep learning','neural','huggingface','bot','هوش مصنوعی','چت جی پی تی','مدل زبانی','یادگیری ماشین','پرامپت','ربات هوشمند','دیپ لرنینگ'],
+  ['crypto','cryptocurrency','bitcoin','btc','ethereum','eth','blockchain','defi','web3','trading','altcoin','toncoin','airdrop','binance','forex','ارز دیجیتال','رمزارز','بیت کوین','اتریوم','بلاکچین','ترید','تحلیل تکنیکال','ایردراپ','تتر','بازار مالی','بورس','فارکس'],
+  ['news','breaking','politics','world','newspaper','journalism','report','media','economy','اخبار','خبر فوری','سیاسی','اقتصادی','روزنامه','تحلیل خبری','حوادث','بین الملل'],
+  ['tech','technology','gadget','mobile','smartphone','apple','iphone','xiaomi','android','windows','microsoft','google','فناوری','تکنولوژی','گجت','موبایل','گوشی','آیفون','شیائومی','اندروید','سخت افزار','لپ تاپ'],
+  ['movie','movies','film','cinema','series','netflix','trailer','hollywood','actor','entertainment','فیلم','سریال','سینما','انیمیشن','نتفلیکس','تریلر','هالیوود','دانلود فیلم'],
+  ['sports','football','soccer','premier league','champions','ufc','formula1','motogp','athlete','fitness','ورزش','فوتبال','لیگ برتر','اروپا','المپیک','فرمول یک','کشتی','بدنسازی'],
+  ['science','physics','biology','chemistry','astronomy','space','nasa','nature','research','math','علم','علمی','نجوم','فضا','فیزیک','زیست','شیمی','طبیعت','کیهان','پژوهش','ریاضی'],
+  ['education','learn','learning','course','tutorial','english','vocabulary','grammar','ielts','toefl','duolingo','university','study','book','آموزش','یادگیری','زبان انگلیسی','لغت','گرامر','آیلتس','تافل','دانشگاه','کتاب','درس','فلش کارت','لایتنر'],
+  ['design','art','graphic','ui','ux','figma','dribbble','photography','photo','wallpaper','illustration','طراحی','گرافیک','هنر','رابط کاربری','عکاسی','عکس','تصویرسازی','والپیپر'],
+  ['music','song','audio','spotify','podcast','radio','playlist','singer','موسیقی','موزیک','آهنگ','پادکست','رادیو','پلی لیست','ترانه'],
+  ['gaming','game','esports','steam','playstation','xbox','nintendo','dota','csgo','fortnite','overwatch','gta','بازی','گیم','گیمینگ','پلی استیشن','استیم','ای اسپورت']
+];
+function semanticScore(nq,hay){
+  if(!nq||nq.length<2)return 0;
+  const qWords=nq.split(/\s+/).filter(w=>w.length>=2);
+  let total=0;
+  for(const cluster of SEMANTIC_CLUSTERS){
+    const qMatched=cluster.some(term=>nq.includes(term)||(qWords.length&&qWords.some(w=>w.length>=3&&term.includes(w))));
+    if(!qMatched)continue;
+    let hits=0;
+    for(const term of cluster){
+      if(hay.includes(term))hits++;
+    }
+    if(hits>0)total+=Math.min(75,35+hits*10);
+  }
+  return total;
+}
+function searchLocal(q){
+  q=(q||'').trim();
+  if(!q)return[];
+  const f=filterState();
+  let base=getAllChannels();
+  if(f.langs.length)base=base.filter(ch=>f.langs.includes(ch.lang||'en'));
+  const nq=normalizeText(q);
+  const scored=base.map(ch=>{
+    const postSample=(typeof CHANNEL_POSTS!=='undefined'&&CHANNEL_POSTS[ch.username])?CHANNEL_POSTS[ch.username].slice(0,3).map(p=>p.text||'').join(' ').slice(0,240):'';
+    const hay=normalizeText([ch.title,ch.username,ch.description,(ch.tags||[]).join(' '),postSample].join(' '));
+    const fz=fuzzyScore(nq,hay);
+    const sem=semanticScore(nq,hay);
+    return{ch,score:Math.max(fz,sem)+(fz>0&&sem>0?20:0)};
+  }).filter(x=>x.score>0);
+  scored.sort((a,b)=>b.score-a.score);
+  return scored.map(x=>x.ch);
+}
 // ============================================================
 // SEARCH AUTOCOMPLETE (instant local DB suggestions)
 // ============================================================
@@ -3037,7 +3104,7 @@ function buildLocalFeedPool(category){
   for(const ch of chans){
     for(const p of getChannelPosts(ch.username)){
       if(!p.image&&!p.hasVideo&&!(p.text&&p.text.trim()))continue;
-      posts.push({id:p.id,date:p.date||'',text:p.text||'',image:p.image||'',video:p.video||'',hasVideo:!!p.hasVideo,channel:ch.username,channelTitle:ch.title||ch.username,channelMembers:ch.members||'0',type:p.hasVideo?'video':'image'});
+      posts.push({id:p.id,date:p.date||'',text:p.text||'',image:p.image||'',video:p.video||'',hasVideo:!!p.hasVideo,views:p.views||0,channel:ch.username,channelTitle:ch.title||ch.username,channelMembers:ch.members||'0',type:p.hasVideo?'video':'image'});
     }
   }
   for(let i=posts.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));const tmp=posts[i];posts[i]=posts[j];posts[j]=tmp}
@@ -3469,8 +3536,8 @@ async function fetchNewerPosts(ctx){
   let newPosts=[];
   try{
     if(state.workerUrl){
-      const r=await fetch(state.workerUrl+'/api/posts/'+encodeURIComponent(ctx.username)+'?page=1',{signal:AbortSignal.timeout(10000)});
-      if(r.ok){const d=await r.json();newPosts=(d.posts||[]).filter(p=>p&&p.id)}
+      const d=await fetchWorker('/api/posts/'+encodeURIComponent(ctx.username)+'?page=1',{timeout:10000});
+      if(d&&d.posts)newPosts=(d.posts||[]).filter(p=>p&&p.id);
     }else{
       const url='https://r.jina.ai/https://t.me/s/'+encodeURIComponent(ctx.username);
       let r=await fetch(url,{headers:{'X-Respond-With':'html'},signal:AbortSignal.timeout(12000)});
@@ -3561,8 +3628,8 @@ function parseJinaPosts(md){
     if(state.workerUrl){
       const before=ctx.beforeId||(ctx.posts.length?String(ctx.posts[ctx.posts.length-1].id):'');
       const qs=before?'?before='+encodeURIComponent(before):'?page='+((ctx.page||0)+1);
-      const r=await fetch(state.workerUrl+'/api/posts/'+encodeURIComponent(ctx.username)+qs,{signal:AbortSignal.timeout(10000)});
-      if(r.ok){const d=await r.json();newPosts=(d.posts||[]).filter(p=>p&&p.id)}
+      const d=await fetchWorker('/api/posts/'+encodeURIComponent(ctx.username)+qs,{timeout:10000});
+      if(d&&d.posts)newPosts=(d.posts||[]).filter(p=>p&&p.id);
       ctx.page=(ctx.page||0)+1;
       if(newPosts.length&&before)ctx.beforeId=String(newPosts[newPosts.length-1].id);
     }else{
@@ -3647,8 +3714,11 @@ async function openChannel(username){
   document.getElementById('modalSharePageBtn').onclick=()=>shareChannelPage(username);
   const sb=document.getElementById('modalShareBotBtn');if(sb)sb.onclick=()=>shareChannelBot(username);
   const nb=document.getElementById('modalNotifyBotBtn');if(nb){const nUrl='https://t.me/telgexplorerbot?start=notify_'+username;nb.setAttribute('href',nUrl);nb.dataset.href=nUrl;nb.onclick=(e)=>openBotDeepLink(nUrl,e)}
+  const rb=document.getElementById('modalRssBtn');if(rb){const rssUrl='rss/'+username+'.xml';rb.setAttribute('href',rssUrl);rb.dataset.href=rssUrl}
+  const simb=document.getElementById('modalSimilarBtn');if(simb)simb.onclick=()=>scrollToSimilarChannels();
   document.getElementById('modalCompareBtn').onclick=()=>openCompare(username);
   updateModalFav(username);
+  renderChannelDigest(username);
   const posts=getChannelPosts(username);
   const postsEl=document.getElementById('modalPosts');
   if(posts.length){
@@ -3663,16 +3733,78 @@ async function openChannel(username){
   // is drawn on a canvas, which needs a real size to measure.
   renderChannelProfile(username);
 }
-// Local related-channels fallback (worker /api/related gets priority elsewhere)
+let _summariesCache=null;
+async function loadSummariesMap(){
+  if(_summariesCache)return _summariesCache;
+  try{
+    const r=await fetch('summaries.json');
+    if(r.ok){
+      const d=await r.json();
+      if(d&&d.channels)return (_summariesCache=d.channels);
+    }
+  }catch(e){}
+  return (_summariesCache={});
+}
+async function renderChannelDigest(username){
+  const wrap=document.getElementById('modalDigest');
+  const txtEl=document.getElementById('modalDigestText');
+  if(!wrap||!txtEl)return;
+  const posts=getChannelPosts(username);
+  const withText=posts.filter(p=>p&&String(p.text||'').trim().length>10);
+  let headline='';
+  let topics=[];
+  if(withText.length){
+    const top=withText.slice().sort((a,b)=>(Number(b.views)||0)-(Number(a.views)||0))[0]||withText[0];
+    const clean=String(top.text||'').replace(/https?:\/\/\S+/g,' ').replace(/@[A-Za-z0-9_]+/g,' ').replace(/\s+/g,' ').trim();
+    headline=clean.length>150?clean.slice(0,150)+'…':clean;
+  }
+  const map=await loadSummariesMap();
+  const entry=map[username];
+  if(entry&&entry.headline){
+    headline=entry.headline;
+    topics=Array.isArray(entry.topics)?entry.topics:[];
+  }
+  if(!headline){wrap.style.display='none';return}
+  const topicChips=topics.length?(' <span style="opacity:0.8">('+topics.map(w=>'#'+escHtml(w)).join(' ')+')</span>'):'';
+  txtEl.innerHTML=escHtml(headline)+topicChips;
+  wrap.style.display='';
+}
+function scrollToSimilarChannels(){
+  const wrap=document.getElementById('modalRelated');
+  if(wrap&&wrap.style.display!=='none'){
+    try{wrap.scrollIntoView({behavior:'smooth',block:'nearest'})}catch(e){}
+  }
+}
+function channelTextTokens(ch){
+  const posts=getChannelPosts(ch.username).slice(0,3).map(p=>p.text||'').join(' ');
+  const raw=normalizeText([ch.title,ch.description,(ch.tags||[]).join(' '),posts].join(' '));
+  return new Set((raw.match(/[\p{L}\p{N}_]{3,}/gu)||[]).slice(0,40));
+}
+// Local related-channels (tag match + content/semantic token similarity fallback for tagless channels)
 function renderLocalRelated(username){
   const wrap=document.getElementById('modalRelated');
   const chips=document.getElementById('relatedChips');
   if(!wrap||!chips)return;
-  const me=getAllChannels().find(c=>c.username===username);
-  if(!me||!me.tags||!me.tags.length){wrap.style.display='none';return}
-  const rel=getAllChannels().filter(c=>c.username!==username&&c.tags.some(tg=>me.tags.includes(tg)))
-    .map(c=>({c,shared:c.tags.filter(tg=>me.tags.includes(tg)).length}))
-    .sort((a,b)=>b.shared-a.shared).slice(0,6);
+  const all=getAllChannels();
+  const me=all.find(c=>c.username===username);
+  if(!me){wrap.style.display='none';return}
+  const myTags=Array.isArray(me.tags)?me.tags:[];
+  const myTokens=channelTextTokens(me);
+  const myHay=normalizeText([me.title,me.description,myTags.join(' ')].join(' '));
+  const rel=all.filter(c=>c.username!==username).map(c=>{
+    const cTags=Array.isArray(c.tags)?c.tags:[];
+    const sharedTags=myTags.length?cTags.filter(tg=>myTags.includes(tg)).length:0;
+    let tokenOverlap=0;
+    if(myTokens.size){
+      const cTokens=channelTextTokens(c);
+      for(const tk of myTokens){if(cTokens.has(tk))tokenOverlap++;}
+    }
+    const cHay=normalizeText([c.title,c.description,cTags.join(' ')].join(' '));
+    const semMatch=semanticScore(myHay,cHay)>0?1:0;
+    const langBonus=(c.lang||'en')===(me.lang||'en')?0.5:0;
+    const score=sharedTags*3+Math.min(4,tokenOverlap*0.6)+semMatch*1.5+langBonus;
+    return {c,shared:sharedTags||Math.min(3,Math.floor(tokenOverlap/2)+(semMatch?1:0)),score};
+  }).filter(x=>x.score>=1.5).sort((a,b)=>b.score-a.score).slice(0,6);
   if(!rel.length){wrap.style.display='none';return}
   chips.innerHTML=rel.map(r=>`<span class="related-chip" onclick="closeChannelModal();openChannel('${r.c.username}')"><span style="${avatarGrad(r.c.username)};width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:10px;font-weight:700">${escHtml((r.c.title||r.c.username)[0].toUpperCase())}</span>${escHtml(r.c.title||r.c.username)}${r.shared?`<span class="chip-tag">+${r.shared}</span>`:''}</span>`).join('');
   wrap.style.display='';
@@ -4431,8 +4563,8 @@ function parseJinaFirstPost(md){
 async function fetchLatestPost(u){
   if(state.workerUrl){
     try{
-      const r=await fetch(state.workerUrl+'/api/posts/'+encodeURIComponent(u)+'?page=1',{signal:AbortSignal.timeout(8000)});
-      if(r.ok){const d=await r.json();if(d.posts&&d.posts.length)return d.posts[0]}
+      const d=await fetchWorker('/api/posts/'+encodeURIComponent(u)+'?page=1',{timeout:8000});
+      if(d&&d.posts&&d.posts.length)return d.posts[0];
     }catch(e){}
   }
   try{
@@ -4577,6 +4709,7 @@ function renderSharedFolder(f){
   document.getElementById('categoriesBar').style.display='none';
   let html='<div style="padding:8px 0 20px"><button class="folder-back" onclick="dismissSharedFolder()"> بستن</button>'+
     '<div class="folder-detail-head"><button class="folder-icon-btn" title="تغییر آیکون" onclick="cycleFolderIcon(\''+f.id+'\')"><span style="font-size:26px">'+f.icon+'</span></button><span class="folder-detail-name">'+escHtml(f.name)+'</span><span class="folder-picker-count">'+f.items.length+' آیتم</span>'+
+    '<button class="modal-btn modal-btn-secondary" style="max-width:160px;padding:10px" onclick="copySharedFolderLink()">'+escHtml(t('copy_list_link'))+'</button>'+
     '<button class="modal-btn modal-btn-primary" style="max-width:190px;padding:10px" onclick="importSharedFolder()"> ذخیره در فولدرهای من</button></div>';
   const posts=f.items.filter(it=>it.type==='post').map(it=>{
     const list=getChannelPosts(it.username);
@@ -4641,10 +4774,16 @@ function checkSharedChannel(){
   }
   setTimeout(()=>openChannel(username),0);
 }
+async function copySharedFolderLink(){
+  try{await navigator.clipboard.writeText(location.href);toast(' '+t('toast_link_copied'))}
+  catch(e){toast(' '+t('toast_copy_fail'))}
+}
 function checkSharedFolder(){
   const m=location.hash.match(/^#folder=(.+)$/);
-  if(!m)return;
-  const folder=decodeSharedFolder(m[1]);
+  const listParam=new URLSearchParams(location.search).get('list');
+  const raw=m?m[1]:listParam;
+  if(!raw)return;
+  const folder=decodeSharedFolder(raw);
   if(!folder){toast(' '+t('toast_folder_invalid'));return}
   window._sharedFolder=folder;
   renderSharedFolder(folder);
@@ -5491,6 +5630,11 @@ Object.assign(window, {
   setPostSort,
   setFeedDateRange,
   setFeedSort,
+  parseWorkerUrls,
+  getPrimaryWorkerUrl,
+  scrollToSimilarChannels,
+  copySharedFolderLink,
+  searchLocal,
   clearFolderRule,
   clearLivePosts,
   closeChannelModal,
@@ -5809,6 +5953,7 @@ Object.assign(window, {
     </div>
     <div class="modal-body">
       <div class="modal-desc" id="modalDesc"></div>
+      <div class="modal-digest" id="modalDigest" style="display:none;background:var(--bg-secondary);border:1px solid var(--border-subtle);border-radius:var(--radius-sm);padding:10px 12px;margin-bottom:14px;font-size:13px"><div style="font-weight:700;color:var(--accent);margin-bottom:4px" data-i18n="channel_digest">Latest digest</div><div id="modalDigestText" style="color:var(--text-secondary);line-height:1.5"></div></div>
       <!-- Stats -->
       <div class="stats-grid" id="modalStats" style="display:none"></div>
       <!-- Chart -->
@@ -5818,7 +5963,7 @@ Object.assign(window, {
       <!-- Actions -->
       <div class="modal-actions">
         <button class="modal-btn modal-btn-primary" id="modalOpenTg"><span><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 3L2.5 9l5 2 2 6.5 2.5-3.5 3.5 2.5L17 3z"/></svg></span> <span data-i18n="open_telegram">Open in Telegram</span></button>
-        <button class="modal-btn modal-btn-secondary" id="modalFavBtn"><span><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 16.5s-6-3.8-6-8.2A3.5 3.5 0 0 1 10 6a3.5 3.5 0 0 1 6 2.3c0 4.4-6 8.2-6 8.2z"/></svg></span> <span data-i18n="save">Save</span></button><button class="modal-btn modal-btn-secondary" id="modalFolderBtn"><span><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5.5A1.5 1.5 0 0 1 4.5 4h3.2l1.8 2h6A1.5 1.5 0 0 1 17 7.5v7a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 3 14.5v-9z"/></svg></span> <span>Folder</span></button><button class="modal-btn modal-btn-secondary" id="modalShareBtn"><span><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 11.5l3-3M7 13l-1.5 1.5a2.5 2.5 0 0 1-3.5-3.5L3.5 9.5a2.5 2.5 0 0 1 3.5 0M13 7l1.5-1.5a2.5 2.5 0 0 1 3.5 3.5L16.5 10.5a2.5 2.5 0 0 1-3.5 0"/></svg></span> <span data-i18n="share_link">Share link</span></button><button class="modal-btn modal-btn-secondary" id="modalSharePageBtn"><span><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="12" height="14" rx="1.5"/><path d="M7 7h6M7 10h6M7 13h4"/></svg></span> <span data-i18n="share_page">Share page</span></button><button class="modal-btn modal-btn-secondary" id="modalShareBotBtn"><span><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 3L2.5 9l5 2 2 6.5 2.5-3.5 3.5 2.5L17 3z"/></svg></span> <span data-i18n="share_bot">Share via bot</span></button><a class="modal-btn modal-btn-secondary" id="modalNotifyBotBtn" href="https://t.me/telgexplorerbot" target="_blank" rel="noopener" style="text-decoration:none"><span><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3a5 5 0 0 0-5 5v3.5L3.5 13v1h13v-1L15 11.5V8a5 5 0 0 0-5-5zM8.5 16.5a1.5 1.5 0 0 0 3 0"/></svg></span> <span data-i18n="notify_in_bot">Get new-post notifications in the bot</span></a><button class="modal-btn modal-btn-secondary" id="modalCompareBtn"><span><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4v12M4 7l3-3 3 3M13 16V4M10 13l3 3 3-3"/></svg></span> <span data-i18n="compare">Compare</span></button>
+        <button class="modal-btn modal-btn-secondary" id="modalFavBtn"><span><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 16.5s-6-3.8-6-8.2A3.5 3.5 0 0 1 10 6a3.5 3.5 0 0 1 6 2.3c0 4.4-6 8.2-6 8.2z"/></svg></span> <span data-i18n="save">Save</span></button><button class="modal-btn modal-btn-secondary" id="modalFolderBtn"><span><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 5.5A1.5 1.5 0 0 1 4.5 4h3.2l1.8 2h6A1.5 1.5 0 0 1 17 7.5v7a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 3 14.5v-9z"/></svg></span> <span>Folder</span></button><button class="modal-btn modal-btn-secondary" id="modalShareBtn"><span><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 11.5l3-3M7 13l-1.5 1.5a2.5 2.5 0 0 1-3.5-3.5L3.5 9.5a2.5 2.5 0 0 1 3.5 0M13 7l1.5-1.5a2.5 2.5 0 0 1 3.5 3.5L16.5 10.5a2.5 2.5 0 0 1-3.5 0"/></svg></span> <span data-i18n="share_link">Share link</span></button><button class="modal-btn modal-btn-secondary" id="modalSharePageBtn"><span><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="3" width="12" height="14" rx="1.5"/><path d="M7 7h6M7 10h6M7 13h4"/></svg></span> <span data-i18n="share_page">Share page</span></button><button class="modal-btn modal-btn-secondary" id="modalShareBotBtn"><span><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 3L2.5 9l5 2 2 6.5 2.5-3.5 3.5 2.5L17 3z"/></svg></span> <span data-i18n="share_bot">Share via bot</span></button><a class="modal-btn modal-btn-secondary" id="modalNotifyBotBtn" href="https://t.me/telgexplorerbot" target="_blank" rel="noopener" style="text-decoration:none"><span><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3a5 5 0 0 0-5 5v3.5L3.5 13v1h13v-1L15 11.5V8a5 5 0 0 0-5-5zM8.5 16.5a1.5 1.5 0 0 0 3 0"/></svg></span> <span data-i18n="notify_in_bot">Get new-post notifications in the bot</span></a><a class="modal-btn modal-btn-secondary" id="modalRssBtn" href="#" target="_blank" rel="noopener" style="text-decoration:none"><span><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11a5 5 0 0 1 5 5M4 5a11 11 0 0 1 11 11"/><circle cx="5" cy="15" r="1"/></svg></span> <span data-i18n="rss_feed">RSS Feed</span></a><button class="modal-btn modal-btn-secondary" id="modalSimilarBtn"><span><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="7" cy="10" r="3"/><circle cx="14" cy="6" r="2"/><circle cx="14" cy="14" r="2"/><path d="M9.7 8.7l2.5-1.5M9.7 11.3l2.5 1.5"/></svg></span> <span data-i18n="find_similar">Find similar</span></button><button class="modal-btn modal-btn-secondary" id="modalCompareBtn"><span><svg class="ui-icon" viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4v12M4 7l3-3 3 3M13 16V4M10 13l3 3 3-3"/></svg></span> <span data-i18n="compare">Compare</span></button>
       </div>
       <!-- Related -->
       <div class="related-section" id="modalRelated" style="display:none"><h4 data-i18n="related_channels"> Related Channels</h4><div class="related-chips" id="relatedChips"></div></div>

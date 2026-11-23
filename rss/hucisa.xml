@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>HUCISA - Haramaya University Computing and Informatics Students&apos; Association (@hucisa) — Telegram Explorer</title>
+    <link>https://mohsen-niksirat.github.io/tgexplorer/?channel=hucisa</link>
+    <atom:link href="https://mohsen-niksirat.github.io/tgexplorer/rss/hucisa.xml" rel="self" type="application/rss+xml"/>
+    <description>HUCISA is dedicated to equipping students with tech skills, fostering innovation, and empowering communities to excel in their careers and embrace the digital future. https://hucisa.site https://linkedin.com/company/hucisa https://tiktok.com/@hucisa_</description>
+    <language>en</language>
+
+  </channel>
+</rss>

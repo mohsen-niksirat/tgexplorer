@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Bloomberg (@bloomberg) — Telegram Explorer</title>
+    <link>https://mohsen-niksirat.github.io/tgexplorer/?channel=bloomberg</link>
+    <atom:link href="https://mohsen-niksirat.github.io/tgexplorer/rss/bloomberg.xml" rel="self" type="application/rss+xml"/>
+    <description>The first word in business news</description>
+    <language>en</language>
+
+  </channel>
+</rss>

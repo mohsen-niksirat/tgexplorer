@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>APMIX.AI (@apmix_ai) — Telegram Explorer</title>
+    <link>https://mohsen-niksirat.github.io/tgexplorer/?channel=apmix_ai</link>
+    <atom:link href="https://mohsen-niksirat.github.io/tgexplorer/rss/apmix_ai.xml" rel="self" type="application/rss+xml"/>
+    <description>AI API platform providing developers access to multiple AI models through one API with monthly subscription plans.</description>
+    <language>en</language>
+    <item>
+      <title>DeepSeek V4.1 Flash 1017 Abliterated is now LIVE on apmix! A powerful uncensored…</title>
+      <link>https://t.me/apmix_ai/95</link>
+      <guid isPermaLink="true">https://t.me/apmix_ai/95</guid>
+      <pubDate>Sat, 21 Nov 2026 09:10:07 GMT</pubDate>
+      <description>DeepSeek V4.1 Flash 1017 Abliterated is now LIVE on apmix! A powerful uncensored AI model for cybersecurity research, red teaming, vulnerability analysis, and security testing. • 320K context window • Advanced reasoning • Reduced refusal behavior • OpenAI-compatible API Available now: https://apmix.ai/models/deepseek-v4.1-flash-1017-abliterated</description>
+      <enclosure url="https://cdn4.telesco.pe/file/FZ0xj8Zo4xEt0SakCLfNoQDrTOFXG7B2FQcfwNVGxE7bEeWUW_mPiYMQ7d2661MEBEJu7Q8DEFY9JvMP5IEij_PUGy2lWf5rmQapgODc53rYB9RAS3QdcubRgMnWsGUCpAByQfDkCL7rx4TV__7xJW94nbuvqFiiiDPx78pXBn6Y-g0aknV3XrMuOfxLs0lEvkR9a5TuaAH1tn0LZ4kkChniZh7rC4gycA8pwEl2u5bxyjhh0XNhzhHT2DSceMT8dbQG1gF9YHyRFRnoliblTGMKlBtGbvmRHDAQcGWsZNh68h0w2l-pWkBVpo65XRXhbHg1JL9M6rPhj7J91urilA.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>We fixed the API outage today, so everything&apos;s working again and you can keep us…</title>
+      <link>https://t.me/apmix_ai/94</link>
+      <guid isPermaLink="true">https://t.me/apmix_ai/94</guid>
+      <pubDate>Sat, 21 Nov 2026 08:23:39 GMT</pubDate>
+      <description>We fixed the API outage today, so everything&apos;s working again and you can keep using the API as usual. Sorry for the trouble, and thanks for your patience. Live status: https://status.apmix.ai/</description>
+    </item>
+  </channel>
+</rss>

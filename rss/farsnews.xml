@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>خبرگزاری فارس (@farsnews) — Telegram Explorer</title>
+    <link>https://mohsen-niksirat.github.io/tgexplorer/?channel=farsnews</link>
+    <atom:link href="https://mohsen-niksirat.github.io/tgexplorer/rss/farsnews.xml" rel="self" type="application/rss+xml"/>
+    <description>پایگاه خبری خبرگزاری فارس</description>
+    <language>fa</language>
+
+  </channel>
+</rss>

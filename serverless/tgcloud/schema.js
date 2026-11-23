@@ -58,6 +58,7 @@ export const subscriptions = table('subscriptions', {
   id:         integer('id').primaryKey({ autoIncrement: true }),
   userId:     integer('user_id').notNull(),
   username:   text('username').notNull(),
+  keywords:   text('keywords'),
   lastPostId: text('last_post_id'),
   createdAt:  integer('created_at', { mode: 'timestamp' }).default(sql`(unixepoch())`),
 }, (t) => ({

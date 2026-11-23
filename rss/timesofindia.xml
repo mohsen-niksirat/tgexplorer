@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Times of India (@timesofindia) — Telegram Explorer</title>
+    <link>https://mohsen-niksirat.github.io/tgexplorer/?channel=timesofindia</link>
+    <atom:link href="https://mohsen-niksirat.github.io/tgexplorer/rss/timesofindia.xml" rel="self" type="application/rss+xml"/>
+    <description>Official Channel for The Times of India news &amp; campaigns. For suggestions &amp; collaboration, pls email to campaign@timesgroup.com. To get your copy, https://subscribe.timesgroup.com</description>
+    <language>en</language>
+
+  </channel>
+</rss>

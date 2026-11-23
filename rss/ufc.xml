@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>UFC (@ufc) — Telegram Explorer</title>
+    <link>https://mohsen-niksirat.github.io/tgexplorer/?channel=ufc</link>
+    <atom:link href="https://mohsen-niksirat.github.io/tgexplorer/rss/ufc.xml" rel="self" type="application/rss+xml"/>
+    <description>UFC news and fights</description>
+    <language>en</language>
+
+  </channel>
+</rss>

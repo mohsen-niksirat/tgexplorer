@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>DDC (Channel) (@DevsDoCode) — Telegram Explorer</title>
+    <link>https://mohsen-niksirat.github.io/tgexplorer/?channel=DevsDoCode</link>
+    <atom:link href="https://mohsen-niksirat.github.io/tgexplorer/rss/DevsDoCode.xml" rel="self" type="application/rss+xml"/>
+    <description>Web: https://a4f.co YT: youtube.com/@DevsDoCode Insta: instagram.com/sree.shades_ TG: t.me/devsdocode LinkedIn: linkedin.com/in/developer-sreejan GitHub: github.com/SreejanPersonal Twitter: x.com/Anand_Sreejan Discord: tinyurl.com/DDC-Discord</description>
+    <language>en</language>
+
+  </channel>
+</rss>

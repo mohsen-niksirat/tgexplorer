@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Programming Resources (@pythony) — Telegram Explorer</title>
+    <link>https://mohsen-niksirat.github.io/tgexplorer/?channel=pythony</link>
+    <atom:link href="https://mohsen-niksirat.github.io/tgexplorer/rss/pythony.xml" rel="self" type="application/rss+xml"/>
+    <description>Here I share my programming related resources during working or at my free times ☺️ Talk to me if you have any query: @Mojtabaeuler</description>
+    <language>en</language>
+
+  </channel>
+</rss>

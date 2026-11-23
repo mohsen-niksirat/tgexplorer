@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>AL JAZEERA (@aljazeera) — Telegram Explorer</title>
+    <link>https://mohsen-niksirat.github.io/tgexplorer/?channel=aljazeera</link>
+    <atom:link href="https://mohsen-niksirat.github.io/tgexplorer/rss/aljazeera.xml" rel="self" type="application/rss+xml"/>
+    <description>News from Al Jazeera</description>
+    <language>en</language>
+
+  </channel>
+</rss>

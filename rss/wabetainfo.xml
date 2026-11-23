@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>WABetaInfo - WhatsApp beta news (@wabetainfo) — Telegram Explorer</title>
+    <link>https://mohsen-niksirat.github.io/tgexplorer/?channel=wabetainfo</link>
+    <atom:link href="https://mohsen-niksirat.github.io/tgexplorer/rss/wabetainfo.xml" rel="self" type="application/rss+xml"/>
+    <description>WABetaInfo is the main source where you can discover news and real-time updates about WhatsApp. Download WhatsApp beta: https://wabetainfo.com/download/ Join TestFlight: https://wabetainfo.com/testflight/</description>
+    <language>en</language>
+    <item>
+      <title>WhatsApp introduces view-once text messages on iOS WhatsApp is rolling out the v…</title>
+      <link>https://t.me/wabetainfo/6347</link>
+      <guid isPermaLink="true">https://t.me/wabetainfo/6347</guid>
+      <pubDate>Mon, 23 Nov 2026 03:00:03 GMT</pubDate>
+      <description>WhatsApp introduces view-once text messages on iOS WhatsApp is rolling out the view-once feature for text messages, so users can send a message that the recipient can only read once.</description>
+      <enclosure url="https://cdn4.telesco.pe/file/RucXNAze6-0X_9-il93U2lrO8xt8VrimvZ9HZ0ojh2VpxEOUyVvGE28L8oXqdjFtIh1jwa6tnCGBp5pP4V_v55QT0-8HawBw9tEUUKqNfK5oVlxt-e5Gi7XHsaqaiIOTgSwinA2hXqo4mZX4AB58yARAQbSc4WAdEs2BBBqFF_WHVuz7MbiDSceqwOXN77HAkw_7D0fDgIkUJwTHjueK3GJyPgmhhJDkfY2nz8kz2f-UvkBRDqb2jHuUx1bzzJtSe_o9hHslOd_Mwqk1lVSrPoRrEhPrHyJ37QkIcgKYEkQF8uO5ZmN88C3Ef68tBghYPcdR74k-qzSE2wPCvyFr8g.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>WhatsApp news of the week: WhatsApp introduces cloud backup storage on Android a…</title>
+      <link>https://t.me/wabetainfo/6346</link>
+      <guid isPermaLink="true">https://t.me/wabetainfo/6346</guid>
+      <pubDate>Sun, 22 Nov 2026 03:00:03 GMT</pubDate>
+      <description>WhatsApp news of the week: WhatsApp introduces cloud backup storage on Android and iOS This summary includes 7 updates shared this week covering WhatsApp beta for Android and iOS.</description>
+      <enclosure url="https://cdn4.telesco.pe/file/TUQbF5QOg0cWmlqTrCWt5IGmd_YE0ZjP9ZC77OJ1qHscCV7gfY3jg2SKXCGzsryn9-5ryMt9yFEviKiO9Rxv1mkF47sVSUe0VQn29a7PV0CI3VaBy5hUz5Hm1X2I-p1wswxne5moA3dUfEt1c6IekiN31eh7fwJ8y0ySpH4xm6QYYgU2gnLfNtGr9iguAMKWsCD00RU5XzEmasHA2Zfqmno0XIt1yE-HZ8rSRNc0s31ko4jS-3t3Hbqm5yFclmGjCU37EWTcXZ5ic1QTn5KSCTU5u9_d6XwyrnYf3uJhuidqyzK7_vbR8ZZKg6nztIvLJtEp7M_PaS8PILcYm2Q-9A.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>WhatsApp is rolling out a feature to sync chat themes on iOS WhatsApp is introdu…</title>
+      <link>https://t.me/wabetainfo/6345</link>
+      <guid isPermaLink="true">https://t.me/wabetainfo/6345</guid>
+      <pubDate>Sat, 21 Nov 2026 03:00:04 GMT</pubDate>
+      <description>WhatsApp is rolling out a feature to sync chat themes on iOS WhatsApp is introducing a feature that lets users share their chat themes and wallpapers.</description>
+      <enclosure url="https://cdn4.telesco.pe/file/Z2f1_wq7LeoAG3229VKL7SozlPQuGA2OQVnCtpoxQUmF06RogYQ3mFqT2XZHn0QlVkyAn8iCckReufICAjrXlMsMXDNqaDaUnn83yLc6Nwuxlxp0TQHMeWsxlOd5TkeU0xMHMELZFZh2cnM2-KgxjVQCsqx2chUJIEKKr6LrKX5oLchLKVjWEVfuNgaiEHN0QZXtZrnpue49rT1x0DCN8cTIFPL7ViiEI5PEDMgj7wBqZ_kV_Y1y_SbhXJUab05nq9B32n5863MhDQGtiTJr3g-fqDOIV4FKiqvHk8_x6OsAXdSjJXlmN86V3h-udFEq9bo95cY8s5amIozKsNL9xw.jpg" type="image/jpeg" length="0"/>
+    </item>
+  </channel>
+</rss>

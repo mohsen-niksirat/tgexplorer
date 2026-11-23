@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>WormGPT (@wormgpt) — Telegram Explorer</title>
+    <link>https://mohsen-niksirat.github.io/tgexplorer/?channel=wormgpt</link>
+    <atom:link href="https://mohsen-niksirat.github.io/tgexplorer/rss/wormgpt.xml" rel="self" type="application/rss+xml"/>
+    <description>freedom</description>
+    <language>en</language>
+    <item>
+      <title>For those asking our api is located at https://openroute.cyberneurova.com</title>
+      <link>https://t.me/wormgpt/1785</link>
+      <guid isPermaLink="true">https://t.me/wormgpt/1785</guid>
+      <pubDate>Sun, 22 Nov 2026 16:38:49 GMT</pubDate>
+      <description>For those asking our api is located at https://openroute.cyberneurova.com</description>
+      <enclosure url="https://cdn4.telesco.pe/file/TnNwSvmLvy7fyDpaGQI7TI4AiAOuDljW1j77N1oNjdjIyYJLlUEHEm4WmgsQxycqLf-V7xPHxc5iV4p08UbdTxTITwIE-crNAeVL_noDG6qVXMd2crPK3BiPY3vJvy2KTHaGZOaiw_vGg5kM4HiQyZTkMUfeop6TrXaYHarGwMIAASdtQPfveUzuw83qIJ3FMYB-jqey9PRjDZzA2S0Gsnffw15CLO27_WkbQNuOm5k2gNfDpF6RsVgWwlnd6fw5bEEWQltfXGYsu7o9g4ipEZtZQ35tpMl2hvwsTQbJDSPnPq6nAYoe7uWKG5eNFhXdrqR9DjaSrvxxzk_yCvDzQg.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>cyberneurova now supports artex you can use api or connect your account to it us…</title>
+      <link>https://t.me/wormgpt/1784</link>
+      <guid isPermaLink="true">https://t.me/wormgpt/1784</guid>
+      <pubDate>Sun, 22 Nov 2026 08:23:40 GMT</pubDate>
+      <description>cyberneurova now supports artex you can use api or connect your account to it using oauth https://github.com/CyberNeurova/artex_cn.git</description>
+    </item>
+    <item>
+      <title>cyberneurova now supports artex you can use api or connect your account to it us…</title>
+      <link>https://t.me/wormgpt/1783</link>
+      <guid isPermaLink="true">https://t.me/wormgpt/1783</guid>
+      <pubDate>Sun, 22 Nov 2026 08:23:40 GMT</pubDate>
+      <description>cyberneurova now supports artex you can use api or connect your account to it using oauth https://github.com/CyberNeurova/artex_cn.git</description>
+      <enclosure url="https://cdn4.telesco.pe/file/hjB7U1IgfxkSrforZcVQf-zJ0GploqgYxWDCW6D2ZrV4JcGoASH_LBKbhsrWBalXGzk74HQ0DAQgup3tvsv_sU2bF58J33PywLSjzA7l9Vltb6zJtKaScDGbp6Z-Fre__jtbhb0NTeYnAzKha8aDcp6Y_0VWuknNkP9iRWQWXI6bj7oKvQzq6j7BUADoTFuk-99HRPVDibYWJI0ePUAlO4zotwSGVbzUTtJWLlnNgEVrEuM1xJJEdLFK-VIFRY9Ar6xMAmri8nfo21jjfHTZDGrNZFf5KrWNXRQS6QzycjBynZwtscw3O_M8wXsSa_Q80y6xpszHXEpBHKpdJppsug.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>Seems like users are actively working on their projects RN, we are working on in…</title>
+      <link>https://t.me/wormgpt/1782</link>
+      <guid isPermaLink="true">https://t.me/wormgpt/1782</guid>
+      <pubDate>Fri, 20 Nov 2026 19:56:57 GMT</pubDate>
+      <description>Seems like users are actively working on their projects RN, we are working on increasing our GPU capacity to support the current ones.</description>
+    </item>
+  </channel>
+</rss>

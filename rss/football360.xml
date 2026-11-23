@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>فوتبال ۳۶۰ (@football360) — Telegram Explorer</title>
+    <link>https://mohsen-niksirat.github.io/tgexplorer/?channel=football360</link>
+    <atom:link href="https://mohsen-niksirat.github.io/tgexplorer/rss/football360.xml" rel="self" type="application/rss+xml"/>
+    <description>اخبار و تحلیل فوتبال ایران و جهان</description>
+    <language>fa</language>
+
+  </channel>
+</rss>

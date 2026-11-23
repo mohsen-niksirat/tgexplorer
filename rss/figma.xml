@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Figma (@figma) — Telegram Explorer</title>
+    <link>https://mohsen-niksirat.github.io/tgexplorer/?channel=figma</link>
+    <atom:link href="https://mohsen-niksirat.github.io/tgexplorer/rss/figma.xml" rel="self" type="application/rss+xml"/>
+    <description>Figma design community</description>
+    <language>en</language>
+
+  </channel>
+</rss>

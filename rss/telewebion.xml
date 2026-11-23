@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>تلوبیون (@telewebion) — Telegram Explorer</title>
+    <link>https://mohsen-niksirat.github.io/tgexplorer/?channel=telewebion</link>
+    <atom:link href="https://mohsen-niksirat.github.io/tgexplorer/rss/telewebion.xml" rel="self" type="application/rss+xml"/>
+    <description>پخش زنده و آرشیو شبکه‌های صداوسیما</description>
+    <language>fa</language>
+
+  </channel>
+</rss>

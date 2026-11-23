@@ -222,14 +222,29 @@ async function fetchPosts(ch){
   };
 }
 
+function classifyChannelTier(ch, prevPosts) {
+  if (!Array.isArray(prevPosts) || !prevPosts.length) return 1; // Always crawl unseeded channels
+  const membersNum = parseViewsCount(ch && ch.members);
+  if (membersNum >= 100000) return 1;
+  const newestDate = prevPosts[0] && prevPosts[0].date ? Date.parse(prevPosts[0].date) : NaN;
+  const ageHours = !isNaN(newestDate) ? (Date.now() - newestDate) / 36e5 : Infinity;
+  if (ageHours <= 18 || prevPosts.length >= 10) return 1; // High-traffic / active
+  if (ageHours <= 72 || prevPosts.length >= 2) return 2;  // Medium-traffic
+  return 3; // Low-traffic
+}
+
 (async () => {
-  console.log('Fetching posts for ' + db.length + ' channels (concurrency=' + CONCURRENCY + ')...');
+  const forceAll = process.argv.includes('--force-all') || process.env.CRAWL_FORCE_ALL === '1';
+  const slot = Math.floor(Date.now() / (3 * 3600e3));
+  console.log('Fetching posts for ' + db.length + ' channels (concurrency=' + CONCURRENCY + ', slot=' + slot + (forceAll ? ', force-all' : ', tiered') + ')...');
   const POSTS_DIR = path.join(__dirname, 'posts');
   fs.mkdirSync(POSTS_DIR, { recursive: true });
   const archive = {};   // full archive -> posts/<username>.json (lazy-loaded)
   const seed = {};      // latest 6 posts -> posts.js (inline, small)
   const metaMap = new Map();
   let withPosts = 0;
+  let liveFetched = 0;
+  let cacheReused = 0;
   let nextIdx = 0;
   let doneCount = 0;
 
@@ -238,17 +253,25 @@ async function fetchPosts(ch){
       const i = nextIdx++;
       if (i >= db.length) break;
       const ch = db[i];
-      const res = await fetchPosts(ch);
-      if (res.meta) metaMap.set(String(ch.username).toLowerCase(), res.meta);
-      let posts = res.posts;
-      if (!posts.length) {
-        const prevFile = path.join(POSTS_DIR, ch.username + '.json');
-        if (fs.existsSync(prevFile)) {
-          try {
-            const prev = JSON.parse(fs.readFileSync(prevFile, 'utf8'));
-            if (Array.isArray(prev) && prev.length) posts = prev;
-          } catch (e) {}
-        }
+      const prevFile = path.join(POSTS_DIR, ch.username + '.json');
+      let prev = [];
+      if (fs.existsSync(prevFile)) {
+        try {
+          const parsed = JSON.parse(fs.readFileSync(prevFile, 'utf8'));
+          if (Array.isArray(parsed)) prev = parsed;
+        } catch (e) {}
+      }
+      const tier = classifyChannelTier(ch, prev);
+      const shouldFetch = forceAll || tier === 1 || (tier === 2 && ((i + slot) % 2 === 0)) || (tier === 3 && ((i + slot) % 4 === 0));
+      let posts = [];
+      if (shouldFetch) {
+        const res = await fetchPosts(ch);
+        liveFetched++;
+        if (res.meta) metaMap.set(String(ch.username).toLowerCase(), res.meta);
+        posts = res.posts && res.posts.length ? res.posts : prev;
+      } else {
+        posts = prev;
+        cacheReused++;
       }
       if (posts.length) {
         archive[ch.username] = posts;
@@ -256,7 +279,7 @@ async function fetchPosts(ch){
         withPosts++;
       }
       doneCount++;
-      process.stdout.write('\r  [' + doneCount + '/' + db.length + '] ' + ch.username + ' -> ' + posts.length + ' posts      ');
+      process.stdout.write('\r  [' + doneCount + '/' + db.length + '] ' + ch.username + ' (T' + tier + (shouldFetch ? '' : ':cached') + ') -> ' + posts.length + ' posts      ');
     }
   }
 
@@ -354,6 +377,8 @@ async function fetchPosts(ch){
     + '// Full archive: posts/<username>.json — regenerate: node crawl_posts.js\n'
     + 'const CHANNEL_POSTS = ' + JSON.stringify(seed) + ';\n';
   fs.writeFileSync(path.join(__dirname, 'posts.js'), data);
-  console.log('\n\nDone: ' + withPosts + '/' + db.length + ' channels, ' + total + ' archived posts (' + dropped + ' dropped by ' + RETENTION_DAYS + '-day retention), ' + seedTotal + ' seeded -> posts.js (' + Math.round(data.length / 1024) + ' KB)');
+  console.log('\n\nDone: ' + withPosts + '/' + db.length + ' channels (live=' + liveFetched + ', cached=' + cacheReused + '), ' + total + ' archived posts (' + dropped + ' dropped by ' + RETENTION_DAYS + '-day retention), ' + seedTotal + ' seeded -> posts.js (' + Math.round(data.length / 1024) + ' KB)');
   updateChannelsMetadata(metaMap);
+  try { require('./scripts/generate-rss.js').generateAllRss(); } catch (e) { console.error('RSS generation warning:', e.message); }
+  try { require('./scripts/generate-summaries.js').generateSummaries(); } catch (e) { console.error('Summary generation warning:', e.message); }
 })();

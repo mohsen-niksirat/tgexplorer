@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>One-api.ir | وان سرویس (@one_apis) — Telegram Explorer</title>
+    <link>https://mohsen-niksirat.github.io/tgexplorer/?channel=one_apis</link>
+    <atom:link href="https://mohsen-niksirat.github.io/tgexplorer/rss/one_apis.xml" rel="self" type="application/rss+xml"/>
+    <description>وان سرویس ارائه دهنده کاملترین وبسرویس ها و API ها &amp;#33; با ما همیشه اول باشید&amp;#33; سایت رسمی: https://one-api.ir پنل کاربری: https://panel.one-api.ir ربات رسمی: @One_Api_Bot جهت ارتباط با پشتیبانی، از طریق پنل کاربری سایت، تیکت بزنید&amp;#33;</description>
+    <language>fa</language>
+
+  </channel>
+</rss>

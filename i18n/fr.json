@@ -150,7 +150,11 @@
     "range_7d": "7 derniers jours",
     "sort_newest": "Plus récents",
     "sort_views": "Plus vus",
-    "views_unit": "vues"
+    "views_unit": "vues",
+    "rss_feed": "Flux RSS",
+    "find_similar": "Chaînes similaires",
+    "channel_digest": "Résumé récent",
+    "copy_list_link": "Copier le lien de la liste"
   },
   "ui": {
     "all": "Tout",

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>حمل و نقل اسنپ (@snapp_trip) — Telegram Explorer</title>
+    <link>https://mohsen-niksirat.github.io/tgexplorer/?channel=snapp_trip</link>
+    <atom:link href="https://mohsen-niksirat.github.io/tgexplorer/rss/snapp_trip.xml" rel="self" type="application/rss+xml"/>
+    <description>اسنپ — سوپراپلیکیشن حمل‌ونقل ایرانی</description>
+    <language>fa</language>
+
+  </channel>
+</rss>

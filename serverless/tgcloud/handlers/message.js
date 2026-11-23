@@ -42,7 +42,8 @@ function parseCommand(text, isGroup) {
   const target = atIdx === -1 ? '' : head.slice(atIdx + 1).toLowerCase();
   if (isGroup && target !== BOT_USERNAME.toLowerCase()) return null;
   const param = parts[1] || '';
-  return { cmd, param };
+  const rest = parts.slice(2).join(' ').trim();
+  return { cmd, param, rest };
 }
 
 async function upsertUser(from, startParam) {
@@ -173,7 +174,7 @@ export default async function (message) {
     return;
   }
 
-  if (parsed && parsed.cmd === 'notify' && isPrivate) {
+  if (parsed && (parsed.cmd === 'notify' || parsed.cmd === 'alert') && isPrivate) {
     if (parsed.param) {
       const target = parseSuggestedUsername(parsed.param);
       if (!target) {
@@ -183,12 +184,13 @@ export default async function (message) {
         });
         return { action: 'notify_invalid' };
       }
-      await subscribeUser(fromId, target);
+      const kw = parsed.rest || null;
+      await subscribeUser(fromId, target, kw);
       await api.sendMessage({
         chat_id: message.chat.id,
-        text: notifySubscribedText(lang, target),
+        text: notifySubscribedText(lang, target, kw),
       });
-      return { action: 'notify_subscribed', username: target };
+      return { action: 'notify_subscribed', username: target, keywords: kw };
     }
     const subs = await getUserSubscriptions(fromId);
     const mgr = buildNotifyManagerPayload(lang, subs);

@@ -109,10 +109,12 @@ self.addEventListener('fetch', event => {
     return;
   }
 
-  // Data files (posts.js / channels.js / avatars.js / posts/*.json):
+  // Data files (posts.js / channels.js / avatars.js / summaries.json / rss/*.xml / posts/*.json):
   // stale-while-revalidate in separate DATA_CACHE so crawls never invalidate
   // the shell cache and repeat visits don't block on data downloads.
   if (url.pathname.endsWith('/posts.js') || url.pathname.endsWith('/channels.js') || url.pathname.endsWith('/avatars.js')
+    || url.pathname.endsWith('/summaries.json')
+    || (url.pathname.includes('/rss/') && url.pathname.endsWith('.xml'))
     || (url.pathname.includes('/posts/') && url.pathname.endsWith('.json'))) {
     staleWhileRevalidate(event, DATA_CACHE);
     return;

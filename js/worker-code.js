@@ -128,8 +128,8 @@ export default {
     }
 
     try {
-      if (path === '/api/ping') return j({ ok: true, ts: Date.now(), version: '3.3', hasApi: !!(env && env.TG_API_HASH) });
-      if (path === '/api/version') return j({ version: '3.3', name: 'tgexplorer-worker', endpoints: ['/api/ping', '/api/search', '/api/searchPosts', '/api/trending', '/api/explore-feed', '/api/channel', '/api/posts', '/api/related', '/api/stats', '/api/categories', '/api/notifications', '/api/version'], builtAt: BUILD_TIME });
+      if (path === '/api/ping') return j({ ok: true, ts: Date.now(), version: '3.4', hasApi: !!(env && env.TG_API_HASH) });
+      if (path === '/api/version') return j({ version: '3.4', name: 'tgexplorer-worker', endpoints: ['/api/ping', '/api/search', '/api/searchPosts', '/api/trending', '/api/explore-feed', '/api/channel', '/api/posts', '/api/related', '/api/stats', '/api/rss', '/api/categories', '/api/notifications', '/api/version'], builtAt: BUILD_TIME });
 
       if (path === '/api/search') return await handleSearch(url, env);
       if (path === '/api/searchPosts') return await handleSearchPosts(url, env);
@@ -137,6 +137,7 @@ export default {
       if (path.startsWith('/api/posts/')) return await handlePosts(path.split('/api/posts/')[1], url);
       if (path.startsWith('/api/stats/')) return await handleStats(path.split('/api/stats/')[1]);
       if (path.startsWith('/api/related/')) return await handleRelated(path.split('/api/related/')[1]);
+      if (path.startsWith('/api/rss/')) return await handleRss(path.split('/api/rss/')[1]);
       if (path === '/api/trending') return await handleTrending(url, env);
       if (path === '/api/categories') return handleCategories();
       if (path === '/api/notifications') return await handleNotifications(url);
@@ -395,6 +396,36 @@ async function handleStats(username) {
   };
   cacheSet(cacheKey, result);
   return j(result);
+}
+
+// ============================================================
+// RSS FEED
+// ============================================================
+function escXml(s) {
+  return String(s == null ? '' : s)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&apos;');
+}
+
+async function handleRss(username) {
+  const u = String(username || '').replace(/\\.xml$/i, '').replace(/[^a-zA-Z0-9_]/g, '');
+  if (!u) return j({ error: 'Invalid username' }, 400);
+  const html = await fetchHtml(\`https://t.me/s/\${u}\`);
+  if (!html) return j({ error: 'Not found' }, 404);
+  const info = parseChannelPage(html, u);
+  const posts = parsePosts(html, u).slice(-20).reverse();
+  const items = posts.map(p => {
+    const link = \`https://t.me/\${u}/\${p.id}\`;
+    const raw = String(p.text || '').replace(/\\s+/g, ' ').trim();
+    const title = raw ? (raw.length > 80 ? raw.slice(0, 80) + '…' : raw) : \`\${info.title || '@' + u} #\${p.id}\`;
+    const pubDate = p.date && !isNaN(Date.parse(p.date)) ? new Date(p.date).toUTCString() : new Date().toUTCString();
+    return \`    <item><title>\${escXml(title)}</title><link>\${escXml(link)}</link><guid isPermaLink="true">\${escXml(link)}</guid><pubDate>\${escXml(pubDate)}</pubDate><description>\${escXml(p.text || '')}</description></item>\`;
+  }).join('\\n');
+  const xml = \`<?xml version="1.0" encoding="UTF-8"?>\\n<rss version="2.0"><channel><title>\${escXml(info.title || '@' + u)}</title><link>https://t.me/\${escXml(u)}</link><description>\${escXml(info.description || info.title || u)}</description>\\n\${items}\\n</channel></rss>\`;
+  return new Response(xml, {
+    status: 200,
+    headers: { 'Content-Type': 'application/rss+xml; charset=utf-8', 'Cache-Control': 'public, max-age=300', ...CORS }
+  });
 }
 
 // ============================================================

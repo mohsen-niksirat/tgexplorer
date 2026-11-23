@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Sky News (@skynews) — Telegram Explorer</title>
+    <link>https://mohsen-niksirat.github.io/tgexplorer/?channel=skynews</link>
+    <atom:link href="https://mohsen-niksirat.github.io/tgexplorer/rss/skynews.xml" rel="self" type="application/rss+xml"/>
+    <description>Breaking news from Sky News</description>
+    <language>en</language>
+
+  </channel>
+</rss>

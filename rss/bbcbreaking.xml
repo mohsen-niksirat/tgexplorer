@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>BBC Breaking (@bbcbreaking) — Telegram Explorer</title>
+    <link>https://mohsen-niksirat.github.io/tgexplorer/?channel=bbcbreaking</link>
+    <atom:link href="https://mohsen-niksirat.github.io/tgexplorer/rss/bbcbreaking.xml" rel="self" type="application/rss+xml"/>
+    <description>Breaking news from the BBC</description>
+    <language>en</language>
+
+  </channel>
+</rss>

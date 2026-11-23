@@ -150,7 +150,11 @@
     "range_7d": "۷ روز اخیر",
     "sort_newest": "جدیدترین",
     "sort_views": "پربازدیدترین",
-    "views_unit": "بازدید"
+    "views_unit": "بازدید",
+    "rss_feed": "فید RSS",
+    "find_similar": "کانال‌های مشابه",
+    "channel_digest": "خلاصهٔ آخرین پست‌ها",
+    "copy_list_link": "کپی لینک لیست"
   },
   "ui": {
     "all": "همه",

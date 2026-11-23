@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Scientific American (@scientificamerican) — Telegram Explorer</title>
+    <link>https://mohsen-niksirat.github.io/tgexplorer/?channel=scientificamerican</link>
+    <atom:link href="https://mohsen-niksirat.github.io/tgexplorer/rss/scientificamerican.xml" rel="self" type="application/rss+xml"/>
+    <description>Science news and discoveries (unofficial)</description>
+    <language>en</language>
+
+  </channel>
+</rss>

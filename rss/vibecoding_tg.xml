@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Вайб-кодинг (@vibecoding_tg) — Telegram Explorer</title>
+    <link>https://mohsen-niksirat.github.io/tgexplorer/?channel=vibecoding_tg</link>
+    <atom:link href="https://mohsen-niksirat.github.io/tgexplorer/rss/vibecoding_tg.xml" rel="self" type="application/rss+xml"/>
+    <description>Авторский канал по ВАЙБ КОДИНГУ Ссылка для друзей: https://t.me/+ll3pbl442dNkZmYy Cотрудничество: @devmangx РКН: https://clck.ru/3RRVfk</description>
+    <language>ru</language>
+    <item>
+      <title>Вышла GLM-5.4 с поддержкой изображений и контекстным окном на 1 млн токенов. Мод…</title>
+      <link>https://t.me/vibecoding_tg/4409</link>
+      <guid isPermaLink="true">https://t.me/vibecoding_tg/4409</guid>
+      <pubDate>Mon, 23 Nov 2026 06:32:19 GMT</pubDate>
+      <description>Вышла GLM-5.4 с поддержкой изображений и контекстным окном на 1 млн токенов. Модель уже появилась в списке BigModel Coding Plan и доступна через API, совместимый с Anthropic Messages. Для подключения к существующим инструментам достаточно заменить базовый URL API. Бонус: недельные лимиты увеличили на 50% по сравнению с GLM-5.3.</description>
+      <enclosure url="https://cdn4.telesco.pe/file/felw_9zuT7FbTtW66aOSTHgk7jpW1VkUMsoSzqNx3g6jmOinrFSS5hZelJ30K1CkOFzKn2RSasspZSWVPXDNV9q1NpWujoIfvmngp4OrHLex7ZWf2FkUzGfDMD5VugnMa0ZembhDfPpoEWC2eFT-Lx-ho5rPvKHtYv3YDVC9kywcnhRust9C_r-5MgYD6AK8hgZh7sdwbG8De6ctszIS7hewKRqBs0mebZQ3IUIqpKDbieGbrLdQJIz9T19dU0Uv5a4QCYqEhP_Rbw70llLNSGTqzhCj-9GsQNn-UYf5nk3S2ojzqAw6mz-o8AddmJQHb0P_YX7zSvJ_WEvBKUWsKg.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>Ускорение локальных ИИ-моделей от 30% до 5 раз. Разработчик представил скилл для…</title>
+      <link>https://t.me/vibecoding_tg/4407</link>
+      <guid isPermaLink="true">https://t.me/vibecoding_tg/4407</guid>
+      <pubDate>Mon, 23 Nov 2026 06:01:01 GMT</pubDate>
+      <description>Ускорение локальных ИИ-моделей от 30% до 5 раз. Разработчик представил скилл для оптимизации инференса. 🫣 Инструмент помогает находить узкие места в работе модели и подбирать настройки для повышения производительности на конкретном оборудовании. Оптимизация охватывает скорость генерации токенов, обработку промптов, спекулятивное декодирование, KV-кеш и время до появления первого токена. Скилл стал результатом тысяч часов работы над оптимизацией инференса. Он собрал 30 публикаций пользователей, сообщивших об ускорении от 30% до 5 раз. https://github.com/sybil-solutions/inference-optimisation-skill</description>
+      <enclosure url="https://cdn4.telesco.pe/file/VylBvXUfLOnWnZ2mQbfgJFA6o3pU9y8h8wTWSAm24aHApRdDuq1BQUQwbEm7wlDuX3BpGlpLnY-wmDxxLK8f4J3ymd32lidSTxHT2_HMXVETjOQCwFHgz3jtZFMycmhYuOVFpAFgC3i2yNJDZU-pTwvOTuk4gioPyyscp_yk5m1PSZ61zdPp7SbdxPJWmBG7SDihS9a7e-QGOlHuuFreIDtU-B4CmCNn6Vs46gTpKN6vHC48INoKtgW6SCSTuwpAyrL59u3xCysUFmWkLyuj-97QbtUuHoTe2fpeBbNawIiYOWzE9dz0IBzw5Gihg4C64wPLxOw_x2trU0F46rY0NQ.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>OpenAI теперь позволяет авторизоваться в инструментах с открытым исходным кодом …</title>
+      <link>https://t.me/vibecoding_tg/4406</link>
+      <guid isPermaLink="true">https://t.me/vibecoding_tg/4406</guid>
+      <pubDate>Mon, 23 Nov 2026 04:33:01 GMT</pubDate>
+      <description>OpenAI теперь позволяет авторизоваться в инструментах с открытым исходным кодом и локальных приложениях через учётную запись ChatGPT, а также выполнять поддерживаемые запросы к Responses API в рамках подписки ChatGPT. API-ключ для этого не нужен. В репозитории ниже показано, как это работает: достаточно добавить в локальный инструмент модуль авторизации и модуль отправки запросов. После этого плагины смогут использовать лимиты вашей подписки ChatGPT. При этом они не получают доступа к истории ваших чатов. https://github.com/openai/sign-in-with-chatgpt-devkit</description>
+      <enclosure url="https://cdn4.telesco.pe/file/ToPKbiOrfcNYub-FRz5bgTK_v7BLlSSxiRhtY2CbsILOjtAhLEYXqeWq1OHxDyLDK5-97xp9NomPrQ6wn_GiQPH-p7GU61zgx-v9RVACXMg2aKz9S3oHJYr_VLY97uaXfYbsHgQy4rNbVvflDl5V5ek2pSRS_Zj1N6DNCQFZdS5V8QufC3ikoMYswdHOgj_SfGqQUr41wZT4upAO0HWuNhOX6yRSiBV5TfkfcZmTL4IRsZD6zyjlIUlmv7dBbnAIf020Dylddn-YXsHBuIfmD6Ygdd7LsSfBvhv0sAf4lSjn3_G1-Ycycl3UBIT7njTKF7F1_ErpaQcF_gFciRcZWw.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>Полезная находка для тех, кто пользуется Bitwarden или Vaultwarden. На GitHub по…</title>
+      <link>https://t.me/vibecoding_tg/4405</link>
+      <guid isPermaLink="true">https://t.me/vibecoding_tg/4405</guid>
+      <pubDate>Sun, 22 Nov 2026 19:21:01 GMT</pubDate>
+      <description>Полезная находка для тех, кто пользуется Bitwarden или Vaultwarden. На GitHub появился Agent Access — инструмент, который позволяет ИИ-агентам безопасно получать нужные пароли и другие учётные данные, не открывая доступ ко всему хранилищу. https://github.com/bitwarden/agent-access В комплекте открытый протокол, утилита командной строки и набор инструментов для разработчиков. Автор находки настолько доволен результатом, что, по его словам, полностью отказался от 1Password. 😏 😏 😏</description>
+      <enclosure url="https://cdn4.telesco.pe/file/MMVlk_SncXQBoSwmbFpkHFKoBeA4DSkFAenjhQsjhiuE_AbKsVlyrU3O9j7TnQ7hA4yrK79V_SfHkqNWOHL9Hho9YPMA3EuuAda2repIU3c4en8SCzYcu9mLku8ghDwWiFPaPzCRTV2oibH4RP1WgtOZPfnTea10QvrsXn7UFYbv_ev8O1_VEwPvlcRfY_aTW--_LLO2EKRMDDBReyrbrFv-Fi1zcbCWJXM82oBlGcj_asxfK__dv1gpWsTuRzTxI-WdIpu4KWZmuMLBRRE8uE4Ydg-6ALkENOq5fyfAWCfDhEypiFdo4dAvYmoB0oWLox0tqgA-MO61xoLXNgN0rg.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>На Reddit разгорелось обсуждение после того, как начинающий разработчик случайно…</title>
+      <link>https://t.me/vibecoding_tg/4404</link>
+      <guid isPermaLink="true">https://t.me/vibecoding_tg/4404</guid>
+      <pubDate>Sun, 22 Nov 2026 17:19:58 GMT</pubDate>
+      <description>На Reddit разгорелось обсуждение после того, как начинающий разработчик случайно передал Claude Code пароль от рабочей базы данных. Во время миграции базы данных он столкнулся с ошибкой схемы и решил обратиться за помощью к Claude Code. Для этого скопировал из конфигурации продакшена полную строку подключения к базе данных, включая пароль администратора. Нейросеть нашла причину ошибки и исправила конфликт всего за четыре минуты. Однако когда об этом узнал технический руководитель, команде пришлось менять пароль базы данных и перезапускать все работающие сервисы. На это ушёл ещё час. Сам разработчик искренне не понимал проблемы. Ведь компания использовала платную корпоративную подписку Claude, а Anthropic обещает не использовать такие данные для обучения моделей. В комментариях архитекторы и инженеры по безопасности объяснили, почему это всё равно опасно. Во-первых, Claude Code сохраняет историю локальных сеансов в файлах JSONL. Если в переписку попал пароль, он может остаться на диске и стать доступным вредоносным расширениям или другим программам. Во-вторых, при работе с несколькими MCP-серверами секретные данные из контекста могут случайно попасть в параметры вызовов сторонних инструментов. Наконец, подобная практика быстро становится привычкой. Сегодня разработчик вставил пароль от базы данных, а завтра в истории переписки могут оказаться приватные ключи, токены Stripe и персональные данные клиентов. В обсуждении предложили не полагаться исключительно на внимательность разработчиков, а ограничивать передачу секретов техническими средствами. Например, использовать 1Password CLI или Infisical для передачи учётных данных через переменные окружения, а в Claude Code настроить хуки UserPromptSubmit и PreToolUse для обнаружения паролей и токенов.</description>
+    </item>
+    <item>
+      <title>Thinking Machines выпустила Inkling 2 Mini — модель с открытыми весами: https://…</title>
+      <link>https://t.me/vibecoding_tg/4403</link>
+      <guid isPermaLink="true">https://t.me/vibecoding_tg/4403</guid>
+      <pubDate>Sun, 22 Nov 2026 08:45:58 GMT</pubDate>
+      <description>Thinking Machines выпустила Inkling 2 Mini — модель с открытыми весами: https://huggingface.co/thinkingmachines/Inkling-2-Mini Она построена на циклической архитектуре трансформера: средние слои обрабатывают каждый токен трижды, что позволяет модели выполнять…</description>
+      <enclosure url="https://cdn4.telesco.pe/file/ACbOGlzRfGDQav3UpG4D76QdWygM0t64nHb0GBe3PgL4nT8Si_cUlgmeIAjze4TvUelSSpUUzfsoT-C2UZK0FYuQHKtgT-3EXYVTaQKZllXubrBOVhw0PS2Ksn5ipWzjeNwcuB6kUBcmHDHGnoXPeFmApIY8MqDs_0puIB7mtSNvLVjpLOMlE3FmD9yVRTZYjw6wahBuhleRxOKKg0EFtylh6FpVIJRd6K1Qy1IHDhSp8lMtx1i_YqmCKPmXVY2RkKX-J355TnTjCI4YMwbQIrTk2VRccZvBmqrtlL0i0q0FpcJyv9lk9dZvro7eC1ANwUmRgDC-ijt57D9oCs7kBg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>Вайб-кодинг #4402</title>
+      <link>https://t.me/vibecoding_tg/4402</link>
+      <guid isPermaLink="true">https://t.me/vibecoding_tg/4402</guid>
+      <pubDate>Sun, 22 Nov 2026 08:10:58 GMT</pubDate>
+      <description></description>
+    </item>
+    <item>
+      <title>Если вы постоянно используете Claude Code для программирования, но чувствуете, ч…</title>
+      <link>https://t.me/vibecoding_tg/4401</link>
+      <guid isPermaLink="true">https://t.me/vibecoding_tg/4401</guid>
+      <pubDate>Sun, 22 Nov 2026 07:09:58 GMT</pubDate>
+      <description>Если вы постоянно используете Claude Code для программирования, но чувствуете, что воспринимаете его лишь как чат в терминале, стоит обратить внимание на открытый репозиторий от топ-иженера, который недавно набрал более 6400 звёзд на GitHub. Французский инженер Флориан Брюньо с почти маниакальной тщательностью собрал практическую энциклопедию Claude Code объёмом более 430 тысяч строк. Она охватывает всё: от первоначальной настройки до продвинутой оркестрации нескольких ИИ-агентов. Многие руководства по ИИ-агентам ограничиваются составлением сложных промптов. Главное отличие этого материала в том, что автор рассматривает Claude Code с точки зрения инженерных практик для продакшена. Например, в разделе о Hooks (хуках жизненного цикла) приведены готовые шаблоны скриптов, позволяющих автоматически приостанавливать выполнение опасных миграций базы данных или команд удаления до их запуска. Там же объясняется, как с помощью хуков после каждого изменения файла принудительно запускать статическую проверку типов и форматирование кода. Это позволяет избавиться от привычки модели завершать работу, не проверив внесённые изменения. Отдельное внимание уделено управлению контекстом и контролю расходов. В репозитории разобраны лучшие практики иерархического наследования CLAUDE.md , загрузки Skills по мере необходимости и подключения только необходимых MCP-серверов. Кроме того, автор подготовил 244 готовых файла шаблонов, которые можно сразу добавить в проект, генератор записей об архитектурных решениях (ADR) и контрольные списки для аудита безопасности. Подробно описано даже то, как защитить локальный терминал от атак через внедрение скрытых инструкций в содержимое вредоносных репозиториев. Разница между подходами к программированию с ИИ становится всё заметнее. Начинающие пользователи по-прежнему вручную копируют сообщения об ошибках и пытаются добиться от модели исправлений. Опытные команды уже используют Hooks, собственные Skills и строгую изоляцию контекста, превращая ИИ-агентов в управляемый и воспроизводимый процесс автоматизированной разработки. Главная ценность этого репозитория в том, что он позволяет сэкономить сотни часов, которые иначе пришлось бы потратить на самостоятельное изучение и настройку всей этой инфраструктуры. https://github.com/FlorianBruniaux/claude-code-ultimate-guide</description>
+      <enclosure url="https://cdn4.telesco.pe/file/jXplXCogq0PYhGbvIrjUkFOjIzdtdDhNH4yZHURuJpqJwmKZ96l_zdUZ_oyflgtshU-0j0GzZHPasINKaMtQPZR0IWlJv2lOc9OtmuQV8XzUcDxdSBMw_-UvXEN869IdMq5jsP4hohJUsjhJKeok6OYjI5N1EaKolylVyJ2Hw8xBsuvTSY7DiQhu3UXhuhiFOPxGPlF2md_cOjc7npv5G0kOwRl6eDFu8kDccrhM_8oKc8LQw4VDfRUlPrymG1WWPKyY-4vD9wW3CZEe8B1fQPkD_5BjtEAk22BO0Mz_1MXmr0fB-1NrWRIeS52iM8HrYeGZtDsc-T__VepI02ueZQ.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>В сети поделились способом повысить безопасность Claude Code: dependency-cooldow…</title>
+      <link>https://t.me/vibecoding_tg/4400</link>
+      <guid isPermaLink="true">https://t.me/vibecoding_tg/4400</guid>
+      <pubDate>Sun, 22 Nov 2026 06:14:58 GMT</pubDate>
+      <description>В сети поделились способом повысить безопасность Claude Code: dependency-cooldown блокирует установку версий пакетов, опубликованных менее 7 дней назад, через npm, pnpm или uv. - Снижает риск атак на цепочку поставок ПО. - Защищает от слопсквоттинга — атак с использованием вредоносных пакетов, названия которых могут быть выдуманы ИИ. - Требует вашего разрешения, если Claude пытается обойти ограничение. Ограничение также распространяется на MCP-серверы и хуки, запускаемые Claude Code. Установка на уровне пользователя для защиты всех проектов: npx claude-code-templates@latest --setting environment/dependency-cooldown https://www.aitmpl.com/component/settings/environment/dependency-cooldown</description>
+    </item>
+    <item>
+      <title>Вот как на самом деле нужно использовать ИИ-агентов. 🍿</title>
+      <link>https://t.me/vibecoding_tg/4399</link>
+      <guid isPermaLink="true">https://t.me/vibecoding_tg/4399</guid>
+      <pubDate>Sat, 21 Nov 2026 19:22:01 GMT</pubDate>
+      <description>Вот как на самом деле нужно использовать ИИ-агентов. 🍿</description>
+      <enclosure url="https://cdn4.telesco.pe/file/MJF5lN-oGctUJqMXuaW6Mf-iRW-4R29b8Bp1bJSuawmPNBEMdMq8BI_ALlfteSFY0u9vEZDBTMkn0KaZUGeHtbqySr4uWi6V70ih8KPG7v3LFztVNzkEMr_8AgP9Ct_wt8snLrt8iOrkC-4ijJYOMwn8oFmwzcxSTZKQCNSFZbOUG1NlpQsgFOaGwr5Z7fL3o1wJRIXYLxfSpc7-qyfS1wb3cvoD5S3dpaQ2l06OURa9XB5FYz5owgiNISm_llOrbOCSqxLDhvQpxRfZy4vR5f19XcH3XxC5v0NpLnD_8qa9SL-FGKTwWU9sCy0tfNXnqhE31DPuaMKgLZ4jy9kUwg.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>Советую внимательно посмотреть это видео Мэтта. За 70 минут он на практике показ…</title>
+      <link>https://t.me/vibecoding_tg/4398</link>
+      <guid isPermaLink="true">https://t.me/vibecoding_tg/4398</guid>
+      <pubDate>Sat, 21 Nov 2026 17:19:01 GMT</pubDate>
+      <description>Советую внимательно посмотреть это видео Мэтта. За 70 минут он на практике показывает, как с помощью набора собственных навыков работает над огромным PR, содержащим 21 тысячу строк кода. Сначала он запускает /grill-with-docs , затем использует /retro для анализа проделанной работы и улучшения процесса. После этого проводит ручное ревью кода. Большой PR он разбивает на несколько последовательных PR. При проверке основное внимание уделяет общим закономерностям и архитектурным решениям, а не каждой строке кода. Сразу после ревью он снова запускает /retro , чтобы на основе полученного опыта постоянно совершенствовать стандарты проверки. Было даже немного трогательно видеть, насколько серьёзно Мэтт по-прежнему относится к проверке PR. В этом и проявляется настоящий инженерный подход. Сейчас я почти полностью доверяю проверку кода ИИ и подключаюсь лишь на этапе принятия ключевых решений. Поэтому такой внимательный подход Мэтта произвёл на меня особое впечатление. Видео на YouTube: https://youtu.be/jVBlkOF8sHk?si=5t54td6l-vP9E2SC</description>
+      <enclosure url="https://cdn4.telesco.pe/file/f6aZCQ_8QGRV5Q0Pg-kxTgVEqjJns9SoF-hYpVXcQXIfQ4meo7kWjETCh4RU6DhlCJH_xcK_PqWQ2xNudv6QDkLE4AEu4UzDSRktYynfx5W1G-9xuLAe3jD7r9JSu91RLXmuub4ZE74LHcwulPbtkgweUd4rle7Q7jDi8xMoDyw3J2KrlTuMV9xcRYgVOZOAIJGs351q3EYPHPTaoSAu4o29JFG3Px5k18tEYyCv0jNttj6UJTzKFWBI7CPG3xlF8bi3X9S6hneOIwFO2lgu6yCVFhMW_E3z0wLM8I_pH46S0YT8M0dw-XcIN2Z7mKcNE9vWWhanuCEsNKcSSjca6Q" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>Представлен MCP Events. Теперь ИИ-агенты могут подписываться на внешние события …</title>
+      <link>https://t.me/vibecoding_tg/4397</link>
+      <guid isPermaLink="true">https://t.me/vibecoding_tg/4397</guid>
+      <pubDate>Sat, 21 Nov 2026 15:18:01 GMT</pubDate>
+      <description>Представлен MCP Events. Теперь ИИ-агенты могут подписываться на внешние события и реагировать на них, не дожидаясь запроса пользователя. Например, агент может отслеживать репозиторий на GitHub и при появлении нового пул-реквеста автоматически запускать проверку кода и тесты. MCP Events поддерживает три способа доставки событий. - Poll — периодический опрос сервера. - Push — отправка событий сервером клиенту. - Webhook — уведомление о событии через вебхук. На схеме показана работа Poll. Сначала клиент обнаруживает доступные события, затем обращается к серверу, ожидает некоторое время и повторяет запрос. Когда происходит событие, информация о нём передаётся в среду выполнения ИИ-агента. https://github.com/modelcontextprotocol/ext-events</description>
+      <enclosure url="https://cdn4.telesco.pe/file/kO4E4qVdalp6NVydz5-g_SO2eo4r1CR9NMoB-4YFTnwFVUoCpnMAiP3SdpIegtckAAXGB8NUl2dU46CfJFE0KTY0Fgf1g__OyO2ecO64QTTExNdKZw4PA7ySMXmgW5Ydh4WRZZi6m-97urf6gak1oyuQiy7PmpUJx_i0MS-2hszcjPj80m4tPO_rLkV-H6Wqk1ORKh4DbqbMFlm9bpdqV_6cwRwWnQWO8JFx5Kc8muYQfwywGrOx1tggA_DW1nwNYu8jMtdVAShgQejuzgxuKMNalDPgArXwmpzvt5G1gIYRcCAPIdhB5xKgt6lrPs0ORqg11imnXDXIGkhvtnz59A.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>Китайский ИИ-инструмент ARTEX, способный автоматизировать кибератаки, теперь, ка…</title>
+      <link>https://t.me/vibecoding_tg/4394</link>
+      <guid isPermaLink="true">https://t.me/vibecoding_tg/4394</guid>
+      <pubDate>Sat, 21 Nov 2026 11:14:01 GMT</pubDate>
+      <description>Китайский ИИ-инструмент ARTEX, способный автоматизировать кибератаки, теперь, как сообщается , можно запускать даже с обычного iPhone. https://github.com/BaaRai/ARTEX Изначально его представляли как инструмент для проверки безопасности, но ARTEX позволяет запускать ИИ-агентов, которые самостоятельно ищут уязвимости, подбирают способы атаки и выполняют последовательность действий без участия человека. По данным Microsoft, связанная с Китаем хакерская группировка использовала ARTEX для атак на сотни организаций. Исследователи Check Point также обнаружили более 1608 панелей управления ARTEX, доступных через интернет.</description>
+      <enclosure url="https://cdn4.telesco.pe/file/nLWxgbqqRnQkwpf5vzNDY8fQEQ9OrET3uJDcpRBTHYi--SKhjkAK2An-voeOxMhBSgcn9j2xwswvb_yf2LufhShreEpD4qgGdl-fY-4xKWU5tXpc3EqHY5031_eOFDOjuaQydesaVgktBch6dCcfDFo5WJTIb3XAa3BR1pZFFeO8eEaofUrchX-yfMH8lHOcrnf-XX1I3tRWeyT_NNfqePJnRG-f01pXp1CE_PizcsqGWoaoY--yqHk8Z7icF-z6kvtG5yyafibHcTW5FG09_5VHgNtO8oOY-2lWxnY9sWAKIi273Cs23DKs5_3btC5JwmuTzZ7TLapo2jpL77OhMQ.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>В Antigravity сбросили лимиты Gemini для всех пользователей А благодаря улучшени…</title>
+      <link>https://t.me/vibecoding_tg/4393</link>
+      <guid isPermaLink="true">https://t.me/vibecoding_tg/4393</guid>
+      <pubDate>Sat, 21 Nov 2026 10:32:46 GMT</pubDate>
+      <description>В Antigravity сбросили лимиты Gemini для всех пользователей А благодаря улучшениям кэширования теперь можно выполнять примерно на 22% больше работы в рамках той же квоты. Неплохо ✋</description>
+      <enclosure url="https://cdn4.telesco.pe/file/srp4rGcRCIfcMxpALVtQT5-JXbdi_2WJxpmX9KJoBb7VbI-D9zYoxrp8IJcKMjVDYfLjQb9iKVKsmU_F_xfLIp4rPG9NahXBgEAuzZzLlZsSc9l5FMNAIGVAcqkt3AWYekQNRdewVfQHUqQeZjac2NgIpGD_x4YP0rvCkRFCNelEeYdxAT_qxebIE4EGvjb1Z5ctiJT8hFJLCXurznFrcKj8rjZpCd0D2Ua2C_DeknFc4e1_3dd30UoM0_EO6jcycDZSOnAE7GLE50G5tv8n5RLoG24BIeu41cNgdinfLtVyz0Hfb0D9tfPhJgputsdAVeDh7l59MiKH-byjccl4FQ.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>Thinking Machines выпустила Inkling 2 Mini — модель с открытыми весами: https://…</title>
+      <link>https://t.me/vibecoding_tg/4392</link>
+      <guid isPermaLink="true">https://t.me/vibecoding_tg/4392</guid>
+      <pubDate>Sat, 21 Nov 2026 10:02:01 GMT</pubDate>
+      <description>Thinking Machines выпустила Inkling 2 Mini — модель с открытыми весами: https://huggingface.co/thinkingmachines/Inkling-2-Mini Она построена на циклической архитектуре трансформера: средние слои обрабатывают каждый токен трижды, что позволяет модели выполнять больше внутренних вычислений и использовать меньше токенов для решения задач. Характеристики: - 26,4 млрд параметров, из которых активны 3,4 млрд. - Для запуска требуется около 20 ГБ памяти. - 48,2% в DeepSWE v1.1 — по данным Thinking Machines, лучший результат среди открытых моделей с менее чем 100 млрд параметров. Команда Thinking Machines взяла Inkling 2 Mini в самолёт и попросила модель создать авиасимулятор. Всё работало локально на Mac, без подключения к интернету. Таким образом разработчики продемонстрировали, что модель можно использовать для программирования даже без доступа к сети.</description>
+      <enclosure url="https://cdn4.telesco.pe/file/m_4jyO4_He31xbnUNRnlUSfkdgaYRxb78YAVxi7MwKRQn0uo8rkUAv_thotiThjN7nEX7SIx7vckFLrt3rLbaQ6nJV1KngTZwv1G-4poDK1fwwiA4lLoq3Bvcr3PCvjwA4_K8zySUHhxUnOHbsfeIHHJGdhJduQ8Gnw9Iaxp6Z-fRjtonldH6Oq27Ow_LmTYvAkpzUBvS7on4EK3u6UZtpJUQ73B1pM93BKhoL7SSISyIn-2CU858qfz7J54XL_jH5kpeZJlww-FYRCxERXSEXNe3fTw5FwY43ADV5AXiVxZQu3H_8Gb9d_j2ez9wzvJQRqsd0iZ7SQQHD6iVcBDoA" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>После выхода Anthropic на биржу из OpenAI ушли сразу несколько сотрудников. Сред…</title>
+      <link>https://t.me/vibecoding_tg/4391</link>
+      <guid isPermaLink="true">https://t.me/vibecoding_tg/4391</guid>
+      <pubDate>Sat, 21 Nov 2026 08:01:01 GMT</pubDate>
+      <description>После выхода Anthropic на биржу из OpenAI ушли сразу несколько сотрудников. Среди них специалисты по безопасности ИИ, робототехнике и разработчики Codex. В частности, сообщается об уходе Пола Росу, Дмитрия Охонько, Ви Маккой, Хуана Фелипе Серона Урибе и Кэт Коревец. Причины увольнений неизвестны. По слухам, даже Тибо подумывает об уходе. 😓</description>
+      <enclosure url="https://cdn4.telesco.pe/file/oE0PWDNlyPpMYk086VIKTTQ7UoxXZuWJNqC_-mVOPYbtblPdzpkDPwFikBlhTw1qVInEiCTt5kcVmp7-ibWWLsFHc8teP8cZT1a--QdDmVVpC5wVoU5xDXOdLts5eUNEUaAz4Bh2z6NAOg13ncjYAxdtEigij176vmMFWwTuQYTyUay6lj8molB6T8btLjtMMsTRVMkEyU_2SeaYYQ5UrncKYLeZEd4-WXMsBtZa3tjp5mgzfBenLqhwLKcHkFXOsAAonQRU7wuUXby5xacNdvs6o5NZx3i-va3-NzLnQc8p4FMG3S07FhN4G0oAkNpUDyfesjmukDZkMexoQjcV5w.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>В сети нашли способ обходить проверку личности в Claude с помощью поддельных док…</title>
+      <link>https://t.me/vibecoding_tg/4386</link>
+      <guid isPermaLink="true">https://t.me/vibecoding_tg/4386</guid>
+      <pubDate>Sat, 21 Nov 2026 07:32:01 GMT</pubDate>
+      <description>В сети нашли способ обходить проверку личности в Claude с помощью поддельных документов. Один из пользователей X поделился инструкцией, как сделать удостоверение личности и попробовать пройти с ним проверку KYC. Для этого он использовал онлайн-генератор документов , где можно выбрать страну, загрузить свою фотографию, подобрать фон и заполнить необходимые данные. Сам автор выбрал японские водительские права. Есть и небольшая хитрость. Автор также продемонстрировал, как с помощью инструментов разработчика в Google Chrome можно получить готовое изображение документа без водяного знака. Получившуюся картинку предлагают использовать для проверки личности в Claude. Причем, можно даже не распечатывать документ, а просто открыть его на хорошем экране и сфотографировать. Хотя вариант с распечаткой тоже предусмотрен. Правда, насколько успешно такой способ проходит проверку, из публикации неясно. Сам автор в конце предупреждает, что инструкция приведена лишь для ознакомления, а все риски каждый берёт на себя.</description>
+      <enclosure url="https://cdn4.telesco.pe/file/rzaevNzO25d_hZfs97pLA4cu10dhuv2Qj2yAhR3QWa6OBHjHyFNyAXsIE9JoASibaV30vRZMMdHKFJoXLKJaiMM0mUDr-m4x03XFCjJ5-Kl8WksgZJ5Ullt5I9Ht1AeIcn3pnoL8rBmdZAOtfvL3TeXKSKWk-hrvwJXT4qPqy4StPd_xPe9cmlVFdiZ9Fyt0eSNz0jYPf3tOg8kAJOymDgz7_RAWgvuhqc-yN3buwKGssqxPIPik6JNpunp8vr4CrKIBH25CsWGjCFCpO75frJA1VdwW2RjtMvdqJtAo7eiSfhZBqFGC7YmqOW0ITF6ZXWXJSmiwdh2xlkiZSPbjTQ.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>Простой способ улучшить SEO. Откройте Google Search Console и перейдите в раздел…</title>
+      <link>https://t.me/vibecoding_tg/4385</link>
+      <guid isPermaLink="true">https://t.me/vibecoding_tg/4385</guid>
+      <pubDate>Sat, 21 Nov 2026 07:01:26 GMT</pubDate>
+      <description>Простой способ улучшить SEO. Откройте Google Search Console и перейдите в раздел &lt;Эффективность&gt; ➡️ &lt;Результаты поиска&gt;. Добавьте фильтр, выберите &lt;Запрос&gt; и переключитесь на пользовательское регулярное выражение. Вставьте следующий шаблон. ^(?:\S+\s+){7,}\S+$ Нажмите &lt;Применить&gt;. Этот фильтр покажет длинные поисковые запросы, состоящие как минимум из девяти слов. «Это длинные и конкретные вопросы, которые люди задают Google, прежде чем попасть на ваш сайт. Похожие вопросы они задают и ChatGPT. Выберите запросы с большим количеством показов, но малым числом кликов. Затем разместите ответы на них в начале страниц, которые уже ранжируются по этим запросам» Если нажать на один из найденных запросов, Google Search Console покажет страницы вашего сайта, которые отображаются в результатах поиска по нему. Остаётся открыть соответствующую страницу и добавить в её начало нужный поисковый запрос вместе с ответом на него. Таким образом можно улучшить позиции сайта по дополнительным популярным запросам. Кроме того, в Google Search Console можно создавать более сложные фильтры с помощью ИИ-чата. Для этого достаточно нажать синюю кнопку в интерфейсе и описать нужный фильтр обычным языком.</description>
+      <enclosure url="https://cdn4.telesco.pe/file/lAamxDqCZxA_HK5x0o3uOdRtET1nMEcOvOgRpzb8w-ZCBPfqkAVE0AZ6Prm1zvq0UB65_u8n8uOjJeKz-it07Fg2hqvkblxuUEwAqFgGvCfIOHzNvaD3KsYw5EYlD26BICs-21H3NzfZIlXtIVaMIU545HqEUDqT3T4JETZwI1K1i1da6kTluQNs706GSQAlThExOHK2AKC6ldsyxZtVL8dOPZEtGUzfL1hEJUcnuMbH7THYk_nC__5nNfx45sLF8ThnUDRHMl-Y-UieTcRo8ZdvYZPEu4UP4LjQVRbkcJEWd4E83QKJEGrE0hzDWHiDdlATHdEV3YpSQ48mwjllMw" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>На днях публикация о неудачном опыте вайб-кодинга набрала более 10 тысяч сохране…</title>
+      <link>https://t.me/vibecoding_tg/4383</link>
+      <guid isPermaLink="true">https://t.me/vibecoding_tg/4383</guid>
+      <pubDate>Sat, 21 Nov 2026 05:01:01 GMT</pubDate>
+      <description>На днях публикация о неудачном опыте вайб-кодинга набрала более 10 тысяч сохранений. Её автор допустил несколько типичных, но крайне опасных ошибок при разработке приложения. Автор публикации не был программистом. Летом он с помощью Cursor и Claude разработал приложение для записи клиентов в студию своего партнёра. В проекте использовались Supabase, Stripe, OpenAI и Resend. Несколько дней назад ему попалась история о счёте за использование Codex на $88 982. Обеспокоенный возможными последствиями, он решил перед публичным запуском показать приложение знакомому бэкенд-разработчику. Всего за час работы с Chrome DevTools тот обнаружил три серьёзные уязвимости. Открыв вкладку Network и изучив JavaScript-файлы, разработчик обнаружил, что в клиентском коде открытым текстом хранятся: - API-ключ OpenAI. - Секретный ключ Stripe для рабочего окружения с префиксом sk_live_ , позволяющий выполнять операции с платежами. При этом предназначенный для публичного использования ключ вообще не применялся должным образом. - API-ключ Resend. Все эти ключи находились в JavaScript-файлах, которые автоматически загружал браузер каждого посетителя. Автор приложения предусмотрительно добавил .env в .gitignore и был уверен, что этого достаточно. Причина ошибки заключалась в особенностях сборки Vite. Любая переменная окружения с префиксом VITE_ включается в клиентскую сборку. Во время разработки Claude ради упрощения реализации предложил обращаться к API непосредственно из браузера и добавил ко всем переменным префикс VITE_ . Поскольку приложение исправно работало, у автора не возникло причин сомневаться в предложенном решении. Но самое тревожное обнаружилось в серверных логах. Хотя сервер отдавал только содержимое каталога build и сам файл .env оставался недоступным, за две недели существования практически никому не известного сайта автоматизированные скрипты 212 раз пытались получить доступ к /.env При этом для API-ключа OpenAI даже не был установлен лимит расходов. Автору повезло, что никто не воспользовался открытыми ключами. В тот же вечер он заменил все три ключа, установил для OpenAI жёсткий лимит расходов в $20, при достижении которого запросы должны блокироваться, а не просто отправляться уведомление по электронной почте, и перенёс все API-вызовы в Supabase Edge Functions. Тем, кто создаёт приложения с помощью ИИ и готовится к их публикации, стоит уделить хотя бы пять минут двум простым проверкам. 1. После сборки проекта проверьте все файлы выходного каталога на наличие строк sk- , sk_live_ и key . 2. В настройках используемых API включите жёсткие ограничения расходов, чтобы при достижении лимита запросы блокировались автоматически. https://www.reddit.com/r/TechLeader/comments/1xxodfy/i_checked_my_own_vibe_coded_app_before_launch_i/</description>
+      <enclosure url="https://cdn4.telesco.pe/file/nbgvHu_Y7ZLpeVNZmIs0Xs4OvsG8HuI3y4XqH2O3cFgTNu3leMd0IuviQUQVetaXQ66s-Vw29G4hopPzd2n8JRn3xX6ld1Lv3gRjQxYPIanPHopD0OEzghZLsdpg-Cmrv6tKLOfCRzIWs-XRJSYL61CfHTFDkwZGGUocv5dz2x0qIPTXJjpTPIWBntonpWMGQShzY5BsO7lDhgA5ZR4y11UVZvAhckLSghU06ZtmzZPVJTl9foDAUeVHb0x3BPfmBxreQYaZ916jM_fU3GMM-HOgwCUM3SYMixUzAv3xiwpXWPWNckyvZhUkWb1NXkWAZSdj80dlnDHmzLjkKyVpoQ.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>OpenMotion официально вышел с открытым исходным кодом. Разработчики заявляют, чт…</title>
+      <link>https://t.me/vibecoding_tg/4382</link>
+      <guid isPermaLink="true">https://t.me/vibecoding_tg/4382</guid>
+      <pubDate>Fri, 20 Nov 2026 15:17:57 GMT</pubDate>
+      <description>OpenMotion официально вышел с открытым исходным кодом. Разработчики заявляют, что инструмент позволяет воспроизводить популярные видео с точностью более 95%, причём для этого не требуется Fable 5.2. OpenMotion объединяет создание анимации и видеомонтаж. В проекте собраны дизайнерские решения и шаблоны известных брендов, воссозданные методом реверс-инжиринга. Доступно более 300 видеошаблонов, 152 дизайн-системы и файлы MOTION.md , в которых описаны последовательность кадров, анимация текста, переходы и звуковое оформление. Эти инструкции позволяют ИИ-агентам воспроизводить и изменять анимацию, сохраняя визуальный стиль бренда. OpenMotion также поддерживает генерацию изображений, видео, озвучки и музыки через подключённые модели, включая Seedance 2.5 и ElevenLabs. Инструмент совместим с более чем 20 ИИ-агентами* включая Claude Code, Codex и DeepSeek Harness, а также поддерживает 74 поставщика сервисов. Через MCP или плагины можно создавать и редактировать ролики непосредственно из чата с ИИ-агентом. Для ручной доработки предусмотрен видеоредактор. https://github.com/nexu-io/openmotion</description>
+      <enclosure url="https://cdn4.telesco.pe/file/URc0OwVAK86W09PbXeZLnMiQMDlo0WlVkG03diyyThRg6n8ClLAm7AYdfH6p5wHOJTt4cW8fomOKYYH149imQrnGuI8Tpjh3iyRceotJm5fJisCiRzYIZo6FlWEKJIYS4CCCX2v72I3lLvHyU4Pkq8zlaLCDbhk6msfcHS9jgGFvYUso6ZHR8tea72tx56lbwSKJG8T7Jen7jUEqiSf2tGexu5uvWXHrWTl1XG3-DKArTWLpiMQFnCb_XuLiTlbT7RrwMnS0-62I0-LccSGJh1SiiRIFSeIJ4Mh2eN3K_jxUUu5muSHb8GMRiiEc12vKoA9L7YJrW5zn93zvWEe7-Q" type="image/jpeg" length="0"/>
+    </item>
+  </channel>
+</rss>

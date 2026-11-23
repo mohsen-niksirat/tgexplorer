@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Joe Rogan (@joerogan) — Telegram Explorer</title>
+    <link>https://mohsen-niksirat.github.io/tgexplorer/?channel=joerogan</link>
+    <atom:link href="https://mohsen-niksirat.github.io/tgexplorer/rss/joerogan.xml" rel="self" type="application/rss+xml"/>
+    <description>Joe Rogan Experience podcast clips</description>
+    <language>en</language>
+
+  </channel>
+</rss>

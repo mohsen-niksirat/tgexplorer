@@ -557,6 +557,26 @@ test.describe('Telegram Explorer - e2e', () => {
     await page.locator('#feedTypeBar [data-feed-sort="views"]').click();
     await expect(page.locator('#feedTypeBar [data-feed-sort="views"]')).toHaveAttribute('aria-pressed', 'true');
   });
+
+  test('channel modal shows RSS link, latest digest, content-based similar channels, semantic search, and multi-worker parsing', async ({ page }) => {
+    await page.evaluate(() => window.openChannel('bbcpersian'));
+    await expect(page.locator('#channelOverlay')).toHaveClass(/open/);
+    await expect(page.locator('#modalRssBtn')).toHaveAttribute('href', 'rss/bbcpersian.xml');
+    await expect(page.locator('#modalSimilarBtn')).toBeVisible();
+    await expect(page.locator('#modalDigest')).toBeVisible();
+
+    // Tagless channel still gets similar channels via content/semantic similarity
+    await page.evaluate(() => window.openChannel('news_hut'));
+    await expect(page.locator('#modalRelated .related-chip').first()).toBeVisible();
+
+    // Semantic search for Persian programming concept finds coding/dev channels
+    const semCount = await page.evaluate(() => window.searchLocal('آموزش برنامه‌نویسی').length);
+    expect(semCount).toBeGreaterThan(3);
+
+    // Multi-worker URL pool parser normalizes comma-separated URLs
+    const urls = await page.evaluate(() => window.parseWorkerUrls('https://w1.workers.dev/, w2.workers.dev'));
+    expect(urls).toEqual(['https://w1.workers.dev', 'https://w2.workers.dev']);
+  });
 });
 
 /**

@@ -200,11 +200,17 @@ export function notifyEmptyText(lang) {
     : 'You have no active notification subscriptions.\nOpen any channel card and tap "Notify me about new posts", or send:\n/notify @username';
 }
 
-export function notifyUnsubButton(lang, username) {
-  return isFa(lang) ? `لغو اشتراک @${username}` : `Unsubscribe @${username}`;
+export function notifyUnsubButton(lang, username, keywords = null) {
+  const kwLabel = keywords ? ` [${keywords}]` : '';
+  return isFa(lang) ? `لغو اشتراک @${username}${kwLabel}` : `Unsubscribe @${username}${kwLabel}`;
 }
 
-export function notifySubscribedText(lang, username) {
+export function notifySubscribedText(lang, username, keywords = null) {
+  if (keywords) {
+    return isFa(lang)
+      ? `هشدار هوشمند کلمه کلیدی (${keywords}) برای @${username} فعال شد.`
+      : `Smart keyword alert (${keywords}) enabled for @${username}.`;
+  }
   return isFa(lang)
     ? `اطلاع‌رسانی پست‌های جدید برای @${username} فعال شد.`
     : `Subscribed to new-post notifications for @${username}.`;

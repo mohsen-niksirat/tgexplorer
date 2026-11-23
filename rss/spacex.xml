@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>SpaceX (@spacex) — Telegram Explorer</title>
+    <link>https://mohsen-niksirat.github.io/tgexplorer/?channel=spacex</link>
+    <atom:link href="https://mohsen-niksirat.github.io/tgexplorer/rss/spacex.xml" rel="self" type="application/rss+xml"/>
+    <description>SpaceX launches and missions</description>
+    <language>en</language>
+
+  </channel>
+</rss>

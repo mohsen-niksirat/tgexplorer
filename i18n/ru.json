@@ -150,7 +150,11 @@
     "range_7d": "За 7 дней",
     "sort_newest": "Новые",
     "sort_views": "По просмотрам",
-    "views_unit": "просм."
+    "views_unit": "просм.",
+    "rss_feed": "RSS-лента",
+    "find_similar": "Похожие каналы",
+    "channel_digest": "Сводка последних постов",
+    "copy_list_link": "Копировать ссылку списка"
   },
   "ui": {
     "all": "Все",

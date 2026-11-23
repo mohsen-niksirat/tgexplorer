@@ -150,7 +150,11 @@
     "range_7d": "آخر 7 أيام",
     "sort_newest": "الأحدث",
     "sort_views": "الأكثر مشاهدة",
-    "views_unit": "مشاهدة"
+    "views_unit": "مشاهدة",
+    "rss_feed": "خلاصة RSS",
+    "find_similar": "قنوات مشابهة",
+    "channel_digest": "ملخص أحدث المنشورات",
+    "copy_list_link": "نسخ رابط القائمة"
   },
   "ui": {
     "all": "الكل",

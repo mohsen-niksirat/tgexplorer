@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Code Stars (@code_stars) — Telegram Explorer</title>
+    <link>https://mohsen-niksirat.github.io/tgexplorer/?channel=code_stars</link>
+    <atom:link href="https://mohsen-niksirat.github.io/tgexplorer/rss/code_stars.xml" rel="self" type="application/rss+xml"/>
+    <description>Track GitHub repos gaining stars in real time. Discover trending projects in AI, Python, JavaScript, React, and DevOps before they go viral. Updated hourly.</description>
+    <language>en</language>
+    <item>
+      <title>diggerhq/opencomputer An open-source, faster Devin alternative Language: TypeScr…</title>
+      <link>https://t.me/code_stars/16678</link>
+      <guid isPermaLink="true">https://t.me/code_stars/16678</guid>
+      <pubDate>Mon, 23 Nov 2026 07:17:01 GMT</pubDate>
+      <description>diggerhq/opencomputer An open-source, faster Devin alternative Language: TypeScript Total stars: 1603 #typescript</description>
+      <enclosure url="https://cdn4.telesco.pe/file/Cfea4u9Epl4HfDBqMoDQmdImPkpK9VlDqxVU5L2nqim8LQgMWwX5-IdLQESTjIqs2HqMRx9gWFc_0myn6CEorAKdHteoBtiwrM2t8WpZMiQJtvxE0KU6FK8J5LXtZGv4MuLzYMwHhoJPKVU0NQssCH263yXpN9QwA0-zkKUPIagM3O5BRwZXxs2aI8mWxu2PjezE9AO91dX4Ist_oaWSFCZIrkJGClF2UFwEGL2926rUUvVGxGtZyADpPtLbJMS71N8jZbWoThK0loP893Oaha87nmzmZYKGafwF-khH-b3QZ34CPl9lJpwcUcMV2UmlL0A4itd_N--R4rOFdwbQ4Q.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>ChiefGyk3D/Clouds-Against-Humanity Learn cloud security by building it! An open-…</title>
+      <link>https://t.me/code_stars/16677</link>
+      <guid isPermaLink="true">https://t.me/code_stars/16677</guid>
+      <pubDate>Sun, 22 Nov 2026 22:16:44 GMT</pubDate>
+      <description>ChiefGyk3D/Clouds-Against-Humanity Learn cloud security by building it! An open-source homelab teaching Zero Trust, DevSecOps, IaC, and cloud architecture from the ground up. Language: Python Total stars: 2679 #python #aws , #azure , #cloudcomputing , #cloudsecurity , #cybersecurity , #devsecops , #digitalocean , #doppler , #gcp , #homelab , #opentofu , #spacelift , #terraform , #threatmodeling , #twingate , #zerotrust</description>
+      <enclosure url="https://cdn4.telesco.pe/file/oTpOMpDvdkrvkgl162fPEwMidmx7SorCM2sduul3gjyKJzQi7uyO21uVD4Evzdqlk10MH-bf9F4iEZ46gdEZ2CGeBa9IZkRsx8uwZdBfzXP4jnT-gB01Q3SHYl2rvjlvZ3zaBQnKsrnOXeKnIH8yeDKM4Bv3Il9eNkxmiu_GU6HRdYCT02p90i6T8Wg1V6ZQLCDJcYUwwMviWGuhpuT2IYBqGm_yjwjvA3tSOmIzIJJjzYtiReKP1Yt0dKgrt2_Jrw6tqaqdRGXqaUC4J1ul_Luv4sX3cAPeK3zC_zsxBTtnHvc4eH4Yh5kQ1bZ68xQlD7-MpyqA9JEzU5UojlrkVQ.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>EL4CTEO/fast-anything Don&apos;t rewrite it in Rust. Rewrite the 5% that&apos;s slow: prof…</title>
+      <link>https://t.me/code_stars/16676</link>
+      <guid isPermaLink="true">https://t.me/code_stars/16676</guid>
+      <pubDate>Sun, 22 Nov 2026 18:16:53 GMT</pubDate>
+      <description>EL4CTEO/fast-anything Don&apos;t rewrite it in Rust. Rewrite the 5% that&apos;s slow: profile Python, Node or Ruby apps, port the hot functions with your coding agent, prove they behave the same. Language: Rust Total stars: 1531 #rust #agentskills , #aiagents , #claudecode , #claudecodeplugin , #codex , #developertools , #ffi , #mcp , #mcpserver , #napirs , #nodejs , #optimization , #performance , #profiler , #pyo3 , #python , #rewriteitinrust , #ruby , #rust , #typescript</description>
+      <enclosure url="https://cdn4.telesco.pe/file/imIPbHBAsG3hgT9CUFikz__LGmu6jZKeX8gDtjNLHCdYhoDWnJMgpGKwgGKKdg8xgGgHcNsMh5gZ0T_LpSWnY7kCkawm7wfsEe_YFFUmx92WTOTNjpzYrJ93gFhAlXoiNwYJ2Z2P-z_KmHeUM0KO84VD33AhRH35ZTQpjEvM0KG8jjK9-Ry0F7SomJGrFHYHJmzZd5bDYnBYiKh69oYgwi5BmMrlZe9ARA5aD9tQeM__DHl2FZ_rfdrhVFoF6A5DbQL6hMydNWNMOymHTDkrKI_OzWUzDbizr9uooigLODm4qyS-fVCcoZfYbeVzc4v6I-cZWulgQ47SgsfZaWrBkw.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>Flagsmith/flagsmith Flagsmith is an open-source feature flag platform with remot…</title>
+      <link>https://t.me/code_stars/16675</link>
+      <guid isPermaLink="true">https://t.me/code_stars/16675</guid>
+      <pubDate>Sun, 22 Nov 2026 17:17:01 GMT</pubDate>
+      <description>Flagsmith/flagsmith Flagsmith is an open-source feature flag platform with remote config and experimentation. Choose from self-hosted or cloud deployment options. Language: Python Total stars: 8618 #python #cd , #ci , #continuousintegration , #docker , #featureflag , #featureflaggers , #featureflagging , #featureflags , #featuremanagement , #featuretoggles , #flagsmith , #hacktoberfest , #multivariatetesting , #python , #react , #remoteconfig , #remotecontrol , #selfhosted</description>
+      <enclosure url="https://cdn4.telesco.pe/file/O8ommef_uSkFiCDg4Zr5VO-OI5z18YEzDe_QbavcV1wVf4FU1GR0o-uddE8IfFk63PsymXVwdwSS5p9oIw_Y33lvJ5PvhgybE20i-g78k2Ys08cvsKGfxPxzgsKRjDR2vIPpZGVJlvvMyDRA8EDsh_11xX5Hu9g3XJlGoLzt-ox0A55wneczVxlhly_Pej_81Em4LtggsYpuoaS-4S3DblAj1oiWGf_J9vvYXfLOH7ErQZb5jZdlY_gt8Tz0qwX6jWP9hd4D5bW_QQgrwkSPh4IBfe9fun8OR5VI5VvJd7PA-S_hPwxfdlfBe2NpC_t5e3FLiFv_j2ctpHUtrPuZCQ.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>R0Y00/Xbox2Windows GTA VI static recompilation research for x64 Windows. Source-…</title>
+      <link>https://t.me/code_stars/16674</link>
+      <guid isPermaLink="true">https://t.me/code_stars/16674</guid>
+      <pubDate>Sun, 22 Nov 2026 13:16:58 GMT</pubDate>
+      <description>R0Y00/Xbox2Windows GTA VI static recompilation research for x64 Windows. Source-built EXEs run on Windows, and two translated pixel shaders match reference outputs on hardware and WARP. Full-game startup is unverified. Language: Python Total stars: 1158 #python #d3d12 , #directxraytracing , #scarlett , #staticrecompilation , #windows , #xbox , #xboxseriesx</description>
+      <enclosure url="https://cdn4.telesco.pe/file/IRGVITC7EDChEu4yj4BVDwxwCXJY1STyza_ssJ_aO-v4TkXyI7egPexE6xakD16HoXpuWNvjapcXimvF7b5c7Y7qpfZXzTLEOczUNf6jOvJ_JTivv9d1JHCrZW6Z6c-xpptUhl1-JFkvYg7z5rj3KPo4wYsovLWL1KYg3OATLZxjvlZ2EVTt8aaJsR7rRdBRTlh76SwZe7E0EPKTVrEmc-aoghnb3EYd2Cgs4RVsZpF_O9hvG_yFAo9TCqq-nPxm1NXVOPI2Yc5Vmicvap9kFkQG0u72uJP4iBYipUNpD8RrLc8iwy5k-xd2T0QVDxcoOQ8I4ghFIKspx9b5pf19kQ.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>hatsunemiku-ai/google-one-tools Language: Python Total stars: 1179 #python</title>
+      <link>https://t.me/code_stars/16673</link>
+      <guid isPermaLink="true">https://t.me/code_stars/16673</guid>
+      <pubDate>Sun, 22 Nov 2026 09:16:54 GMT</pubDate>
+      <description>hatsunemiku-ai/google-one-tools Language: Python Total stars: 1179 #python</description>
+      <enclosure url="https://cdn4.telesco.pe/file/D-vPmzjRGLbWUu6j3owYDm6uylHHWacJ0PRDmDtZXVqr0O1KycUbsthJpTq_ojSdfN84uYm0lb-XFOfFMc5AW0Mlh1NXd-bTJ-b1XYqy3LC0evY0kja1a5IyfTpD5Fl5fRCB5MRDQo-V1flWg557t8CkgIPf3Ix5sdMBDZVZ8OY6Vw3hiedJVbtxXFC9icIG9IUIgb1d9fxdKF7I5NxUGziWYTwfgd1TpaJRurnvxu5U4lDRBoqq6_BcCPmlj3y-ZZ9izJ7qjZznupUnJjrmI9UCCd5Ek7X5YhuO1DMK5ywoiYVS9XCqxaeRRbj8TJApAiCzwFx-N-6ziV3pakmUyw.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>toyxyz/toyxyz_RGBMocap Native Windows video motion capture with ExMR, FlowHMR an…</title>
+      <link>https://t.me/code_stars/16672</link>
+      <guid isPermaLink="true">https://t.me/code_stars/16672</guid>
+      <pubDate>Sat, 21 Nov 2026 21:17:12 GMT</pubDate>
+      <description>toyxyz/toyxyz_RGBMocap Native Windows video motion capture with ExMR, FlowHMR and GVHMR, contact correction, humanoid retargeting, and FBX/VMD export. Language: Python Total stars: 2813 #python</description>
+      <enclosure url="https://cdn4.telesco.pe/file/fNe50l0VcJ5Lhc2qYM7_lvKqlokBQkBgXIMnuzF7QVd0s6P7Sww1_BxTbvrvqlFGHBWlGKjWDuw8HuY442u7tvdwbC04k8e27TmicASQT2vUaxXezh4AL0I8lopyEIdex_B4PHTvSQ_Gga8GPSwh5cgAV6yXNdpbd7LUc2V0WLmQJGLa1frPrkpmo0zTSy2OWTxTqiV_UbLw71bM_HnpLef9_tYP0aUyEQ8wuEh-O7_8dl7XQ3PV_YqmJHeTONIucq5dhQ3v9Rpe_kcksvHsayLm4tB3dtZ-QZDGk7-Lwu-DmlGhk--_nEQWcW_SUXqwmU6YrUiQT--4ns9ka9NKAw.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>Lemxy/WinRust Windows shell replacement in Rust: taskbar, file manager, NTFS sea…</title>
+      <link>https://t.me/code_stars/16671</link>
+      <guid isPermaLink="true">https://t.me/code_stars/16671</guid>
+      <pubDate>Sat, 21 Nov 2026 20:16:53 GMT</pubDate>
+      <description>Lemxy/WinRust Windows shell replacement in Rust: taskbar, file manager, NTFS search, task manager, disk cleaner. One installer exe. Language: Rust Total stars: 934 #rust</description>
+      <enclosure url="https://cdn4.telesco.pe/file/WkRr34mNzAZO6C_PoI9W6stUQ_gXK9_n_GkaCRtaCyysq9YuJg49G6lWmpbn-j1QuZsldqrIEkl8iYRBhux4jYUnxynqD5NaI2w-h81smAHlfen1T3k16h4cSAsLRlru8hqnKT2VIre3rx9jdUDYNNWiXsNITZzypno1G-_p1HtEOMbh9GlZxpLZBI9GCZP0AXQ5MNSN8YF5yU7dAzzutPsE8S9V0kpUKD3dFSRff11uMmdreI3M8gCPYGz-E_WPOWyeIq68NiXWjFQQ5OxFxqL-eC8v0Kz8rZll9W9DltNznjodqxZGDm6ckRcNeQqpWdVA_8FqrE_y5HY-aE6ePw.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>ItsNotRexed/Leonida Leonida Is A Native PC Recompilation Of The Xbox Version Of …</title>
+      <link>https://t.me/code_stars/16670</link>
+      <guid isPermaLink="true">https://t.me/code_stars/16670</guid>
+      <pubDate>Sat, 21 Nov 2026 19:17:01 GMT</pubDate>
+      <description>ItsNotRexed/Leonida Leonida Is A Native PC Recompilation Of The Xbox Version Of Grand Theft Auto 6 Language: Python Total stars: 1568 #python</description>
+      <enclosure url="https://cdn4.telesco.pe/file/i0sqZDouPuYbXeJtFV6xzj6EUDDBgTQxLxUFEu472Z1nwvWUsWgBwT51O2hajBNorOpsNZgaZu1pcsXggP-ObZHzb9-Rw6fiutUacrAAaduOzzKolecPYsojVWnLE9FqP5TosiyZG0kvLRsJ2yvQhFtnJ9vHLnFc6N3uyBIcNrEwR1RdyQVge1X3NMNq1mwnecwIyvfUoi8JbqXPYbfpaW3bxAlKZ2tyhugSP86jTkbWsl1095Qboa0oCmLXLQVhnEXqKmbsYksjscfasVV0xnl4Vvqya1vPpjx0jScaKD-yo_H5bI1lxZIPzAbyDkSDhkNQHe7V3Ak1H5HCoHrcRQ.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>atuizz/posewear 姿势、服装、人像参考图库，附中英文提示词，可在浏览器里 AI 试穿 · Pose, outfit &amp; portrait refe…</title>
+      <link>https://t.me/code_stars/16669</link>
+      <guid isPermaLink="true">https://t.me/code_stars/16669</guid>
+      <pubDate>Sat, 21 Nov 2026 12:17:04 GMT</pubDate>
+      <description>atuizz/posewear 姿势、服装、人像参考图库，附中英文提示词，可在浏览器里 AI 试穿 · Pose, outfit &amp; portrait reference library with bilingual prompts and in-browser AI try-on Language: Python Total stars: 1048 #python #aiart , #aitryon , #chinese , #cloudflarepages , #fashion , #gemini , #gptimage , #imagegeneration , #outfitreference , #posereference , #prompt , #pwa , #seedream , #virtualtryon</description>
+      <enclosure url="https://cdn4.telesco.pe/file/NZHiasnN96_pvPiYp-Dc2rXjRLNMdIJFFkDH0dTapnZuzTV5Pk4g7uN6Lm89AXwI1wOhJB5PgyK9EhaQ9RHjTVFQoGCmXsuaQRZnaXiqfBiztw1Sc2TfGpqGC-WvP6T9L--aw8Ex1qP--6nVNoCIhvinjCwRRnlzRNsHkxS0gRwLiHCaHR-AfTWme7D3_lbJYf9vi83r5RF-VxYVAVuVTi5MnPI1C9AShV0J98Ff1uBk3nLIEklBTWlxElTIJPduaaoqO16pNv_Fv-uXG6LS7PX1nv4fcPjulY5vcFw6s1vfGdanaanS3-hn0XxMRQFy2RattBRsrgO3OK0zDrDPdg.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>havenicec/google-qr-sms-helper Chrome Extension (MV3) to switch Google&apos;s mandato…</title>
+      <link>https://t.me/code_stars/16668</link>
+      <guid isPermaLink="true">https://t.me/code_stars/16668</guid>
+      <pubDate>Sat, 21 Nov 2026 08:16:57 GMT</pubDate>
+      <description>havenicec/google-qr-sms-helper Chrome Extension (MV3) to switch Google&apos;s mandatory QR code verification back to standard 6-digit SMS verification via iPad Mini profile &amp; [3,null,4] RPC fallback. Language: JavaScript Total stars: 1256 #javascript #browserautomation , #chromeextension , #googleauth , #manifestv3 , #smsverification</description>
+      <enclosure url="https://cdn4.telesco.pe/file/o5f412r45_2OTsooi8FOx2_QewJBx6l5HX0LNBWZF421gDsxmPJ2P-iGFC_FxLq8iKrNwDFxMamXZ4BWyjtZllvgZzoSyKdIy86EtVwGRMYYA7uQh507JZO77MfGSsr0H5co-l7eC6YnmEmtXe_b1hOaeOR_85JMhvTiUgZn4hVXWsElAoyt6w1senpMozoSGnVAlGPNAY7ONtrlp-d7JHn1WFTihLIXkMHIss4P5r3oB1FuoDuLja-xsnDUfnQN-ABrYh-8Pzc3fWrD9YPXHIXULdcPVvXBweED4ZAIg7GVn3PwsQwWAz3QtAxozpsZawBFTk7kHtGHdN-_QZqzhw.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>XinaTian/MROffice MR Office: open-source document, spreadsheet, presentation, PD…</title>
+      <link>https://t.me/code_stars/16667</link>
+      <guid isPermaLink="true">https://t.me/code_stars/16667</guid>
+      <pubDate>Sat, 21 Nov 2026 03:16:53 GMT</pubDate>
+      <description>XinaTian/MROffice MR Office: open-source document, spreadsheet, presentation, PDF, handwriting and code editors. https://mroffice.ai Language: TypeScript Total stars: 896 #typescript #agpl , #documenteditor , #excel , #officesuite , #opensource , #pdfeditor , #powerpoint , #spreadsheet , #typescript , #word</description>
+      <enclosure url="https://cdn4.telesco.pe/file/FlNHSUFCsUme4Y9PdRjI4dnZVIVS91mmEMni1FmPB4gdJlE9iKx23Xw9G0xRyn9SXiKKpRBC2Jns_p9lC48yhTn3XtCOvrwJ4e7x_nFmLQLVKB0ZAfmFTMbMRCcez4dpV44iDbMV7u41HBptFOpD4OObCFBwgcs5ZyZrrmJrko16LxvqefW2HLS0H9OgLVC6w1CjiyK_Jhv7qMKvc4CiZMSQaP2125gJLmnLQGUJjY9ni3u8QtbeYHZy9Fk_oHvA8XFfD7NSxnQkaYBGBvM6dVZFmrobP7M004FRVMJXcRkBjT2sjE0BoX_vorPuc-H3OkYhnAKFLaDqtl70SSW3kw.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>bookwjitchieni1986/blender-ai-mcp-addon AI assistant and MCP server for Blender:…</title>
+      <link>https://t.me/code_stars/16666</link>
+      <guid isPermaLink="true">https://t.me/code_stars/16666</guid>
+      <pubDate>Fri, 20 Nov 2026 19:17:12 GMT</pubDate>
+      <description>bookwjitchieni1986/blender-ai-mcp-addon AI assistant and MCP server for Blender: visual chat, scene tools, multi-agent workflows. Works with ChatGPT/GPT, Claude, Gemini, Ollama, OpenCode. Blender AI addon, copilot for 3D, bpy Python scripting, MCP integration. Language: Total stars: 1388 #aiagents , #aiassistant , #blender , #blenderaddon , #blenderai , #blenderautomation , #blendermcp , #blenderplugin , #blenderscripting , #bpy , #chatgpt , #claude , #gemini , #llm , #mcp , #mcpforblender , #mcpserver , #modelcontextprotocol , #ollama , #opencode</description>
+      <enclosure url="https://cdn4.telesco.pe/file/i7K3XwiL_8CFiTRMWqJCIJ-2mYp8d-JkLD1RwVrMQTMv05cCXJtWfrbE-1WVlyLgCJPYSSZAfsVOnFSSj-qm8UoNdivU8q5z1nfEajwxrzZlAq7GgQafhd9rZf2_UtfCqU4jYOlkEVIe_lYC3zA1v5v94QvkE1bh2NqeIpXGQVLciktFejwozXJPaBra5vladAufJb7Hva-cJ-jvrIMQRAFkM5NuBCRqQ8OJ-nh6iGbbzB-9vM2nqgKxrNCsPmjJIFTg9r0_ffF_z37HHXWQWpurpGDcuCHLvHjoTcv2ivqiYrhkkWJye06XSIpBntSklCUBo2aB9m4fZMofCbgPAg.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>iamajmeena/neonclipping Paste a link, get captioned 9:16 clips in ~2 min. Free, …</title>
+      <link>https://t.me/code_stars/16665</link>
+      <guid isPermaLink="true">https://t.me/code_stars/16665</guid>
+      <pubDate>Fri, 20 Nov 2026 12:17:08 GMT</pubDate>
+      <description>iamajmeena/neonclipping Paste a link, get captioned 9:16 clips in ~2 min. Free, local, open-source clipping engine (audio-first, YouTube captions, local LLM). Language: Python Total stars: 911 #python #clipping , #ffmpeg , #shorts , #video , #whisper , #ytdlp</description>
+      <enclosure url="https://cdn4.telesco.pe/file/rILRHDt_rULvpJ2T-lgcwdaSkYuYBH6HGAx0b9r0zbHXvSRCYigvSfKfimZpUrTVZTM4cJkPhB4UwKJE67zjsiRpg42GAxF1EHdjLq-3pQchb5UrPH9Y5TtSwGFQr9ctFgCcVii9EjIC3sf8ZgfFiZw2-OGaTG3SEH0n_p5osGwShz42Q-aoyvk7uCTpRGRbAlS9CCMgpD2p8VlJZIV65X8pbvRL770A1WsiM14DdZaNZ0DUaFhXuQ_6OOn3KEs-h4crrxT3LcjHdeiCztMWgHP7z8OuOXRqChfV1eqJA2ZowXOJL2xkd8UOaWuMoCHUfiSGKGoPPyXOMpg9Mny90A.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>imxieyi/Kernarium Run real Linux kernel natively on iOS Language: C++ Total star…</title>
+      <link>https://t.me/code_stars/16664</link>
+      <guid isPermaLink="true">https://t.me/code_stars/16664</guid>
+      <pubDate>Fri, 20 Nov 2026 08:16:52 GMT</pubDate>
+      <description>imxieyi/Kernarium Run real Linux kernel natively on iOS Language: C++ Total stars: 1501 #cplusplus #android , #emulator , #ios , #linux , #linuxkernel , #usermodelinux , #virtualization</description>
+      <enclosure url="https://cdn4.telesco.pe/file/RVuwr_4awri9xnvLl14qg33vHHP8MyI7cDUyzXb4kvPvdfDQtvAQrj6mxuptbTudqDhi27_CkPoSiFTl8Pyq2ElnvtZzETI5SUkXNI2oTG80iD3cerU6BxggTQe_xNnNSJDlklrC_lJTkJNYq0HI0ABcLdROOdoS9yv2sL5BlG7tef7yevUUB5RiPa4g-mzlwRPyW5GyO2ROQw81LV1eiJDXctBU4yv2M68BynFdnRPK3aQ6q5OTQzuyu2cPdO1VPJqgeJLa2rbPxNZ3ikb2suzQiOqo6CWGVc9ruhTJlsO2cPGHf4Vx4YDyU5pSUxG07O1kxsFcNbm266fpZdtZLw.jpg" type="image/jpeg" length="0"/>
+    </item>
+  </channel>
+</rss>

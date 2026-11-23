@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>خبر فارسی (@khabarfarsi) — Telegram Explorer</title>
+    <link>https://mohsen-niksirat.github.io/tgexplorer/?channel=khabarfarsi</link>
+    <atom:link href="https://mohsen-niksirat.github.io/tgexplorer/rss/khabarfarsi.xml" rel="self" type="application/rss+xml"/>
+    <description>مهمترین خبرها — موتور جستجوی اخبار فارسی</description>
+    <language>fa</language>
+
+  </channel>
+</rss>

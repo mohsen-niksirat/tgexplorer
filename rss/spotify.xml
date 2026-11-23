@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Spotify (@spotify) — Telegram Explorer</title>
+    <link>https://mohsen-niksirat.github.io/tgexplorer/?channel=spotify</link>
+    <atom:link href="https://mohsen-niksirat.github.io/tgexplorer/rss/spotify.xml" rel="self" type="application/rss+xml"/>
+    <description>Music news from Spotify</description>
+    <language>en</language>
+    <item>
+      <title>​ 📅 WHEN DOES SPOTIFY WRAPPED 2026 DROP? 🎁 ​We are officially in the final str…</title>
+      <link>https://t.me/spotify/22</link>
+      <guid isPermaLink="true">https://t.me/spotify/22</guid>
+      <pubDate>Sun, 22 Nov 2026 17:04:34 GMT</pubDate>
+      <description>​ 📅 WHEN DOES SPOTIFY WRAPPED 2026 DROP? 🎁 ​We are officially in the final stretch! While Spotify never confirms the exact launch date in advance, the pattern is crystal clear. 🔍 ​For the past 5 years, Wrapped has always dropped on a Wednesday between late November and early December: • 2023: Nov 29 • 2024: Dec 4 • 2025: Dec 3 ​Following that exact trend, all eyes for 2026 Wrapped are on Wednesday, December 2 ! 🗓️ ✨ ​ 📲 Quick prep tip: Make sure your Spotify app is updated to the latest version so the Wrapped banner pops up on your Home screen the second it goes live. 🚀 💚</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>AnyModel (@ai_anymodel) — Telegram Explorer</title>
+    <link>https://mohsen-niksirat.github.io/tgexplorer/?channel=ai_anymodel</link>
+    <atom:link href="https://mohsen-niksirat.github.io/tgexplorer/rss/ai_anymodel.xml" rel="self" type="application/rss+xml"/>
+    <description>Сайт – anymodel.org Общий чат – @vibecoding_anymodel • Собрали все нейронки в одном API, чтобы не платить за десять подписок. • Дешевле, чем напрямую, старт бесплатный. Тут – апдейты, находки и иногда промокоды. Коллабы – @anymodel_admin</description>
+    <language>ru</language>
+    <item>
+      <title>AnyModel #161</title>
+      <link>https://t.me/ai_anymodel/161</link>
+      <guid isPermaLink="true">https://t.me/ai_anymodel/161</guid>
+      <pubDate>Sun, 22 Nov 2026 16:00:43 GMT</pubDate>
+      <description></description>
+    </item>
+    <item>
+      <title>AnyModel #160</title>
+      <link>https://t.me/ai_anymodel/160</link>
+      <guid isPermaLink="true">https://t.me/ai_anymodel/160</guid>
+      <pubDate>Sat, 21 Nov 2026 19:15:07 GMT</pubDate>
+      <description></description>
+    </item>
+    <item>
+      <title>AnyModel #159</title>
+      <link>https://t.me/ai_anymodel/159</link>
+      <guid isPermaLink="true">https://t.me/ai_anymodel/159</guid>
+      <pubDate>Sat, 21 Nov 2026 17:05:02 GMT</pubDate>
+      <description></description>
+      <enclosure url="https://cdn4.telesco.pe/file/OREoLFhnLSYb4ArJPmClZUSlecipVzf4L-9eY6uVBhKy3uvDNSK1Ow8DupTFEm5xSiohvQsMC5v8GJF7_JibzHoPalc2HKwCTqh-GKkLna6-Q8rFjUpnHD9LuuZyspC9RhgcsTOxPBgtDTW47pA7_dxIR5pzdG7pdl9_YC-sO3z_ySLi4EzfJT_gvOiUXF92H0TAVTGulwNDQ9Wsz6pADC3bUgM-YWa3YmV-d5CC_ccpqJ1jdhjOtutRhRJa086i3prMWJdwQeDf23hnuC7M5BOZci-G2ueV6aFOw0khftc08KC_TVMHpUOOS4TFPp2XJFcou14b8cgJ16Q5iQYDzQ.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>AnyModel #158</title>
+      <link>https://t.me/ai_anymodel/158</link>
+      <guid isPermaLink="true">https://t.me/ai_anymodel/158</guid>
+      <pubDate>Sat, 21 Nov 2026 10:32:01 GMT</pubDate>
+      <description></description>
+    </item>
+    <item>
+      <title>AnyModel #157</title>
+      <link>https://t.me/ai_anymodel/157</link>
+      <guid isPermaLink="true">https://t.me/ai_anymodel/157</guid>
+      <pubDate>Fri, 20 Nov 2026 14:28:48 GMT</pubDate>
+      <description></description>
+    </item>
+    <item>
+      <title>AnyModel #156</title>
+      <link>https://t.me/ai_anymodel/156</link>
+      <guid isPermaLink="true">https://t.me/ai_anymodel/156</guid>
+      <pubDate>Fri, 20 Nov 2026 09:10:05 GMT</pubDate>
+      <description></description>
+    </item>
+  </channel>
+</rss>

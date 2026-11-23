@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>GitHub repos (@github_repos) — Telegram Explorer</title>
+    <link>https://mohsen-niksirat.github.io/tgexplorer/?channel=github_repos</link>
+    <atom:link href="https://mohsen-niksirat.github.io/tgexplorer/rss/github_repos.xml" rel="self" type="application/rss+xml"/>
+    <description>Welcome to GitHub repos. Here you&apos;ll find valuable information on the latest trending projects. Subscribe to stay informed and gain insights from the thriving GitHub community.</description>
+    <language>en</language>
+    <item>
+      <title>omonkeyz/xbox-emulator Progress notes for running Xbox Series X|S builds on PC (…</title>
+      <link>https://t.me/github_repos/14059</link>
+      <guid isPermaLink="true">https://t.me/github_repos/14059</guid>
+      <pubDate>Mon, 23 Nov 2026 05:00:03 GMT</pubDate>
+      <description>omonkeyz/xbox-emulator Progress notes for running Xbox Series X|S builds on PC (TomBox + rage9) Language : Rust Stars : 939 Issues : 74 Forks : 47 https://github.com/omonkeyz/xbox-emulator</description>
+      <enclosure url="https://cdn4.telesco.pe/file/Uit3-z4ULQEPfuKHomkPwnCBtm6Vy5Losp6RMnnHMVjc_1PNKxSRw1ghZ6AEk3bnNYwPVVaie2PAVVTfBVLq4g1BW99x8lrk2oh18UW-3oK33I-M7RnNWjQPvqzefbBIJgcyC7S0kd03rM-gcSXWjFElL5nsmKq5icW2IHBT7aW2b4PsmYDANwFrCvvaBmYi7miBvDt9XC65gdpbMNE3tL_PWaNc8gy-ycYxITCAA3lwBDtqHJa25o6jSE4NHcQIBTkjz--omFlcD4tclJ0pyeOY-Gr7VcE6G42gl-9PHLoJoePDker7grWmSazExPi-6OB3cnwcDxhk9W6zXgeSEw.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>R0Y00/Xbox2Windows GTA VI static recompilation research for x64 Windows. Source-…</title>
+      <link>https://t.me/github_repos/14058</link>
+      <guid isPermaLink="true">https://t.me/github_repos/14058</guid>
+      <pubDate>Sun, 22 Nov 2026 23:00:03 GMT</pubDate>
+      <description>R0Y00/Xbox2Windows GTA VI static recompilation research for x64 Windows. Source-built EXEs run on Windows, and two translated pixel shaders match reference outputs on hardware and WARP. Full-game startup is unverified. Language : Python #d3d12 #directx_raytracing #scarlett #static_recompilation #windows #xbox #xbox_series_x Stars : 1043 Issues : 101 Forks : 102 https://github.com/R0Y00/Xbox2Windows</description>
+      <enclosure url="https://cdn4.telesco.pe/file/QYEoixImrbYva__Dvsf4AxAywlxDFYPu2pMhbquM7ck74ejyE2Wt0e3yaPmOWMB6Dftm6rWKML-L1UHc5Kf6M-uRQHsZ6urhsNJsofG925Yy6vrC8PRHkSo6Rj8W4sz219313mxD0y1ozbavX8GxMgy_co6TKcBIUxJy7edXyNmGO7jVOCBiEH3wMXl125qmwVGjBW7Q2HHA-S5VQ__KeXDEURrf4hE4FMGwE8-l-5x4YesfPFzai8f1bdhAkUHBptotSgrNQ1CJDuH71npJi8yJhaTpUjaJLjbaWkmVIKGhNNnuci4yRPKGa8nSKoH5qgA_fZ7x-zvH24LBqaljQg.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>hatsunemiku-ai/google-one-tools Language : Python Stars : 1159 Issues : 2 Forks …</title>
+      <link>https://t.me/github_repos/14057</link>
+      <guid isPermaLink="true">https://t.me/github_repos/14057</guid>
+      <pubDate>Sun, 22 Nov 2026 17:00:03 GMT</pubDate>
+      <description>hatsunemiku-ai/google-one-tools Language : Python Stars : 1159 Issues : 2 Forks : 541 https://github.com/hatsunemiku-ai/google-one-tools</description>
+      <enclosure url="https://cdn4.telesco.pe/file/gCLJzF40_kklEnIhFfJeWeAa4HRnGF9RvP5Afdve7o3AbSwgOOvqD_ZzLzvzorzfwL3GcwzQpiLZSPRbpdXwopiZsms51h2EJPlgeypiXsdqO2YEiIIRlYjKoCOzYiNnZmCFk9o0vAlPC3fj5cEAooC9JYvw1dClFPololven27LBXbouzRGvXdIf402y0DOU-eOWt4Aba6xhOsFFa5LGHtgkDUz4N_oL_Am6s3OA6urZCWqj4cYXtdt0b_2NITpGJdvlNGsA6aVAFLruVQ9COUlYMaXnbUwwM26djTAzESiQBp_c7dh9_RpTl0Hygu5ZfF2XEhwXSjOn0s0ffhaIQ.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>ItsNotRexed/Leonida Leonida Is A Native PC Recompilation Of The Xbox Version Of …</title>
+      <link>https://t.me/github_repos/14056</link>
+      <guid isPermaLink="true">https://t.me/github_repos/14056</guid>
+      <pubDate>Sun, 22 Nov 2026 11:00:03 GMT</pubDate>
+      <description>ItsNotRexed/Leonida Leonida Is A Native PC Recompilation Of The Xbox Version Of Grand Theft Auto 6 Language : Python Stars : 7929 Issues : 191 Forks : 629 https://github.com/ItsNotRexed/Leonida</description>
+      <enclosure url="https://cdn4.telesco.pe/file/ZlilFzc0rgsB0U3C7YMJ0fL3X55ttlsoefJd3ql2QSdUKgNkiwSRMC8geVoiXwZS_n2qM5MX36rPVmX9XJhehN0UZuOBdV2s57_ZmFPozmnEwKWYmaWig-DGHdUR_3rwB2VYrctsBF6gzAFjaS_qfr9s7AAN98wMTFS_Q0c-AUWSYTWKee2arX2s12UaaBwAXmwWLXKrUtJKDHVTEYSugdBrEwPxLim-aPAiuyQXOjSA_SPNPgupZ-g1zgQ-qZopRoO_JNQF2OOgdFDUy6-c9mwq9H7ZUAyombYlGTHvPsxr3x65l9MMchFb-J3eSDDl-Rig_Sy8Pis8VSMckdp8Uw.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>0xkaka/homeport Language : HTML Stars : 605 Issues : 0 Forks : 105 https://githu…</title>
+      <link>https://t.me/github_repos/14055</link>
+      <guid isPermaLink="true">https://t.me/github_repos/14055</guid>
+      <pubDate>Sun, 22 Nov 2026 05:00:03 GMT</pubDate>
+      <description>0xkaka/homeport Language : HTML Stars : 605 Issues : 0 Forks : 105 https://github.com/0xkaka/homeport</description>
+    </item>
+    <item>
+      <title>boringmarketer/boring-marketing-skills 32 free marketing skills for your AI agen…</title>
+      <link>https://t.me/github_repos/14054</link>
+      <guid isPermaLink="true">https://t.me/github_repos/14054</guid>
+      <pubDate>Sat, 21 Nov 2026 23:00:03 GMT</pubDate>
+      <description>boringmarketer/boring-marketing-skills 32 free marketing skills for your AI agent: research, positioning, copy, pages, SEO, AI search, ads, email and content, plus a deep local-business pack. MIT. Language : Python #agent_skills #ai_agents #claude_code #codex #copywriting #local_seo #marketing #seo Stars : 755 Issues : 1 Forks : 275 https://github.com/boringmarketer/boring-marketing-skills</description>
+      <enclosure url="https://cdn4.telesco.pe/file/RzMXrgXyqv8wlHWq1RiedHucmnRwzG2bpIk35wcIahtHxB8ciCvfiKQuNrC5j4pXeu9WdIomw7a_Vz2oy9UbNZ4il9CLmYDPAC1Yv1Pd4iWBIxMUzx6ahQzd_vtBiCKEoJGHmMz8qXCSuf-pKZfEeh4Eao8kOk4iEiur1eBtfd-f_ryzdeFqVYTfnfqVApr1pBkENzvsFZaco-rnmZk3aChW4dVp-_7-hen2ccRRXRDMDLPWAUOX_1BJOTKlIEurEWbsjoNOQe62R-OCRwFLjDFtcTOWRLgUYzCxcOIOKfRsp291pBU8cTmLxkn87zB-dTp16mjhSHPqIsV9fkz-Vg.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>Lemxy/WinRust Windows shell replacement in Rust: taskbar, file manager, NTFS sea…</title>
+      <link>https://t.me/github_repos/14053</link>
+      <guid isPermaLink="true">https://t.me/github_repos/14053</guid>
+      <pubDate>Sat, 21 Nov 2026 17:00:03 GMT</pubDate>
+      <description>Lemxy/WinRust Windows shell replacement in Rust: taskbar, file manager, NTFS search, task manager, disk cleaner. One installer exe. Language : Rust Stars : 807 Issues : 31 Forks : 40 https://github.com/Lemxy/WinRust</description>
+      <enclosure url="https://cdn4.telesco.pe/file/XIbmRGwdz0QPWUmlXF9NVHjNYyWD-Fa5Cl-_IS9Q2W8wJV3sW6nryWgMpI_mdGHfGQHkUuVSsWxV61AHhsu7fPl7Ma1AtvpuwSt4h_TesWHQHrk0TEeqF0IcvV5jcwDyOcwmHAFxX5oG_jDdRAmbgpjr51vcPZZs-Xc6VaFf8Q12W_mbeX3nmUWzL_oXTgPOqMteI1pEuu5gvBQdPoSSsQuNicCYYJFZsd87mDSg_hS-nUXo-iMBzWyGwsfKfbVXMJUUSxbjNCRStfjl223JeisxsIfq6tdu4SK36VQpymdMBIe80FpN_2hAN0qBxRINNCmyKkO5mby2qf80ZJQg6A.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>iamajmeena/neonclipping Paste a link, get captioned 9:16 clips in ~2 min. Free, …</title>
+      <link>https://t.me/github_repos/14052</link>
+      <guid isPermaLink="true">https://t.me/github_repos/14052</guid>
+      <pubDate>Sat, 21 Nov 2026 11:00:03 GMT</pubDate>
+      <description>iamajmeena/neonclipping Paste a link, get captioned 9:16 clips in ~2 min. Free, local, open-source clipping engine (audio-first, YouTube captions, local LLM). Language : Python #clipping #ffmpeg #shorts #video #whisper #yt_dlp Stars : 1390 Issues : 17 Forks : 66 https://github.com/iamajmeena/neonclipping</description>
+      <enclosure url="https://cdn4.telesco.pe/file/Sz4SXwEh_yu7di0EQjadqAv7sxLiTFGA_KacpqdjgUdWp7ybdhFsWQNmQPrPnsiX_zwn_9QGI3nAmZLDd4qqCguE2x2wiRtiiPOZ2FLqfIVU8u9t17PrtyUOb8G4nzocWx9eBSF-oZSgVn7eG1pXsLHOMpeGGWRJkY8N8EMCAu0zLKIhttXU0hlNi7S6IoexUjOlv0tilbXrIl-RQmBpoKYRmOkOttnXZ-GM4WbwvUk_yvEX9ki8xlHU2OjMZwZ5wyFVIQN1PCL5ba4KyT_JtscMs-2hTsEnegPsekEZEVK4rtY7qFvznWJiZuZQmBvKtjsGm00zOBib3RUYNpyAcQ.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>siliconjungle/shapeshift-labs-ink-studio Sculpting, animation and simulation too…</title>
+      <link>https://t.me/github_repos/14051</link>
+      <guid isPermaLink="true">https://t.me/github_repos/14051</guid>
+      <pubDate>Sat, 21 Nov 2026 05:00:04 GMT</pubDate>
+      <description>siliconjungle/shapeshift-labs-ink-studio Sculpting, animation and simulation toolkit for pixel-art Gaussian splats Language : JavaScript Stars : 735 Issues : 7 Forks : 56 https://github.com/siliconjungle/shapeshift-labs-ink-studio</description>
+      <enclosure url="https://cdn4.telesco.pe/file/cED8vSnLVpeRd2DWuI5lsd4sOwAS-VUvSncb9X_Qy-B5fdqme7gTC7UI6goLL-yI4dGlbpf322vTIyus89vaW_VNN_CiISG9Z-wIDWbjekavv6v1Isx7m94CObBKsyCH_to0-ecEzRB0IpW6MU3okO3k0zBNdFacj-ahlnrYRmb5o_gsiV3jMyVm89IAmjVagbBHNXXO4H14JkSg7HTgjUXTbFMib1Sq6a8b7kNol4nRzKekFe7gl--XQ6MbEmYnWZ_KBkDjGFjOonvrQt1PqI7j1WSqqi6vB2igwDdKZgPOJYXWkU-UG3fYma0yjoE7O-UzG24kTEw2hf36XWzo5w.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>mit-han-lab/pear Training Reasoning Models in Simulation to Natively Use Real Ro…</title>
+      <link>https://t.me/github_repos/14050</link>
+      <guid isPermaLink="true">https://t.me/github_repos/14050</guid>
+      <pubDate>Fri, 20 Nov 2026 23:00:03 GMT</pubDate>
+      <description>mit-han-lab/pear Training Reasoning Models in Simulation to Natively Use Real Robots Language : Python Stars : 739 Issues : 5 Forks : 48 https://github.com/mit-han-lab/pear</description>
+    </item>
+    <item>
+      <title>yetanotherbrowser/yab Yab, yet another browser: a fast native macOS browser with…</title>
+      <link>https://t.me/github_repos/14049</link>
+      <guid isPermaLink="true">https://t.me/github_repos/14049</guid>
+      <pubDate>Fri, 20 Nov 2026 17:00:03 GMT</pubDate>
+      <description>yetanotherbrowser/yab Yab, yet another browser: a fast native macOS browser with an iPhone and Android companion Language : Swift Stars : 741 Issues : 963 Forks : 78 https://github.com/yetanotherbrowser/yab</description>
+      <enclosure url="https://cdn4.telesco.pe/file/mBt1pGzr4WW90iscO3R0u9PFLFesNmlWll4n0IFwBB4cu3aL6eZCJ3jRg7nFd1o2wUjw70kQQZZjQHEhQ3vdFBSWZyd2XYJzTeC8QrE5yT6jImcHtDcO5p-ytWaSLfS9bxnSS7lvzdjuS8CJYPGuXv-wmGyAYHJzwCmAplTyYoiSbpBxlU16ERE7Tj6cYL7sH8ki-i7i8kzF3qehPJW8foet7f3phAac84pL1qbPXpqo5h1_qm9umaEYUI2cF_VBy8d-yxF8MLLrczWteenvzPZvw0L9LIn2sk7l03jq38BNRLCxcVhy1IMhtPlC1kr65AA5zBz8522kQ_apszrsnQ.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>Bodila51/gtavi-claudecode Claude Code plugin that turns GTA 6 streams into paid …</title>
+      <link>https://t.me/github_repos/14048</link>
+      <guid isPermaLink="true">https://t.me/github_repos/14048</guid>
+      <pubDate>Fri, 20 Nov 2026 11:00:03 GMT</pubDate>
+      <description>Bodila51/gtavi-claudecode Claude Code plugin that turns GTA 6 streams into paid vertical clips: live campaigns, trending videos, best moments, 9:16 cuts with hooks, captions and credits. Language : Python #agent_skills #claude_code #clipping #gta6 #tiktok #youtube_shorts Stars : 1049 Issues : 3 Forks : 235 https://github.com/Bodila51/gtavi-claudecode</description>
+      <enclosure url="https://cdn4.telesco.pe/file/KPxVNjcl82Lj2OFf-TZQFZEmlQzeS6Ix43KYmStAhb4SqalynZWwX6Jb_Vx1iSDXScpFU7zwV_FkbXmrEFhgfzCYubbnsPuHfwZHtZ3EVsB95_NVENthZEmbcgOGuP5RXrBBXte_03i-mSGY2RZRLKMkWJWRDjKIva3VRAUyHk85wClXZ9PLNsYNh4SYF-z2lql0ydhR6TiHrNT0329ppHij08d9wGir1bhavUeEZ6R32WMyB0cRiMU5_TpSpU9CVV8I6E4el4rOATpGsaak3MhMvfEyPZCLvzoPsYJH4R1K9OMt0nAk89uK8MmsyxF6PfXhGiudEFhbodgz5bkSCQ.jpg" type="image/jpeg" length="0"/>
+    </item>
+  </channel>
+</rss>

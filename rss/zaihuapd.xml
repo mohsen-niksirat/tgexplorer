@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>在花🎗️科技圈 (@zaihuapd) — Telegram Explorer</title>
+    <link>https://mohsen-niksirat.github.io/tgexplorer/?channel=zaihuapd</link>
+    <atom:link href="https://mohsen-niksirat.github.io/tgexplorer/rss/zaihuapd.xml" rel="self" type="application/rss+xml"/>
+    <description>分享 科技、AI、数码、互联网及前沿资讯，分享见闻与实用内容。 📌 群规 • 文明交流，理性讨论 • 禁止刷屏、广告推广、恶意引流 • 禁止黑产、色情、赌博等违规内容 • 禁止宗教政治、键政、人身攻击及恶意争吵 • 违规内容将被删除，严重者移出 📮 科技圈投稿： @zaihuabot 🛠 侵权｜申诉｜客服： @BiuAsstBot 📡 备用频道： @zaihuatg 🤝 广告合作： @zaihua_ad_bot</description>
+    <language>zh</language>
+    <item>
+      <title>开源 nospeaker：触控板振动念出文字 开发者 Cody Collier 开源工具 nospeaker，用 MacBook 触控板下的触觉马达发声念出文字…</title>
+      <link>https://t.me/zaihuapd/45312</link>
+      <guid isPermaLink="true">https://t.me/zaihuapd/45312</guid>
+      <pubDate>Mon, 23 Nov 2026 07:16:04 GMT</pubDate>
+      <description>开源 nospeaker：触控板振动念出文字 开发者 Cody Collier 开源工具 nospeaker，用 MacBook 触控板下的触觉马达发声念出文字：驱动频率推到每秒 4000 次，玻璃振动快到人耳可闻。它用 macOS 语音合成读入文字，每 10 毫秒取两个共振峰，连同响度、音高重放，听感偏机器人；实测 100 Hz 至 4 kHz 有声，1 kHz 附近最清晰。 工具只念文字，放不了音乐和视频，且绕开苹果公开触觉接口、调用私有框架 MultitouchSupport。需 Force Touch 触控板，作者称只在 M5 Max 的 MacBook Pro 上跑通。 快科技 🌸 科技圈 · 茶馆 · 投稿</description>
+    </item>
+    <item>
+      <title>🍏 苹果 iPhone Duo 国内部分区域破发 10 月 25 日消息，苹果 iPhone Duo 在国内部分区域出现破发，拼多多百亿补贴频道已上架该机（仅…</title>
+      <link>https://t.me/zaihuapd/45311</link>
+      <guid isPermaLink="true">https://t.me/zaihuapd/45311</guid>
+      <pubDate>Mon, 23 Nov 2026 06:00:00 GMT</pubDate>
+      <description>🍏 苹果 iPhone Duo 国内部分区域破发 10 月 25 日消息，苹果 iPhone Duo 在国内部分区域出现破发，拼多多百亿补贴频道已上架该机（仅部分地区可见），比上市价便宜约 200-300 元。该机首发日曾被加价 1500-2000 元，发售两天后即跌破原价。 目前 Apple Store 多家门店仍无现货，官网选择送货需等到 2027 年 1 月。IDC 预计该机首年出货量将超过 1000 万部。 IT之家 🌸 科技圈· 茶馆 · 投稿</description>
+    </item>
+    <item>
+      <title>🤖 Anthropic IPO 后，AI 投资疑虑升温，亚洲股市普遍下跌 Anthropic 盘后跌逾 5%、跌破 92 美元。亚洲股市下跌，MSCI 亚太指…</title>
+      <link>https://t.me/zaihuapd/45310</link>
+      <guid isPermaLink="true">https://t.me/zaihuapd/45310</guid>
+      <pubDate>Mon, 23 Nov 2026 05:15:01 GMT</pubDate>
+      <description>🤖 Anthropic IPO 后，AI 投资疑虑升温，亚洲股市普遍下跌 Anthropic 盘后跌逾 5%、跌破 92 美元。亚洲股市下跌，MSCI 亚太指数跌 1.7%，连续第七个交易日走低；MSCI 全球指数可能录得 2023 年 9 月以来最长连跌。 市场对 AI 交易的疑虑加剧，投资者担心巨额投入能否带来相应回报。今天早上，东京电子跌 7.19%、瑞萨电子跌 6.71%；韩国 SK 海力士跌 6%、三星电子跌 4.7%，Kospi 指数跌 3.66%。软银累计向 OpenAI 投资 646 亿美元，其股价…</description>
+    </item>
+    <item>
+      <title>Z.ai 发布 GLM-5.3-Flash，18B 激活参数价格仅上代十分之一，限时价格低至每百万 Tokens 输入 0.075 美元 Z.ai 发布 GLM…</title>
+      <link>https://t.me/zaihuapd/45309</link>
+      <guid isPermaLink="true">https://t.me/zaihuapd/45309</guid>
+      <pubDate>Mon, 23 Nov 2026 04:47:25 GMT</pubDate>
+      <description>Z.ai 发布 GLM-5.3-Flash，18B 激活参数价格仅上代十分之一，限时价格低至每百万 Tokens 输入 0.075 美元 Z.ai 发布 GLM-5 系列首个原生多模态模型 GLM-5.3-Flash，总参数 320B、激活参数仅 18B。其在多项编程和智能体基准上超过 GLM-5.2，价格降至约十分之一，并接近 Claude Opus 4.8。限时优惠期间，API 输入价格为每百万 Tokens 0.075 美元，缓存输入为 0.015 美元，输出为 0.25 美元，缓存存储暂时免费；原价分别为…</description>
+    </item>
+    <item>
+      <title>🤖 豆包刘星反驳「国内超一半算力在造爽剧」：字节仅约 10% 算力用于视频生成 10 月 19 日，豆包公关负责人刘星回应「国内超一半算力在造爽剧」的说法，称…</title>
+      <link>https://t.me/zaihuapd/45308</link>
+      <guid isPermaLink="true">https://t.me/zaihuapd/45308</guid>
+      <pubDate>Mon, 23 Nov 2026 04:34:57 GMT</pubDate>
+      <description>🤖 豆包刘星反驳「国内超一半算力在造爽剧」：字节仅约 10% 算力用于视频生成 10 月 19 日，豆包公关负责人刘星回应「国内超一半算力在造爽剧」的说法，称该算力数据有些不靠谱；就字节而言，公司总算力中只有约 10% 用于视频生成模型的训练和推理。 此前中文在线在投资者关系活动记录表中披露，国内 AI Token 消耗 55% 用于短剧和视频生成，24% 用于电商广告，真正投入研发的只有 15%。 IT之家 🌸 科技圈· 茶馆 · 投稿</description>
+    </item>
+    <item>
+      <title>🚘 特斯拉开始推送 FSD v15 特斯拉今日在海外推出FSD v15。本次更新对安全关键场景处理能力提升至 25 倍，并带来“Tesla Reality V…</title>
+      <link>https://t.me/zaihuapd/45307</link>
+      <guid isPermaLink="true">https://t.me/zaihuapd/45307</guid>
+      <pubDate>Mon, 23 Nov 2026 03:33:47 GMT</pubDate>
+      <description>🚘 特斯拉开始推送 FSD v15 特斯拉今日在海外推出FSD v15。本次更新对安全关键场景处理能力提升至 25 倍，并带来“Tesla Reality View”可视化界面，可在车机屏幕叠加摄像头画面与FSD行驶规划，支持全屏、地图或分屏视图及安静模式。 导航可将转弯等信息叠加显示，转向灯提示音更轻柔并逐渐减弱。更新还优化坑洼、碎片等路况行驶体验及学校、恶劣天气下的速度控制。 Tesla(@Tesla) 🌸 科技圈· 茶馆 · 投稿</description>
+    </item>
+    <item>
+      <title>微软新服务器系统默认跑不了 32 位老软件，需要可手动装回 微软在 Ignite 2026 上表示，Windows Server 2028 将默认不再包含 Wo…</title>
+      <link>https://t.me/zaihuapd/45306</link>
+      <guid isPermaLink="true">https://t.me/zaihuapd/45306</guid>
+      <pubDate>Mon, 23 Nov 2026 03:03:53 GMT</pubDate>
+      <description>微软新服务器系统默认跑不了 32 位老软件，需要可手动装回 微软在 Ignite 2026 上表示，Windows Server 2028 将默认不再包含 WoW64 兼容子系统，因此开箱即无法运行 32 位应用。该版本计划 2027 年秋季与 Windows 11 27H2 一同发布。 需要时可通过按需功能（FoD）把 WoW64 装回，Server Core 上一般用 PowerShell 或 DISM 添加。微软称此举目的是减少攻击面、阻止 32 位恶意软件。Windows 11 目前仍保留 WoW64，微软未公布移除计划。 Windows Latest 🌸 科技圈 · 茶馆 · 投稿</description>
+    </item>
+    <item>
+      <title>字节跳动与红杉领投机器人公司1.4亿美元融资 中国具身智能初创企业 X Square Robot 完成 10 亿元人民币（约合 1.4 亿美元）的 A++ 轮融…</title>
+      <link>https://t.me/zaihuapd/45305</link>
+      <guid isPermaLink="true">https://t.me/zaihuapd/45305</guid>
+      <pubDate>Mon, 23 Nov 2026 02:02:47 GMT</pubDate>
+      <description>字节跳动与红杉领投机器人公司1.4亿美元融资 中国具身智能初创企业 X Square Robot 完成 10 亿元人民币（约合 1.4 亿美元）的 A++ 轮融资，本轮融资由字节跳动与红杉中国联合领投。 据悉，该公司已成为具身智能领域目前唯一一家同时获得字节跳动、美团和阿里巴巴集团三大中国互联网巨头支持的初创企业。 量子位 🍀 在花频道 🍵 茶馆聊天 📮 投稿</description>
+    </item>
+    <item>
+      <title>谷歌搭建模拟互联网测试 Chrome AI 代理 谷歌为 Chrome 的 AI 代理搭建了一个名为 Mirror Dimension 的模拟互联网，在隔离环境…</title>
+      <link>https://t.me/zaihuapd/45304</link>
+      <guid isPermaLink="true">https://t.me/zaihuapd/45304</guid>
+      <pubDate>Mon, 23 Nov 2026 01:30:59 GMT</pubDate>
+      <description>谷歌搭建模拟互联网测试 Chrome AI 代理 谷歌为 Chrome 的 AI 代理搭建了一个名为 Mirror Dimension 的模拟互联网，在隔离环境中测试它打开网站、搜索浏览、登录、加购和完成任务等操作。蓝点网称其中包含数千个模拟网站，每名工程师单独隔离测试，每天运行超过 1000 个测试案例，重点防御恶意网页的提示词注入等攻击。 蓝点网 🌸 科技圈 · 茶馆 · 投稿</description>
+    </item>
+    <item>
+      <title>第62届金马奖揭晓：张震再夺影帝，范冰冰封后，《大濛》获最佳剧情片 第62届金马奖于11月22日晚在台北流行音乐中心举行。台湾演员张震凭借《幸福之路》再次获得最…</title>
+      <link>https://t.me/zaihuapd/45303</link>
+      <guid isPermaLink="true">https://t.me/zaihuapd/45303</guid>
+      <pubDate>Sun, 22 Nov 2026 16:39:45 GMT</pubDate>
+      <description>第62届金马奖揭晓：张震再夺影帝，范冰冰封后，《大濛》获最佳剧情片 第62届金马奖于11月22日晚在台北流行音乐中心举行。台湾演员张震凭借《幸福之路》再次获得最佳男主角；中国演员范冰冰凭借马来西亚电影《地母》拿下最佳女主角。最佳男配角由曾敬骅凭《我家的事》获得，陈雪甄则凭《人生海海》夺得最佳女配角。 本届最大赢家是《大濛》——不仅斩获最佳剧情片，还一举拿下最佳造型设计、美术设计、原著剧本等多项大奖。影片由陈玉勋执导，讲述白色恐怖时期，一名嘉义少女北上为家人取回兄长遗体的故事。此外，“国民阿嬷”陈淑芳获…</description>
+    </item>
+    <item>
+      <title>摩尔线程产品经理：庐山 GPU 显存 64 GB 据 VideoCardz 转述，摩尔线程 MTT S80 产品经理称，下一代庐山游戏 GPU 的显存将超过目前…</title>
+      <link>https://t.me/zaihuapd/45302</link>
+      <guid isPermaLink="true">https://t.me/zaihuapd/45302</guid>
+      <pubDate>Sun, 22 Nov 2026 15:11:55 GMT</pubDate>
+      <description>摩尔线程产品经理：庐山 GPU 显存 64 GB 据 VideoCardz 转述，摩尔线程 MTT S80 产品经理称，下一代庐山游戏 GPU 的显存将超过目前任何在售消费级显卡；按其此前&quot;4 倍于 S80 的 16 GB&quot;的说法推算为 64 GB，是 RTX 5090 的 32 GB 的两倍。该表态并非公司官方发布。 庐山沿用 MDC 2025 披露的目标：相对 S80 的 AAA 游戏性能 15 倍、光追 50 倍、AI 算力 64 倍。公司称将在 12 月 29—30 日于北京举行的 MDC 2026 上由 CEO 张建中发布新旗舰产品。 Tom&apos;s Hardware 🌸 科技圈 · 茶馆 · 投稿</description>
+    </item>
+    <item>
+      <title>网易 UU 远程将于 12 月推出增值服务 网易 UU 远程计划于 2026 年 12 月 1 日推出增值服务，基础远程控制继续免费，且不限次数、不限时、不排队…</title>
+      <link>https://t.me/zaihuapd/45298</link>
+      <guid isPermaLink="true">https://t.me/zaihuapd/45298</guid>
+      <pubDate>Sun, 22 Nov 2026 14:37:12 GMT</pubDate>
+      <description>网易 UU 远程将于 12 月推出增值服务 网易 UU 远程计划于 2026 年 12 月 1 日推出增值服务，基础远程控制继续免费，且不限次数、不限时、不排队、无广告。此前注册成功的用户可领取年卡五折优惠；页面显示 VIP 年费为 238 元，原价 288 元。 HarmonyOS 和 Linux 客户端即将上线，Beta 期间全部付费功能免费使用。 网易 UU 远程 🌸 科技圈· 茶馆 · 投稿</description>
+    </item>
+    <item>
+      <title>超级厄尔尼诺海温破纪录，粮食援助承压 据伯克利地球气候学家 Zeke Hausfather，截至 10 月，用于衡量厄尔尼诺强度的中热带太平洋升温已达 3.5℃…</title>
+      <link>https://t.me/zaihuapd/45297</link>
+      <guid isPermaLink="true">https://t.me/zaihuapd/45297</guid>
+      <pubDate>Sun, 22 Nov 2026 14:09:55 GMT</pubDate>
+      <description>超级厄尔尼诺海温破纪录，粮食援助承压 据伯克利地球气候学家 Zeke Hausfather，截至 10 月，用于衡量厄尔尼诺强度的中热带太平洋升温已达 3.5℃，打破此前约 2.75℃ 的纪录，并预计在初冬升至约 4℃ 的峰值。 世界粮食计划署 8 月警告，本轮厄尔尼诺可能在 2027 年底前把额外 4900 万人推入急性粮食不安全，使总数达到 2.74 亿。全球援助资金 2025 年较 2022 年峰值下降 30%，索马里遭遇类似旱情时，该机构能覆盖的人数从 1000 万降至不足 100 万。 WIRED 🌸 科技圈 · 茶馆 · 投稿</description>
+    </item>
+    <item>
+      <title>巴菲特批评当下股市：人人热衷投机，很难找到有价值票 巴菲特近日接受 CNBC 采访时批评当前股市环境，人人热衷于投机，而不是基于长期的价值投资。巴菲特表示，如今…</title>
+      <link>https://t.me/zaihuapd/45296</link>
+      <guid isPermaLink="true">https://t.me/zaihuapd/45296</guid>
+      <pubDate>Sun, 22 Nov 2026 13:24:55 GMT</pubDate>
+      <description>巴菲特批评当下股市：人人热衷投机，很难找到有价值票 巴菲特近日接受 CNBC 采访时批评当前股市环境，人人热衷于投机，而不是基于长期的价值投资。巴菲特表示，如今最有意义的投资机会越来越少，需要耐心和纪律，有时几年才能等到一个好机会。 今年 5 月，巴菲特曾将股市比作&quot;附带赌场的教堂&quot;，直指一日期权交易的激增就是赌博。今年以来股市虽屡创新高，但怀疑者认为 AI 相关股票投机过度，期权和杠杆 ETF 更是火上浇油，美光和 SpaceX 等个股也吸引大量散户涌入。巴菲特感叹：&quot;人类太爱赌博了，培养赌徒比培养投资者更赚钱。&quot;…</description>
+    </item>
+    <item>
+      <title>腾讯 AI 语音输入工具 Chatterfly 开启限时内测 腾讯推出 AI 输入工具 Chatterfly，主打“不必想好，开口就成稿”。目前产品正限时内测，…</title>
+      <link>https://t.me/zaihuapd/45295</link>
+      <guid isPermaLink="true">https://t.me/zaihuapd/45295</guid>
+      <pubDate>Sun, 22 Nov 2026 12:36:30 GMT</pubDate>
+      <description>腾讯 AI 语音输入工具 Chatterfly 开启限时内测 腾讯推出 AI 输入工具 Chatterfly，主打“不必想好，开口就成稿”。目前产品正限时内测，已开放 Windows、macOS 和 Android 版下载，iOS 版即将发布。 它不只是语音转文字，还能理解上下文和场景，把零散口语整理成流畅表达，甚至直接执行任务。即便在轻声、嘈杂或弱网环境下也能准确识别，并支持随时唤起和积累词库。 Chatterfly 🌸 科技圈 · 茶馆 · 投稿</description>
+    </item>
+    <item>
+      <title>Phison 太空 SSD 将携 488 TB 入轨 Phison 发布面向航天器、卫星和在轨数据中心的 Pascari Space SSD 系列，并确认将用于…</title>
+      <link>https://t.me/zaihuapd/45294</link>
+      <guid isPermaLink="true">https://t.me/zaihuapd/45294</guid>
+      <pubDate>Sun, 22 Nov 2026 10:31:38 GMT</pubDate>
+      <description>Phison 太空 SSD 将携 488 TB 入轨 Phison 发布面向航天器、卫星和在轨数据中心的 Pascari Space SSD 系列，并确认将用于 Lonestar Data Holdings 的轨道数据中心 StarVault-001。后者计划 2027 年上半年发射，搭载 488 TB Phison SSD，进入低地球轨道后可用容量约 370 TB，为整机合计容量。 系列含 Flight Critical、Main Storage 与 Orbital Data Center 三类，最高 128 TB；Phison 称在部分型号用 pSLC 可将写入寿命提高至多 60 倍。产品已上市。 VideoCardz 🌸 科技圈 · 茶馆 · 投稿</description>
+    </item>
+    <item>
+      <title>前三季度国内手机份额：华为 20.25% 居首 博主 @RD 观测 11 月 22 日发布的数据显示，2026 年前三季度国内手机市场（销量口径）整体下跌约 9…</title>
+      <link>https://t.me/zaihuapd/45293</link>
+      <guid isPermaLink="true">https://t.me/zaihuapd/45293</guid>
+      <pubDate>Sun, 22 Nov 2026 08:22:21 GMT</pubDate>
+      <description>前三季度国内手机份额：华为 20.25% 居首 博主 @RD 观测 11 月 22 日发布的数据显示，2026 年前三季度国内手机市场（销量口径）整体下跌约 9.2%，头部集中趋势加剧，仅华为与苹果两家份额实现正增长。 华为以 20.25% 位列第一，较去年同期 16.33% 提升 3.92 个百分点；苹果以 17.44% 位居第二，提升 3.23 个百分点，两家合计占近 37.7%。OPPO、vivo、小米与荣耀分列三至六位，份额均同比下滑；其他中小品牌合计份额由 6.14% 缩至 4.30%。 新浪科技 🌸 科技圈 · 茶馆 · 投稿</description>
+    </item>
+    <item>
+      <title>美 FCC 拟禁止中国三大运营商直接获取美国号码资源 美国联邦通信委员会 10 月 29 日表示，将于 11 月 19 日表决一项提案，以国家安全、防范诈骗骚扰…</title>
+      <link>https://t.me/zaihuapd/45292</link>
+      <guid isPermaLink="true">https://t.me/zaihuapd/45292</guid>
+      <pubDate>Sun, 22 Nov 2026 06:44:40 GMT</pubDate>
+      <description>美 FCC 拟禁止中国三大运营商直接获取美国号码资源 美国联邦通信委员会 10 月 29 日表示，将于 11 月 19 日表决一项提案，以国家安全、防范诈骗骚扰电话为由，禁止中国移动、中国电信、中国联通及其他相关 VoIP 服务商直接获取美国电话号码资源。该提案仅针对美国电话号码资源的直接获取权限，暂不影响现有普通国际电话的拨打与接听。 FCC 另拟禁止使用华为、中兴等风险清单设备的服务商直接获取美国电话号码资源。目前三家运营商相关在美实体此前已被拒绝或撤销在美国际电信业务授权。 FCC | 路透社…</description>
+    </item>
+    <item>
+      <title>研究：巨鹰或猎杀成年狒狒，人类祖先或曾遭捕食 圣安德鲁斯大学 Catherine Hobaiter 团队在乍得 Ennedi 高原发现，全球最大鹰种之一的黑雕（…</title>
+      <link>https://t.me/zaihuapd/45291</link>
+      <guid isPermaLink="true">https://t.me/zaihuapd/45291</guid>
+      <pubDate>Sun, 22 Nov 2026 05:11:56 GMT</pubDate>
+      <description>研究：巨鹰或猎杀成年狒狒，人类祖先或曾遭捕食 圣安德鲁斯大学 Catherine Hobaiter 团队在乍得 Ennedi 高原发现，全球最大鹰种之一的黑雕（Verreaux&apos;s eagle）可能在猎杀成年橄榄狒狒，体重上限达 57 磅（约 26 公斤）：崖壁上的狒狒残骸头骨有爪刺穿孔、肩胛骨有刮痕，狒狒见鹰靠近也会迅速躲避。 此前学界认为，人类祖先自约 250 万年前的「汤恩幼儿」之后已大到不再成为猛禽猎物，也没有猛禽捕食超过 28 磅灵长类的记录。研究者称无法完全排除食腐可能，但穿孔的严重程度更倾向「致命抓握」；团队还援引鹰以低空持续抓握猎杀羚羊等有蹄类的记述，说明猛禽可杀死数倍于自身体重的猎物。 404 Media 🌸 科技圈 · 茶馆 · 投稿</description>
+    </item>
+    <item>
+      <title>美商务部将定稿规则，封堵中国 AI 公司远程用芯，管制扩展至新加坡等东南亚国家 美国商务部正敲定一项规则，阻止中国 AI 公司通过境外数据中心远程使用先进 AI…</title>
+      <link>https://t.me/zaihuapd/45289</link>
+      <guid isPermaLink="true">https://t.me/zaihuapd/45289</guid>
+      <pubDate>Sun, 22 Nov 2026 04:34:32 GMT</pubDate>
+      <description>美商务部将定稿规则，封堵中国 AI 公司远程用芯，管制扩展至新加坡等东南亚国家 美国商务部正敲定一项规则，阻止中国 AI 公司通过境外数据中心远程使用先进 AI 芯片，最早可能本月公布。管制将从现有半导体出口限制扩展至马来西亚、新加坡、泰国等七个国家，以封堵远程访问和芯片走私；商务部正与其他政府机构磋商后定稿。 白宫此前已要求国会立法，要求商务部制定这一规则。英伟达曾游说反对封堵这一远程访问缺口，称美国 AI 基础设施需在全球取胜。 The Information | The Defiant 🌸 科技圈·…</description>
+    </item>
+  </channel>
+</rss>

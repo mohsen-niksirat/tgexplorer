@@ -48,7 +48,7 @@ jobs:
             node scripts/generate-share-pages.js
           fi
 
-          git add channels.js posts.js posts archive share
+          git add channels.js posts.js posts archive share rss summaries.json
           if git diff --cached --quiet; then
             echo "No data changes — nothing to push"
             exit 0
@@ -63,7 +63,7 @@ jobs:
             git commit -m "chore: update channel posts $(date -u +%Y-%m-%dT%H:%M:%SZ)"
           fi
 
-          bash scripts/push-branch.sh main channels.js posts.js posts archive share
+          bash scripts/push-branch.sh main channels.js posts.js posts archive share rss summaries.json
 
       - name: Trigger bot new-post notifications
         continue-on-error: true

@@ -150,7 +150,11 @@
     "range_7d": "最近 7 天",
     "sort_newest": "最新",
     "sort_views": "最多浏览",
-    "views_unit": "次浏览"
+    "views_unit": "次浏览",
+    "rss_feed": "RSS 订阅",
+    "find_similar": "查找相似频道",
+    "channel_digest": "最新动态摘要",
+    "copy_list_link": "复制列表链接"
   },
   "ui": {
     "all": "全部",

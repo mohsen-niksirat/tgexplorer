@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Nat Geo Travel (@natgeotravel) — Telegram Explorer</title>
+    <link>https://mohsen-niksirat.github.io/tgexplorer/?channel=natgeotravel</link>
+    <atom:link href="https://mohsen-niksirat.github.io/tgexplorer/rss/natgeotravel.xml" rel="self" type="application/rss+xml"/>
+    <description>Travel photography and guides</description>
+    <language>en</language>
+
+  </channel>
+</rss>

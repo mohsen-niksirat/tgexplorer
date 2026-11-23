@@ -29,13 +29,45 @@ export async function isUserSubscribed(userId, username) {
   return Boolean(row);
 }
 
-export async function subscribeUser(userId, username) {
+export function normalizeKeywords(raw) {
+  const list = String(raw || '')
+    .split(/[,،]+/)
+    .map(k => k.trim())
+    .filter(Boolean)
+    .slice(0, 8);
+  return list.length ? list.join(', ') : null;
+}
+
+function normalizeForMatch(s) {
+  return String(s || '')
+    .toLowerCase()
+    .replace(/ي/g, 'ی')
+    .replace(/ك/g, 'ک')
+    .replace(/[\u200c\u200b]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+export function postMatchesKeywords(postText, keywordsStr) {
+  const cleanKw = normalizeKeywords(keywordsStr);
+  if (!cleanKw) return true;
+  const hay = normalizeForMatch(postText);
+  if (!hay) return false;
+  const terms = cleanKw.split(',').map(k => normalizeForMatch(k)).filter(Boolean);
+  return terms.some(term => hay.includes(term));
+}
+
+export async function subscribeUser(userId, username, keywords = null) {
   const u = String(username || '').toLowerCase();
   if (!userId || !u) return false;
+  const kw = normalizeKeywords(keywords);
   await db
     .insert(subscriptions)
-    .values({ userId, username: u })
-    .onConflictDoNothing({ target: [subscriptions.userId, subscriptions.username] })
+    .values({ userId, username: u, keywords: kw })
+    .onConflictDoUpdate({
+      target: [subscriptions.userId, subscriptions.username],
+      set: { keywords: kw },
+    })
     .run();
   return true;
 }
@@ -81,7 +113,7 @@ export function buildNotifyManagerPayload(lang, rows) {
     text: notifyListHeader(lang, rows.length),
     reply_markup: {
       inline_keyboard: rows.map(r => [
-        { text: notifyUnsubButton(lang, r.username), callback_data: `unsub:${r.username}` },
+        { text: notifyUnsubButton(lang, r.username, r.keywords || null), callback_data: `unsub:${r.username}` },
       ]),
     },
   };
@@ -240,7 +272,7 @@ export async function checkNotifications({ postsMap, dryRun = false, sendFn, bat
   let updatedChannels = 0;
 
   for (const [username, subs] of subsByChannel.entries()) {
-    const posts = map[username];
+    let posts = map[username];
     if (!Array.isArray(posts) || !posts.length) continue;
     checkedChannels++;
 
@@ -249,6 +281,24 @@ export async function checkNotifications({ postsMap, dryRun = false, sendFn, bat
       .from(notifyState)
       .where(eq(notifyState.username, username))
       .get();
+
+    // If all 6 seed posts in posts.js are newer than the channel watermark,
+    // fetch the full 50-post archive (posts/<username>.json) so high-volume
+    // channels report exact new-post counts and keyword alerts inspect all posts.
+    if (stateRow?.lastPostId && posts.length >= 6 && !postsMap) {
+      const preDiff = findNewPosts(posts, stateRow.lastPostId);
+      if (preDiff.newPosts.length >= posts.length) {
+        try {
+          const fullRes = await fetch(`${APP_URL}posts/${encodeURIComponent(username)}.json`);
+          if (fullRes.ok) {
+            const fullArr = await fullRes.json();
+            if (Array.isArray(fullArr) && fullArr.length > posts.length) {
+              posts = fullArr;
+            }
+          }
+        } catch (e) {}
+      }
+    }
 
     const channelDiff = findNewPosts(posts, stateRow?.lastPostId ?? null);
     if (channelDiff.initialized) {
@@ -284,12 +334,26 @@ export async function checkNotifications({ postsMap, dryRun = false, sendFn, bat
       }
       const subDiff = findNewPosts(posts, effectiveWatermark);
       if (!subDiff.newPosts.length) continue;
+      const matchedPosts = sub.keywords
+        ? subDiff.newPosts.filter(p => postMatchesKeywords(p.text, sub.keywords))
+        : subDiff.newPosts;
+      if (!matchedPosts.length) {
+        if (subDiff.newestId && !dryRun) {
+          await db
+            .update(subscriptions)
+            .set({ lastPostId: subDiff.newestId })
+            .where(eq(subscriptions.id, sub.id))
+            .run();
+        }
+        continue;
+      }
       channelHadUpdates = true;
       if (!updatesByUser.has(sub.userId)) updatesByUser.set(sub.userId, []);
       updatesByUser.get(sub.userId).push({
         subId: sub.id,
         username,
-        newPosts: subDiff.newPosts,
+        keywords: sub.keywords || null,
+        newPosts: matchedPosts,
         newestId: subDiff.newestId,
       });
     }
