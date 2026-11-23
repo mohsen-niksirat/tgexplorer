@@ -6,13 +6,6 @@
     <atom:link href="https://mohsen-niksirat.github.io/tgexplorer/rss/ai4free.xml" rel="self" type="application/rss+xml"/>
     <description>بررسی نکات کاربردی در زمینه ی هوش مصنوعی. لینک گروه:https://t.me/ai_club0</description>
     <language>fa</language>
-    <item>
-      <title>Qwen code An open-source AI coding agent https://github.com/QwenLM/qwen-code/ جا…</title>
-      <link>https://t.me/ai4free/443</link>
-      <guid isPermaLink="true">https://t.me/ai4free/443</guid>
-      <pubDate>Fri, 20 Nov 2026 15:10:08 GMT</pubDate>
-      <description>Qwen code An open-source AI coding agent https://github.com/QwenLM/qwen-code/ جایگزین هرمس همه قابلیت های هرمس اتصال به تلگرام #agent @ai4free</description>
-      <enclosure url="https://cdn4.telesco.pe/file/XZ5CJH6rdDYLQToJnu7KnR9gzq5JEhJ-2Ed9L7-vBOjrslQXC-43GQ-pmKS3feZQAXIQTK3cL_yNgJkZfbXB3TfvJQK9mgpPGpC5mkVCHX7QO_P8MwblDSuuoYq3TN-ztfA00uEULYFohPYxb66LUkt0x0KFBwhRKezm-MDgpdXlqAjdMOnzxtvuU5_GIWZB6WjdGYajo1JMjl2L7DePXiormK_y7JCFQUEuTWH19Y4gXOEBr_mVotEMou5Ui8Ww8nm8BOa3e41Zwqxp6NrNqG1gzwTf4Ay5HAG-25_GDA4mS7Fb_omEueti8kbdKMrMFTidgUj_3A1SB1qccWmL4g.jpg" type="image/jpeg" length="0"/>
-    </item>
+
   </channel>
 </rss>

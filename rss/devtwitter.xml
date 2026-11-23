@@ -7,6 +7,117 @@
     <description>توییت های برنامه نویسی و طراحی وب :) Admin: @dvtwi Hashtags: devtwitter.t.me/5 DevBooks Channel: https://t.me/+AYbOl75CLNYxY2U0 Github: https://github.com/DevTwitter X: https://x.com/devtwittir</description>
     <language>fa</language>
     <item>
+      <title>با RyzerDNS، تحریم‌ها دیگر مانع شما نیستند. تاحالا با ارور ریجن جمینای برخورد کر…</title>
+      <link>https://t.me/devtwitter/14026</link>
+      <guid isPermaLink="true">https://t.me/devtwitter/14026</guid>
+      <pubDate>Mon, 23 Nov 2026 19:35:19 GMT</pubDate>
+      <description>با RyzerDNS، تحریم‌ها دیگر مانع شما نیستند. تاحالا با ارور ریجن جمینای برخورد کرده‌اید؟ ارور 403 چطور؟ فیلترشکن‌ها کلافه‌ات کردن؟ رایزر همشو حل می‌کنه، خیلی بهتر از وی پی ان. از هوش مصنوعی‌هایی مثل ChatGPT، Gemini و Claude گرفته تا Spotify و Adobe و هر سرویس بین‌المللی دیگر و حتی گیمینگ — بدون محدودیت، راحت و مستقیم. یک سرویس DNS پیشرفته که تنها با تغییر DNS دستگاه، بدون نیاز به VPN یا هیچ نرم‌افزار اضافه‌ای، دسترسی شما را به تمام سرویس‌های تحریم‌شده باز می‌کند. https://ryzerdns.ir</description>
+      <enclosure url="https://cdn4.telesco.pe/file/g_CAT9S3u4VdefnkXQPd2AgO7ZxtIUUSuEQ3q1CDPMyvXANHpsLqaVHYVOA03Ua3zYVcAmKeTn2NriYWiGWwUUBEflBIZfAY9Fer38pWfJoaYg9vAGTYRQ0fTLqRL9P8pvfCqEevKdhJCeExvpZoBYZLIVTJNWe92fcWmlju1kVQeoB1x2wdwAnRypkqay7iHHcYklQAIN9vx6xNFvdy2lv1nRuk3OE03N4Mg5KS2XVp-pxngJnM3pGQNiwjitIxgw0ipoyKRtHCnHSQ8J8uoEcHKDxom-0dCBVKcobRENJ5_v2841HLOCZUQcbIqgPDhXT-f6ON8xXP5l-6cJTsLg.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>به‌ تازگی و در قالب یک پروژه تمرینی، یک سیستم هوشمند پرسش‌ و پاسخ مبتنی بر اسناد…</title>
+      <link>https://t.me/devtwitter/14022</link>
+      <guid isPermaLink="true">https://t.me/devtwitter/14022</guid>
+      <pubDate>Mon, 23 Nov 2026 19:02:06 GMT</pubDate>
+      <description>به‌ تازگی و در قالب یک پروژه تمرینی، یک سیستم هوشمند پرسش‌ و پاسخ مبتنی بر اسناد (RAG) رو با استفاده از Python و Django پیاده‌سازی کردم. هدف این سیستم اینه که کاربر بتونه اسناد خودش رو بارگذاری کنه و بدون جست‌و‌جوی دستی سؤالاتش رو مستقیماً درباره محتوای اون‌ها بپرسه. پیاده‌سازی این قابلیت رویکرد جالبی داره: ابتدا محتوای فایل استخراج و با استفاده از تکنیک Text Chunking به بخش‌های کوچک‌تر تقسیم می‌شه؛ بعد با کمک مدل multilingual-e5-small برای هر بخش یک بردار عددی (Embedding) تولید و در پایگاه داده PostgreSQL با استفاده از pgvector ذخیره می‌شه تا امکان جست‌وجوی معنایی (Semantic Search) و پیدا کردن مرتبط‌ترین بخش‌های اسناد فراهم بشه. در مرحله پاسخ‌گویی هم با استفاده از LangChain و مدل زبانی Qwen3، اطلاعات بازیابی‌شده در اختیار مدل قرار می‌گیره تا پاسخ سؤال کاربر بر اساس محتوای اسناد تولید بشه. همچنین منابع و بخش‌های مرتبط با هر پاسخ هم نمایش داده می‌شن. در کنار پیاده‌سازی هسته RAG، توسعه REST API با Django REST Framework، مستندسازی API با Swagger و ReDoc، راه‌اندازی پروژه با Docker و Docker Compose و نوشتن ۵۸ تست خودکار هم از بخش‌های دیگه این پروژه بودن. برای مدیریت اطلاعات هم از پنل ادمین Django استفاده کردم که امکان مشاهده و مدیریت اسناد، وضعیت پردازش اون‌ها، متن استخراج‌شده، بخش‌های متنی و اطلاعات Embedding و همچنین تاریخچه سؤالات، پاسخ‌ها و منابع مرتبط با هر پاسخ رو فراهم می‌کنه. از اونجایی که این پروژه با هدف تمرین انجام شده، تمرکز اصلی روی توسعه Backend و هسته اصلی سیستم بوده و فعلاً رابط کاربری اختصاصی یا قابلیت‌های بیشتر براش پیاده‌سازی نشده؛ قطعا این پروژه قابلیت توسعه خیلی بیشتری از لحاظ امکانات و قابلیت‌ها داره. در مجموع، تجربه خیلی خوبی بود که باعث شد در کنار کار با Python و Django، بیشتر با معماری RAG، پایگاه داده‌های برداری و نحوه استفاده از مدل‌های زبانی بزرگ (LLM) به‌صورت عملی آشنا بشم. سورس کد و مستندات پروژه: https://github.com/MrMahdiAliakbar/rag-document-system @DevTwitter | &lt; Mahdi Aliakbar /&gt;</description>
+      <enclosure url="https://cdn4.telesco.pe/file/fwu7j1T-OYOzKwecMJ8f2Yzrm36mdEwyHJPz71Rjg-ZNgAKMZwAONiiU3Uxlht-0X7VfgysZxZI94x6vHQRQJc-LeE40Np4OFZmfHRcYdCegtuhExGewhMgHtSjQpbQtEaAytTA83fy7XGsuJbKvRIvrbSgW07cRg_61gXTKTrcSr8a_62V42_vjCo75vn0FOpcaZjOXbZPn8XKfKT-nOTGo3_BO3-4ysETg9H7DErF1pbzd_5P4QFchMjaZrFPIfysTx9au0It6MgQEQs8VisRavVUPBL2ZesEcLzwMgamAzlFsGOjsKG2Ky_BkY-8CVoKBKZQkSVE5aIhMgw0TVw.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>با مطالعه این مقاله شاید بتونی چندین ساعت در زمانت صرفه‌جویی کنی و کارهایی که قب…</title>
+      <link>https://t.me/devtwitter/14021</link>
+      <guid isPermaLink="true">https://t.me/devtwitter/14021</guid>
+      <pubDate>Mon, 23 Nov 2026 18:29:57 GMT</pubDate>
+      <description>با مطالعه این مقاله شاید بتونی چندین ساعت در زمانت صرفه‌جویی کنی و کارهایی که قبلا زمان زیادی برای انجامشون نیاز داشتی رو خیلی سریع‌تر پیش ببری تصور کن می‌خوای یک پروژه بزرگ رو با هوش مصنوعی انجام بدی و برای این کار به چندین ایجنت نیاز داری در روش معمول، هر ایجنت باید منتظر بمونه تا ایجنت قبلی کارش رو تموم کنه و بعد نوبت به اون برسه اما اگه بتونی همه این ایجنت‌ها رو به‌صورت هم‌زمان و هماهنگ به کار بگیری چی؟ اینجاست که Graph Engineering وارد میشه این مقاله توضیح میده چطور میشه به‌جای استفاده از زنجیره‌ای از وظایف، یک ساختار گرافی طراحی کرد تا چندین AI Agent به‌صورت موازی روی بخش‌های مختلف یک پروژه کار کنن و در نهایت نتایجشون با هم ترکیب بشه حتی عنوان مقاله به اجرای ۱۰۰۰ ایجنت هوش مصنوعی از طریق یک پرامپت اشاره می‌کنه اگه به AI Agentها و اتوماسیون علاقه داری پیشنهاد می‌کنم این مقاله رو از دست ندی چون می‌تونه دید متفاوتی نسبت به ساخت سیستم‌های هوش مصنوعی بهت بده https://x.com/0xWast3/status/2079899723947712845 @DevTwitter | &lt; Kamali /&gt;</description>
+      <enclosure url="https://cdn4.telesco.pe/file/VGns2o2qva-BxBw8niEH9qN7SLL8jXq0vNsnIo3Q64zqHFxBtY_4nra9uD3QEn68nv_MKhnnqopHh4NWzE-XeHZltA0Cp8aSMFISfZZZrHEKPDtM8kEwNMIiW5DLLeNKnZ3DC7Yz8QoNhK0KT1gVSFYz_CjZn9vxgR0UCY-AVDcjAkcPxtyVo87h1oQn69VozYZUOe2pHKxCcU2cfMPkxtiz_h5170OEzJYO2FrqltOYQmDyral6QQFBnmyNY-EvKa2dWm68X3hOOEh0LyBcVV9uMyR3bLZN23F_AaMkhtSLVRBRABqF3P3RxHrGdzk6IzMAYUtv0XkFEhzcU_vqGA.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>🚀 بدون دانش برنامه‌نویسی، از صفر تا صد یه وبسایت رو بساز! 📚 با دوره جدید « آمو…</title>
+      <link>https://t.me/devtwitter/14020</link>
+      <guid isPermaLink="true">https://t.me/devtwitter/14020</guid>
+      <pubDate>Mon, 23 Nov 2026 17:29:57 GMT</pubDate>
+      <description>🚀 بدون دانش برنامه‌نویسی، از صفر تا صد یه وبسایت رو بساز! 📚 با دوره جدید « آموزش عملی وایب‌کدینگ» کوئرا کالج یاد می‌گیری چطور با کمک ابزارهای هوش مصنوعی مثل Cursor، ChatGPT و Claude، بدون نیاز به دانش قبلی برنامه‌نویسی، ایده‌ت رو به یه محصول واقعی تبدیل کنی! 👨🏻‍💻 در این دوره، همراه با ا میر تقی‌آبادی ، پروداکت‌لید تپسی‌فود ، قدم‌به‌قدم از طراحی صفحات تا پیاده‌سازی و راه‌اندازی سایت پیش می‌ری و ساخت یک فروشگاه اینترنتی رو یاد می‌گیری. 🔥 فرصت ویژه بلک‌فرایدی 🔥 : 🔹 ۵۰٪ تخفیف برای ثبت‌نام دوره 🔹 تا ۷۰٪ تخفیف با انتخاب دوره‌های بیشتر 💳 پرداخت قسطی با اسنپ‌پی ✨ مشاهده دوره و ثبت‌نام با تخفیف ویژه: 🔗 https://quera.org/r/rqfmn</description>
+      <enclosure url="https://cdn4.telesco.pe/file/PCl7TFllHEmfLkVpzDrz5xqLKcH2EpjIIyYKtiuLAidv_RXFaY0mkeGA4Fk8EYRKxs2yY1lt4Ds4sp15sT3sxOZ_jctaj7e7ksy1NaGeF2fuaAvl0spca2awnxzf3JcFcg-N1BbxLmIXBL6hDmgG826iKMmM0RXhDOeFTmcoKgqaAd9IEf1wB68K5wV9tlKnHDTYGhmbEJR6jO4sknMq01Vf-M6QTctIbpgIkJuLw5Tenl3YbSA2ldcqFfWU3HzuKi1IF_bWswE7NwNfDk-5ub78_FUH9EJZSu3B65485eQnGPoEDERiG-ntSAkm30GsjNw11xSgo8jC8E7qfDYuzw.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>یه مجموعه جالب برای پیدا کردن و پیاده‌سازی Microinteractionها! سایت microinterac…</title>
+      <link>https://t.me/devtwitter/14019</link>
+      <guid isPermaLink="true">https://t.me/devtwitter/14019</guid>
+      <pubDate>Mon, 23 Nov 2026 16:59:57 GMT</pubDate>
+      <description>یه مجموعه جالب برای پیدا کردن و پیاده‌سازی Microinteractionها! سایت microinteractions.dev مجموعه‌ای از تعاملات کوچک رابط کاربری رو با دموهای زنده و کد آماده در اختیار توسعه‌دهنده‌ها قرار می‌ده. چیزی که این سایت رو برام جذاب کرد، فقط نمونه‌های انیمیشنی اون نیست؛ بلکه جزئیات فنی هر تعامل هم مشخص شده. برای هر نمونه می‌تونی: - رفتار تعامل رو به‌صورت زنده بررسی کنی. - زمان‌بندی (Timing) و منحنی حرکت (Easing) رو ببینی. - کدهای HTML، CSS، JavaScript و Tailwind رو دریافت کنی. - نسخه React رو هم با shadcn نصب کنی. از انیمیشن دکمه‌ها و جابه‌جایی بین تب‌ها گرفته تا Drag &amp; Drop و تعاملات پیچیده‌تر. حتی به جزئیاتی مثل دسترسی‌پذیری و پشتیبانی از Reduced Motion هم توجه شده. اگه روی طراحی و پیاده‌سازی رابط کاربری کار می‌کنید، پیشنهاد می‌کنم این سایت رو ببینید و ذخیره کنید: microinteractions.dev @DevTwitter | &lt; Zeinab Anvari /&gt;</description>
+      <enclosure url="https://cdn4.telesco.pe/file/CcnYJtbProJG60a6K_VObvbYBlHbgdb8evPuTF55hn92k6k-PVt4aW5E7e7t1oVeWWlJF7Oa_94qGzxkwJkHjIGza06zlEttYVY3HBE1x9rh1rd3WSJPMppI_-s9GmrxyAJgwS-5hdJtS0RVN8eeREeWeO0S-Zby_Bb_r1c-Me_NMW-8TE6wdwIJdsUY0QmkneWXSRc4zbw2j7Zh8rp39oNCseTc6DhToewQ04UnpJX9URxO_mOq-_TZR0y1S9Wt_zHRScKB7UUxCx210svUldGQvJNTm3QnEmO-vYuW8vFGmtYj0Vt2EGYk6kxodXEqgtyop9yCWvgU9YflBUAN7g" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>اگه موقع کار با هوش مصنوعی برات متنی مینویسه که واضح به نظر ‌‌نمیاد و گم میشی تو…</title>
+      <link>https://t.me/devtwitter/14018</link>
+      <guid isPermaLink="true">https://t.me/devtwitter/14018</guid>
+      <pubDate>Mon, 23 Nov 2026 16:29:57 GMT</pubDate>
+      <description>اگه موقع کار با هوش مصنوعی برات متنی مینویسه که واضح به نظر ‌‌نمیاد و گم میشی تو‌ جوابش بیا که راه حل اینجاس! من این مساله برام زیاد پیش میومد و مجبور بودم دائما بهش چهارچوب بدم که دوباره انبورد بشم با مسیر فکری هوش.م ولی یه هفته پیش یه skill پیدا کردم از matt pocock که اسمش هست wait-what که تو زبان انگلیسی واکنش طبیعی ادما به شرایط بالا تو‌ کلام هست. لینکشو میذارم این پایین؛ کارش اینه که میاد بر اساس پروتوکل ارتباطی ASD-STE100 که تو‌خلبانی و ارتباط با برج‌ مراقبت استفاده میشه، موضوع رو توضیح میده. این پروتکل در زبان هدفش شفافیت و سریعترین حالت انتقال داده هست تا کمترین واگرایی گفتاری شکل بگیره. استفاده کنید مطمئنم شگفت‌زده میشید. اگه راه نصب رو بلد نیستید همین لینک رو بدین به ایجنت و ازش بخواید اسکیل رو نصب‌کنه. https://github.com/mattpocock/skills/blob/main/docs/productivity/wait-what.md @DevTwitter | &lt; Soheil /&gt;</description>
+      <enclosure url="https://cdn4.telesco.pe/file/GK-LGV75qPY186aDabUR9ShYgHjnLvpxCoO2ehntSXfkFSnCSa6Y2WSjBlCdcWWVX4cF81339Iap306TuXxlXS8mwWyRQtkNp3FYzRvucbr-AIZf51BGU5XnXCMDcKYTOuEiZU9Sf5JbIqt8gJ_wQ5aiXVfLrkvLzmrP8uI0K61VGpt_HCNT4m2bW5NBkRUp5hBGIHsD_Cf7FiQtETjzYLYYzFcvqQ5LML512qA95sDs2shluhdKc4Wvb-J-MRulUwqjBC84OXkcWZ8aTIdh5Q_Pj6S-jMusHSm2_8zSEaVrQWhhYKVjDiG1B78lte_LNAMG3exM6xoN0R7CBr1UAA.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>💻 تاحالا فکر کردی مهارت برنامه نویسی تو بازار جهانی چقدر می ارزه؟ برنامه‌نویسی …</title>
+      <link>https://t.me/devtwitter/14017</link>
+      <guid isPermaLink="true">https://t.me/devtwitter/14017</guid>
+      <pubDate>Mon, 23 Nov 2026 15:29:57 GMT</pubDate>
+      <description>💻 تاحالا فکر کردی مهارت برنامه نویسی تو بازار جهانی چقدر می ارزه؟ برنامه‌نویسی از اون مهارت‌هایی‌ـه که می‌تونه در بازار بین‌المللی هم فرصت‌های کاری متنوعی ایجاد کنه؛ اما چطور باید به کارفرمای خارجی وصل بشی و درآمد دلاری بگیری؟ 🚀 در وبینار «نقشه راه فریلنسینگ بین‌المللی» با مسیر ورود به بازار پروژه‌های خارجی و فعالیت در پلتفرم‌هایی مثل Upwork آشنا شو. 🎙️ مدرس: حسین جوان‌کیش 📅 ۳ آذر | ⏰ ساعت ۱۹ برای شروع همین الان رایگان ثبت‌نام کن: 👇🏻 👇🏻 https://links.etekanesh.com/CFJ8 https://links.etekanesh.com/CFJ8 ➖ ➖ ➖ پشتیبانی: @tekaneshmahaei</description>
+      <enclosure url="https://cdn4.telesco.pe/file/HdmLpv46EsD60I0jma6dYb72bSrJyVPm8VHQA6kRPe6dpFAaZouI8WNChKnxrPUzbwGkyk-cX6BPVGoBlRXDJogcWEvj-aKUXEDv2-f5SWnIpWwoZI_5qOBP5nDjDfDLbY_Cu36ut1UsJTtY36I_7KW_X3YKNc85zP4Y4U350woEaX_cXuJGZInJG_HCfMa5x0TLh8_xwrpDA6zGJS3OQW8EGdPOoYLVBXarv867RxRvpqYn5PsN4WRiWVwIEEwlnIoOeukGFloHZJ_klS6tdV8sNHyZGP0beIqcVo369IqpnBhvO4dUrdPbXRTn229wmU8cmuPYLqL92LS4G4_XVw.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>یه دستیار هوش مصنوعی رایگان اومده که رو کامپیوتر خودت نصب میشه و تو ۱۳ روز ۳۵۰۰ …</title>
+      <link>https://t.me/devtwitter/14016</link>
+      <guid isPermaLink="true">https://t.me/devtwitter/14016</guid>
+      <pubDate>Mon, 23 Nov 2026 13:47:01 GMT</pubDate>
+      <description>یه دستیار هوش مصنوعی رایگان اومده که رو کامپیوتر خودت نصب میشه و تو ۱۳ روز ۳۵۰۰ ستاره (لایک) تو گیت‌هاب (سایت برنامه‌های رایگان) گرفته. برنامه‌ها رو باز می‌کنه و خودش کلیک و تایپ می‌کنه. اسمش Linger (لینگر) ـه. فرقش با ChatGPT اینه که فقط جواب نمی‌ده، مثل یه منشی کار رو خودش انجام می‌ده: برنامه رو باز می‌کنه، تو کروم با همون حساب‌هایی که وارد شدی کار می‌کنه و فایل‌هات رو پیدا می‌کنه. چون هوش مصنوعیش روی خود کامپیوترت اجرا میشه، لازم نیست هر ماه پول اشتراک بدی. آدما، مشتری‌ها و پروژه‌هات هم یادش می‌مونه. کار طولانی رو خودش جدا انجام می‌ده و تو همون موقع می‌تونی باهاش چت کنی. نصبش: ۱. لینک توییت اول رو باز کن و تو صفحه بزن رو Releases (نسخه‌های آماده) ۲. ویندوز: فایلی که آخرش setup.exe ـه رو دانلود کن. مک: فایلی که آخرش dmg ـه ۳. اجراش کن. خودش کامپیوترت رو بررسی می‌کنه و نسخه‌ای از هوش مصنوعی رو می‌ذاره که به قدرت کامپیوترت بخوره محدودیتش رو هم بگم: کامپیوتر قوی می‌خواد. حداقل یه مک با تراشه‌ی M1 به بالا و ۱۶ گیگ رم، یا یه کامپیوتر گیمینگ با کارت گرافیک ۸ گیگی و ۳۲ گیگ رم. بعضی کارهاش هم اینترنت لازم داره. لینک پروژه: https://github.com/simplexai-labs/linger @DevTwitter | &lt; Arash /&gt;</description>
+      <enclosure url="https://cdn4.telesco.pe/file/Ydb5buPoBdwx0qNyl1qbKfgGUc36bMODz4ZbwxMc07ZjuK-Np2n5phLGGGyXbn0_yJDVaUsb5wWegczirY7WNTtoCaRn2SRvIhcFSCh7G1cKJ9-YPX4YW4zLrDjrJ1myp9jEMpgg-A2pARMSy10G1ZTChj6cYqkJCUSBnLPinPVCj_rlPFQRxrd0IyaeorHc1f65s4JO4HdrGq9noSq7QldvW7OLnbTLKDYi3dpZevmQNXXrFfVsT4PmxuKMF1KxIva-tPZSCegqC2U9K8Jh4pj1vKu8c4409hlXRZgM7dUcq7xbAxW7CSJvnUjI_OD4VvExSqDTKvubFo_aG9ynVA.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>۹۰٪ تخفیف، فقط با چند تا جمله قانع‌کننده؟ 🔥 با «لیابات» چونه بزن و تخفیفت رو تا…</title>
+      <link>https://t.me/devtwitter/14015</link>
+      <guid isPermaLink="true">https://t.me/devtwitter/14015</guid>
+      <pubDate>Mon, 23 Nov 2026 12:32:06 GMT</pubDate>
+      <description>۹۰٪ تخفیف، فقط با چند تا جمله قانع‌کننده؟ 🔥 با «لیابات» چونه بزن و تخفیفت رو تا ۹۰٪ بالا ببر! ⏳ فقط ۴ روز دیگه فرصت داری. 🤖 ببین چند درصد تخفیف می‌گیری: بلک‌فرایدی لیارا @liara_cloud</description>
+      <enclosure url="https://cdn4.telesco.pe/file/HWgB8QAyW5MLVVbYrjhBoZclLINXmnzQKtEuWLEaGflmZIJQBbqVHypSAgRWtJFEWvO1sSSbo2yoKuqru6tUd7cIdkI6xyrQiQhql9SEb-Za1mjCCOSrnyRqJnR40JlfSJnds3oJP0Z3zQsb7q2whluPt5u6fPpcPe02DWgOqrK6EkA1181z-DYUWDSIrdCMX19CT_V73GczCRvlat4jEf5QuVhZomMYhNTa5d3nAitGmgnP-PwEbhlmoR92G3q1OrsGLk5goy6-2eW8t3dPCBA7u0kVttNLgO2wx-hbUMzRnXFZhH1QlEL9bf3stEV42f1MJ-F-LZbblLNAC8grkg.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>#کدبوک کتابی کاربردی برای حل مسائل واقعی TypeScript و تسلط بر سیستم نوع‌دهی پیشر…</title>
+      <link>https://t.me/devtwitter/14014</link>
+      <guid isPermaLink="true">https://t.me/devtwitter/14014</guid>
+      <pubDate>Mon, 23 Nov 2026 11:45:11 GMT</pubDate>
+      <description>#کدبوک کتابی کاربردی برای حل مسائل واقعی TypeScript و تسلط بر سیستم نوع‌دهی پیشرفته این زبان: - آموزش تکنیک‌های پیشرفته Type System و طراحی Typeهای پیچیده - پیاده‌سازی Typeهای کمکی (Utility Types)، Genericها و Conditional Types - حل چالش‌های واقعی در پروژه‌های TypeScript و بهبود Type Safety - مناسب برای توسعه‌دهنده‌هایی که می‌خوان فراتر از TypeScript مقدماتی برن و کدهای حرفه‌ای، دقیق و قابل‌اعتماد بنویسن * فایل PDF این کتاب رو میتونید از کانال DevBooks که لینکش این زیر هست دانلود کنید. DevBooks: https://t.me/+kUnIvAQ3HWgwYjk8 @DevTwitter</description>
+      <enclosure url="https://cdn4.telesco.pe/file/vZHbfg1IpE0IjSQC0zAd8S9dU4rwWRyJ3rjZtW-kStv3xx_90Z1S9zK2y79MiXPXPbauRQS1IHhw1KMCE3bkm9wOyOfkqV_JcKfDRNhbqpxLTESxXtd2ZvhTsWjcV2uYyXMWG5zcBupv2fiOue6HrLvauQftMLNYizFRFCKey6Aub1wiKz5HsqpicTZX_v4jw3lfeFE7m-NqxuzEdRnya-G-4w-NGKcvgwbyiMctMpaaDKI1NYyIiLJJ3Zx7bR3SX1UNW0gX4Aect2GwXpKbYOMB2yy09LIPYpZpOWGq2aCTgPooOg3ody3F1wsD5VJqwoVkoxT5lrWYYQKc44nh_w.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>مایکروسافت با VibeVoice-ASR تبدیل فایل‌های صوتی طولانی به متن رو ساده‌تر کرده! ا…</title>
+      <link>https://t.me/devtwitter/14013</link>
+      <guid isPermaLink="true">https://t.me/devtwitter/14013</guid>
+      <pubDate>Mon, 23 Nov 2026 11:02:01 GMT</pubDate>
+      <description>مایکروسافت با VibeVoice-ASR تبدیل فایل‌های صوتی طولانی به متن رو ساده‌تر کرده! این مدل می‌تونه تا ۶۰ دقیقه فایل صوتی رو در یک مرحله به متن تبدیل کنه؛ بدون اینکه لازم باشه فایل رو به بخش‌های کوچک‌تر تقسیم کنی. قابلیت‌های VibeVoice-ASR: پشتیبانی از بیش از ۵۰ زبان تشخیص هویت و تفکیک گویندگان (Speaker Identification) ثبت Timestamp برای هر جمله اجرای کاملاً محلی روی کامپیوتر بدون نیاز به API و پرداخت هزینه پردازش مجوز MIT و امکان استفاده تجاری یعنی می‌تونی فایل‌های طولانی مثل پادکست، مصاحبه، جلسات و سخنرانی‌ها رو پردازش کنی و علاوه بر متن، زمان دقیق صحبت‌ها و گوینده هر بخش رو هم داشته باشی. نکته جذاب اینه که برای استفاده از مدل نیازی به سرویس‌های ابری و پرداخت هزینه به‌ازای هر درخواست نداری. لینک GitHub: https://github.com/microsoft/VibeVoice @DevTwitter | &lt; Yarad /&gt;</description>
+      <enclosure url="https://cdn4.telesco.pe/file/ZezVVy_O41xMfOJ7dvHlhcsSPiLX3VGyQEEQGjyNDlcL2mgWERlMzfFexcPH_kpTQ1jjDCxip0IZWyzSjgv_WQ7oaLwr3lstueKtJE57FhLlEw6tSi9LKpdCClqsCNKp3X4xgmdlPqN9zIDwHWjNGR2Uspll_93DexGTVews0hXF6CNNTDyIF-ZUAJYMIZKmfFUC9gMGMXq-vH59jaqodyuwwLSOnaUt9Y55kQs5iAIWH1Dm_RLy8mn6LW1fGTU-7iJtuxnSoe40Jzq7wU5j3xxuw7a5H7yOTnOjEYiY8t2zjg8dYhICiAcXPFbyTUN7auJWYPT3PidbSy5hDtdcyA.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>🔴 برنامه‌نویس های عزیز که در کسب‌وکارهای آنلاین، فروشگاه اینترنتی، طلا، ارز و ف…</title>
+      <link>https://t.me/devtwitter/14012</link>
+      <guid isPermaLink="true">https://t.me/devtwitter/14012</guid>
+      <pubDate>Mon, 23 Nov 2026 10:31:10 GMT</pubDate>
+      <description>🔴 برنامه‌نویس های عزیز که در کسب‌وکارهای آنلاین، فروشگاه اینترنتی، طلا، ارز و فین‌تک مشغولید! آیا می‌دونستید می‌تونید استعلام‌های هویتی و بانکی رو مستقیماً به سایت یا نرم‌افزار کسب‌وکارتون اضافه کنید؟ 🚀 با APIهای احرازینو: ✅ استعلام شاهکار (تطبیق کد ملی و موبایل) ✅ استعلام نام صاحب کارت بانکی ✅ استعلام‌های چک صیادی ✅ استعلام اطلاعات هویتی مشتریان 🔗 بدون نیاز به استعلام دستی، سرویس‌های موردنیازتون رو به سیستم خودتون متصل کنید و از خریدهای فیشینگ جلوگیری و فرآیندهاتون رو اتومات کنید. 💎 احرازینو | ارائه‌دهنده APIهای احراز هویت و استعلام بانکی 🌐 ehrazino.com/api</description>
+    </item>
+    <item>
+      <title>ابزار رایگان و متن‌باز Filee به جای آپلود فایل‌ها در سایت‌های ناشناس، بیش از ۲۵۵…</title>
+      <link>https://t.me/devtwitter/14010</link>
+      <guid isPermaLink="true">https://t.me/devtwitter/14010</guid>
+      <pubDate>Mon, 23 Nov 2026 09:43:01 GMT</pubDate>
+      <description>ابزار رایگان و متن‌باز Filee به جای آپلود فایل‌ها در سایت‌های ناشناس، بیش از ۲۵۵ فرمت رو به‌صورت ۱۰۰٪ آفلاین روی سیستم خودتون تبدیل می‌کنه. کافیه Ctrl رو نگه دارید و فایل رو بکشید تا با یه منوی دایره‌ای سریع خروجی بگیرید. https://filee.sh @DevTwitter | &lt; محمد زمانی /&gt;</description>
+      <enclosure url="https://cdn4.telesco.pe/file/QuFOdfAk6Z0KTzLwTLTg94hlbKletPtNNdXRmBDtLdE3-_Rw_HHJ23OspXMWcJ7ruLCmhxoZj8PTvJLqHhobI7tMMje23730CfNW46wW-cmIJVgJWoLe8EDDKVKsoizLR92hKAHGGKrzM-qahL-0s6Eezwf2dAKwhV7-JlxHHUkynCFngxg-9b-swJKIGlglushyNvMEQd9qp5hFX1KjlEOXBckqU5oneXpWC4jNquRTrMbvoxuz7BS0BjQovucv2d_Mapd1boc_1TVvsa6yoz09EMKYgJTwuUjOw8F_SjZSWABOee0jh9ztJxA9fgIucZO8A0vPN43PmZARe1ii0A.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>این خیلی جالبه https://human-md.ai یه visual essay در مورد اینکه انسان تو عصر AI…</title>
+      <link>https://t.me/devtwitter/14009</link>
+      <guid isPermaLink="true">https://t.me/devtwitter/14009</guid>
+      <pubDate>Mon, 23 Nov 2026 07:41:01 GMT</pubDate>
+      <description>این خیلی جالبه https://human-md.ai یه visual essay در مورد اینکه انسان تو عصر AI چه چیزی رو به سیستم اضافه می‌کنه. @DevTwitter | &lt; وحیدیدو /&gt;</description>
+      <enclosure url="https://cdn4.telesco.pe/file/sax9NMDYyhdHfgkwYthtLYobNHXE3S7-o1VOjK_ICaQHa0mbwu055k6ZSSh9Ctw9HlWCjJdwhxk362CjlDPFehvDcJJEgAJkxm50Utr35rtOA0P4coOIuyenFwdKWzsUyztESMFWOShUMruXq0KhjhAOO04X9WgHUMu6h-a6bbTGsXlMfLgM4F3_icTlhvc83jHUhc6n1QR6TMrD9RVihZRvacb76x9agdlzPo-0l_Ryyr55Dp5yNPP1eb-Z2HRLlvMS5bravNyLpsflY4JOjNZ1VuEAUwk9lsl8NOHKEzszsxy7XW0pUYQqh1ygUdjZhLyTf0MKmUr7mQjAsiqFUg.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
       <title>تقریبا تمام میرورهای ایرانی رو اینجا جمع کرده‌م. می‌تونین کاملا cloneش کنین یا ب…</title>
       <link>https://t.me/devtwitter/14008</link>
       <guid isPermaLink="true">https://t.me/devtwitter/14008</guid>
@@ -20,7 +131,7 @@
       <guid isPermaLink="true">https://t.me/devtwitter/14007</guid>
       <pubDate>Sun, 22 Nov 2026 19:34:20 GMT</pubDate>
       <description>تا حالا شده برای گرفتن تخفیف با یه ربات چونه بزنی؟ 🧐 از امروز بلک‌فرایدی لیارا تا ۹۰٪ تخفیف شروع شده! 🔥 این بار خبری از کد تخفیف ثابت نیست. قراره با لیابات چونه بزنی و قانعش کنی که بهت تخفیف بده. هرچی بهتر قانعش کنی، شانس بیشتری برای گرفتن تخفیف ۹۰٪ داری. 😎 اگر برای پروژه‌هات به هاست، دیتابیس یا سرویس‌های ابری نیاز داری، این فرصت رو از دست نده. 📅 فقط از ۱ تا ۶ آذر فرصت داری با لیابات چونه بزنی. بلدی تخفیف بگیری؟ 👇 🌐 شروع چالش بلک‌فرایدی لیارا @liara_cloud</description>
-      <enclosure url="https://cdn4.telesco.pe/file/dUWDVrOkxSYezMgXknr0cNVIsM1Q_32DhXmfOFjjKJXESbeWmneD3LT0mApOQqUNwvg-3XUslFPsJzEouIbSzLg-rpfT_cLG6VTKiR6mgkwwBy-QHnVZKRzVvxLpQBnb067SPjKwL_86_u8Ard-P74SgSQel-1nTiaJC7b-iGh5nEGskiZUquaRALq8js15kJ8Glr11_Td8VJkOyJ8Boo9bpgFJ9QiFmk0tTmoapsn8bJtWgGRHzx9RKWB7i3pqrpx_DfxbNzD4_4m_pMaCLef3yxhze1mN-YWnfx2SFj5daq4cLguq-GhrGPBUnYaWJFE5NGbk2aThD7og6zpY7-g.jpg" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/JXuPFeMlVxbyc4_7NaEFYgzeUCpe5chKZBxewAFNBwZxb8sEBPpv2hKPIlJzh8dOH3kQsZFPvuTuXoACGSCEltCE388qQZmvckUAgD-glT9IpoDok2eWI1GH-HdqFYID7EIP5njvN-xvD_y4MddvBWugp4K5nvdnqQA81vNK6yLoM0jDJHmkXYJLSNuUjGzi6cC5Ao1Q0TWjeTOtopHrNt7AtoPVWTEiA_jsTPGGspAsEeZ9kTXqNjaRSq_ukNXOirDTOYjMaJmd-cwMi-KvEF2SWncc7L0EaSIuJ9Uj_XaA-Okl8PpRTdAXbjjE5mNHki25ZjEo3lunbRgRS2SQJQ.jpg" type="image/jpeg" length="0"/>
     </item>
     <item>
       <title>RoutePilot یه ابزار اپن سورس برای لینوکس که وقتی vpn روشنه فقط سایتایی که خودت م…</title>
@@ -28,7 +139,7 @@
       <guid isPermaLink="true">https://t.me/devtwitter/14006</guid>
       <pubDate>Sun, 22 Nov 2026 19:17:36 GMT</pubDate>
       <description>RoutePilot یه ابزار اپن سورس برای لینوکس که وقتی vpn روشنه فقط سایتایی که خودت میگی رو مستقیم باز میکنه - دامنه یا آیپی یا رنج آیپی رو بهش میدی - بدون پراکسی و فقط با مسیریابی خود هسته لینوکس - با wireguard و openvpn و sing-box کار میکنه - رابط گرافیکی و خط فرمان داره - فارسی هم هست https://github.com/pedramkhademi619/routepilot @DevTwitter | &lt;Pedram/&gt;</description>
-      <enclosure url="https://cdn4.telesco.pe/file/ctmkuGWvw8XGypKib14gAKr2fPDHa-dJqOVm3MzJ9VxLzqJS7cng_ulHQ-5pnSZXP225YNIK9MT5aPWkAOh9FP-hBWIEQCrNB6w4X9IdhY1noqY520p1OcqF7sGi5JtGGe3K5qKOqdo8hYYM6266Jf6OC1y4Wo5_jSngrEtfMtwWx8LpQNrUGEzh0oS3PbDbVjpW2VnBD3vRqtujwOenbTTJ2Hs6wtDrZeEAsMWZiM8098V3pq1M5fDCgoGue1D0y6nHpop3kHl3C8a4mD9Kgbr5Vi8Z8-SQOtLgHcdiQLia2Vet1bhqhWPbAc03RGy5V_I0hMfWlfan1A30Z_hUxg.jpg" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/bOZfA5FDSjMlz9qe_YUcMkoRqiQitYhv8TVBqzsDqzc4vTvHqcAhkvJkW0mo8-cDZlQnspQh2nrZOjoKUunmD3PbhMsiP2DONmRfdUMNXGTdrYktTJSIZATBf_JY5FCnOE9pBbRMNoNUAuwPd9mwnJhn7BC_xZonNprKj8lpa8IFCz6iH0KSi39LvXn05mshxx-2Wk7_xUvvVI3vc_MjeI6vQum9l0EqmtoIUdMPbDkI3z-eg4V2KJ9tthB6KrxRIT9kAQQ1vix9IV5pailCZIpRTSsh9DxNyoYEuAiPhAwrgMFV97Nlmx6LVUdoost1YKSYLx5jcr7eW9yZhH2nnw.jpg" type="image/jpeg" length="0"/>
     </item>
     <item>
       <title>فونت B Nazanin روی MacOS یه مقداری مشکل داره و ده هزارتا نسخه به اسم های مختلف ز…</title>
@@ -43,7 +154,7 @@
       <guid isPermaLink="true">https://t.me/devtwitter/14004</guid>
       <pubDate>Sun, 22 Nov 2026 17:34:58 GMT</pubDate>
       <description>🤖 دوره «آموزش عملی MLOps» کوئرا کالج منتشر شد! 🚀 ساخت مدل یادگیری ماشین فقط اول راهه! توی این دوره یاد می‌گیری چطور مدل‌هات رو از محیط آزمایش خارج کنی، دیپلوی کنی و عملکردشون رو مدیریت کنی. 🛠 چی یاد می‌گیری؟ استقرار مدل‌های ML در محیط واقعی کار با Docker، MLflow، DVC و Airflow ساخت پایپ‌لاین‌های خودکار یادگیری ماشین 🔥 ۵۰٪ تخفیف به مناسبت بلک فرایدی با انتخاب دوره‌های بیشتر، تخفیفت رو تا ۷۰٪ برسون! 💳 امکان پرداخت قسطی با اسنپ‌پی ✨ مشاهده دوره و ثبت‌نام: 🔗 https://quera.org/r/cx2jj</description>
-      <enclosure url="https://cdn4.telesco.pe/file/hbkzyNrduN3ATuqRmEtD6RRxDQBmhkfgG1QT4k6iO_2oAQhCe7An2ZIIrUteLjqVKX0VqI9HbDTn6FaK9und5uLYG2e9-RYY9FaazWV_De2YrjcQGcfmG4l8_SJWAbt-ssGFoKCXHrGgMchKH01a4NSyug5lUoUt0PCp9P_xfr6MpHfzm5huOCyjKZ-wvFZHZX49SKn4ubSJsXxi07fAvDGN5sW10FqHdAuJYrYpYZkcNngNPXq-5SqP3apzuusbogNdag7WnvRh82ffFGnBm004tOkDD0j5XFHfmmZpy5P6fe27f865YWfcQdsB56EXeQppzq2KvgBmnD0TzTC9gg.jpg" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/I4FKHCaKUkIipmgH1CpxKIoDkMYtVV1zCGDOfg-KI-kGt4nOdbxCyWoQMqBltCJm35ItO80TB-0oIQl5CHo9ns8-N8j-u5pDiWceVrVjocCFqBPAUSwhiu4rYpZruIdecR__hkU1cr9FRyIVbABGsQxT0kgniW1dlEu675WiSq1U89lExMqgLAWTo3yHpxgVb8QQSEPtxeJ5-ZEXKJtcezBw7eSrt-uibXqJeySThpaR4B7QlXQ1wi_sdeYsGlj8lF-BExovc_higRE8HJcxZE_dIIR0Mu0L3C7-XC2exle-QNpuXA6zdFbyJ8FmQuhCyiS_tq6bgMCIdIPNVD7OxA.jpg" type="image/jpeg" length="0"/>
     </item>
     <item>
       <title>«بنّا» منتشر شد؛ گردش‌کار درست ساخت نرم‌افزار با ایجنت‌ها ایجنت‌ها کد را از سرعت…</title>
@@ -51,118 +162,7 @@
       <guid isPermaLink="true">https://t.me/devtwitter/14003</guid>
       <pubDate>Sun, 22 Nov 2026 16:50:19 GMT</pubDate>
       <description>«بنّا» منتشر شد؛ گردش‌کار درست ساخت نرم‌افزار با ایجنت‌ها ایجنت‌ها کد را از سرعتی که بشود دقیق بازبینی کرد سریع‌تر می‌نویسند. نتیجه‌اش را هم همه دیده‌ایم: برنامه‌های بازبینی‌نشده و تست‌هایی که بعد از کد نوشته می‌شوند. بنّا یعنی معمار؛ ۱۰ مهارت در قالب Agent Skills که همین حلقه را منظم می‌کند. پایهٔ گردش‌کار هم دو روش آشناست: Spec Driven Development و Test Driven Development. اول برنامه بازبینی و تأیید می‌شود، سپس تست‌های ردشونده نوشته و منجمد می‌شوند، بعد از آن پیاده‌سازی بر مبنای قوانین شما آغاز می‌شود، در نهایت داکیومنت‌های شما آپدیت و تصمیمات گرفته‌شده ذخیره می‌شوند. در تمام مسیر فقط سه چیز را خودتان تأیید می‌کنید: برنامه، تست‌های منجمدشده و کار نهایی. بقیه‌اش کار ایجنت است. گیت‌هاب: https://github.com/hosseinhabibi2004/banna @DevTwitter | &lt;H H/&gt;</description>
-      <enclosure url="https://cdn4.telesco.pe/file/i_ENC5E1wf4bH9sl2UlDsV3HXzzFmlgP2lxeRHCrb7ngGCd6Fr3dStuwSKp7njAcU0BshB3K3W1-1EVU4g3Lu38EXEumJLSPWhV9pqEgxSCV9cCwVKnU1tLIlogcIMOXgt1ENSGC9s7IOW-f2wzbOApZhbd2zi1DMq_qgEW2jFLR0Ev747Qr4n8DXjqxsA4ShmLppooFrX_jzRrNKR8XbQeFFgneqYCCpEZqEuKZuB0xIESiJ3lcwDtqHtgBobaXEnOJioM-WdgvZ3JQxrRMypAKEcdurLXrhL2R-f2UjUjeLbP0sclKMnP91L-ezx8-axb2icK6nYiNRSmZmBLR8Q.jpg" type="image/jpeg" length="0"/>
-    </item>
-    <item>
-      <title>github.com/tahadavari/AiFortress با این وضعیت بن شدن Claude می‌تونید از این ریپو…</title>
-      <link>https://t.me/devtwitter/14002</link>
-      <guid isPermaLink="true">https://t.me/devtwitter/14002</guid>
-      <pubDate>Sun, 22 Nov 2026 15:49:01 GMT</pubDate>
-      <description>github.com/tahadavari/AiFortress با این وضعیت بن شدن Claude می‌تونید از این ریپو استفاده کنید و احتمالشو کم کنید این ریپو چیکار میکنه اگه ip شما لیک داشته باشه یا تایم زون شما با ip شما هماهنگ نباشه کل پروسه های claude از جمله claude desktop claude code cli و .... بسته میشن درجا @DevTwitter | &lt; Mikaeel /&gt;</description>
-    </item>
-    <item>
-      <title>یه چیزی که توی کار DevOps به مرور برام پررنگ‌تر شده، اینه که: سبز بودن سرویس همی…</title>
-      <link>https://t.me/devtwitter/14001</link>
-      <guid isPermaLink="true">https://t.me/devtwitter/14001</guid>
-      <pubDate>Sun, 22 Nov 2026 14:30:11 GMT</pubDate>
-      <description>یه چیزی که توی کار DevOps به مرور برام پررنگ‌تر شده، اینه که: سبز بودن سرویس همیشه به معنی سالم بودن سیستم نیست! خیلی وقت‌ها ما مانیتورینگ رو راه‌اندازی می‌کنیم، Grafana و Prometheus بالا میاریم، کلی داشبورد خوشگل درست می‌کنیم و وقتی همه‌چی سبزه، خیال‌مون راحت می‌شه. ولی واقعیت اینه که ممکنه: * سرویس Active باشه ولی عملاً به درخواست‌ها جواب نده. * دیتابیس Running باشه ولی کوئری‌ها با تأخیر غیرعادی اجرا بشن. * ممکنه Cron Job اجرا شده باشه ولی خروجی مورد انتظار تولید نشده باشه. * بکاپ با موفقیت اجرا شده باشه ولی فایل خروجی قابل Restore نباشه. * ممکنه API در دسترس باشه ولی ارتباطش با سرویس‌های وابسته قطع شده باشه. به نظرم تفاوت یه مانیتورینگ معمولی با یه مانیتورینگ درست، دقیقاً همین‌جاست. ما نباید فقط وضعیت سرویس رو چک کنیم؛ باید نتیجه‌ای که اون سرویس قراره تولید کنه رو هم بررسی کنیم. چند تا نکته که به نظرم تو طراحی مانیتورینگ باید جدی بگیریم: ۱. فقط به Process و Port اکتفا نکنیم؛ Health Check واقعی داشته باشیم. ۲. خروجی Jobها رو بررسی کنیم، نه فقط زمان اجرای اون‌ها رو. ۳. برای Alertها اولویت تعریف کنیم. قرار نیست برای هر اتفاق کوچیکی SMS بگیریم! ۴. برای هر هشدار مشخص باشه چه کسی باید پیگیری کنه و قدم اول چیه. ۵. مانیتورینگ رو تا جای ممکن از دید کاربر نهایی ببینیم، نه فقط از دید سرور. @DevTwitter | &lt; Iman Jafari /&gt;</description>
-      <enclosure url="https://cdn4.telesco.pe/file/sAu71HqdtKq73cdtWUlT4n7JnxFCYLu9c7akBq6B3ijAZJdijMWEOSBUuncLJDfSgyM6Df_5k3ks847NPfN_IJYSBkUM1uUKf978cm1CHNnyboBFNWNECmqMmFar0Fhfl2fJ0RzVJuScdaT2jrSF0yTPCIlf48Fk2RbztAdmLK1BRRxS3QnGRCETAzKP-0QCbce5F_vSML8KnM0DQl5LZYmudou6CTO8HdNdgnFkrRLYUsujtz5jsNJQgE5omGdM2LT39i0x6OIw8JLJh3-2YqyYaainV4zZtipFJD3j5cuw1XBclDPw1TgeyUctO0iod5jmgZDMvQGYiiJodPNTpg.jpg" type="image/jpeg" length="0"/>
-    </item>
-    <item>
-      <title>می‌تونی هر سی‌تا مرغ رو برسونی به قاف؟ 🪶 یه بازی ساختم به اسم «سیمرغ». سرور ندا…</title>
-      <link>https://t.me/devtwitter/14000</link>
-      <guid isPermaLink="true">https://t.me/devtwitter/14000</guid>
-      <pubDate>Sun, 22 Nov 2026 12:33:22 GMT</pubDate>
-      <description>می‌تونی هر سی‌تا مرغ رو برسونی به قاف؟ 🪶 یه بازی ساختم به اسم «سیمرغ». سرور نداره و به‌جای دیتابیس هم از S3 استفاده کردم؛ کلش روی Edge اجرا می‌شه. نصب و ثبت‌نام نمی‌خواد؛ یه دست بازی کن ببین توی جدول چندم می‌شی: 🌐 بازی سیمرغ &amp;rlm;</description>
-      <enclosure url="https://cdn4.telesco.pe/file/pHNI35R36nMh0ytq2Lwt7lEXF2ZdzhqzcM8CP3rG_KzXJiSC7pVGfpU99dGEj824aifYZDZnCXd1eb_4eqCz7tKU3U2_u6A7uZxsp7oaDskzbMsUNOX5xdCH5CYFC1mWJgxQC3uAV4fD-bEKg-9TyWmYNscNq2LX_uFqBm6Q8ndvy3lJ42FGNjWoHlnF_Ht7VJQFTWnp_Zxmz7defXgIOsleW8Owx1F5i89owRC1aQOTWciwEim2wyKegbZLOSecWVVYMY1L-syHnOWbDLPyyQBEtjIsa3sC9j2e6wV5gMqEULvjib826li42KfFz-Xe-7I3B6JzDlUPuriD36HUVg.jpg" type="image/jpeg" length="0"/>
-    </item>
-    <item>
-      <title>نسخه جدید PHP، یعنی PHP 8.6، فقط چند قابلیت سینتکسی به زبان اضافه نکرده، بلکه ام…</title>
-      <link>https://t.me/devtwitter/13999</link>
-      <guid isPermaLink="true">https://t.me/devtwitter/13999</guid>
-      <pubDate>Sun, 22 Nov 2026 11:45:12 GMT</pubDate>
-      <description>نسخه جدید PHP، یعنی PHP 8.6، فقط چند قابلیت سینتکسی به زبان اضافه نکرده، بلکه امکانات جالبی برای نوشتن کدهای تمیزتر، مدیریت بهتر منابع و توسعه سیستم‌های مقیاس‌پذیر ارائه داده. چند مورد از قابلیت‌های جدید این نسخه: - قابلیت Partial Function Application برای ساخت Closure بدون نیاز به نوشتن فانکشن‌های اضافی - قابلیت Time\Duration برای مدیریت دقیق بازه‌های زمانی - قابلیت Polling API برای مدیریت کارآمدتر ارتباطات I/O و تعداد زیادی اتصال هم‌زمان - قابلیت clamp() برای محدود کردن مقادیر به یک بازه مشخص - بهبودهای Reflection و پراپرتی‌های Readonly - قابلیت‌های جدید رمزنگاری و امنیت - بهینه‌سازی‌های عملکردی در بخش‌های مختلف PHP البته در کنار قابلیت‌های جدید، تغییرات ناسازگار با نسخه‌های قبلی، موارد Deprecated و نکاتی که هنگام مهاجرت به این نسخه باید در نظر گرفت هم اهمیت زیادی دارند. در مقاله جدید باورژن، تمام این تغییرات رو با مثال‌های عملی بررسی کردم. از نحوه استفاده از قابلیت‌های جدید گرفته تا مقایسه با روش‌های قبلی و بررسی تاثیر این تغییرات در پروژه‌های واقعی. اگر با PHP کار می‌کنید، پیشنهاد می‌کنم این مقاله رو مطالعه کنید. مطالعه مقاله: https://baversion.com/blog/php-8-6-features @DevTwitter | &lt; Mojtaba Pakzad /&gt;</description>
-      <enclosure url="https://cdn4.telesco.pe/file/LdNbcWjQ2llrxA3YakFGuQ0MXA1EoEWs1OrInNVgt1kuEPyPe4XaJXhOLFlIhhagWQaQPbtEcCe7jtybaHAVlNzfO7TGQvz0fDCftqcarcqNfbAHzCAI0EiikfEaksLn_m_OUuiaCooKKBRqQaDmCPY3FkYHYsGBGYyzAzopAUZR1MpiVTjZl2sdeHXQM9JRucyXisqssa7AU9y_xr5cXifTvCapREwA5kKSvfL7lJ7BLzBjWQHVul2as4xVHBRktYlACCzAk_gJVoP1JotL5JhWyLVJPiHYYpK-wfZmgOkV96pAmrtDw7okhzyMz0B6uSqq8ejDJ3-0BKeI6YeaKQ.jpg" type="image/jpeg" length="0"/>
-    </item>
-    <item>
-      <title>اگر همکار واقعی میخواید، از OpenBot استفاده کنید! پروژه OpenBot یک پلتفرم برای ا…</title>
-      <link>https://t.me/devtwitter/13998</link>
-      <guid isPermaLink="true">https://t.me/devtwitter/13998</guid>
-      <pubDate>Sun, 22 Nov 2026 10:02:46 GMT</pubDate>
-      <description>اگر همکار واقعی میخواید، از OpenBot استفاده کنید! پروژه OpenBot یک پلتفرم برای ایجاد و مدیریت AI Coworkers هستش که به هر ایجنت یک محیط کاری شبیه مرورگر، ابزار و کلی فایل اختصاص میده. بخش های اصلی: بخش computer Use: تعامل ایجنت با مرورگر، فایل‌ها و محیط اجرای دستورات. بخش MCP Integration : اتصال به ابزارها و سرویس‌های خارجی از طریق MCP. بخش Human-in-the-Loop: امکان مشاهده عملکرد Agent و تایید اقدامات حساس بخش Multi-Agent Support : پشتیبانی از Agentهای ساخته‌شده با فریم‌ورک‌های مختلف. بخش Scheduled Tasks: تعریف فعالیت‌های زمان‌بندی‌شده برای اجرای خودکار وظایف. بخش Security &amp; Governance: تعریف سیاست‌های دسترسی. بخش Generative UI: نمایش خروجی‌ها در قالب رابط‌های تعاملی. @DevTwitter | &lt; Ali Nazarizadeh /&gt;</description>
-      <enclosure url="https://cdn4.telesco.pe/file/CVA9tD2c-6aELEaka13-v1yVScaPxhXqaazsOV141H8UP0B6uvTGgRc34C-Uz1LrA-3d97C-iTUofVlTnfMohwwy9S0F17qffVGLPKX6HCg6PlV_oJtD5IwkNmtrZn5ax1Cj5SykrhTpOKElGgoMvWsCAk4E4Zve9SKMfX1Ek569dJp4ho9TRx7Hb75CLt-YARcVJSSjRCHWTw2Kw0jeCPQPkCWMhNyXXUYIqbsjseyGd4k3k8vKnROVqORzJL7hn6lYCNWQ7xtF9OATZfm-a6W3XbS7QenVtF6ZafugsrEW96eolZ0zJgJuyS_uOZXdMaF44Xd2hgBCJ3f2CcDIpA" type="image/jpeg" length="0"/>
-    </item>
-    <item>
-      <title>🚀 وبینار رایگان «نقشه راه شغلی علم داده در ۱۴۰۵» 📊 🎯 به دنیای علم داده (Data …</title>
-      <link>https://t.me/devtwitter/13997</link>
-      <guid isPermaLink="true">https://t.me/devtwitter/13997</guid>
-      <pubDate>Sun, 22 Nov 2026 09:32:35 GMT</pubDate>
-      <description>🚀 وبینار رایگان «نقشه راه شغلی علم داده در ۱۴۰۵» 📊 🎯 به دنیای علم داده (Data Science) علاقه داری، اما نمی‌دونی از کجا شروع کنی، چه مهارت‌هایی یاد بگیری و چطور وارد بازار کار بشی؟ 💡 در این وبینار بررسی می‌کنیم: 🔹 آشنایی با مسیر شغلی #علم_داده و فرصت‌های بازار کار 🔹 مهارت‌ها و ابزارهای موردنیاز یک متخصص علم داده 🔹 نقشه راه یادگیری علم داده از مبتدی تا حرفه‌ای 🔹 مسیر ورود به بازار کار و ساخت رزومه حرفه‌ای 🔹 اشتباهات رایج در مسیر یادگیری و انتخاب بهترین نقطه شروع 🗓 دوشنبه ۲ آذر | ساعت ۱۸:۰۰ ⏰ 🎁 ثبت‌نام رایگان فقط 👈 ظرفیت محدود 🟢 لینک ثبت‌نام: 👈 برای ثبت‌نام اینجا کلیک کنید ➖ ➖ ➖ ➖ ➖ ➖ ✨ موسسه آموزشی توسعه</description>
-      <enclosure url="https://cdn4.telesco.pe/file/UsFysznmuh6X7ulI_7MjmufbTijABNp8eLo9uLGgXk70K78RJUZ9bJ_YwSGiz8KB0if6498zhias3gbgZChk1yXlNNMdgQ90iB7Xxh_TvPCKvWXAZgW2w4ZYOE80VVg7nHfSaEhhS2RwhN1_prw70ta3rIoEMLJFqCHiyWH2_dk7LI0TJb1fYxvtwvN_SwEOL-yqcS49D-pXpxZFevEA6xPR0GDg0Iy1v52W1Npzy89wKWKzxXB7WRHyuPHACncjuA9mJW-TasQXQ_Z0w7Kn-9RApjCm5dflhx24OKYPAVA1aF--z8wcX7ZZOszoIQWVkcl7QY-2ilsQhuUgNzOR_w.jpg" type="image/jpeg" length="0"/>
-    </item>
-    <item>
-      <title>مدتیه روی پروژه‌ای کار می‌کنم که خوشحالم امروز می‌تونم معرفیش کنم: Kavero یک فضا…</title>
-      <link>https://t.me/devtwitter/13996</link>
-      <guid isPermaLink="true">https://t.me/devtwitter/13996</guid>
-      <pubDate>Sun, 22 Nov 2026 09:04:21 GMT</pubDate>
-      <description>مدتیه روی پروژه‌ای کار می‌کنم که خوشحالم امروز می‌تونم معرفیش کنم: Kavero یک فضای کاری طراحی (Design Workspace) متن‌باز که با هدف ترکیب طراحی بصری و هوش مصنوعی ساخته می‌شه. به‌عنوان یک توسعه‌دهنده، بارها برای ساخت محتوای بصری، پست‌های شبکه‌های اجتماعی، تصاویر تبلیغاتی، کاور، کاتالوگ و سایر دارایی‌های گرافیکی با ابزارهای مختلف سروکار داشتم. چیزی که دنبالش بودم، ابزاری بود که هوش مصنوعی رو صرفاً به یک تولیدکننده تصویر محدود نکنه، بلکه اون رو به بخشی از فرایند واقعی طراحی تبدیل کنه. ایده‌ی Kavero از همین‌جا شکل گرفت. با Kavero می‌تونی: - طراحی‌های بصری رو با استفاده از متن، اشکال، تصاویر، لایه‌ها و صفحات ایجاد و ویرایش کنی. - با کمک هوش مصنوعی تصاویر تولید کنی و مستقیماً وارد محیط طراحی کنی. - از Canvas Copilot برای تعامل با طرح‌ها و ویرایش اون‌ها از طریق دستورات متنی استفاده کنی. -️ تصاویر رو به اجزای مجزا تقسیم کنی و روی عناصر بصری به‌صورت مستقل کار کنی. - از ارائه‌دهندگان و مدل‌های مختلف هوش مصنوعی استفاده کنی. - کلیدهای API خودت رو وارد کنی و کنترل بیشتری روی زیرساخت هوش مصنوعی داشته باشی. - پروژه رو به‌صورت محلی اجرا کنی یا با Docker روی زیرساخت شخصی خودت میزبانی کنی. یکی از اصول اصلی Kavero اینه: ابزارها باید در خدمت خلاقیت شما باشن، نه اینکه شما رو به اکوسیستم خودشون محدود کنن. Kavero یک پروژه متن‌بازه و چشم‌انداز بلندمدتش ایجاد یک فضای کاری منعطف برای ترکیب طراحی، هوش مصنوعی و تولید محتوای بصریه. این تازه شروع راهه و هنوز ایده‌های زیادی برای توسعه‌اش دارم. خوشحال می‌شم نظرتون رو بدونم و اگر به این حوزه علاقه‌مند هستید، پروژه رو دنبال کنید. گیت‌هاب پروژه: https://github.com/upstandplatform/kavero @DevTwitter | &lt; Morteza Bagheri /&gt;</description>
-      <enclosure url="https://cdn4.telesco.pe/file/kPymqk-wQSwdgIz32XSuw3P4mMmZL0ee8tA5duMalEBrdggO8geWQDK6DmVtZcYeHipw6-nMXi2C9a0Xw6V7APQllVlthJo5AvvcF5R0FuPh72FUYgpMBWdCvXJOsVgJC3zin5K4neY1dtYg2cgmHJj0PseecpdQ1keXSDqEp4w-87uL3OSMsaCshw_G_4uUkKelBXqeuawj-VgmqZzRdSKoU8FdIufjmqUqBJ1ejY5EX14KQ7S5c800FFpDxB4838asOqG-6FZmJb1mhzncuGV6llpBxM6-9JUPZcdYbXLcWqbxrCMAYIdcGBQHZZRRf99s5m7oTpHkH4DoMa5nGA.jpg" type="image/jpeg" length="0"/>
-    </item>
-    <item>
-      <title>میخوای بدونی قیمت خونه‌ات چنده؟ 💢 قیمت خونه‌ای که دیدی واقعا منطقیه؟ محله‌ش چقد…</title>
-      <link>https://t.me/devtwitter/13995</link>
-      <guid isPermaLink="true">https://t.me/devtwitter/13995</guid>
-      <pubDate>Sun, 22 Nov 2026 08:34:13 GMT</pubDate>
-      <description>میخوای بدونی قیمت خونه‌ات چنده؟ 💢 قیمت خونه‌ای که دیدی واقعا منطقیه؟ محله‌ش چقدر برای زندگی خوبه؟ 📍 با پنجره قبل از معامله، خونه رو دقیق‌تر بررسی کن: • تخمین قیمت و مقایسه با بازار • ارزیابی کیفیت محیط و دسترسی‌ها • امکانات نزدیک و آگهی‌های مشابه • نقشه قیمت محله‌های تهران فقط مشخصات آپارتمانت رو وارد کن و گزارشش رو ببین قبل از خرید خونه، اول پنجره‌اش رو باز کن برای ارزیابی ملک خود، کلیک کنید قدرت گرفته از کارخانه هوش مصنوعی ایران @panjereh_amlak</description>
-      <enclosure url="https://cdn4.telesco.pe/file/S7i83uxTuTU3Sm3KoGgBnWxMdm7wanCojJgggxiY8A-vC6S5dIWQY_ac7YHTR_57wsuxAodAYhUzw_q1vA2cYuffbeFJk47FStehfq4bDBXLPIywudlffjk6LrGShEw9jkHGODFDXPrZPwVq8osPEXgZ0X0IJruqJwFG5LmZ6wbKDpvj3cSjn9sI3jsXveOlAyTIec4bllSPES-sBvOGnax_G5308luDvb3SNbOwU2H6XEqwrZxnLHozVxcC6qKEDJsLUgSJ0q4OGVjl-SS-3MyF2ro4eoNnBJRqiU5qO_3596hZh4bDqepPqVFXLLcXcCnDZznr_hz4JMCN5P3M2g.jpg" type="image/jpeg" length="0"/>
-    </item>
-    <item>
-      <title>یک مهندس ایرانی دواپس به اسم حسین مرجانی برای خودش داره بازیهای مینیمال درست می‌…</title>
-      <link>https://t.me/devtwitter/13994</link>
-      <guid isPermaLink="true">https://t.me/devtwitter/13994</guid>
-      <pubDate>Sun, 22 Nov 2026 07:41:02 GMT</pubDate>
-      <description>یک مهندس ایرانی دواپس به اسم حسین مرجانی برای خودش داره بازیهای مینیمال درست می‌کنه، اسمش رو گذاشته چوگان، ندیدم توی توییتر کسی ازش حرفی بزنه! خیلی کارش جالبه، آدرس گیتهاب چوگان: https://github.com/choganhq/chogan @DevTwitter | &lt; حمید کرد /&gt;</description>
-      <enclosure url="https://cdn4.telesco.pe/file/CEe7beCZ4Vtp0sgIhdt7UicisIEslWdqa9F57ChHA_NkmcvYVXwUIt0pyTYaa0E5Wc2Jqt1jRkaHsQmmUtsaiOUItwYkOyxH96Dad8JrLgkyYQxps98j9u8mBIxhMl56MvBTkE4_X4Tle4aP8Vu3xVRxSlyq2UZxnH4tF-6niTPym9zaMgJY-FAdEtIjX2GvrhtP7_XhCa8LjetPHoYVkVqTqqygRebMrSi5T4xya3EcmFHjgGJ--MgdZW1ozLDXOB6cZxcTZAiCYCvAfrqHQmlr82XFun1da-Cqs_oS4iqkmpXAZYZ6_rMeMa9iTqWm3BlI6fjgwfGdrWqwxGBXwQ.jpg" type="image/jpeg" length="0"/>
-    </item>
-    <item>
-      <title>یه ریپوی جدید روی گیت‌هاب ساختم به اسم cilla-apps که قراره توش یه سری اپلیکیشن و…</title>
-      <link>https://t.me/devtwitter/13993</link>
-      <guid isPermaLink="true">https://t.me/devtwitter/13993</guid>
-      <pubDate>Sun, 22 Nov 2026 05:39:02 GMT</pubDate>
-      <description>یه ریپوی جدید روی گیت‌هاب ساختم به اسم cilla-apps که قراره توش یه سری اپلیکیشن واقعی و کاربردی با مدل‌های تبدیل متن به گفتار فارسی سیلا (Cilla) بسازیم. اولین اپش همین الان آماده‌ست: یه دستیار صوتی فارسی کاملاً آفلاین که بدون هیچ سرور ابری روی سیستم خودتون اجرا می‌شه: تشخیص گفتار فارسی (با Whisper یا مدل فارسی Nemotron خودم) مدل زبانی لوکال با Ollama یا llama.cpp و مدل Cilla Mini (فقط ۱۸ میلیون پارامتر!) که مستقیم داخل مرورگر با WebAssembly و تأخیر حدود ۲۰ میلی‌ثانیه فارسی صحبت می‌کنه. قراره به مرور اپ‌های جذاب بیشتری هم به این ریپو اضافه کنیم (مثل دوبله زیرنویس داخل مرورگر، کتاب‌خوان صوتی، اکستنشن مرورگر و...). اگه ایده باحالی دارید یا دوست دارید با مدل‌های سیلا چیزی بسازید و به این ریپو اضافه کنید، خیلی خوشحال می‌شم PR بدید یا توی ریپو مشارکت کنید! ویدیوی زیر یه دمو ساده از این personal assistant هست. البته صدای اون assistant یه کمی اکو داره، اون به‌خاطر تنظیمات کامپیوتر من بود وقتی داشتم ضبط می‌کردم. لینک گیت‌هاب: https://github.com/mallahyari/cilla-apps مدل Cilla Mini روی هاگینگ‌فیس: https://huggingface.co/mehdi-hf/cilla-mini @DevTwitter | &lt; Mehdi Allahyari /&gt;</description>
-      <enclosure url="https://cdn4.telesco.pe/file/seaVqMhqVeAnalpoto82lMvD91Sn2NzKHtwRRh7UiM1FBuEDUiFde3lQ0gCkbbuCfTkkhzawAjE68B6kfElE69J-5RnKJRycw8mroOsSXi8nh8bFmrcf2irGx-bmQ4IbjLZUM4KgJS5O3EMSGFxNDP-w_YrdwR6DzNXjG2C-1yK1DYFWzzIi_K3ZMx19eoBVep8TV7ShNViCDkWRcBgQmAJ4lm_CcPgymCDkQ-1I7fcP5fJJmIx6bh44orVcbldRyLXks6On8vXKR_NeHlZn6u0HfSgCCEo-LA08ugT5yrpnJ1hIIbAr_1FcWoOERNQ0hiSyRz1MGHNfpfQzraklgQ" type="image/jpeg" length="0"/>
-    </item>
-    <item>
-      <title>#کدبوک راهنمایی برای عبور از کدنویسی صرف و تبدیل شدن به یک مهندس نرم‌افزار حرفه‌…</title>
-      <link>https://t.me/devtwitter/13992</link>
-      <guid isPermaLink="true">https://t.me/devtwitter/13992</guid>
-      <pubDate>Sat, 21 Nov 2026 20:02:05 GMT</pubDate>
-      <description>#کدبوک راهنمایی برای عبور از کدنویسی صرف و تبدیل شدن به یک مهندس نرم‌افزار حرفه‌ای، با تمرکز بر اصول، تفکر مهندسی و ساخت نرم‌افزارهای قابل‌اعتماد: - آشنایی با اصول طراحی نرم‌افزار، معماری و حل مسئله - یادگیری تست، دیباگ، Refactoring و نوشتن کد قابل نگه‌داری - درک مفاهیم کیفیت نرم‌افزار، مستندسازی و همکاری تیمی - مناسب برای برنامه‌نویدهایی که می‌خوان فراتر از نوشتن کد، مهندسی نرم‌افزار رو اصولی یاد بگیرن * فایل PDF این کتاب رو میتونید از کانال DevBooks که لینکش این زیر هست دانلود کنید. DevBooks: https://t.me/+kUnIvAQ3HWgwYjk8 @DevTwitter</description>
-      <enclosure url="https://cdn4.telesco.pe/file/ChlF8skhvhhwM0RyL9iCC5Y5p0qducZyXLQqx7pd1B89_cmZ5GmhSjs-pOdNikAiWvHnTYmzb4v3MLAc5sRpnaPZNF0Ou-qXym0psLavBEhqifqSA8IZdW-f8SIdID5foHJuZ8KJzVI7kKdORlkEqMZQ2W09mMyYOsTDZwVGrq8PJNxX2OIfCw1AkHhegFvbKc4j_IWEuSPOdEkHH3mrKVOSn2zhQB_i7CInlxYPbFhmcxqW7YfQ0VVESK2ad_3nzxouJqIJJ6wn9M2S8hgjLlmmWx-oIzobUfNMvg6fcxe4RmJJMlD7Kfafs5VaGLuIOsMv1EiovITDIynyqp1pzw.jpg" type="image/jpeg" length="0"/>
-    </item>
-    <item>
-      <title>توی پروژه‌های Go، وقتی تصمیم می‌گیریم استفاده از ORM رو کنار بذاریم و مستقیماً ب…</title>
-      <link>https://t.me/devtwitter/13991</link>
-      <guid isPermaLink="true">https://t.me/devtwitter/13991</guid>
-      <pubDate>Sat, 21 Nov 2026 19:33:33 GMT</pubDate>
-      <description>توی پروژه‌های Go، وقتی تصمیم می‌گیریم استفاده از ORM رو کنار بذاریم و مستقیماً با SQL کار کنیم، کنترل بیشتری روی Queryها داریم؛ اما در عوض، مسئولیت بررسی درستی اون‌ها هم بیشتر می‌شه. مثلاً ممکنه یک تغییر کوچیک در Modelها یا Database Schema باعث بشه یکی از Queryهای قبلی دیگه معتبر نباشه. مشکلی که معمولاً فقط در زمان اجرای برنامه (Runtime) خودش رو نشون می‌ده و ممکنه حتی از زیر دستمون در بره. مخصوصاً در پروژه‌های بزرگ، بررسی تمام این حالت‌ها کار ساده‌ای نیست؛ مگر اینکه برای تمام مسیرهای مرتبط Integration Test داشته باشیم. توی تجربه‌ای که با Rust داشتم، با قابلیت جالبی در sqlx آشنا شدم به اسم Compile-Time SQL Verification. این قابلیت Queryهای SQL رو در زمان کامپایل بررسی می‌کنه و خطاهایی مثل وجود نداشتن یک Table یا Column، یا اشتباه بودن Syntax رو قبل از اجرای برنامه تشخیص می‌ده. همون موقع به این فکر کردم که جای چنین قابلیتی در Go خالیه. برای همین شروع کردم به ساختن sqlcheck؛ یک Static Analyzer که Queryهای SQL رو با Schema واقعی PostgreSQL اعتبارسنجی می‌کنه تا بتونیم بخشی از خطاهایی رو که معمولاً در Runtime متوجهشون می‌شیم، زودتر پیدا کنیم. در حال حاضر sqlcheck می‌تونه موارد زیر رو تشخیص بده: خطاهای SQL Syntax نامعتبر بودن نام Table یا Column ناسازگاری Typeها عدم تطابق تعداد پارامترهای Query با آرگومان‌های Go برای استفاده هم می‌تونید به‌سادگی در کنار go vet اجراش کنید: o vet -vettool=$(which sqlcheck) ./... البته پروژه هنوز محدودیت‌هایی داره. در حال حاضر فقط از PostgreSQL پشتیبانی می‌کنه و Queryهایی که به‌صورت Dynamic ساخته می‌شن (مثل fmt.Sprintf یا String Concatenation) قابل بررسی نیستن. خوشحال می‌شم امتحانش کنید و نظرتون رو درباره‌ش بدونم. اگر براتون مفید بود، ممنون می‌شم با یک ستاره از پروژه حمایت کنید. https://github.com/adel-hadadi/sqlcheck @DevTwitter | &lt; Adel Hadadi /&gt;</description>
-      <enclosure url="https://cdn4.telesco.pe/file/rgskKXGxpAco8dd9R9a3wZIIyn6H3nUT41XrFql7RvwQ47lrp8OauKWm3NdJMoowF2XdR4TDMNFfUPm4DmeR0U5GnJeElfR0M7PJHkazD27c84cRvYabwA9seRq04urtc3zEoZcyctcUstdlTe9N9jYY2s84lgIyGONKkdMh3nXbYQJW-36kRJ8j1cj4vCHDWf7RmKtPUXJXlUAf-ztzjqmLSJi8Uku3iYbmc0C8MwLaz9Uzd4-0c3PHkCxr573UpUHnh9rkprnanYaJlxo_7CZq6ljoMDegka__sE87P2bFDqqXDv6qFnaMS9sxjGK3TiGdb0hgMUocRlHuvBedJw.jpg" type="image/jpeg" length="0"/>
-    </item>
-    <item>
-      <title>🔥 کوئرا به مناسبت بلک‌فرایدی توی بزرگ‌ترین تخفیف سالشه! 🚀 اگه می‌خوای برنامه‌ن…</title>
-      <link>https://t.me/devtwitter/13990</link>
-      <guid isPermaLink="true">https://t.me/devtwitter/13990</guid>
-      <pubDate>Sat, 21 Nov 2026 17:34:46 GMT</pubDate>
-      <description>🔥 کوئرا به مناسبت بلک‌فرایدی توی بزرگ‌ترین تخفیف سالشه! 🚀 اگه می‌خوای برنامه‌نویسی ، هوش مصنوعی یا یه مهارت جدید یاد بگیری، الان بهترین فرصته! 🎯 همه دوره‌های کوئرا کالج ۵۰٪ تخفیف دارن! تازه با انتخاب دوره‌های بیشتر، تخفیفت به ۶۰٪ و بعد ۷۰٪ می‌رسه! 📚 از پایتون و تحلیل داده تا فرانت‌اند، Agentic AI، هک و امنیت و وایب‌کدینگ! 💳 پرداخت قسطی با اسنپ‌پی ⏳ الان با تخفیف ثبت‌نام کن، هر وقت خواستی یاد بگیر! 🔗 https://quera.org/r/awbv5</description>
-      <enclosure url="https://cdn4.telesco.pe/file/U1VQ74A3AjV_UejYN4oSxHr7RtksO7sGZUwRJy5ZKMgV1pkR0zvawkrL7d1pPNZwy4ZY5F55e4EV_1MblsZTE5PtfvhRlMXjI5wlQ_Sh1apYAgI6ydQ-3HZggnZ6dhV3DEkWpyrHvp1NMp2frisJtHspQ0wUGDmM3niwVLdByBU4uc-MfsniCMKzeE0s95wkTDZpNvpbpO4ngKtT6fa7FmGz2TiIBq6AGGagE8_kOH0jckwia5qknaDf4wiFLfZ4ryXRPyx0hhctQTPn0sJELPovDgI22NEIZDLcdcmnEUhRfuRhQYV4w21Y4CZqBqgD43eBQmobqZJa3N9JIMwrzg.jpg" type="image/jpeg" length="0"/>
-    </item>
-    <item>
-      <title>اگه با Claude Code یا Codex یو‌آی ساختی، احتمالاً اون حس آشنا رو داری: «کار می‌ک…</title>
-      <link>https://t.me/devtwitter/13989</link>
-      <guid isPermaLink="true">https://t.me/devtwitter/13989</guid>
-      <pubDate>Sat, 21 Nov 2026 16:00:30 GMT</pubDate>
-      <description>اگه با Claude Code یا Codex یو‌آی ساختی، احتمالاً اون حس آشنا رو داری: «کار می‌کنه، ولی شبیه یه محصول واقعی نیست.» بنجی تیلور، مدیر دیزاین شبکه اجتماعی X، یک اسکیل منتشر کرده به اسم Stageshow. خلاصه‌ش اینه: صدها تصمیم کوچیکی که خودش موقع طراحی یو‌آی می‌گیره رو نوشته، تا ایجنت هم همون تصمیم‌ها رو بگیره. ۵ تا اشتباهی که یو‌آی ساخت ایجنت معمولاً داره: - خیلی شلوغ، توی هر خونه متن واقعی و همه‌چی چسبیده به هم - خیلی خالی، یه وایرفریم که شبیه محصول نیست - توی قاب، کل اپ کوچیک شده توی یه کارت، مثل اسکرین‌شات - تخت، همه‌چی یه وزن داره - بی‌هویت، استایل برندت هیچ‌جا دیده نمی‌شه نصبش هم یه خطه: npx skills add benjitaylor/skills --skill stageshow @DevTwitter | &lt; Hamzeh Ghoreyshi /&gt;</description>
-      <enclosure url="https://cdn4.telesco.pe/file/MBoVYsK0EKkx4S-duxfiTLdg-gYRHbn0jsaFjw8GM000C_Oq1CuGMs7vhnjyOyll_aJ9oNcUqtbmtGSe5EGT1qx2C9EO0zGDsrPwPMRUAaGhFwHUX0AcJS0V3PLbTNs0fq-fzC0d1abrbogg007be4t2WoGcM2ABGSgV0ppzkCF2C202lAe4je5HFfLeKCvrUNNb5Z0TYOvIZjX9xDCj8AmuFolu8KoaOGHvEZ7WtRtBOr59A97BC9AVIIsthAzl-hXIJUfKQaTN-iGf40FGaI2c0XwoGkf9CSN4aLi8qf4YrX57JkZIiniyxG2EXc6gcJdu8hzHLHN1lyQX9PJGfA.jpg" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/tAGI7MASYfuZCqYubtojicSjseVA0SIpjclYUkefC1VUhryqChgIVDZZj1IR-jEZMl4yExkvhXRpeuRKZR718uDLWuEk9glnX57nLHugMleVcMn0WuJKiJ7crUpiGs3X5SOewrOF_ynOVR6iOwAb8Q_eeO-wusAfX_7Cp446Pvup7hAWC-7SNm1rCcxuFGArfecdRINVSzLtONQ8LEbkfqA3jFoddOCJ59ndPMVbniOHMTvVXXSYYSRVHQwC79xa1fnCPa9w3YRbLt-MYzYVKCKeJyuH8VV_reUVPVcrDnFA8j958YrhzwjmhU-pnUlUtC3OS-fPZyW7rTb0kyvJpg.jpg" type="image/jpeg" length="0"/>
     </item>
   </channel>
 </rss>
