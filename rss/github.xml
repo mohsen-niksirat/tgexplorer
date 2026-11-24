@@ -7,6 +7,30 @@
     <description>Developer community and updates</description>
     <language>en</language>
     <item>
+      <title>CodeGraph — предварительно проиндексированный график знаний кода, автоматическая…</title>
+      <link>https://t.me/github/11838</link>
+      <guid isPermaLink="true">https://t.me/github/11838</guid>
+      <pubDate>Tue, 24 Nov 2026 08:32:33 GMT</pubDate>
+      <description>CodeGraph — предварительно проиндексированный график знаний кода, автоматическая синхронизация при изменениях кода для Claude Code, Codex, Gemini, Cursor, OpenCode, AntiGravity, Kiro, второго пилота и агента Hermes — меньше токенов, меньше вызовов инструментов, 100% локально 🐱 GitHub</description>
+      <enclosure url="https://cdn4.telesco.pe/file/bWSGq2YrFc4DbqQ3wkm_kH1uzIw5rqGrF1YePH-i6Z4f4IKonNSrZcUi09Nkb7jNO51YAofeaCYKQvxxYSoMRGtA78giIZsU58eeAcfa6qO4CK-DmgFIZKn2tHN4H5JAbhO9BOzN5Q0ng0-ZhwF_InBhJ40V066NIOdYECGvOGSLeRrdezzM4zsrnwJ53dT5Uh2Ipz52HrvdWM39GUVFz6OlVYk7OjUZr4lTWWoJiAZFiUXl02HjxQtzIr8CaaGq19sdaBukeJltrHVyhYVt9CpH_dDQCKi9ycognB3cko9SOSbiFAMP_ltqMDIEBVWcGmKn4Dicbg-vCBzjDbYDKQ.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>SysWatch — отслеживайте работу процессора, памяти, дисков, процессов, графическо…</title>
+      <link>https://t.me/github/11837</link>
+      <guid isPermaLink="true">https://t.me/github/11837</guid>
+      <pubDate>Tue, 24 Nov 2026 05:33:51 GMT</pubDate>
+      <description>SysWatch — отслеживайте работу процессора, памяти, дисков, процессов, графического процессора, энергопотребления и сетевой активности в macOS и Linux. Очищайте историю, записывайте сеансы и анализируйте всплески активности с помощью карт эвристических аномалий. SysWatch доступен только для чтения и работает без sudo; доступные измерения зависят от вашей платформы и разрешений. 🐱 GitHub</description>
+      <enclosure url="https://cdn4.telesco.pe/file/ZFalEb2wRQO99m-qPgAhtZRX8lWcOUUGn_2zb2o1Ocp-LwhoMDfml2tMaTmEDlT88HCqppjlahnWj56baMn4zpBNDzD0vzptMrN4iRaZ3ZF-Al2zaQDvppyY5DY6iGeG46jxxrhUESCEDE3BC0TwxOlMIdJr22TqbXN7vqD3jEF5xPjBMr8f9gLVOH7zK8j-q0QLQ-5Lo0IwOlrzEv5pFeGlIHNLJelI6EzL70f44mECz2rnPTYTux5jaFnVKW8wHJvsC6fgb8IVHSUuM7hIcAMtm-sL4KSdshzJcVWdkAM2nGBfo3YC0qTIu9WuIpg8Oj5s5eVe-Bipn_wYOB261A.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>Lanes — одно рабочее пространство. Много агентов. Запускайте множество агентов И…</title>
+      <link>https://t.me/github/11836</link>
+      <guid isPermaLink="true">https://t.me/github/11836</guid>
+      <pubDate>Mon, 23 Nov 2026 21:45:11 GMT</pubDate>
+      <description>Lanes — одно рабочее пространство. Много агентов. Запускайте множество агентов ИИ для кодирования в параллельных потоках: задачи, рабочие деревья, сессии, одна доска. 🐱 GitHub</description>
+      <enclosure url="https://cdn4.telesco.pe/file/HjpxF8qbRKHY5YRi45tdr8GRTYFpmUV6QzEfnDqqZ1Vlw3feoz-U3jPTMe_aPOPGD1xpReNS6ICJg8mH1P6bYzcBB04xBSUdASdCtA6yOVSShgC_9tf6uGkp7iAK1P2REgN8qHApOVPIVLyB9GwPs4GemtQeoQiVX1KSwNm_dWauRzrR0yKUaqAfyVxMYw0hWWlAs3zmgQqpg0EEObGLs1HmwXnGWUXeVCyqY5zdHJBr799serN2xmCc_6EW6bikp6So79a2wGkwcKEaWJdOX95pk5qUXDGN2zzrq_QWZOJZy1hIAy5tJ5-PyhIADir8I_1CbmWkVEzRMtR4Ako-pw.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
       <title>Memoir — это высокопроизводительная система семантической памяти для ИИ-агентов,…</title>
       <link>https://t.me/github/11835</link>
       <guid isPermaLink="true">https://t.me/github/11835</guid>
@@ -52,7 +76,7 @@
       <guid isPermaLink="true">https://t.me/github/11830</guid>
       <pubDate>Mon, 23 Nov 2026 08:31:46 GMT</pubDate>
       <description>424 кинематографических приёма для генерации ИИ-видео Нашли настоящую библиотеку для тех, кто хочет делать ролики с ВАЙБОМ большого кино. Внутри — 424 приёма : движения и ракурсы камеры, переходы, освещение, композиция, цветокоррекция и многое другое. Каждый приём сопровождается примерами и готовыми промптами, которые можно адаптировать под собственные проекты. Особенно полезно для генерации клипов, рекламы и даже короткометражных ужастиков с помощью ИИ. Забираем кинематографическую годноту — тут . 🐱 GitHub</description>
-      <enclosure url="https://cdn4.telesco.pe/file/ZvwsJOAauNm9aoSmeIfYOdiU_ZRnJryoFq8YsN3nOF_Hbwn7360apZ6d3d72bJ5leSYwO3HkPrUGmLUe4eSKT9JQjKlT4vK7_q5yREtzCsN1K52NSmPWuaaPPmzgp74l7DbcgF_MkxmAV7QJPYOtZoebrBHLDET_QOCjB7O8cFHNekUr2O5JjlrH8I_yfEQ78MRHsO8IXZbe3s6K2Ufj7MwOvxpZOvbkwkD-ZrxvM9ZG2dWREJFpYLNmYk8FevMFREDNEJnCZhzl_D1fu6ZaVyD3ztnsLmBjJAqqijyhhvNATdVTFxGMfCEcxGKqIFyvQF16ZfiCOL7_4mr35VDyYA" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/nL53pQmRAQMJPsAzPsu4nXoynG5VBUsCG4bFqici5mVfFMOalWLwTMsl_K9Nu1u4XvvhAYYH9Lc7_mGgCHXGUY6cGGPqL9rqPjLnGVPmT9NIcDm9sxyxi2FgXIJ8ZFK-dxtBqRUylDxDjXZUayz1hBjn8PaaoKyFPV2WgXqwmtMAT8gD-f9MKYFBJ-s2M_ZeSB8datIBhJtxeJPHjKDX5Y6JgjQ2vk_QS40k_kRRtNFQcKgstBFFecsS5br3wnGb5Fne9_zyWMyLSYQ31tm7RPMghbPCJGoe2AucbeTm9H-Uau_nIHCoLb46OXDSBbrxYnptjyeU5MPCR55uUjuCCA" type="image/jpeg" length="0"/>
     </item>
     <item>
       <title>WinBoat — инструмент для запуска Windows-приложений в Linux через контейнеры Doc…</title>
@@ -60,7 +84,7 @@
       <guid isPermaLink="true">https://t.me/github/11829</guid>
       <pubDate>Mon, 23 Nov 2026 05:32:16 GMT</pubDate>
       <description>WinBoat — инструмент для запуска Windows-приложений в Linux через контейнеры Docker/Podman с интеграцией в рабочий стол системы. Возможности ▫️ Элегантный интерфейс : лаконичный и интуитивно понятный интерфейс, который органично интегрирует Windows в вашу среду рабочего стола Linux, создавая ощущение, что это ваша родная операционная система ▫️ Автоматическая установка : простой процесс установки через наш интерфейс — выберите свои предпочтения и характеристики, а мы позаботимся обо всем остальном ▫️ Запускайте любые приложения : если приложение работает на Windows, оно будет работать и на WinBoat. Наслаждайтесь полным набором приложений Windows в виде нативных окон на уровне операционной системы в своей среде Linux 🐱 GitHub</description>
-      <enclosure url="https://cdn4.telesco.pe/file/bOQMCxjRzrUU60T7i7OqlqpZ45DV3LBeT9ZmR25weeYCEbjxw8kDD-Tjr-NQ1ShSvPBvPR1jSslW29hBtGyW-OUJvii7TOrXCbCHy26u6DMCv3Pqj1dDlL0ROZ3yMo1hmN8BEUdzz9LXx2sEy_FBo7UKC4DS5mZ2BGBK-dgw_MG6XgwrShmgIrzN-M-ZJn3V5cczMWhCN3mhkmeXZ9PAeJjmKiKiia48x3hb9wqqIfurVQJFXm-xq3r2e_vcuU2rTJbiQIx7u0K8s6qGWopDqgfiBaeTpurWzwTldtn5FqoSoy70W_69GVxkx27jquIqDEA3Qxj1QszKlMAKKMo6_g.jpg" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/DSPkt0Tq6VmS1xiXQUWiyejGIumJQvatyL-DTZk--Zv3gcQ9IlFCs7CmjwLiimhmgZPMl5UFLJM0Wgv4Rcd_UlTKRoKHtIyNGpUnGrtOvp3OLvDKwMTVh3PRYZBDOJVp_RYa2nODVik-er7B_4YfealtO7zS_a3DO2vUXlQNQK2SuBYL4oMbbOtcrGv0K5ZGgnS4ktZgsVYZZe--TZ_IjZ4gd5gK2qEXTkB61KolLgWmn1M5YR2m0WW4XpXToG38p8mo0wMm1nWLxdSOwr6K5iJ5T3EEVfs7foP6OEtG-LfELUUqXQY_oh4Gu8GHcmnSFbEsZFLk_M4KeBOds6sMxA.jpg" type="image/jpeg" length="0"/>
     </item>
     <item>
       <title>CodexSaver — это инструмент MCP, который превращает Codex в маршрутизатор с учет…</title>
@@ -68,7 +92,7 @@
       <guid isPermaLink="true">https://t.me/github/11828</guid>
       <pubDate>Sun, 22 Nov 2026 21:45:12 GMT</pubDate>
       <description>CodexSaver — это инструмент MCP, который превращает Codex в маршрутизатор с учетом затрат. Его текущая история развития намеренно ограничена: — выиграйте первое за специалистов, доступных только для чтения, таких как объяснение, поиск и рецензирование. — выиграйте второе за ограниченную, поддающуюся проверке работу над исправлениями. — сохраните рискованное суждение и окончательный обзор в Codex. — Более дешевое выполнение тестов, документации, поиска и пояснений — Codex остается ответственным за архитектуру, безопасность, защищенные домены и окончательный анализ 🐱 GitHub</description>
-      <enclosure url="https://cdn4.telesco.pe/file/chri33OhhhRttCKueD7g-eEruEjg1jL4mRv1vSjgF-CDcaxlIV3SOQrft1fEehNHbRBvQftd-D1A_GDJXIrxCDw5Wiw6Kjn8qMimK9udF3j8KafOwAaES8fzzKF2c-oPuJzTxA8UdTID9-udHMJcb-Ar7CKAE4JOeZa6QSDNJS01_EUvCVMCF2jusrXWoEIMHrIxlMb4GFHpy-D6Ck7uKLbp0HcvgLVizsX8Mt4rIzsCtR2jOC4zO4xjJ6XrJwt3jydIbEiSMD1uWNtUIQGvuTJCMnVbVJDw-k04prqKPhB5GOlFH7VcwDkSxcAVGtP0GzI8SLociU3h_LG5PKB87A.jpg" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/jN_CKqbHbSWbYS93kJ_fCVjQrOmErAFN6U5tjBul7dxy-sSaopkCovzledA5z3SSGr-NxoKkABBJEcvhpF_Et-DnaTvU1Wc4ufCnDEGriFlpLm2ExU8uiLZlg6rX-yrrR4iuPLR05U2p8eQYCzinIGRLLVd9Bk9dsG5WHJlXkv6d9mPcxCTwcdjZvNM-O5QSzcmavkTDnKlGr8KKssiFgr3dro-Ot1M2vi0UDHVorYxnDnf2dTOD1VBctt--JUP11GZuYljWbMHsCA5F1kxH_aPbUeZmHc78xVJv3-J4uQDTAToUGRWsMZelk915jif-vjI2GKJEUcTI8UmhFP1cLQ.jpg" type="image/jpeg" length="0"/>
     </item>
     <item>
       <title>Helmor запускает множество агентов для написания кода параллельно, каждый из кот…</title>
@@ -108,7 +132,7 @@
       <guid isPermaLink="true">https://t.me/github/11823</guid>
       <pubDate>Sun, 22 Nov 2026 08:34:06 GMT</pubDate>
       <description>LynxDB — это однобинарная база данных для анализа логов. Она работает как конвейерный инструмент в стиле Unix, постоянный сервер или распределенный кластер — и все это благодаря одному и тому же механизму запросов LynxFlow. 🐱 GitHub</description>
-      <enclosure url="https://cdn4.telesco.pe/file/XYZ4_ZBBvD90Lqp_S2-g_Ww87BVhfvz9lWrCgeh2b6vn2BnQ0w0F9DqB10Nr6-fbbh_0mIU4JrQgyk4q2dyqjNrFaze-qsfzvstw8AGU-wFGC9L_XR043va6XERa9O5HTZH7ZDympnLfPae0hQ-5a8EXyAFX66lLtusYMKdgCaZbltk9Sb2ZYZoqMCnXvAC_mfJFPke9Nj_1Qf9No3McQTDsWBcSYKu6DGVcuCUyJs0xpTOh-eo-KNd5492ClnroizEYSiC6GFAuovbwmSoMl9WTlryYKjQ8xVNCR1kjzdqrCts7P9bvB0up99fKgmpJW7ma1baJgyZ69iYSoLo1MA.jpg" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/Tucq3gS6pxF705isCy7q8GicHytGHXQpVqa3GzBQRb9sBdciUeLVMIf90JOCvIrNMniAXYvZPE3A24AX4pLstcAuSNrQebdnMerc111n4VQWJHDDIS2MgNzUqIzkfmiif70nWrzxs53Yvqs3FInLKlF6iJuPDvk1sFyhRW7gaAsFAA252R81X-hOLmFoOfbCBKpoO5GuiGDxhTWxW6UutAJ4Z_E1-ohau-_vwWi522AuWrryZqkJwasOagwMAE1tJkKHJnJWChPiGmZOY1znpfj8thsY855FUKO2orE5fmsx_4AyKKS-0kJCUQT1gVqpY5n9KTUV0kfMxCeqXCqG4A.jpg" type="image/jpeg" length="0"/>
     </item>
     <item>
       <title>H4cker — коллекция ресурсов по кибербезопасности, этичному хакингу, цифровой кри…</title>
@@ -116,7 +140,7 @@
       <guid isPermaLink="true">https://t.me/github/11822</guid>
       <pubDate>Sun, 22 Nov 2026 05:34:00 GMT</pubDate>
       <description>H4cker — коллекция ресурсов по кибербезопасности, этичному хакингу, цифровой криминалистике, AI-безопасности и разработке эксплойтов 🐱 GitHub</description>
-      <enclosure url="https://cdn4.telesco.pe/file/FuMZVLyLyEgtHPJzoRoZsIBTLfNEC1r-fcgsj9mbyN-jbwMuYoj6i5yAo3SlcEbqwIJFqMbcqGPtirDU3ZVg9FKs0IXAbgm9p0t1lcKadVZN7TnfVX-e-C0CPOE3xwkeuinBOVEGM1gXubLfUcCVMZmWuu5yMpEkVOWPunoMmFlBLT19vboVHE2XmmNqcGg1mtqe4SqGhGeXaZoV064NUjfKUMJUAHkC4viQiRNR0v3WT46goew8DLgvzGk12ua8_UGGlnTluGUqZeFzzFrM9eKYJkeAuyBUoF430w5gKZ2n5N2aExN2kiSC4t_jPA3m339eHKEWyPnZyYglxC7BZg.jpg" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/dchSyKP5FlUhhvD8z2wLFBh3pq8Z-H5YXrQAKo6oUCV-dEE8eZclN8Ree57gmTY2SIpMNySQSWKuiihkqqy16mUldabVBfhiRgkSi4bMiaxxSCGK3aw4GSXR330JygmNuwwtylxoO8w6xVPiYqmiXMCAYeWjDFC0v-asmpPddvTufvkbBU0ME6EqbYZ4fZ5olkCgQzE0mTIYQtZqMyquH-Hrpe0PQUTRqT3SyMgTzAPE60km-Q_-MmFwtIX1iON77qC-3_f-4lRZZiwW1j8yuOr11GQUGXgvGHq5LwQwSU4zcLyfF0y8ppzMdqNcVxa9GKzuUlTcSFKEM1RZxxWgqA.jpg" type="image/jpeg" length="0"/>
     </item>
     <item>
       <title>Xata — это облачная платформа с открытым исходным кодом для самостоятельного раз…</title>
@@ -141,30 +165,6 @@
       <pubDate>Sat, 21 Nov 2026 17:31:10 GMT</pubDate>
       <description>Dory — это SQL-клиент с искусственным интеллектом для людей и агентов. Dory - это рабочее пространство SQL, где люди могут запрашивать, исследовать и визуализировать данные, и где агенты искусственного интеллекта могут безопасно работать с базами данных через MCP. В отличие от обычного сервера MCP для баз данных, который отправляет результаты запросов только в чат, Dory превращает работу агентов в редактируемые рабочие пространства SQL: вкладки SQL, наборы результатов, диаграммы, сохраненные запросы и контекст выполнения — все это может быть открыто, изучено, изменено и продолжено человеком. Используйте Dory в качестве повседневного SQL-клиента или в качестве уровня выполнения базы данных для таких агентов, как Claude Code, Codex CLI и других инструментов, совместимых с MCP. 🐱 GitHub</description>
       <enclosure url="https://cdn4.telesco.pe/file/beHu5x8UmXqdnMw9T9GCela2S34vkrgvxNAWJhn6uVI2G5BkHcLSZmdylp9SE8R_4HLp3Zd33b_62LXAYpNh6zYaNPIGgpIf6Yql0nqjdYgisLvAv3kBchVWjRRxxaXMvB1e4knvERKHMXptedDsU9k-E2tvGE65S0NqfJYuiqWmmF5SOJi5HqTngvUkLHfd_vUv74RFGcv6eLzNPlqAqg3IJbxbXptFWNnnjROeEuARtTvgrUiRUHOKyw9PX_H0b22NDml3joBLf8TNPiKKnpgSI-Ko2oQxEHNi6NgldxTbsLDTRROEvef9shlGyOoARaueTpTc51Cjh4nqbL4QjQ.jpg" type="image/jpeg" length="0"/>
-    </item>
-    <item>
-      <title>Rs-top — это легковесный удаленный системный монитор без агентов, предназначенны…</title>
-      <link>https://t.me/github/11818</link>
-      <guid isPermaLink="true">https://t.me/github/11818</guid>
-      <pubDate>Sat, 21 Nov 2026 14:32:23 GMT</pubDate>
-      <description>Rs-top — это легковесный удаленный системный монитор без агентов, предназначенный только для чтения. Он предоставляет панель управления с графическим интерфейсом в режиме реального времени для одновременного мониторинга нескольких удаленных хостов через SSH. Созданный под сильным влиянием классических инструментов, таких как top , htop , и btop , он призван обеспечить аналогичный функционал для удаленных серверов. 🐱 GitHub</description>
-      <enclosure url="https://cdn4.telesco.pe/file/VMi-RC8zs2NMj8dIwrke8WO6SkibbBdWH_iqC9ZHJ5PbURHJ4dATZFEW2NmZJhFEmpvRlOrBQXlFg6mk7OYER-ULssIlJMMWGj5pRBo2MUuDRhXJPGHF5zR6h4ht6Kdx7Z2npmO_9s0grocpmll3S4M3n2J9hgf54F5uu5neJ18QYJhW7SRxrmlzAg3v8ok9Xp6jSEGeXolneZZZmdl781IK99Sj8Kbk8LMnh7dXqOZu6PepKh5KZlO0S6bEEoNkQscffwfFaHzzmKUlKRTtB97ORTXJqwqtIT9zATfmqfj220iaVEqZWbP_IEqipAXI7hxQ-PSuHo3jTIm9AsDLmQ.jpg" type="image/jpeg" length="0"/>
-    </item>
-    <item>
-      <title>Scarf — нативное приложение для macOS и iOS для агента Hermes AI — многооконное,…</title>
-      <link>https://t.me/github/11817</link>
-      <guid isPermaLink="true">https://t.me/github/11817</guid>
-      <pubDate>Sat, 21 Nov 2026 11:33:48 GMT</pubDate>
-      <description>Scarf — нативное приложение для macOS и iOS для агента Hermes AI — многооконное, многосерверное (локальное + удаленное через SSH). Чат, панель управления, сессии, память, cron, MCP и многое другое. 🐱 GitHub</description>
-      <enclosure url="https://cdn4.telesco.pe/file/t2Ain6qmqnSF1EaWnle77Vh9jgY4lTV0il_h7hzsWKUXSgtI0YOAqkn6yNzH68nSBb3QO9qP4Qfk9aaQbWIgublVRTxGVb9kjHKZV9_MjvkTFRL5LS6cZRffrt7kymt5LYzsuGQeV1NJfP8wfjmxvMVYwNs_c6l6Aa9qLZnLL0hSeQkoQd62Z7QznIkkc_pCvFmadpzdH6v84Wcxk78TX2te5kK9cesqP-TTii3JCco_DZUwf0dWIyBVGvYY4Pp95A1ormrU3QRW7ikEMLYOdE_9JKunYYVzUgBF_mzd6wlPYOMkbZvCAaFHaYqTgQAOWqJZNU7RuW5g9U95rKj9PA.jpg" type="image/jpeg" length="0"/>
-    </item>
-    <item>
-      <title>Backhaul — молниеносное решение для обратного туннелирования при обходе NAT, опт…</title>
-      <link>https://t.me/github/11816</link>
-      <guid isPermaLink="true">https://t.me/github/11816</guid>
-      <pubDate>Sat, 21 Nov 2026 08:34:58 GMT</pubDate>
-      <description>Backhaul — молниеносное решение для обратного туннелирования при обходе NAT, оптимизированное для обработки большого количества одновременных подключений с поддержкой tcp, tcpmux, udp, udp через tcp, ws, wsmux, wss и wssmux. 🐱 GitHub</description>
-      <enclosure url="https://cdn4.telesco.pe/file/vuqPCHnPrLLXLiVKBaAlYIxbBdG8atpv0M9y8DG6VQ8fmXVsWSu9tuR62gOj_RjpNCpSpdJaCOeS3oT1t8sdLbZP6IdQOrO8fc68fnN_xYmG6VaDp07XM-XfZnmaHhOtGcu3uHfDlR265RMQronLH6iZLwlO2-V9Zwc_dzQ7fOXCaMowRErzHytRz3gBGEK4ul3j2ZfBV1IXlB4RoH42Ell7G_4sUiTKMnWNoowO74TDn2u8KAB1Fj60Q5pPS4FJfjSlVGe--7y8K7C8Ltcc7ZkglFgRm199YUD3G2u5i-p2o-5HxLv1SqgbVBa62LLN499idFIzLQmLCHPbtPIE_A.jpg" type="image/jpeg" length="0"/>
     </item>
   </channel>
 </rss>

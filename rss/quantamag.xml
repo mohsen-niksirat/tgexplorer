@@ -6,6 +6,13 @@
     <atom:link href="https://mohsen-niksirat.github.io/tgexplorer/rss/quantamag.xml" rel="self" type="application/rss+xml"/>
     <description>Illuminating basic science and math research</description>
     <language>en</language>
-
+    <item>
+      <title>https://ift.tt/n1swHIU</title>
+      <link>https://t.me/quantamag/1533</link>
+      <guid isPermaLink="true">https://t.me/quantamag/1533</guid>
+      <pubDate>Mon, 23 Nov 2026 17:10:14 GMT</pubDate>
+      <description>https://ift.tt/n1swHIU</description>
+      <enclosure url="https://cdn4.telesco.pe/file/stO217VpOwqvmOJ-PHIz1YEHeEqDilUTLltt3NHbrzWBUs7c3v81_QO1fy45iHsSyXuKWcqSLZ7mDyf_Sji2oq-u9Up0F7nB1pLGrgFrbsBjK45cuQPyac7Ao1kpL8hLoJodVaLBy9CDnebpwXL6-MdtPuYaPHxn5GKTBCMuMyVCgHa9Jh001KtDkWS381fkdyoulX9u2G7h52zL8Sl4FxNETVE4k3wRo-gYrwUcpftewEeak4y5sLCpyVysgdglHqxQcxNQ9s7jxM5_-FLXsDTrbZTVJXrTIyMgTcfA_-Rc8peSk0OsIP-gfwtjV-seSGnPtGw_LdboiKI9pWCCTg.jpg" type="image/jpeg" length="0"/>
+    </item>
   </channel>
 </rss>

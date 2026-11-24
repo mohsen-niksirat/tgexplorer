@@ -6,12 +6,6 @@
     <atom:link href="https://mohsen-niksirat.github.io/tgexplorer/rss/jixiu.xml" rel="self" type="application/rss+xml"/>
     <description>发一些小众的东西。</description>
     <language>zh</language>
-    <item>
-      <title>#TestFlight 🎦 糖葫芦Haw（THLRedLook） 一款全平台独立短剧聚合播放器 https://testflight.apple.com/jo…</title>
-      <link>https://t.me/jixiu/1012</link>
-      <guid isPermaLink="true">https://t.me/jixiu/1012</guid>
-      <pubDate>Sat, 21 Nov 2026 05:22:38 GMT</pubDate>
-      <description>#TestFlight 🎦 糖葫芦Haw（THLRedLook） 一款全平台独立短剧聚合播放器 https://testflight.apple.com/join/rkvvdp7J</description>
-    </item>
+
   </channel>
 </rss>

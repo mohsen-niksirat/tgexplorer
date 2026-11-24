@@ -7,11 +7,116 @@
     <description>分享 科技、AI、数码、互联网及前沿资讯，分享见闻与实用内容。 📌 群规 • 文明交流，理性讨论 • 禁止刷屏、广告推广、恶意引流 • 禁止黑产、色情、赌博等违规内容 • 禁止宗教政治、键政、人身攻击及恶意争吵 • 违规内容将被删除，严重者移出 📮 科技圈投稿： @zaihuabot 🛠 侵权｜申诉｜客服： @BiuAsstBot 📡 备用频道： @zaihuatg 🤝 广告合作： @zaihua_ad_bot</description>
     <language>zh</language>
     <item>
-      <title>英伟达董事会据称未咨询高管层，决定让 Jensen Huang 复任 CEO 据 Bloomberg 报道，英伟达董事会在未咨询公司高管层的情况下，决定让被免职…</title>
+      <title>Claude Duet 老用户每周领 500 美元额度 11 月 23 日起，Anthropic 向部分 Claude Duet 用户发放推广额度，仅限当日前已…</title>
+      <link>https://t.me/zaihuapd/45337</link>
+      <guid isPermaLink="true">https://t.me/zaihuapd/45337</guid>
+      <pubDate>Tue, 24 Nov 2026 09:15:21 GMT</pubDate>
+      <description>Claude Duet 老用户每周领 500 美元额度 11 月 23 日起，Anthropic 向部分 Claude Duet 用户发放推广额度，仅限当日前已同时开通 Duet 与付费套餐的美国账户，名单已截止，之后新增的 Team 席位或后开 Duet 的 Team 都不算。 · 每周 500 美元，总额上限 3000 美元，按个人每周重置日结算，未用完部分清零不滚存，最后一周可用到 12 月 31 日 · 覆盖 Pro、Max、Ultra 与 Team，Enterprise、政府及公共部门 Team 排除在外 Claude Help Center 🌸 科技圈 · 茶馆 · 投稿</description>
+    </item>
+    <item>
+      <title>Dario Amodei：AI 有望 10 年内攻克癌症等疑难病症 Anthropic CEO Dario Amodei 预测，AI 的进步有望在 10 年内让…</title>
+      <link>https://t.me/zaihuapd/45336</link>
+      <guid isPermaLink="true">https://t.me/zaihuapd/45336</guid>
+      <pubDate>Tue, 24 Nov 2026 08:54:25 GMT</pubDate>
+      <description>Dario Amodei：AI 有望 10 年内攻克癌症等疑难病症 Anthropic CEO Dario Amodei 预测，AI 的进步有望在 10 年内让癌症、阿尔茨海默病、心脏病和精神类疾病成为历史遗迹。 Anthropic 近期收购多家生物技术初创企业，上月披露已启动内部新药研发，并在旧金山设立实验室研究 AI 如何支撑基础生物学研究。Dario 今年 8 月曾在 X 上表示，说服 AI 怀疑者的最好方式就是真正治愈癌症。 新浪财经 🌸 科技圈· 茶馆 · 投稿</description>
+    </item>
+    <item>
+      <title>李彦宏内部讲话曝光：大模型开源意义不大，百度绝不抢开发者饭碗 在内部讲话中，李彦宏对大模型开源与闭源的路线选择以及AI创业者应该专注模型还是应用等业界焦点话题，…</title>
+      <link>https://t.me/zaihuapd/45334</link>
+      <guid isPermaLink="true">https://t.me/zaihuapd/45334</guid>
+      <pubDate>Tue, 24 Nov 2026 07:32:31 GMT</pubDate>
+      <description>李彦宏内部讲话曝光：大模型开源意义不大，百度绝不抢开发者饭碗 在内部讲话中，李彦宏对大模型开源与闭源的路线选择以及AI创业者应该专注模型还是应用等业界焦点话题，发表了自己的看法。李彦宏认为，闭源模型在能力上会持续地领先，而不是一时地领先。模型开源也不是一个众人拾柴火焰高的情况。这跟传统的软件开源一比如Linux、安卓等等很不一样“闭源，是有真正的商业模式的，是能够赚到钱的，能够赚到钱才能聚集算力、聚集人才，闭源在成本上反而是有优势的，只要是同等能力，闭源模型的推理成本一定是更低的，响应速度一定是更快的。…</description>
+    </item>
+    <item>
+      <title>🤖 Anthropic 称内部 Claude 模型发现 VP≠VNP 并公开 Lean 4 证明 Anthropic 于 11 月 24 日公开论文《VP ≠…</title>
+      <link>https://t.me/zaihuapd/45333</link>
+      <guid isPermaLink="true">https://t.me/zaihuapd/45333</guid>
+      <pubDate>Tue, 24 Nov 2026 06:02:02 GMT</pubDate>
+      <description>🤖 Anthropic 称内部 Claude 模型发现 VP≠VNP 并公开 Lean 4 证明 Anthropic 于 11 月 24 日公开论文《VP ≠ VNP over every field》及 Lean 4 形式化证明。仓库称结果由内部研究用 Claude 模型发现，论文与代码均由 AI 撰写。论文给出哈密顿圈多项式的超多项式算术电路下界，据此推出 VP 是 VNP 真子类，若成立即解决 Valiant 1979 年的代数复杂度猜想；但仅针对算术电路，不涉及 P 与 NP。 经三条标准公理审计与独立内核 nanoda 复核，除预留文件外无 sorry。尚无人类数学家通读，Lean 无法确认形式化陈述与声称命题一致，附录 Q 列出出入，待独立审阅。 Anthropics/formal-math 🌸 科技圈 · 茶馆 · 投稿</description>
+    </item>
+    <item>
+      <title>黄循财：不允许新加坡成规避芯片管制通道 新加坡总理黄循财表示，不允许新加坡被当作企业规避美国芯片出口管制的通道，当局正在调查 Megaspeed 采购英伟达芯片…</title>
+      <link>https://t.me/zaihuapd/45332</link>
+      <guid isPermaLink="true">https://t.me/zaihuapd/45332</guid>
+      <pubDate>Tue, 24 Nov 2026 05:03:36 GMT</pubDate>
+      <description>黄循财：不允许新加坡成规避芯片管制通道 新加坡总理黄循财表示，不允许新加坡被当作企业规避美国芯片出口管制的通道，当局正在调查 Megaspeed 采购英伟达芯片的交易。他强调，新加坡不会为绕开管制提供路径。 此前一天，美国商务部已将 Megaspeed 及另外 6 家东南亚企业列入贸易黑名单。《联邦公报》称，这些企业存在向未获授权用户转移先进计算产品的「重大风险」，名单包括其在马来西亚、泰国的关联实体。路透社报道，阿里巴巴新加坡子公司 Apex Enterprise Solutions 同样在列，阿里称从未转移受管制的先进计算芯片。 Bloomberg 🌸 科技圈 · 茶馆 · 投稿</description>
+    </item>
+    <item>
+      <title>神舟二十四号瞄准 25 日 8 时 18 分发射，乘组首含巴基斯坦航天员 11 月 24 日，中国载人航天工程新闻发言人张静波在酒泉宣布，神舟二十四号瞄准 11…</title>
+      <link>https://t.me/zaihuapd/45331</link>
+      <guid isPermaLink="true">https://t.me/zaihuapd/45331</guid>
+      <pubDate>Tue, 24 Nov 2026 04:08:00 GMT</pubDate>
+      <description>神舟二十四号瞄准 25 日 8 时 18 分发射，乘组首含巴基斯坦航天员 11 月 24 日，中国载人航天工程新闻发言人张静波在酒泉宣布，神舟二十四号瞄准 11 月 25 日 8 时 18 分发射。据新华社，乘组由汤洪波、武毅和巴基斯坦航天员穆罕默德·齐尚·阿里组成，汤洪波任指令长；这是中国载人航天工程首个含外籍航天员的乘组，阿里将成为首位到访&quot;天宫&quot;的外籍航天员。飞船将采用 3.5 小时自主快速交会对接，对接天和核心舱前向端口。阿里之后与张志远、黎家盈乘神舟二十三号返回。 新华网 | 中国新闻网 🌸 科技圈 · 茶馆 · 投稿</description>
+    </item>
+    <item>
+      <title>🤖 Antigravity 重置全部用户的 Gemini 配额 Varun Mohan 发帖称，Antigravity 正在为所有用户重置 Gemini 配额…</title>
+      <link>https://t.me/zaihuapd/45330</link>
+      <guid isPermaLink="true">https://t.me/zaihuapd/45330</guid>
+      <pubDate>Tue, 24 Nov 2026 03:16:04 GMT</pubDate>
+      <description>🤖 Antigravity 重置全部用户的 Gemini 配额 Varun Mohan 发帖称，Antigravity 正在为所有用户重置 Gemini 配额，原因是各档位模型正在升级。 Varun Mohan 🌸 科技圈 · 茶馆 · 投稿</description>
+    </item>
+    <item>
+      <title>4.5 万家企业组织联名致信欧盟，要求对苹果 iPhone 浏览器限制立案 包括 Mozilla 和 Shopify 在内的企业及民间组织联名致信欧盟委员会，要…</title>
+      <link>https://t.me/zaihuapd/45329</link>
+      <guid isPermaLink="true">https://t.me/zaihuapd/45329</guid>
+      <pubDate>Tue, 24 Nov 2026 03:02:09 GMT</pubDate>
+      <description>4.5 万家企业组织联名致信欧盟，要求对苹果 iPhone 浏览器限制立案 包括 Mozilla 和 Shopify 在内的企业及民间组织联名致信欧盟委员会，要求对苹果 iPhone 浏览器限制立案。信方称，署名方合计代表约 4.5 万至 5.5 万家欧盟企业组织，联署征至 2026 年 12 月 3 日。 苹果虽按《数字市场法》在欧盟允许竞品浏览器用自有引擎，但技术与法律要求令厂商无法把现有欧盟用户迁出 WebKit，企业更依赖 App Store 触达用户。联名方测算，若半数原生 iOS 应用转 Web，欧盟企业每年可省 110 亿欧元开发成本和 13 亿欧元 App Store 费用。 AppleInsider 🌸 科技圈 · 茶馆 · 投稿</description>
+    </item>
+    <item>
+      <title>🤖 豆包个人助理「小豆」开启公测，邀请制、送免费额度 豆包发文宣布，旗下 AI 个人助理产品「小豆」开启公测。公测期间采用邀请制，用户凭邀请码体验，并获赠一定…</title>
+      <link>https://t.me/zaihuapd/45328</link>
+      <guid isPermaLink="true">https://t.me/zaihuapd/45328</guid>
+      <pubDate>Tue, 24 Nov 2026 02:41:36 GMT</pubDate>
+      <description>🤖 豆包个人助理「小豆」开启公测，邀请制、送免费额度 豆包发文宣布，旗下 AI 个人助理产品「小豆」开启公测。公测期间采用邀请制，用户凭邀请码体验，并获赠一定量免费额度。 小豆是字节对标 Meta Muse 的个人助理（Personal Agent）独立产品，官方称其能力与体验会逐步在豆包 App 上线。 豆包 🌸 科技圈 · 茶馆 · 投稿</description>
+    </item>
+    <item>
+      <title>马斯克承认 SpaceX 的 AI 落后，转而向 Anthropic、Google 出租大量算力，月入数十亿美元 《纽约时报》11 月 23 日报道，自今年 5…</title>
+      <link>https://t.me/zaihuapd/45327</link>
+      <guid isPermaLink="true">https://t.me/zaihuapd/45327</guid>
+      <pubDate>Tue, 24 Nov 2026 02:06:37 GMT</pubDate>
+      <description>马斯克承认 SpaceX 的 AI 落后，转而向 Anthropic、Google 出租大量算力，月入数十亿美元 《纽约时报》11 月 23 日报道，自今年 5 月起，SpaceX 每月从其数据中心向 Anthropic、Google 等公司出租算力，月入数十亿美元。 三名知情人士称，马斯克向员工表示 SpaceX 在 AI 上落后，出租算力比自用更赚钱，8 月一度把部门群聊改名为“Sell compute because we can&apos;t compete”，并警告浪费 GPU 的员工将被要求离开。 The New York Times 🌸 科技圈 · 茶馆 · 投稿</description>
+    </item>
+    <item>
+      <title>鸿蒙终端设备破 1 亿台，应用服务超 46 万项 华为终端有限公司 24 日宣布，搭载鸿蒙操作系统 HarmonyOS 5、6、7 的手机、平板和电脑设备数量已…</title>
+      <link>https://t.me/zaihuapd/45325</link>
+      <guid isPermaLink="true">https://t.me/zaihuapd/45325</guid>
+      <pubDate>Tue, 24 Nov 2026 01:46:21 GMT</pubDate>
+      <description>鸿蒙终端设备破 1 亿台，应用服务超 46 万项 华为终端有限公司 24 日宣布，搭载鸿蒙操作系统 HarmonyOS 5、6、7 的手机、平板和电脑设备数量已突破 1 亿台。目前鸿蒙操作系统可获取的应用和服务超过 46 万项，注册开发者超过 1200 万人。 鸿蒙操作系统 2019 年首次发布，2024 年 10 月发布原生鸿蒙，到 2026 年 11 月终端设备数量跨过 1 亿台。开源鸿蒙已汇聚 1.4 万余名贡献者，形成 120 余个行业发行版；合作伙伴贡献的创新能力超过 160 项，被超过 1600 款应用集成调用，一年内相关功能使用量提升 90 倍。 新华网 🌸 科技圈 · 茶馆 · 投稿</description>
+    </item>
+    <item>
+      <title>黎曼猜想证明通过 Lean 验证 2026 年 11 月 20 日，Levent Alpöge 发布黎曼猜想的 Lean 形式化证明，代码库约 1700 万行。…</title>
+      <link>https://t.me/zaihuapd/45324</link>
+      <guid isPermaLink="true">https://t.me/zaihuapd/45324</guid>
+      <pubDate>Tue, 24 Nov 2026 01:29:09 GMT</pubDate>
+      <description>黎曼猜想证明通过 Lean 验证 2026 年 11 月 20 日，Levent Alpöge 发布黎曼猜想的 Lean 形式化证明，代码库约 1700 万行。11 月 21 日，Lean FRO 与 Mathlib Initiative 联合声明认证该命题与证明均正确：社区确认其命题与 Mathlib 的 RiemannHypothesis 一致、代码库可无错编译，且多个独立证明检查器验证证明有效。 Lean community blog ｜Lean (@leanprover) 🌸 科技圈· 茶馆…</description>
+    </item>
+    <item>
+      <title>黄仁勋回归！ 英伟达董事会全票通过黄仁勋即刻恢复总裁兼首席执行官职务，并重新担任董事会成员。董事长 Harvey Jones 表示，董事会对黄仁勋领导公司“有充…</title>
+      <link>https://t.me/zaihuapd/45322</link>
+      <guid isPermaLink="true">https://t.me/zaihuapd/45322</guid>
+      <pubDate>Tue, 24 Nov 2026 01:12:52 GMT</pubDate>
+      <description>黄仁勋回归！ 英伟达董事会全票通过黄仁勋即刻恢复总裁兼首席执行官职务，并重新担任董事会成员。董事长 Harvey Jones 表示，董事会对黄仁勋领导公司“有充分信心”。Colette Kress 此前担任临时 CEO，将继续担任首席财务官。 董事会称，在听取美国政府高层意见后，认为黄仁勋复任不构成国家安全风险。公告称，此前有报道称黄仁勋曾成为外国情报活动的目标，董事会已成立由独立董事组成的调查委员会，调查将进行到底，黄仁勋表示全力配合。董事会另设国家安全与出口管制委员会，并启动首席合规官职位的招聘。…</description>
+    </item>
+    <item>
+      <title>🤖 ChatGPT 聊天页上线 GPT-6.2 Sol，今日起向 Plus 等付费用户推送 ChatGPT 官方账号 11 月 23 日宣布，在 Chat 标…</title>
+      <link>https://t.me/zaihuapd/45321</link>
+      <guid isPermaLink="true">https://t.me/zaihuapd/45321</guid>
+      <pubDate>Tue, 24 Nov 2026 00:44:15 GMT</pubDate>
+      <description>🤖 ChatGPT 聊天页上线 GPT-6.2 Sol，今日起向 Plus 等付费用户推送 ChatGPT 官方账号 11 月 23 日宣布，在 Chat 标签页上线 GPT-6.2 Sol 版本，主打日常对话场景，当天起向 Plus、Pro、Business 和 Enterprise 用户推送。 ChatGPT 称，新版本更能处理复杂请求，尤其是用户给出详细指令或要求联网查找信息时；在识别照片细节（如标签文字、路牌符号）、按价格或位置等关注点缩小在线选项范围，以及判断何时主动给出后续建议（例如询问是否要在降价时提醒）方面均有改进。上述能力描述来自官方发布，未经独立验证。 ChatGPT 🌸 科技圈 · 茶馆 · 投稿</description>
+    </item>
+    <item>
+      <title>🍏 Apple 拟推出 Product(RED)版 AirPods Max 2 与 HomePod mini 2 知情人士称，Apple 计划在 12 月 1…</title>
+      <link>https://t.me/zaihuapd/45320</link>
+      <guid isPermaLink="true">https://t.me/zaihuapd/45320</guid>
+      <pubDate>Tue, 24 Nov 2026 00:07:37 GMT</pubDate>
+      <description>🍏 Apple 拟推出 Product(RED)版 AirPods Max 2 与 HomePod mini 2 知情人士称，Apple 计划在 12 月 1 日世界艾滋病日前后发布 Product(RED)版 AirPods Max 2 和 HomePod mini 2。新款 HomePod mini 采用红色网面外观；AirPods Max 为银色机身、白色耳罩与头带，并配红色 Digital Crown。 Apple 长期与 Product(RED)合作，通常捐出部分收益支持抗击艾滋病。另有消息称，Apple 还开发了 Product(RED)版 AirTag，是否同步发布尚不确定。 9to5Mac 🌸 科技圈 · 茶馆 · 投稿</description>
+    </item>
+    <item>
+      <title>👁️ 英伟达董事会据称未咨询高管层，决定让 Jensen Huang 复任 CEO 据 Bloomberg 报道，英伟达董事会在未咨询公司高管层的情况下，决定…</title>
       <link>https://t.me/zaihuapd/45319</link>
       <guid isPermaLink="true">https://t.me/zaihuapd/45319</guid>
       <pubDate>Mon, 23 Nov 2026 17:59:59 GMT</pubDate>
-      <description>英伟达董事会据称未咨询高管层，决定让 Jensen Huang 复任 CEO 据 Bloomberg 报道，英伟达董事会在未咨询公司高管层的情况下，决定让被免职的首席执行官 Jensen Huang 复职，高管层直到最后一刻才被告知。报道称该决定在 11 月 22 日周日下午作出，原因是美国总统特朗普向董事会成员施加了政治压力。 知情人士还称，部分原本有望接替黄仁勋的候选人也已退出这一遴选过程。上述说法来自不愿具名的知情人士，英伟达方面未予确认，相关决定也未经独立验证。 Bloomberg 🌸 科技圈 · 茶馆 · 投稿</description>
+      <description>👁️ 英伟达董事会据称未咨询高管层，决定让 Jensen Huang 复任 CEO 据 Bloomberg 报道，英伟达董事会在未咨询公司高管层的情况下，决定让被免职的首席执行官 Jensen Huang 复职，高管层直到最后一刻才被告知。报道称该决定在 11 月 22 日周日下午作出， 原因是美国总统特朗普向董事会成员施加了政治压力。 知情人士还称，部分原本有望接替黄仁勋的候选人也已退出这一遴选过程。上述说法来自不愿具名的知情人士，英伟达方面未予确认，相关决定也未经独立验证。 Bloomberg 🌸 科技圈 · 茶馆 · 投稿</description>
     </item>
     <item>
       <title>黄仁勋回归！ 英伟达董事会全票通过黄仁勋即刻恢复总裁兼首席执行官职务，并重新担任董事会成员。董事长 Harvey Jones 表示，董事会对黄仁勋领导公司“有充…</title>
@@ -40,111 +145,6 @@
       <guid isPermaLink="true">https://t.me/zaihuapd/45315</guid>
       <pubDate>Mon, 23 Nov 2026 10:45:32 GMT</pubDate>
       <description>上海地铁票价时隔21年首次调整 本次票价调整后，上海轨道交通起乘价3元，起乘间距为0-4公里，之后4、4、4、7、7、10、10公里加1元，以及50公里以上每15公里加1元。与新票价同步实施的轨道交通计次票、满额优惠等举措，主要目的是减少调价对高频出行人群的影响。 同步推出 35 次、45 次、60 次、90 次四档计次票，定价 190 元、210 元、270 元、390 元，11 月 26 日开售。新票价和优惠 12 月 1 日起实施；同一支付渠道当月累计满 90 元后享 9 折。 新华社 🌸 科技圈 · 茶馆 · 投稿</description>
-    </item>
-    <item>
-      <title>🤖 Anthropic IPO 后，AI 投资疑虑升温，亚洲股市普遍下跌 Anthropic 盘后跌逾 5%、跌破 92 美元。亚洲股市下跌，MSCI 亚太指…</title>
-      <link>https://t.me/zaihuapd/45314</link>
-      <guid isPermaLink="true">https://t.me/zaihuapd/45314</guid>
-      <pubDate>Mon, 23 Nov 2026 09:31:10 GMT</pubDate>
-      <description>🤖 Anthropic IPO 后，AI 投资疑虑升温，亚洲股市普遍下跌 Anthropic 盘后跌逾 5%、跌破 92 美元。亚洲股市下跌，MSCI 亚太指数跌 1.7%，连续第七个交易日走低；MSCI 全球指数可能录得 2023 年 9 月以来最长连跌。 市场对 AI 交易的疑虑加剧，投资者担心巨额投入能否带来相应回报。今天早上，东京电子跌 7.19%、瑞萨电子跌 6.71%；韩国 SK 海力士跌 6%、三星电子跌 4.7%，Kospi 指数跌 3.66%。软银累计向 OpenAI 投资 646 亿美元，其股价…</description>
-    </item>
-    <item>
-      <title>懂车帝回应尊界 V800 刹车测试：台架加载和实车急刹有何不同？ 一、两类测试有何不同 台架测试：将踏板总成固定在设备上，按规定方向逐渐施力，加严试验加载速度为…</title>
-      <link>https://t.me/zaihuapd/45313</link>
-      <guid isPermaLink="true">https://t.me/zaihuapd/45313</guid>
-      <pubDate>Mon, 23 Nov 2026 08:53:55 GMT</pubDate>
-      <description>懂车帝回应尊界 V800 刹车测试：台架加载和实车急刹有何不同？ 一、两类测试有何不同 台架测试：将踏板总成固定在设备上，按规定方向逐渐施力，加严试验加载速度为每分钟 20 mm，主要看踏板是否变形、开裂或损坏。 实车急刹：车辆行驶中全力制动，踏板、支架和制动系统处于实际安装和动态工作状态，主要看车辆能否完成制动。 两者关系：两类测试问题不同、相互补充，但台架结果无法覆盖实车急刹的全部动态条件。 二、公布说明与三处待补充 公布说明称，4 件样品在 1500 牛试验中符合 QC/T 788…</description>
-    </item>
-    <item>
-      <title>开源 nospeaker：触控板振动念出文字 开发者 Cody Collier 开源工具 nospeaker，用 MacBook 触控板下的触觉马达发声念出文字…</title>
-      <link>https://t.me/zaihuapd/45312</link>
-      <guid isPermaLink="true">https://t.me/zaihuapd/45312</guid>
-      <pubDate>Mon, 23 Nov 2026 07:16:04 GMT</pubDate>
-      <description>开源 nospeaker：触控板振动念出文字 开发者 Cody Collier 开源工具 nospeaker，用 MacBook 触控板下的触觉马达发声念出文字：驱动频率推到每秒 4000 次，玻璃振动快到人耳可闻。它用 macOS 语音合成读入文字，每 10 毫秒取两个共振峰，连同响度、音高重放，听感偏机器人；实测 100 Hz 至 4 kHz 有声，1 kHz 附近最清晰。 工具只念文字，放不了音乐和视频，且绕开苹果公开触觉接口、调用私有框架 MultitouchSupport。需 Force Touch 触控板，作者称只在 M5 Max 的 MacBook Pro 上跑通。 快科技 🌸 科技圈 · 茶馆 · 投稿</description>
-    </item>
-    <item>
-      <title>🍏 苹果 iPhone Duo 国内部分区域破发 10 月 25 日消息，苹果 iPhone Duo 在国内部分区域出现破发，拼多多百亿补贴频道已上架该机（仅…</title>
-      <link>https://t.me/zaihuapd/45311</link>
-      <guid isPermaLink="true">https://t.me/zaihuapd/45311</guid>
-      <pubDate>Mon, 23 Nov 2026 06:00:00 GMT</pubDate>
-      <description>🍏 苹果 iPhone Duo 国内部分区域破发 10 月 25 日消息，苹果 iPhone Duo 在国内部分区域出现破发，拼多多百亿补贴频道已上架该机（仅部分地区可见），比上市价便宜约 200-300 元。该机首发日曾被加价 1500-2000 元，发售两天后即跌破原价。 目前 Apple Store 多家门店仍无现货，官网选择送货需等到 2027 年 1 月。IDC 预计该机首年出货量将超过 1000 万部。 IT之家 🌸 科技圈· 茶馆 · 投稿</description>
-    </item>
-    <item>
-      <title>🤖 Anthropic IPO 后，AI 投资疑虑升温，亚洲股市普遍下跌 Anthropic 盘后跌逾 5%、跌破 92 美元。亚洲股市下跌，MSCI 亚太指…</title>
-      <link>https://t.me/zaihuapd/45310</link>
-      <guid isPermaLink="true">https://t.me/zaihuapd/45310</guid>
-      <pubDate>Mon, 23 Nov 2026 05:15:01 GMT</pubDate>
-      <description>🤖 Anthropic IPO 后，AI 投资疑虑升温，亚洲股市普遍下跌 Anthropic 盘后跌逾 5%、跌破 92 美元。亚洲股市下跌，MSCI 亚太指数跌 1.7%，连续第七个交易日走低；MSCI 全球指数可能录得 2023 年 9 月以来最长连跌。 市场对 AI 交易的疑虑加剧，投资者担心巨额投入能否带来相应回报。今天早上，东京电子跌 7.19%、瑞萨电子跌 6.71%；韩国 SK 海力士跌 6%、三星电子跌 4.7%，Kospi 指数跌 3.66%。软银累计向 OpenAI 投资 646 亿美元，其股价…</description>
-    </item>
-    <item>
-      <title>Z.ai 发布 GLM-5.3-Flash，18B 激活参数价格仅上代十分之一，限时价格低至每百万 Tokens 输入 0.075 美元 Z.ai 发布 GLM…</title>
-      <link>https://t.me/zaihuapd/45309</link>
-      <guid isPermaLink="true">https://t.me/zaihuapd/45309</guid>
-      <pubDate>Mon, 23 Nov 2026 04:47:25 GMT</pubDate>
-      <description>Z.ai 发布 GLM-5.3-Flash，18B 激活参数价格仅上代十分之一，限时价格低至每百万 Tokens 输入 0.075 美元 Z.ai 发布 GLM-5 系列首个原生多模态模型 GLM-5.3-Flash，总参数 320B、激活参数仅 18B。其在多项编程和智能体基准上超过 GLM-5.2，价格降至约十分之一，并接近 Claude Opus 4.8。限时优惠期间，API 输入价格为每百万 Tokens 0.075 美元，缓存输入为 0.015 美元，输出为 0.25 美元，缓存存储暂时免费；原价分别为…</description>
-    </item>
-    <item>
-      <title>🤖 豆包刘星反驳「国内超一半算力在造爽剧」：字节仅约 10% 算力用于视频生成 10 月 19 日，豆包公关负责人刘星回应「国内超一半算力在造爽剧」的说法，称…</title>
-      <link>https://t.me/zaihuapd/45308</link>
-      <guid isPermaLink="true">https://t.me/zaihuapd/45308</guid>
-      <pubDate>Mon, 23 Nov 2026 04:34:57 GMT</pubDate>
-      <description>🤖 豆包刘星反驳「国内超一半算力在造爽剧」：字节仅约 10% 算力用于视频生成 10 月 19 日，豆包公关负责人刘星回应「国内超一半算力在造爽剧」的说法，称该算力数据有些不靠谱；就字节而言，公司总算力中只有约 10% 用于视频生成模型的训练和推理。 此前中文在线在投资者关系活动记录表中披露，国内 AI Token 消耗 55% 用于短剧和视频生成，24% 用于电商广告，真正投入研发的只有 15%。 IT之家 🌸 科技圈· 茶馆 · 投稿</description>
-    </item>
-    <item>
-      <title>🚘 特斯拉开始推送 FSD v15 特斯拉今日在海外推出FSD v15。本次更新对安全关键场景处理能力提升至 25 倍，并带来“Tesla Reality V…</title>
-      <link>https://t.me/zaihuapd/45307</link>
-      <guid isPermaLink="true">https://t.me/zaihuapd/45307</guid>
-      <pubDate>Mon, 23 Nov 2026 03:33:47 GMT</pubDate>
-      <description>🚘 特斯拉开始推送 FSD v15 特斯拉今日在海外推出FSD v15。本次更新对安全关键场景处理能力提升至 25 倍，并带来“Tesla Reality View”可视化界面，可在车机屏幕叠加摄像头画面与FSD行驶规划，支持全屏、地图或分屏视图及安静模式。 导航可将转弯等信息叠加显示，转向灯提示音更轻柔并逐渐减弱。更新还优化坑洼、碎片等路况行驶体验及学校、恶劣天气下的速度控制。 Tesla(@Tesla) 🌸 科技圈· 茶馆 · 投稿</description>
-    </item>
-    <item>
-      <title>微软新服务器系统默认跑不了 32 位老软件，需要可手动装回 微软在 Ignite 2026 上表示，Windows Server 2028 将默认不再包含 Wo…</title>
-      <link>https://t.me/zaihuapd/45306</link>
-      <guid isPermaLink="true">https://t.me/zaihuapd/45306</guid>
-      <pubDate>Mon, 23 Nov 2026 03:03:53 GMT</pubDate>
-      <description>微软新服务器系统默认跑不了 32 位老软件，需要可手动装回 微软在 Ignite 2026 上表示，Windows Server 2028 将默认不再包含 WoW64 兼容子系统，因此开箱即无法运行 32 位应用。该版本计划 2027 年秋季与 Windows 11 27H2 一同发布。 需要时可通过按需功能（FoD）把 WoW64 装回，Server Core 上一般用 PowerShell 或 DISM 添加。微软称此举目的是减少攻击面、阻止 32 位恶意软件。Windows 11 目前仍保留 WoW64，微软未公布移除计划。 Windows Latest 🌸 科技圈 · 茶馆 · 投稿</description>
-    </item>
-    <item>
-      <title>字节跳动与红杉领投机器人公司1.4亿美元融资 中国具身智能初创企业 X Square Robot 完成 10 亿元人民币（约合 1.4 亿美元）的 A++ 轮融…</title>
-      <link>https://t.me/zaihuapd/45305</link>
-      <guid isPermaLink="true">https://t.me/zaihuapd/45305</guid>
-      <pubDate>Mon, 23 Nov 2026 02:02:47 GMT</pubDate>
-      <description>字节跳动与红杉领投机器人公司1.4亿美元融资 中国具身智能初创企业 X Square Robot 完成 10 亿元人民币（约合 1.4 亿美元）的 A++ 轮融资，本轮融资由字节跳动与红杉中国联合领投。 据悉，该公司已成为具身智能领域目前唯一一家同时获得字节跳动、美团和阿里巴巴集团三大中国互联网巨头支持的初创企业。 量子位 🍀 在花频道 🍵 茶馆聊天 📮 投稿</description>
-    </item>
-    <item>
-      <title>谷歌搭建模拟互联网测试 Chrome AI 代理 谷歌为 Chrome 的 AI 代理搭建了一个名为 Mirror Dimension 的模拟互联网，在隔离环境…</title>
-      <link>https://t.me/zaihuapd/45304</link>
-      <guid isPermaLink="true">https://t.me/zaihuapd/45304</guid>
-      <pubDate>Mon, 23 Nov 2026 01:30:59 GMT</pubDate>
-      <description>谷歌搭建模拟互联网测试 Chrome AI 代理 谷歌为 Chrome 的 AI 代理搭建了一个名为 Mirror Dimension 的模拟互联网，在隔离环境中测试它打开网站、搜索浏览、登录、加购和完成任务等操作。蓝点网称其中包含数千个模拟网站，每名工程师单独隔离测试，每天运行超过 1000 个测试案例，重点防御恶意网页的提示词注入等攻击。 蓝点网 🌸 科技圈 · 茶馆 · 投稿</description>
-    </item>
-    <item>
-      <title>第62届金马奖揭晓：张震再夺影帝，范冰冰封后，《大濛》获最佳剧情片 第62届金马奖于11月22日晚在台北流行音乐中心举行。台湾演员张震凭借《幸福之路》再次获得最…</title>
-      <link>https://t.me/zaihuapd/45303</link>
-      <guid isPermaLink="true">https://t.me/zaihuapd/45303</guid>
-      <pubDate>Sun, 22 Nov 2026 16:39:45 GMT</pubDate>
-      <description>第62届金马奖揭晓：张震再夺影帝，范冰冰封后，《大濛》获最佳剧情片 第62届金马奖于11月22日晚在台北流行音乐中心举行。台湾演员张震凭借《幸福之路》再次获得最佳男主角；中国演员范冰冰凭借马来西亚电影《地母》拿下最佳女主角。最佳男配角由曾敬骅凭《我家的事》获得，陈雪甄则凭《人生海海》夺得最佳女配角。 本届最大赢家是《大濛》——不仅斩获最佳剧情片，还一举拿下最佳造型设计、美术设计、原著剧本等多项大奖。影片由陈玉勋执导，讲述白色恐怖时期，一名嘉义少女北上为家人取回兄长遗体的故事。此外，“国民阿嬷”陈淑芳获…</description>
-    </item>
-    <item>
-      <title>摩尔线程产品经理：庐山 GPU 显存 64 GB 据 VideoCardz 转述，摩尔线程 MTT S80 产品经理称，下一代庐山游戏 GPU 的显存将超过目前…</title>
-      <link>https://t.me/zaihuapd/45302</link>
-      <guid isPermaLink="true">https://t.me/zaihuapd/45302</guid>
-      <pubDate>Sun, 22 Nov 2026 15:11:55 GMT</pubDate>
-      <description>摩尔线程产品经理：庐山 GPU 显存 64 GB 据 VideoCardz 转述，摩尔线程 MTT S80 产品经理称，下一代庐山游戏 GPU 的显存将超过目前任何在售消费级显卡；按其此前&quot;4 倍于 S80 的 16 GB&quot;的说法推算为 64 GB，是 RTX 5090 的 32 GB 的两倍。该表态并非公司官方发布。 庐山沿用 MDC 2025 披露的目标：相对 S80 的 AAA 游戏性能 15 倍、光追 50 倍、AI 算力 64 倍。公司称将在 12 月 29—30 日于北京举行的 MDC 2026 上由 CEO 张建中发布新旗舰产品。 Tom&apos;s Hardware 🌸 科技圈 · 茶馆 · 投稿</description>
-    </item>
-    <item>
-      <title>网易 UU 远程将于 12 月推出增值服务 网易 UU 远程计划于 2026 年 12 月 1 日推出增值服务，基础远程控制继续免费，且不限次数、不限时、不排队…</title>
-      <link>https://t.me/zaihuapd/45298</link>
-      <guid isPermaLink="true">https://t.me/zaihuapd/45298</guid>
-      <pubDate>Sun, 22 Nov 2026 14:37:12 GMT</pubDate>
-      <description>网易 UU 远程将于 12 月推出增值服务 网易 UU 远程计划于 2026 年 12 月 1 日推出增值服务，基础远程控制继续免费，且不限次数、不限时、不排队、无广告。此前注册成功的用户可领取年卡五折优惠；页面显示 VIP 年费为 238 元，原价 288 元。 HarmonyOS 和 Linux 客户端即将上线，Beta 期间全部付费功能免费使用。 网易 UU 远程 🌸 科技圈· 茶馆 · 投稿</description>
-    </item>
-    <item>
-      <title>超级厄尔尼诺海温破纪录，粮食援助承压 据伯克利地球气候学家 Zeke Hausfather，截至 10 月，用于衡量厄尔尼诺强度的中热带太平洋升温已达 3.5℃…</title>
-      <link>https://t.me/zaihuapd/45297</link>
-      <guid isPermaLink="true">https://t.me/zaihuapd/45297</guid>
-      <pubDate>Sun, 22 Nov 2026 14:09:55 GMT</pubDate>
-      <description>超级厄尔尼诺海温破纪录，粮食援助承压 据伯克利地球气候学家 Zeke Hausfather，截至 10 月，用于衡量厄尔尼诺强度的中热带太平洋升温已达 3.5℃，打破此前约 2.75℃ 的纪录，并预计在初冬升至约 4℃ 的峰值。 世界粮食计划署 8 月警告，本轮厄尔尼诺可能在 2027 年底前把额外 4900 万人推入急性粮食不安全，使总数达到 2.74 亿。全球援助资金 2025 年较 2022 年峰值下降 30%，索马里遭遇类似旱情时，该机构能覆盖的人数从 1000 万降至不足 100 万。 WIRED 🌸 科技圈 · 茶馆 · 投稿</description>
     </item>
   </channel>
 </rss>

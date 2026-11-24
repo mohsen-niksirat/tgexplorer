@@ -7,6 +7,41 @@
     <description>Welcome to @prompt , your go-to source for AI insights, breakthroughs, and tools shaping the future of intelligence. Contact: @LightEarendil</description>
     <language>en</language>
     <item>
+      <title>🤖 Qwen3.8-27B squeezed to 3-bit, 10 GB, and it still matches BF16 on agentic be…</title>
+      <link>https://t.me/Prompt/1113</link>
+      <guid isPermaLink="true">https://t.me/Prompt/1113</guid>
+      <pubDate>Tue, 24 Nov 2026 08:11:49 GMT</pubDate>
+      <description>🤖 Qwen3.8-27B squeezed to 3-bit, 10 GB, and it still matches BF16 on agentic benchmarks Nari Labs&apos; NariQ scores 41.0 on DeepSWE (BF16: 39.8) and 63.8 on Terminal-Bench 2.1 (BF16: 62.6). The 2-bit version falls off a cliff, down to 28.6 on DeepSWE. All numbers are self-reported. You need their llama.cpp fork, and an M3 Pro manages about 3.8 tok/s. A 1,000-token reply takes around four minutes.</description>
+    </item>
+    <item>
+      <title>🧠 Qwen 32B seems to know when a concept was slipped into its context, but it wo…</title>
+      <link>https://t.me/Prompt/1112</link>
+      <guid isPermaLink="true">https://t.me/Prompt/1112</guid>
+      <pubDate>Tue, 24 Nov 2026 05:10:48 GMT</pubDate>
+      <description>🧠 Qwen 32B seems to know when a concept was slipped into its context, but it won&apos;t say so out loud A new arXiv paper finds the detection signal in the residual stream, then watches it fade in the final layers. Prompting the model with accurate info on how AI introspection works lifts sensitivity from 0.3% to 39.9%, with only 0.6% more false positives. The authors never test whether the model can tell hidden-state edits from plain input manipulation. It may just be spotting a contradiction in the prompt. Code is out for small Qwen models, so anyone can rerun it.</description>
+    </item>
+    <item>
+      <title>🤖 Anthropic&apos;s new Claude Ship lets an AI agent approve code changes on its own …</title>
+      <link>https://t.me/Prompt/1111</link>
+      <guid isPermaLink="true">https://t.me/Prompt/1111</guid>
+      <pubDate>Tue, 24 Nov 2026 02:09:48 GMT</pubDate>
+      <description>🤖 Anthropic&apos;s new Claude Ship lets an AI agent approve code changes on its own Anthropic launched a beta suite for what happens after the PR. Code Review is already live. PR Steward fixes things like failing CI checks, and Claude Approvals signs off on routine changes under policies your team sets. Anthropic says Claude writes most of the Claude Code team&apos;s own code, so it wanted everything after the PR to move just as fast.</description>
+    </item>
+    <item>
+      <title>🤖 Anthropic says Claude settled VP vs. VNP, the arithmetic cousin of P vs. NP A…</title>
+      <link>https://t.me/Prompt/1110</link>
+      <guid isPermaLink="true">https://t.me/Prompt/1110</guid>
+      <pubDate>Mon, 23 Nov 2026 23:08:59 GMT</pubDate>
+      <description>🤖 Anthropic says Claude settled VP vs. VNP, the arithmetic cousin of P vs. NP Anthropic&apos;s formal-math repo has a paper claiming Claude solved it. VP vs. VNP asks the same question as P vs. NP, but for algebraic circuits computing polynomials instead of Boolean problems. It doesn&apos;t touch P vs. NP itself, and nobody outside Anthropic has checked the proof yet.</description>
+    </item>
+    <item>
+      <title>🚨 US moves to blacklist Singapore&apos;s Megaspeed over suspected Nvidia chip divers…</title>
+      <link>https://t.me/Prompt/1109</link>
+      <guid isPermaLink="true">https://t.me/Prompt/1109</guid>
+      <pubDate>Mon, 23 Nov 2026 23:05:48 GMT</pubDate>
+      <description>🚨 US moves to blacklist Singapore&apos;s Megaspeed over suspected Nvidia chip diversion to China Commerce says it plans to add the data center developer to the Entity List, after investigating it for almost two years, well before the Alice Huang affair story broke. The suspicion is that it helped get restricted Nvidia chips to Chinese companies, and Alibaba is its largest customer. No effective date yet.</description>
+    </item>
+    <item>
       <title>🚨 Oregon and Virginia sue SpaceX over Grok&apos;s sexualized deepfakes, minors inclu…</title>
       <link>https://t.me/Prompt/1108</link>
       <guid isPermaLink="true">https://t.me/Prompt/1108</guid>
@@ -110,41 +145,6 @@
       <guid isPermaLink="true">https://t.me/Prompt/1094</guid>
       <pubDate>Sun, 22 Nov 2026 09:18:35 GMT</pubDate>
       <description>⚡️ RightNow AI makes Inkling 2 Small&apos;s FP4 expert GEMMs 5.1x to 7.5x faster on B300, with identical bits The YC-backed lab tuned kernels for Thinking Machines&apos; 594B MoE on 8 GPUs, running NVFP4 natively. Logits matched on all 599 rows, whether prompts were fed 64 positions per step or 1. They sharded the NVFP4 experts anyway, which SGLang&apos;s recipe says can&apos;t be done. Each GPU exchanges only the row maximum, and the kernels are open source.</description>
-    </item>
-    <item>
-      <title>🚨 Together AI&apos;s leaked prompts came from a credential its own coding agent comm…</title>
-      <link>https://t.me/Prompt/1093</link>
-      <guid isPermaLink="true">https://t.me/Prompt/1093</guid>
-      <pubDate>Sun, 22 Nov 2026 06:17:35 GMT</pubDate>
-      <description>🚨 Together AI&apos;s leaked prompts came from a credential its own coding agent committed Together disclosed that an AI coding agent working on its public xorl repo committed a key to a private Hugging Face repo of prompt samples. Someone grabbed it, downloaded samples from MiniMax M3, GLM-5.2 and Kimi K2.6 requests, and went hunting for credentials. Together reverted the commit after its scanner flagged the key. It&apos;s still working out which customers were hit, and five of the credentials the thief tested were canaries.</description>
-    </item>
-    <item>
-      <title>🚨 OpenRouter cuts 3 inference providers and pulls 125 endpoints from Zero Data …</title>
-      <link>https://t.me/Prompt/1092</link>
-      <guid isPermaLink="true">https://t.me/Prompt/1092</guid>
-      <pubDate>Sun, 22 Nov 2026 03:16:35 GMT</pubDate>
-      <description>🚨 OpenRouter cuts 3 inference providers and pulls 125 endpoints from Zero Data Retention After the MiniMax prompt leak, OpenRouter off-boarded three providers. It also dropped some endpoints as a precaution, beyond the ones researchers flagged. Those endpoints only get ZDR back with assurances and validation, and OpenRouter is adapting the researchers&apos; testing to run these checks continuously.</description>
-    </item>
-    <item>
-      <title>🚨 Cursor may drop Kimi K2.5 after a House report on Chinese models According to…</title>
-      <link>https://t.me/Prompt/1091</link>
-      <guid isPermaLink="true">https://t.me/Prompt/1091</guid>
-      <pubDate>Sun, 22 Nov 2026 00:15:35 GMT</pubDate>
-      <description>🚨 Cursor may drop Kimi K2.5 after a House report on Chinese models According to the report , Cursor is exploring a phase-out of PRC base models. • 50-page joint report from Homeland Security and the China Select Committee • Probe started in April 2026 • It named weights from Alibaba, Moonshot, DeepSeek and MiniMax • Cursor is now owned by SpaceX</description>
-    </item>
-    <item>
-      <title>🤖 Stripe&apos;s new evals: coding agents score 78.1% on Stripe integrations, but onl…</title>
-      <link>https://t.me/Prompt/1090</link>
-      <guid isPermaLink="true">https://t.me/Prompt/1090</guid>
-      <pubDate>Sat, 21 Nov 2026 21:14:35 GMT</pubDate>
-      <description>🤖 Stripe&apos;s new evals: coding agents score 78.1% on Stripe integrations, but only 29.4% on strict pass Stripe ran 69 scenarios on 14 model and harness pairs. Agents lean on older APIs from their training data, and they ship code that&apos;s almost right. Opus 5.5 checks that a payment succeeded but not whether the order was refunded, so it can ship refunded or disputed orders. The Stripe plugin lifted every agent by 3 to 8 points and cut web searches 96%. Almost correct is how money gets lost.</description>
-    </item>
-    <item>
-      <title>🚨 Prefill attacks break every major open-weight model FAR.AI tested FAR.AI ran …</title>
-      <link>https://t.me/Prompt/1089</link>
-      <guid isPermaLink="true">https://t.me/Prompt/1089</guid>
-      <pubDate>Sat, 21 Nov 2026 18:13:35 GMT</pubDate>
-      <description>🚨 Prefill attacks break every major open-weight model FAR.AI tested FAR.AI ran 20+ prefill strategies across multiple model families. You write the first few tokens of the reply yourself, and the model just keeps going. Big reasoning models held up better against generic prefills. Tailored, model-specific ones still got through.</description>
     </item>
   </channel>
 </rss>
