@@ -7,6 +7,20 @@
     <description>Power Users/Automators 折腾/讨论/分享各种开源工具/脚本/自动化工作流 👥 @zhetengsha_group 🎁 恰饭 https://t.me/zhetengsha/957 📌 合集 https://t.me/zhetengsha/2 📢 推广 @xream_bot Buy ads: https://telega.io/c/zhetengsha feedId:55438372655431680+userId:62307599601855488</description>
     <language>zh</language>
     <item>
+      <title>网页上的ipa tweak工具 可以注入dylib和deb文件 但是一次只能注入一个 https://ipatool.codevn.net/inject-dyl…</title>
+      <link>https://t.me/zhetengsha/7603</link>
+      <guid isPermaLink="true">https://t.me/zhetengsha/7603</guid>
+      <pubDate>Tue, 24 Nov 2026 13:03:18 GMT</pubDate>
+      <description>网页上的ipa tweak工具 可以注入dylib和deb文件 但是一次只能注入一个 https://ipatool.codevn.net/inject-dylib/index.php</description>
+    </item>
+    <item>
+      <title>🔗 Sub-Store 更新 ⚙️ 后端: 2.44.29 🌐 前端: 2.34.4 Egern 的 XHTTP 还没更 等鼠爸 PR ▎修复 🎈 Loo…</title>
+      <link>https://t.me/zhetengsha/7602</link>
+      <guid isPermaLink="true">https://t.me/zhetengsha/7602</guid>
+      <pubDate>Tue, 24 Nov 2026 10:04:12 GMT</pubDate>
+      <description>🔗 Sub-Store 更新 ⚙️ 后端: 2.44.29 🌐 前端: 2.34.4 Egern 的 XHTTP 还没更 等鼠爸 PR ▎修复 🎈 Loon encryption-public-keys 感谢群友 Kook 的反馈 承接频道/群广告 有需要的老板可以私聊联系 🙏 🤭 Sub-Store 合集 🧐 合集 😄 恰饭推荐 💬 群组 🥰 联系推广 🥰 #SubStore #更新记录 #changlog #updates</description>
+    </item>
+    <item>
       <title>#Scripting #小组件 🔍 Antigravity 重置小组件，提供大中小三种尺寸 ➡️ 参考 Codex重置小组件 ，数据来源: agyresets…</title>
       <link>https://t.me/zhetengsha/7601</link>
       <guid isPermaLink="true">https://t.me/zhetengsha/7601</guid>
@@ -59,7 +73,7 @@
       <guid isPermaLink="true">https://t.me/zhetengsha/7595</guid>
       <pubDate>Mon, 23 Nov 2026 13:37:27 GMT</pubDate>
       <description>#TestFlight #iOS Loon 3.5.4(1018)版本已准备好在iOS 上进行测试。 # Tailscale - 新增 UDP 回包的 IP 分片。回包超过隧道 MTU 时，本机 UDP 服务的 IPv4 回包，以及 Loon 作为出口节点时的 IPv4、IPv6 回包，都可以分片发回对端。 - 优化 Wi-Fi 与蜂窝网络切换后的重连，避免频繁切换导致重试间隔不断增加。 - 修复部分 TCP 连接的半关闭问题。对端结束发送后，Loon 会先交付剩余数据，并允许 App 继续向对端发送。 # XHTTP - VLESS、Trojan 和 AEAD VMess 的节点编辑页新增 HTTP/3 选项。 - 支持 XMUX 连接复用。HTTP/2 和 HTTP/3 可让多个会话共享连接，HTTP/1.1 可复用 packet-up 短上传请求的连接。 - 支持独立下行，可为下行单独指定服务器、端口、HTTP 版本和安全设置。 总共 54 项配置，具体配置参考： https://nsloon.app/docs/Node/#xhttp # REALITY - 节点和全局均未指定 TLS 指纹时，默认使用 Chrome-147。新导入的 REALITY 节点也会将 fp=chrome 映射为 Chrome-147。 - 混合握手失败时，自动使用普通 X25519 重试一次，以兼容旧版 Xray。 - 新增 VLESS 协议层加密，支持 native、xorpub、random 三种模式，以及 1-RTT 和 0-RTT 握手。 - 支持 TCP、WebSocket、HTTP 和 XHTTP，可按传输配置搭配 TLS、REALITY 或 XTLS Vision。服务端也需启用 VLESS Encryption。 - Vision 支持 xtls-rprx-vision-udp443 具体配置参考： https://nsloon.app/docs/Node/#vless-encryption # Mieru - 新增 Mieru 节点，可在界面或配置文件中添加，使用用户名和密码认证。 - 支持 TCP 代理和 UDP over TCP。在界面新建节点时默认开启 UDP 转发。 具体配置参考： https://nsloon.app/docs/Node/#mieru</description>
-      <enclosure url="https://cdn5.telesco.pe/file/u9ixv1m1XAtsJPHmVJSZBioKpCsqpZSAkhftPWwPUSzfU2kD6_CdjhLe7UxYxotX8mOGD4_abmUttSdkk6dPvSOAEWOQx3vXcrOPEMtjqomd2Vs7qTRCAWTU0eKbo47PppnXNGZMOU2RMYn-PE_HnJK2Sen__J-gqvUlfgU95j944X3KTXfNmQh7o6ohIs6C0uwqcytdMUjhkS9NEwAaEYAvw-Wlpg93pfJ-hQ5jCnGd43AL_RhpxpgrIJZne5_d0tNnKkdXn7lUjCOcDVPmMRBpMJNDotW0EFCV5uo34ZgBreK2R-ay-Oi0P0utAOpqiBMxiqPl461d7GabuI1xxA.jpg" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn5.telesco.pe/file/qa2KU30O7hrCNHirM92u4bWsBQ2KFpmJAdyxMmyIWLTvrb-jLxXg4iSNBvIkTDxGdM0vzxM4kTXHl06X-zsr0dpCN3xCvaG-C61-umFP8xAUkxUZu0fMcaW6uvgfAEXp9iB47kG14n2u0CuqJnj_GhCt1GiF3M-vNm38Wq4qtUSrEu28QvLrrS7pcUhB6Z1fN85GzM7ITXH1MnWaRjppXzYQrzRBcOK05ziK-BySC1gZM-xYZTxhtjT10UQFL05rH_Ca8oK5DPe2JDBC97MbijdONqi0reeslxejrXy7RGJ3aumNaU-2L3NiYH-Lhe8j9uXrIzE-yWaOI-dcwyQ0Jg.jpg" type="image/jpeg" length="0"/>
     </item>
     <item>
       <title>Linkit: 本地优先的跨平台桌面书签管理器 • 本地 SQLite 存储，支持可选云端同步及浏览器书签导入 • 接入 OpenAI 兼容 API 或 Oll…</title>
@@ -67,7 +81,7 @@
       <guid isPermaLink="true">https://t.me/zhetengsha/7594</guid>
       <pubDate>Mon, 23 Nov 2026 12:59:58 GMT</pubDate>
       <description>Linkit: 本地优先的跨平台桌面书签管理器 • 本地 SQLite 存储，支持可选云端同步及浏览器书签导入 • 接入 OpenAI 兼容 API 或 Ollama，实现自动摘要、语义搜索和知识图谱 • 提供主题空间、重复书签检测与失效链接扫描，支持 macOS、Windows 和 Linux https://github.com/blue-idea/linkit 🧐 合集 💬 群组 😄 恰饭 🥰 联系推广 🥰 #书签管理 #知识管理 #AI #本地优先 #跨平台</description>
-      <enclosure url="https://cdn5.telesco.pe/file/mGh4YIHBtkk1i2d7sltveYv-jVvMtHwR-AHW-cBn52sfzqf3wiZslgsKvAQ2jzOyQM5AZ3MyvcJsp2eFON_VEFbXvlMs6S_-utuh0lcLzOU9IwjNmbnLk2S5Cp3u7-MeQrIKSRpAU3T5oqCr2x22GDVadRmeHllFuA7NeXtMHfYxiGZWb8mwU0TNerGfHbBFoqNpkKm7AFzMqIM0a0xqHttFZ18OTa3dyYize-NALg1VmDG6Ina7gXwWcPN7Gt5CchCXYcOFAoCrsYMi2SEqe_40wLlArsVRVOXNC6POolpfI_R6DxewbfeO04Q1zJEVjcllApKAIvAamHLFIvTXVQ.jpg" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn5.telesco.pe/file/RrxlDLNokLne41SbCLKU5M5ecqOdgFfeWOsXh-4xlwtHHZQeKygIr8Zkk2DfeHFaf1VjTokRHC9W2De76gEokIOWTUhwyTjOnG0J015EDGflEnA7HPNmEFdgQk2ec3XOsuRPYlu5fX0SYliQCJsUxw71ms5RmMp-ZleJut8muLFm0kmTYGzfeQEXxMtzdvm-luYINo9PzZ25crKirc6w7neq9Jdeo7jJylpg1YAUcUFyMlMHbm_GtV0cjv98Y7NWuJhBo8nL-VwR3a5ArlcjXeBkfS15xJszeO32vaNpop8xJ_L_5ldYpMraBvYXYcox7RwSn4f_uTsONPDaOcM3Uw.jpg" type="image/jpeg" length="0"/>
     </item>
     <item>
       <title>i made my macbook trackpad talk using only the vibrations from its haptic motor …</title>
@@ -134,20 +148,6 @@
       <guid isPermaLink="true">https://t.me/zhetengsha/7579</guid>
       <pubDate>Sun, 22 Nov 2026 02:00:26 GMT</pubDate>
       <description>Stela: 面向 x86-64 电脑的 Apple Silicon 转译层 • 通过 UEFI 启动，模拟 M2 Mac mini 硬件环境 • 使用提前编译与即时编译，将 arm64e 指令转译为 x86-64 指令 • 提供适用于指定 NVIDIA 显卡的 Metal 驱动，目前 Wi-Fi 和音频支持仍在开发中 https://github.com/tylertms/Stela 🧐 合集 💬 群组 😄 恰饭 🥰 联系推广 🥰 #AppleSilicon #macOS #指令转译 #NVIDIA #开源项目</description>
-    </item>
-    <item>
-      <title>🔗 Sub-Store 更新 ⚙️ 后端: 2.44.23 🌐 前端: 2.34.2 Egern 的 XHTTP 还没更 等鼠爸 PR ▎ ⚠️ Surfb…</title>
-      <link>https://t.me/zhetengsha/7576</link>
-      <guid isPermaLink="true">https://t.me/zhetengsha/7576</guid>
-      <pubDate>Sat, 21 Nov 2026 14:04:38 GMT</pubDate>
-      <description>🔗 Sub-Store 更新 ⚙️ 后端: 2.44.23 🌐 前端: 2.34.2 Egern 的 XHTTP 还没更 等鼠爸 PR ▎ ⚠️ Surfboard 支持 VLESS 还涉及到一些转义和解析的改动 如有问题 麻烦及时反馈 谢谢大家 承接频道/群广告 有需要的老板可以私聊联系 🙏 🤭 Sub-Store 合集 🧐 合集 😄 恰饭推荐 💬 群组 🥰 联系推广 🥰 #SubStore #更新记录 #changlog #updates</description>
-    </item>
-    <item>
-      <title>🔗 Sub-Store 更新 ⚙️ 后端: 2.44.22 🌐 前端: 2.34.2 Egern 的 XHTTP 还没更 等鼠爸 PR ▎优化 YAML 相…</title>
-      <link>https://t.me/zhetengsha/7574</link>
-      <guid isPermaLink="true">https://t.me/zhetengsha/7574</guid>
-      <pubDate>Sat, 21 Nov 2026 10:01:28 GMT</pubDate>
-      <description>🔗 Sub-Store 更新 ⚙️ 后端: 2.44.22 🌐 前端: 2.34.2 Egern 的 XHTTP 还没更 等鼠爸 PR ▎优化 YAML 相关解析效率 如果你在使用 YAML( 🐱 mihomo 节点/配置) 相关的流程中遇到问题 麻烦及时反馈 🙏 谢谢大家 ▎优化正则排序效率 首先感谢 @sinspired 提交的关于上述内容的原始 PR 但是屎山项目这样改 review 不了一点 先重新弄了一个没那么伤筋动骨的版本 承接频道/群广告 有需要的老板可以私聊联系 🙏 🤭 Sub-Store 合集 🧐 合集 😄 恰饭推荐 💬 群组 🥰 联系推广 🥰 #SubStore #更新记录 #changlog #updates</description>
     </item>
   </channel>
 </rss>

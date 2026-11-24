@@ -7,12 +7,27 @@
     <description>Welcome to GitHub repos. Here you&apos;ll find valuable information on the latest trending projects. Subscribe to stay informed and gain insights from the thriving GitHub community.</description>
     <language>en</language>
     <item>
+      <title>ivall/xcl Xbox Series compatibility layer for Windows - runs console game code n…</title>
+      <link>https://t.me/github_repos/14065</link>
+      <guid isPermaLink="true">https://t.me/github_repos/14065</guid>
+      <pubDate>Tue, 24 Nov 2026 17:00:02 GMT</pubDate>
+      <description>ivall/xcl Xbox Series compatibility layer for Windows - runs console game code natively, reimplements the console system libraries and recompiles RDNA2 shaders to DXIL Language : Rust #d3d12 #gdk #rdna2 #xbox Stars : 5026 Issues : 520 Forks : 632 https://github.com/ivall/xcl</description>
+      <enclosure url="https://cdn4.telesco.pe/file/PltuxfjVEoUIyhX2p5MMrv-Ekd2yyFpYDBu4aqJXLxyws199X5Y5BEvLVfyN_gr6Q0arjtOUx7BDA2J09SSsxmr9dYYswR6x0LvcG_uXMeT1myKe2d8MUYUGsKXj3sDWGviplnL1rnODY6Xg5FQkct9YNefUmqlTpT-sgOo6zkc7SbVd4LmrbUc8pwDtGix0ra0Sm_Z9lCe0vheH4xOpx63Fj-bIkkwPXJwrWMbAvA1yunapnGvI4_pKp5I2LJfD7_-V6rTWZ4lU1T3s7HwW55teanjBD19eUJKzRE69IDc6FWbj3uIeJ2YAHVbJroJcorEnnI76tsojuEEz61Hh6g.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>Marvisak/VIctory An attempt at running GTA VI on PC Language : Rust Stars : 6075…</title>
+      <link>https://t.me/github_repos/14064</link>
+      <guid isPermaLink="true">https://t.me/github_repos/14064</guid>
+      <pubDate>Tue, 24 Nov 2026 11:00:03 GMT</pubDate>
+      <description>Marvisak/VIctory An attempt at running GTA VI on PC Language : Rust Stars : 6075 Issues : 595 Forks : 786 https://github.com/Marvisak/VIctory</description>
+    </item>
+    <item>
       <title>os6/nospeaker make your macbook&apos;s trackpad talk using its haptic motor Language …</title>
       <link>https://t.me/github_repos/14063</link>
       <guid isPermaLink="true">https://t.me/github_repos/14063</guid>
       <pubDate>Tue, 24 Nov 2026 05:00:03 GMT</pubDate>
       <description>os6/nospeaker make your macbook&apos;s trackpad talk using its haptic motor Language : Swift #haptics #macos #swift #trackpad Stars : 674 Issues : 1 Forks : 38 https://github.com/os6/nospeaker</description>
-      <enclosure url="https://cdn4.telesco.pe/file/FoCIQmAwE1P3CaSfpelJ10vWdxO95upKuXzvzklONdkunoLkVsgWHbqqfDM42SpumvlfpHqtbFFOWyfIKJZTfExI90f2f5gutMDimQkuCSQn6ac4b6sFYaaW3iWA-OpM6GE0r5_OFTUC16kDUK5wu9c2nKft_UuMY7SS-BSYHCsCod1G5O1sX-H_iCY7DzJOLvS1j0mwInV5ig6aSZCCwWd0OvLmldZQBN4O6MZn7C26ssw06POP1BDMhqDL8Cr9Z_5kOUUv-ixx9NS5ER04DYJPefkH_vzrRDKHmMDFwHDm4WEAlxH_JBSlrEu2K7mxVhDvXMTP-2k_QEAnDzMzSg.jpg" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/F5nlPGyYWtUSfSG4HubzEWQP8K3cmvVs2NDP8Mb2KI5rDc6ONAO44zxz56dMmUP5RUT6EsC_tdBMeAscDUAmxvADyDpXaDQbObiHTSFfJ-H-0LnvcRVkdeJym0qJGmaicMLlEXskZc5VE2fYkmPbrEgpta7uFRBkFIomPnuFJ5wdOuwbBoI7U98S94eKlsR9IibgmBLC2en-q9i6vOgkji3ItIPOu9raVNIorsbX_0DIFHKyAUdNZBBvrtVndLbr2gd8aPM-SmmybxlaSA61FYrCfnZBGmPsOoUfAFkMgYhI90UQNsl5yldPnH7ts6k1zq6Rcs_tYEu6dPj4vVlCNw.jpg" type="image/jpeg" length="0"/>
     </item>
     <item>
       <title>leanprover-community/riemann-hypothesis Independent Comparator setup for the Lea…</title>
@@ -28,7 +43,7 @@
       <guid isPermaLink="true">https://t.me/github_repos/14061</guid>
       <pubDate>Mon, 23 Nov 2026 17:00:03 GMT</pubDate>
       <description>pierridotite/mobile-agent-testers 20 AI testers on 20 different phones, in parallel, on GitHub&apos;s free runners: Claude Code agents on iOS Simulators and Android emulators that find broken flows, translation, layout and accessibility bugs Language : Python #accessibility_testing #ai_agents #ai_testing #android #android_emulator #claude #claude_code #e2e_testing #exploratory_testing #expo #flutter #github_actions #ios #ios_simulator #llm #mobile_testing #qa #react_native #test_automation #ui_testing Stars : 922 Issues : 0 Forks : 90 https://github.com/pierridotite/mobile-agent-testers</description>
-      <enclosure url="https://cdn4.telesco.pe/file/Xe9gQhYkx2U61G_2pc3ng-X16y7yN_Wyrz1faKN6FQPMWRLphVYEC4nWHMpO4qd0m_JG1tlmscuzYmM4rbpUn-FZWzEy_A5w5tFrAHm02Zu-7njZfJrwfsSTaBF2w2FhkP5f4BoOJ6FssBv_bUSx8gWg3H4Qd6v74Lbt2c4N_0h8Vk4gZNwPvTpEDxHyVqxIgglK76YccIGGpDRh6fSmArEEEHaaDv-x4ToXMaZfdMeaaP22q-yViZoRdi4ua9HDvPx_f4D5YUJT7Kmpgui44G6CuBG-nZZjF6BQflrfzvHzacTtlVHzzXvFHYaIG_vt62CyY3oqi4Up5mg2s9CxpQ.jpg" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/lFK0JmlA8tHp3hzantZWrtTBaWJ-_phnyYQi0SP-zvBT85Meo2yXcVIL3AtkCCdNmJ2Chx6d7SL6AjMKAbG7mGOIe9MG0Ou0io_gangg0NFvVRs__3pRMUCvMT_bjc8TEEgZOvWIodaYKaBznmHL9hjownXi1WEiFew9fG-33VFPHMXMNwgw7CSlg8VwTxMkttP0thCMZ8H1L9vEt4PDRnB7Df_qW2ndZwIRtmI04pTRWQs3_aKqU4O7jYCQ1tq6Od4JKrZxiqek6OgizIJ_nKhgLtwl3OVbwHW08cJi4rprHUz95FTTOBPN6QIQe9Qa8d2ywSa96xH9koN64LIqNA.jpg" type="image/jpeg" length="0"/>
     </item>
     <item>
       <title>EL4CTEO/fast-anything Don&apos;t rewrite it in Rust. Rewrite the 5% that&apos;s slow: prof…</title>
@@ -36,7 +51,7 @@
       <guid isPermaLink="true">https://t.me/github_repos/14060</guid>
       <pubDate>Mon, 23 Nov 2026 11:00:03 GMT</pubDate>
       <description>EL4CTEO/fast-anything Don&apos;t rewrite it in Rust. Rewrite the 5% that&apos;s slow: profile Python, Node or Ruby apps, port the hot functions with your coding agent, prove they behave the same. Language : Rust #agent_skills #ai_agents #claude_code #claude_code_plugin #codex #developer_tools #ffi #mcp #mcp_server #napi_rs #nodejs #optimization #performance #profiler #pyo3 #python #rewrite_it_in_rust #ruby #rust #typescript Stars : 2360 Issues : 12 Forks : 145 https://github.com/EL4CTEO/fast-anything</description>
-      <enclosure url="https://cdn4.telesco.pe/file/H6UmLtdnEOq9-8lGLsk5-4DtxrvxGqMKGTlho2dXcJrFCbZronooscqQgvLhJ8RZtfI7qTBQHfuTSWFjhbh7cZOul3Ihi7lIYAUu6HGepIckWdO4SwEQknjxzA6yAVhJ8pfdK9JDN12qcfdJsmxwGKRFdltMIWj4luXri6QDrAdme6ld-TBLbPNmq0RhsF44cXSMorxYPcsV5Qt0k6A3XEb_Mt6nj-PdHyp5yxL_V8IPUhhJXwuudH4TIhx9uAniCC08ITzvD1ND6xm5unVlUF91IDhyczy803_ZjwU3Vq_4f9-uhpomsb2KMVTc2GxZ1Ex6wdvpV5BYMQRQlkefSQ.jpg" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/ChlN2oAaJ9Zy5pAO_7Ufwgz8flx76xDn7z5l6H_au3KWb6AiNzGW4-s1ASZ2Zqrc5IQGS2BvHfR1zqwQjiYX7ZbxhLQ4ZqKnct7dOjX_erwTUms9i1YUtvc2RsGMOYmHPAaN9fX4C3SeWrA8bLNtLHlrIOGJX-AIapxmFqr-ZyYCA4ooFI-FIZPOZyNnQHlTmCm_2b_ZyNS8hX_HeFVcUDyrEEud9MycHGBjrORLEYm9pI28S-1ce89Hj5XB-yG3pF3P8OlhlEd04fPfWDoGfv8KNdAdyJvEHT9s38y3v13hc87KjvzeuK7imi_JowbqDKdpUsJlSinkRvfxuAE03Q.jpg" type="image/jpeg" length="0"/>
     </item>
     <item>
       <title>omonkeyz/xbox-emulator Progress notes for running Xbox Series X|S builds on PC (…</title>
@@ -59,7 +74,7 @@
       <guid isPermaLink="true">https://t.me/github_repos/14057</guid>
       <pubDate>Sun, 22 Nov 2026 17:00:03 GMT</pubDate>
       <description>hatsunemiku-ai/google-one-tools Language : Python Stars : 1159 Issues : 2 Forks : 541 https://github.com/hatsunemiku-ai/google-one-tools</description>
-      <enclosure url="https://cdn4.telesco.pe/file/tJOsx9f7qZ4tk8KBWCZaiaaq1niOiy2zY52AFaaPNl7F5QZANobsBraDOjiBQHqWm8NQ00WbRqGEfBb8_Hdak4Oe9ry1-XIJEzCWhN9CyB4_dFqWNTHZDJYi9CfMZ_J0M0DSlRsznmWE2aL6TYJG2NAK2w1KxX8Y3xN11fjS9QanX_D0jS1EIAJIpDRwGxfYzFkRyJ-wMVwby-gGsTY8W5FgK-BNhQRuSTuImmeG2iuGRWAvJqOWRhPlXdLV1wnkvd6vVWCWBlqy4wA7F7aqHhoRkESfuGRNLXYgw4r5GiA9s6Rp8pk4z8wTZL5jfPWRZEL3w4b-kWd1S1ODbV9dyw.jpg" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/Vzxsz5eZsekK4r3t-2sT1CF1adqSIkQnWMlslMSAdKWU_jqoAYrGvYL6QpTiB9wyH__-AB5lMF1QUdKuvMYGUzZOmi95sjXc65kdSVqRGvg8AZ1KW4rI8fZ00-LiXRzbEICPsEF2edzBpad6C_9DE1MjJ35EmM2nj4nXh5T_Jeseo0bzzWOVGEvWLgzEJVNLjyviwMdxifnuuIJmd7NKKFiBP4JLQHMG-mnfztlR1OISwkSCnllVbDob7wiVZn0YsPsFgDVPQfKSt5N0VXtsUM80Q9YAICcMSmOrhdwRnUFvQludZNSFOQcgaY6u7nRuTsfuYU-Do4IIZjoVR2_auA.jpg" type="image/jpeg" length="0"/>
     </item>
     <item>
       <title>ItsNotRexed/Leonida Leonida Is A Native PC Recompilation Of The Xbox Version Of …</title>
@@ -67,7 +82,7 @@
       <guid isPermaLink="true">https://t.me/github_repos/14056</guid>
       <pubDate>Sun, 22 Nov 2026 11:00:03 GMT</pubDate>
       <description>ItsNotRexed/Leonida Leonida Is A Native PC Recompilation Of The Xbox Version Of Grand Theft Auto 6 Language : Python Stars : 7929 Issues : 191 Forks : 629 https://github.com/ItsNotRexed/Leonida</description>
-      <enclosure url="https://cdn4.telesco.pe/file/RiiwuBv1SVEAi9DdsWgRru-rjD7EA8ZzGuLoi2srEGKsCcl3y7-fF4aIj9bIqzz9XndTrgGwoDvMwnsll2EFscC4ZJSvqFrtTfrbgpGZjVQbJP6P7IZ1rCCtwDPKTDTuSIsq3pEdO-mxnlYg-T6ilQFe10erYovgbna5Q7AlDHLhKKvuq5Jbti7Gzln_LFI2Hgzvop-WHa_BIIyx2RyUKyv7ShXZATlFGdhTYe36vLwJBQcr7ZN9KZJMMoFmOx1Oql7Xl9WOqqi9KQG20gz0LvG2_ACTc5YUJJOdBaF7V92RRR9X8Pu7Zu7dvPL7hQfZsL5AIfICjhTO701Q0GWvcg.jpg" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/DEbB7mElqpkdNRT7rOAfXsuFy2uHViDgMGHvRgrqS1meQ_v72U7KseQM2jSEencGEqoDrl7MbyGVn2c56kSkhFHGeXO7jFFYj4Zg2MVZ5goPpZXcMeHeK81JrThNKYA8d3ehwIYiRbLF91DZ94x0QWMjrYpXietym0V4dg1CrsnFiopJEabNL-yFzm1WTvZjNL8I8oVTuerUTNmNB6omo_FmIxDvwCBrweqVTGPcqd-oIha6dyTXkyQ8VyXlHIZQcugDGfGbgDrm-kPt7-DVlpea5YvXOSLtj7iCpJQsx7czu-c2iu8Wytywhu1EZ66R95EL6WFWQD2f3hu6imOXKQ.jpg" type="image/jpeg" length="0"/>
     </item>
     <item>
       <title>0xkaka/homeport Language : HTML Stars : 605 Issues : 0 Forks : 105 https://githu…</title>
@@ -82,22 +97,7 @@
       <guid isPermaLink="true">https://t.me/github_repos/14054</guid>
       <pubDate>Sat, 21 Nov 2026 23:00:03 GMT</pubDate>
       <description>boringmarketer/boring-marketing-skills 32 free marketing skills for your AI agent: research, positioning, copy, pages, SEO, AI search, ads, email and content, plus a deep local-business pack. MIT. Language : Python #agent_skills #ai_agents #claude_code #codex #copywriting #local_seo #marketing #seo Stars : 755 Issues : 1 Forks : 275 https://github.com/boringmarketer/boring-marketing-skills</description>
-      <enclosure url="https://cdn4.telesco.pe/file/JFKxSLudr844hau_5mvWgqiIOwrFXxsbwdAhre7ihsVt0zFKdC_nd_OyvtJQXpKWFVuEs7Rh0CHemlNl7iZ416upTmV_XSkl4kd2H3IDW_gCQ6E2bgNqXcxw1EWVTUIaBMQEhacGhOiRh6j0TVI6cDpvABHtswWFJ24LtwHtlebHUeAc9o1iV7XnASXUucLWkGE88gkYS7E7dpuut0nNBsA68iygYf4JYj2mBznYsChHoXNEcFWOcchWxBVwOGybdUy81OFRXBJ-KAzuw4TBI1eXkJ-D_OUV1NvXDKkLUTMuux4h7IBvH3Q5SKVW8YLI_8RgD2933MYren7YDRYATw.jpg" type="image/jpeg" length="0"/>
-    </item>
-    <item>
-      <title>Lemxy/WinRust Windows shell replacement in Rust: taskbar, file manager, NTFS sea…</title>
-      <link>https://t.me/github_repos/14053</link>
-      <guid isPermaLink="true">https://t.me/github_repos/14053</guid>
-      <pubDate>Sat, 21 Nov 2026 17:00:03 GMT</pubDate>
-      <description>Lemxy/WinRust Windows shell replacement in Rust: taskbar, file manager, NTFS search, task manager, disk cleaner. One installer exe. Language : Rust Stars : 807 Issues : 31 Forks : 40 https://github.com/Lemxy/WinRust</description>
-      <enclosure url="https://cdn4.telesco.pe/file/fpEwF1w2Kzw8Fui-TaT-X5np-hLg1eCHP75Hs1I2RUT-LGXHkoUweTk8kIvC_BiLfLOo1vCxA_mfkRcBvEBQi7RtXdo8CBJDK1gD_Itw2kO8zQLaFtTkAtHjp0jbGuxVAIJTyDosWUI4avR8c4yEv23zOI7c1CLXdD6KT7EiVJ0KOBY8fwGf_CMMa5FBJw3RhpHIgSyIHWm0U9qbHfAlA66gY9EemUPgv27dzC5HdEXSWFtk25CsDTGH6WvI7xeBpNgNG89rAagEFsN6fR4Uzhwyn0etdXBmhu6GKgz0nOLHSnjKGt5ko7gvKI9zf1hgAQRkd78BKCRae5CAOplqKg.jpg" type="image/jpeg" length="0"/>
-    </item>
-    <item>
-      <title>iamajmeena/neonclipping Paste a link, get captioned 9:16 clips in ~2 min. Free, …</title>
-      <link>https://t.me/github_repos/14052</link>
-      <guid isPermaLink="true">https://t.me/github_repos/14052</guid>
-      <pubDate>Sat, 21 Nov 2026 11:00:03 GMT</pubDate>
-      <description>iamajmeena/neonclipping Paste a link, get captioned 9:16 clips in ~2 min. Free, local, open-source clipping engine (audio-first, YouTube captions, local LLM). Language : Python #clipping #ffmpeg #shorts #video #whisper #yt_dlp Stars : 1390 Issues : 17 Forks : 66 https://github.com/iamajmeena/neonclipping</description>
+      <enclosure url="https://cdn4.telesco.pe/file/d7YA3kMZpt-l1ABEVH4ym_-FTfto4Qhz4arZ4XRoO35HYL8ADgu3H16lSxFeM1Ecq2ECCmjwtYi-BFIZMSyUeTrwCitRpIEO0voR4mU02f7LKOqniUTuve2a42AM9ykG66LlwXOoX-sy7Ztu4y5xGpImq5kdgTkw-gJt8b7sIKoFfEbJDWaqSMidNF6wjdLdk6MZ3Ngtmcs8ZFqGwHo3_zph3RzVwjdRO0KUnmGBnpZFnGs-hIyPLn6qA9HMAduNZeg989Rfbf0LoPiWGejps5Bj7CiAXi0lbVuhrHo6cOP9ESkIG8uR7K7YcO2pVtt81ExibtSOPg2RqdZFYwdbuQ.jpg" type="image/jpeg" length="0"/>
     </item>
   </channel>
 </rss>

@@ -7,6 +7,13 @@
     <description>🔵 Freelancing articles, tips, and trick optimizing your workflow for better efficiency and higher earnings. Buy Ads: @strategy</description>
     <language>en</language>
     <item>
+      <title>🤖 Claude Code Guide 🤖 A comprehensive guide to Claude Code covers working with…</title>
+      <link>https://t.me/Freelancer/1131</link>
+      <guid isPermaLink="true">https://t.me/Freelancer/1131</guid>
+      <pubDate>Tue, 24 Nov 2026 10:03:30 GMT</pubDate>
+      <description>🤖 Claude Code Guide 🤖 A comprehensive guide to Claude Code covers working with the agent, skills, MCP, workflows, settings, and other parts of the tool. It has nearly 7,000 stars and was assembled by an experienced AI agent engineer. ✔️ Working with the Claude Code agent ✔️ Skills and MCP ✔️ Workflows and settings ✔️ Other Claude Code topics 👉 Github 👈 Use the guide as a reference when setting up Claude Code or exploring its main features. 💻 @program</description>
+    </item>
+    <item>
       <title>🕹️ GTA VI PC Port Takes Shape An open-source GitHub project is rebuilding the X…</title>
       <link>https://t.me/Freelancer/1130</link>
       <guid isPermaLink="true">https://t.me/Freelancer/1130</guid>
@@ -19,13 +26,6 @@
       <guid isPermaLink="true">https://t.me/Freelancer/1129</guid>
       <pubDate>Sun, 22 Nov 2026 16:00:53 GMT</pubDate>
       <description>🦀 Rewrite Projects In Rust Rust Anything helps rewrite games and apps from other languages in Rust. It works with Claude Code, Codex, and other AI agents, rewriting code in parts while checking that nothing breaks. ✔️ Designed for incremental code rewrites ✔️ Works with Claude Code, Codex, and other AI agents ✔️ Checks rewritten parts for breakage ✔️ Rust programs can use less memory and system resources ✔️ Authors report up to 20x speedups in some tests 👉 Github 👈 Use it when you want to move an existing project to Rust without rewriting the whole codebase at once. 💻 @program</description>
-    </item>
-    <item>
-      <title>📱 Android Apps On iPhone Andarium can now run APK files on an iPhone by launchi…</title>
-      <link>https://t.me/Freelancer/1126</link>
-      <guid isPermaLink="true">https://t.me/Freelancer/1126</guid>
-      <pubDate>Sat, 21 Nov 2026 13:04:00 GMT</pubDate>
-      <description>📱 Android Apps On iPhone Andarium can now run APK files on an iPhone by launching a virtual Android 17 environment. This makes it possible to try apps that are unavailable in the App Store, including some banking apps, depending on compatibility. ✔️ Virtual Android 17 runs directly on iPhone ✔️ Internet, camera, and microphone access are available ✔️ VPN must be disabled for Andarium to work properly 👉 Link 👈 App support depends on each APK, so compatibility may vary. 💻 @program</description>
     </item>
   </channel>
 </rss>

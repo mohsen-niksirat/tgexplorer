@@ -7,6 +7,41 @@
     <description>Welcome to @prompt , your go-to source for AI insights, breakthroughs, and tools shaping the future of intelligence. Contact: @LightEarendil</description>
     <language>en</language>
     <item>
+      <title>🧬 OpenAI says GPT-6 designs proteins with just reasoning and code, no specializ…</title>
+      <link>https://t.me/Prompt/1118</link>
+      <guid isPermaLink="true">https://t.me/Prompt/1118</guid>
+      <pubDate>Tue, 24 Nov 2026 21:39:11 GMT</pubDate>
+      <description>🧬 OpenAI says GPT-6 designs proteins with just reasoning and code, no specialized biology models In OpenAI&apos;s preprint , an internal model matched or beat specialist tools on most design tasks. In lab tests with Onava, GPT-6.2-based designs showed binding on all five targets. But specialized models still supplied sequences and picked the candidates to test, and full structure prediction remains a clear weakness.</description>
+    </item>
+    <item>
+      <title>🚨 OpenAI says it proved VP ≠ VNP, and the Lean proof is in the repo OpenAI post…</title>
+      <link>https://t.me/Prompt/1117</link>
+      <guid isPermaLink="true">https://t.me/Prompt/1117</guid>
+      <pubDate>Tue, 24 Nov 2026 19:04:01 GMT</pubDate>
+      <description>🚨 OpenAI says it proved VP ≠ VNP, and the Lean proof is in the repo OpenAI posted a preprint with a border circuit lower bound of exp(Ω((log n)^(5/4))) for an explicit VNP family over every field. It carries over to the directed Hamiltonian cycle polynomial, and to the permanent outside characteristic two. It&apos;s a GitHub preprint with no peer review, and it lands days after Anthropic&apos;s Claude result on the arithmetic analogue of P vs NP.</description>
+    </item>
+    <item>
+      <title>🚨 Ex-OpenAI engineer allegedly bugged a conference room, and prosecutors say it…</title>
+      <link>https://t.me/Prompt/1116</link>
+      <guid isPermaLink="true">https://t.me/Prompt/1116</guid>
+      <pubDate>Tue, 24 Nov 2026 17:14:48 GMT</pubDate>
+      <description>🚨 Ex-OpenAI engineer allegedly bugged a conference room, and prosecutors say it likely caught trade secrets Prosecutors argued against bail for Abdulrahman Alfozan in a Monday filing. • A photo of what looks like a term sheet for a &quot;strategic partnership&quot; with another company • Hundreds of audio files, reportedly 160+ hours, per X trending summaries • Flight risk claim: weak US ties, plenty of connections and resources in Saudi Arabia</description>
+    </item>
+    <item>
+      <title>🚨 Anthropic is trading below its $83 IPO price before the opening bell Bloomber…</title>
+      <link>https://t.me/Prompt/1115</link>
+      <guid isPermaLink="true">https://t.me/Prompt/1115</guid>
+      <pubDate>Tue, 24 Nov 2026 14:13:48 GMT</pubDate>
+      <description>🚨 Anthropic is trading below its $83 IPO price before the opening bell Bloomberg reports the stock slipped under the offer price in premarket. Day-one buyers are already underwater. Premarket volume is thin and prices can swing hard, so the open could look different.</description>
+    </item>
+    <item>
+      <title>🤖 Baidu opens the weights on ERNIE 5.5 Flash Preview, a 280B MoE with only 14B …</title>
+      <link>https://t.me/Prompt/1114</link>
+      <guid isPermaLink="true">https://t.me/Prompt/1114</guid>
+      <pubDate>Tue, 24 Nov 2026 11:12:50 GMT</pubDate>
+      <description>🤖 Baidu opens the weights on ERNIE 5.5 Flash Preview, a 280B MoE with only 14B active per token The release has a 1M-token context, FP4 expert weights and a speculative decoding head. Baidu says one 11-hour run produced a full Unreal Engine 5.8 game in C++. It&apos;s an unfinished mid-training checkpoint, and every score is Baidu&apos;s own. Expect the final version to look different.</description>
+    </item>
+    <item>
       <title>🤖 Qwen3.8-27B squeezed to 3-bit, 10 GB, and it still matches BF16 on agentic be…</title>
       <link>https://t.me/Prompt/1113</link>
       <guid isPermaLink="true">https://t.me/Prompt/1113</guid>
@@ -110,41 +145,6 @@
       <guid isPermaLink="true">https://t.me/Prompt/1099</guid>
       <pubDate>Mon, 23 Nov 2026 00:22:48 GMT</pubDate>
       <description>⚡️ Raschka says pre-training isn&apos;t plateauing, and OpenAI&apos;s own data backs him up In a new essay , he points to a chart from OpenAI where log-perplexity keeps falling as pre-training scales. It&apos;s a next-token metric, not a task score, but it still tracks real-world performance, and he wants the same plot with training FLOPs on the x-axis.</description>
-    </item>
-    <item>
-      <title>🚨 TSMC just bought $500M of Anthropic at the IPO price TSMC Partners picked up …</title>
-      <link>https://t.me/Prompt/1098</link>
-      <guid isPermaLink="true">https://t.me/Prompt/1098</guid>
-      <pubDate>Sun, 22 Nov 2026 21:21:48 GMT</pubDate>
-      <description>🚨 TSMC just bought $500M of Anthropic at the IPO price TSMC Partners picked up 6,024,096 shares at $83 each, which works out to about 0.03% of a company priced at roughly $1.5T. It&apos;s the first half of a board-approved plan to put up to $500M each into Anthropic common stock and OpenAI preferred shares.</description>
-    </item>
-    <item>
-      <title>🚨 California&apos;s Nvidia probe reportedly covers possible criminal law violations …</title>
-      <link>https://t.me/Prompt/1097</link>
-      <guid isPermaLink="true">https://t.me/Prompt/1097</guid>
-      <pubDate>Sun, 22 Nov 2026 18:21:21 GMT</pubDate>
-      <description>🚨 California&apos;s Nvidia probe reportedly covers possible criminal law violations Bloomberg reports that the state&apos;s investigation reaches past civil territory. That&apos;s a different tier of risk for the company that supplies most of the AI chips on earth. Details are thin so far, and an investigation isn&apos;t a charge. State prosecutors don&apos;t need Washington&apos;s permission to make a very bad quarter.</description>
-    </item>
-    <item>
-      <title>🚨 Anthropic&apos;s IPO ran so tight that bankers are complaining Reuters reports Ant…</title>
-      <link>https://t.me/Prompt/1096</link>
-      <guid isPermaLink="true">https://t.me/Prompt/1096</guid>
-      <pubDate>Sun, 22 Nov 2026 15:20:35 GMT</pubDate>
-      <description>🚨 Anthropic&apos;s IPO ran so tight that bankers are complaining Reuters reports Anthropic capped some of its 22 underwriters at four bankers per deal team. Some senior bankers also signed six-month non-competes covering rivals like OpenAI and Cursor. Banks still collected over $500M in fees. The stock jumped 17% on day one, then closed down 8.5% on Friday.</description>
-    </item>
-    <item>
-      <title>🚨 Trump threatens &quot;tremendous penalties&quot; for US tech firms that build datacente…</title>
-      <link>https://t.me/Prompt/1095</link>
-      <guid isPermaLink="true">https://t.me/Prompt/1095</guid>
-      <pubDate>Sun, 22 Nov 2026 12:19:35 GMT</pubDate>
-      <description>🚨 Trump threatens &quot;tremendous penalties&quot; for US tech firms that build datacenters abroad He said it at a Friday press conference, and he gave no details . He also admitted he hasn&apos;t told his own officials. His reasoning is that China &quot;will take all of them,&quot; and he told US communities to make developers pay them but not shut the datacenters off.</description>
-    </item>
-    <item>
-      <title>⚡️ RightNow AI makes Inkling 2 Small&apos;s FP4 expert GEMMs 5.1x to 7.5x faster on B…</title>
-      <link>https://t.me/Prompt/1094</link>
-      <guid isPermaLink="true">https://t.me/Prompt/1094</guid>
-      <pubDate>Sun, 22 Nov 2026 09:18:35 GMT</pubDate>
-      <description>⚡️ RightNow AI makes Inkling 2 Small&apos;s FP4 expert GEMMs 5.1x to 7.5x faster on B300, with identical bits The YC-backed lab tuned kernels for Thinking Machines&apos; 594B MoE on 8 GPUs, running NVFP4 natively. Logits matched on all 599 rows, whether prompts were fed 64 positions per step or 1. They sharded the NVFP4 experts anyway, which SGLang&apos;s recipe says can&apos;t be done. Each GPU exchanges only the row maximum, and the kernels are open source.</description>
     </item>
   </channel>
 </rss>

@@ -6,6 +6,12 @@
     <atom:link href="https://mohsen-niksirat.github.io/tgexplorer/rss/ai4free.xml" rel="self" type="application/rss+xml"/>
     <description>بررسی نکات کاربردی در زمینه ی هوش مصنوعی. لینک گروه:https://t.me/ai_club0</description>
     <language>fa</language>
-
+    <item>
+      <title>tiny-voca TTS یک مدل کوچک برای تبدیل متن به صدا 4.5 میلیون پارامتر و 18MB فقط زب…</title>
+      <link>https://t.me/ai4free/444</link>
+      <guid isPermaLink="true">https://t.me/ai4free/444</guid>
+      <pubDate>Mon, 23 Nov 2026 13:43:01 GMT</pubDate>
+      <description>tiny-voca TTS یک مدل کوچک برای تبدیل متن به صدا 4.5 میلیون پارامتر و 18MB فقط زبان انگلیسی دارای دو صدای مردانه و زنانه که توسط Qwen3-TTS طراحی و اجرا شده‌است. هزینه توسعه این مدل 9.56 دلار بوده است. https://tiny-voca.n4ze3m.com/ #tts #local معادل فارسی 18MB https://huggingface.co/mehdi-hf/cilla-lite 100MB https://huggingface.co/mehdi-hf/cilla-mini Link #tts @ai4free</description>
+    </item>
   </channel>
 </rss>

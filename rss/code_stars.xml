@@ -7,6 +7,30 @@
     <description>Track GitHub repos gaining stars in real time. Discover trending projects in AI, Python, JavaScript, React, and DevOps before they go viral. Updated hourly.</description>
     <language>en</language>
     <item>
+      <title>ubiquitarianism/leonida A continuation of Leonida, the Xbox &gt; PC port interface …</title>
+      <link>https://t.me/code_stars/16686</link>
+      <guid isPermaLink="true">https://t.me/code_stars/16686</guid>
+      <pubDate>Tue, 24 Nov 2026 22:16:46 GMT</pubDate>
+      <description>ubiquitarianism/leonida A continuation of Leonida, the Xbox &gt; PC port interface of GTA VI Language: Python Total stars: 1804 #python</description>
+      <enclosure url="https://cdn4.telesco.pe/file/exC8w4-jSFyUM_3-5ng993TRMibAIzxga-YJzPx9teo0BI3PnRBiZyW7ppgPpPH7yDn5WKaHgOIp8io4vFkf5lJQFWLCBj7KXtxegjT90Mm-x8h_9em7zPAlWIDIYpXE7aCp4p-KbGnxhJia_Ij2CTTHrrFIsdLuip2IVKkIdcBqFjIF_f5QcXtoyxeztMpi-_X9hTdmG0IUhrPTL5YkMbu3ppUTc7ZUpaGxhDNfUujEl6-pzuVHKNi1D-xekvVf5Y4VcpqFtR4QcpFwGnv0dB_-Pb4hX-ZqIRU6-ScOQk2chVu5_2adiDFDeMmhHTxgfNBRD_chhRbX4KATjNB8ww.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>4lwayz/portwatch-vi Does GTA VI run on PC yet? A live tracker of community recom…</title>
+      <link>https://t.me/code_stars/16685</link>
+      <guid isPermaLink="true">https://t.me/code_stars/16685</guid>
+      <pubDate>Tue, 24 Nov 2026 21:17:01 GMT</pubDate>
+      <description>4lwayz/portwatch-vi Does GTA VI run on PC yet? A live tracker of community recompilation and emulation efforts, updated daily. Language: JavaScript Total stars: 2613 #javascript</description>
+      <enclosure url="https://cdn4.telesco.pe/file/YGW9Y79IDqDDTGOQO91PATNdiaqnjsPn_JL3I42TFvm6FyZfJeYZk7kXNDMcYavUlGaTqMBdadhAO5IwN-z1pozirqQIJGuYJKf35J_DWcwk7WEQx0X1G48Yq3MX0uHy9cforfIgvnmtbquzhuNwZ06zCBhwj4JPV1PBY-_hQv3j-PFY4v2N7bZ6nMvmtHqHvNImszPxesg0eAv6QiDenRd4CvZ44ufP8Ad6YFCXNGvPLUMSxibVekTM3EKexAaLOCX2H8Pf7JQqPdv9Zw_YEDIQ8sxMyzQ0cmmC0qFHz7Czsv-XMGaYPmVeWM0cWHXI3cdyWTAqDT7qpZpID01g7w.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>zed-industries/gpui A GPU-accelerated, open-source UI framework for Rust that co…</title>
+      <link>https://t.me/code_stars/16684</link>
+      <guid isPermaLink="true">https://t.me/code_stars/16684</guid>
+      <pubDate>Tue, 24 Nov 2026 14:16:58 GMT</pubDate>
+      <description>zed-industries/gpui A GPU-accelerated, open-source UI framework for Rust that combines immediate and retained modes. Language: Total stars: 1270 #crossplatform , #desktop , #frameowrk , #gpu , #gpuacceleration , #gpui , #gui , #mobile , #rust , #web</description>
+      <enclosure url="https://cdn4.telesco.pe/file/XuDfiPLQgTaM1ZQunbHhfQn7jRhNHwjKa2yLLYR-fmVnWM4gOpNw9oLRhQ8jKcVi-iozpq7hxRBCRlwDbj8ospQT_GC78WkygdqWYqJrBLYs0tyxbbpzVoi1mOzlWGBoMet91VsEu3rqwp4TJ_o7widdrXfWVW90vmc1IzXNuhqW1eijaTYev9OykY9OktFu7g9ZEVbJ_GDyMOrIW5rB379tHb54-4SXXno2KQILEa9y-p7ngJkb1oYyZJqocUKNqr5Up9XUG_0WXouS7c0xJ2OSFOC6EuRiKsnYBSJEBvPM5Dlg8O-BLDwEYSPXOne9z6EatLKQibTc0DXOofOKqw.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
       <title>Marvisak/VIctory An attempt at running GTA VI on PC Language: Rust Total stars: …</title>
       <link>https://t.me/code_stars/16683</link>
       <guid isPermaLink="true">https://t.me/code_stars/16683</guid>
@@ -28,7 +52,7 @@
       <guid isPermaLink="true">https://t.me/code_stars/16681</guid>
       <pubDate>Mon, 23 Nov 2026 18:16:59 GMT</pubDate>
       <description>a2ui-project/a2ui Open-source generative UI framework: agents stream layout data, and apps render it with native components in React, Angular, Lit, Flutter, SwiftUI and Jetpack Compose. Language: TypeScript Total stars: 18330 #typescript #a2a , #a2ui , #agent , #angular , #flutter , #generativeui , #jetpackcompose , #lit , #llm , #mcp , #react , #swiftui</description>
-      <enclosure url="https://cdn4.telesco.pe/file/I7yGuuQd8ct0-pewOg52uioVWiBGJ9AcRHdbwKrTNdBkpUgbfd_U_Xt078_SDR5didA3lHieYmRrpV_utYpI3mkGEFI3eNjsaK5jSSmIkXGyOKln77vNez7smnb-78iGeDslQF6cxhCJxTpN88F6Pcd73qQeHHqqDeWaxsTQ0zHGKlMFEeZDuAy6mTVP0bGrX98TEGbsrJupi2SvPwAR78fdu8OVE7IAeRGAGVpBjslypJn88noRHmzily8ypPxaXtSnWtMX6DE5wttL97uz5ibgROdfYXqQUJhRGqPxhPfyBnfw_w8vPrrbl_Qug4umeBlafA0SJYXahWcyt6VnPA.jpg" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/jRHsT8jcBnc-JESzppxTtg1Pyd0tMPycyDTFJjgwjLQPQRt-RYduXStA7xGhV-yqv3RBwwOPbA7qojB_OYGsj84YR1osQNHAbL8sErjGZmsJ7dgDD-Ny4BPLX3TuEOyUUh2l8MC_uyUTWZnlrltb_bvVN2bEINk94XPBcz9jL_vxOpgi4aHhyx7E_2tRsWOsiWH9HJBjHXO998wl7rr7gz0SixPGeuVpj-Q94_Apj_oV1Z69ggEGSaET6Ks1mouQoZUc_F0WYu8pl9OXnCVVqqeDqYIMnz-tqYcmJf7lFLtmu20Go1JS6nzgbZQihxNclnaUd-Lj34XwctsBXMbZTQ.jpg" type="image/jpeg" length="0"/>
     </item>
     <item>
       <title>omonkeyz/xbox-emulator Progress notes for running Xbox Series X|S builds on PC (…</title>
@@ -36,7 +60,7 @@
       <guid isPermaLink="true">https://t.me/code_stars/16680</guid>
       <pubDate>Mon, 23 Nov 2026 17:17:17 GMT</pubDate>
       <description>omonkeyz/xbox-emulator Progress notes for running Xbox Series X|S builds on PC (TomBox + rage9) Language: Rust Total stars: 1560 #rust</description>
-      <enclosure url="https://cdn4.telesco.pe/file/N6rwcj8DCL_NUuSDH0HWRrQdGdwOnoNvigvxVRo6sFP6N62B_mVFja5fbD8DHKXDs1tmpl6iQdY6J4WDG0CsolNBuC3C-PrdqYY9f_OiY0c89dsnCLfWxONp3oJBralD1-w0nShXktdkMWiosT6qeqCP5wkAwIvvrAznZbmWCDULrfshyCy3oJaWTbjxj-dtBdYK7aLMj-tkTSBW5B5JgZbUGBeZwMFFY-mjzTWdhJL8NlrugiBG7mSPtuXcYHBUg3_hjF-hHwo7AaCQpNLJgKZIVbRUSdWu-NL3UVNlao1tGk8JEKzJP2odP_8YrLQSxSwuOrGX3PCVQqQ6qhA0Kw.jpg" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/k732rDDa2E4ab4vZZeNbxkpDoqvzyt2hbg2wWdnp-DcWT1VMozClA2sfoPP4YWnCkysowQmMvuiGMvvkzMcHZCsqlxxxwx72wF6x9pN9jtzBClH_4QUspYf7siGKghK_yOnCROLaerPRNOb5wtWlDgFF0uPq2t9OOPySM4X4cktos2FSfXZkCdJ3nlNSBIKdRPC-R9tHPFhHA7VNiMhiwBPXtkx1Lgsjbs0pziLR90le9JId_muL0AKjcMwACXE8qvPTmxu32LOaXnDuUAYIySIws0qpf17zdBcdVpj5sWtjFiXWHRBwyNcu4XbGj-YQNygtOEuvpDMMZ0cioufjIw.jpg" type="image/jpeg" length="0"/>
     </item>
     <item>
       <title>AFK-surf/xnulinux XNU as a loadable kernel module inside Linux (macOS personalit…</title>
@@ -44,7 +68,7 @@
       <guid isPermaLink="true">https://t.me/code_stars/16679</guid>
       <pubDate>Mon, 23 Nov 2026 16:16:54 GMT</pubDate>
       <description>AFK-surf/xnulinux XNU as a loadable kernel module inside Linux (macOS personality for arm64 Linux) Language: Objective-C++ Total stars: 1337 #objectivecplusplus</description>
-      <enclosure url="https://cdn4.telesco.pe/file/txViIvYBZV9ClCR3m87v2HYU6AZFp-bLIS-N_dLiryS6M27gBGc7PgIderUV5eOtItvqHHwYCMJ8BRrNoYw9om6ZN8q6lzEIuZr9V1MZ3j344eW2nLfUmtEJf2lpVYzqF2eRxM5TcXqbLy0x-nub1eIrr0jOdCGzuqXiY6XxSW5KwaZDwvNAGMAO9bcdaBbI9GNySvZqSas66jN8JyXqa8uCfDq-zlRyTEF3s5FEWBoTide78wyhTlFSwRbyTLcD3_92ggg6YJgJFpay9m6RCKNhQWguAJKc-Z7kc_k1M9TsnQW7PTwBYgfBIemLpP4GIKDOuIGynUTU_2_peVxE-A.jpg" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/Z__QbLvISCW-RSszZwNiqxkEESKYeB4fSARQymNecnP9XZ7ooTpnUz7y-DmcECS8dC6cpkUIncvEEcE19BdLTEYdADZH9cSrKpF4gSNemVLuxKSpS4UavI43cCJOQi04D-ntPXJroiMqZQ25aR4-1jJUfVbwTAhgbGFqcQQ-4JC04r_3RdIK8F-4PkRl_m80OcadoIFmQifXfGcPX6fe-ou-Fe7uR1H0-xnpOyREWD0XASq99hgpJc-e6K0ufUEY6gW5kXWG_YBZhPRLeWqNm6vdveHleWZAq8uX7TA2XMEboJNSwOMaDgzu_R0LpY-Mte_zRPC3wV9iVJCc_RRCyQ.jpg" type="image/jpeg" length="0"/>
     </item>
     <item>
       <title>diggerhq/opencomputer An open-source, faster Devin alternative Language: TypeScr…</title>
@@ -60,7 +84,7 @@
       <guid isPermaLink="true">https://t.me/code_stars/16677</guid>
       <pubDate>Sun, 22 Nov 2026 22:16:44 GMT</pubDate>
       <description>ChiefGyk3D/Clouds-Against-Humanity Learn cloud security by building it! An open-source homelab teaching Zero Trust, DevSecOps, IaC, and cloud architecture from the ground up. Language: Python Total stars: 2679 #python #aws , #azure , #cloudcomputing , #cloudsecurity , #cybersecurity , #devsecops , #digitalocean , #doppler , #gcp , #homelab , #opentofu , #spacelift , #terraform , #threatmodeling , #twingate , #zerotrust</description>
-      <enclosure url="https://cdn4.telesco.pe/file/i40aroH0jUx-rEBJpmgiEQy3-UaPuKgbVTJz6q-i9exjULArJ9W1WFJvSySzBNhns570K8j6DhmeFG86jTTb9hK1GNBbRO9ueHBvPGzch5Y0Z5MW__rabtS5bEbgQNOJ1Vq6KheidMEmx4tqWZZkLLjfMcdWev4wD17fpGtBVhNjCYGfw9ed5GuJQ5Kl8Rv721QDJi7QoXhFMYlKdAZ0iocgNE_TbuqzRhhgy6VGPEQ7xg_d1lmSqFpO8yPkuLJ5wu4RwTXV9yFyxj6I35b1siTEPkT1HsrseMh6ou8rZcz5JZMlJ7fa92IWszaNu3SKZ748D1p0tagKCeZ5_29Jig.jpg" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/G373l8PfJoIU1G1nwn356MPX4B-EAro6awbl63FVeBXTwPjnAHuEinvZg4WPDdJ0783q1SxeumuksYqytdbHi6D8xOVz15NdOOW4qq59jxI7_WsoaIhLE_F1JzE6jt5Cctc7sFfoOwYUYOFRrZ66zS_k4ZopZpfQpUHnRk6SOWyWrYpLJH7Hjo10GukR9f1bkhPPH4aVeo2W_-2fKdz-DOjYjW7oMPvY3vFjwhQ5msuGmSN547QnJMes-skH5Nr7RQqKqEGwYhAb9Zacm0GeDNw0iZsfe7OYAG5haR67TwGBaajVpG47Uai5lEqT_J-aGa8R3lb6cv_yWDpmNmSLIw.jpg" type="image/jpeg" length="0"/>
     </item>
     <item>
       <title>EL4CTEO/fast-anything Don&apos;t rewrite it in Rust. Rewrite the 5% that&apos;s slow: prof…</title>
@@ -68,7 +92,7 @@
       <guid isPermaLink="true">https://t.me/code_stars/16676</guid>
       <pubDate>Sun, 22 Nov 2026 18:16:53 GMT</pubDate>
       <description>EL4CTEO/fast-anything Don&apos;t rewrite it in Rust. Rewrite the 5% that&apos;s slow: profile Python, Node or Ruby apps, port the hot functions with your coding agent, prove they behave the same. Language: Rust Total stars: 1531 #rust #agentskills , #aiagents , #claudecode , #claudecodeplugin , #codex , #developertools , #ffi , #mcp , #mcpserver , #napirs , #nodejs , #optimization , #performance , #profiler , #pyo3 , #python , #rewriteitinrust , #ruby , #rust , #typescript</description>
-      <enclosure url="https://cdn4.telesco.pe/file/fZFewAhqiJG1LmVpmYtKWnLqC7jgnnMUA1dfYapJPTfbNUMvqyvv8BMD4VNYyLo0Sc6OkTDzb44JvQaY4eein_JZi2V4my9cjGhwCEcdsPpkSyJWkwWDqVVFUEyV96h5bf_I1OAov-MrI4E4jYPVQ5Zn6idcx2l3S_mQV-o4rKKlqjOYEd7zAco9hCqX92XZYgSwafsB11MxC0c2mjkb8DodgSTQcxRHKsi_N5tE4U67RNsnuYKX6DSOhFFVyoh5S0eIfPnUZqNFTr_haNBNOt4tFOwSEmbrs4mzTC-wL_VQiQhVk7fvWwWvFJwQz2B9eyN6kkgF7J8U8r22G_x2Wg.jpg" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/thR9DPZRPdrCDojJxmYhE1PW0ZT2wSJ-wyZihFi-n5H639NHUoEorMT6sLLWsr7HmR4_3OnaIer6lJwfKP8PkQiKfayLrdrQR0yEL5D4HTaltu6DvwjMz_BKOfXT8qQ--7u1sEtDPd3ZoudULEGWBGySGT3Yo2inchTGjR5ijlvKbwntPNIxYwSYkUwrkem0hd-jlJpjTf8kKbMnMXUSkwe13GJbgM0pDXq4zoxS1gNii0aY7sykUstjC3upW_BLixOdslihAoxeHJe6um73j6696F76p6eajcBY7vIOVcfruYYxY2ZyeXD2e_Czxm4aU3DAm0E1cjGA6FWD4v6pPQ.jpg" type="image/jpeg" length="0"/>
     </item>
     <item>
       <title>Flagsmith/flagsmith Flagsmith is an open-source feature flag platform with remot…</title>
@@ -76,7 +100,7 @@
       <guid isPermaLink="true">https://t.me/code_stars/16675</guid>
       <pubDate>Sun, 22 Nov 2026 17:17:01 GMT</pubDate>
       <description>Flagsmith/flagsmith Flagsmith is an open-source feature flag platform with remote config and experimentation. Choose from self-hosted or cloud deployment options. Language: Python Total stars: 8618 #python #cd , #ci , #continuousintegration , #docker , #featureflag , #featureflaggers , #featureflagging , #featureflags , #featuremanagement , #featuretoggles , #flagsmith , #hacktoberfest , #multivariatetesting , #python , #react , #remoteconfig , #remotecontrol , #selfhosted</description>
-      <enclosure url="https://cdn4.telesco.pe/file/tzpMQNI-uqsL6kPokqg664A5oSq77lilh2rNiQXsS5BGi6FAdNLXu5ZXPGfNDM6XiGIHd3Q6kY2QpKJbeLzT7RyWtSfSlKFBjQsmMzWnQe292sn-SgxlOMeBjcdeI7YpFMITbu4x1UxWND8txfvz-qolHvO43pW_3KgKEr_TiPEbXswtGYJOvkv3zDdL-cJxN06pHD4fABhA3nzDC2MXSucdziKrK5wVH6L3WOUPwXZEAjSfuhbkHDt0C2wqwa5CHAkobZMUW1DJ-mdcaGZ4Qm2DjjZPUmelkEfRVBGw5jdHHQQvp6-qd1Htfn04iLWHNHtvoTBRaaB0fa2hGd7bsg.jpg" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/tKY8Hov274AJYYNVF5TN8ifq8Jw1HU3lYWDjhKhfPXZXThQk0tsEiLCyjun_K0LNOLJhcWDxUXnPkOrIW_9KcVgxuIYDcg4pPcUo1lBt3LrRKuzx2_QW_M2I3X24ToKD3ipMeLOpkvigpK87G61iOEQ0Op_ZEpXXOrWdQ9yGLCvXEX5f5k-CZnYFSIYJjL6sL0dS_3DQFMHV31NEzSiNKh24oPX4QnwcWZ1OSZhz0wgixktAeyviwJgLixL39CDaWR2KccLKOZXVvTlv-7RAbbZCECDiYM-1RgtfPiLEfvY2gMYekko_V8fyyaWztU1ziG6NsXiMccsa_Ce6oTaRJg.jpg" type="image/jpeg" length="0"/>
     </item>
     <item>
       <title>R0Y00/Xbox2Windows GTA VI static recompilation research for x64 Windows. Source-…</title>
@@ -84,7 +108,7 @@
       <guid isPermaLink="true">https://t.me/code_stars/16674</guid>
       <pubDate>Sun, 22 Nov 2026 13:16:58 GMT</pubDate>
       <description>R0Y00/Xbox2Windows GTA VI static recompilation research for x64 Windows. Source-built EXEs run on Windows, and two translated pixel shaders match reference outputs on hardware and WARP. Full-game startup is unverified. Language: Python Total stars: 1158 #python #d3d12 , #directxraytracing , #scarlett , #staticrecompilation , #windows , #xbox , #xboxseriesx</description>
-      <enclosure url="https://cdn4.telesco.pe/file/X7TmNiSXzYIhxMldIFhxgbcRnMAd-wW3oHZryDtTDF8NgQrDapnHPr5iynpjkgrQnt28t3EYlRTwBPGEK0XoElForVQpbPx-j2iGYoTk46IEdv5wf2xrFfbHk8KEIdTxF9oDZ4EeOlYiydm7y-mcsnPitH1SsK_KaHBheFg6c3z3Y_d8FyOb0vXB57SRodCPHK0u4zEmd-A4aN86-YMg4GogAhcbW7yN6J67-VQ6lhabASOoBZ6RYC2NjQMJAkGfZie2S7qNu7VML-oFPJPRQ99vlgzIfTlHbFrfMTWY8KuQBMFAIPefKRx8bR7GKGZmBLT6xezMAYDWc5f1eOO58Q.jpg" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/U8CuIFoUwSJ1sFzuP_ekE-pKJRl6ph4-wMeacXdW0NqJ-T05iaDxJdUcIZP7iUpW3NxXuw4p78TAFtik2qF-izlaZCMYr7inzccKZIUdKcz7ExYQP6y18yKerOMFV2gAqevg4WUdcgPaAt899Xo331OUV2hy06PoHo-TXLfgoJ-3-Gqk2AqpxekQLn2MrXSpPtbAvP2PkPAQiL7fzvb8JVbGlsYy39rCwmOSURTPs3jDmts-uidGun9R2qLXcyTDCWr332LXJDotfDhu7BV6LyCi-vG2wBkP7auAld9bmEVr7P21MVT1XMVuCPzUvQ_X4sRjDCdNNQQXfWg2RE_E5w.jpg" type="image/jpeg" length="0"/>
     </item>
     <item>
       <title>hatsunemiku-ai/google-one-tools Language: Python Total stars: 1179 #python</title>
@@ -93,38 +117,6 @@
       <pubDate>Sun, 22 Nov 2026 09:16:54 GMT</pubDate>
       <description>hatsunemiku-ai/google-one-tools Language: Python Total stars: 1179 #python</description>
       <enclosure url="https://cdn4.telesco.pe/file/r8FrJILW6CDKZgSyA3WpoAMu4QPB7UxDErXnYggmG9t3q_JHiYy9h3V-ZmiBcDXIkT5OT2LI0aj_EYtNJNGZ6eIlVuqBYJAVlen_PgMCMdit48g4_trNvjf5Ll4W0qlwxX3awKChIpm92Q5hGtuNi_eaVJfFxp83OxdHtSfjtrLdIuOLoFy0XVk65qq61Q52GLQTfUGRbOtEn4RwS8dAEkf3pPm35fI_amWD3Oc9VMn7_tDNnMnFeXTwS10nqg85anaa7L6yiah-iqWcLks--izCzFloDxWiTC-DN7Ea1b9q3lhD2McpbHG16Af1vzE4KlB8iGrJJKfg1I9SVx9QaQ.jpg" type="image/jpeg" length="0"/>
-    </item>
-    <item>
-      <title>toyxyz/toyxyz_RGBMocap Native Windows video motion capture with ExMR, FlowHMR an…</title>
-      <link>https://t.me/code_stars/16672</link>
-      <guid isPermaLink="true">https://t.me/code_stars/16672</guid>
-      <pubDate>Sat, 21 Nov 2026 21:17:12 GMT</pubDate>
-      <description>toyxyz/toyxyz_RGBMocap Native Windows video motion capture with ExMR, FlowHMR and GVHMR, contact correction, humanoid retargeting, and FBX/VMD export. Language: Python Total stars: 2813 #python</description>
-      <enclosure url="https://cdn4.telesco.pe/file/gh12VN-O82fcHD6oZdbS99CbW7AMm25udUzuyhX6XBSdVJNn760JhPhsaJVendHXhWyOYXDRhpa9K_8aK8IyhuVVlGh8x-FGDdRA2gH3wvy-JnV4bRLI0hKqshs4bbzshvB3wg1vTTX3Qo5FIHEitTSgVsYITZDtFFTjmRxm9IsLagQ8cK7PjozBE-41VP8owckFZYuNbr1ecbkumksqh5CJ5UaVZjEXYHqD5ugic8ZkqiU9-tdJQJ_dnwFK0mZdEIruZL3fecXUpn_e1LHfT1-WVbNDM9KHT_IMdrTElMKe4q9lZU_nYOCEtc1iApzspFnQQH-iVN7K1KWqnGlnNQ.jpg" type="image/jpeg" length="0"/>
-    </item>
-    <item>
-      <title>Lemxy/WinRust Windows shell replacement in Rust: taskbar, file manager, NTFS sea…</title>
-      <link>https://t.me/code_stars/16671</link>
-      <guid isPermaLink="true">https://t.me/code_stars/16671</guid>
-      <pubDate>Sat, 21 Nov 2026 20:16:53 GMT</pubDate>
-      <description>Lemxy/WinRust Windows shell replacement in Rust: taskbar, file manager, NTFS search, task manager, disk cleaner. One installer exe. Language: Rust Total stars: 934 #rust</description>
-      <enclosure url="https://cdn4.telesco.pe/file/k6ZDcxPIt7DnMkOgTQDwg0ePemtn9xHs1FVyfGn_37onTX9MB3rgHW8kYqb8O0GEAorKtwjpFu_Cf6vpktjTXpxoEp4oV-I1EJRCbMS7uOotQhAZSTqe4xdQN5TGv97PZtByGbIcVsxo2tKeml5Z8V2sBS3VzjhD_hxOEjrL6zd71JFXpVIsubfIhxUGfge4Li-poarQFsc277PJBFhSPI8L4Q-34o3E8NP6xo43hltzpcbyUdHL-LTZzyK67g-xsQb3ywDIXyY_sioaXFw3yQcmyUFbZWMu1tbK1JIa2VSOISNwtBZbogmMswNdcuzCY8n0xPv9oscawOeWt5EWWg.jpg" type="image/jpeg" length="0"/>
-    </item>
-    <item>
-      <title>ItsNotRexed/Leonida Leonida Is A Native PC Recompilation Of The Xbox Version Of …</title>
-      <link>https://t.me/code_stars/16670</link>
-      <guid isPermaLink="true">https://t.me/code_stars/16670</guid>
-      <pubDate>Sat, 21 Nov 2026 19:17:01 GMT</pubDate>
-      <description>ItsNotRexed/Leonida Leonida Is A Native PC Recompilation Of The Xbox Version Of Grand Theft Auto 6 Language: Python Total stars: 1568 #python</description>
-      <enclosure url="https://cdn4.telesco.pe/file/FS2Djj-kvFvLrhfrZO2-LTUfwu0r4rSN_VGe9Pdfmx3CDtC3KzLAZmrZ-s12RkhO8-IwLFiprbymWsmKjH9H5RiDB7fMZo10dQ9R1wyJPU5RRKSoB4UxwGqGdUDovtaz74YKDwp_qWGR9l4BR4hK_HeVgh2Jwo8r6br9WwURfApCKwjtsKRqTBf_zFdX85rTswX8tIikHuQVTOW-cItYDbOIVgomiEsV40VCrNSLJmj1WFln4MpEMS61_rEpxs-mqAzxXGeD9Y9xbc9Y_GTjXbUOuHXihpd50w_lEEkR1rs0UC1TldHZ1v1zImgcTwTyAI6JuEZf3taTghWfm_jg4Q.jpg" type="image/jpeg" length="0"/>
-    </item>
-    <item>
-      <title>atuizz/posewear 姿势、服装、人像参考图库，附中英文提示词，可在浏览器里 AI 试穿 · Pose, outfit &amp; portrait refe…</title>
-      <link>https://t.me/code_stars/16669</link>
-      <guid isPermaLink="true">https://t.me/code_stars/16669</guid>
-      <pubDate>Sat, 21 Nov 2026 12:17:04 GMT</pubDate>
-      <description>atuizz/posewear 姿势、服装、人像参考图库，附中英文提示词，可在浏览器里 AI 试穿 · Pose, outfit &amp; portrait reference library with bilingual prompts and in-browser AI try-on Language: Python Total stars: 1048 #python #aiart , #aitryon , #chinese , #cloudflarepages , #fashion , #gemini , #gptimage , #imagegeneration , #outfitreference , #posereference , #prompt , #pwa , #seedream , #virtualtryon</description>
-      <enclosure url="https://cdn4.telesco.pe/file/Wpm67GVzsxjGTK6KCB1aBsSFUVL8tzOSv1-lnqM_9FEAIhf1xMd2fAk07INrs-NLN0ShYqmNnYWYeNkIm0vJ0xpbeUi90Kp6FHnLBMyj2EwBG6oZNxbaqRJ3Urq-CnfRNF2QkWXWmBLQ_W5JnmwBrwDiQphOwJtHpGxmcXNvRQH7pF3Jol_eLsPeS0jsPEP231JkFSLR1zGXJ4LQ82zUedLYJOpey_iJXLFDCJtFKuz7L91U98vqE3tS_KU-LcfloObyGtPkN6om4mqBK7V8Y-_AkTgkCV-THA2MMTbgood164Fxx9w8E9HYsKmqHDMSdNjF6dpShYPMsSLSuRmv9w.jpg" type="image/jpeg" length="0"/>
     </item>
   </channel>
 </rss>
