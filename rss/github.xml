@@ -7,6 +7,14 @@
     <description>Developer community and updates</description>
     <language>en</language>
     <item>
+      <title>Telescope — это веб-приложение с интуитивно понятным интерфейсом для изучения да…</title>
+      <link>https://t.me/github/11847</link>
+      <guid isPermaLink="true">https://t.me/github/11847</guid>
+      <pubDate>Wed, 25 Nov 2026 05:33:53 GMT</pubDate>
+      <description>Telescope — это веб-приложение с интуитивно понятным интерфейсом для изучения данных журналов. Оно поддерживает несколько типов источников, включая ClickHouse, StarRocks, Docker и Kubernetes. Пользователи могут настраивать подключение к своим базам данных ClickHouse или StarRocks, получать доступ к журналам контейнеров через Docker API или извлекать журналы подов из кластеров Kubernetes. Telescope обеспечивает единый подход к запросам для различных типов источников, позволяя пользователям эффективно фильтровать, искать и анализировать журналы. В то время как ClickHouse и StarRocks служат основными бэкендами для структурированного хранения логов, поддержка Docker и Kubernetes предлагает удобные варианты для локальной разработки, временных сред или облачных развертываний. 🐱 GitHub</description>
+      <enclosure url="https://cdn4.telesco.pe/file/jTkOoIJYHdOj799edwUXYlOXk1LT8hBo7PVnZ8mT_KhZmTQfwWCMs-et0KLq9aPTHxgAONLZsN3VtNFrB0RBg_HWuRFNt5JH47F9GrMjOrTSdgmPxHkiK4Abi3HTzR8n4dKpGRFhiViEc7APeqvUA_R8l5n2VXksWTh8NfR0wDhkYh_EkzU3Hb_fuRQGO2mSi1Q_rtNRURlivLoMVStw6VdtrdSlNFPYA82IscrXzHvcJSRsjQEc-25rGTJWfUOIOE0hHutjZe9q0V1H8hHeYzeJK0PwZI7rdb1qaIW22_6lYa0v5h-y3ipVULXIsPnP-ztStRcHhNaGozIyUIZnJA.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
       <title>MagesticAI — это браузерная платформа для управления задачами по написанию кода …</title>
       <link>https://t.me/github/11846</link>
       <guid isPermaLink="true">https://t.me/github/11846</guid>
@@ -60,7 +68,7 @@
       <guid isPermaLink="true">https://t.me/github/11838</guid>
       <pubDate>Tue, 24 Nov 2026 08:32:33 GMT</pubDate>
       <description>CodeGraph — предварительно проиндексированный график знаний кода, автоматическая синхронизация при изменениях кода для Claude Code, Codex, Gemini, Cursor, OpenCode, AntiGravity, Kiro, второго пилота и агента Hermes — меньше токенов, меньше вызовов инструментов, 100% локально 🐱 GitHub</description>
-      <enclosure url="https://cdn4.telesco.pe/file/bWSGq2YrFc4DbqQ3wkm_kH1uzIw5rqGrF1YePH-i6Z4f4IKonNSrZcUi09Nkb7jNO51YAofeaCYKQvxxYSoMRGtA78giIZsU58eeAcfa6qO4CK-DmgFIZKn2tHN4H5JAbhO9BOzN5Q0ng0-ZhwF_InBhJ40V066NIOdYECGvOGSLeRrdezzM4zsrnwJ53dT5Uh2Ipz52HrvdWM39GUVFz6OlVYk7OjUZr4lTWWoJiAZFiUXl02HjxQtzIr8CaaGq19sdaBukeJltrHVyhYVt9CpH_dDQCKi9ycognB3cko9SOSbiFAMP_ltqMDIEBVWcGmKn4Dicbg-vCBzjDbYDKQ.jpg" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/Ncfq7JpWlaZ-bwmk5hp2tjKEpkIewlYpgUBLtYjCDHhfVqzQFN_KLgLMjRwDmpoIWw0OTjgiUJnc-yn2wzyuh5GI85Fk8fBULaGXl2JNW96bLsuavjlivZThp5D_EVSm4Tzrriv_TOBODwq1OmkgOcWgevs4AP_LY4FCjj-MVb5JNuLuskwH2soJ8GmfCbWp2Gu7nWfPvuBw2nUpJb5tVdzTud2ByC0dh16AQu_Q2fdrJJm07iK1Wht_dYJto9u7HGPxZ1DOddOdBcNpbfuY7waNp-TXIRTaW_rKxrykeX0TaPPrcQTKyz9FF0ueiGlV-whx_0_U42eaMNQS5hMa2g.jpg" type="image/jpeg" length="0"/>
     </item>
     <item>
       <title>SysWatch — отслеживайте работу процессора, памяти, дисков, процессов, графическо…</title>
@@ -68,7 +76,7 @@
       <guid isPermaLink="true">https://t.me/github/11837</guid>
       <pubDate>Tue, 24 Nov 2026 05:33:51 GMT</pubDate>
       <description>SysWatch — отслеживайте работу процессора, памяти, дисков, процессов, графического процессора, энергопотребления и сетевой активности в macOS и Linux. Очищайте историю, записывайте сеансы и анализируйте всплески активности с помощью карт эвристических аномалий. SysWatch доступен только для чтения и работает без sudo; доступные измерения зависят от вашей платформы и разрешений. 🐱 GitHub</description>
-      <enclosure url="https://cdn4.telesco.pe/file/ZFalEb2wRQO99m-qPgAhtZRX8lWcOUUGn_2zb2o1Ocp-LwhoMDfml2tMaTmEDlT88HCqppjlahnWj56baMn4zpBNDzD0vzptMrN4iRaZ3ZF-Al2zaQDvppyY5DY6iGeG46jxxrhUESCEDE3BC0TwxOlMIdJr22TqbXN7vqD3jEF5xPjBMr8f9gLVOH7zK8j-q0QLQ-5Lo0IwOlrzEv5pFeGlIHNLJelI6EzL70f44mECz2rnPTYTux5jaFnVKW8wHJvsC6fgb8IVHSUuM7hIcAMtm-sL4KSdshzJcVWdkAM2nGBfo3YC0qTIu9WuIpg8Oj5s5eVe-Bipn_wYOB261A.jpg" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/CHLM6-nrWGdvRurMDaS2HrgXkCJo7fAAdEDj8WPjZ296UtjPhaLNuIt8L9ltaLNIt7vlxRf80ZrWxBsAvooF9mJKIntW8v6IbYHt2KapVtugK6veW8SOH-EW9Gpuw0IbEGsgNsAsBgkQ3RFL5chAWKXF5QOVlTCCCjZurevxtCaJw6TDNT58aXdHwtrWGTZT_TuPLZKI32kduoaEVjL1U-iRLjiHh_KWgT1LlHpbMBDxJlXaXZTmfdK_NHbrUqokwkfe-kntDm7RK9xVRV1_o2SHc-lJNNmwk3Ljhn9x3KiaQBJIVw_rI7MMgH0g9a3SqHaWxyYdGcy1GRN7hKBTTg.jpg" type="image/jpeg" length="0"/>
     </item>
     <item>
       <title>Lanes — одно рабочее пространство. Много агентов. Запускайте множество агентов И…</title>
@@ -124,7 +132,7 @@
       <guid isPermaLink="true">https://t.me/github/11830</guid>
       <pubDate>Mon, 23 Nov 2026 08:31:46 GMT</pubDate>
       <description>424 кинематографических приёма для генерации ИИ-видео Нашли настоящую библиотеку для тех, кто хочет делать ролики с ВАЙБОМ большого кино. Внутри — 424 приёма : движения и ракурсы камеры, переходы, освещение, композиция, цветокоррекция и многое другое. Каждый приём сопровождается примерами и готовыми промптами, которые можно адаптировать под собственные проекты. Особенно полезно для генерации клипов, рекламы и даже короткометражных ужастиков с помощью ИИ. Забираем кинематографическую годноту — тут . 🐱 GitHub</description>
-      <enclosure url="https://cdn4.telesco.pe/file/nL53pQmRAQMJPsAzPsu4nXoynG5VBUsCG4bFqici5mVfFMOalWLwTMsl_K9Nu1u4XvvhAYYH9Lc7_mGgCHXGUY6cGGPqL9rqPjLnGVPmT9NIcDm9sxyxi2FgXIJ8ZFK-dxtBqRUylDxDjXZUayz1hBjn8PaaoKyFPV2WgXqwmtMAT8gD-f9MKYFBJ-s2M_ZeSB8datIBhJtxeJPHjKDX5Y6JgjQ2vk_QS40k_kRRtNFQcKgstBFFecsS5br3wnGb5Fne9_zyWMyLSYQ31tm7RPMghbPCJGoe2AucbeTm9H-Uau_nIHCoLb46OXDSBbrxYnptjyeU5MPCR55uUjuCCA" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/QGy7dEJ-5jaQTO0-ZZjYiNyKJXG8L6peHHi6vMjSH5od0TQobBrYvYe7YDb3JTN_H5LgXlNfjwLWhRB9Qjqikc70MQD8c7S8iANMwYQJUYNtODMsWsFncczycC1LJvkOZTgdkjVVGIav22gk-CbpG4dxgTaQG14Bkhw8IaAQFDLkwKPdpYts_-vtvmvCTXvspx-KgtNdXxzf7LXexMuUsUzfxLeVIkuiefkAIu0Ep0LKTA_4XxenTXQu6iuJtlk_ZTq6iP63T_WTzi-wo_dI975rNz-OL75Xz-04zVZBV0CFj5rTo2Zl5_4iCTh2aFcEDFY2x07TyFcktygr7rA0nA" type="image/jpeg" length="0"/>
     </item>
     <item>
       <title>WinBoat — инструмент для запуска Windows-приложений в Linux через контейнеры Doc…</title>
@@ -132,7 +140,7 @@
       <guid isPermaLink="true">https://t.me/github/11829</guid>
       <pubDate>Mon, 23 Nov 2026 05:32:16 GMT</pubDate>
       <description>WinBoat — инструмент для запуска Windows-приложений в Linux через контейнеры Docker/Podman с интеграцией в рабочий стол системы. Возможности ▫️ Элегантный интерфейс : лаконичный и интуитивно понятный интерфейс, который органично интегрирует Windows в вашу среду рабочего стола Linux, создавая ощущение, что это ваша родная операционная система ▫️ Автоматическая установка : простой процесс установки через наш интерфейс — выберите свои предпочтения и характеристики, а мы позаботимся обо всем остальном ▫️ Запускайте любые приложения : если приложение работает на Windows, оно будет работать и на WinBoat. Наслаждайтесь полным набором приложений Windows в виде нативных окон на уровне операционной системы в своей среде Linux 🐱 GitHub</description>
-      <enclosure url="https://cdn4.telesco.pe/file/DSPkt0Tq6VmS1xiXQUWiyejGIumJQvatyL-DTZk--Zv3gcQ9IlFCs7CmjwLiimhmgZPMl5UFLJM0Wgv4Rcd_UlTKRoKHtIyNGpUnGrtOvp3OLvDKwMTVh3PRYZBDOJVp_RYa2nODVik-er7B_4YfealtO7zS_a3DO2vUXlQNQK2SuBYL4oMbbOtcrGv0K5ZGgnS4ktZgsVYZZe--TZ_IjZ4gd5gK2qEXTkB61KolLgWmn1M5YR2m0WW4XpXToG38p8mo0wMm1nWLxdSOwr6K5iJ5T3EEVfs7foP6OEtG-LfELUUqXQY_oh4Gu8GHcmnSFbEsZFLk_M4KeBOds6sMxA.jpg" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/sCc16UkXm6UJSCpwREVI_aymIRfF-CLr-zkxmvyUOk9xxsQgriIDct3vMaRKC1b6EOskypDR6YxvjeRuXrXcge9MkDBlWhDZqA4-Rm8Ll5i63_xHmsLCM-Wad859-twKCwlfSYA54DUo6m2Z0ZkLZKT1PQ1BrvQ_70e1PSGQVKB76T8E4KY0tMKIXNSb2B4w5BHwfWGMbfdNKFPkTzDRIb56aCbZttSNURyFhcOfW_tZDsRDfXfl5VXcZbQ_pjdxEIEZJsgUdCOm1tQq55U_ehVHofjBCItCK7KLlupMUXea5KxzHWjMz9C3qkBV-32bALBz_eI6IhIARNnny2T3dw.jpg" type="image/jpeg" length="0"/>
     </item>
     <item>
       <title>CodexSaver — это инструмент MCP, который превращает Codex в маршрутизатор с учет…</title>
@@ -157,14 +165,6 @@
       <pubDate>Sun, 22 Nov 2026 17:34:35 GMT</pubDate>
       <description>Cardamon — это инструмент для аудита метрик в Prometheus. Он выявляет метрики, которые есть в вашей TSDB, но никогда не запрашиваются дашбордами, правилами генерации оповещений, правилами записи и другими потребителями. Идея состоит в том, чтобы проанализировать ситуацию, а не слепо отказываться от всех показателей, поскольку они могут быть полезны во время инцидента. 🐱 GitHub</description>
       <enclosure url="https://cdn4.telesco.pe/file/KcPif4woo7i2ay1YfHraosYmYQ5AjY2S3byKAmskURhhsIlfk8zeizBdgM3OzPZWofMxQPdz7anULVJXSXC1mNmFeXj3FaOOtkU3LLAITx8pcP2h3muokQiQuoOORxzXdoVna6BK7gYp_dBAUTdICelwSLNpcNIN0iIX8dqZiB5HVoVqNkiAEOYRnkhKmhyWFzMNRHq5wiiLb-H8ft5FlDXW6Nz46aKuTPTKMgeQh4TCpl-zcoDe08yyajAFqWFQJLtIXk_dKRoMldcoguc2sGaDBFmHHO0Rh0nsJQBP_Fg413-YHmPcAjvi4VCDLuq2LijsBP2YdO6N1zelsM7KGQ.jpg" type="image/jpeg" length="0"/>
-    </item>
-    <item>
-      <title>Gnhf — это оркестратор в стиле ralph, авторесерч, который поддерживает работу ва…</title>
-      <link>https://t.me/github/11825</link>
-      <guid isPermaLink="true">https://t.me/github/11825</guid>
-      <pubDate>Sun, 22 Nov 2026 14:33:25 GMT</pubDate>
-      <description>Gnhf — это оркестратор в стиле ralph, авторесерч, который поддерживает работу ваших агентов, пока вы спите. Каждая итерация вносит одно небольшое, зафиксированное и задокументированное изменение, направленное на достижение цели. Вы просыпаетесь и видите, что ветка полна исправлений, а также журнал со всеми произошедшими изменениями. 🐱 GitHub</description>
-      <enclosure url="https://cdn4.telesco.pe/file/RtQxHV88lGTdSiHBgPArhP1OBB8kafD11Vcur4-VjzFfFLfiCoHVxn9SsQqq3cd5EFWff9HPId9cKgD1mg-XbOSyBy5A0sro9kgqiT_BX_d0PJo2PUjiOUZ9ie0Gaa2vKI7l2UIbM908Q8djAt6qD7nKOxUsCegdMtA5smEVQhKrqdjvbXNtArYliEi_7_Eq-V0cx4nFF6crXFl4EwnYKiOqt4DJxAutOH0ySYBvOLsvnM_yZg80Txm3VeCxtBZcqksWtnNZmuK3fk2O5aTp5Uvur3r7bRmme37Z6zkQ2UQFWjU0wZFe_f-xNsKjqSasOH_fwgRLbE40x4rBBxQ2UA.jpg" type="image/jpeg" length="0"/>
     </item>
   </channel>
 </rss>

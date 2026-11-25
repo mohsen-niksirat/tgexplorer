@@ -6,6 +6,19 @@
     <atom:link href="https://mohsen-niksirat.github.io/tgexplorer/rss/javascript.xml" rel="self" type="application/rss+xml"/>
     <description>JavaScript ecosystem news</description>
     <language>en</language>
-
+    <item>
+      <title>JavaScript #3622</title>
+      <link>https://t.me/javascript/3622</link>
+      <guid isPermaLink="true">https://t.me/javascript/3622</guid>
+      <pubDate>Wed, 25 Nov 2026 06:30:14 GMT</pubDate>
+      <description></description>
+    </item>
+    <item>
+      <title>CHALLENGE function makeCounter() { let count = 0; return function increment(step…</title>
+      <link>https://t.me/javascript/3621</link>
+      <guid isPermaLink="true">https://t.me/javascript/3621</guid>
+      <pubDate>Wed, 25 Nov 2026 06:30:14 GMT</pubDate>
+      <description>CHALLENGE function makeCounter() { let count = 0; return function increment(step = count++) { return (count += step); }; } const counter = makeCounter(); console.log(counter(), counter(), counter(5));</description>
+    </item>
   </channel>
 </rss>

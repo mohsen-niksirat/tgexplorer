@@ -7,6 +7,41 @@
     <description>Welcome to @prompt , your go-to source for AI insights, breakthroughs, and tools shaping the future of intelligence. Contact: @LightEarendil</description>
     <language>en</language>
     <item>
+      <title>🧸 New York bans AI chatbot toys for five years Gov. Hochul signed a law halting…</title>
+      <link>https://t.me/Prompt/1125</link>
+      <guid isPermaLink="true">https://t.me/Prompt/1125</guid>
+      <pubDate>Wed, 25 Nov 2026 08:24:48 GMT</pubDate>
+      <description>🧸 New York bans AI chatbot toys for five years Gov. Hochul signed a law halting the manufacture, distribution and sale of toys with built-in chatbots. Think talking plushies, dolls and robots that chat with kids over the internet. It takes effect 90 days after signing, and the Senate and Assembly passed it with nearly unanimous support.</description>
+    </item>
+    <item>
+      <title>🤖 Claude&apos;s MCP servers can now ship their own skills and run jobs in the backgr…</title>
+      <link>https://t.me/Prompt/1124</link>
+      <guid isPermaLink="true">https://t.me/Prompt/1124</guid>
+      <pubDate>Wed, 25 Nov 2026 05:24:05 GMT</pubDate>
+      <description>🤖 Claude&apos;s MCP servers can now ship their own skills and run jobs in the background Anthropic put Skills over MCP in public beta , so a server delivers its playbook with its tools, and Claude loads it only when needed. Tasks and Elicitation are now GA. Shopify, Atlassian and ZoomInfo are already using them. File Uploads is next, sending PDFs and spreadsheets to servers without touching the context window. It&apos;s all open MCP spec, so other clients can support it too.</description>
+    </item>
+    <item>
+      <title>🚨 OpenAI&apos;s math repo claims a strongly polynomial algorithm for linear programm…</title>
+      <link>https://t.me/Prompt/1122</link>
+      <guid isPermaLink="true">https://t.me/Prompt/1122</guid>
+      <pubDate>Wed, 25 Nov 2026 02:24:01 GMT</pubDate>
+      <description>🚨 OpenAI&apos;s math repo claims a strongly polynomial algorithm for linear programming If it holds, that solves Smale&apos;s ninth problem, open for decades. Simplex runs fast in practice, but nobody has proven a runtime that doesn&apos;t depend on the size of the numbers. Linear programming sits under logistics, scheduling and most of operations research. The paper is a fresh, unreviewed preprint, so mathematicians still have to check the proof.</description>
+    </item>
+    <item>
+      <title>🚨 OpenAI claims matrix multiplication runs in O(n^2.25), and says that&apos;s the ex…</title>
+      <link>https://t.me/Prompt/1121</link>
+      <guid isPermaLink="true">https://t.me/Prompt/1121</guid>
+      <pubDate>Wed, 25 Nov 2026 01:48:59 GMT</pubDate>
+      <description>🚨 OpenAI claims matrix multiplication runs in O(n^2.25), and says that&apos;s the exact exponent A new preprint puts omega at exactly 9/4. The best known upper bound was about 2.37, and nobody has pinned the true value before. It&apos;s a GitHub PDF with no peer review yet, so experts still have to check the proof.</description>
+    </item>
+    <item>
+      <title>🚨 The European Commission confirms hackers stole personal data in an AI-assiste…</title>
+      <link>https://t.me/Prompt/1120</link>
+      <guid isPermaLink="true">https://t.me/Prompt/1120</guid>
+      <pubDate>Tue, 24 Nov 2026 22:54:02 GMT</pubDate>
+      <description>🚨 The European Commission confirms hackers stole personal data in an AI-assisted attack The Commission confirmed that EU Academy, its online learning platform, was breached, and names and email addresses of people outside the EU institutions were taken. It doesn&apos;t know how many users are affected, and it warned them with a website notice instead of contacting them directly. Public access to the platform is disabled.</description>
+    </item>
+    <item>
       <title>🧬 OpenAI says GPT-6 designs proteins with just reasoning and code, no specializ…</title>
       <link>https://t.me/Prompt/1118</link>
       <guid isPermaLink="true">https://t.me/Prompt/1118</guid>
@@ -110,41 +145,6 @@
       <guid isPermaLink="true">https://t.me/Prompt/1104</guid>
       <pubDate>Mon, 23 Nov 2026 11:35:48 GMT</pubDate>
       <description>🤖 HAProxy&apos;s lead got Mythos bug reports on his own code, and they were close to unusable Willy Tarreau says two batches of 30 to 50 findings arrived with no reproducers, no patches, no commit ID, and walls of text in single-line paragraphs. A colleague who validated and patched the bugs by hand got far better results. He&apos;s a Linux kernel security team member, and he still can&apos;t get Mythos access himself.</description>
-    </item>
-    <item>
-      <title>🤖 A 32GB RTX 5090 now runs a 27B Qwen as your own private ChatGPT, no terminal …</title>
-      <link>https://t.me/Prompt/1103</link>
-      <guid isPermaLink="true">https://t.me/Prompt/1103</guid>
-      <pubDate>Mon, 23 Nov 2026 08:34:51 GMT</pubDate>
-      <description>🤖 A 32GB RTX 5090 now runs a 27B Qwen as your own private ChatGPT, no terminal required GPUPartner&apos;s guide installs Unsloth Desktop, loads Qwen3.8-27B at 4-bit with a 128K context, and turns on LAN access, about 10-15 minutes plus downloads. Thinking Machines&apos; Inkling 2 Mini (26.4B, Apache 2.0) is a near-identical 17.6GB fit. The card that makes it comfortable still costs more than a year of most subscriptions.</description>
-    </item>
-    <item>
-      <title>🚨 Z.ai just dropped GLM 5.4, and so far it&apos;s a tweet and nothing else Zhipu&apos;s a…</title>
-      <link>https://t.me/Prompt/1102</link>
-      <guid isPermaLink="true">https://t.me/Prompt/1102</guid>
-      <pubDate>Mon, 23 Nov 2026 07:53:57 GMT</pubDate>
-      <description>🚨 Z.ai just dropped GLM 5.4, and so far it&apos;s a tweet and nothing else Zhipu&apos;s announcement is a bare post with the version number. • No model card or benchmarks yet • No word on pricing or API docs • Open weights and license unconfirmed • No comparison to DeepSeek, Qwen or Kimi</description>
-    </item>
-    <item>
-      <title>🚨 A 16-year-old YC founder is building AI-guided missiles and pitching &quot;cost pe…</title>
-      <link>https://t.me/Prompt/1101</link>
-      <guid isPermaLink="true">https://t.me/Prompt/1101</guid>
-      <pubDate>Mon, 23 Nov 2026 06:24:48 GMT</pubDate>
-      <description>🚨 A 16-year-old YC founder is building AI-guided missiles and pitching &quot;cost per kill&quot; Henrijs Dandzbergs dropped out of high school to start Polemos Industries, which Wired profiles . He&apos;s in YC&apos;s fall 2026 batch, probably its youngest solo founder ever. The pitch is a cheap, easy-to-build precision missile with jam resistance that fires from portable launchers.</description>
-    </item>
-    <item>
-      <title>🚨 Bell Canada says an &quot;agentic&quot; attacker got into its systems and took enterpri…</title>
-      <link>https://t.me/Prompt/1100</link>
-      <guid isPermaLink="true">https://t.me/Prompt/1100</guid>
-      <pubDate>Mon, 23 Nov 2026 03:23:48 GMT</pubDate>
-      <description>🚨 Bell Canada says an &quot;agentic&quot; attacker got into its systems and took enterprise customer data Bell confirmed the Nov 17 breach, which hit a pre-production Maximo system used to order and provision circuits. Names, job titles, work emails, phone numbers, ticket titles and some network IP addresses may be gone. Bell hasn&apos;t named the actor, hasn&apos;t said how many customers were hit, and hasn&apos;t published the IOCs it&apos;s sharing privately.</description>
-    </item>
-    <item>
-      <title>⚡️ Raschka says pre-training isn&apos;t plateauing, and OpenAI&apos;s own data backs him u…</title>
-      <link>https://t.me/Prompt/1099</link>
-      <guid isPermaLink="true">https://t.me/Prompt/1099</guid>
-      <pubDate>Mon, 23 Nov 2026 00:22:48 GMT</pubDate>
-      <description>⚡️ Raschka says pre-training isn&apos;t plateauing, and OpenAI&apos;s own data backs him up In a new essay , he points to a chart from OpenAI where log-perplexity keeps falling as pre-training scales. It&apos;s a next-token metric, not a task score, but it still tracks real-world performance, and he wants the same plot with training FLOPs on the x-axis.</description>
     </item>
   </channel>
 </rss>

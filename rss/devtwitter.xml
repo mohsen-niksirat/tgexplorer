@@ -7,6 +7,37 @@
     <description>توییت های برنامه نویسی و طراحی وب :) Admin: @dvtwi Hashtags: devtwitter.t.me/5 DevBooks Channel: https://t.me/+AYbOl75CLNYxY2U0 Github: https://github.com/DevTwitter X: https://x.com/devtwittir</description>
     <language>fa</language>
     <item>
+      <title>&amp;rlm;سیستم دیزاین رو از کجا شروع کنیم؟ از تفاوت HLD و LLD خیلی‌ها این دو تا رو ب…</title>
+      <link>https://t.me/devtwitter/14048</link>
+      <guid isPermaLink="true">https://t.me/devtwitter/14048</guid>
+      <pubDate>Wed, 25 Nov 2026 07:59:55 GMT</pubDate>
+      <description>&amp;rlm;سیستم دیزاین رو از کجا شروع کنیم؟ از تفاوت HLD و LLD خیلی‌ها این دو تا رو با هم قاطی می‌کنن، ولی در واقع دارن به یه سیستم از دو فاصله‌ی متفاوت نگاه می‌کنن. حالت &amp;rlm;High-Level Design (HLD) سوالش اینه: «سیستم از چه اجزایی تشکیل شده؟» &amp;rlm;سرویس‌ها، دیتابیس‌ها، Cache، Load Balancer، Message Queue و ارتباط بینشون. دغدغه‌ش: مقیاس‌پذیری، دسترس‌پذیری، latency و هزینه. حالت &amp;rlm;Low-Level Design (LLD) سوالش اینه: «هر جزء دقیقاً چطور کار می‌کنه؟» &amp;rlm;کلاس‌ها، interfaceها، design patternها و schema دیتابیس. &amp;rlm;دغدغه‌ش: SOLID، تست‌پذیری و توسعه‌پذیری. مثال: طراحی یک URL Shortener &amp;rlm;در HLD تصمیم می‌گیریم: LB ← API ← Cache ← DB و داده‌ها رو بر اساس کلید کوتاه shard می‌کنیم. &amp;rlm;در LLD تصمیم می‌گیریم: یک IKeyGenerator داریم، Base62Encoder تولید کلید رو انجام می‌ده و UrlRepository دسترسی به داده رو. نکته‌ای که معمولاً گفته نمی‌شه: &amp;rlm;این دو از هم جدا نیستن. یک تصمیم در HLD (مثلاً انتخاب eventual consistency) مستقیماً روی LLD اثر می‌ذاره؛ مثلاً حالا باید idempotency و retry رو در کد پیاده کنید. یک معمار خوب هر دو سطح رو با هم در نظر می‌گیره. &amp;rlm;خلاصه: HLD می‌گه «چی» بسازیم، LLD می‌گه «چطور». @DevTwitter | &lt; Ali Rahbari /&gt;</description>
+      <enclosure url="https://cdn4.telesco.pe/file/vypIJWshEx79y-1BRSXdf6A_CdnZ38x6nEFmtIN1ZDXrqetDBW43Iv9BrtWqJuIsinG5s0ZEn4rN6MNBIp4-2QQ02PD0BGrAJidZCvX0or-83VTMsCH3e5DjtQQ7QlTMDI52ryihuIB23bixf_J_ZCYfgXclgT5959RcXsM0IgMZFYNTQa7PYxWXBBw-4Ke0TNJcyovrYLS3TvS_pE0vO3eep3XHAZA8L6IAVkgmLfgjv0l4VlEymaYeamgBM7BcMvh0km97yVATsy1BUt9_tEdetzpDwRi9C188O9qdPNbzpTR_enNNZZEgEiZh3ZaDcNGhjVrcWiJK4aPizG5IPw.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>🔴 برنامه‌نویس های عزیز که در کسب‌وکارهای آنلاین، فروشگاه اینترنتی، طلا، ارز و ف…</title>
+      <link>https://t.me/devtwitter/14047</link>
+      <guid isPermaLink="true">https://t.me/devtwitter/14047</guid>
+      <pubDate>Wed, 25 Nov 2026 07:29:55 GMT</pubDate>
+      <description>🔴 برنامه‌نویس های عزیز که در کسب‌وکارهای آنلاین، فروشگاه اینترنتی، طلا، ارز و فین‌تک مشغولید! آیا می‌دونستید می‌تونید استعلام‌های هویتی و بانکی رو مستقیماً به سایت یا نرم‌افزار کسب‌وکارتون اضافه کنید؟ 🚀 با APIهای احرازینو: ✅ استعلام شاهکار (تطبیق کد ملی و موبایل) ✅ استعلام نام صاحب کارت بانکی ✅ استعلام‌های چک صیادی ✅ استعلام اطلاعات هویتی مشتریان 🔗 بدون نیاز به استعلام دستی، سرویس‌های موردنیازتون رو به سیستم خودتون متصل کنید و از خریدهای فیشینگ جلوگیری و فرآیندهاتون رو اتومات کنید. 💎 احرازینو | ارائه‌دهنده APIهای احراز هویت و استعلام بانکی 🌐 ehrazino.com/api</description>
+    </item>
+    <item>
+      <title>در idempotency زمانی که درخواست replay زده میشه دوست نداریم که از لایه rate limi…</title>
+      <link>https://t.me/devtwitter/14046</link>
+      <guid isPermaLink="true">https://t.me/devtwitter/14046</guid>
+      <pubDate>Wed, 25 Nov 2026 06:39:55 GMT</pubDate>
+      <description>در idempotency زمانی که درخواست replay زده میشه دوست نداریم که از لایه rate limiter عبور کنه و اون quota رو مصرف کنه برای همین موضوع اگه داخل nestjs از پکیج های @nestjs/idempotency و @nestjs/throttler برای پیاده سازی این دولایه استفاده میکنین اینجا یه تکنیکی رو معرفی کردم که اصطلاحا میشه rate limiter رو دیفر کرد تا اگه درخواست از جنس replay بود به اون لایه اصلا نرسه لینک: https://dev.to/silentwatcher_95/how-to-make-idempotent-replays-skip-rate-limiting-in-nestjs-1412 @DevTwitter | &lt; Ali Nazari /&gt;</description>
+      <enclosure url="https://cdn4.telesco.pe/file/czjGy7uRrk1OCY2cVt6ZG0CryHbIs6IlXjhMnqCHScN8ZYmh-7vlwQvZ8PwxIonbIR1YR2_4wgidZzu2JV6p6pKzHefV5E2Tevibz9-Uc3vXYyPjaui-24OvD7LKt4mSAIHXqZpGfFm2Px2abzIo-YAU-ZrQTq_YHwHitivVwi49yFP2YWmmt20tvVxnvT30xNQffeYq9foYIj-PTG3fw3ybhYO0AiIz7Gx1dkEiJEy9JGKrz9L5zJ9ioLWFi5lvS10NFKMXLADzVKOiOLsxPS70L0BxUNKni0brUm-3-Y8B8TaWHqlk4-gxZ4WEi_Umfx87h6fUnyrWfKjV-dAp-w.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>یه برنامه‌ی رایگان اومده که ۴ تا برنامه رو یه جا داره: متن مثل ورد، جدول مثل اکس…</title>
+      <link>https://t.me/devtwitter/14045</link>
+      <guid isPermaLink="true">https://t.me/devtwitter/14045</guid>
+      <pubDate>Wed, 25 Nov 2026 05:38:55 GMT</pubDate>
+      <description>یه برنامه‌ی رایگان اومده که ۴ تا برنامه رو یه جا داره: متن مثل ورد، جدول مثل اکسل، اسلاید مثل پاورپوینت، و PDF. یه دستیار هوش مصنوعی هم توشه که خودش تو فایل می‌نویسه و درستش می‌کنه. https://github.com/genspark-ai/genoffice اسمش GenOffice (جِن‌آفیس) ـه، ساخت شرکت Genspark (جِن‌اسپارک). فایل‌هاش همون فایل‌های معمولی ورد، اکسل و پاورپوینته، پس هر جا بفرستی باز میشه. نسخه‌ی ویندوز و مک داره. فرقش با آفیس معمولی همون دستیار هوش مصنوعیشه. کنار فایلت یه پنجره‌ی چت هست. بهش می‌گی چی می‌خوای، مثلاً «این متن رو کوتاه‌تر کن»، و خودش تو همون فایل تغییر میده. لازم نیست متن رو کپی کنی ببری تو ChatGPT و برگردونی. نصبش: ۱. برو https://genoffice.ai ۲. نسخه‌ی ویندوز یا مک رو دانلود و نصب کن ۳. برنامه رو باز کن و برای فعال شدن دستیار، یه حساب رایگان Genspark بساز و وارد شو محدودیتش رو هم بگم: خود برنامه و ویرایش فایل‌ها رایگانه، دستیارش هم یه مقدار رایگان داره، ولی برای استفاده‌ی زیاد باید حساب Genspark رو شارژ کنی. اینترنت هم می‌خواد. متنی که به دستیار می‌دی برای شرکت سازنده‌ش فرستاده میشه، پس فایل خیلی خصوصی رو بهش نده. صفحه‌ی برنامه تو گیت‌هاب: https://github.com/genspark-ai/genoffice سایت دانلود: https://genoffice.ai @DevTwitter | &lt;Arash/&gt;</description>
+      <enclosure url="https://cdn4.telesco.pe/file/sONf8Xq0MBlsMQhjCUaRJrIJ17iphuu7-2HqLnaJ1aDmnHSHW3lOJkbcf4L5sVp5F9pFt590qvuL0bCDmgKJ5cnercMbiNyMYy9sVYkdqITJKhi9IigAgKlJTtq1jwAmXWGjt5B-1zMuDIAOjyYfHDeIG4-KmYZuuwmg05i0DjyqR5IcPLuv3hxy6CZw27LDZgZMjvhgNqBA00rJAon1UfCNbUhBLwU3dbpBxhFC9s5JvDsQdAFeA6SewDa9psYKgQ7RZTvzr0VhNjZgn7uQfzLjYUIsztP1QaZr1bWk_x5jpg1OBQbg1vUAd3SnBP9h6tAhijLYedlTzSe-wjSFjQ.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
       <title>یه جیمیل اختصاصی بگیرین که برای آفرهای بعدی هم به کارتون بیاد! 😉 پلن ۳ ماهه Goo…</title>
       <link>https://t.me/devtwitter/14044</link>
       <guid isPermaLink="true">https://t.me/devtwitter/14044</guid>
@@ -116,7 +147,7 @@
       <guid isPermaLink="true">https://t.me/devtwitter/14031</guid>
       <pubDate>Tue, 24 Nov 2026 08:29:51 GMT</pubDate>
       <description>اینم یکی از اون بازی‌هاییه که با کمک AI Agent ساخته شده و جالبیش اینجاس که بازی فقط ۳روز پیش منتشر شده و تو همین مدت تونسته به ۲۰۰۰ بازیکن برسه! کل بازی با Canvas و TypeScript توسعه داده شده. البته برای بازی کردنش به اعصاب فولادین نیاز دارید! به صورت تحت وب موقتا از این لینک بازی کنید: یه چیزی که شاید براتون جالب باشه اینه که توی بازی Color Jump حتی یک فایل صوتی هم وجود نداره! افکت‌های صوتی و حتی خود موسیقی بازی تماما با کد و با استفاده از Web Audio API ساخته شده؛ با ترکیب موج‌های صوتی مثل Sine(سینوسی) و Oscillator، تنظیم فرکانس، نت‌ها و افکت‌های مختلف. یعنی عملا به‌جای پخش فایل صوتی، خود مرورگر صدا رو لحظه‌ای تولید می‌کنه! (درواقع بجای اینکه فایل‌های حجیم audio رو داخل هاست وجود داشته باشه، مستقیما نت هاش با کد پیاده‌سازی شده و خود مرورگر زحمت تولید موسیقی و افکت‌های صوتی‌ش رو می‌کشه!) https://github.com/SabziDev/color-jump ازینجا بازی کنید: https://color-jump-sabzidev.sabzidev-ss1if.arvanedge.ir @DevTwitter | &lt;SabziDev/&gt;</description>
-      <enclosure url="https://cdn4.telesco.pe/file/nCni0D9bSrptSzJTD2hT1YLGJcfWuQQIIt___cwyj0dohNBgteQ8AzcA4H73EfucYruJzycaukuhGLutW2y5iJ2bDqYOFzDUXL-zu9uIOsSDqkj5SvyFWzP7LeG4_fQhl9VeUviF5NquSKSyNevWhA_tyFsTX4GknMlp-Sk7AQhf92RnlrjxURkYribq5hd8DN3KVnw8aXKWwrhSPhbKW4L0n8G3MeEhvsfdj7-otrx204kIRfiC7zOlhyMutgBMKRBOJ_hC20G0f0pa4itGvX9-YZR5HWnxgWVBFQazPByKOCp8a9gMA32i450yxKr6tVvKkc9G7bSIkrutBdLKTw.jpg" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/EjUpAXYQdiaxXNxCErgrTJZEMHLDfKl5oUyOvHvcXSnpINhOhf8HVcbQnLHUtJtmPHu45sPM8rKL4FvlFzxiNo78azyz6Vzn3n3mQLD2ORNMPUaDcnzK6mLUUZQiXQQ1LFsVavM-8FpDnvG4pyMyJxdBYel_WFRJZnxd3lcz6gEOaKTXGM1mFXrGShbdhyiw8LDyH9JC4fgCAeJhvfjZsNI-X6IUkhyZCT4WW7q5UPB7MsFN-4Va9c1WVmDp-Doa2Iv85giF4ZUfAZ9jF-wXlem2FczkSzgO0oUZsbrbW7lz9_CQ60bx-oRkKWpBzN1NssJmQY0MC8626IENuYxxgQ.jpg" type="image/jpeg" length="0"/>
     </item>
     <item>
       <title>نسخه ۱۹ PostgreSQL منتشر شد این نسخه چند تا تغییر جالب و کاربردی داره که به نظرم…</title>
@@ -124,7 +155,7 @@
       <guid isPermaLink="true">https://t.me/devtwitter/14030</guid>
       <pubDate>Tue, 24 Nov 2026 07:59:51 GMT</pubDate>
       <description>نسخه ۱۹ PostgreSQL منتشر شد این نسخه چند تا تغییر جالب و کاربردی داره که به نظرم ارزش بررسی دارن، مخصوصاً برای کسایی که با دیتابیس‌های بزرگ و سیستم‌های پرترافیک کار می‌کنن. مثلاً با REPACK (CONCURRENTLY) می‌شه فضای اشغال‌شده جدول‌ها رو بدون مسدود کردن طولانی خواندن و نوشتن آزاد کرد. یا با WAIT FOR LSN می‌شه مطمئن شد تغییرات جدید روی Replica هم قابل مشاهده هستن. کنترل بهتر Query Planner، بهبود Logical Replication و تغییرات مربوط به Autovacuum و I/O هم از بخش‌های مهم این نسخه هستن. البته در کنار این قابلیت‌ها، یه سری تغییرات هم وجود داره که قبل از ارتقا باید بهشون توجه کرد. من توی این مقاله سعی کردم مهم‌ترین تغییرات PostgreSQL 19 رو بر اساس مستندات رسمی، همراه با مثال‌های کاربردی و نکات مهم ارتقا بررسی کنم. اگه از PostgreSQL استفاده می‌کنید، پیشنهاد می‌کنم قبل از ارتقا یه نگاهی بهش بندازید. https://nextadmin.net/blog/postgresql-19 @DevTwitter | &lt; Saeed Kholousi /&gt;</description>
-      <enclosure url="https://cdn4.telesco.pe/file/aaBKuJDp3f-nmysneg_nSNrg-s35DiGOPgzy27krrBv2j8Kqy8gWzKP-BUDclN4lwMuBddLCaiWiQtOCnPF0Y0WcovS8drhO7NwR84TokfeDJXJbOnpAv_y7NquNvwjqJ5rLKQErifvjdBCO2-8z_fTTXhS_S03ImYldNc0RloGHnDFKuKSiFH5UxFF8hK5qMIZeknCzUKn2QOYk3ySBJXLA_R1KDEKxf9jzMyMyhgC36mg3ockMxAt0sjVX04Yq7H38-qwsGpt_NfwyUwhO5USojJobjYmPbIFP5TVCreQUYzISsBOa2vT5yiL_1gK7mx5xZrDiNqzZPY_6Bs80SQ.jpg" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/iYcUdbOsVJ0lcQjCAQ75KmdoRrau7Z8AqtkotdrW2UPwNxMn3ulQLtu9xZnio9MLebGyB2W-4eZK93mFzSTvNJk0KM1Bd7Mahb00loai7U_u6gk-kgilsPNG1KrxjcaCdPI9xDQNsboRDjPTnEX6nASjIqBDMpx-mfezv9BDHQJYSxGCQy8vyGiMMiG2_u4sMfvmKsZiQGDC6UhWaw3-qR4oXKG3yNSg6MbOa_VQjLIAx7AVIwKzEpCIyI37D3YhscoMbAfBvArRGmWt2u51NqnJVLicXJy8r2aSiciPSkaphkQT_wGdQS4fH6F8RPjQtU1B-SzWHUzUznVhnRpJbQ.jpg" type="image/jpeg" length="0"/>
     </item>
     <item>
       <title>🔴 برنامه‌نویس های عزیز که در کسب‌وکارهای آنلاین، فروشگاه اینترنتی، طلا، ارز و ف…</title>
@@ -132,37 +163,6 @@
       <guid isPermaLink="true">https://t.me/devtwitter/14029</guid>
       <pubDate>Tue, 24 Nov 2026 07:29:57 GMT</pubDate>
       <description>🔴 برنامه‌نویس های عزیز که در کسب‌وکارهای آنلاین، فروشگاه اینترنتی، طلا، ارز و فین‌تک مشغولید! آیا می‌دونستید می‌تونید استعلام‌های هویتی و بانکی رو مستقیماً به سایت یا نرم‌افزار کسب‌وکارتون اضافه کنید؟ 🚀 با APIهای احرازینو: ✅ استعلام شاهکار (تطبیق کد ملی و موبایل) ✅ استعلام نام صاحب کارت بانکی ✅ استعلام‌های چک صیادی ✅ استعلام اطلاعات هویتی مشتریان 🔗 بدون نیاز به استعلام دستی، سرویس‌های موردنیازتون رو به سیستم خودتون متصل کنید و از خریدهای فیشینگ جلوگیری و فرآیندهاتون رو اتومات کنید. 💎 احرازینو | ارائه‌دهنده APIهای احراز هویت و استعلام بانکی 🌐 ehrazino.com/api</description>
-    </item>
-    <item>
-      <title>فکر می‌کنم یکی از مهم‌ترین اتفاقات تاریخ هوش مصنوعی همین دیروز افتاد، ولی شاید ه…</title>
-      <link>https://t.me/devtwitter/14028</link>
-      <guid isPermaLink="true">https://t.me/devtwitter/14028</guid>
-      <pubDate>Tue, 24 Nov 2026 06:34:32 GMT</pubDate>
-      <description>فکر می‌کنم یکی از مهم‌ترین اتفاقات تاریخ هوش مصنوعی همین دیروز افتاد، ولی شاید هنوز خیلی‌ها متوجه اهمیتش نشدن! فرضیه ریمان، یکی از معروف‌ترین مسائل حل‌نشده ریاضیات بعد از بیش از ۱۶۰ سال ظاهراً حل شده :) اما بخش جالب ماجرا فقط حل شدن این مسئله نیست آقای Levent Alpöge، ریاضی‌دان، با کمک Claude یه اثبات ریاضی ارائه کرده که حدود ۱۷ میلیون خط کد Lean داره و جامعه Lean و Mathlib هم اعتبار صوری اون رو تأیید کردن چیزی که برای من جذابه، تغییر نقشی هست که داریم از هوش مصنوعی می‌بینیم تا همین چند وقت پیش درباره این صحبت می‌کردیم که AI چقدر خوب کد می‌نویسه و یا محتوا تولید می‌کنه یا کارهای تکراری رو انجام می‌ده اما حالا داریم به جایی می‌رسیم که هوش مصنوعی می‌تونه تو کشف دانش جدید و حل مسائلی مشارکت کنه که دهه‌ها ذهن بهترین دانشمندها رو درگیر کرده بودن البته این دستاورد حاصل همکاری یک ریاضی‌دان متخصص، هوش مصنوعی و ابزارهای بررسی صوری بوده، نه صرفاً یک پرامپت سادها به نظرم سؤال دیگه این نیستش که AI قراره چه کارهایی رو به‌جای ما انجام بده؛ سؤال جذاب‌تر اینه که چه چیزهایی رو قراره با کمک AI کشف کنیم که قبلاً از توانمون خارج بودن؟ https://leanprover-community.github.io/blog/posts/riemann-hypothesis/ @DevTwitter | &lt; Rashin Gholijani Farahani /&gt;</description>
-    </item>
-    <item>
-      <title>داکر دسکتاپ روی سیستمت سنگینه؟ این جایگزین رو ببین. پروژه‌ی Kiri یک ابزار متن‌با…</title>
-      <link>https://t.me/devtwitter/14027</link>
-      <guid isPermaLink="true">https://t.me/devtwitter/14027</guid>
-      <pubDate>Tue, 24 Nov 2026 05:29:57 GMT</pubDate>
-      <description>داکر دسکتاپ روی سیستمت سنگینه؟ این جایگزین رو ببین. پروژه‌ی Kiri یک ابزار متن‌باز برای اجرای کانتینرهاست که با Docker CLI، Compose و buildx کار می‌کنه. می‌تونید کانتینرها، وضعیت اجرا، لاگ‌ها و فایل‌ها رو از پنجره‌ی برنامه مدیریت کنید. برای مک، ویندوز و لینوکس در دسترسه؛ روی ویندوز به WSL 2 نیاز داره. قبل از مهاجرت هم سازگاری پروژه‌تون رو بررسی کنید. لینک پروژه: https://github.com/libracoder/kiri @DevTwitter | &lt; Diego Jr /&gt;</description>
-      <enclosure url="https://cdn4.telesco.pe/file/dCFl1WJ2NoHHp89aGMYOJ2e0g9zH3s9h2IJ4okp6pGNvNfyKIjGDSFPQQUlKeUULcj1HPYmpOBiQAvN4tTrZW298nuqOmoT5aaReQ9STt2odKd5B5DBO6Fo4Q9VFnL8X9bnSl4XjY-IvYlN6joW2gCsXwPwXEizzsmDPLRfXgMwcJ65xzTdI-ASLAP0vUx_-S_aAcQLC9Rx08x_4We0fNk-H_X2KHdV725CjWbAiKl4Y35QUoxsfe7cmcv1jqsDJGp1Oq_OgODXmjIVRH2XvBqX9kfq75ibK5CymxibBBHgSedIuDrE6L2byYsIiWMlkNz0pkdl1uauGHZlVEPdQCA" type="image/jpeg" length="0"/>
-    </item>
-    <item>
-      <title>با RyzerDNS، تحریم‌ها دیگر مانع شما نیستند. تاحالا با ارور ریجن جمینای برخورد کر…</title>
-      <link>https://t.me/devtwitter/14026</link>
-      <guid isPermaLink="true">https://t.me/devtwitter/14026</guid>
-      <pubDate>Mon, 23 Nov 2026 19:35:19 GMT</pubDate>
-      <description>با RyzerDNS، تحریم‌ها دیگر مانع شما نیستند. تاحالا با ارور ریجن جمینای برخورد کرده‌اید؟ ارور 403 چطور؟ فیلترشکن‌ها کلافه‌ات کردن؟ رایزر همشو حل می‌کنه، خیلی بهتر از وی پی ان. از هوش مصنوعی‌هایی مثل ChatGPT، Gemini و Claude گرفته تا Spotify و Adobe و هر سرویس بین‌المللی دیگر و حتی گیمینگ — بدون محدودیت، راحت و مستقیم. یک سرویس DNS پیشرفته که تنها با تغییر DNS دستگاه، بدون نیاز به VPN یا هیچ نرم‌افزار اضافه‌ای، دسترسی شما را به تمام سرویس‌های تحریم‌شده باز می‌کند. https://ryzerdns.ir</description>
-      <enclosure url="https://cdn4.telesco.pe/file/civuUt9IHY019YjKAC9F8Iq92buQlTps_mm71e0PP4J8xRdJOJ2-Pt7GDwY_9RaLes7fU8nR9IZMrFPGTGl20Y2sLq69Y-h7qS6l9x18_8-BVTUZB9eKsDdOFqIIUmQFhrCinaJ_OauhVMnyuUPA1g8z8MqOqx0Y5Clkw76AhARxz-bofGsRHcgQ0GZoMC41EKEzqdVXakrdg07A9hvMn0c9Fag8_Bnu_TGuvRGza0TLivVnJ14Mp8w6TMg55Zg8CaYKf-98Jv0qVMz6vyPYSyTyjLQp45CID3qMv79CzZHqplLuo5zfmL1Vt2zHa9nqkZAm1n74CjJRMHrMXj5gtQ.jpg" type="image/jpeg" length="0"/>
-    </item>
-    <item>
-      <title>به‌ تازگی و در قالب یک پروژه تمرینی، یک سیستم هوشمند پرسش‌ و پاسخ مبتنی بر اسناد…</title>
-      <link>https://t.me/devtwitter/14022</link>
-      <guid isPermaLink="true">https://t.me/devtwitter/14022</guid>
-      <pubDate>Mon, 23 Nov 2026 19:02:06 GMT</pubDate>
-      <description>به‌ تازگی و در قالب یک پروژه تمرینی، یک سیستم هوشمند پرسش‌ و پاسخ مبتنی بر اسناد (RAG) رو با استفاده از Python و Django پیاده‌سازی کردم. هدف این سیستم اینه که کاربر بتونه اسناد خودش رو بارگذاری کنه و بدون جست‌و‌جوی دستی سؤالاتش رو مستقیماً درباره محتوای اون‌ها بپرسه. پیاده‌سازی این قابلیت رویکرد جالبی داره: ابتدا محتوای فایل استخراج و با استفاده از تکنیک Text Chunking به بخش‌های کوچک‌تر تقسیم می‌شه؛ بعد با کمک مدل multilingual-e5-small برای هر بخش یک بردار عددی (Embedding) تولید و در پایگاه داده PostgreSQL با استفاده از pgvector ذخیره می‌شه تا امکان جست‌وجوی معنایی (Semantic Search) و پیدا کردن مرتبط‌ترین بخش‌های اسناد فراهم بشه. در مرحله پاسخ‌گویی هم با استفاده از LangChain و مدل زبانی Qwen3، اطلاعات بازیابی‌شده در اختیار مدل قرار می‌گیره تا پاسخ سؤال کاربر بر اساس محتوای اسناد تولید بشه. همچنین منابع و بخش‌های مرتبط با هر پاسخ هم نمایش داده می‌شن. در کنار پیاده‌سازی هسته RAG، توسعه REST API با Django REST Framework، مستندسازی API با Swagger و ReDoc، راه‌اندازی پروژه با Docker و Docker Compose و نوشتن ۵۸ تست خودکار هم از بخش‌های دیگه این پروژه بودن. برای مدیریت اطلاعات هم از پنل ادمین Django استفاده کردم که امکان مشاهده و مدیریت اسناد، وضعیت پردازش اون‌ها، متن استخراج‌شده، بخش‌های متنی و اطلاعات Embedding و همچنین تاریخچه سؤالات، پاسخ‌ها و منابع مرتبط با هر پاسخ رو فراهم می‌کنه. از اونجایی که این پروژه با هدف تمرین انجام شده، تمرکز اصلی روی توسعه Backend و هسته اصلی سیستم بوده و فعلاً رابط کاربری اختصاصی یا قابلیت‌های بیشتر براش پیاده‌سازی نشده؛ قطعا این پروژه قابلیت توسعه خیلی بیشتری از لحاظ امکانات و قابلیت‌ها داره. در مجموع، تجربه خیلی خوبی بود که باعث شد در کنار کار با Python و Django، بیشتر با معماری RAG، پایگاه داده‌های برداری و نحوه استفاده از مدل‌های زبانی بزرگ (LLM) به‌صورت عملی آشنا بشم. سورس کد و مستندات پروژه: https://github.com/MrMahdiAliakbar/rag-document-system @DevTwitter | &lt; Mahdi Aliakbar /&gt;</description>
-      <enclosure url="https://cdn4.telesco.pe/file/UXbtMeNjceR4TdNz60BTvUY_i7KultGBCRPr-jEw_i4uyBRTasM5BXyDB4yY3Egi8eguTnzChVUSbiKHxO9F6Wx1plPZo_QeGc29p_4oOyqJgTQ1d-fOZuWXU2bkiLjFYx3shVZEj85kNZUYCadllXtfZCKq0qx_azUMvUSC907iJ9X1SFuK3GOW9X97RRperJ2N9a3orB0n36cXbZTHIiy1LC9waTzpB58XE8tFKxjs0GY7fR2aUeU2kWWWNHlGKrhQWzqcI8UA4NvCh-2Pdbgam6E9yMUEB6fl-G8tN3W2c9qNVzjbwfQ-LBmrwfG2FOojdp7o8oO-F26Af0n1MA.jpg" type="image/jpeg" length="0"/>
     </item>
   </channel>
 </rss>

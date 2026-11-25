@@ -59,7 +59,7 @@
       <guid isPermaLink="true">https://t.me/ai_tv/9535</guid>
       <pubDate>Tue, 24 Nov 2026 07:34:04 GMT</pubDate>
       <description>یه مدل فارسی تبدیل متن به گفتار (TTS) خیلی کوچیک ساختم به اسم tiny-ava که می‌تونه مستقیم توی مرورگر یا روی موبایل و کاملاً آفلاین اجرا بشه - از صفر (from scratch) و فقط با حدود ۲۰ ساعت دیتای صوتی سنتتیک (synthetic) آموزش داده شده - فقط ۴.۵ میلیون پارامتر و حدود ۲۰ مگابایت حجم (با مدل G2P فارسیش جمعاً زیر ۳۰ مگابایت) - سرعت روی CPU معمولی: ۳۸ تا ۷۷ برابر سریع‌تر از زمان واقعی (یه جمله ۵ ثانیه‌ای تو کسری از ثانیه آماده می‌شه) - خروجی ۲۴ کیلوهرتز، بدون نیاز به GPU، بدون سرور و بدون API از اعراب و کسره اضافه هم پشتیبانی می‌کنه، یعنی اگه جای حساسی بود (مثلاً «گُل» و «گِل» یا کسره اضافه) می‌تونید خودتون تلفظ دقیقش رو کنترل کنید: huggingface.co/mehdi-hf/tiny-ava منبع @Ai_Tv</description>
-      <enclosure url="https://cdn4.telesco.pe/file/BajFHJeNBhsBbPcCF2Ee0IYaAtOnCkyCgGRMQJ4IizQVLMsiZwfkSTN0skSwgsH3PK8elcrU0SjlUGQpe9Q2uMQf0pjQxJro2WHrAR5x6acv6sQdSci2CGT2iMw1ZMH7lQER3hhG3NctAFCLVrSuALJU6P5yww7_kjBOJ0-mByGJ48LuaD7tdxYZrA3KN6wsL2_vadPP00OEwDGZV_T1t2uSN3CtZ7-3C6aNreuuAUNqT-4Vw9GrRI305DkLGWx8E82Y2yGT5ioYQmyLKSwKnMIzkjjTf_okl-WJl5WlVyCaTeV4vKGYjLVGvxz9cMi55h5IeHof2uxU13Tgnzg_bw" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/IGp0Xlthnlx7RDPPVBH6fkRTFEG9yGQUC6IqfeCys23LQJUJt_PcFp2kL9txTgk0zxPtp-yz6qUDl5F6zpdDAvNbpLouCeDEccRBONdGTFys5UsT6ZXLzuw959Q1UBgYkqBh2UxCX-Ua7fpwucBfI2oeVOI55PkfsXHYXzr7tfyhvVmwPLYtmH7zWFTSn8JnuYb3-1t24Y3HY_Lb2UEclPNmYPNPbb7_SdONozenL3oXSjSCA45MH0ahzPdeoCE1iUGHysVPpb2vYGfKAGBN5sOaav-zqFH9QsOGvumzXBh20uYBrB_Gm__RUQ-74Ig8HCg40A3Pm__bUZDSiv8yGw" type="image/jpeg" length="0"/>
     </item>
     <item>
       <title>🔴 ⚫️ 🔴 بلک فرایدی فرادرس شروع شد! 🔥 دسترسی نامحدود به بیش از ۲۰,۰۰۰ آموزش، فق…</title>
@@ -75,14 +75,6 @@
       <guid isPermaLink="true">https://t.me/ai_tv/9531</guid>
       <pubDate>Mon, 23 Nov 2026 08:53:02 GMT</pubDate>
       <description>📚 دورهٔ «چطور ChatGPT کار می‌کند» — از استنفورد رایگان در یوتیوب منتشر شد دورهٔ CME 295 از پایه شروع می‌کنه: مدل‌ها چطور متن را می‌خوانند و پردازش می‌کنند، و بعد می‌ره سراغ آموزش مدل، استدلال، ایجنت‌ها و ارزیابی. 🎬 نسخهٔ کاملش که پارسال منتشرشد ۹ جلسهٔ نزدیک به دو ساعته است که از مبانی ترنسفورمر تا ایجنت‌های LLM و سنجش عملکرد مدل‌ها رو شامل میشه. 🔗 پلی‌لیست کامل 📝 اسلایدها، آزمون میان‌ترم و پایان‌ترم، پاسخ‌نامه و جزوهٔ خلاصهٔ تصویری هم رایگان منتشر شده: 🔗 cme295.stanford.edu/syllabus/2025 🍂 نسخهٔ پاییز امسال هم در حال برگزاریه و تا حالا ۵ جلسه منتشر شده و باقی‌مانده‌ها شامل: 👈 ایجنت‌های AI با MCP و Skills 👈 ارزیابی و سنجش عملکرد مدل‌ها 👈 مدل‌های Diffusion و نگاه متفاوت به تولید متن 💡 برخلاف دوره‌های prompting، اینجا «چرا» را یاد می‌گیری نه فقط «چه بنویسی» — و همین دقیقاً همان چیزی است که برای ساختن ایجنت لازمه. 🆔 @Ai_Tv</description>
-    </item>
-    <item>
-      <title>📊 مهارت‌های موردنیاز یک متخصص علم داده را یاد بگیرید. در دوره جامع علم داده (Da…</title>
-      <link>https://t.me/ai_tv/9529</link>
-      <guid isPermaLink="true">https://t.me/ai_tv/9529</guid>
-      <pubDate>Mon, 23 Nov 2026 07:38:02 GMT</pubDate>
-      <description>📊 مهارت‌های موردنیاز یک متخصص علم داده را یاد بگیرید. در دوره جامع علم داده (Data Science) جهاد دانشگاهی صنعتی شریف، با ابزارها و مهارت‌های موردنیاز برای تحلیل داده، مهندسی داده و استخراج اطلاعات کاربردی آشنا می‌شوید. 📚 مباحث دوره: ▪️ آموزش SQL Server ▪️ آشنایی با نرم‌افزار Tableau ▪️ معرفی سرویس‌ها و ابزارهای Power BI و کاربرد آن‌ها ▪️ R for Data Engineering ▪️ Python for Data Engineering ▪️ Big Data ▪️ کاربرد آمار در علم داده ▪️ Python for Data Scientist ▪️ R for Data Scientist 📌 مدت دوره: ۱۴۴ ساعت 🌐 نحوه برگزاری: آنلاین 📜 ارائه گواهینامه معتبر 💳 امکان پرداخت اقساطی با اسنپ‌پی 🔗 اطلاعات بیشتر و ثبت‌نام: https://link.sharif.ac/RyhJ7 💬 ارتباط با کارشناس دوره 📞 ۰۲۱۶۷۶۴۱۹۹۹ 📱 @jdsharif 🔹 جهاد دانشگاهی صنعتی شریف؛ یک پله بالاتر از تخصص...</description>
-      <enclosure url="https://cdn4.telesco.pe/file/FQQWveTtDafdMx6AnRciynRSTquXJtK7pUECjlnOOX3g1trzAYEj9tRmr_bnph_kqjXVKDckHHspyhlKy4Usj1euD8QpyZ6sU74nn3D2CuYqMw-ZlIFlIWpr7qJcjmeanyHC4zXB0WJkEE3fICXxkb-8Blyg6t7maVhnBonI8_v83MZqjUsoI-PsPGKnUg92p4I_F8uQzD5SGMGSZgfXigd_CQkumW88H1wmVas-iRaxdxKw9lLjTMdZtjd7WMZX_dZfZs5UYWiLWPLqj0ocS_pVNHnWhLdiVuCbfwZxWGP_jrxF5IKiQTLkEi5mjt0WQIHSgIZAxJqaop2OkkNHrw.jpg" type="image/jpeg" length="0"/>
     </item>
   </channel>
 </rss>
