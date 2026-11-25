@@ -6,6 +6,13 @@
     <atom:link href="https://mohsen-niksirat.github.io/tgexplorer/rss/manutd.xml" rel="self" type="application/rss+xml"/>
     <description>Manchester United news</description>
     <language>en</language>
-
+    <item>
+      <title>‍ Match day: UEFA Champions League TODAY - - Sporting CP vs Manchester United</title>
+      <link>https://t.me/manutd/4845</link>
+      <guid isPermaLink="true">https://t.me/manutd/4845</guid>
+      <pubDate>Wed, 25 Nov 2026 02:00:05 GMT</pubDate>
+      <description>‍ Match day: UEFA Champions League TODAY - - Sporting CP vs Manchester United</description>
+      <enclosure url="https://cdn4.telesco.pe/file/skOEEzyQ_XuaWnK8R6deqx4-EojqvLawg3gHoUIRTDiRfiYZSo-7bM-GgdAZnVq1zo4m9obz0UkSoBDfgTJSFIl7L7hy3NZPqDsd_iD1B7bqIgFYC3ltLfFsJvUY3PEi0WeHp2Iwc-hVhPk2DXZaJXTE4Tl3Z_B2XheR57z41k4BaWSiq9362sSQozQjOSgXS3_5-H-2H92amoyUbQbTGmkGEsr0nyCbGyP07oZw9TaLDLd09pywxstSKJZLceJGfRzBxJTkCMD4OLJRokOIvbx3k6EwcBaMs-Ay_JraejLO7_ethlnaaBYmR79p49UIjuD9wM6d3pU2k5N70wC13g.jpg" type="image/jpeg" length="0"/>
+    </item>
   </channel>
 </rss>

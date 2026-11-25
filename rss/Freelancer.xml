@@ -7,6 +7,13 @@
     <description>🔵 Freelancing articles, tips, and trick optimizing your workflow for better efficiency and higher earnings. Buy Ads: @strategy</description>
     <language>en</language>
     <item>
+      <title>⚠️ Claude KYC Evasion Warning A circulating guide describes ways to bypass Claud…</title>
+      <link>https://t.me/Freelancer/1132</link>
+      <guid isPermaLink="true">https://t.me/Freelancer/1132</guid>
+      <pubDate>Wed, 25 Nov 2026 13:01:01 GMT</pubDate>
+      <description>⚠️ Claude KYC Evasion Warning A circulating guide describes ways to bypass Claude’s KYC checks using fake Indian passports, AI-generated images, or help from people in other countries. It also includes a forum template for seeking outside assistance with identity verification. These methods involve misrepresenting identity or location and may breach Anthropic’s rules. ✔️ Fake identity documents are used to imitate another country ✔️ AI tools are suggested for editing verification photos ✔️ Third parties are asked to complete KYC assistance ✔️ The guide says country details must match across the form 👉 Link 👈 Do not submit false documents or use someone else’s identity. Use official access and support channels instead. 💻 @program</description>
+    </item>
+    <item>
       <title>🤖 Claude Code Guide 🤖 A comprehensive guide to Claude Code covers working with…</title>
       <link>https://t.me/Freelancer/1131</link>
       <guid isPermaLink="true">https://t.me/Freelancer/1131</guid>
@@ -19,13 +26,6 @@
       <guid isPermaLink="true">https://t.me/Freelancer/1130</guid>
       <pubDate>Mon, 23 Nov 2026 13:02:55 GMT</pubDate>
       <description>🕹️ GTA VI PC Port Takes Shape An open-source GitHub project is rebuilding the Xbox version of GTA VI for Windows. It has already become the platform’s most popular open-source project. The released files include models, textures, audio, and all 26,500 shaders translated for PC. The main missing piece is the.exe file, which CyberLeek is offering in exchange for a crypto scam, though it may later be published anyway. ✔️ Xbox version rebuilt for Windows ✔️ Models, textures, and audio extracted ✔️ 26,500 shaders translated for PC ✔️ The executable is still missing 👉 Github 👈 The port is not complete yet, while Rockstar could still disrupt the effort with an official PC release. 💻 @program</description>
-    </item>
-    <item>
-      <title>🦀 Rewrite Projects In Rust Rust Anything helps rewrite games and apps from othe…</title>
-      <link>https://t.me/Freelancer/1129</link>
-      <guid isPermaLink="true">https://t.me/Freelancer/1129</guid>
-      <pubDate>Sun, 22 Nov 2026 16:00:53 GMT</pubDate>
-      <description>🦀 Rewrite Projects In Rust Rust Anything helps rewrite games and apps from other languages in Rust. It works with Claude Code, Codex, and other AI agents, rewriting code in parts while checking that nothing breaks. ✔️ Designed for incremental code rewrites ✔️ Works with Claude Code, Codex, and other AI agents ✔️ Checks rewritten parts for breakage ✔️ Rust programs can use less memory and system resources ✔️ Authors report up to 20x speedups in some tests 👉 Github 👈 Use it when you want to move an existing project to Rust without rewriting the whole codebase at once. 💻 @program</description>
     </item>
   </channel>
 </rss>

@@ -7,6 +7,27 @@
     <description>Welcome to @prompt , your go-to source for AI insights, breakthroughs, and tools shaping the future of intelligence. Contact: @LightEarendil</description>
     <language>en</language>
     <item>
+      <title>🚨 Billions in data center deals are stalling after the new AI chip curbs Bloomb…</title>
+      <link>https://t.me/Prompt/1128</link>
+      <guid isPermaLink="true">https://t.me/Prompt/1128</guid>
+      <pubDate>Wed, 25 Nov 2026 17:27:10 GMT</pubDate>
+      <description>🚨 Billions in data center deals are stalling after the new AI chip curbs Bloomberg reports that financing and buildout agreements are freezing while buyers and builders work out what export rules let them ship, and to whom. A data center without approved chips is a very expensive warehouse with great air conditioning.</description>
+    </item>
+    <item>
+      <title>🧮 Google drops 9 math papers from Cogentic, including sub-exponential integer f…</title>
+      <link>https://t.me/Prompt/1127</link>
+      <guid isPermaLink="true">https://t.me/Prompt/1127</guid>
+      <pubDate>Wed, 25 Nov 2026 14:26:14 GMT</pubDate>
+      <description>🧮 Google drops 9 math papers from Cogentic, including sub-exponential integer factoring and sub-quasi-polynomial discrete logs Cogentic is a multi-agent harness that, per its arXiv write-up, has LLMs coordinate through a shared database of proofs. Google published the PDFs under Apache 2.0. Others cover Nash equilibria, the log-rank conjecture and prophet inequalities. The factoring claim is L_N[1/3, O(1)] with no unproven assumptions. None of the papers have been peer reviewed yet.</description>
+    </item>
+    <item>
+      <title>🚨 Apple pulled Talkie, a Chinese AI companion app, after an ABC investigation i…</title>
+      <link>https://t.me/Prompt/1126</link>
+      <guid isPermaLink="true">https://t.me/Prompt/1126</guid>
+      <pubDate>Wed, 25 Nov 2026 11:25:14 GMT</pubDate>
+      <description>🚨 Apple pulled Talkie, a Chinese AI companion app, after an ABC investigation into sexualized chats with kids About 50,000 Australian kids aged 10 to 17 said they&apos;d used it, though it&apos;s rated 18+. In a joint ABC and Bureau of Investigative Journalism probe , parents reported sexual and abusive roleplay with their 12, 13 and 10-year-old daughters. Company documents show MiniMax, Talkie&apos;s maker, penalized bots in testing if they couldn&apos;t keep conversations going. Users average over 70 minutes a day.</description>
+    </item>
+    <item>
       <title>🧸 New York bans AI chatbot toys for five years Gov. Hochul signed a law halting…</title>
       <link>https://t.me/Prompt/1125</link>
       <guid isPermaLink="true">https://t.me/Prompt/1125</guid>
@@ -124,27 +145,6 @@
       <guid isPermaLink="true">https://t.me/Prompt/1107</guid>
       <pubDate>Mon, 23 Nov 2026 17:03:58 GMT</pubDate>
       <description>🚨 Google says it just saw the first fully autonomous cyberattack Google&apos;s threat team reports criminals have moved past supervised chatbots to software that finds flaws and launches exploits on its own. An exposed server revealed tooling built to automate vulnerability research and exploitation end to end.</description>
-    </item>
-    <item>
-      <title>🚨 Amazon pays $7.5B for Decart&apos;s chip-optimization tech after Anthropic and Nvi…</title>
-      <link>https://t.me/Prompt/1106</link>
-      <guid isPermaLink="true">https://t.me/Prompt/1106</guid>
-      <pubDate>Mon, 23 Nov 2026 15:38:58 GMT</pubDate>
-      <description>🚨 Amazon pays $7.5B for Decart&apos;s chip-optimization tech after Anthropic and Nvidia both walked Amazon signed for the Optimization Stack behind the Israeli startup, plus its three co-founders and research team. • Decart already tuned Amazon&apos;s Trainium chips in 2025 • Anthropic pulled out of a ~$6B deal in early September • Nvidia refused to reopen talks • Founders stay five years, with a big chunk of the payout in year five</description>
-    </item>
-    <item>
-      <title>🚨 Nvidia reinstates Jensen Huang as CEO 10 days after he resigned, and the stoc…</title>
-      <link>https://t.me/Prompt/1105</link>
-      <guid isPermaLink="true">https://t.me/Prompt/1105</guid>
-      <pubDate>Mon, 23 Nov 2026 14:36:48 GMT</pubDate>
-      <description>🚨 Nvidia reinstates Jensen Huang as CEO 10 days after he resigned, and the stock jumps 27% The board voted unanimously after reports of extramarital affairs, including one with a woman allegedly in contact with a Chinese intelligence officer. It says &quot;senior levels of the United States government&quot; told it his return poses no national security risk, after weeks of insisting reinstatement wasn&apos;t on the table.</description>
-    </item>
-    <item>
-      <title>🤖 HAProxy&apos;s lead got Mythos bug reports on his own code, and they were close to…</title>
-      <link>https://t.me/Prompt/1104</link>
-      <guid isPermaLink="true">https://t.me/Prompt/1104</guid>
-      <pubDate>Mon, 23 Nov 2026 11:35:48 GMT</pubDate>
-      <description>🤖 HAProxy&apos;s lead got Mythos bug reports on his own code, and they were close to unusable Willy Tarreau says two batches of 30 to 50 findings arrived with no reproducers, no patches, no commit ID, and walls of text in single-line paragraphs. A colleague who validated and patched the bugs by hand got far better results. He&apos;s a Linux kernel security team member, and he still can&apos;t get Mythos access himself.</description>
     </item>
   </channel>
 </rss>
