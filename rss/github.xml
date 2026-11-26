@@ -7,6 +7,38 @@
     <description>Developer community and updates</description>
     <language>en</language>
     <item>
+      <title>Nbd-vram — используйте VRAM графического процессора NVIDIA в качестве пространст…</title>
+      <link>https://t.me/github/11861</link>
+      <guid isPermaLink="true">https://t.me/github/11861</guid>
+      <pubDate>Thu, 26 Nov 2026 14:34:20 GMT</pubDate>
+      <description>Nbd-vram — используйте VRAM графического процессора NVIDIA в качестве пространства подкачки в Linux. Создано для ноутбуков с распаянной памятью и без возможности обновления. Если у вас есть видеокарта RTX с 8 ГБ видеопамяти и вы переносите данные на SSD, эта видеопамять будет задействована 🐱 GitHub</description>
+      <enclosure url="https://cdn4.telesco.pe/file/OaJWWG10crsJgElHXKT7XcNt4q8RbFbvPBAIP5MPhH-9flTacndo8K2qi2uFcXazpfBRWiBdsxWt9b20IWVWb_zm29a5RR8gaWxtheGmpR-uYCVo3jYCQm3JWXwCzj2fGjO4u5UFDBaUwHPjx_CdFxG8VvxIqS8kVkKaadDI0A4W57_-w--M69H63UxO5v_d-9Uw7VGG8WMeG4qYGvIuMZm_S_0LiSOrPszlbPyekHiXL25w-iNqq9-7knutPNrJzo2vv0seVJ1l9MrP7aJzEB3w8CeNy4FKEjrbYbINvlRNMt7o5X5n1HcH7KDvzc5YhHCpnssQEokRVRjyhRNQTw.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>Claude-bughunter — набор навыков Claude Code для поиска ошибок и работы с внешне…</title>
+      <link>https://t.me/github/11860</link>
+      <guid isPermaLink="true">https://t.me/github/11860</guid>
+      <pubDate>Thu, 26 Nov 2026 11:33:42 GMT</pubDate>
+      <description>Claude-bughunter — набор навыков Claude Code для поиска ошибок и работы с внешней командой red-team - 82 навыка, 15 команд с косой чертой, 681 раскрытый шаблон отчета, подобранный по 24 основным классам уязвимостей, плюс матрицы атак enterprise identity + infrastructure. 🐱 GitHub</description>
+      <enclosure url="https://cdn4.telesco.pe/file/p9JBBZ7jYyKeFbOhDm-Uvm84-UtdVUx_9gZyTkhhO8IN1EUrx7gSSZLlxsF10BB6i9jF17BQ1R8Y6ljdLbvo3NT1yxzaoqaPBDukcIN3oaNq0-9RmCNWvNO3tYrOF4LhdyMLHKH_UHwt-boObNCs-l1AXT2Tb-yTKumUXNqvPehLtiWvxh0opEm2kSzTNg4a2BpYaFzE0YcSq2ESvaMQT4L7uDyv_qBTVNCucvg5DdrNWgZP2LFWg4sOBMabjh3TlUYaPXycU6_rx5sY7doI7t-Svwr944cKjSixHnPNeRFO8nIueHVoBgP3WO9yN_ATIZZZuhl73qcSaeSPQH-HIA.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>Permission Manager — это приложение, разработанное SIGHUP , которое обеспечивает…</title>
+      <link>https://t.me/github/11859</link>
+      <guid isPermaLink="true">https://t.me/github/11859</guid>
+      <pubDate>Thu, 26 Nov 2026 08:31:22 GMT</pubDate>
+      <description>Permission Manager — это приложение, разработанное SIGHUP , которое обеспечивает сверхпростое и удобное управление RBAC для Kubernetes . Если вы ищете простой и интуитивно понятный способ управления пользователями в кластере Kubernetes, то вы попали по адресу. С помощью Permission Manager вы можете создавать пользователей, назначать пространства имен и разрешения, а также распространять файлы Kubeconfig YAML через удобный и простой веб-интерфейс. 🐱 GitHub</description>
+      <enclosure url="https://cdn4.telesco.pe/file/D-j5AVHTdup84q9gWp3RWds-HIsOgLOGuRbdp4SfiUGpTZhSJp7RvmnbFgTlb1e0_x_F6PQnX3dStCfrGspODN6uG10VjCsxJs7tgEkzc7rKGNe5yOlb6yWTjLHqsjZFr_J6xGiKfL006FIlIePRkDtkpBrKNXUQ5SdyDAS7Qk9eW9uFxR3XsYt0D9IZx5JjEZwiLryeRzsah8FywqgMAQnjXe30NueCGut22ieSoOFNqBtQ2ayu32YpOMZR_O0jS6NV7fAPvWJr9k4JuuWBp75IJpcqYzhsTDnfRvFHtOiHeU9gU2edbhdvAZ33fANVO5vdoDT-iTZP4oYqDaG1CQ.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>Atomic-agent — локальный ИИ-агент, работающий на вашем компьютере, с локальными …</title>
+      <link>https://t.me/github/11858</link>
+      <guid isPermaLink="true">https://t.me/github/11858</guid>
+      <pubDate>Thu, 26 Nov 2026 05:34:02 GMT</pubDate>
+      <description>Atomic-agent — локальный ИИ-агент, работающий на вашем компьютере, с локальными или облачными моделями. Управляет вашим браузером, редактирует файлы, выполняет одобренные команды и запоминает контекст между сеансами. Открытый исходный код, работает на нашей платформе TurboQuant llama.cpp — благодаря этому длительные сеансы с небольшими локальными моделями занимают меньше памяти. 🐱 GitHub</description>
+      <enclosure url="https://cdn4.telesco.pe/file/RCpj_fXoFfmBVRHluwRyAfKf9XgdC3zIGSjlJ8EE_Qq7LzMZdG48ZVsd63Or6xIwHnByzwthOXHxGMnTqmJFb24RVLIlyTFatyplOlrm_N1UoO2ukSPhXsee1cmtvA_FGtUORULBIYv_N-W1wEG2_VIk_S7eAmi-bWqaRksIuZDSXOFIWGyYOqyNI3gGmjiwi5zpaOuV3NnewdS4X9dXBaU92Yr8IE61e7WkiIpnC6eqfaAStiexY7kkGwLGPJnqumomNUilk0pRYVmWZZZEtK54x191mJe6fDkgAsnKG9VSCiR7fgDAdAeKnOk17VojWP7A1A2x5qEah_W-YAzfXQ.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
       <title>Witr — отследить любой процесс, порт, контейнер или файл до самой первой цепочки…</title>
       <link>https://t.me/github/11857</link>
       <guid isPermaLink="true">https://t.me/github/11857</guid>
@@ -59,7 +91,7 @@
       <guid isPermaLink="true">https://t.me/github/11851</guid>
       <pubDate>Wed, 25 Nov 2026 14:53:05 GMT</pubDate>
       <description>Нейросети для работы в одном пространстве 💚 Дизайнерам — для креативов, маркетологам — для контента, бизнесу — для документов и аналитики. Нейростудия от Polza.ai объединяет инструменты для работы с ИИ. Здесь можно анализировать файлы, создавать изображения, видео и музыку, а также разрабатывать мини-приложения без кода. Что доступно в Нейростудии? 📁 Работа с документами и анализ таблиц 🎨 Генерация и редактирование креативов для рекламы и соцсетей 🕹 Мини-приложения по текстовому описанию 🎬 Генерация видеороликов, музыки и озвучки Можно подключать коллег, устанавливать лимиты и управлять общим бюджетом. Оплата только по факту использования, без обязательных подписок и фиксированных тарифов. 👉 Попробовать: Polza.ai</description>
-      <enclosure url="https://cdn4.telesco.pe/file/JeLndxVtC0iSB6K8abhLXRYCOXiIJV0C19YA4x3UTBY15ullSTO17LnJyqdFF6Z2gOF6sB6vjbFo7sQxaUJhOblI0QBIlrTQuU_zORoKoPuK3j_fkcRhsoBHSx16V4xBEeN1lLtlovFT3A6ulN1BjbicDNQH9VjVuLp9G5sRs1IwGWl-86ND3I7U5QrZ5yQ2w_toXrljclY7vYtyMQAcTDvmVZUkyiAqWpmK5INWtW6iS-ipFeRTPfMrSsVJ2Zl5g2S14GVbYhsC4EUVUL84VnUyrAWZwpyVWkuPSdLwhyiNVK_iy0mbdrX7AJPNjCSH1Z0DkMTT8qyS6odIiXYCrA" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/vwd7lr5-GXhSM2fTAQXPY-Giy5PEKVQTmnQdcvj3iSSrAFI9gIguV0x4i_R6L5SQKF1tWLCBKjl1F5pabFTGXmRp4xF2MhfjJjl63t_f1LUWXfkPT6MvUlfLinZhyS8D-kj79bkNqSAI4eg4eeWahcwBa7DLU8I_65PHzRFbETOsMpA640mAx3-2ETGXPf_8iKrNT2_6gRjry8OdsDD5ZTqNYS5WrnBqkTrz53pJv_GIX9ZZby2k7q_p4JmBhRiFVkGwwWVKZzPx9MCkE96IJ66j2sQn4Uq667bMQL8G6K3a6UvQmt1mfrKiS60F8PqpHzqSmSeQ1ukrkk8QXAR-tg" type="image/jpeg" length="0"/>
     </item>
     <item>
       <title>Whatcable-linux — виджет для KDE Plasma 6 и CLI-инструмент, который объясняет, ч…</title>
@@ -67,7 +99,7 @@
       <guid isPermaLink="true">https://t.me/github/11850</guid>
       <pubDate>Wed, 25 Nov 2026 14:30:20 GMT</pubDate>
       <description>Whatcable-linux — виджет для KDE Plasma 6 и CLI-инструмент, который объясняет, что именно делают ваши USB-устройства в Linux. 🐱 GitHub</description>
-      <enclosure url="https://cdn4.telesco.pe/file/G_RyUN_3qTOT2lY_ng1EJqmme4prDaO1_UgrP_EVzvOsMV2975Xwj-shM0DGJKPiJPs_GgzAb7ZZ182kZdczoNMojgFwKPQ172u94oFJNRMSqyLjbbmHzgCdWn4MDNkANBj253u2V_F3wrStC-Y9oRe65xJOt_g5WOmLbBdLtWiadD2YRA5KiQ8DWMzkpfqL9gWR2Fan_1BQvGSOPKU82Z0W83zV8mzfpa5lCLdvxpffvuwxqRicI5r3mNx3h8FJU6AwxRfWXul1GLue6qDcLWIoAqFHe4xtQKkzoiE4JQMF3hOHKclztxN1KEiIyuL1V23_zf9LG6Hn_IBMpKs-FA.jpg" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/GTB-3A9VDM8gAnnCl1MHW_svd6nvCW9a3xDYBUdOV70WZXpnNoqGaGD77qnK2JbW86XjMi-C8iABy73x8SuObVdC4dtTvVKtaD-mnNEGpMkidO88lauD_QFI5aFfNxC01LwJRAruiPh9Yi0WQQsIbGYBmJWVAg5meF3N5EO1eXauajkkGd_ZDiKYREbN645hB1nCvhtFgZkYPNRPNGF18-5-7e-DX5OoR92IFE3iC4DTL1hvmfmgHK5Qjgz9sFJVPdBTF34jFXApinqTG_O8YK_MYfZVefUpoeEPiviMxGQOpKg1TR-aFX9uB8n854EjcVWoVgmLJYsKS9wb4WPu7w.jpg" type="image/jpeg" length="0"/>
     </item>
     <item>
       <title>Все инструменты для разработчиков — НА ОДНОЙ странице Нашли удобную подборку веб…</title>
@@ -75,7 +107,7 @@
       <guid isPermaLink="true">https://t.me/github/11849</guid>
       <pubDate>Wed, 25 Nov 2026 11:31:16 GMT</pubDate>
       <description>Все инструменты для разработчиков — НА ОДНОЙ странице Нашли удобную подборку веб-инструментов, которые пригодятся в повседневной работе и тестировании. Генераторы UUID, конвертеры, инструменты для регулярных выражений, JSON-валидаторы и другие полезные мелочи. Всё собрано в одном месте, на русском языке и без необходимости прыгать между десятками сайтов. Добавляем в закладки — тут . 🐱 GitHub</description>
-      <enclosure url="https://cdn4.telesco.pe/file/unRWDaSZ_qHEImxoClr_jwEJFrTCSq6vGm1XKp9RJSvON2h8vzUd4lRfLTCh7OyrJUO5wAbV3sftwxgx7XTRc4OdmYGyk1K3nAwiSHVcuwiOWmZdw21JvCWlfm8vUVZI3khOz1FBsVD4DbiqQpOCbPfEb4T7wLtTam-sg9_aEP3fY7G3-vt1qvMHX-ZFlarVXynsnfMBEMZGvTzSh90ED0ycOidtMuXnSsa0Ih9QYyigwqlupDGvmoqzIqbN0yxtNcDLqIYXw1MOKdOVo9aQDmVaBjzHJ9S-4WLYj2b3BKroNJX2cz3ePcIhRgMbVGngCOh7J9AuTG0nosgz3Tx9Mg.jpg" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/vqk_phum3QwIvJjJBRuH9uOdRQEnuoIMt0XIh6Gow8r6Mtiws0i3i5oX4dCmJlP3DUQFQCxs4yPpb9H1t-Ld16wWH3H5MFBKTUpS1B923jUIOmQqp6D_QUrtfHfcVZAFb-NLAEQwomMl0LvWOlZlJRx-zbH2yqe3NlQzx7hCRIsEoNw_r5AygruPbg9ZVqYThx1P4RbIyPc8VUX8Eryx8QSEmScLzAI2pk_cKr9iGKkOOffuDdLa5tNfepm8xFSJL_QrqyQ_s5zpBFszBFr-BW64F3y8CXiRDwFpJwnnBKWZiW6yS6bvgFPmB02ReOeXcSMkJH9wGByOwBff6o3PHQ.jpg" type="image/jpeg" length="0"/>
     </item>
     <item>
       <title>Hunk — терминальный diff-просмотрщик для анализа и ревью изменений в коде, включ…</title>
@@ -83,7 +115,7 @@
       <guid isPermaLink="true">https://t.me/github/11848</guid>
       <pubDate>Wed, 25 Nov 2026 08:32:03 GMT</pubDate>
       <description>Hunk — терминальный diff-просмотрщик для анализа и ревью изменений в коде, включая изменения, созданные AI-агентами. 🐱 GitHub</description>
-      <enclosure url="https://cdn4.telesco.pe/file/rrNJPbIjWqNZhVLdIugA3cMmkIdk69gI7acK5Dn0jp-VZFBbJHRake7zelS8Ku77b5VVlT9VxKMnePszfpJChDzhmyjxZuzC7opzGy3sRPdI-P9Fkq3WDAevCuUSlP9l-dK4WsMk4C-Ruk-B4NyzCaHAk20hkEfW3ZW-Xn4xXBZWwNuOtdXMoJLGjOY1O8nck0RyPyt3E2pbSVddzSJGMgJAK9TsrKIXz1hpn0NYk2J3xTTeLbSSSWJVSBRXFnuWby3A1CuvDpV0TEoV7CUCpSn6dc1KuWX155z7ho3laTNMLA6UT12YR1TWiJUQap5HNK7cUYaNv843ebLLSard0w.jpg" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/G39oLo_bOY9DPJEU__SeJYm4-um3aCb45xANLmZqkmm6hEk3kPShTSoFTkpDPTYBRowVqH1I7wSw37Aa51dktY3ZdDHiRKcjCJeC1nm6cdun7BstTQeIcUhiaIIgYUwbzf7uq8FtDo5mqEuEWSS2wf_jQMosPC9u6bjEH8oE8HGhGgBmSneVGHGs2_98Nmv3Br0tYTmfogn6I8R9syxS-kj7Cf_NdvIQ3cu77PzOaAM5UFQmh0tEs0Eiqpk8B1OUOjRiKpSSPCItkxP2t1N7IgxwcvpyV7HKhmUlVOzY4OAUfEHUjNrvq33jAPvJfk_2ZKzgU0y7Vg7nV8ZJXVH9zQ.jpg" type="image/jpeg" length="0"/>
     </item>
     <item>
       <title>Telescope — это веб-приложение с интуитивно понятным интерфейсом для изучения да…</title>
@@ -91,7 +123,7 @@
       <guid isPermaLink="true">https://t.me/github/11847</guid>
       <pubDate>Wed, 25 Nov 2026 05:33:53 GMT</pubDate>
       <description>Telescope — это веб-приложение с интуитивно понятным интерфейсом для изучения данных журналов. Оно поддерживает несколько типов источников, включая ClickHouse, StarRocks, Docker и Kubernetes. Пользователи могут настраивать подключение к своим базам данных ClickHouse или StarRocks, получать доступ к журналам контейнеров через Docker API или извлекать журналы подов из кластеров Kubernetes. Telescope обеспечивает единый подход к запросам для различных типов источников, позволяя пользователям эффективно фильтровать, искать и анализировать журналы. В то время как ClickHouse и StarRocks служат основными бэкендами для структурированного хранения логов, поддержка Docker и Kubernetes предлагает удобные варианты для локальной разработки, временных сред или облачных развертываний. 🐱 GitHub</description>
-      <enclosure url="https://cdn4.telesco.pe/file/jTkOoIJYHdOj799edwUXYlOXk1LT8hBo7PVnZ8mT_KhZmTQfwWCMs-et0KLq9aPTHxgAONLZsN3VtNFrB0RBg_HWuRFNt5JH47F9GrMjOrTSdgmPxHkiK4Abi3HTzR8n4dKpGRFhiViEc7APeqvUA_R8l5n2VXksWTh8NfR0wDhkYh_EkzU3Hb_fuRQGO2mSi1Q_rtNRURlivLoMVStw6VdtrdSlNFPYA82IscrXzHvcJSRsjQEc-25rGTJWfUOIOE0hHutjZe9q0V1H8hHeYzeJK0PwZI7rdb1qaIW22_6lYa0v5h-y3ipVULXIsPnP-ztStRcHhNaGozIyUIZnJA.jpg" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/k_A8XeeXIfOBC_1wHldfvD-epVjvhodQ6gGilH4cp9qfo9rO8KSFDEAY6FbaXnb_x1bkfEmzZ2qOR1Cu_E3P572OCv2o70_gW5TpKjxQevQlJCBgnKGyyBUies0mmZMouAJGnNZKb8aCLD-juexvUJwTLjz5KBom9aWNsJCjebboSAYyAt-zGxGQLT2sqZ963rbGKo6Q8-0OGkv8OZIKH3DikVnMGw-obdd1VRbu0963HP2zwNV69SJt5SUQPsUE_HLhZmTHAfPAvGvIDmdXc7Y8ve_qnHou3J0KTpQgfMRE44iQZu68VSc3EMzFC67DiVLDpakRpx13-aMlTqSBiA.jpg" type="image/jpeg" length="0"/>
     </item>
     <item>
       <title>MagesticAI — это браузерная платформа для управления задачами по написанию кода …</title>
@@ -131,39 +163,7 @@
       <guid isPermaLink="true">https://t.me/github/11840</guid>
       <pubDate>Tue, 24 Nov 2026 14:33:49 GMT</pubDate>
       <description>RiceHub — общественная галерея конфигураций рабочего стола Linux (dotfiles, rices, цветовые палитры) для Hyprland&apos;а, i3, Sway, bspwm, dwm и других. 🐱 GitHub</description>
-      <enclosure url="https://cdn4.telesco.pe/file/kZBR3yKyyvxJ5qa4zf6uPa5VEryAw2-mmr05dNwzZIjgHKWrgLB5Ks_inMmjEpX7dS9r71OKS5dRWPL9AEJ4w6nnX5GH6wDArbYsPV4s2PQEo_eGU-0ChzefRbeAV4ZK2QoXKtUdgMzh_KY5Q75Fmg0wtYmNf-ebfPSzIF-LQqf8C3f-m4JQ1zWhyTp06p1ygC35cQbL7MKraqeQMLRviI2jLcg-Pe_LKiewE3l3bt5B5Zwk8m00NRxbxMSZgcgGdeOYgA_izmYRzKt6BvbRbBYHrCR1IfiXiLpeClSWRlvXZX33Oi-L7dLvQAkooQ9rksjJ364kcETtgwqB6KdgFQ.jpg" type="image/jpeg" length="0"/>
-    </item>
-    <item>
-      <title>Cronalytics — это плагин для Hermes Agent, который определяет использование ресу…</title>
-      <link>https://t.me/github/11839</link>
-      <guid isPermaLink="true">https://t.me/github/11839</guid>
-      <pubDate>Tue, 24 Nov 2026 11:33:41 GMT</pubDate>
-      <description>Cronalytics — это плагин для Hermes Agent, который определяет использование ресурсов на уровне сеанса и примерную стоимость каждого запуска, инициированного cron, чтобы вы могли видеть, во сколько вам обходятся запланированные задания. Он подключается к on_session_end , сохраняет производные аналитические данные в локальной базе данных фактов SQLite и предоставляет к ним доступ через три дополнительных интерфейса: вкладку на панели управления Hermes, инструмент командной строки для программного доступа и агентский навык для мониторинга и диагностики cron, а также комплексной оценки. 🐱 GitHub</description>
-      <enclosure url="https://cdn4.telesco.pe/file/keVdNj0i3u_dGOLgXCrhoFNkDMUzlnhKZKBnMYXbzmn_ILhtvW5zTNDu-18VHSW_gaoIjLwCIH9bqi1VYx8J1bhRv5CYyqMFj10HYZeaHZ6qsAxjZmlIvDmsb3ACW2Q5kcWP8biFUet4sM_rafoBpJaTYi3yFQJ9GZxlQ4pjJxgYYCpOa8z3xGWnTNMLUhhKmiTrFqCZQw9NnRzVdoJ61O1lEq0uvqcK55FMDiyatoyjnk3lo4VHM9L94H0HgM8FQML8b0dMcH68yAvhVl8xA5qwOcjbh4yQ9IoQWZ0LaQ07tWfg19vdMmLsLxFOCPH5NY0GZfFAtIAj5BF7G1UaSQ.jpg" type="image/jpeg" length="0"/>
-    </item>
-    <item>
-      <title>CodeGraph — предварительно проиндексированный график знаний кода, автоматическая…</title>
-      <link>https://t.me/github/11838</link>
-      <guid isPermaLink="true">https://t.me/github/11838</guid>
-      <pubDate>Tue, 24 Nov 2026 08:32:33 GMT</pubDate>
-      <description>CodeGraph — предварительно проиндексированный график знаний кода, автоматическая синхронизация при изменениях кода для Claude Code, Codex, Gemini, Cursor, OpenCode, AntiGravity, Kiro, второго пилота и агента Hermes — меньше токенов, меньше вызовов инструментов, 100% локально 🐱 GitHub</description>
-      <enclosure url="https://cdn4.telesco.pe/file/Ncfq7JpWlaZ-bwmk5hp2tjKEpkIewlYpgUBLtYjCDHhfVqzQFN_KLgLMjRwDmpoIWw0OTjgiUJnc-yn2wzyuh5GI85Fk8fBULaGXl2JNW96bLsuavjlivZThp5D_EVSm4Tzrriv_TOBODwq1OmkgOcWgevs4AP_LY4FCjj-MVb5JNuLuskwH2soJ8GmfCbWp2Gu7nWfPvuBw2nUpJb5tVdzTud2ByC0dh16AQu_Q2fdrJJm07iK1Wht_dYJto9u7HGPxZ1DOddOdBcNpbfuY7waNp-TXIRTaW_rKxrykeX0TaPPrcQTKyz9FF0ueiGlV-whx_0_U42eaMNQS5hMa2g.jpg" type="image/jpeg" length="0"/>
-    </item>
-    <item>
-      <title>SysWatch — отслеживайте работу процессора, памяти, дисков, процессов, графическо…</title>
-      <link>https://t.me/github/11837</link>
-      <guid isPermaLink="true">https://t.me/github/11837</guid>
-      <pubDate>Tue, 24 Nov 2026 05:33:51 GMT</pubDate>
-      <description>SysWatch — отслеживайте работу процессора, памяти, дисков, процессов, графического процессора, энергопотребления и сетевой активности в macOS и Linux. Очищайте историю, записывайте сеансы и анализируйте всплески активности с помощью карт эвристических аномалий. SysWatch доступен только для чтения и работает без sudo; доступные измерения зависят от вашей платформы и разрешений. 🐱 GitHub</description>
-      <enclosure url="https://cdn4.telesco.pe/file/CHLM6-nrWGdvRurMDaS2HrgXkCJo7fAAdEDj8WPjZ296UtjPhaLNuIt8L9ltaLNIt7vlxRf80ZrWxBsAvooF9mJKIntW8v6IbYHt2KapVtugK6veW8SOH-EW9Gpuw0IbEGsgNsAsBgkQ3RFL5chAWKXF5QOVlTCCCjZurevxtCaJw6TDNT58aXdHwtrWGTZT_TuPLZKI32kduoaEVjL1U-iRLjiHh_KWgT1LlHpbMBDxJlXaXZTmfdK_NHbrUqokwkfe-kntDm7RK9xVRV1_o2SHc-lJNNmwk3Ljhn9x3KiaQBJIVw_rI7MMgH0g9a3SqHaWxyYdGcy1GRN7hKBTTg.jpg" type="image/jpeg" length="0"/>
-    </item>
-    <item>
-      <title>Lanes — одно рабочее пространство. Много агентов. Запускайте множество агентов И…</title>
-      <link>https://t.me/github/11836</link>
-      <guid isPermaLink="true">https://t.me/github/11836</guid>
-      <pubDate>Mon, 23 Nov 2026 21:45:11 GMT</pubDate>
-      <description>Lanes — одно рабочее пространство. Много агентов. Запускайте множество агентов ИИ для кодирования в параллельных потоках: задачи, рабочие деревья, сессии, одна доска. 🐱 GitHub</description>
-      <enclosure url="https://cdn4.telesco.pe/file/GWH_vA2kkUBDFKgJPk-n0hL3RK00amNytVeXQO-WpkF9VxYPNxKr-POnZG3hfC-QfkULyPz4QA0t6bab9nHm3gm-VDHfTgkwlle0HHQILc8K0_9MU2hJd_L-aU0xyC6CpoZULPmT2RqJvLsR63LV2ZZshz6madgn_02vBP2tUA_vTpDY61DchX2Z-H4Oc9DDcvbfB1FrR6blcTuhhyWYblkaVzQJ9wPZbDrBQoyAuGQeOkeZP2eZoBPw9OzPkM42LfvxEux7xCEhDpFnb3Z9bXHXmYHdCoM2oq6YuintmlfMwQUvvjaTzL6E1DNxhUUsU_Qqbf668BSSuN3KSIeRNg.jpg" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/v881MUGmDlFMspjvaIphDIPl3ua1Q_FbNkQbUcVH4qQYF6_SlQcO7rsAGG0_ctCtFbVbNWlLvaJGmeWt5n-E2mGUipPRjw8lRhMunZic4N_eA_kPPKmDAtg4aD59w7lbZ9aB7nGwGzvjs2B8pKXBDJGiMOnXOyoCCBNeSUcuVa6kHGSGDWitPgVMHKdqgKbYWivKCi4na2AGKRi2DaAaac5NMrY-jA0VoIiukYF99NCEz92r3Zq-OAqv_HttSaDj39o2YNau6Aqhrr620pvn6QO8d24upQ39uHafSg9j7zChisJ2TQTZunjPxnETP4uiwrj4SFUrjdO_qaMGChfk8A.jpg" type="image/jpeg" length="0"/>
     </item>
   </channel>
 </rss>
