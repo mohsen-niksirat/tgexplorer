@@ -7,6 +7,20 @@
     <description>JavaScript ecosystem news</description>
     <language>en</language>
     <item>
+      <title>JavaScript #3624</title>
+      <link>https://t.me/javascript/3624</link>
+      <guid isPermaLink="true">https://t.me/javascript/3624</guid>
+      <pubDate>Thu, 26 Nov 2026 06:32:22 GMT</pubDate>
+      <description></description>
+    </item>
+    <item>
+      <title>CHALLENGE function* inner() { yield 1; yield 2; return 100; } function* outer() …</title>
+      <link>https://t.me/javascript/3623</link>
+      <guid isPermaLink="true">https://t.me/javascript/3623</guid>
+      <pubDate>Thu, 26 Nov 2026 06:32:22 GMT</pubDate>
+      <description>CHALLENGE function* inner() { yield 1; yield 2; return 100; } function* outer() { const result = yield* inner(); yield result; yield 3; } const it = outer(); console.log(it.next().value, it.next().value, it.next().value, it.next().value);</description>
+    </item>
+    <item>
       <title>JavaScript #3622</title>
       <link>https://t.me/javascript/3622</link>
       <guid isPermaLink="true">https://t.me/javascript/3622</guid>

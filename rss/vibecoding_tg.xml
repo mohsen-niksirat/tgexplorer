@@ -7,6 +7,13 @@
     <description>Авторский канал по ВАЙБ КОДИНГУ Ссылка для друзей: https://t.me/+ll3pbl442dNkZmYy Cотрудничество: @devmangx РКН: https://clck.ru/3RRVfk</description>
     <language>ru</language>
     <item>
+      <title>Одна из наиболее интересных возможностей скиллов в Claude Code заключается в том…</title>
+      <link>https://t.me/vibecoding_tg/4451</link>
+      <guid isPermaLink="true">https://t.me/vibecoding_tg/4451</guid>
+      <pubDate>Thu, 26 Nov 2026 15:18:01 GMT</pubDate>
+      <description>Одна из наиболее интересных возможностей скиллов в Claude Code заключается в том, что они могут выполнять shell-команды в момент загрузки, ещё до того, как Claude прочитает их содержимое. Это позволяет экономить токены и передавать модели полезный контекст, например состояние Git-репозитория, логи или сведения об окружении. Однако этот же механизм позволяет незаметно для пользователя выполнять произвольные скрипты. 💻 В Claude Code 2.1.332 появился хук PreSkillShellCommand, который позволяет проверять и блокировать такие команды до их выполнения. Для защиты от сторонних скиллов автор разработал skill-shell-guard, работающий на основе списка разрешённых команд. - Разрешает команды, предназначенные только для чтения, включая git status, git log, ls, cat, grep, проверку версий Node.js и Python. - Блокирует сетевые запросы, выполнение скриптов, установку пакетов, запись и удаление файлов. - Блокирует доступ к конфиденциальным файлам и каталогам, включая .env , ~/.ssh , ~/.aws и *.pem . Если команда заблокирована, скилл всё равно загружается, а Claude получает информацию о причине блокировки. После этого модель может выполнить команду через стандартный инструмент Bash в соответствии с установленными пользователем разрешениями. Установить хук можно следующей командой: npx claude-code-templates@latest --hook security/skill-shell-guard При установке выберите User settings, чтобы защита распространялась на все ваши репозитории. https://www.aitmpl.com/component/hooks/security/skill-shell-guard</description>
+    </item>
+    <item>
       <title>95 ГБ данных, объединивших практически все основные материалы по кибербезопаснос…</title>
       <link>https://t.me/vibecoding_tg/4450</link>
       <guid isPermaLink="true">https://t.me/vibecoding_tg/4450</guid>
@@ -153,13 +160,6 @@
       <guid isPermaLink="true">https://t.me/vibecoding_tg/4432</guid>
       <pubDate>Wed, 25 Nov 2026 08:03:53 GMT</pubDate>
       <description>Появился маркетплейс скиллов для ИИ-агентов — Skillsync. Сейчас скиллы, которые разрабы пишут для своих агентов, разбросаны по репозиториям GitHub, чатам в Slack и папкам на Google Drive. Создатели Skillsync решили собрать всё это в одном месте и дать разработчикам возможность зарабатывать на своих наработках. Причём покупать скиллы смогут не только пользователи, но и сами ИИ-агенты. По сути, Substack в мире скиллов. 😎 https://skillsync.com/</description>
-    </item>
-    <item>
-      <title>Вайб-кодинг #4431</title>
-      <link>https://t.me/vibecoding_tg/4431</link>
-      <guid isPermaLink="true">https://t.me/vibecoding_tg/4431</guid>
-      <pubDate>Wed, 25 Nov 2026 07:20:11 GMT</pubDate>
-      <description></description>
     </item>
   </channel>
 </rss>

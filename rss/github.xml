@@ -75,7 +75,7 @@
       <guid isPermaLink="true">https://t.me/github/11853</guid>
       <pubDate>Wed, 25 Nov 2026 16:32:07 GMT</pubDate>
       <description>Klip — минимальный менеджер паролей на основе терминала Возможности ▫️ Полностью автономная работа. ▫️ Безопасное шифрование с использованием Argon2id для получения ключа и аутентифицированного шифрования с помощью libsodium . ▫️ Генератор надежных паролей. ▫️ Пользовательский интерфейс, созданный без использования внешних библиотек. 🐱 GitHub</description>
-      <enclosure url="https://cdn4.telesco.pe/file/BPey1MUbTGsN9FQy_9dP0GMByP_r1PmRvLPG9lC_CwuJX9C68tXbeCG2ZQanzUwXZ6PXa-2MTg1389Aj36app0KDHYdIlsyoNqMV5WXf_h2NB2kqtMPoASUbtsLQp-pR1O-PODlOk0PAcePU4P1c_0GCC0czPxmSCH9Jt6qrpyLzqftuqjt8qDImxw1XgYAgFKkr7psxS7hvEBWqVVBNVj2oER2NchbsH8LsCL1ytPeBcmTCrl-LqE7jkFqcto_RdAh_sNRQQffBFrLq7hwFcPtYf1QLotn9D_IWakhhvpmv-SXGUsZ3Um4I77nEd5synJldqYtlrg3HQ32qag375w.jpg" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/gFbzz32nfF1ZPC92pMQIQrbP-tuLssVmK4PCfRNFIId_sael3ASjf_bN0zRWj7rS2TLckwtK51JY4F4zHZ81G1smbBDEIUsU_H45R4Um8qtp4-_vkK-MMs0rv9ud111WiahecstPnKNUPX4IX7Js32c-RZuFoJ03_jugGQHjJQ_9g6WwouqWVorodjO-AaYer-skQJB7dwu5YlqFcwwMEWShMOtmfukn3r5XiVe70HnbqhdCIDduCBFAbp0xD0F_Zxlftsi1GrPkfxi7qYX9R77IIskeT0Ie_pWnBT81bmqXG-hReTReBbmAJiWo_P6X6Wm1nm7YNDLB9SCJLf7aTg.jpg" type="image/jpeg" length="0"/>
     </item>
     <item>
       <title>Boo — терминальный мультиплексор в стиле GNU screen, созданный на основе libghos…</title>
@@ -83,7 +83,7 @@
       <guid isPermaLink="true">https://t.me/github/11852</guid>
       <pubDate>Wed, 25 Nov 2026 15:53:01 GMT</pubDate>
       <description>Boo — терминальный мультиплексор в стиле GNU screen, созданный на основе libghostty. Вывод каждого сеанса обрабатывается ядром эмуляции терминала Ghostty, поэтому boo всегда знает точное состояние экрана каждого сеанса: содержимое, стили, курсор, историю прокрутки и режимы терминала. Это состояние используется для восстановления терминала при подключении, для ответа на запросы терминала в отсоединенных сеансах, а также для того, чтобы скрипты и агенты искусственного интеллекта считывали экран так, как его видит человек. 🐱 GitHub</description>
-      <enclosure url="https://cdn4.telesco.pe/file/Gv9Q5ceY25nS6zn8GWJBcH5WXQEKHgpnPTUofmYaMLHjjARTbv4z0WyxuC0Tml4d-PzOSfXOD73Bcz0UoBovsOdyOb3inJxT2jhlx-vavi53cLNHg5OIHA_wfNVUv1SabdYSk70Y5MHwEOA4Ylu11NKh6J8Mv2Z15Bq_Ay-3BkZFRYVvO-JqWfxlqIaURV2KYwsNd3ibyTUKSJ2hW7riw3SuGpaTKG8_VrioVzUofc7GOJZHNaTI_4RZZDGAympeolyVZgooZWWinBl4IdPtQDcTvpNPpK8rvl_2wD2GtJlekUGxvHcepN9OOGEqpU-H9AT1cBYN5nHLxUdJfdJcSA.jpg" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/Yi-8pAReyNRzRKSoVEANO4TJW5iLZHZyg400EivUY7BXL6ReEBXaKNquAG3OQrN9C_ZDPqjwcZuTdfgYWvuhheAlAb5W2dD0qlT0doPKDmaMbDsgpX_kLZzeRC8Aad8dkSAQcmGvJvwWN_zUpel0Mcj_i5VX7NDre1Nb4WAZnxjq8rKcwikJX1wDr6Id2R4RPBbOWw17LvBFvXMgZmk9bdxMfhyHUgSn6tSbjHl9rW6_cZMI_UIw9FMXPpmUcejqWhMVg6kJ2Vd4xTXeuHyMHrZaJ6VNA93oMPk77P_si8ec0uozzX8GaqfwdiSRwYTrf5k36b4L-GnpqNIrP45muw.jpg" type="image/jpeg" length="0"/>
     </item>
     <item>
       <title>Нейросети для работы в одном пространстве 💚 Дизайнерам — для креативов, маркето…</title>

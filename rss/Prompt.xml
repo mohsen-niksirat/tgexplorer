@@ -7,6 +7,13 @@
     <description>Welcome to @prompt , your go-to source for AI insights, breakthroughs, and tools shaping the future of intelligence. Contact: @LightEarendil</description>
     <language>en</language>
     <item>
+      <title>🔮 Thinking Machines and Mantic trained a small forecasting agent that matches a…</title>
+      <link>https://t.me/Prompt/1136</link>
+      <guid isPermaLink="true">https://t.me/Prompt/1136</guid>
+      <pubDate>Thu, 26 Nov 2026 16:01:29 GMT</pubDate>
+      <description>🔮 Thinking Machines and Mantic trained a small forecasting agent that matches a frontier model at 1/15 the cost Built on Inkling 2 Small, it&apos;s roughly as accurate as Fable 5.2 (medium), trained on 45,000 synthetic questions generated from news.</description>
+    </item>
+    <item>
       <title>🪤 Anthropic built Siren, a honeypot that tempts AI agents to escape their sandb…</title>
       <link>https://t.me/Prompt/1135</link>
       <guid isPermaLink="true">https://t.me/Prompt/1135</guid>
@@ -138,13 +145,6 @@
       <guid isPermaLink="true">https://t.me/Prompt/1115</guid>
       <pubDate>Tue, 24 Nov 2026 14:13:48 GMT</pubDate>
       <description>🚨 Anthropic is trading below its $83 IPO price before the opening bell Bloomberg reports the stock slipped under the offer price in premarket. Day-one buyers are already underwater. Premarket volume is thin and prices can swing hard, so the open could look different.</description>
-    </item>
-    <item>
-      <title>🤖 Baidu opens the weights on ERNIE 5.5 Flash Preview, a 280B MoE with only 14B …</title>
-      <link>https://t.me/Prompt/1114</link>
-      <guid isPermaLink="true">https://t.me/Prompt/1114</guid>
-      <pubDate>Tue, 24 Nov 2026 11:12:50 GMT</pubDate>
-      <description>🤖 Baidu opens the weights on ERNIE 5.5 Flash Preview, a 280B MoE with only 14B active per token The release has a 1M-token context, FP4 expert weights and a speculative decoding head. Baidu says one 11-hour run produced a full Unreal Engine 5.8 game in C++. It&apos;s an unfinished mid-training checkpoint, and every score is Baidu&apos;s own. Expect the final version to look different.</description>
     </item>
   </channel>
 </rss>

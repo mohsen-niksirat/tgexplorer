@@ -7,6 +7,29 @@
     <description>توییت های برنامه نویسی و طراحی وب :) Admin: @dvtwi Hashtags: devtwitter.t.me/5 DevBooks Channel: https://t.me/+AYbOl75CLNYxY2U0 Github: https://github.com/DevTwitter X: https://x.com/devtwittir</description>
     <language>fa</language>
     <item>
+      <title>لیابات هنوز کوتاه نیومده! تو چی؟ 🤖 بلک‌فرایدی لیارا به روز سوم رسید! فقط کافیه …</title>
+      <link>https://t.me/devtwitter/14072</link>
+      <guid isPermaLink="true">https://t.me/devtwitter/14072</guid>
+      <pubDate>Thu, 26 Nov 2026 15:31:18 GMT</pubDate>
+      <description>لیابات هنوز کوتاه نیومده! تو چی؟ 🤖 بلک‌فرایدی لیارا به روز سوم رسید! فقط کافیه با لیابات چونه بزنی و ببینی می‌تونی تا ۹۰٪ تخفیف ازش بگیری یا نه! 🔥 ⏳ فقط ۲ روز دیگه فرصت داری! وارد بازی شو: 🌐 بلک‌‌فرایدی لیارا @liara_cloud</description>
+      <enclosure url="https://cdn4.telesco.pe/file/PWyQQOFT7U2cvduoq5dqa5nRVgtCqA2HjfKoHJOaAQKG1vKrkEXTqYzOVKc7cp7VcWWaN2i9SsZy6tZHHMgJoC0NMPLGroKvXmoHb4b81XG6Z3-GE3GR-N4iPHtxdJrW0V40VHeoQpwcMDR4T40fVtF3LTWKzKuNSS8c4DmRYFCoJt0jGXyv-bK-mwYtXbE71YvA01oROznsL3IDn0FwFEM6Ubp7MmVk9DM2tnKImYqTnVaeP-BLOACjolzsve8SVJbojXVndG3LoYveChpmCI66OWto9n3VUQuJH14HdFeHJgBJUYBI2vaYNEobHO4bRnuU5_RqYxvJbjKlLKsdbA.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>فاجعه دیتابیس GitLab در ۲۰۱۷؛ وقتی فهمیدند Backupها واقعاً Backup نیستند! تصور ک…</title>
+      <link>https://t.me/devtwitter/14071</link>
+      <guid isPermaLink="true">https://t.me/devtwitter/14071</guid>
+      <pubDate>Thu, 26 Nov 2026 15:29:01 GMT</pubDate>
+      <description>فاجعه دیتابیس GitLab در ۲۰۱۷؛ وقتی فهمیدند Backupها واقعاً Backup نیستند! تصور کنید دیتابیس Production شما حدود ۳۰۰ گیگابایت داده دارد. یک Replica هم دارید که قرار است در شرایط بحرانی نجاتتان دهد. همچنین Backup روزانه هم فعال است. پس خیالتان راحت است، درست است؟ ۳۱ ژانویه ۲۰۱۷، تیم GitLab با واقعیتی متفاوت روبه‌رو شد. در جریان تلاش برای بازسازی PostgreSQL Replica، یک مهندس تصور کرد روی سرور Secondary قرار دارد؛ اما دستور حذف Data Directory را روی Primary اجرا کرد. در عرض چند ثانیه، بخش عمده‌ای از دیتابیس Production حذف شد. اما قسمت تکان‌دهنده‌ی ماجرا این نبود که یک دستور اشتباه اجرا شده بود. قسمت تکان‌دهنده این بود که وقتی تیم سراغ راه‌های بازیابی رفت، متوجه شد Backupها هم قابل استفاده نیستند. چه اتفاقی افتاده بود؟ - اول اینکه Replica به دلیل افزایش بار دیتابیس از Primary عقب افتاده بود. - همچنین WAL Segmentهای موردنیاز دیگر در دسترس نبودند و Replication متوقف شده بود. - در ضمن Backup استاندارد با &quot;pg_dump&quot; به دلیل استفاده از نسخه‌ی ناسازگار PostgreSQL شکست می‌خورد. - هشدارهای شکست Backup به دلیل مشکل ایمیل و DMARC به مقصد نمی‌رسیدند. - دیگه اینکه Snapshotهای دیسک Azure برای این دیتابیس فعال نبودند. در نهایت، تنها یک LVM Snapshot که حدود شش ساعت قبل برای محیط Staging گرفته شده بود، امکان بازیابی را فراهم کرد. در نهایت GitLab مجبور شد از همان نسخه برای بازگرداندن سرویس استفاده کند. نتیجه؟ حدود ۱۸ ساعت اختلال و از دست رفتن تغییرات بخشی از داده‌های دیتابیس در بازه‌ی حادثه؛ از جمله Projects، Issues، Comments و User Accounts. ولی Git Repositoryها و Wikiها از این حذف آسیب ندیدند. این حادثه یک درس مهم برای تمام تیم‌های Data Engineering، DBA و SRE داشت: نباید Replication را جایگزین Backup در نظر گرفت. و حتی مهم‌تر: نسخه Backupی که Restore آن را آزمایش نکرده‌اید، هنوز یک تضمین نیست. @DevTwitter | &lt; Mahdi Hedjazi /&gt;</description>
+      <enclosure url="https://cdn4.telesco.pe/file/WreshyhFCTgtl_Ke0XSaM3SScsNwdoG0PARUG290O7J1AwSU8Ug1DQlWY-cnDUxHaeb8-he8LmzIcbg_yOfJbWwBGePl46bhRpkArcQ40Gc_wIMoJkcDtBdnLyYVyJR22ILHGcluv6UkY5iarbfFPIcPar00TkrvPj8YaoD0lWT55zxGZpEUtULOaWRf4AqC2lwezOK68aPCfZH5Q3uav8-1Tb19TW0YE_iECYtVL1P-sjMjRYGYuF6Pgsww9eAv5djHbynXMqByWiliUlrv9X8C3ueCnNnO7amuAADjbxaV4HOPQP9X9kMfjSHesfA17BW59_1l6cwfiLybw4UXeQ.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>دوره جامع پایتون: مقدماتی تا پیشرفته 🗓 شروع دوره:14 آذر 🎁 تخفیف ویژه برای دانش…</title>
+      <link>https://t.me/devtwitter/14070</link>
+      <guid isPermaLink="true">https://t.me/devtwitter/14070</guid>
+      <pubDate>Thu, 26 Nov 2026 14:58:02 GMT</pubDate>
+      <description>دوره جامع پایتون: مقدماتی تا پیشرفته 🗓 شروع دوره:14 آذر 🎁 تخفیف ویژه برای دانشجویان، فرصتی بی‌نظیر برای شما! 🔥 آموزشی که شما را به برنامه‌نویس حرفه‌ای تبدیل می‌کند و در بازار کار به شما رقابت‌پذیری بیشتری می‌دهد. همچنین برای اپلای‌های شغلی و تحصیلی شما را برتر می‌کند و به راه‌اندازی استارت‌آپ‌های شگفت‌انگیز کمک می‌کند. ⏰ 140 ساعت آموزش مجازی، با بیش از 25 پروژه و مینی‌پروژه برای تسلط کامل! 🌟 سرفصل‌های دوره شامل: 💻 تسلط بر کدنویسی پایتون 💻 علوم داده با پایتون 💻 محاسبات علمی با پایتون 💻 یادگیری ماشین با پایتون 💻 طراحی بازی و اپلیکیشن با پایتون 💻 ساخت بلاک‌چین و ارز دیجیتال با پایتون 💻 هک و امنیت با پایتون 💻 طراحی سایت با پایتون 🎁 همراه با هدایای ویژه، از جمله پکیج کسب درآمد از پایتون! همین حالا شروع کنید و بهترین نسخه خود را با ما کشف کنید! 💥 🚀 🔥 🌟 به دوستان خود نیز اطلاع دهید تا این فرصت را از دست ندهند! 🌟 👨‍🏫 برگزارکننده: شرکت آتی پژوهش امیرکبیر @kargah2018 👩‍🎓 جهت ثبت نام و کسب اطلاعات بیشتر @apa_admin12</description>
+    </item>
+    <item>
       <title>این واقعا ترسناکه! سیسکو و OpenAI از محصولی مشترک به نام Shirudo رونمایی کردند. …</title>
       <link>https://t.me/devtwitter/14069</link>
       <guid isPermaLink="true">https://t.me/devtwitter/14069</guid>
@@ -123,7 +146,7 @@
       <guid isPermaLink="true">https://t.me/devtwitter/14055</guid>
       <pubDate>Wed, 25 Nov 2026 16:32:35 GMT</pubDate>
       <description>😺 اشتراک قانونی ChatGPT Plus + Codex 🚀 &amp;rlm;⁧ اکانت آماده و کاملاً اختصاصی · ۳۰ روزه⁩ فقط ⁦۲٬۱۹۹٬۰۰۰⁩ تومان⁩ &amp;rlm;⁧ ✔️ گارانتی کامل در برابر مسدودی! ⏳ تحویل در حداکثر سی دقیقه! 🛒 فقط &amp;rlm;⁧20 اشتراک برامون شارژ شده! · برای ثبت سفارش خرید روم بزن</description>
-      <enclosure url="https://cdn4.telesco.pe/file/Rka-JGNtokPvp-KznOfB0s0MiU3TSdo_lTZ3IsOJ5a-3vspKlT29SYGWIxx82q901kmo7fKNglrZOzjDphxItijVLiSV2bU5b69Ozd6SzodtH-uKrbhQkaBgLtcjqthjUjP2tWmAvLUOsuPPh0yRWyMNYuilQ4CTpOou1uIaPc75q4xxVv3fexNC-2XdV70PMq6XMUoUxNXnhojiRv8aLKnNSQ13yZeinXDSNjFQf64ly_i0muqzGBAQ7EBuGj-R8yUw9yF7_2uBIYuuTZnb4cKNNALkftyMWZ7xJ5IEz-OVmBwv75yKEf3PkZ_zUeIoTLR7Dja046C-o8NWBzpBmQ.jpg" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/QWLmRNWtSFv8gYFcJo0CAn_uYJd5ARDVw1WNh7fDe-qH1HSpGL12O5xm0LwqnOfbG2ep_6e0AkvC_nb6nBje-V3Kpft4J6NIOOM0xKSE7Fj_8pApD2jDebQvhcoDilulaU8hYEuwf_8yNE4Tp4D1L0JrXDlOgdyL5xqttWOz5t1up_sVR_qcYcKatDs4BCh2ihJzKN8Hxe_gZu1eg_KanSEYi0Qh1H-N2-0ktYt8Q5WZWP2OVxgWZcfOfXBMHIEoEko1zLvZUc4Zapc64MiieYVRK6LfSC2XS77Cz-3Kcj6SvAyHzgLIRFctuOTShCQJOCxFar9cXtsqC0QTaAU0nw.jpg" type="image/jpeg" length="0"/>
     </item>
     <item>
       <title>یه ابزار ساده برای مدیریت راحت‌تر GitHub می‌تونی: فالو بک نداده هارو گروهی Unfol…</title>
@@ -131,7 +154,7 @@
       <guid isPermaLink="true">https://t.me/devtwitter/14054</guid>
       <pubDate>Wed, 25 Nov 2026 15:48:55 GMT</pubDate>
       <description>یه ابزار ساده برای مدیریت راحت‌تر GitHub می‌تونی: فالو بک نداده هارو گروهی Unfollow کنی با یک کلیک به تمام ریپوهای یک نفر Star بدی تاریخ‌های دلخواهت رو توی Graph سبز کنی یه crawer داره که میتونی اتوماتیک بزاری برات فالو کنه پروژه کاملاً Open Source هست https://git-gpt.netlify.app https://github.com/MiladJoodi/Git-GPT @DevTwitter | &lt; JooD /&gt;</description>
-      <enclosure url="https://cdn4.telesco.pe/file/ZXA8K5CZfv_P1QkW7wgZhzaw8_ZYrAV4CTi3PSgnQs7RK67HOc6oECgx2TtRl4SO59jw9dlcbr-iS50quz8A78zeQT2T0kf7xpDKvtelDHqbem7Wv5fG61grhXgHydm3pAM_feKyT1J-mCK4-0nI1UjLuGmd-vhBUHN2QeC4TrjdJ8w6WzkF22lHshx7x0wx2bdB8AaxHD2vf_seWtvLQLTfvbiHD43XaiowU-rJfk7SiTH4Grj8TDRz7T1erd7f8cByvEoiteHxNDlPWehPZKsusLgY_0xBIkfmSk7Gad-ZaSxzJ7H1vBHmZ4vSC3_XuQHQBJnQ4WDZ30yZYwDzSw" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/apIANyHWQ9U1ERS6FwZZtaguOyKs-Z2QUX3RzpEMFlPzxirLezwHdgqI8-TQ03JScJ3v_-gTna8qGS1Iwb7QgRFN3DwXw_JGUR-XQklOGfsYV8etU2zQ5HVJiRsZZCQ2rFswJF3NCuUDZuEn2SddCC2fpFWmvrKsId7ASfQnYv6ULI_el9tO3qgjcGWQN5M-r62YjuOBa4MY_FZWKU_RY7aAxmJewrCcNX4s-j6zSzdM8VDh_R_T7MtWGbDeHyF97hpzwhw5nbDeweG53YKMdRaq9zK_Ncv8gGc1XS4TNXOjyovHTw6rpDB3Kvthz-GOittwdizClu93Ub3AnBtLwA" type="image/jpeg" length="0"/>
     </item>
     <item>
       <title>این پست یه گنج واقعی برای Motion Designerها و کاربران Fable 5.2 ابزار و Opus 5.5…</title>
@@ -140,29 +163,6 @@
       <pubDate>Wed, 25 Nov 2026 13:46:55 GMT</pubDate>
       <description>این پست یه گنج واقعی برای Motion Designerها و کاربران Fable 5.2 ابزار و Opus 5.5 ابزارـه! این ۲۰ ریپازیتوری رایگان GitHub می‌تونن Fable 5.2 ابزار رو به یک استودیوی کامل Motion Design تبدیل کنن. از انیمیشن و برنامه‌نویسی گرفته تا طراحی سه‌بعدی، تولید ویدیو با AI و رندر نهایی! انیمیشن و ساخت ویدیو 01. ابزار HyperFrames - با یک پرامپت، یک ویدیوی کامل Motion Design بساز. https://github.com/heygen-com/hyperframes 02. ابزار MCP for Blender - با کمک Fable 5.2 ابزار، صحنه‌های سه‌بعدی رو به‌صورت خودکار داخل Blender بساز. https://github.com/ahujasid/mcp-fusion 03. ابزار Wan 2.2 - تولید ویدیوی AI از متن یا تصویر با یک مدل Open Source. https://github.com/Wan-Video/Wan2.2 04. ابزار Hunyuan3D-2 - تبدیل یک تصویر به یک مدل سه‌بعدی کامل. https://github.com/Tencent-Hunyuan/Hunyuan3D-2 05. ابزار LivePortrait - به تصاویر پرتره جان بده و کاری کن حرکت کنن و حرف بزنن. https://github.com/KlingAIResearch/LivePortrait 06. ابزار Blender - یک استودیوی کامل طراحی سه‌بعدی و Motion Design به‌صورت رایگان. https://github.com/blender/blender انیمیشن با کدنویسی 07. ابزار Remotion - ساخت ویدیو با React و امکان رندر هم‌زمان ۱۰۰۰ ویدیو. https://github.com/remotion-dev/remotion 08. ابزار Motion Canvas - ساخت انیمیشن با TypeScript. https://github.com/motion-canvas/motion-canvas 09. ابزار Manim - موتور ساخت انیمیشن‌های ریاضی و آموزشی با سبک ویدیوهای 3Blue1Brown. https://github.com/ManimCommunity/manim 10. ابزار Theatre.js - ساخت انیمیشن‌های Keyframe سه‌بعدی، مشابه After Effects. https://github.com/theatre-js/theatre 11. ابزار GSAP - ساخت Timelineهای حرفه‌ای و کنترل دقیق حرکت و انیمیشن؛ حالا کاملاً رایگان. https://github.com/greensock/GSAP 12. ابزار anime.js - متحرک‌سازی تقریباً هر چیزی در محیط مرورگر. https://github.com/juliangarnier/anime 13. ابزار Revideo - تولید ۱۰۰۰ ویدیوی شخصی‌سازی‌شده از یک Template. https://github.com/midrender/revideo ابزارهای جایگزین و مکمل After Effects 14. ابزار Friction - نرم‌افزار رایگان Motion Graphics با امکاناتی شبیه After Effects. https://github.com/friction2d/friction 15. ابزار Natron - کامپوزیتینگ Node-Based مشابه Nuke به‌صورت رایگان. https://github.com/NatronGitHub/Natron 16. ابزار Glaxnimate - ساخت انیمیشن‌های وکتوری و خروجی گرفتن با فرمت Lottie. https://github.com/KDE/glaxnimate 17. ابزار OpenToonz - نرم‌افزار انیمیشن‌سازی دوبعدی که ریشه در ابزار استفاده‌شده در Studio Ghibli داره. https://github.com/opentoonz/opentoonz 18. ابزار Synfig - ساخت انیمیشن دوبعدی با سیستم Bone و بدون نیاز به انیمیشن‌سازی فریم‌به‌فریم. https://github.com/synfig/synfig 19. ابزار mo.js - ساخت افکت‌های انفجاری، اشکال متحرک و انیمیشن‌های جذاب با چند خط کد. https://github.com/mojs/mojs 20. ابزار gl-transitions - بیش از ۱۰۰ افکت Transition رایگان با استفاده از GLSL. https://github.com/gl-transitions/gl-transitions حالا تصور کن این ابزارها رو کنار هم داشته باشی: Prompt - Animate - 3D - AI - Render نکته جذاب اینجاست که با کمک Fable 5.2 ابزار و Opus 5.5 ابزار می‌تونی بسیاری از مراحل کار با این ابزارها رو از طریق دستور متنی انجام بدی. @DevTwitter | &lt; Yarad /&gt;</description>
       <enclosure url="https://cdn4.telesco.pe/file/k4F6c1fk_ya9SzdPrEP1bnE3D6uR1HZ_RgssmnOZOVLMrxalvrhn7gzZuhofbkO9V_fl8jIITlRcaXv5kYP2Yc_vYUGtodOt5HoQ2ANmCuE1ywEUIGeIM28uNah0uFxiv8CJt8_tG63PSQCtk-mmrW_lmRachJX8PChqVSJ3siG-n6rvmZgkoctaLyR_Gykf7OejYL079fEfCK8Zo272jXAv8jpDykyH5iHfCPiJ4tVwaEEwK-SNamPGc595prQMGZxE4aD3iBUVnwZIjP1eCkSLMWuL_WaVPS4Z3RbjFzKX1QSRvxmZd05z9QdcRznRa3G7fPxVVlUeJrjiV7IAFw" type="image/jpeg" length="0"/>
-    </item>
-    <item>
-      <title>این روزا اسم MCP رو زیاد می‌شنوی. ساده‌ش اینه: هوش مصنوعی خودش به ابزارای تو دست…</title>
-      <link>https://t.me/devtwitter/14052</link>
-      <guid isPermaLink="true">https://t.me/devtwitter/14052</guid>
-      <pubDate>Wed, 25 Nov 2026 11:44:55 GMT</pubDate>
-      <description>این روزا اسم MCP رو زیاد می‌شنوی. ساده‌ش اینه: هوش مصنوعی خودش به ابزارای تو دسترسی نداره. نه فیگما، نه جیمیل، نه فایلات. واسه همین کلی کپی و پیست می‌کنی. در واقع MCP مثل یه سه‌راهی برقه. یه بار به هوش مصنوعی وصلش می‌کنی، بعد هر ابزاری که MCP داشته باشه رو بهش می‌زنی و کار می‌کنه. فرقش تو عمل: بدون MCP ایمیلا رو کپی می‌کنی و می‌گی خلاصه کن. ولی با MCP فقط می‌گی «ایمیلای امروزمو خلاصه کن» و خودش می‌ره می‌خونه. دو تا نکته که کمتر کسی می‌گه: ۱. هر ابزاری وصل کنی، هوش مصنوعی واقعاً بهش دسترسی داره. فقط چیزی رو وصل کن که بهش اعتماد داری. ۲. هر MCP که روشنه توکن مصرف می‌کنه، حتی وقتی ازش استفاده نمی‌کنی. اونایی که لازم نداری رو خاموش کن. @DevTwitter | &lt; Hamzeh Ghoreyshi /&gt;</description>
-      <enclosure url="https://cdn4.telesco.pe/file/BWRTrLaHNLoC0pBl9sfCiSO_OSRpdqLisdDARFtzMJU_neWYy9p6HsLhcit1nmxFXYi5nf0ey90qZ0I8Mfl3iSBEJ7ozVbWbJIqCBVFCbhVJKEvXoPwS2ZbbHzGey_yp6YTwvTEIxfX1W58IM0Eyix92C9XYETgtbpEXB-2TfBc6fjaZsaQrO4dYXb7n9xlcpbTFNftGJV8cjAO2E7d9dQ0-2KUiao6sKC6X7MGYxI3rGq4GsdvPcXwV4ynXA6iCuf0VtaKcSfvDym3bj-DnBtPzvwozjeOFT0tvBtKaHeQnhebfInKRbQTTVnEIVqcckyobb9CcSCZSyLOngpVnAw.jpg" type="image/jpeg" length="0"/>
-    </item>
-    <item>
-      <title>📊 دوره پیشرفته تحلیل داده با Power BI با بورسیه داتین دوره پیشرفته تحلیل داده ب…</title>
-      <link>https://t.me/devtwitter/14051</link>
-      <guid isPermaLink="true">https://t.me/devtwitter/14051</guid>
-      <pubDate>Wed, 25 Nov 2026 10:29:55 GMT</pubDate>
-      <description>📊 دوره پیشرفته تحلیل داده با Power BI با بورسیه داتین دوره پیشرفته تحلیل داده با Power BI توسط کاریار و با همراهی داتین برای مهارت‌آموزان مناطق کم‌برخوردار برگزار می‌شود. این دوره مناسب علاقه‌مندانی است که با مباحث تحلیل داه آشنایی دارند و به‌دنبال توسعه مهارت‌های تخصصی خود هستند. 📚 سرفصل‌ها: SQL پیشرفته، Power BI، Power Query، مدل‌سازی داده، DAX، طراحی داشبوردهای مدیریتی، پایتون و کاربرد هوش مصنوعی در تحلیل داده 🔹 ۳۰ ساعت آموزش تخصصی آنلاین 🔹 ۱۲ ساعت آموزش شایستگی‌های حرفه‌ای 🔹 منتورشیپ فردی و گروهی 🔹 یادگیری پروژه‌محور در کنار متخصصان صنعت 🎓 امکان استفاده از بورسیه آموزشی داتین تا سقف ۹۵ درصد شهریه، با اولویت مهارت‌آموزان مناطق کم‌برخوردار 📅 مهلت ثبت‌نام: ۱۴ آذر ۱۴۰۵ 🔗 ثبت‌نام: https://digital.kaaryar.ir/ https://digital.kaaryar.ir/ https://digital.kaaryar.ir/</description>
-    </item>
-    <item>
-      <title>وایب‌کدرها کنج پیدا کردم براتون یه کتابخونه آماده پرامپت و کامپوننت برای ساخت سا…</title>
-      <link>https://t.me/devtwitter/14050</link>
-      <guid isPermaLink="true">https://t.me/devtwitter/14050</guid>
-      <pubDate>Wed, 25 Nov 2026 09:42:55 GMT</pubDate>
-      <description>وایب‌کدرها کنج پیدا کردم براتون یه کتابخونه آماده پرامپت و کامپوننت برای ساخت سایت‌های مدرن و انیمیشنی با ابزارهای AI -بیش از ۶۰۰ پرامپت برای ساخت سایت‌های سه‌بعدی و اسکرول‌محور داره -کامپوننت‌ها، شیدرها، سکشن‌ها و UI screenهایی که جای دیگه پیدا نمیشه https://scrolltide.co @DevTwitter | &lt; O — B — S — I — D — A — N /&gt;</description>
-      <enclosure url="https://cdn4.telesco.pe/file/P9l89GRM_liHUsCqJ_fgRShpfGiuMsqhT_gcOIHGbTVYqt3b2wrAXrlY6153z6eoF1QUlMni7GnItlq84y9ha6uFvIK8mSFlp0yfwbzdsPo-pTGRZBs284xnj-wfJYqvhJcgK4qGYTB4UZjgPVHkoAiCf0EMjpX8HfGilffKrle22Gs7qSOGL0bk8JAsM87OSK4je5B4rRTUAYAGs-tcS3k7W-rvsp9ZI77J5Q9Kuup8yU1EnLW7L0nVnXWGCH7ECdNOMYVomnAa2PtvrA35gYRgF6IoFHPF_RPOyl6dfXbbz6bkd08OCk5hQaz_P3crpsFwsd6R5E2YzrhZ5yJ6aQ" type="image/jpeg" length="0"/>
     </item>
   </channel>
 </rss>

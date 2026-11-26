@@ -7,6 +7,20 @@
     <description>Power Users/Automators 折腾/讨论/分享各种开源工具/脚本/自动化工作流 👥 @zhetengsha_group 🎁 恰饭 https://t.me/zhetengsha/957 📌 合集 https://t.me/zhetengsha/2 📢 推广 @xream_bot Buy ads: https://telega.io/c/zhetengsha feedId:55438372655431680+userId:62307599601855488</description>
     <language>zh</language>
     <item>
+      <title>🔗 Sub-Store 更新 ⚙️ 后端: 2.44.31 🌐 前端: 2.34.4 Egern 的 XHTTP 还没更 等鼠爸 PR ▎ 📈 Surge…</title>
+      <link>https://t.me/zhetengsha/7619</link>
+      <guid isPermaLink="true">https://t.me/zhetengsha/7619</guid>
+      <pubDate>Thu, 26 Nov 2026 15:57:41 GMT</pubDate>
+      <description>🔗 Sub-Store 更新 ⚙️ 后端: 2.44.31 🌐 前端: 2.34.4 Egern 的 XHTTP 还没更 等鼠爸 PR ▎ 📈 Surge 节点参数逻辑优化 统一 Surge 参数解析和导出 完善导出校验 扩展 WireGuard 支持 改动较大 若遇到问题 麻烦及时反馈 🙏 谢谢大家 承接频道/群广告 有需要的老板可以私聊联系 🙏 🤭 Sub-Store 合集 🧐 合集 😄 恰饭推荐 💬 群组 🥰 联系推广 🥰 #SubStore #更新记录 #changlog #updates</description>
+    </item>
+    <item>
+      <title>About the &quot;Security update available&quot; notice in the Tailscale admin console Some…</title>
+      <link>https://t.me/zhetengsha/7618</link>
+      <guid isPermaLink="true">https://t.me/zhetengsha/7618</guid>
+      <pubDate>Thu, 26 Nov 2026 15:12:03 GMT</pubDate>
+      <description>About the &quot;Security update available&quot; notice in the Tailscale admin console Some users have noticed that the Tailscale admin console marks their Surge device with &quot;Security update available&quot; and recommends updating to Tailscale 1.104.7. This notice does not apply to Surge. Surge&apos;s Tailscale support is an independent implementation of the protocol that contains zero code from the official Tailscale client. A security issue fixed in a Tailscale client release is an issue in code that Surge does not ship. The version shown in the admin console, such as 1.104.1-Surge-iOS-6.0.1-4037 , is not the version of any code running in Surge. Surge reports an official-style version number only for compatibility: the Tailscale control plane decides which capabilities to hand out based on the client version, and without a recognized one it treats the device as an outdated client and withholds them. The admin console then compares that number with the latest official release, which is what triggers the notice. The latest beta version now reports 1.104.7, so the notice no longer appears after updating. It may appear again whenever Tailscale publishes a new release, and it is safe to ignore.</description>
+    </item>
+    <item>
       <title>ServerOS Panel: 集中管理 Linux 服务器的开源面板 • 一条命令连接服务器，查看资源使用情况并安装系统更新 • 从 Git 或模板部署应用、…</title>
       <link>https://t.me/zhetengsha/7617</link>
       <guid isPermaLink="true">https://t.me/zhetengsha/7617</guid>
@@ -98,7 +112,6 @@
       <guid isPermaLink="true">https://t.me/zhetengsha/7603</guid>
       <pubDate>Tue, 24 Nov 2026 13:03:18 GMT</pubDate>
       <description>网页上的ipa tweak工具 可以注入dylib和deb文件 但是一次只能注入一个 https://ipatool.codevn.net/inject-dylib/index.php</description>
-      <enclosure url="https://cdn4.telesco.pe/file/NTyxTANnAj7alieGqn_TYwkpNKnFUKph7zUYqGxGlXpANhtxA_v2jB_ufC7Z2Gcld4I7B6AC9KuefdVSDGhbaYefbtIRHXZPDbiQbrmtylFS6MYOfwdC_mhoEmi0qFxAsF13sdIy0eMQfDzHsOuGQJDhe-4uTVtgCeDfSfy2-rlapCNlFQw0JGDre-Vkqybj4T85gwxkZOM7bLgK6f0hG5f_8BB-oFGvcq1X0pPB0HGcvt0VifExw03GKXorixDk4OFSu1xiZj2B-vUBx9esl9UvgYOeWxq6U0vTVtbFpL_RLWev7DB9sGE9GdOchKD_ZcEqkWsAzYMiXsqxqUtebw.jpg" type="image/jpeg" length="0"/>
     </item>
     <item>
       <title>🔗 Sub-Store 更新 ⚙️ 后端: 2.44.29 🌐 前端: 2.34.4 Egern 的 XHTTP 还没更 等鼠爸 PR ▎修复 🎈 Loo…</title>
@@ -130,13 +143,6 @@
       <pubDate>Tue, 24 Nov 2026 02:05:10 GMT</pubDate>
       <description>🔗 Sub-Store 更新 ⚙️ 后端: 2.44.28 🌐 前端: 2.34.4 Egern 的 XHTTP 还没更 等鼠爸 PR ▎ 📈 Surge ECN 逻辑调整 见 https://t.me/SurgeTestFlight/1884 ▎前端支持设置 ECN 为 自动 承接频道/群广告 有需要的老板可以私聊联系 🙏 🤭 Sub-Store 合集 🧐 合集 😄 恰饭推荐 💬 群组 🥰 联系推广 🥰 #SubStore #更新记录 #changlog #updates</description>
       <enclosure url="https://cdn5.telesco.pe/file/MSYe98I-x_6vM39dmdmLcnqRx15CGe7P6lu_P2zPO1ceO5AC69Hw4EY3bsDgLQRjq1zQ4q-bsLo8lj09_Te7kYgR60g7_fACvAQwFn9B8wsL5gIU2CogOvJg2Cdc16xf__Cgqg7kBrtsjmIE-GLSYTqCylSU-ZLuDWsDDFEQvLQOc2u0ZWyvw20jxj726Rbm20jd5B3vX_gYpYAhjDOGYj_rIzmmZmIdGNiGlKHSnCb_TVSfccqd7_zpjU-mwyRaRhsEBSH18Tvrd2m-2Du1EZujuOxw_qZZkP0-xymiYxP9jaUiF45PfBmkWCAhQbi8fGCYK7NYyXsw2isC_iTWZA.jpg" type="image/jpeg" length="0"/>
-    </item>
-    <item>
-      <title>🔗 Sub-Store 更新 ⚙️ 后端: 2.44.27 🌐 前端: 2.34.2 Egern 的 XHTTP 还没更 等鼠爸 PR ▎ 🎈 Loon …</title>
-      <link>https://t.me/zhetengsha/7596</link>
-      <guid isPermaLink="true">https://t.me/zhetengsha/7596</guid>
-      <pubDate>Mon, 23 Nov 2026 15:04:48 GMT</pubDate>
-      <description>🔗 Sub-Store 更新 ⚙️ 后端: 2.44.27 🌐 前端: 2.34.2 Egern 的 XHTTP 还没更 等鼠爸 PR ▎ 🎈 Loon XHTTP, VLESS Encryption, mieru 人已废 有问题反馈吧 先发了 文档 https://nsloon.app/docs/Node/#xhttp https://nsloon.app/docs/Node/#vless-encryption https://nsloon.app/docs/Node/#mieru 承接频道/群广告 有需要的老板可以私聊联系 🙏 🤭 Sub-Store 合集 🧐 合集 😄 恰饭推荐 💬 群组 🥰 联系推广 🥰 #SubStore #更新记录 #changlog #updates</description>
     </item>
   </channel>
 </rss>
