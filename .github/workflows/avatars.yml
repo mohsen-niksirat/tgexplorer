@@ -8,6 +8,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: tgexplorer-data-publish
+  cancel-in-progress: false
+
 jobs:
   avatars:
     runs-on: ubuntu-latest

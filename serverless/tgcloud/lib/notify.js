@@ -234,18 +234,25 @@ function sleep(ms) {
 }
 
 export const DELIVERY_BATCH_SIZE = 25;
+const RAW_DATA_URL = 'https://raw.githubusercontent.com/mohsen-niksirat/tgexplorer/main/';
+
+async function fetchDataWithFallback(relPath) {
+  const urls = [`${RAW_DATA_URL}${relPath}`, `${APP_URL}${relPath}`];
+  let lastErr = null;
+  for (const url of urls) {
+    try {
+      const res = await fetch(url);
+      if (res && res.ok) return res;
+      lastErr = new Error(`HTTP ${res ? res.status : 'no-response'} for ${url}`);
+    } catch (e) {
+      lastErr = e;
+    }
+    await sleep(150);
+  }
+  throw lastErr || new Error(`Failed to fetch ${relPath}`);
+}
 
 export async function checkNotifications({ postsMap, dryRun = false, sendFn, batchSize = DELIVERY_BATCH_SIZE, cursorUserId } = {}) {
-  let map = postsMap;
-  if (!map) {
-    const res = await fetch(`${APP_URL}posts.js`);
-    if (!res.ok) {
-      throw new Error(`Failed to fetch posts.js: ${res.status}`);
-    }
-    const raw = await res.text();
-    map = parsePostsJs(raw);
-  }
-
   const allSubs = await db.select().from(subscriptions).all();
   if (!allSubs.length) {
     return {
@@ -263,6 +270,40 @@ export async function checkNotifications({ postsMap, dryRun = false, sendFn, bat
     const u = String(s.username || '').toLowerCase();
     if (!subsByChannel.has(u)) subsByChannel.set(u, []);
     subsByChannel.get(u).push(s);
+  }
+
+  let map = postsMap;
+  let fetchedFullArchive = false;
+  if (!map) {
+    map = {};
+    const channelNames = [...subsByChannel.keys()];
+    if (channelNames.length <= 12) {
+      // Fetch tiny per-channel JSON files directly (avoids ~400KB posts.js timeouts and already includes full 50-post archive)
+      fetchedFullArchive = true;
+      for (const u of channelNames) {
+        try {
+          const res = await fetchDataWithFallback(`posts/${encodeURIComponent(u)}.json`);
+          const arr = await res.json();
+          if (Array.isArray(arr)) map[u] = arr;
+        } catch (e) {}
+      }
+    } else {
+      try {
+        const res = await fetchDataWithFallback('posts.js');
+        const raw = await res.text();
+        map = parsePostsJs(raw);
+      } catch (e) {
+        // Fallback to per-channel JSON if posts.js times out
+        fetchedFullArchive = true;
+        for (const u of channelNames) {
+          try {
+            const res = await fetchDataWithFallback(`posts/${encodeURIComponent(u)}.json`);
+            const arr = await res.json();
+            if (Array.isArray(arr)) map[u] = arr;
+          } catch (_) {}
+        }
+      }
+    }
   }
 
   const now = Math.floor(Date.now() / 1000);
@@ -285,11 +326,11 @@ export async function checkNotifications({ postsMap, dryRun = false, sendFn, bat
     // If all 6 seed posts in posts.js are newer than the channel watermark,
     // fetch the full 50-post archive (posts/<username>.json) so high-volume
     // channels report exact new-post counts and keyword alerts inspect all posts.
-    if (stateRow?.lastPostId && posts.length >= 6 && !postsMap) {
+    if (stateRow?.lastPostId && posts.length >= 6 && !postsMap && !fetchedFullArchive) {
       const preDiff = findNewPosts(posts, stateRow.lastPostId);
       if (preDiff.newPosts.length >= posts.length) {
         try {
-          const fullRes = await fetch(`${APP_URL}posts/${encodeURIComponent(username)}.json`);
+          const fullRes = await fetchDataWithFallback(`posts/${encodeURIComponent(username)}.json`);
           if (fullRes.ok) {
             const fullArr = await fullRes.json();
             if (Array.isArray(fullArr) && fullArr.length > posts.length) {

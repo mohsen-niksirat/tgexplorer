@@ -9,6 +9,10 @@ permissions:
   contents: write
   issues: write
 
+concurrency:
+  group: tgexplorer-data-publish
+  cancel-in-progress: false
+
 jobs:
   crawl:
     runs-on: ubuntu-latest
@@ -72,11 +76,26 @@ jobs:
           cd serverless
           npx tgcloud run endpoints/checkNotifications "{\"secret\":\"${NOTIFY_SECRET}\"}"
 
+      - name: Auto-close stale failure issues
+        if: success()
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          OPEN_NUMS=$(gh issue list --repo "${{ github.repository }}" --state open --author "app/github-actions" --search "Crawl workflow failed in:title" --json number --jq '.[].number')
+          for num in $OPEN_NUMS; do
+            gh issue close "$num" --repo "${{ github.repository }}" --comment "✅ Crawl recovered on run #${{ github.run_number }} (${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})."
+          done
+
       - name: Report failure (GitHub Issue)
         if: failure()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          curl -s -X POST \
-            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-            -H "Accept: application/vnd.github+json" \
-            https://api.github.com/repos/${{ github.repository }}/issues \
-            -d "{\"title\": \"🤖 Crawl workflow failed (run #${{ github.run_number }})\", \"body\": \"The **Crawl Channel Posts** workflow failed on \`${{ github.ref }}\`.\n\n[View run logs](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})\n\nTriggered by: ${{ github.event_name }}\"}"
+          EXISTING=$(gh issue list --repo "${{ github.repository }}" --state open --author "app/github-actions" --search "Crawl workflow failed in:title" --limit 1 --json number --jq '.[0].number // empty')
+          BODY="The **Crawl Channel Posts** workflow failed on \`${{ github.ref }}\` (run #${{ github.run_number }}).\n\n[View run logs](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})\n\nTriggered by: ${{ github.event_name }}"
+          if [ -n "$EXISTING" ]; then
+            gh issue comment "$EXISTING" --repo "${{ github.repository }}" --body "$(printf '%b' "$BODY")"
+          else
+            gh issue create --repo "${{ github.repository }}" --title "🤖 Crawl workflow failed (run #${{ github.run_number }})" --body "$(printf '%b' "$BODY")"
+          fi
