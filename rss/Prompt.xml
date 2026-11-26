@@ -7,6 +7,27 @@
     <description>Welcome to @prompt , your go-to source for AI insights, breakthroughs, and tools shaping the future of intelligence. Contact: @LightEarendil</description>
     <language>en</language>
     <item>
+      <title>🤖 Amazon says AI agents found and exploited a 0-day with almost no human help A…</title>
+      <link>https://t.me/Prompt/1131</link>
+      <guid isPermaLink="true">https://t.me/Prompt/1131</guid>
+      <pubDate>Thu, 26 Nov 2026 02:15:29 GMT</pubDate>
+      <description>🤖 Amazon says AI agents found and exploited a 0-day with almost no human help Amazon reports that attackers pointed agents at a list of IPs and told them to get shell access. • The target was an East Asian university server, and the agents found the bug in an open source medical imaging AI app • They ran on Cairn, an open source pentesting framework that works with Claude Code, Codex and Pi • The prompts were in simplified Chinese, with the model set to Chinese Standard Time</description>
+    </item>
+    <item>
+      <title>🧮 Engram says it can predict the exact LoRA rank a SFT dataset needs Engram&apos;s t…</title>
+      <link>https://t.me/Prompt/1130</link>
+      <guid isPermaLink="true">https://t.me/Prompt/1130</guid>
+      <pubDate>Wed, 25 Nov 2026 23:14:29 GMT</pubDate>
+      <description>🧮 Engram says it can predict the exact LoRA rank a SFT dataset needs Engram&apos;s theory sizes an adapter by how many bits it takes to encode the data under the base model. That counts memorization, so for tasks that are really just patterns, it&apos;s likely an upper bound.</description>
+    </item>
+    <item>
+      <title>⚡️ Google&apos;s DiffusionGemma generates text like an image diffuser. And it&apos;s fast.…</title>
+      <link>https://t.me/Prompt/1129</link>
+      <guid isPermaLink="true">https://t.me/Prompt/1129</guid>
+      <pubDate>Wed, 25 Nov 2026 20:13:51 GMT</pubDate>
+      <description>⚡️ Google&apos;s DiffusionGemma generates text like an image diffuser. And it&apos;s fast. DiffusionGemma is Google DeepMind&apos;s open-weight text diffusion model built on a clever trick: it&apos;s a 25.2B-parameter MoE with only ~3.8B active params per forward pass. No retraining…</description>
+    </item>
+    <item>
       <title>🚨 Billions in data center deals are stalling after the new AI chip curbs Bloomb…</title>
       <link>https://t.me/Prompt/1128</link>
       <guid isPermaLink="true">https://t.me/Prompt/1128</guid>
@@ -124,27 +145,6 @@
       <guid isPermaLink="true">https://t.me/Prompt/1110</guid>
       <pubDate>Mon, 23 Nov 2026 23:08:59 GMT</pubDate>
       <description>🤖 Anthropic says Claude settled VP vs. VNP, the arithmetic cousin of P vs. NP Anthropic&apos;s formal-math repo has a paper claiming Claude solved it. VP vs. VNP asks the same question as P vs. NP, but for algebraic circuits computing polynomials instead of Boolean problems. It doesn&apos;t touch P vs. NP itself, and nobody outside Anthropic has checked the proof yet.</description>
-    </item>
-    <item>
-      <title>🚨 US moves to blacklist Singapore&apos;s Megaspeed over suspected Nvidia chip divers…</title>
-      <link>https://t.me/Prompt/1109</link>
-      <guid isPermaLink="true">https://t.me/Prompt/1109</guid>
-      <pubDate>Mon, 23 Nov 2026 23:05:48 GMT</pubDate>
-      <description>🚨 US moves to blacklist Singapore&apos;s Megaspeed over suspected Nvidia chip diversion to China Commerce says it plans to add the data center developer to the Entity List, after investigating it for almost two years, well before the Alice Huang affair story broke. The suspicion is that it helped get restricted Nvidia chips to Chinese companies, and Alibaba is its largest customer. No effective date yet.</description>
-    </item>
-    <item>
-      <title>🚨 Oregon and Virginia sue SpaceX over Grok&apos;s sexualized deepfakes, minors inclu…</title>
-      <link>https://t.me/Prompt/1108</link>
-      <guid isPermaLink="true">https://t.me/Prompt/1108</guid>
-      <pubDate>Mon, 23 Nov 2026 20:04:48 GMT</pubDate>
-      <description>🚨 Oregon and Virginia sue SpaceX over Grok&apos;s sexualized deepfakes, minors included Both attorneys general say SpaceX and X Corp. lied about safety and kept safeguards weak on purpose to pull in users for a &quot;lagging product.&quot; Virginia&apos;s complaint calls it a &quot;market opportunity for more profits.&quot; The suits are in state courts, in Richmond and Multnomah County. Baltimore and a group of Tennessee teens have already filed similar cases.</description>
-    </item>
-    <item>
-      <title>🚨 Google says it just saw the first fully autonomous cyberattack Google&apos;s threa…</title>
-      <link>https://t.me/Prompt/1107</link>
-      <guid isPermaLink="true">https://t.me/Prompt/1107</guid>
-      <pubDate>Mon, 23 Nov 2026 17:03:58 GMT</pubDate>
-      <description>🚨 Google says it just saw the first fully autonomous cyberattack Google&apos;s threat team reports criminals have moved past supervised chatbots to software that finds flaws and launches exploits on its own. An exposed server revealed tooling built to automate vulnerability research and exploitation end to end.</description>
     </item>
   </channel>
 </rss>

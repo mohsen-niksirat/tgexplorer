@@ -78,7 +78,7 @@
       <guid isPermaLink="true">https://t.me/mrchatgpt_ir/7202</guid>
       <pubDate>Mon, 23 Nov 2026 18:09:38 GMT</pubDate>
       <description>مسئله‌ی ۱۶۷ ساله‌ی ریاضیات شاید همین هفته بسته شد! 🤯 یک ریاضی‌دان شرکت Anthropic با کمک Claude اثباتی برای فرضیه‌ی ریمان منتشر کرد؛ مشهورترین مسئله‌ی حل‌نشده‌ی ریاضیات. این اثبات مقاله نیست؛ یک کتابخانه‌ی ۱۷ میلیون خطی در زبان Lean است که کامپیوتر تک‌تک گام‌هایش را وارسی می‌کند. روز بعد، گروه‌های Lean و Mathlib رسماً اعلام کردند: هم قضیه و هم اثبات درست است. ✅ اما ماجرا جنجالی شد! انجمنی از ریاضی‌دان‌ها می‌گوید: هیچ انسانی نمی‌تواند چنین اثباتی را بفهمد. 🧐 یعنی ماشین ثابت کرده، اما ما نمی‌فهمیم. جزئیات، خط زمانی و نقدها را در مقاله‌ی کامل بخوانید. برای داغ‌ترین اخبار هوش مصنوعی، ما رو دنبال کنید 👇 📄 نسخهٔ کامل مقاله در سایت ➖ ➖ ➖ ➖ ➖ @MrChatGPT_IR</description>
-      <enclosure url="https://cdn4.telesco.pe/file/BqIc64hb7qNEiiCuIbgm_BOY8mMYiNgWam5h6RCyu530fpDqw2nyZdBVrlhWNkeEWbdJzLjLNui-WqurDWA3DDez0VyDhZi2KwNHcGGkR5mBPJHaTQxKGnFeweS2--2zuFEAKIoW6TpfEF8abhrNySEADmmvIWPLIO-qhz-TuB4KBzyB3dBSmioCggwVrCEkB7ydEokeF9B9Z_F0bTF9ihGAl1XTy2RB4LxdbrXyO6D6Z_EK1vYeakFRV10b5K7q4JNYmPC2bStN-ObK67T2BO-z_DyoOJWT8Fwt7WbCI6Kory4Lnya0g1M_GAgQQLTYPo-8I8pFXVDWOuhSo1_zzQ.jpg" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/QqnJb75ZWyjs2vtvTE5qujzIi91E-GawVUsTjW9K47Hi5NFCIRRiZvjdfe-RLb2HPMydnx6y9vgLkSCLyFjlVIBQApNysI1hf1t5Gg9qC2mX7XeoOjvekc0j676jcpYZPqwqkuC9Y82NR0A8dLZmiss3mxv3qjQtb7iyQcPyisC6VPW8lWRuQMYQEggrZWsKjttJ3OqgOrfFo89_fi_LbXXVI3LgXIojf1ELXRny5UPpQXXP_ne-3DVd-eWoxj63NLx-DLA0ldW6P_mtGQGnFlojCMPRi5AXPzY20vZCSrJ5W4PRpevP8tJ5Et0LRU0tqCn7MD6qRMC6kP1-tXyuuQ.jpg" type="image/jpeg" length="0"/>
     </item>
     <item>
       <title>🧾 دیگه لازم نیست برای خوندن یه فاکتور، یه LLM گنده رو چند ثانیه منتظر بذاری! Cl…</title>
@@ -100,22 +100,6 @@
       <guid isPermaLink="true">https://t.me/mrchatgpt_ir/7199</guid>
       <pubDate>Mon, 23 Nov 2026 08:24:00 GMT</pubDate>
       <description>🔐 از OpenRouter استفاده می‌کنی؟ این خبر مستقیم به حریم خصوصی پرامپت‌هات مربوطه! OpenRouter (همون واسطی که خیلی‌ها باهاش به ده‌ها مدل و ارائه‌دهنده وصل می‌شن) دیروز، ۲۲ نوامبر، یه اطلاعیه داد: پژوهشگرهای امنیتی نشون دادن بعضی «ارائه‌دهنده‌های اینفرنس» یا داده‌شون لو رفته، یا به سیاست داده‌ای که ادعا می‌کردن پایبند نبودن. طبق خود OpenRouter: 🔸 به خود OpenRouter نفوذی نشده؛ مشکل از بعضی ارائه‌دهنده‌هاست. 🔸 سه ارائه‌دهنده از پلتفرم کنار گذاشته شدن. 🔸 ۱۲۵ اندپوینت از فهرست «Zero Data Retention» (بدون نگهداری داده) بیرون رفتن؛ بخشی فقط از سر احتیاط. 🔸 به همه مشتری‌هایی که احتمالاً درگیر بودن اطلاع داده شده. 🔸 از این به بعد همین تست‌ها رو مداوم اجرا می‌کنن و بررسی می‌کنن درخواست‌ها جایی به شخص ثالث فوروارد نشه. توی فهرست اطلاعیه‌های ارائه‌دهنده‌ها اسم Atlas Cloud، Novita، Phala و Together هست؛ مثلاً Together از «نشت پرامپت در درخواست‌های ژوئن و ژوئیه ۲۰۲۶» نوشته. 💡 چی کار کنیم؟ ۱) رمز، مدارک مشتری و کد محرمانه رو توی پرامپت نذار؛ حتی وقتی تیک ZDR خورده. ۲) اگه از OpenRouter استفاده می‌کنی، ایمیلت رو چک کن و توی تنظیمات، ارائه‌دهنده‌ها رو به اونایی که بهشون اعتماد داری محدود کن. ۳) اگه قبلاً کلید یا رمزی توی پرامپت‌ها فرستادی، همون‌ها رو عوض کن. ۴) برای داده‌ی واقعاً محرمانه، مدل لوکال یا سرور خصوصی رو جدی بگیر. 👇 تو کارهای حساست رو به کدوم سرویس می‌سپری؟ توی کامنت بگو. 🔗 منبع: اطلاعیه OpenRouter https://openrouter.ai/blog/announcements/data-processing-incidents-on-inference-providers/ 💬 بحث Hacker News (ارسال sdko، حدوداً ۲۸۰ امتیاز): https://news.ycombinator.com/item?id=50595554 #هوش_مصنوعی #حریم_خصوصی #امنیت #OpenRouter @mrchatgpt_ir</description>
-    </item>
-    <item>
-      <title>نسل جدید تولید ویدیو های سه بعدی با کلاود</title>
-      <link>https://t.me/mrchatgpt_ir/7198</link>
-      <guid isPermaLink="true">https://t.me/mrchatgpt_ir/7198</guid>
-      <pubDate>Sun, 22 Nov 2026 21:24:33 GMT</pubDate>
-      <description>نسل جدید تولید ویدیو های سه بعدی با کلاود</description>
-      <enclosure url="https://cdn4.telesco.pe/file/iBajbp55Xti2LrwJ45M7mrNkGpT9EJ3tkZRQeRWf-SwbiUT39AQw5yUGJY4M4hdkS_6V5nLagGeqHYY78szXLx7MtegYG6M6HtNdwUQOcPGGKDBN9HnLr7I8f81xqkinaB_Js8K1wUeumLoO3IbyQOhb4YtwpyKoyioD78svBDivZzaKb0tKLxBBNp9smkujIzvjhlTd2GvaasNZt_ovwIR2irOIrl4O7F8pnCw16cAHtx9juxS1ipcqGc9KlZ2DO6tZT8u0uJ03R8RIKpoR_NtoW0tGmvLHY4ShB-JCKueF6vm_0t4x608iAoaeMC3WA1k4NiAkbKi7OhJQ5eLnew" type="image/jpeg" length="0"/>
-    </item>
-    <item>
-      <title>Mr ChatGPT #7197</title>
-      <link>https://t.me/mrchatgpt_ir/7197</link>
-      <guid isPermaLink="true">https://t.me/mrchatgpt_ir/7197</guid>
-      <pubDate>Sun, 22 Nov 2026 21:24:14 GMT</pubDate>
-      <description></description>
-      <enclosure url="https://cdn4.telesco.pe/file/u9QjptvRe5Iq219ryIkxtHw7LECZnj5qX5uSVO_sGeiz5uvu6F__GOGIBnDhm0326DRO9dfYCJjk82DY3jbj4Pkgz6rCkhiL9tDm78NHadhez_a1MbldZWc_pxTlW1ycWxWhnmI6wcoma-YRmrnbojpbDY-RTYdB_ebaoCS4522SrRketE-1WM13CK0zr0Rz8iQoykK4dn8l3_NJ8HJ80bXo5oMtDnXn9qzKNETvjt2Kx2-yuuSA2F1rUvcLsvfKoUlqp5nPae3njVCGTk1DNtcVv_zgCj7ruuBF1LIviscgsBHfs3ZmW7qr-uDT1dpqLNG2868IjxeGjLu6TOfqWQ" type="image/jpeg" length="0"/>
     </item>
   </channel>
 </rss>
