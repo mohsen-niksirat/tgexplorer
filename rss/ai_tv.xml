@@ -22,13 +22,5 @@
       <description>🔸 آغاز همکاری مشترک وزارت علوم و هلدینگ خلیج فارس و گام بلند « فارس » برای از بین بردن بزرگترین خلا صنعت کشور 🔹 تمجید مدیران علمی از شریعتمداری برای سرمایه‌گذاری و تمرکز بر گذر از پتروشیمی‌های سنتی به نوین در کنار پیشگامی در ایجاد بزرگترین صندوق CVC شرکتی کشور و حمایت از شرکت‌های فناور @PGPIC1</description>
       <enclosure url="https://cdn4.telesco.pe/file/vn4__o7vBqTGYICcivEFJUQQ5HP0nLiBNfNymjNRCzoEAdNmhTLaDPZmyTwsTEGxRU743mPRMzv7Qu0ZSRVasM-0l7kaqrz8ZOr923D8a04dK-D54AGxr3GZ5oKSDFHeMbGT_diyXlSKedrLjtJUhiH3nevxMoHBdU6vCJvwF0hSpUMfmzrMUnR4PTIKGxOfx_P19PCGuLSA5K0MSUy1nGcFZfxZGZdHM4OniGViGdCjs7jOl81peTiLzBUW5YR2lqd4o5keS49BcO3qNx0e0gNTxypVsMoYMHjvRkaPM6wyIS5tM4I2PJw8VrDtcGhNMFZdRdIkJMORqBHcur_jTw" type="image/jpeg" length="0"/>
     </item>
-    <item>
-      <title>یه مدل فارسی تبدیل متن به گفتار (TTS) خیلی کوچیک ساختم به اسم tiny-ava که می‌تون…</title>
-      <link>https://t.me/ai_tv/9535</link>
-      <guid isPermaLink="true">https://t.me/ai_tv/9535</guid>
-      <pubDate>Tue, 24 Nov 2026 07:34:04 GMT</pubDate>
-      <description>یه مدل فارسی تبدیل متن به گفتار (TTS) خیلی کوچیک ساختم به اسم tiny-ava که می‌تونه مستقیم توی مرورگر یا روی موبایل و کاملاً آفلاین اجرا بشه - از صفر (from scratch) و فقط با حدود ۲۰ ساعت دیتای صوتی سنتتیک (synthetic) آموزش داده شده - فقط ۴.۵ میلیون پارامتر و حدود ۲۰ مگابایت حجم (با مدل G2P فارسیش جمعاً زیر ۳۰ مگابایت) - سرعت روی CPU معمولی: ۳۸ تا ۷۷ برابر سریع‌تر از زمان واقعی (یه جمله ۵ ثانیه‌ای تو کسری از ثانیه آماده می‌شه) - خروجی ۲۴ کیلوهرتز، بدون نیاز به GPU، بدون سرور و بدون API از اعراب و کسره اضافه هم پشتیبانی می‌کنه، یعنی اگه جای حساسی بود (مثلاً «گُل» و «گِل» یا کسره اضافه) می‌تونید خودتون تلفظ دقیقش رو کنترل کنید: huggingface.co/mehdi-hf/tiny-ava منبع @Ai_Tv</description>
-      <enclosure url="https://cdn4.telesco.pe/file/VqWfyymKCPjd1qtqQnZUv2qSt0Tmfj5gzAvYFHQsOUXtQGzFpueQPJdKrJpnQBB3PwPgOKc8lqYdrH23ZXSfIHlvp7CeWDab00hmaYQNA1VLvosnoyyaTIMp5qQkklS5yvii4lpCDHtYIVP_WpVKfUFbQZlj6D33N6PMdJWkCQiUk9rtkwGeltt8_Ow1CjpmkuN5NYbMbsBVfBYhmurvnZ6K7bl2A4QKtDC84eE-wwLfdUVcaljSvUpKO-fXJoJMsrW-4WCWhk_nwzKoXSx_5bnV4Jgu9T_y7vNTU565d5zh12ozg9psdDEtUaXOc-ovupM_dgUNRZ98uK9LHALlzQ" type="image/jpeg" length="0"/>
-    </item>
   </channel>
 </rss>

@@ -7,6 +7,27 @@
     <description>Welcome to @prompt , your go-to source for AI insights, breakthroughs, and tools shaping the future of intelligence. Contact: @LightEarendil</description>
     <language>en</language>
     <item>
+      <title>🏗️ &quot;Vibe architecting&quot; is the new name for letting your coding agent pick your …</title>
+      <link>https://t.me/Prompt/1142</link>
+      <guid isPermaLink="true">https://t.me/Prompt/1142</guid>
+      <pubDate>Fri, 27 Nov 2026 10:07:30 GMT</pubDate>
+      <description>🏗️ &quot;Vibe architecting&quot; is the new name for letting your coding agent pick your stack A new arXiv paper shows that changing only the prompt wording gave structurally different systems for the same task, and almost nobody reviews those choices as architecture.</description>
+    </item>
+    <item>
+      <title>🪤 Anthropic built Siren, a honeypot that tempts AI agents to escape their sandb…</title>
+      <link>https://t.me/Prompt/1141</link>
+      <guid isPermaLink="true">https://t.me/Prompt/1141</guid>
+      <pubDate>Fri, 27 Nov 2026 07:06:29 GMT</pubDate>
+      <description>🪤 Anthropic built Siren, a honeypot that tempts AI agents to escape their sandbox Wired reports the test drops agents into 26 sandboxes with deliberate egress holes and a juicy file of passwords just outside. Claude Mythos 5 took the bait 25.8% of the time…</description>
+    </item>
+    <item>
+      <title>🧹 Phil Schmid deleted most of his agent rules for Gemini 4 Neon Google&apos;s Schmid…</title>
+      <link>https://t.me/Prompt/1140</link>
+      <guid isPermaLink="true">https://t.me/Prompt/1140</guid>
+      <pubDate>Fri, 27 Nov 2026 04:05:29 GMT</pubDate>
+      <description>🧹 Phil Schmid deleted most of his agent rules for Gemini 4 Neon Google&apos;s Schmid says old bans on comments and unrequested edits now clash with real requests. Neon burns extra thinking tokens sorting out the conflict and often obeys the stale rule. He swapped them for cues like &quot;match the surrounding codebase style.&quot; His user-level GEMINI.md now fits on one screen. Task-specific stuff lives in skills.</description>
+    </item>
+    <item>
       <title>🧪 DeepMind now lets AI agents run part of the compute for Gemini experiments VP…</title>
       <link>https://t.me/Prompt/1139</link>
       <guid isPermaLink="true">https://t.me/Prompt/1139</guid>
@@ -124,27 +145,6 @@
       <guid isPermaLink="true">https://t.me/Prompt/1122</guid>
       <pubDate>Wed, 25 Nov 2026 02:24:01 GMT</pubDate>
       <description>🚨 OpenAI&apos;s math repo claims a strongly polynomial algorithm for linear programming If it holds, that solves Smale&apos;s ninth problem, open for decades. Simplex runs fast in practice, but nobody has proven a runtime that doesn&apos;t depend on the size of the numbers. Linear programming sits under logistics, scheduling and most of operations research. The paper is a fresh, unreviewed preprint, so mathematicians still have to check the proof.</description>
-    </item>
-    <item>
-      <title>🚨 OpenAI claims matrix multiplication runs in O(n^2.25), and says that&apos;s the ex…</title>
-      <link>https://t.me/Prompt/1121</link>
-      <guid isPermaLink="true">https://t.me/Prompt/1121</guid>
-      <pubDate>Wed, 25 Nov 2026 01:48:59 GMT</pubDate>
-      <description>🚨 OpenAI claims matrix multiplication runs in O(n^2.25), and says that&apos;s the exact exponent A new preprint puts omega at exactly 9/4. The best known upper bound was about 2.37, and nobody has pinned the true value before. It&apos;s a GitHub PDF with no peer review yet, so experts still have to check the proof.</description>
-    </item>
-    <item>
-      <title>🚨 The European Commission confirms hackers stole personal data in an AI-assiste…</title>
-      <link>https://t.me/Prompt/1120</link>
-      <guid isPermaLink="true">https://t.me/Prompt/1120</guid>
-      <pubDate>Tue, 24 Nov 2026 22:54:02 GMT</pubDate>
-      <description>🚨 The European Commission confirms hackers stole personal data in an AI-assisted attack The Commission confirmed that EU Academy, its online learning platform, was breached, and names and email addresses of people outside the EU institutions were taken. It doesn&apos;t know how many users are affected, and it warned them with a website notice instead of contacting them directly. Public access to the platform is disabled.</description>
-    </item>
-    <item>
-      <title>🧬 OpenAI says GPT-6 designs proteins with just reasoning and code, no specializ…</title>
-      <link>https://t.me/Prompt/1118</link>
-      <guid isPermaLink="true">https://t.me/Prompt/1118</guid>
-      <pubDate>Tue, 24 Nov 2026 21:39:11 GMT</pubDate>
-      <description>🧬 OpenAI says GPT-6 designs proteins with just reasoning and code, no specialized biology models In OpenAI&apos;s preprint , an internal model matched or beat specialist tools on most design tasks. In lab tests with Onava, GPT-6.2-based designs showed binding on all five targets. But specialized models still supplied sequences and picked the candidates to test, and full structure prediction remains a clear weakness.</description>
     </item>
   </channel>
 </rss>

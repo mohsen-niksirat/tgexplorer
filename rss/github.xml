@@ -7,6 +7,30 @@
     <description>Developer community and updates</description>
     <language>en</language>
     <item>
+      <title>VaultUI — терминальный пользовательский интерфейс в стиле k9s для HashiCorp Vaul…</title>
+      <link>https://t.me/github/11867</link>
+      <guid isPermaLink="true">https://t.me/github/11867</guid>
+      <pubDate>Fri, 27 Nov 2026 11:33:49 GMT</pubDate>
+      <description>VaultUI — терминальный пользовательский интерфейс в стиле k9s для HashiCorp Vault — просматривайте секреты, политики, методы аутентификации, PKI, Transit и Identity, не выходя из терминала. Возможности ▫️ Панель управления - состояние печати, версия, количество узлов HA, серверная часть хранилища, количество ресурсов, быстрая навигация ▫️ Браузер секретных движков — список всех подключений KV, PKI, Transit, Identity и других ▫️ KV v2 path browser — просмотр каталогов, чтение секретных данных, копирование значений в буфер обмена ▫️ История версий KV v2 — просмотр истории версий, просмотр конкретных версий, различие между версиями ▫️ Браузер политик — список и просмотр органов политики ACL с подсветкой синтаксиса 🐱 GitHub</description>
+      <enclosure url="https://cdn4.telesco.pe/file/Zjejt316tBJKCskIsKdqxl0ii_ox3fFxhCDbT7CdvO_NeNKHIjbsjgsYMYTL-eJoX4emNJA6heZkL-XHqLMrq0cm0rlG1uXrOWfjnxuDAiKjFMKb2W_aw_8RuvFzbHNvBW7L7Sw-o82YegOApJwugFeiRbwvy4Po_MC2zjUhO4Jyo7ey_Xw8Jr3qsFIxFlWcWSIZFcR8y4feh1XPKecmyBTcnEzSaJkLndq72faS62NJv8eMMm9T3zCNgZQyn-ksCGAJR_guXIruCWpASjnflYJpgrcfRyEaMkb2DvhmaUogBSMNP-eIt8lLSsx89wWXldheDzqJyUKefPimXeo-SA.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>Dbx — легкий кроссплатформенный клиент для работы с более чем 100 базами данных,…</title>
+      <link>https://t.me/github/11866</link>
+      <guid isPermaLink="true">https://t.me/github/11866</guid>
+      <pubDate>Fri, 27 Nov 2026 08:31:24 GMT</pubDate>
+      <description>Dbx — легкий кроссплатформенный клиент для работы с более чем 100 базами данных, включая MySQL, PostgreSQL, SQLite, Redis, MongoDB, DuckDB, SQL Server и Dameng. Встроенный искусственный интеллект, MCP-сервер, интерфейс командной строки, десктопная версия и Docker. 🐱 GitHub</description>
+      <enclosure url="https://cdn4.telesco.pe/file/ipCe9QM3-Y4iUVCEjq31EB_XIOyECV9Hbs35O8XVETaO2q8FJSviFTDymeNfpJTFptcaG91A_jZV3NA9s9dIJOoG9uK3ash5p4A9YPy6MDXa_q8xj63MdN26kGyBA8JxQNYipjzuJxSh8SLVHZe3jDFDCsPvN6NhcsCHcaqHIiKs3kPZYYa5K20Jj6pSS6vxlb4H2oTzb1a3Rp_RVa560zXmebO_4NacCyjIjW6BRLKG8y9r45GWH-8Lr0GUx6edN2p3MJz5CwfOQewqREIwW3hF7HFyFtUUaDsc5b1EvCcCHTHltVV4cRyWAbHEGqWlMz4WjRjq2_Eai-LavRr1Dw.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>OwnCloud Infinite Scale — современная платформа для синхронизации и обмена файла…</title>
+      <link>https://t.me/github/11865</link>
+      <guid isPermaLink="true">https://t.me/github/11865</guid>
+      <pubDate>Fri, 27 Nov 2026 05:32:06 GMT</pubDate>
+      <description>OwnCloud Infinite Scale — современная платформа для синхронизации и обмена файлами с микросервисной архитектурой нового поколения. 🐱 GitHub</description>
+      <enclosure url="https://cdn4.telesco.pe/file/N0NDMRqoF9DEp2_LHGtx4JoDTao2MgaZxKQEWiDPVeUS7O2jUaDN1_nvffw5f8m2Ou3eIOsGYUw40nuHfEmPk3j7ti4NS6BXQpC1uTuXHLo3mRSYntqS8KjuOL6r75fblFAQSA0yllQjVujQvDHlXkrLnQFWwiKP2xZyHC_pLzJ5BSAnOSKXasVnKwsiufjOzukBGvzOivCNTMTrE_6Kt2HaHd8oYUtRZyhxCRM5e_Ue9jl4R2i6qo2q-uG_UQpOf-m99CTOJmllSIFhkxZkzJRF5B-A8Dp3QFfMApMlgOgKwn8cpW_rWaOM7BegBP5ZtxHY_NsNQFHXjD5fAueKog.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
       <title>Dolt — это база данных SQL, которую можно форкнуть, клонировать, создать в ней в…</title>
       <link>https://t.me/github/11864</link>
       <guid isPermaLink="true">https://t.me/github/11864</guid>
@@ -44,7 +68,7 @@
       <guid isPermaLink="true">https://t.me/github/11860</guid>
       <pubDate>Thu, 26 Nov 2026 11:33:42 GMT</pubDate>
       <description>Claude-bughunter — набор навыков Claude Code для поиска ошибок и работы с внешней командой red-team - 82 навыка, 15 команд с косой чертой, 681 раскрытый шаблон отчета, подобранный по 24 основным классам уязвимостей, плюс матрицы атак enterprise identity + infrastructure. 🐱 GitHub</description>
-      <enclosure url="https://cdn4.telesco.pe/file/p9JBBZ7jYyKeFbOhDm-Uvm84-UtdVUx_9gZyTkhhO8IN1EUrx7gSSZLlxsF10BB6i9jF17BQ1R8Y6ljdLbvo3NT1yxzaoqaPBDukcIN3oaNq0-9RmCNWvNO3tYrOF4LhdyMLHKH_UHwt-boObNCs-l1AXT2Tb-yTKumUXNqvPehLtiWvxh0opEm2kSzTNg4a2BpYaFzE0YcSq2ESvaMQT4L7uDyv_qBTVNCucvg5DdrNWgZP2LFWg4sOBMabjh3TlUYaPXycU6_rx5sY7doI7t-Svwr944cKjSixHnPNeRFO8nIueHVoBgP3WO9yN_ATIZZZuhl73qcSaeSPQH-HIA.jpg" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/qriyKpK7E-PSQh-w0x5IaJXdjKWQKAoF5DBElcdAGGr4xZ7Mg77N93uDYkJCapR17mxq7J9DRBE_fKIavUUfGTQOHfjn9VDp3RGJr10Fg-hw8ApPZetcd8onsB7PV_SKPl_DEupxVU0ydoW6MB36PUUvCXjp2l2_wlBhzkzjlxymRq60EHvTz9h-lUF8YNpW5lRpHppTNvBAHM3OIO5NyURt2eJfH9MEvKjn_k99GdGtedRW1IiBG7T3jnZzAKjoFQ0FTzWDIoUiFrj3KanOhW12lmMGI65t0I15gVqXeYsujjkSQQzm6QvNTJMo7vHCySy9s33NOV4mLi0SOf2SJw.jpg" type="image/jpeg" length="0"/>
     </item>
     <item>
       <title>Permission Manager — это приложение, разработанное SIGHUP , которое обеспечивает…</title>
@@ -52,7 +76,7 @@
       <guid isPermaLink="true">https://t.me/github/11859</guid>
       <pubDate>Thu, 26 Nov 2026 08:31:22 GMT</pubDate>
       <description>Permission Manager — это приложение, разработанное SIGHUP , которое обеспечивает сверхпростое и удобное управление RBAC для Kubernetes . Если вы ищете простой и интуитивно понятный способ управления пользователями в кластере Kubernetes, то вы попали по адресу. С помощью Permission Manager вы можете создавать пользователей, назначать пространства имен и разрешения, а также распространять файлы Kubeconfig YAML через удобный и простой веб-интерфейс. 🐱 GitHub</description>
-      <enclosure url="https://cdn4.telesco.pe/file/D-j5AVHTdup84q9gWp3RWds-HIsOgLOGuRbdp4SfiUGpTZhSJp7RvmnbFgTlb1e0_x_F6PQnX3dStCfrGspODN6uG10VjCsxJs7tgEkzc7rKGNe5yOlb6yWTjLHqsjZFr_J6xGiKfL006FIlIePRkDtkpBrKNXUQ5SdyDAS7Qk9eW9uFxR3XsYt0D9IZx5JjEZwiLryeRzsah8FywqgMAQnjXe30NueCGut22ieSoOFNqBtQ2ayu32YpOMZR_O0jS6NV7fAPvWJr9k4JuuWBp75IJpcqYzhsTDnfRvFHtOiHeU9gU2edbhdvAZ33fANVO5vdoDT-iTZP4oYqDaG1CQ.jpg" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/fS9RSaXGcRPB4X5uFJXw-JIyLs0N4qHTwNvSLDtUMDytHVIQAFXcYIm4SUeBsk6-TlQN_NsfFyJ85g6a7sR1Hk86o6dc0hhQvksK2foeWegkfdRKA5qj6_G4cDmWwDERrNslQxcgIZrgHCqxSRbcF2Y31JLpJR5V8JgeD9EP8F9f9WqH8BvnV_0TEzr6jIKc7MKQpGWQtCbPUDlkJR1Tj8NU-btaFYGz2nisjuHpd9E_h0saZDX4N_vIie5FF1qOj4HUvtH8ZNPxkWRZmiRzWe22qLkAWXOAQrlycB4j2nNRLenDR4c5CoNE0PzXOhjC5nAXrONflWal-X54puFr7Q.jpg" type="image/jpeg" length="0"/>
     </item>
     <item>
       <title>Atomic-agent — локальный ИИ-агент, работающий на вашем компьютере, с локальными …</title>
@@ -60,7 +84,7 @@
       <guid isPermaLink="true">https://t.me/github/11858</guid>
       <pubDate>Thu, 26 Nov 2026 05:34:02 GMT</pubDate>
       <description>Atomic-agent — локальный ИИ-агент, работающий на вашем компьютере, с локальными или облачными моделями. Управляет вашим браузером, редактирует файлы, выполняет одобренные команды и запоминает контекст между сеансами. Открытый исходный код, работает на нашей платформе TurboQuant llama.cpp — благодаря этому длительные сеансы с небольшими локальными моделями занимают меньше памяти. 🐱 GitHub</description>
-      <enclosure url="https://cdn4.telesco.pe/file/RCpj_fXoFfmBVRHluwRyAfKf9XgdC3zIGSjlJ8EE_Qq7LzMZdG48ZVsd63Or6xIwHnByzwthOXHxGMnTqmJFb24RVLIlyTFatyplOlrm_N1UoO2ukSPhXsee1cmtvA_FGtUORULBIYv_N-W1wEG2_VIk_S7eAmi-bWqaRksIuZDSXOFIWGyYOqyNI3gGmjiwi5zpaOuV3NnewdS4X9dXBaU92Yr8IE61e7WkiIpnC6eqfaAStiexY7kkGwLGPJnqumomNUilk0pRYVmWZZZEtK54x191mJe6fDkgAsnKG9VSCiR7fgDAdAeKnOk17VojWP7A1A2x5qEah_W-YAzfXQ.jpg" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/Jqwz_Kn9uzoLfmUiZTec66LOafVT_T-bF46ygRjSyXlPt8GuPoyEqmMU_A7F5mvFQAvEQg8eOFGmCVFVnbJyicaJ9FfUXrm8eqWunCKvMEmEHfg8hTrqihtjQTgKUvAiN0zNdZnGBd2EjAbNKTaZIS8cjDxZIN3d6hseMqFl4qxId1MWltA1csgZZYxlAnJbrT-sK4pngLCVVm-OmmW9amc71A0rR5JefuRP4rzgHlwd7DIrZZWvI0pUlMyi6ZXCp1NYNF9WWsicAr4U3ftjZPi7cGcVvTDwhxfJgWizypEi1N8Qt3-Odx3pfcs26IY0FjsejapaK8heQwXij27rrA.jpg" type="image/jpeg" length="0"/>
     </item>
     <item>
       <title>Witr — отследить любой процесс, порт, контейнер или файл до самой первой цепочки…</title>
@@ -131,7 +155,7 @@
       <guid isPermaLink="true">https://t.me/github/11849</guid>
       <pubDate>Wed, 25 Nov 2026 11:31:16 GMT</pubDate>
       <description>Все инструменты для разработчиков — НА ОДНОЙ странице Нашли удобную подборку веб-инструментов, которые пригодятся в повседневной работе и тестировании. Генераторы UUID, конвертеры, инструменты для регулярных выражений, JSON-валидаторы и другие полезные мелочи. Всё собрано в одном месте, на русском языке и без необходимости прыгать между десятками сайтов. Добавляем в закладки — тут . 🐱 GitHub</description>
-      <enclosure url="https://cdn4.telesco.pe/file/vqk_phum3QwIvJjJBRuH9uOdRQEnuoIMt0XIh6Gow8r6Mtiws0i3i5oX4dCmJlP3DUQFQCxs4yPpb9H1t-Ld16wWH3H5MFBKTUpS1B923jUIOmQqp6D_QUrtfHfcVZAFb-NLAEQwomMl0LvWOlZlJRx-zbH2yqe3NlQzx7hCRIsEoNw_r5AygruPbg9ZVqYThx1P4RbIyPc8VUX8Eryx8QSEmScLzAI2pk_cKr9iGKkOOffuDdLa5tNfepm8xFSJL_QrqyQ_s5zpBFszBFr-BW64F3y8CXiRDwFpJwnnBKWZiW6yS6bvgFPmB02ReOeXcSMkJH9wGByOwBff6o3PHQ.jpg" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/I__5Bcc6-yJ4TGE51uQuCDOn7wtO6784dyer8o9quKsvBTntZ9SBHOY7xawG7af50J_7nrBr9dbQ4_qk8I7lvHOMJl9vZldtO6aCexX1JXvd-zqMj8i9Ginb-LdN0C5c-HegyZv41GqkCdyaiCQJiEfVhbWQ-orzOES1nlN6UEnfvC30q_sFY7CEc7gavKREuxp3LgTjNVDjr_l-Di3NtqjO1QF_5LmvhycDCC2YXHGTbJwex0xrq5NV7XIhJ1zWhb8wlfCj5PT2sLZouq60wt4w4Zvi7Nbbr1zbqrDcIT3MCxyyqtWHK3hLg8RPMhJo87f1laf1roMTCT9nm1GiDA.jpg" type="image/jpeg" length="0"/>
     </item>
     <item>
       <title>Hunk — терминальный diff-просмотрщик для анализа и ревью изменений в коде, включ…</title>
@@ -139,31 +163,7 @@
       <guid isPermaLink="true">https://t.me/github/11848</guid>
       <pubDate>Wed, 25 Nov 2026 08:32:03 GMT</pubDate>
       <description>Hunk — терминальный diff-просмотрщик для анализа и ревью изменений в коде, включая изменения, созданные AI-агентами. 🐱 GitHub</description>
-      <enclosure url="https://cdn4.telesco.pe/file/G39oLo_bOY9DPJEU__SeJYm4-um3aCb45xANLmZqkmm6hEk3kPShTSoFTkpDPTYBRowVqH1I7wSw37Aa51dktY3ZdDHiRKcjCJeC1nm6cdun7BstTQeIcUhiaIIgYUwbzf7uq8FtDo5mqEuEWSS2wf_jQMosPC9u6bjEH8oE8HGhGgBmSneVGHGs2_98Nmv3Br0tYTmfogn6I8R9syxS-kj7Cf_NdvIQ3cu77PzOaAM5UFQmh0tEs0Eiqpk8B1OUOjRiKpSSPCItkxP2t1N7IgxwcvpyV7HKhmUlVOzY4OAUfEHUjNrvq33jAPvJfk_2ZKzgU0y7Vg7nV8ZJXVH9zQ.jpg" type="image/jpeg" length="0"/>
-    </item>
-    <item>
-      <title>Telescope — это веб-приложение с интуитивно понятным интерфейсом для изучения да…</title>
-      <link>https://t.me/github/11847</link>
-      <guid isPermaLink="true">https://t.me/github/11847</guid>
-      <pubDate>Wed, 25 Nov 2026 05:33:53 GMT</pubDate>
-      <description>Telescope — это веб-приложение с интуитивно понятным интерфейсом для изучения данных журналов. Оно поддерживает несколько типов источников, включая ClickHouse, StarRocks, Docker и Kubernetes. Пользователи могут настраивать подключение к своим базам данных ClickHouse или StarRocks, получать доступ к журналам контейнеров через Docker API или извлекать журналы подов из кластеров Kubernetes. Telescope обеспечивает единый подход к запросам для различных типов источников, позволяя пользователям эффективно фильтровать, искать и анализировать журналы. В то время как ClickHouse и StarRocks служат основными бэкендами для структурированного хранения логов, поддержка Docker и Kubernetes предлагает удобные варианты для локальной разработки, временных сред или облачных развертываний. 🐱 GitHub</description>
-      <enclosure url="https://cdn4.telesco.pe/file/k_A8XeeXIfOBC_1wHldfvD-epVjvhodQ6gGilH4cp9qfo9rO8KSFDEAY6FbaXnb_x1bkfEmzZ2qOR1Cu_E3P572OCv2o70_gW5TpKjxQevQlJCBgnKGyyBUies0mmZMouAJGnNZKb8aCLD-juexvUJwTLjz5KBom9aWNsJCjebboSAYyAt-zGxGQLT2sqZ963rbGKo6Q8-0OGkv8OZIKH3DikVnMGw-obdd1VRbu0963HP2zwNV69SJt5SUQPsUE_HLhZmTHAfPAvGvIDmdXc7Y8ve_qnHou3J0KTpQgfMRE44iQZu68VSc3EMzFC67DiVLDpakRpx13-aMlTqSBiA.jpg" type="image/jpeg" length="0"/>
-    </item>
-    <item>
-      <title>MagesticAI — это браузерная платформа для управления задачами по написанию кода …</title>
-      <link>https://t.me/github/11846</link>
-      <guid isPermaLink="true">https://t.me/github/11846</guid>
-      <pubDate>Tue, 24 Nov 2026 21:45:09 GMT</pubDate>
-      <description>MagesticAI — это браузерная платформа для управления задачами по написанию кода с помощью ИИ и скоординированных автономных агентов. Она предоставляет современный веб-интерфейс для создания задач, мониторинга выполнения, доступа к терминалу и проверки кода — все это доступно из любого браузера. 🐱 GitHub</description>
-      <enclosure url="https://cdn4.telesco.pe/file/v-glORrrVxsYWGzj1kP9K0r_p_OZNGy-t3NrBF4om4pEhe889C15R4NjMGibumrXr9LmlxjQ02-p5r4YJY-l29Azz8mX4vPIn42JXcAzV9c6FymADDXsElAxiPcfDthQJVZQ5k9M4bF4LfSvlS4geNiu6worMPFunzNMxG8NVf10k8OAyJ-7Z9OofqJI5Xi9JvxnBkrHO3PInzdmBM82K1NW2_HWlphxMEnBBOhzjm06uSrbGCmU_u4D7yTWkOEnCMUnlnyY7JLB26Dg2ELV-lwcUwDsxiLlSLkjExQk8jpZEq2QTZVQJPTmpI5tdYCGBAO3DOhBufHXKdSYFavTSg.jpg" type="image/jpeg" length="0"/>
-    </item>
-    <item>
-      <title>Boring — простой менеджер SSH-туннелей для командной строки, который просто рабо…</title>
-      <link>https://t.me/github/11845</link>
-      <guid isPermaLink="true">https://t.me/github/11845</guid>
-      <pubDate>Tue, 24 Nov 2026 19:33:15 GMT</pubDate>
-      <description>Boring — простой менеджер SSH-туннелей для командной строки, который просто работает. 🐱 GitHub</description>
-      <enclosure url="https://cdn4.telesco.pe/file/KzR5wGLrRhzMvbTjoBioZ2KXHfUmOUGc4oyQsS3ChinXmmVtEE6uUWeuQhB2ydzWYP5NOf21qY1u0qiD3-7m_PMBD5lsztaDxupUhCnIsj3ar2A-Tds97cN4wvieamdaDB4tzC_Wt5dPPiY1JplVecNioC6yF0y64kTA2d9UImTStgWPiOdcguFi43M5Nvo2endo7ISsmldHYgK_LiTcnfjc5cvkRJEcBliRqcBKa93GusP3KXXBB29wKFQZfyhKK2DPUnKd2vm_hiuSXHgYo-DlNnE2JrZJnuD1eK8RxnML6fEXMdIDi8RaJ9uSnhUlI2E4x9JqayzvB_jTSU9hbQ.jpg" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/QXJCW_6_YrAUO3DiH9_YXIFfYbdUhVeiVoi0x3WwCyNoqCG3EuX2R8SVyrYcSEEcI1T2X_4kxGHrzyp6WuPpFfmvPEJNoRr9clRk1pLEAM7Q9DdMOhnhzbgNKZciCneiOMBeqxL3rdrbM3vgPgc7HstMueAC0QRseyrtC1FQG-GFzNQRDXqMVpGx90yxjIgIxUo2OpuGPhTv2q4D4DS-lJ2vhfSGWlRfh3e1kaSteOuONNlq1cVEyPY-TYGoXjoPq6ivcWkTl15bS-C_fIDmrt1DPAXlwj9ZeNzNyNJ7G4zzw0Aiwt8_yrDz2zkrITm2LBrH972XofAKvKbBuq-7KA.jpg" type="image/jpeg" length="0"/>
     </item>
   </channel>
 </rss>
