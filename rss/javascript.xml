@@ -7,6 +7,20 @@
     <description>JavaScript ecosystem news</description>
     <language>en</language>
     <item>
+      <title>JavaScript #3626</title>
+      <link>https://t.me/javascript/3626</link>
+      <guid isPermaLink="true">https://t.me/javascript/3626</guid>
+      <pubDate>Fri, 27 Nov 2026 06:30:44 GMT</pubDate>
+      <description></description>
+    </item>
+    <item>
+      <title>CHALLENGE const machine = { state: &apos;idle&apos;, start() { this.state = &apos;running&apos;; ret…</title>
+      <link>https://t.me/javascript/3625</link>
+      <guid isPermaLink="true">https://t.me/javascript/3625</guid>
+      <pubDate>Fri, 27 Nov 2026 06:30:44 GMT</pubDate>
+      <description>CHALLENGE const machine = { state: &apos;idle&apos;, start() { this.state = &apos;running&apos;; return this.state; }, arrowStart: () =&gt; { return this?.state; } }; const bound = machine.start.bind(machine); console.log(machine.start(), machine.arrowStart(), bound(), machine.state);</description>
+    </item>
+    <item>
       <title>JavaScript #3624</title>
       <link>https://t.me/javascript/3624</link>
       <guid isPermaLink="true">https://t.me/javascript/3624</guid>

@@ -6,12 +6,6 @@
     <atom:link href="https://mohsen-niksirat.github.io/tgexplorer/rss/hucisa.xml" rel="self" type="application/rss+xml"/>
     <description>HUCISA is dedicated to equipping students with tech skills, fostering innovation, and empowering communities to excel in their careers and embrace the digital future. https://hucisa.site https://linkedin.com/company/hucisa https://tiktok.com/@hucisa_</description>
     <language>en</language>
-    <item>
-      <title>HUCISA - Haramaya University Computing and Informatics Students&apos; Association #923</title>
-      <link>https://t.me/hucisa/923</link>
-      <guid isPermaLink="true">https://t.me/hucisa/923</guid>
-      <pubDate>Tue, 24 Nov 2026 18:21:07 GMT</pubDate>
-      <description></description>
-    </item>
+
   </channel>
 </rss>

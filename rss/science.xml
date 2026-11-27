@@ -7,6 +7,21 @@
     <description>Science news and discoveries</description>
     <language>en</language>
     <item>
+      <title>Science #4574</title>
+      <link>https://t.me/science/4574</link>
+      <guid isPermaLink="true">https://t.me/science/4574</guid>
+      <pubDate>Fri, 27 Nov 2026 13:37:57 GMT</pubDate>
+      <description></description>
+    </item>
+    <item>
+      <title>🗺 The United States as a Civilization map, from real data Karpathy asked Claude…</title>
+      <link>https://t.me/science/4573</link>
+      <guid isPermaLink="true">https://t.me/science/4573</guid>
+      <pubDate>Fri, 27 Nov 2026 13:16:43 GMT</pubDate>
+      <description>🗺 The United States as a Civilization map, from real data Karpathy asked Claude to populate a strategy map of the US with real data. Opus 5.5 in Claude Code spent seven hours and wrote 45,000 lines. Thirty-one sources, from the Census and NOAA to FAA, FEMA and CDC. Elevation, land cover, GDP, jobs, power plants, ports, airports, universities, freight and disasters, all reconciled onto one 25 km hex grid. The hard part is not the code but folding thirty agencies with different units and geographies into one grid. Then the translation into game language: gold is GDP, districts are a city&apos;s industries, citizens are the workforce — one in four San Jose workers in engineering, science or code, against one in fourteen nationally — and wonders follow published rules. Plus 19 lenses, a City View for 524 metros and an Explorer over 3,100+ counties. MIT-licensed code. And the honest detail from Karpathy: Claude decided to skip a few states, so Alaska and Hawaii are missing. Map: usaciv / Andrej Karpathy @science</description>
+      <enclosure url="https://cdn4.telesco.pe/file/LkmHA3lmb9bzRPHlEaMjnhO8skBMH4ciNAFEiz-m9dAhpquo6CohMzsiPaz57DXpt_DmbE5yqdphnVQFopXLKJJlWIgWEZcmQwwsddsDsIiKqLuZCHMW0E7YcLHy6QyaSpZWDUFJF098_C2hpL6LCkzg1XXvyF-_9erA7bl2OPaIWC51HfYC7iXJWjJ8hV_rlAEtui5BPJe4_XF_YBu9hTnS-R1VNts5kAApCoMvPhpiWEVfnystK40ZC3uVSo0tsM3-vDEEDbx46D6l80Q7XB6vIgCpYDJYqFlDYFKXtIBEbsYW5ZCy6-cvyt7u6mssRYZrCUUIdedSZi2T0pSzyQ.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
       <title>🌊 The glass salp: a species that waited twenty years for a name In Monterey Bay…</title>
       <link>https://t.me/science/4572</link>
       <guid isPermaLink="true">https://t.me/science/4572</guid>

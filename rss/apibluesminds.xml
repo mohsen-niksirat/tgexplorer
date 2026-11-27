@@ -6,6 +6,12 @@
     <atom:link href="https://mohsen-niksirat.github.io/tgexplorer/rss/apibluesminds.xml" rel="self" type="application/rss+xml"/>
     <description>api-bluesminds</description>
     <language>en</language>
-
+    <item>
+      <title>$5,000 credits added for anthropic/claude-opus-5</title>
+      <link>https://t.me/apibluesminds/76</link>
+      <guid isPermaLink="true">https://t.me/apibluesminds/76</guid>
+      <pubDate>Fri, 27 Nov 2026 20:02:25 GMT</pubDate>
+      <description>$5,000 credits added for anthropic/claude-opus-5</description>
+    </item>
   </channel>
 </rss>

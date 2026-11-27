@@ -7,6 +7,38 @@
     <description>Developer community and updates</description>
     <language>en</language>
     <item>
+      <title>Defending-code-reference-harness — навыки моделирования угроз, сканирования, сор…</title>
+      <link>https://t.me/github/11871</link>
+      <guid isPermaLink="true">https://t.me/github/11871</guid>
+      <pubDate>Fri, 27 Nov 2026 19:35:44 GMT</pubDate>
+      <description>Defending-code-reference-harness — навыки моделирования угроз, сканирования, сортировки, установки исправлений, а также автономный сканер, который можно настроить 🐱 GitHub</description>
+      <enclosure url="https://cdn4.telesco.pe/file/I0SuDiYH4vkzPXc1Gl2nTshRtTunR2iASH1S3HFvrg4iAjUfNPGG7A0TlgruRFMib2neMFwQlQDfFlls-0n3lJCZZB4-FeFauPb3IzOXICqpYhi0eSbdBQz9hoTGlocB-S2YFFYVNniCGudJOI3z_-xIqIukDavemc1aOiAB8F6hsxfcLerPQO8G_78J0juvDrbZZfOyd9__yXP6p_wtDxoiA9RG6OunKu3Cp_gUrBQnQDIF_W2AalQe8MGJTYvODSkz3u5oMff9kqdO1HBIxlZYLIe_rUEMstxZ-rNMQlxE36k0WqOAIxUxM23cfABKiqqvXyNL-IZazE6V8L5ynw.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>OpenBao — это программное решение для управления, хранения и распространения кон…</title>
+      <link>https://t.me/github/11870</link>
+      <guid isPermaLink="true">https://t.me/github/11870</guid>
+      <pubDate>Fri, 27 Nov 2026 16:54:01 GMT</pubDate>
+      <description>OpenBao — это программное решение для управления, хранения и распространения конфиденциальных данных, включая секреты, сертификаты и ключи. 🐱 GitHub</description>
+      <enclosure url="https://cdn4.telesco.pe/file/A3MCvyAdU5mRTryjnCRN0GMaEyCWSCcxcUW4R6uTyzDd85LHB3N7YFIRu94Z1hDmjVupFrNoRjMHIhhEwnVsRIdIubQBJRll3JTXvVqDWYrPi0jXcdTBkQpnHYy8CBh-TH5vCEaNyFEhbwxQCxWv9IyHpxdybPAWqnElwDQVk55khZJwON2wEsGYlgDXdmRIYXZ9BeGzKDEDAWFeYv7HyjB6spD5nXjWEynszX2rH02-s3BhmMELiOiZjLO7fXwyRvxAUK9uChufOgFRwZzntHlio06P22NjCEPmCIIqkxGX9eo83LqFeKIhnMUuUIGfXYpNodXKKh1C0pN-Se7HDA.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>Как уместить голосовое управление в колонку? В семействе моделей GigaEdge для эт…</title>
+      <link>https://t.me/github/11869</link>
+      <guid isPermaLink="true">https://t.me/github/11869</guid>
+      <pubDate>Fri, 27 Nov 2026 15:54:31 GMT</pubDate>
+      <description>Как уместить голосовое управление в колонку? В семействе моделей GigaEdge для этого есть LLM на 73 МБ GigaEdge, семейство открытых моделей для работы прямо на устройстве. В GigaEdge LLM всего 129 млн параметров, а после квантования веса занимают 73 МБ. В тестах на управление умным домом она обходит универсальные 2B-модели и сопоставима с Gemma 4 E4B без режима рассуждений. Модель обучили под умный дом. На CPU колонки она отвечает за 0,3–0,4 секунды и учитывает контекст. GigaEdge Enhance подавляет шум и выравнивает громкость речи. С GigaEdge SDK можно собрать собственного голосового помощника с обработкой звука, распознаванием речи и передачей команд устройству. Вся цепочка работает локально. Карточка LLM ⁠ · Карточка Enhance ⁠ · SDK на GitHub ⁠ Подробнее на Хабре: GigaEdge LLM ⁠ · GigaEdge Enhance ⁠ На Хабре команда рассказала ещё о двух задачах GigaEdge. Первая знакома каждому, кто пользуется умной колонкой. Как она понимает, что обращаются именно к ней? В статье про GigaEdge KWS ⁠ авторы показывают, как научить колонку отзываться на выбранное имя. А о том, как роботу понять, откуда его зовут, посвящена статья про GigaEdge VQE ⁠. 🐱 GitHub</description>
+      <enclosure url="https://cdn4.telesco.pe/file/DaopO9QzSdpl6338ja28LAdWG-TW_MOtZprDM0xdr7ZX4eo2OY6ChdvkQ6fozbYoSEknw684BaciIbEsAYeoi3Ytn6De8E-T_s560YvwJt2g4KN03doOWDNh7HNyVhAyBxRG17WXx5vsN5b0aqUcOCQ9sGUq7c9fOhbxVAn7oLEFZiC3iuTzWjLKG8EjFP13zmrL1uM2bwiMu3Z3cEM--z0zuhB4C-50BHtTALxkiiGRoTP-aBpSJYoDTavxB2dTRP7DHaNZ95OIynpVIQlauBuJ3fJdC_MPo8gsiB5ruFnXylmPjlg_AtEKh8IFc7CjEmzkhlfLSQdiW33kqouARg.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>Claude-tap — это локальный прокси и средство просмотра трассировки для агентов И…</title>
+      <link>https://t.me/github/11868</link>
+      <guid isPermaLink="true">https://t.me/github/11868</guid>
+      <pubDate>Fri, 27 Nov 2026 14:31:43 GMT</pubDate>
+      <description>Claude-tap — это локальный прокси и средство просмотра трассировки для агентов ИИ, занимающихся кодированием. Запустите через него интерфейс командной строки или прослушайте расшифровку работы локального приложения, а затем изучите реальный трафик API и контекст агента: системные запросы, историю диалогов, схемы инструментов, вызовы инструментов, потоковые ответы, использование токенов и различия в запросах. 🐱 GitHub</description>
+      <enclosure url="https://cdn4.telesco.pe/file/VJocOQfKFP618IemZPbPX94Jhh-hsgyMnJwu_YnVJw0RnB0syqxbsbcg5IejYa7BZfrbNtLaL_nQUYNCrBhBTQm4EcJYQS195FcUBUoytX97NA8H9tyLEW1xmRJ8YegXCHX43SRn5vwZmR4SaY5yGg9EBFiyvH52Qy5kNebcAjsPRZlXFZSHQTPMuWXHzVBYYdSUQ6BtKQsVSZR3t08KocydmFy8TXMIJQBySq-p3KJtqsrJFba50rm5pjXQhe0315K8UO4ENF9G3i-KmKG7sXhQ0vzcC_eR6WpRwcrdTDkzTyr-uJWuSZYG7gqTjPEI1_eCK88qDabG2Inp4I9FaQ.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
       <title>VaultUI — терминальный пользовательский интерфейс в стиле k9s для HashiCorp Vaul…</title>
       <link>https://t.me/github/11867</link>
       <guid isPermaLink="true">https://t.me/github/11867</guid>
@@ -44,7 +76,7 @@
       <guid isPermaLink="true">https://t.me/github/11863</guid>
       <pubDate>Thu, 26 Nov 2026 19:34:31 GMT</pubDate>
       <description>VPS-Monitor — это высокопроизводительный инструмент с открытым исходным кодом для мониторинга и управления Docker-контейнерами. Созданный для быстрой и удобной работы, он обеспечивает потоковую передачу журналов в реальном времени, статистику по контейнерам, управление образами, визуализацию сети, оповещения и поддержку нескольких хостов с помощью понятного современного интерфейса. 🐱 GitHub</description>
-      <enclosure url="https://cdn4.telesco.pe/file/OmPoERzgGe112DT6nSgDAJ8RGVtcCQabgypd5UpmTOtk2YK4loz36ichFjg_xuAFpJafJh88wx9Dp5B6R_1vdOVU3S-zb7Oz_y6IvpgUXs2e9vHIJJ09g_ak8Ctw9XAMediORChO7k4qnN9GBH8wbxsnWzVInhOscJjPGGJhX4BaEljtrnZsZ1Wy5XCacOg6uTTl_hpeUmwdzLWXAkk74WlH69yw2rXcKYJ024T7wHtPqk07nyvkrQDCtfkIm7nP4mB9SC-BKdLxYtfXBNwuIsm7RjSrVfGA1hNnzzIS5SgdbY74VUyqzd_ol906T9wxZzSMhyUy4eNVsNNH85TiTw.jpg" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/A6RsavEIZWOREgQozQIR2nmXWkhsFHzYSgjN0_ozDi0K9bwYmabiimVXDUjo9eSLrBMA6m0Jz27pOB-GLunPE2eGqL3az9KYVlupJBbNCgf0WORFPA_2Vf4fhIh5R_zuS8d61qBsfEMhnHsypFZG8PlZ4dkVk9Dc1QGVVfAgBrBH9ZQWWg8MTCndNvyvOy7AChcnLzVnwB_vEEFCf7bz7lHhKU8rFhVA41xcaOd_cgwAewuxkP2i20DW4XR6PA-cswO7vGXYoyQGRck8W0ANvqpegVPaqFb7nGtQI64hirEs5m0dVfL3zpRHcVZdVZLzJjIgByrJyuGfJ4HoVUxCxQ.jpg" type="image/jpeg" length="0"/>
     </item>
     <item>
       <title>Codewhale — это агент для написания кода с открытым исходным кодом для вашего те…</title>
@@ -52,7 +84,7 @@
       <guid isPermaLink="true">https://t.me/github/11862</guid>
       <pubDate>Thu, 26 Nov 2026 17:35:09 GMT</pubDate>
       <description>Codewhale — это агент для написания кода с открытым исходным кодом для вашего терминала, написанный на языке Rust. Он работает с любой моделью, может распределять одну задачу между несколькими агентами, и вы можете прочитать каждую его строчку. 🐱 GitHub</description>
-      <enclosure url="https://cdn4.telesco.pe/file/LWOxcr87B93x9-s5w1UvoD8CC0GdMnEKawXmy62D_zdXWhT-rT_RH9xQR-lKfwkMV2wJygaXKELiHtZUS6ODqEypnZgS9cKkRYtNHKdgZSQWiRCRLUX1iWAnBQMNwMBS2BrgUpa6BruPfGvVJrINmke_gVvohsA3l_tMxvxqSrpt3XpfqxVh-7hRM17IpuvU551ME1aSStMffyykSycmxMLb6_zBHWJ0Dyr5rbjGtnHDjAIL1XlP9kOcnyM7pVa_LVftkyiTcjxCQuutK08T_UkPzkn2vuZxgiQILSW8nC9rfuFjUsozQs0j6mLyIZfDYj9n4oJzqrl6hKFsqpSLPA.jpg" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/Sz6hNqc5YQ0Aiq96DrC_nzZiAu8XifFPSro4Vb-hRSP5SK9SctpAnGWZDk769iiXsNhVqYuElBpIg9ly32M7T-lyNYzlugBJbjj7v7TsuyRmipRuAEaZZWV2mRvmQcTcpUvCebupx4EWHsR79C5INv2qCAJd38RlRCq8qObpFzCkhSPAS4ebTIlR7APZNwBeuDRPV4o-zUwKNos4ZBrNlYuHxmo0G9nzmXNUYjfID-mg6MhwpVZkXrACG2qktR3mczopwAcoNib1-ukLvccBx_Z_fesEQ83ngyLElnmvnq5nDm2zO1AG7q_Iu132Bo2n1rvkRGSHIDB9a94CQHgasA.jpg" type="image/jpeg" length="0"/>
     </item>
     <item>
       <title>Nbd-vram — используйте VRAM графического процессора NVIDIA в качестве пространст…</title>
@@ -60,7 +92,7 @@
       <guid isPermaLink="true">https://t.me/github/11861</guid>
       <pubDate>Thu, 26 Nov 2026 14:34:20 GMT</pubDate>
       <description>Nbd-vram — используйте VRAM графического процессора NVIDIA в качестве пространства подкачки в Linux. Создано для ноутбуков с распаянной памятью и без возможности обновления. Если у вас есть видеокарта RTX с 8 ГБ видеопамяти и вы переносите данные на SSD, эта видеопамять будет задействована 🐱 GitHub</description>
-      <enclosure url="https://cdn4.telesco.pe/file/OaJWWG10crsJgElHXKT7XcNt4q8RbFbvPBAIP5MPhH-9flTacndo8K2qi2uFcXazpfBRWiBdsxWt9b20IWVWb_zm29a5RR8gaWxtheGmpR-uYCVo3jYCQm3JWXwCzj2fGjO4u5UFDBaUwHPjx_CdFxG8VvxIqS8kVkKaadDI0A4W57_-w--M69H63UxO5v_d-9Uw7VGG8WMeG4qYGvIuMZm_S_0LiSOrPszlbPyekHiXL25w-iNqq9-7knutPNrJzo2vv0seVJ1l9MrP7aJzEB3w8CeNy4FKEjrbYbINvlRNMt7o5X5n1HcH7KDvzc5YhHCpnssQEokRVRjyhRNQTw.jpg" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/ThVjuGU-qN_SvyArn6eRkg5IJPKY69mAf4mcQR6LLldGglZJnMpuLYp2gMhVqhbV1l8HeHhW_ucXEN1EOOy7TBeiWxnrTZ3UuR5csX6OLBNZuM5ZUpjooN_hDJPFQ-etX4h22T4zIEKyIBNVJc51TQHBxrk0P61x0a3KFrJC5GAx8krI8vMG7WMwOl_3AIE9LWeqx0Ie84Va_Hyj2PO0jMojpGcB8jysJrhPNFa-gd8167P7etUc_J2BA9AOLj7P3mo3dt9CzXDoYprSRouEY608OzJHHgnbhXAQyCahDvrgpdS4CwtY840bCFTYNuq0rTaJsjy4_wheb0WGG3kK8Q.jpg" type="image/jpeg" length="0"/>
     </item>
     <item>
       <title>Claude-bughunter — набор навыков Claude Code для поиска ошибок и работы с внешне…</title>
@@ -92,7 +124,7 @@
       <guid isPermaLink="true">https://t.me/github/11857</guid>
       <pubDate>Wed, 25 Nov 2026 21:45:12 GMT</pubDate>
       <description>Witr — отследить любой процесс, порт, контейнер или файл до самой первой цепочки, которая его запустила, — с помощью одной команды, машиночитаемого JSON или интерактивного TUI. 🐱 GitHub</description>
-      <enclosure url="https://cdn4.telesco.pe/file/XFthH30LsHPKC8n3UVQzOuQT--H0BH4IpCwwAEual-oUXfc_txkY1O7c6UiHNCCand1Uud_6vTz30UhMFV7PDlN5PtlprUyeRIylHN05ulHaAfrR71uDW3G1M8ApEMHX7KOQk43EvVxOSJD5TFVzfccvwEPVciEENAk1CXYkg4hwpktj86zN6PVk0hnuI96trKyyWFjltEahtUowSS2Kl-fHzDlamQGZtLFwbwssDmvWr-_kwk7m0eRcY3rg64BzEl0-bvtmWCV1G4b5lD1_tJ-Mi4DabEqlKJoRnFzwNPPdgbPNn_2LvSZczjIYxD97kaMm8kxOPc63NOXx_PKwag.jpg" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/d48MnqKeian_JUrc7COz1GXZQbWvJNWTdBNAkn2NAFPPceygKZQnfb88x06iVqjfakQyQZkEveVsMcIXtWR01DU0fj3ii2Z6misuz-STaKPZQFXPt649b9WwhHp7o0_zlpcgKUhqwTQZjw0r4IgBqU09bwAmRYrF4NwXfsK1j_8S_lBvH2Q06U9b_RR-S3uFtLmUgcntWvoKXvkL1cHo-6IwSIz3FXDPCOxZXxSZSdA6lUtHvvjDjo9pNiH5P5F3feET78A439HSv3y_uczIfUCBAOq9Gv2hTjJ8Vu1v_o-dF9CRzW8NDMBowEmO_u0c5nWRvg4pRPWwVTZxhGe74Q.jpg" type="image/jpeg" length="0"/>
     </item>
     <item>
       <title>HashCortX — рабочее пространство с искусственным интеллектом, ориентированное на…</title>
@@ -100,7 +132,7 @@
       <guid isPermaLink="true">https://t.me/github/11856</guid>
       <pubDate>Wed, 25 Nov 2026 19:35:14 GMT</pubDate>
       <description>HashCortX — рабочее пространство с искусственным интеллектом, ориентированное на локальные ресурсы: чат с несколькими провайдерами, агент Full Harness в Hashcoder, 3D-модели, ERP-системы и мультиагентные рои в одном нативном настольном приложении. Без бэкенда. Без телеметрии. Без аккаунта. Лицензирован Массачусетским технологическим институтом. 🐱 GitHub</description>
-      <enclosure url="https://cdn4.telesco.pe/file/jCD39TSRSUFSbt4u8jIvm69T_fr9ZsjclrUklQ4h38AXziqKPYKmkjiFJIljvuxfezJlJ6arSTQYBRCl9WCP2ucInRvMasaiwI7ClcvWxhRmlOrIPi0wYkaiWwiNEMsvJ_8IXVjJhwamwYegmuJawouRZiGKsVL8iIqu-b-cCCA0bt4uHzSlP-dnUuXh9IT0Pr8I-DULEhneB2fCVpcdnKW2XQs4-wSswNHszMi-gBHMOhCfGwuzNDpTJ9gPINWE9g7IC8ThhZMk4cyb2hGRGif3N1VflG_BZdV0hrTAUu3qDcgWD4kXvq9lH9JaFqgCdZldtg4fgQNGvYkeLkBJuQ.jpg" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/dnSum4VOOht7kcisWLOe6m_tiT43bRm6HQmSbeekqlWd52-I6jFyxmRbxdfstc7_J2b8elAhY78bk7n3r44EsYAFwYlhO_7JQdEdsfG-6eA4y7GORpFvKbDW-g6Ojfg891gIR8v2GZnxv4Ij2OD9JKY1NNvSjwyV-Y1fr3Nyx2gWbtv0SB62LHDd1AwAujQH6JtV3shJNhqsEJwneE9BjK6cc7WRPLsLPpvMO6P-Ktpo-smC19mj7aotHeOW0WJEU18upwBm7PBc-zasl2lWTr0FMG20OiMqy6LM-FlXg2MPqMAp0rKp3LyrW-7mRCSBqCSwlC9vtkgYZGTd4Pxv-A.jpg" type="image/jpeg" length="0"/>
     </item>
     <item>
       <title>Socktop — это удаленный системный монитор с расширенным пользовательским интерфе…</title>
@@ -108,14 +140,7 @@
       <guid isPermaLink="true">https://t.me/github/11855</guid>
       <pubDate>Wed, 25 Nov 2026 18:01:32 GMT</pubDate>
       <description>Socktop — это удаленный системный монитор с расширенным пользовательским интерфейсом, взаимодействующий с легковесным агентом через WebSockets. 🐱 GitHub</description>
-      <enclosure url="https://cdn4.telesco.pe/file/j3HaBaXtaSaYgf14JC0AZBc2Br_cNw0DjyWwicaIwWujzqijjaz1IlHq3J6AXehaljk34zec9p_tU7g-zNA4XJMwIb0jlrd1m1umGbkJmeHPLzkORNa7lZ_ExBrw_NDvZRDlia2TDrM_CBrwwfdKe43tBwfzL4TsbMQjaM5t8XX0lW2LG_LIicNlzKAABXp8x754swbPNzeSx1Gi6IO5v9Qje3iUewNWgJ6dX4W8xVix10K4rXPH4xxes8h2KPm9siw10EJO3_nK7boRjG6m5wuFiSdGctmMx_jFkqnhoALpVwQx3vIlXFzvEbZgRmMf65I_Py-d40rX2Lm7_yFagQ.jpg" type="image/jpeg" length="0"/>
-    </item>
-    <item>
-      <title>Detect Expert - бесплатный Open Source антидетект для Chrome и Firefox Detect Ex…</title>
-      <link>https://t.me/github/11854</link>
-      <guid isPermaLink="true">https://t.me/github/11854</guid>
-      <pubDate>Wed, 25 Nov 2026 17:00:15 GMT</pubDate>
-      <description>Detect Expert - бесплатный Open Source антидетект для Chrome и Firefox Detect Expert помогает увидеть, как сайты проверяют ваш браузер, и управлять тем, что они получают. Полезен для мультиаккаунтинга, разработки браузерных AI-агентов и ботов, исследования антифрода и защиты от слежки. Что внутри: Анализ проверок. Какие браузерные API вызывает сайт, как собирает цифровой отпечаток и какие способы идентификации использует. Помогает разобраться, какие сигналы могут связывать аккаунты и выдавать автоматизацию. Контроль 158 браузерных API. Разрешайте обращения, блокируйте ненужные или подменяйте возвращаемые значения — управляйте доступными сайту данными. Настройка цифрового отпечатка. Canvas, WebGL, WebGPU, параметры устройства, ОС, экрана, сети и браузера. Пресеты, рандомизация, сохранение и перенос конфигураций. Прокси и защита от утечек. Маршрутизация по доменам, Kill Switch, защита WebRTC и проверка IP - чтобы контролировать, через какое соединение работает браузер. Менеджер cookies. Просмотр, редактирование, импорт и экспорт для работы с сессиями и тестирования. Автосерфер. Автоматизация посещения сайтов, каталог из 8 000+ ресурсов и фильтрация по антифрод-системам. Для мультиаккаунтинга - настройка отпечатков, прокси и cookies, которые могут влиять на связывание аккаунтов и риск блокировок. Для разработчиков AI-агентов и ботов - исследование проверок и настройка браузерного окружения. Для приватности и безопасности - возможность увидеть сбор данных и ограничить его. 🫶 Бесплатно, с открытым исходным кодом: можно изучить реализацию и адаптировать инструмент под свои задачи. 📥 Установить: [ Chrome Web Store ] · [ Firefox Add-ons ] 👨‍💻 Исходный код: [ репозиторий на GitHub ] 🎬 Посмотреть в действии: [ демонстрация интерфейса ] 📖 Разобраться в настройках: [ подробный гайд на русском ]</description>
+      <enclosure url="https://cdn4.telesco.pe/file/m0BWn2B96P-TgZY8MnAttxcqaMJo_KV9emdYMWyj2WKiOayrvWYqGO-oU1cEkFiezhFbWOXq57fUQF55O9Fg0qYGpnXk0e1RWrYPbsckUtRIiHZOzjJW8jrD1M38NP_jPYVHnaqi3jib9OVDS-QK_ek-P2oHHXqbRP9o3JXUPjV1RJwj1xsiWY924r9OC_4jhkEmSFZVLVc1lGT0Y2S2I4Q7E8yE8am-B9_OUmkRMHtmj1sGBJh_0-ELMcecTFs94fZyGZXgCkpw0j1ajhJxE0YHGSsggQbiuF4U__bIJjXefzbEIqPN3iIB8nE9CdAwQHKfaJkjDbVPPG9eOFSx5Q.jpg" type="image/jpeg" length="0"/>
     </item>
     <item>
       <title>Klip — минимальный менеджер паролей на основе терминала Возможности ▫️ Полностью…</title>
@@ -123,7 +148,7 @@
       <guid isPermaLink="true">https://t.me/github/11853</guid>
       <pubDate>Wed, 25 Nov 2026 16:32:07 GMT</pubDate>
       <description>Klip — минимальный менеджер паролей на основе терминала Возможности ▫️ Полностью автономная работа. ▫️ Безопасное шифрование с использованием Argon2id для получения ключа и аутентифицированного шифрования с помощью libsodium . ▫️ Генератор надежных паролей. ▫️ Пользовательский интерфейс, созданный без использования внешних библиотек. 🐱 GitHub</description>
-      <enclosure url="https://cdn4.telesco.pe/file/gFbzz32nfF1ZPC92pMQIQrbP-tuLssVmK4PCfRNFIId_sael3ASjf_bN0zRWj7rS2TLckwtK51JY4F4zHZ81G1smbBDEIUsU_H45R4Um8qtp4-_vkK-MMs0rv9ud111WiahecstPnKNUPX4IX7Js32c-RZuFoJ03_jugGQHjJQ_9g6WwouqWVorodjO-AaYer-skQJB7dwu5YlqFcwwMEWShMOtmfukn3r5XiVe70HnbqhdCIDduCBFAbp0xD0F_Zxlftsi1GrPkfxi7qYX9R77IIskeT0Ie_pWnBT81bmqXG-hReTReBbmAJiWo_P6X6Wm1nm7YNDLB9SCJLf7aTg.jpg" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/ajjyzWW3-yTM8xmEMKULARbgKAYacXpIBjUIXFu3u0hS3FggDlE7-qFyx3PCvSD8_VUQLRnjw5sDzVXuVmSbSKr52KM51gox5tVMkW64VZOJokjw_QA03MhcEXI_BMKBPZ0P7-tX9ECDRYwTu3juPlZ6nfHTOdGzhENBItiYFG8fpnxkVVzlPFa0Ze8gr4BZbcXUocLofqc-wmZqdKbBijijVJ9bJLGfz6ORcRssxGuMO08KZTcI590hzzjYZTt0cFfPyilKm9kaSmlPlj99BquNnFslOX_asc3ozWEykzRXBmp32-rQ6D2UnpUE8O9ZXQSNNrjAuTxZo2bj48h8BQ.jpg" type="image/jpeg" length="0"/>
     </item>
     <item>
       <title>Boo — терминальный мультиплексор в стиле GNU screen, созданный на основе libghos…</title>
@@ -131,7 +156,7 @@
       <guid isPermaLink="true">https://t.me/github/11852</guid>
       <pubDate>Wed, 25 Nov 2026 15:53:01 GMT</pubDate>
       <description>Boo — терминальный мультиплексор в стиле GNU screen, созданный на основе libghostty. Вывод каждого сеанса обрабатывается ядром эмуляции терминала Ghostty, поэтому boo всегда знает точное состояние экрана каждого сеанса: содержимое, стили, курсор, историю прокрутки и режимы терминала. Это состояние используется для восстановления терминала при подключении, для ответа на запросы терминала в отсоединенных сеансах, а также для того, чтобы скрипты и агенты искусственного интеллекта считывали экран так, как его видит человек. 🐱 GitHub</description>
-      <enclosure url="https://cdn4.telesco.pe/file/Yi-8pAReyNRzRKSoVEANO4TJW5iLZHZyg400EivUY7BXL6ReEBXaKNquAG3OQrN9C_ZDPqjwcZuTdfgYWvuhheAlAb5W2dD0qlT0doPKDmaMbDsgpX_kLZzeRC8Aad8dkSAQcmGvJvwWN_zUpel0Mcj_i5VX7NDre1Nb4WAZnxjq8rKcwikJX1wDr6Id2R4RPBbOWw17LvBFvXMgZmk9bdxMfhyHUgSn6tSbjHl9rW6_cZMI_UIw9FMXPpmUcejqWhMVg6kJ2Vd4xTXeuHyMHrZaJ6VNA93oMPk77P_si8ec0uozzX8GaqfwdiSRwYTrf5k36b4L-GnpqNIrP45muw.jpg" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/lz175yghZnbcasb8orJ0zaXpjvPWnCiVTTfa7D8NTwQVqVDx7iyfJWpA9llzuUFKBvXYvPARXQ5NUSNM7SOSaR0yP_RjOA3kVe5s7Wr6mPvl4ulv_OI6eQl121kXAyod-WcmlO-3AB6EludQximfLOSrBdQMcVc4yZMGO7Ad-_CdMBdItUX_gbSNxL3MY5lqLW7FDbPVetFFTX2DKF6zo44aiLvC2yBDV2ywosCMlh6tVbSnGwnBQmScLlfed_RPmrgC3G6VDeXtIxGm--IL16LdADdPhc85vyp0l3lKON7xKS-XKaoqDuYRbZ2_G57l0yyJcWNKoUFnuA6gt8W20w.jpg" type="image/jpeg" length="0"/>
     </item>
     <item>
       <title>Нейросети для работы в одном пространстве 💚 Дизайнерам — для креативов, маркето…</title>
@@ -139,31 +164,7 @@
       <guid isPermaLink="true">https://t.me/github/11851</guid>
       <pubDate>Wed, 25 Nov 2026 14:53:05 GMT</pubDate>
       <description>Нейросети для работы в одном пространстве 💚 Дизайнерам — для креативов, маркетологам — для контента, бизнесу — для документов и аналитики. Нейростудия от Polza.ai объединяет инструменты для работы с ИИ. Здесь можно анализировать файлы, создавать изображения, видео и музыку, а также разрабатывать мини-приложения без кода. Что доступно в Нейростудии? 📁 Работа с документами и анализ таблиц 🎨 Генерация и редактирование креативов для рекламы и соцсетей 🕹 Мини-приложения по текстовому описанию 🎬 Генерация видеороликов, музыки и озвучки Можно подключать коллег, устанавливать лимиты и управлять общим бюджетом. Оплата только по факту использования, без обязательных подписок и фиксированных тарифов. 👉 Попробовать: Polza.ai</description>
-      <enclosure url="https://cdn4.telesco.pe/file/vwd7lr5-GXhSM2fTAQXPY-Giy5PEKVQTmnQdcvj3iSSrAFI9gIguV0x4i_R6L5SQKF1tWLCBKjl1F5pabFTGXmRp4xF2MhfjJjl63t_f1LUWXfkPT6MvUlfLinZhyS8D-kj79bkNqSAI4eg4eeWahcwBa7DLU8I_65PHzRFbETOsMpA640mAx3-2ETGXPf_8iKrNT2_6gRjry8OdsDD5ZTqNYS5WrnBqkTrz53pJv_GIX9ZZby2k7q_p4JmBhRiFVkGwwWVKZzPx9MCkE96IJ66j2sQn4Uq667bMQL8G6K3a6UvQmt1mfrKiS60F8PqpHzqSmSeQ1ukrkk8QXAR-tg" type="image/jpeg" length="0"/>
-    </item>
-    <item>
-      <title>Whatcable-linux — виджет для KDE Plasma 6 и CLI-инструмент, который объясняет, ч…</title>
-      <link>https://t.me/github/11850</link>
-      <guid isPermaLink="true">https://t.me/github/11850</guid>
-      <pubDate>Wed, 25 Nov 2026 14:30:20 GMT</pubDate>
-      <description>Whatcable-linux — виджет для KDE Plasma 6 и CLI-инструмент, который объясняет, что именно делают ваши USB-устройства в Linux. 🐱 GitHub</description>
-      <enclosure url="https://cdn4.telesco.pe/file/GTB-3A9VDM8gAnnCl1MHW_svd6nvCW9a3xDYBUdOV70WZXpnNoqGaGD77qnK2JbW86XjMi-C8iABy73x8SuObVdC4dtTvVKtaD-mnNEGpMkidO88lauD_QFI5aFfNxC01LwJRAruiPh9Yi0WQQsIbGYBmJWVAg5meF3N5EO1eXauajkkGd_ZDiKYREbN645hB1nCvhtFgZkYPNRPNGF18-5-7e-DX5OoR92IFE3iC4DTL1hvmfmgHK5Qjgz9sFJVPdBTF34jFXApinqTG_O8YK_MYfZVefUpoeEPiviMxGQOpKg1TR-aFX9uB8n854EjcVWoVgmLJYsKS9wb4WPu7w.jpg" type="image/jpeg" length="0"/>
-    </item>
-    <item>
-      <title>Все инструменты для разработчиков — НА ОДНОЙ странице Нашли удобную подборку веб…</title>
-      <link>https://t.me/github/11849</link>
-      <guid isPermaLink="true">https://t.me/github/11849</guid>
-      <pubDate>Wed, 25 Nov 2026 11:31:16 GMT</pubDate>
-      <description>Все инструменты для разработчиков — НА ОДНОЙ странице Нашли удобную подборку веб-инструментов, которые пригодятся в повседневной работе и тестировании. Генераторы UUID, конвертеры, инструменты для регулярных выражений, JSON-валидаторы и другие полезные мелочи. Всё собрано в одном месте, на русском языке и без необходимости прыгать между десятками сайтов. Добавляем в закладки — тут . 🐱 GitHub</description>
-      <enclosure url="https://cdn4.telesco.pe/file/I__5Bcc6-yJ4TGE51uQuCDOn7wtO6784dyer8o9quKsvBTntZ9SBHOY7xawG7af50J_7nrBr9dbQ4_qk8I7lvHOMJl9vZldtO6aCexX1JXvd-zqMj8i9Ginb-LdN0C5c-HegyZv41GqkCdyaiCQJiEfVhbWQ-orzOES1nlN6UEnfvC30q_sFY7CEc7gavKREuxp3LgTjNVDjr_l-Di3NtqjO1QF_5LmvhycDCC2YXHGTbJwex0xrq5NV7XIhJ1zWhb8wlfCj5PT2sLZouq60wt4w4Zvi7Nbbr1zbqrDcIT3MCxyyqtWHK3hLg8RPMhJo87f1laf1roMTCT9nm1GiDA.jpg" type="image/jpeg" length="0"/>
-    </item>
-    <item>
-      <title>Hunk — терминальный diff-просмотрщик для анализа и ревью изменений в коде, включ…</title>
-      <link>https://t.me/github/11848</link>
-      <guid isPermaLink="true">https://t.me/github/11848</guid>
-      <pubDate>Wed, 25 Nov 2026 08:32:03 GMT</pubDate>
-      <description>Hunk — терминальный diff-просмотрщик для анализа и ревью изменений в коде, включая изменения, созданные AI-агентами. 🐱 GitHub</description>
-      <enclosure url="https://cdn4.telesco.pe/file/QXJCW_6_YrAUO3DiH9_YXIFfYbdUhVeiVoi0x3WwCyNoqCG3EuX2R8SVyrYcSEEcI1T2X_4kxGHrzyp6WuPpFfmvPEJNoRr9clRk1pLEAM7Q9DdMOhnhzbgNKZciCneiOMBeqxL3rdrbM3vgPgc7HstMueAC0QRseyrtC1FQG-GFzNQRDXqMVpGx90yxjIgIxUo2OpuGPhTv2q4D4DS-lJ2vhfSGWlRfh3e1kaSteOuONNlq1cVEyPY-TYGoXjoPq6ivcWkTl15bS-C_fIDmrt1DPAXlwj9ZeNzNyNJ7G4zzw0Aiwt8_yrDz2zkrITm2LBrH972XofAKvKbBuq-7KA.jpg" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/nIn6gCjEiPyRls5btxUgCgdQu1x1Ihj0ZYM9l7x79OBRCfILY0YAJpzLLjRpatXwNs9dtgD0bW8MyldQYMjQsiluNYWVzGWYlD0k7EyY7H2XKw245EkomfTuuECQo-kOGecvrFQEG8Bq8h1KhIci71yx9v6nsUeGcPNlUCy5liCwCzk_D6qwRF_wrTIE90fMDnBzaIpvvk9iV8T7Jne166dav0qLL6v1vDo_IYf9CV-dZJ-Zc7AhGTo-ibZ012Ln3ltEnVntc8DVOQGLlN8B17gx_1SEMJzxx7rVrGRXDLy0PlKVLpVLV5xQktKWv5HgVMlDieQVqo0-uvFZ-xo3Dw" type="image/jpeg" length="0"/>
     </item>
   </channel>
 </rss>

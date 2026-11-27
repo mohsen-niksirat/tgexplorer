@@ -7,6 +7,86 @@
     <description>توییت های برنامه نویسی و طراحی وب :) Admin: @dvtwi Hashtags: devtwitter.t.me/5 DevBooks Channel: https://t.me/+AYbOl75CLNYxY2U0 Github: https://github.com/DevTwitter X: https://x.com/devtwittir</description>
     <language>fa</language>
     <item>
+      <title>سخن v1.4.1 منتشر شد — گفتاربه‌متن فارسی، متن‌باز و کاملاً لوکال یک فایل صوتی فار…</title>
+      <link>https://t.me/devtwitter/14094</link>
+      <guid isPermaLink="true">https://t.me/devtwitter/14094</guid>
+      <pubDate>Fri, 27 Nov 2026 19:53:01 GMT</pubDate>
+      <description>سخن v1.4.1 منتشر شد — گفتاربه‌متن فارسی، متن‌باز و کاملاً لوکال یک فایل صوتی فارسی می‌دهید، متن تمیز و زمان‌بندی‌شده تحویل می‌گیرید. روی سرور خودتان؛ صدا از دستگاه‌تان خارج نمی‌شود و هیچ سرویس ابری وسط کار نیست. دموی مرورگری: مدل داخل مرورگر اجرا می‌شود، صفر آپلود امکانات: داشبورد وب فارسی، ربات تلگرام، API سازگار با OpenAI، خروجی SRT/VTT/DOCX، وب‌هوک امضاشده، جست‌وجو در آرشیو، و نصب تک‌خطی با docker compose (ایمیج آماده روی GHCR). مخزن و مستندات: https://github.com/Abolfazlrwm/sokhan دموی زنده (بدون نصب): https://huggingface.co/spaces/Abol0pati/sokhan-fa-demo ویرایش و بازنشرِ فصلِ دقت و امنیت این نسخه؛ ریلیز کامل: https://github.com/Abolfazlrwm/sokhan/releases/tag/v1.4.1 اگه امکان داشت استار بدین بهش @DevTwitter | &lt;Abolfazl/&gt;</description>
+      <enclosure url="https://cdn4.telesco.pe/file/T6iThAMk-9bfPubmMPq27VZnfRHONnLgMP-xRH9rKDF7zDu7_UifWveMDFdmkTsHQulj5hj74nzzNoS2vvKZyRdw0wufOjXMSqO_ucLc8bM-D26t9fGI3uxOMJWPvQ6jfk_-mGUaHd6HylXhYICUmH284PEHpSKdFacxbr20bZ7ZkmSOxi-JWUfNl7gbSL57W1k9hoWb8XMrAgj5U7Pg_Q7fbo5rFBzGQ4vpix0uSx-ag6K6YIzsbywXjPTeZM3_hRKuNmmnKbjs-SvjFEobjG-xocg79OR5T-fBLz13OS3amqgAY11QLBKiREwSdK-kjew0tYDbCOPs1HuJpYf3zA.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>اگه با سرورهای لینوکسی کار می‌کنی و حوصله نصب ایجنت اضافه یا اپ‌های SSH سنگین و …</title>
+      <link>https://t.me/devtwitter/14093</link>
+      <guid isPermaLink="true">https://t.me/devtwitter/14093</guid>
+      <pubDate>Fri, 27 Nov 2026 19:15:20 GMT</pubDate>
+      <description>اگه با سرورهای لینوکسی کار می‌کنی و حوصله نصب ایجنت اضافه یا اپ‌های SSH سنگین و پولی رو نداری، پروژه متن‌باز ZentraDeck رو ببین یه اپ دسکتاپ سبک (Go + Wails + React) که بدون نصب هیچی روی سرور، فقط با SSH معمولی وصل می‌شه و همه‌چیز رو زنده نشونت می‌ده (هسته Go فقط ~15MB رم می‌گیره). اتصال: پسورد، کلید SSH، ایمپورت ~/.ssh/config و پراکسی SOCKS5 مجزا برای هر سرور مدیریت زنده: نمای کلی سرورها (Fleet)، امتیاز سلامت، نمودار منابع، تسک‌منیجر (با Kill)، کنترل Docker و Systemd + لاگ، پورت‌ها/فایروال و ترمینال استریم زنده امنیت: بدون تله‌متری و ابر، خزانه AES-256-GCM با OS Keychain، رمزهای Write-Only، تایید کلید سرور (known_hosts/TOFU) و Privacy Mode تجربه کاربری: حالت Simple و Pro رایگان، فارسی راست‌چین کامل (+ ۱۰ زبان) و محیط دمو زنده برای تست بدون سرور گیت‌هاب: https://github.com/CyberRhythm/ZentraDeck دانلود: https://cyberrhythm.github.io/ZentraDeck/ @DevTwitter | &lt;Amirhg/&gt;</description>
+      <enclosure url="https://cdn4.telesco.pe/file/mXM4Uvzc6XLWNKJEfWYrR4up9DPOvjBXFJmuxftT9AWUepsRoz1K1N_Xpb6fMjGnnaO4BTmC8Z-XD8jsj-OPhjQEHLz5AFY3oOQ37m0swsQhqioclso4kHijNJA84V9-zL9xRf9MOXpEHQiczBSVBuPeksVQ2bQ5lmreHqVPbnMh3nmCQil9c3iv1-coceMEbqEbvOIZt4b9Y3ts6wr8r341xHRzJqYUFNs_wHTs5YFC8WFd8vK_JC9bimA-SSGkyEZ3SkABvneF02YLXobfyRI6WUm7rVK976Xiujd4d_KpbbhSkbMBp6uMWWrMnxY1EKQFDV5jd4IyKkLh6jODHg.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>راکت یا لایت‌اسپید کش؟ کدوم برای سایت وردپرسی ما مناسب‌تره؟ اگر سایت روی وب‌سرور…</title>
+      <link>https://t.me/devtwitter/14092</link>
+      <guid isPermaLink="true">https://t.me/devtwitter/14092</guid>
+      <pubDate>Fri, 27 Nov 2026 18:34:49 GMT</pubDate>
+      <description>راکت یا لایت‌اسپید کش؟ کدوم برای سایت وردپرسی ما مناسب‌تره؟ اگر سایت روی وب‌سرور LiteSpeed یا OpenLiteSpeed باشه، افزونه LiteSpeed Cache می‌تونه از قابلیت اختصاصی LSCache برای ذخیره و ارائه نسخه کش‌شده صفحات استفاده کنه. در این معماری، کش در سطح وب‌سرور مدیریت می‌شه؛ بنابراین درخواست‌های تکراری می‌تونن بدون اجرای کامل PHP و پردازش مجدد وردپرس پاسخ داده بشن. این موضوع به‌خصوص برای سایت‌هایی با ترافیک بالا می‌تونه در کاهش TTFB مؤثر باشه. ولی اگر سرور سایت Apache یا Nginx باشه: افزونه WP Rocket می‌تونه گزینه مناسب‌تری باشه. چون برای استفاده از قابلیت‌های اصلی کش، به وب‌سرور LiteSpeed وابسته نیست و روی زیرساخت‌های مختلف کار می‌کنه. البته افزونه LiteSpeed Cache روی این وب‌سرورها هم بعضی قابلیت‌های بهینه‌سازی رو ارائه می‌ده، اما Page Cache اختصاصی LiteSpeed رو در اختیار نداره؛ مگر اینکه از سرویس‌های مکمل مثل QUIC.cloud استفاده کنیم. پس قبل از انتخاب افزونه، این موارد رو بررسی کنیم: 1. وب‌سرور سایت چیه؟ LiteSpeed، Apache یا Nginx؟ 2. هاست چه امکاناتی برای Server-side Cache در اختیارمون گذاشته؟ 3. آیا CDN یا سیستم کش دیگه‌ای روی سایت فعاله؟ 4. وضعیت فعلی سایت در Core Web Vitals چطوره؟ یه نکته مهم دیگه هم اینکه نصب هم‌زمان WP Rocket و LiteSpeed Cache معمولا تصمیم درستی نیست چون ممکنه تنظیمات کش و بهینه‌سازی این دو افزونه با هم تداخل پیدا کنن. و در آخر اینکه نصب افزونه به‌تنهایی به معنی بهبود Core Web Vitals نیست. @DevTwitter | &lt; Amin Falahan /&gt;</description>
+      <enclosure url="https://cdn4.telesco.pe/file/UA17FxSRllLeYBQsZfsyE9EZ2EoB8bijmFA6MqhnmSId0Ocs4x2VJFkV14B2I-5kPchEtqE3liCAfmytTx5n7aOtFaPubkgykJ3dbIMV2gXOLU4ENAEbYCa5PPgKauVp59Y2PIW1sUI629z9NAydB0deTsDi4jIEy-laTNw7gmuuJ3_MM-Smw4VhoUMIuDE2ZMk_JjJOQ1yH-0m2YVTGHwJFHYXJ7BbcY7W5a2FHG-W7lH3ZE8rvQXi13U52bxk3t7rQHhzxpXnfpxu31WRzY8WhDFO1MDZEFPjNu2hGrYC8OFlu8lc-AujMFEQ6XuFgmUbmf3vOUYgnGehsSH2Wrg.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>بچه ها روزهای آخر بلک فرایدی لیاراست، باید با لیابات حرف بزنید کدهای تخفیف رو تا…</title>
+      <link>https://t.me/devtwitter/14091</link>
+      <guid isPermaLink="true">https://t.me/devtwitter/14091</guid>
+      <pubDate>Fri, 27 Nov 2026 16:35:13 GMT</pubDate>
+      <description>بچه ها روزهای آخر بلک فرایدی لیاراست، باید با لیابات حرف بزنید کدهای تخفیف رو تا 90 درصد ازش بگیرید. فقط حواستون باشه خوب باهاش حرف بزنید، اگه بد حرف بزنید بهتون هیچی نمی‌ده و باهوشه 😁 : 🔗 بلک‌‌فرایدی لیارا 🎁 یه جایزه ۱۰۰ میلیون تومانی هم دارن. کافیه از گفت‌وگوتون با لیابات اسکرین‌شات بگیرید و تا دوشنبه در توییتر، لینکدین یا استوری اینستاگرام منتشر کنید. فقط یادتون نره لیارا رو منشن کنید: Linkedin: liara-cloud Instagram : @liara_cloud X: @liara_cloud</description>
+      <enclosure url="https://cdn4.telesco.pe/file/DsHcvgFzdHoV1Y6fU3cefoClvirySwhKk_OXryqy6p_UwaSOkXn1XIMYne_fhU0en3LU5dpABCvQnSY9DL5sWTT0XZHbmEGuSJfkH2rPV0X5_XLbxrVkdQBsiXizkk8zcPCq8uL1FXj-pELzf324_wIK88TXPXC5ynozYlnVsxi2HyL0bUuvxKyPmqZlnLJlIAFRbzw27LOoa3HbzqA9fsIEaXtAppUb-bi9hSiUHt4JZYNWxdzBDsLK91xWsB3m8bc69dY7FYNJ9ybMvyz6-qKiBy3Ne-kCgY-9nAf2d0tDowUziGlvWYA8SvupxyVl5EPesqoOUb0SQOFbJ1psmg.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>پیاده‌سازی Push Notification بدون Firebase با Next.js و Express مدتی قبل درباره …</title>
+      <link>https://t.me/devtwitter/14090</link>
+      <guid isPermaLink="true">https://t.me/devtwitter/14090</guid>
+      <pubDate>Fri, 27 Nov 2026 15:49:01 GMT</pubDate>
+      <description>پیاده‌سازی Push Notification بدون Firebase با Next.js و Express مدتی قبل درباره این پروژه در لینکدین نوشتم و بخش‌هایی از نحوه پیاده‌سازی Push Notification بدون Firebase رو معرفی کردم. حالا برای اینکه توضیحات کامل‌تر و کاربردی‌تری ارائه بدم، یک ویدیوی آموزشی ضبط کردم و در اون کل فرآیند پیاده‌سازی رو به‌صورت قدم‌به‌قدم توضیح دادم. در این پروژه، یک سیستم ارسال نوتیفیکیشن از صفر پیاده‌سازی کردم؛ بدون استفاده از Firebase و با استفاده از Web Push API. تکنولوژی‌ها و مفاهیم استفاده‌شده: * Next.js * Node.js &amp; Express * Service Worker * Web Push API * VAPID Authentication * Push Subscription * Notification API هدف این پروژه، درک عمیق‌تر نحوه عملکرد Push Notification و پیاده‌سازی آن با زیرساخت اختصاصی بود. همیشه برای استفاده از قابلیت‌های پیشرفته وب، نیازی به سرویس‌های آماده نیست؛ گاهی پیاده‌سازی از پایه، فرصت خوبی برای یادگیری عمیق‌تر فراهم می‌کنه. ویدیوی آموزش: https://www.youtube.com/watch?v=cEr7007zulw @DevTwitter | &lt; Sadegh Akbari /&gt;</description>
+      <enclosure url="https://cdn4.telesco.pe/file/MlyA7ghSqQrULQzsPqkiWzOXcthJCGpJiFrROrLF0NWRsEFe19h7fb1MK_67NI8lCC3lzhkL_F9dR3pJzjYlp2cglj9wX_CZKcqPrus-Mm4qmXzEpr1UL0SgsEP9o_s0cbEbmiaTDxQOyOKPqMBdHyyTE7JY5SiVWMRpymKRmaJ6KH5IMUPk_J0EEmM6iouFtpGnC2wl6tIVFlsDfPB03a9I2nA7DcxSOpYU1BO-nNIsGueB05YbFS2zRucE9PgxDQrUCFSB-QT-ioy4Pst5Xr3JXs1lyuzJz8U2zQxcTIoy2VfGRkgK69CC8s9n9c5CcznN2XyxF38L7b3j8UjslQ.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>اگه توی حوزه‌ی Data Science کار می‌کنید، حتما درباره‌ی Tabular Foundation Models…</title>
+      <link>https://t.me/devtwitter/14089</link>
+      <guid isPermaLink="true">https://t.me/devtwitter/14089</guid>
+      <pubDate>Fri, 27 Nov 2026 15:02:09 GMT</pubDate>
+      <description>اگه توی حوزه‌ی Data Science کار می‌کنید، حتما درباره‌ی Tabular Foundation Models بخونید! مدل‌های از پیش آموزش‌دیده‌ای که می‌تونن روی داده‌های جدولی مسائل Classification و Regression رو بدون نیاز به آموزش از صفر حل کنن و با XGBoost و CatBoost رقابت کنن. https://huggingface.co/spaces/TabArena/leaderboard @DevTwitter | &lt; Ali Rashedi /&gt;</description>
+      <enclosure url="https://cdn4.telesco.pe/file/egBSgu-qHJrwNnKgyS2nxGWe2hSlhEhDe68WR5yxW96tmDBdm3Ou9-oH8ta0iWAm6qTLRQP6BIXVKJ-CPMlnmqp6aZWUxAfNIHAJZN8MR5gHb4kDFqqlas5RIcV5laV4gjsGixXM-NJQNpj6pSuluAfU4Ztt4A2LBzVqNQweBFOST7g-SgNC7PDHPTzVXXPJH1xbmps1MQTmMlYpQPBKvVGh5uRE3pLkm2g45-Uf3FnwyK4V-T_scNA0B2vrUyYG3Nac6bQHszP6RqZcI64Tmlxwonc3lPkEk45UdYbYweDq7bMMuXsB2fntzeJ0_8SHUxMtpI6vqW5WZ1RTx6yXXw.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>کلاد دیگه براتون نون هم میگیره! Mcp اسنپ فود رو امروز توی گیتهاب دیدم؛ عملا اگه …</title>
+      <link>https://t.me/devtwitter/14088</link>
+      <guid isPermaLink="true">https://t.me/devtwitter/14088</guid>
+      <pubDate>Fri, 27 Nov 2026 14:00:24 GMT</pubDate>
+      <description>کلاد دیگه براتون نون هم میگیره! Mcp اسنپ فود رو امروز توی گیتهاب دیدم؛ عملا اگه کیف پولتون شارژ کنید میتونید با هوش مصنوعی سفارش بدین یا از schedule استفاده کنین تا هر صبح سر ساعت سفارش بده لینکش: https://github.com/sepehr071/snapp-mcp @DevTwitter | &lt; امیرفخار /&gt;</description>
+      <enclosure url="https://cdn4.telesco.pe/file/fhUPMhj7zpk69alsDVag7-hJYC9nkfbvFn35ovPBfV_EtyoO7bxdJHM96RISUU99ILUIBdfbvfrZaFSAPlHRcjOl2itVy-i-DKJHIDNoJS1TjTod67t4zp_PWsoEhvqv2V51GunqfyGfriXO_8LblyeIpuxXnTRIYf5TQ5gC7Fe1wtYr6d3dVdVESwI-uGsvQK5NoHjT5WWg1zfFoc7qRJ_k27H21fEbxhJJlsu9aFa2JH-0YtFkJ390lG2fbJIwBV8b0N0DhAfzDfvI7dU2LeDzEe4xIK1eVpdXAICbkMTCM5DMUrErTEnoHtEyRZ-uoNI2wMDo9HPa6z5wncHNhg.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>🖤 بلک فرایدی ویراک کلود؛ ۱۵٪ شارژ هدیه بیشتر ! 🚀 ☁️ جمعه سیاه امسال، فرصتی ویژ…</title>
+      <link>https://t.me/devtwitter/14087</link>
+      <guid isPermaLink="true">https://t.me/devtwitter/14087</guid>
+      <pubDate>Fri, 27 Nov 2026 13:34:13 GMT</pubDate>
+      <description>🖤 بلک فرایدی ویراک کلود؛ ۱۵٪ شارژ هدیه بیشتر ! 🚀 ☁️ جمعه سیاه امسال، فرصتی ویژه برای استفاده از خدمات ابری و توسعه زیرساخت کسب‌وکارتون با اعتبار بیشتر! 🎁 با هر واریزی به حساب کاربری ویراک کلود، ۱۵٪ شارژ هدیه دریافت کنید! 💙 با اعتبار بیشتر، از خدمات متنوع ویراک کلود بهره‌مند بشید: 🔹 24 ساعت تست رایگان 🔹 پهنای باند اختصاصی 🔹 ترافیک نامحدود 🔹 وب‌سرویس و راهکارهای ابری 🔹 سایر خدمات زیرساختی ویراک کلود 🔥 فرصت بلک فرایدی رو از دست ندید! همین حالا حساب کاربری خودتون رو شارژ کنید و از اعتبار هدیه این جشنواره بهره‌مند شوید. برای دریافت کد تست رایگان، کلمه «تست» را به آیدی زیر ارسال کنید: https://t.me/cloud_virak 👇 سپس وارد پنل VirakCloud شوید، کد را وارد کنید: 🔗 https://B2n.ir/qy4432 ☎️ 02191555530 #ویراک_کلود #بلک_فرایدی #BlackFriday #رایانش_ابری #خدمات_ابری</description>
+      <enclosure url="https://cdn4.telesco.pe/file/amf_AgI_SjnBa27rRvaSINSV-OGvnRzkwQ2MTZR3EFEggGqH734HCv7FupvIyt2rEQXzmHcgPk7CL1od5LbYgYA6JWGjShJOZgQyOCg065jPpfc02fscCYSi_Hu3Wvnq5CehUdABgCgJ0XYF72BtA4X6DEDvI1h3lRgvUBWX4aUB0dHex5m3bxTpjwWWWgjMoJnyE3ZIv0YRwI6bvhA0GjOJHfe5Jybo0IhW0xIEP_oQr_zIijtndguTT138b_q1g0Uh6CRXwYqQbjnvpJmvV-7_Lf-KNcZQSAy1nsorsROjIYCgaiV3coL_oBlN664pd8B-Ca2yyh1EePtUwuO0mw.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>در این ویدیو به پدر بزرگ ها و مادر بزرگ ها شرح دادم MCP چیه @DevTwitter | &lt; Baba…</title>
+      <link>https://t.me/devtwitter/14086</link>
+      <guid isPermaLink="true">https://t.me/devtwitter/14086</guid>
+      <pubDate>Fri, 27 Nov 2026 13:05:11 GMT</pubDate>
+      <description>در این ویدیو به پدر بزرگ ها و مادر بزرگ ها شرح دادم MCP چیه @DevTwitter | &lt; Babak.uk /&gt;</description>
+      <enclosure url="https://cdn4.telesco.pe/file/MpCVyYkMTCx2Mdu3T0o_F2fUgPCTNaJhXPcXmSdCwfzIaQjKOT51GhwLDU8Ov6yZJ-AmR3VnyUAKracB3IrvZTYqhwfJ1m4IljsjgXSLIjdBArzds0AThauY9EbtKl7rtYHS1rPMEnLDcQCzsffwsodj1ADDZ1kms_-q7cKjYtEf7-9fC92Xfp5kQpn3KhzvokvKrqtXVbhOsl-XBXspXqe61Xq9YEC15G91_yTNPmj-58jmC4omAlwh--fsWuQSx358ZkfPIum6YOyUBGFZiWc9_udD85HU8Do9Tkikt-vdVwfJDzwjN6g7pVMO0Ytj8qTzJZU-EW77QHdxmH26lw" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>یه منبع فوق‌العاده برای تبدیل شدن به مهندس هوش مصنوعی https://become-ai-engineer…</title>
+      <link>https://t.me/devtwitter/14085</link>
+      <guid isPermaLink="true">https://t.me/devtwitter/14085</guid>
+      <pubDate>Fri, 27 Nov 2026 12:34:40 GMT</pubDate>
+      <description>یه منبع فوق‌العاده برای تبدیل شدن به مهندس هوش مصنوعی https://become-ai-engineer-2026.vercel.app همین الان ذخیره‌اش کن. @DevTwitter | &lt; Miss AI /&gt;</description>
+      <enclosure url="https://cdn4.telesco.pe/file/UnYQXOzks5VDmYwiosL6xgh2PxWW_jhsBM1aH2HnPIIgwN0nuEdteVSogdAKYW5QbipfpSWK5y7615jKchxr3w4sxSp9SA7wLy9KDkRAAYNwOGxuRhS1ol7TAEP1obAbhZZST4TVLoxf3qi4A9axT2zCRVdLUeImGRKX0UQ8urgVOrUFUBtgHKD74woR-x6DeoyhUtKgCWbO6palxvfNCcHlnLflHQkfL89dFLsk5a78xJZJES0e-X_Ao8IEhOiZBw78cFSIleXSoFjw3DY_iCc035XTjHUMacgacr0L6k-TNAgl_PwDdfBi4eyLcAg9VRGOyJdnSfBgfTT3mk2btg.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
       <title>۹۹ درصد تخفیف در بلک فرایدی لینگانو! 🎁 به مناسبت بلک فرایدی، مینی‌دوره آموزش زب…</title>
       <link>https://t.me/devtwitter/14084</link>
       <guid isPermaLink="true">https://t.me/devtwitter/14084</guid>
@@ -76,7 +156,7 @@
       <guid isPermaLink="true">https://t.me/devtwitter/14076</guid>
       <pubDate>Thu, 26 Nov 2026 19:53:01 GMT</pubDate>
       <description>چرا String در Java تغییرناپذیر (Immutable) است؟ یکی از ویژگی‌های مهم کلاس String در جاوا، تغییرناپذیر بودن آن است؛ یعنی بعد از ساخته شدن یک شیء از این کلاس، مقدار داخلی آن قابل تغییر نیست. اما چرا جاوا چنین تصمیمی گرفته است؟ این ویژگی چند دلیل مهم دارد: - امنیت (Security) رشته‌ها در بخش‌های حساسی مثل نام کاربری، مسیر فایل‌ها و اطلاعات اتصال استفاده می‌شوند. تغییرناپذیری کمک می‌کند مقدار یک رشته پس از بررسی و اعتبارسنجی، ناخواسته تغییر نکند. - مدیریت حافظه (String Pool) جاوا می‌تواند رشته‌های یکسان را در String Pool به‌صورت مشترک نگهداری کند. چون رشته‌ها تغییرناپذیرند، اشتراک‌گذاری آن‌ها بین بخش‌های مختلف برنامه امن‌تر است و از مصرف حافظه اضافی جلوگیری می‌کند. - امنیت در محیط چندنخی (Thread Safety) از آنجا که مقدار یک String پس از ساخته شدن تغییر نمی‌کند، چند Thread می‌توانند آن را هم‌زمان بخوانند، بدون اینکه نگران تغییر مقدار داخلی آن باشند. - عملکرد در ساختارهای داده رشته‌ها در ساختارهایی مانند HashMap و HashSet کاربرد زیادی دارند. ثابت ماندن مقدار رشته باعث می‌شود مقدار hashCode آن نیز پایدار بماند و عملکرد این ساختارها قابل‌اعتمادتر باشد. در واقع، تغییرناپذیری به این معنا نیست که نمی‌توان متغیری از نوع String را به مقدار دیگری نسبت داد؛ بلکه شیء String ساخته‌شده، قابل تغییر نیست و در صورت نیاز، شیء جدیدی ایجاد می‌شود. اگر قرار است تغییرات متنی زیادی انجام دهیم، کلاس StringBuilder می‌تواند انتخاب مناسب‌تری باشد؛ چون Mutable است و امکان تغییر محتوای خودش را فراهم می‌کند. @DevTwitter | &lt; parham saghazadeh /&gt;</description>
-      <enclosure url="https://cdn4.telesco.pe/file/sZxub6TZl-eUZExVtREEUnaPVG-vskWP3iM6GMYPH0uL_1Ors5zOEbD2IUwOPDxCvu60DIHbgBD4RQ9m7Y5e-Hd3NUhNDRb3Q02hBvgjwf37iLX4MIkroBswxt4HQGez9FBTkSq7XlmRZm3Q1k9i47uBFBGMkWPxpcyKXpe_cA0-zf-rPR5Xb-5QLFUMSweKwZHdibBxWnyLh4EGyQX_wpbRk-NdfpQdIrYC6IO7ijsv5CXEVMVlcGQBlg5w2G8CFyxisfeHFwJR_WbiixFpyTaNuu4vYu0IykrR9jSC34nsYfE1sQsukokZGOEtWghxRTEmWe_w5jfZEvtXxpAV2w.jpg" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/B6YNPvrglsAwXx20Sc9sVWmKcqS-PLDCO6ySCrF0v2u6ir6YQqNgcabzSMTzUEuekfgKUtciSZ_ywVg2aJQsAUpFWrArUWxAC8BUHv-FCIapG3JgsAYEDqjgx_nDKTnQCHPWyALQYDeO0BdTNZuYxON3hnecmwfpCBEIOdywEUWLgyTgWBMUNZVE8fqm76mSz1WJUV35wfTXL3jvB86y7Qkwkx6IeEwnr12JrJ6XoRhzNcBwihYHIR_MBgufXR9tYXoz23OP1FWoAVJzcmntMxkSJFnr6-2H878ZrkZvVLqE51S8P1nRmdDfsCM7t7dam9AnPqcI2zC8xHw3O96V6Q.jpg" type="image/jpeg" length="0"/>
     </item>
     <item>
       <title>ایجنت OpenCode حالا مرورگر داخلی و اتوماسیون داره! نسخه‌ی OpenCode 2.4 منتشر شد؛…</title>
@@ -84,86 +164,7 @@
       <guid isPermaLink="true">https://t.me/devtwitter/14075</guid>
       <pubDate>Thu, 26 Nov 2026 19:32:58 GMT</pubDate>
       <description>ایجنت OpenCode حالا مرورگر داخلی و اتوماسیون داره! نسخه‌ی OpenCode 2.4 منتشر شد؛ تو اپ دسکتاپ یه مرورگر داخلی اومده که لاگین‌ها و تاریخچه رو از Chrome، Edge، Firefox یا Safari میاره و ایجنت می‌تونه همون صفحه‌ها رو بخونه و باهاشون کار کنه. قابلیت Automations هم اضافه شده؛ ایجنت می‌تونه یه پرامپت، اسکریپت یا دستور شل رو با تایمر، زمان‌بندی cron یا رویداد یه سرور MCP اجرا کنه. با دستور /automation مدیریت میشه. اگه مدل ویدیویی وصل باشه، با ابزار generate_video ویدیو هم می‌سازه و فایل‌ها رو تو پروژه ذخیره می‌کنه. ظاهر جدید TUI هم پیش‌فرض شده؛ برای تم قبلی opencode-classic رو انتخاب کن. ️ ابزار تولید عکس اسمش به generate_image عوض شده و تأییدهای قبلی یه بار دیگه پرسیده میشن. https://github.com/anomalyco/opencode/releases/tag/v2.4.0 @DevTwitter | &lt; Ali Askari /&gt;</description>
-      <enclosure url="https://cdn4.telesco.pe/file/lmdTgvMGac2WKdq9vzQ1dezPw3SVplFI0bXZx-NeHpjFjOF8If6_-zkD99UYilL-BFn4RRKdoQm_mHjXsUFEVobPZaceJUhTOylcQ7RtMm02gAMPnhNFHA4gjDuHf66YD0Irt2p4KYIlhjaN6b_ugKVnUq1XUhsfVjD_OVzHHanSs91uvf84GNmXjJtAcdXbetn6WruATth57VockhdGKQb2vmE6SU0JWbnL19av9CedslTB99HSKHPAhFUiwd84DcY4529QplP55W-HoxpKgP0OEulW1JNGCWewfAg-H5sRj7RlDsBlKgOj0I4AQno-yUd4G6tgaxVwNqo5kVe2CQ.jpg" type="image/jpeg" length="0"/>
-    </item>
-    <item>
-      <title>چرا هکر نمی‌شی؟ ما تو کوئرا داریم هک و امنیت یاد می‌گیریم! 🔥 فقط ۲۴ ساعت فرصت د…</title>
-      <link>https://t.me/devtwitter/14074</link>
-      <guid isPermaLink="true">https://t.me/devtwitter/14074</guid>
-      <pubDate>Thu, 26 Nov 2026 18:33:03 GMT</pubDate>
-      <description>چرا هکر نمی‌شی؟ ما تو کوئرا داریم هک و امنیت یاد می‌گیریم! 🔥 فقط ۲۴ ساعت فرصت داری که دوره هک و امنیت رو با ۵۰٪ تخفیف ثبت‌نام کنی! 💳 امکان پرداخت قسطی 🔗 https://quera.org/r/trk3p</description>
-      <enclosure url="https://cdn4.telesco.pe/file/hdoK_ZOwEJV-5qYIIvcHchvwRimpPoImNWrOZDBYXG5tzSUfAaZedQS6hjvYOpnW1DNIFn-RggZ4Q0Kk3XjteKa3cBJYVLH4pb3iPk5Lukzff7R5AowwvgykAH1hur6FDVRr1iPnGEBRkRLLQAuHQ3RawQcS5dJLefkPBfNc-vbBcudQGCXTV75EEJyIld8t0JHKTBvX15nTpyc77Y3n5xU5T919MA90djvcFCy0bD8H7Jl74f9mJdU6MHZTi16B4SasfuYzq4vVGsRv6HOCCdNr1ITOBaky6Kt9H1qBLYaPqkEsQynjyNdfaHCmwlNccbrj50wpNtNPxcHC22usvw.jpg" type="image/jpeg" length="0"/>
-    </item>
-    <item>
-      <title>قبلنا MCP به Claude ابزار می‌داد؛ حالا می‌تونه بهش یاد بده چطور از اون ابزارها د…</title>
-      <link>https://t.me/devtwitter/14073</link>
-      <guid isPermaLink="true">https://t.me/devtwitter/14073</guid>
-      <pubDate>Thu, 26 Nov 2026 17:51:01 GMT</pubDate>
-      <description>قبلنا MCP به Claude ابزار می‌داد؛ حالا می‌تونه بهش یاد بده چطور از اون ابزارها درست استفاده کنه! یکی از تغییرات جالب نسخهٔ جدید Claude Code، پشتیبانی از Skills ارائه‌شده توسط MCP Serverهاست. بذار ساده توضیح بدم چی تغییر کرده. قبلاً وقتی یک MCP به Claude وصل می‌کردیم، ابزارهایی در اختیارش قرار می‌گرفت؛ مثلاً برای کار با GitHub، دیتابیس یا سرویس‌های خارجی. اما داشتن ابزار لزوماً به معنی بلد بودن Workflow درست نیست! مثلاً Claude می‌تونست Pull Request بسازه، ولی برای انجام یک Code Review استاندارد، به دستورالعمل‌های جداگانه نیاز داشت. حالا MCP Server می‌تونه علاوه بر ابزارها، Skill هم ارائه بده. یعنی چی؟ یعنی یک MCP می‌تونه هم ابزار انجام کار رو در اختیار Claude بذاره، هم روش صحیح انجام اون کار رو. به نظرم این تغییر می‌تونه نحوهٔ طراحی و توزیع ابزارهای AI رو حسابی تغییر بده. چون دیگه فقط با یک API Wrapper طرف نیستیم؛ داریم به سمت ابزارهایی می‌ریم که دانش و توانایی انجام کار رو با هم ارائه می‌کنن. @DevTwitter | &lt; Sepideh Moradiani /&gt;</description>
-      <enclosure url="https://cdn4.telesco.pe/file/a6LJ9Q_o8moFL74Mv0uZ_fJw9hldjOvuFfZBTNoozgkudSnCaYN9T40F16-7xFtu-13pnnudRC6m6yQlATt-62JGqLSy83xY3ILEhe3IwDIbmFCh7cqNvOgooCQ0iACnKbc0oSYC18fOKLq7G59avSaHRbEYuz_LyeJet5-whM3HuE-gkK4V7ND5HCnb1mJuOIHjXHirzZkql2dwrRUX0ABOZOrT-r8r2PwvHgt-ib6jVyBbSbEn5LOOx5Ge0bbS44jplQw__DNwR6MZ9W0DQA2RUPp8PkBs9JUrjE_V_P1kv6_w_6dvQwq3_NBSgPQqJEs29AUiIRltno34HfSZOA.jpg" type="image/jpeg" length="0"/>
-    </item>
-    <item>
-      <title>لیابات هنوز کوتاه نیومده! تو چی؟ 🤖 بلک‌فرایدی لیارا به روز سوم رسید! فقط کافیه …</title>
-      <link>https://t.me/devtwitter/14072</link>
-      <guid isPermaLink="true">https://t.me/devtwitter/14072</guid>
-      <pubDate>Thu, 26 Nov 2026 15:31:18 GMT</pubDate>
-      <description>لیابات هنوز کوتاه نیومده! تو چی؟ 🤖 بلک‌فرایدی لیارا به روز سوم رسید! فقط کافیه با لیابات چونه بزنی و ببینی می‌تونی تا ۹۰٪ تخفیف ازش بگیری یا نه! 🔥 ⏳ فقط ۲ روز دیگه فرصت داری! وارد بازی شو: 🌐 بلک‌‌فرایدی لیارا @liara_cloud</description>
-      <enclosure url="https://cdn4.telesco.pe/file/PWyQQOFT7U2cvduoq5dqa5nRVgtCqA2HjfKoHJOaAQKG1vKrkEXTqYzOVKc7cp7VcWWaN2i9SsZy6tZHHMgJoC0NMPLGroKvXmoHb4b81XG6Z3-GE3GR-N4iPHtxdJrW0V40VHeoQpwcMDR4T40fVtF3LTWKzKuNSS8c4DmRYFCoJt0jGXyv-bK-mwYtXbE71YvA01oROznsL3IDn0FwFEM6Ubp7MmVk9DM2tnKImYqTnVaeP-BLOACjolzsve8SVJbojXVndG3LoYveChpmCI66OWto9n3VUQuJH14HdFeHJgBJUYBI2vaYNEobHO4bRnuU5_RqYxvJbjKlLKsdbA.jpg" type="image/jpeg" length="0"/>
-    </item>
-    <item>
-      <title>فاجعه دیتابیس GitLab در ۲۰۱۷؛ وقتی فهمیدند Backupها واقعاً Backup نیستند! تصور ک…</title>
-      <link>https://t.me/devtwitter/14071</link>
-      <guid isPermaLink="true">https://t.me/devtwitter/14071</guid>
-      <pubDate>Thu, 26 Nov 2026 15:29:01 GMT</pubDate>
-      <description>فاجعه دیتابیس GitLab در ۲۰۱۷؛ وقتی فهمیدند Backupها واقعاً Backup نیستند! تصور کنید دیتابیس Production شما حدود ۳۰۰ گیگابایت داده دارد. یک Replica هم دارید که قرار است در شرایط بحرانی نجاتتان دهد. همچنین Backup روزانه هم فعال است. پس خیالتان راحت است، درست است؟ ۳۱ ژانویه ۲۰۱۷، تیم GitLab با واقعیتی متفاوت روبه‌رو شد. در جریان تلاش برای بازسازی PostgreSQL Replica، یک مهندس تصور کرد روی سرور Secondary قرار دارد؛ اما دستور حذف Data Directory را روی Primary اجرا کرد. در عرض چند ثانیه، بخش عمده‌ای از دیتابیس Production حذف شد. اما قسمت تکان‌دهنده‌ی ماجرا این نبود که یک دستور اشتباه اجرا شده بود. قسمت تکان‌دهنده این بود که وقتی تیم سراغ راه‌های بازیابی رفت، متوجه شد Backupها هم قابل استفاده نیستند. چه اتفاقی افتاده بود؟ - اول اینکه Replica به دلیل افزایش بار دیتابیس از Primary عقب افتاده بود. - همچنین WAL Segmentهای موردنیاز دیگر در دسترس نبودند و Replication متوقف شده بود. - در ضمن Backup استاندارد با &quot;pg_dump&quot; به دلیل استفاده از نسخه‌ی ناسازگار PostgreSQL شکست می‌خورد. - هشدارهای شکست Backup به دلیل مشکل ایمیل و DMARC به مقصد نمی‌رسیدند. - دیگه اینکه Snapshotهای دیسک Azure برای این دیتابیس فعال نبودند. در نهایت، تنها یک LVM Snapshot که حدود شش ساعت قبل برای محیط Staging گرفته شده بود، امکان بازیابی را فراهم کرد. در نهایت GitLab مجبور شد از همان نسخه برای بازگرداندن سرویس استفاده کند. نتیجه؟ حدود ۱۸ ساعت اختلال و از دست رفتن تغییرات بخشی از داده‌های دیتابیس در بازه‌ی حادثه؛ از جمله Projects، Issues، Comments و User Accounts. ولی Git Repositoryها و Wikiها از این حذف آسیب ندیدند. این حادثه یک درس مهم برای تمام تیم‌های Data Engineering، DBA و SRE داشت: نباید Replication را جایگزین Backup در نظر گرفت. و حتی مهم‌تر: نسخه Backupی که Restore آن را آزمایش نکرده‌اید، هنوز یک تضمین نیست. @DevTwitter | &lt; Mahdi Hedjazi /&gt;</description>
-      <enclosure url="https://cdn4.telesco.pe/file/WreshyhFCTgtl_Ke0XSaM3SScsNwdoG0PARUG290O7J1AwSU8Ug1DQlWY-cnDUxHaeb8-he8LmzIcbg_yOfJbWwBGePl46bhRpkArcQ40Gc_wIMoJkcDtBdnLyYVyJR22ILHGcluv6UkY5iarbfFPIcPar00TkrvPj8YaoD0lWT55zxGZpEUtULOaWRf4AqC2lwezOK68aPCfZH5Q3uav8-1Tb19TW0YE_iECYtVL1P-sjMjRYGYuF6Pgsww9eAv5djHbynXMqByWiliUlrv9X8C3ueCnNnO7amuAADjbxaV4HOPQP9X9kMfjSHesfA17BW59_1l6cwfiLybw4UXeQ.jpg" type="image/jpeg" length="0"/>
-    </item>
-    <item>
-      <title>دوره جامع پایتون: مقدماتی تا پیشرفته 🗓 شروع دوره:14 آذر 🎁 تخفیف ویژه برای دانش…</title>
-      <link>https://t.me/devtwitter/14070</link>
-      <guid isPermaLink="true">https://t.me/devtwitter/14070</guid>
-      <pubDate>Thu, 26 Nov 2026 14:58:02 GMT</pubDate>
-      <description>دوره جامع پایتون: مقدماتی تا پیشرفته 🗓 شروع دوره:14 آذر 🎁 تخفیف ویژه برای دانشجویان، فرصتی بی‌نظیر برای شما! 🔥 آموزشی که شما را به برنامه‌نویس حرفه‌ای تبدیل می‌کند و در بازار کار به شما رقابت‌پذیری بیشتری می‌دهد. همچنین برای اپلای‌های شغلی و تحصیلی شما را برتر می‌کند و به راه‌اندازی استارت‌آپ‌های شگفت‌انگیز کمک می‌کند. ⏰ 140 ساعت آموزش مجازی، با بیش از 25 پروژه و مینی‌پروژه برای تسلط کامل! 🌟 سرفصل‌های دوره شامل: 💻 تسلط بر کدنویسی پایتون 💻 علوم داده با پایتون 💻 محاسبات علمی با پایتون 💻 یادگیری ماشین با پایتون 💻 طراحی بازی و اپلیکیشن با پایتون 💻 ساخت بلاک‌چین و ارز دیجیتال با پایتون 💻 هک و امنیت با پایتون 💻 طراحی سایت با پایتون 🎁 همراه با هدایای ویژه، از جمله پکیج کسب درآمد از پایتون! همین حالا شروع کنید و بهترین نسخه خود را با ما کشف کنید! 💥 🚀 🔥 🌟 به دوستان خود نیز اطلاع دهید تا این فرصت را از دست ندهند! 🌟 👨‍🏫 برگزارکننده: شرکت آتی پژوهش امیرکبیر @kargah2018 👩‍🎓 جهت ثبت نام و کسب اطلاعات بیشتر @apa_admin12</description>
-    </item>
-    <item>
-      <title>این واقعا ترسناکه! سیسکو و OpenAI از محصولی مشترک به نام Shirudo رونمایی کردند. …</title>
-      <link>https://t.me/devtwitter/14069</link>
-      <guid isPermaLink="true">https://t.me/devtwitter/14069</guid>
-      <pubDate>Thu, 26 Nov 2026 14:32:52 GMT</pubDate>
-      <description>این واقعا ترسناکه! سیسکو و OpenAI از محصولی مشترک به نام Shirudo رونمایی کردند. شیرو‌دو یک محیط اجرای متن‌باز برای لینوکس است که به عامل‌های هوش مصنوعی امکان می‌دهد با eBPF سپرهای امنیتی موقت بسازند و از سیستم‌ها بدون توقف سرویس‌ها محافظت کنند. به نظرم ارزش این ایده در فاصلهٔ بین کشف یک آسیب‌پذیری و واکنش سریعه. شیرودو در همین فاصله، جلوی نفوذ از آسیب‌پذیری رو میگیره و سرویس رو نجات میده، تا شما سر فرصت،مشکلی رو ریشه ای حل کنید. سیسکو و OpenAI این پروژه را قدم اول به‌سمت زیرساختی میدانند که بتواند خودش را با تهدیدهای تازه تطبیق دهد! تهدید هایی که حتی میتواند با استفاده از agent های دیگر توسط مهاجم رخ دهند! معرفی رسمی Shirudo در وب‌سایت OpenAI: https://openai.com/index/introducing-shirudo/ @DevTwitter | &lt; Sepehr Bayat /&gt;</description>
-      <enclosure url="https://cdn4.telesco.pe/file/aeFx_17sdoc2Agg8NbSFUyvdJcdXa3zcaoRE2ZDvnZn2b1BxWo-stVcdcME9R489RNDT1D1Lc5UDijEGJaOGVY5YZ56Etq9rT1DbViUo51y_y7jb8sKHa6F9T2ZRK2k75zbpkBFUq7coV2xSOiipuGLBb7gsmzNBoOExPTu8em1FzLg-t1yAR8DY-orgUpTctICttNd0uXRkYtP_Vf9-3B4nsJ4WCPdXcZDzgiB7IToHyWYb1G6gNWlSs2imPNY5hzT6R5sZvslf5fmTWrus-nL80f2N6WlkydUOjdYmLDnmJIaja70sllCP279BtbAzUpCsQj82smS-_FCLOLKbTg.jpg" type="image/jpeg" length="0"/>
-    </item>
-    <item>
-      <title>اگه خواستید کلادتون بن نشه ببریدش رو حالت Custom Gateway و از iranrouter.net ی A…</title>
-      <link>https://t.me/devtwitter/14068</link>
-      <guid isPermaLink="true">https://t.me/devtwitter/14068</guid>
-      <pubDate>Thu, 26 Nov 2026 12:34:20 GMT</pubDate>
-      <description>اگه خواستید کلادتون بن نشه ببریدش رو حالت Custom Gateway و از iranrouter.net ی API بگیرید ست کنید روش آموزش نحوه اتصال: https://www.zoomit.ir/pr/471110 #کلاد # claude</description>
-      <enclosure url="https://cdn4.telesco.pe/file/RCGhSnmZ_e1SCPVT85R5kQMiHF-3-GQm9SD-FmFwALo50-HIZdTQKgTQhDaLRHXLpJDX9KGgrAwiD4qjR2nl7DqT5CrMpdB48HPIUDuEGop4HayyXWJfeE32N3uFAgqO7OM98Y209Au1mZQ8bhiCWkTioWjbZqUYADmeUpTIoO975KRXPvtuvfQp9rUxtpRKQQQW99MDtQQHmVQTGf2d5VN9rjMFi1DEA15VZfS_uvxvLlaitOEOgYEBk37EI2_jp2Jd0Sp6KTVh9lSnawEe4xghfOeOz3RugPd9ax-OQcOP_9cwu0aNU--D5faC1DrD22tmxDGRTvnPoFGNfTug0g.jpg" type="image/jpeg" length="0"/>
-    </item>
-    <item>
-      <title>️کامپیوتر (Computer) پرپلکسیتی داخل مرورگر کار می‌کند پرپلکسیتی (Perplexity) در …</title>
-      <link>https://t.me/devtwitter/14067</link>
-      <guid isPermaLink="true">https://t.me/devtwitter/14067</guid>
-      <pubDate>Thu, 26 Nov 2026 11:45:17 GMT</pubDate>
-      <description>️کامپیوتر (Computer) پرپلکسیتی داخل مرورگر کار می‌کند پرپلکسیتی (Perplexity) در ۲۰ نوامبر ۲۰۲۶ افزونه کامپیوتر را برای مرورگرهای کرومیوم منتشر کرد. به گفته شرکت، از پنل کناری می‌توان کار را سپرد تا در تب‌های همان مرورگر سایت باز کند، صفحه بخواند، فرم پر کند و از حساب‌های واردشده استفاده کند. در کروم، اج (Edge)، بریو (Brave)، آرک (Arc) و مرورگرهای مشابه نصب می‌شود و به اپ مک و ویندوز وصل می‌شود. طرح اشتراک در صفحه رسمی مشخص نشده است. نکته کاربردی: فقط برای کاری که خودتان شروع کرده‌اید اجازه بدهید و پیش از ارسال فرم، متن را بررسی کنید. منبع و تصویر: Perplexity https://chromewebstore.google.com/detail/perplexity/pninphncmkphpjgfffammoenglghcjii @DevTwitter | &lt; Abbas Bahadori Pour /&gt;</description>
-      <enclosure url="https://cdn4.telesco.pe/file/eZCUoUbETVvC8ZLatv1FTwR9JpCtW0kElcvLDBqohAIbO-nlPumk1cnsYfAVG21HYf4ojl-b8J4J3QOaz52TKAbnIIFg6VyT9_0l8xZLWHm11sZPQqFya_Ji143KgISvpjxyVtS92aC_Cbn1RLZLsKTd4F7pWWcsZkiCcEQnX0kDGA6j2HFGo23Ey0QMSYsVBIjSyhyMdRaDKX6GPIK2JLbSU7zpiLZ1EdCNgKAoe9CHGYiRxOxDPvHn0i3R9BMFEBFBjmQXFsV-LMSrNX1ReqnQv3MFYt2RsS-BFtJvGiuuHKv0pneJQ6pT72in60sELXSvOAmeVh_UyGe9CrzkNw.jpg" type="image/jpeg" length="0"/>
-    </item>
-    <item>
-      <title>گوشی قدیمی‌تان را دوباره استفاده کنید؛ شاید گوشیتون یک داشبورد هوشمند برای کامپی…</title>
-      <link>https://t.me/devtwitter/14066</link>
-      <guid isPermaLink="true">https://t.me/devtwitter/14066</guid>
-      <pubDate>Thu, 26 Nov 2026 11:05:15 GMT</pubDate>
-      <description>گوشی قدیمی‌تان را دوباره استفاده کنید؛ شاید گوشیتون یک داشبورد هوشمند برای کامپیوترتون بشه! پروژه‌ی متن‌باز و جالبی به نام PhoneBox هست که به شما اجازه می‌ده یک گوشی اندرویدی قدیمی را به پنل مانیتورینگ و کنترل کامپیوتر تبدیل کنید. خیلی ساده گوشی را کنار مانیتور قرار می‌دید و اطلاعات و کنترل‌های موردنیازتونو روی صفحه آن نمایش می‌ده. ️ چه امکاناتی داره؟ - مانیتورینگ سیستم: مشاهده وضعیت CPU، GPU، RAM، فضای دیسک، شبکه و پردازش‌های در حال اجرا. - مانیتورینگ ابزارهای هوش مصنوعی: مشاهده وضعیت نشست‌های ابزارهایی مثل Claude Code، Codex و OpenCode، میزان مصرف و سهمیه‌ها. - کنترل کامپیوتر با لمس گوشی: اجرای میانبرها، کنترل صدا و موسیقی، مدیریت برنامه‌ها و اجرای دستورات از طریق پنل کنترلی. - ویجت‌های متنوع: ساعت، تقویم، آب‌وهوا، تایمر، نمودارها، چک‌لیست‌ها و امکانات اتوماسیون. - شخصی‌سازی کامل: امکان ساخت صفحات مختلف و چیدمان ویجت‌ها با یک ویرایشگر بصری تحت وب. اتصال گوشی به کامپیوتر از طریق USB یا Wi-Fi انجام میشه و این ابزار برای Windows، Linux و macOS در دسترسه. نکته جالب دیگه اینه که PhoneBox برای کارکرد اصلی خود به حساب کاربری یا سرویس ابری نیاز نداره؛ هرچند بعضی ویجت‌ها و یکپارچه‌سازی‌های اختیاری ممکنه با سرویس‌های خارجی ارتباط برقرار کنند. به نظرم یکی از کاربردی‌ترین ایده‌های این پروژه، استفاده دوباره از گوشی‌های قدیمیه؛ دستگاهی که شاید مدت‌هاست گوشه کشو افتاده، می‌تونه به یک پنل اختصاصی برای میز کار تبدیل بشه! صفحه GitHub پروژه: https://github.com/ersinkoc/phonebox @DevTwitter | &lt; Reza Shafaghi /&gt;</description>
-      <enclosure url="https://cdn4.telesco.pe/file/C-Wh88n81oz2ntH34-QwrqGrWXWJWToGr2WBVycU90aGqa12_9ZXT1xgMoDslwwTl-LGsVwFkJU7Oz1UBBAwICDX0EpPErBfxdNo-S5S8fPfFZKNg893OCzZGrVyWRh1PIYzf243cm-i3LViEdCq8PvuYgwJF1vAAKpkkS_UpcwgyDfiGQpI2rW94nyPh6bO7OJu3lLoTCdEXkwJqvcd-MOFpfeSg12w8wC4KpDRseYfbZaNEHyykceSv179BfCrfkq7EPD214SzK7FS1SmAPMrJY-iYtRuKtj9dyhoDFDo3e8QFqMjlwCBbUhRW2vmDKSYcDcMDGiN2zc3pk7Qt2Q.jpg" type="image/jpeg" length="0"/>
-    </item>
-    <item>
-      <title>به مناسبت بلک فرایدی، تمام پلن‌‌های سینوکس ۲۰٪ تخفیف خورد! 🎲 هر ۱ میلیون توکن O…</title>
-      <link>https://t.me/devtwitter/14065</link>
-      <guid isPermaLink="true">https://t.me/devtwitter/14065</guid>
-      <pubDate>Thu, 26 Nov 2026 10:30:43 GMT</pubDate>
-      <description>به مناسبت بلک فرایدی، تمام پلن‌‌های سینوکس ۲۰٪ تخفیف خورد! 🎲 هر ۱ میلیون توکن Opus 5.5 فقط ۱۵ سنت ! دسترسی به بهترین مدل‌های هوش مصنوعی دنیا، همگی با یک قیمت! بدون دردسر بن شدن اکانت و قابل دسترس حتی با IP ایران! کد تخفیف: BLACK20 فقط تا جمعه فرصت داری! 💙 @SinoxAPI 🌐 Sinoxapi.com</description>
-      <enclosure url="https://cdn4.telesco.pe/file/U3NOmnoT7WHS_UOv8vQsUbsooEOm74wKvv3L8fZfjBL1fH2ybAA3CEy91eDPstcOFuVJmIhY2e0Nwa03wwWBjMVpmV9fkwPyEO5Eq8GrhpPyM6ihs29aPPe6PbB9gQfuc61phNq4gr0fdXGS2JM1mTQAK9d3dan4sCWpHUVhFmbYUXMk8abpsaQ4ejrAaO9Gu8dxW0cwJJhZ3-h9Z2pjE0qE3M2mFbyjqyxJpVAPFCmRbqwqUq6ap_4J0vOJuboGVGfYdCj6qcKL9GuT-M7hR2fvhYzinjOKITCdeuJG5mfLHIB8BXhQ5rRv2GavTQwD6CMk2ty2s4p1CLb8hMFyXw.jpg" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/AqSSRJR6D5Oyggcfb5c3PTL3wa8CQ7u6rnJD7fTPS2O2UaiCcit_3uydFM5hVrMxoLqIYTzm6ssjmC2WlSxsBAjhk0pwZ8fQmeJ7AQwul3-92cy5e60sXhkLm1LZXsJcDQ413WRdlUwll6PG5EKYtiAkr2sTEOPRn-HOI0F0C2010sTXA4dBi4RdnoArSxPfh5vE7VdvEdeY-8jCAvTyrtjHe87FL1JFB5aesGZhs6hSVA1FOQz1wTFsqKp73rQkPsY8ZWCgV2Wl0iYwC0AH_wuWAsSk3fhzlefAPw8wRRFcFgN7zWyni8kLAXjvYN7i5hOyRxKCgjAa4qUFTgwRCw.jpg" type="image/jpeg" length="0"/>
     </item>
   </channel>
 </rss>

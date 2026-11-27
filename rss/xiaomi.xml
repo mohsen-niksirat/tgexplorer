@@ -6,6 +6,12 @@
     <atom:link href="https://mohsen-niksirat.github.io/tgexplorer/rss/xiaomi.xml" rel="self" type="application/rss+xml"/>
     <description>Independent News Source All Upcoming Devices, News, Apps and More. :) 👥Xiaomi Global Chat @XiaomiEN 📦Want to Buy Xiaomi Products? Find them at Admin - @CloudFlare</description>
     <language>en</language>
-
+    <item>
+      <title>#GTA6 #Xiaomi18Pro @Xiaomi</title>
+      <link>https://t.me/xiaomi/3951</link>
+      <guid isPermaLink="true">https://t.me/xiaomi/3951</guid>
+      <pubDate>Fri, 27 Nov 2026 13:25:47 GMT</pubDate>
+      <description>#GTA6 #Xiaomi18Pro @Xiaomi</description>
+    </item>
   </channel>
 </rss>
