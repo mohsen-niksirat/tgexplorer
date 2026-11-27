@@ -7,6 +7,22 @@
     <description>Авторский канал по ВАЙБ КОДИНГУ Ссылка для друзей: https://t.me/+ll3pbl442dNkZmYy Cотрудничество: @devmangx РКН: https://clck.ru/3RRVfk</description>
     <language>ru</language>
     <item>
+      <title>Сегодня один из лучших способов разобраться в новой теме — попросить ИИ создать …</title>
+      <link>https://t.me/vibecoding_tg/4453</link>
+      <guid isPermaLink="true">https://t.me/vibecoding_tg/4453</guid>
+      <pubDate>Thu, 26 Nov 2026 18:36:01 GMT</pubDate>
+      <description>Сегодня один из лучших способов разобраться в новой теме — попросить ИИ создать короткое объясняющее видео. Поэтому Peter Yang решил открыть исходный код /video-explainer — бесплатного навыка для ИИ, которым он пользуется для создания обучающих видео на любую тему в трёх стилях: → Анимационная графика. → Рисованные иллюстрации. → Кинематографическая 3D-графика. Каждое видео сопровождается закадровой озвучкой и субтитрами. Достаточно ввести /video-explainer как образуются чёрные дыры или /video-explainer покажи наглядный маршрут моего путешествия по Японии , чтобы получить видео, подобное представленному ниже. https://github.com/petergyang/video-explainer</description>
+      <enclosure url="https://cdn4.telesco.pe/file/EnGm39QbRvTylhzFIgV65skk5Awi3u3LM2okiTHmsT0sRDip0mIe1MTwz86SEzuAcX1Rby76DblEEqSmIJaKStpNzSS3UgzAQxXYDWPs9CybiI-Ng2V5pgCJFzJS_n5ghUXjQ_FKu04MQbEQtZc8TgT5KmFkMubMVejRvzjB4H544_0wTNaFb25F_qAHF-tjF__UBqJ7K2CznZG77Z70qtjkgFdjaLH013EgPQI2QKn9q5Ty5GOOUFzwOXkBnuNQ1O_9FewKPM5KANTRpMRIVFURbib3xHg9XRh4vq5ef1YfJIYkS2WsJaOq4dQBzIYl4jthaCPJ1cSLcWkh-AHzmg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>Tencent открыла исходный код DFly2 — метода спекулятивного декодирования, которы…</title>
+      <link>https://t.me/vibecoding_tg/4452</link>
+      <guid isPermaLink="true">https://t.me/vibecoding_tg/4452</guid>
+      <pubDate>Thu, 26 Nov 2026 17:08:58 GMT</pubDate>
+      <description>Tencent открыла исходный код DFly2 — метода спекулятивного декодирования, который ускоряет генерацию токенов в моделях с разреженной архитектурой, таких как DeepSeek-V4.1-Flash, GLM-5.3-Flash и собственная Hy4-Flash. Согласно результатам тестирования, DFly2 повышает пропускную способность при инференсе DeepSeek-V4.1-Flash до 81% при длине контекста в 64 тыс. токенов, а выполнение агентных задач на Hy4-Flash ускоряется до 4,2 раза. Не так давно Tencent также представила DSpine , позволяющий ускорить декодирование в Qwen3.8-27B. Повышение скорости генерации всегда радует, и приятно видеть, что Tencent тоже активно работает в этом направлении. https://huggingface.co/collections/AngelSlim/angelspec https://arxiv.org/abs/2611.34776</description>
+      <enclosure url="https://cdn4.telesco.pe/file/HcopR0rIVRO0SP43u68lAAJwB5ubeZE6dXRjSVJhAMTYOAFZDy0pKoXotSsywhwMWQltYWNdxh_IBkb620BuSq15m8J5bj2DhlBx2W8dr3yjVzphYaFwMnS1EGtmOQJpC1KuujRTgqSlkJ7yWfuV9Od7rPX_qG2k6A8J84VSLoDmbHxi2sP_VlpYqI0lzCUxEOBX86LiYaebf7dU1uqTsrDb8606_eNzjfQzPiuyhJ7Qg6a3bKDGFNK6Fu5cXgBJQVwA4tyjho1yCSyPrw4OhpirnN9djT2_PPq1Mc_xR4r-vhSfFsnlI6gxYTxod63iyt_-U5BFU4ybxmaMcZ8HGQ.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
       <title>Одна из наиболее интересных возможностей скиллов в Claude Code заключается в том…</title>
       <link>https://t.me/vibecoding_tg/4451</link>
       <guid isPermaLink="true">https://t.me/vibecoding_tg/4451</guid>
@@ -97,7 +113,7 @@
       <guid isPermaLink="true">https://t.me/vibecoding_tg/4440</guid>
       <pubDate>Wed, 25 Nov 2026 19:21:58 GMT</pubDate>
       <description></description>
-      <enclosure url="https://cdn4.telesco.pe/file/aIR47kHuf823OV1ilH2jTz5Khg9zMTTbMBPVK2Pn_LNqBUuVKU-NE3SgSr_YvZGdGs-QTXckI1z8Oth3n1IECiGsqXiCTsQN00gGhi6RTq4nEZHRZg8WrpF9tNb2Tx43F15W5eRoyDOaxkmyiIbU3IDLnJZ3r1AYLsA3S_fCilibgsurF1PN4klaOBOk8SzWsk2iUqJu3J-pvK05rF08E_pLZzLK-LF9aTtULPfpTlOpXXZGrEuyiPMeqcg2GODqcOzfn7t_dCdqP-6KAuTPw3XVJqmNwxMaxcPpqi5SZSkbbxIPthgtSd9F2UTdJA2MoHP60EP-rcgl9D6t18pCVA" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/aUjQXvFG7E5WmeNSnvt5pnAQRksV1RUMZszLfwCSUrmjBHC-V_l31Tv-NGdlBl5Y_B1dYja1olNKjs0vQf89nFrTqiqi5zQVyBYk-qU8AAoBKcfc1aj9Clm9cpWhneISX20ClivuVo5maU71Aldll3KQaRTjkDYj_jNwbaUvKSsndKnkeaTZMFJnwkXb3q1NSqQTaF2O6mI1vKnrOdHfN40YpWAq1DHKNRBFhCuF-XsuyI3oAcM3yxrAe6F42QH5-u7M3Hf3TX8OggLUVzt5lF5e5_z26d2ga6Mexz6pvMmcKHUPqMnNveLJ1AeJgjI4AxJD3nCT19As-JglGMhHeA" type="image/jpeg" length="0"/>
     </item>
     <item>
       <title>В Claude Code появилась возможность автоматически устранять причины избыточного …</title>
@@ -145,21 +161,6 @@
       <pubDate>Wed, 25 Nov 2026 09:11:01 GMT</pubDate>
       <description>В официальной документации ChatGPT Dots наконец-то упомянули пользователей подписки Plus. Однако не стоит радоваться раньше времени: с той же страницы убрали упоминание о повышенных лимитах на выполнение сложных задач в течение первого месяца. https://learn.chatgpt.com/docs/dots</description>
       <enclosure url="https://cdn4.telesco.pe/file/KUSPoKS3nC3h8eSvvj6JCs5tvSm9gsKgk_ku_k1Fk_JR3vUmK6kEAvnVTknbVdRMv72NbHS1bG-LCl305W19bwkGAKd2kVoDXzk-NDlRzpT3j6CTyImcB-gdbd53caa9gNfEhQSdZAADU-iRWd9I6yuSK2MrghT4_k1VRi3rU2yvVZNrB9v0U0f1n9j5VvaIuthFW1dukaTS9V28d8si28ItPzgmrdokDz7j1Uan-yysIAr0S4G-F-7zszhefnVA20w2qPSJXLt1T5bKaRXx6-wL86lO-_69G60ovIdKCgv3ZfGcHXLAonDU1YpY-EyBdDqgFEs1glsj5kIrR_bnJw.jpg" type="image/jpeg" length="0"/>
-    </item>
-    <item>
-      <title>OpenAI объединяет Chat и Work в один интерфейс. Пока нововведение тестируется на…</title>
-      <link>https://t.me/vibecoding_tg/4433</link>
-      <guid isPermaLink="true">https://t.me/vibecoding_tg/4433</guid>
-      <pubDate>Wed, 25 Nov 2026 08:40:15 GMT</pubDate>
-      <description>OpenAI объединяет Chat и Work в один интерфейс. Пока нововведение тестируется на небольшой группе пользователей Pro. Компания хочет собрать обратную связь, прежде чем доработать окончательную версию и открыть к ней доступ всем пользователям. И да, судя по информации из справочного центра OpenAI, лимиты ChatGPT и Codex будут тоже объединены. При этом общение с моделями в режиме Instant не будет расходовать лимит.</description>
-      <enclosure url="https://cdn4.telesco.pe/file/i9onLTODQSupbBrpgp2m6qDPOqeYtiizI8td-9U5DeVXPGzZNhOoezQXtuBgun_X1dNcJMDDeT6QDUoGSNcVJQK2o0_hZ2WjlwBdfnyBg5P3BYle5B5SMbDObV4R-xdzxOvyF-H-ck0TiuCSBW0QMmhZNNFYtZc5w6Gw_Xh0dA3wZ18vsvKzsTlHayU9oBCzzLUUrpXNTWfrOxW1z6vQVHY3Dp6AiMfCDHuEnsZY8ywl9jeeCHkx2feWx0-XbPmZ-yOEqkfXaE2JMkDMwx0-EzRwurFDBrjhRzh_65kUZUWSEATcpu1whuwnqM93NxdLFUwExzKKj4eTnaoccv-g0g.jpg" type="image/jpeg" length="0"/>
-    </item>
-    <item>
-      <title>Появился маркетплейс скиллов для ИИ-агентов — Skillsync. Сейчас скиллы, которые …</title>
-      <link>https://t.me/vibecoding_tg/4432</link>
-      <guid isPermaLink="true">https://t.me/vibecoding_tg/4432</guid>
-      <pubDate>Wed, 25 Nov 2026 08:03:53 GMT</pubDate>
-      <description>Появился маркетплейс скиллов для ИИ-агентов — Skillsync. Сейчас скиллы, которые разрабы пишут для своих агентов, разбросаны по репозиториям GitHub, чатам в Slack и папкам на Google Drive. Создатели Skillsync решили собрать всё это в одном месте и дать разработчикам возможность зарабатывать на своих наработках. Причём покупать скиллы смогут не только пользователи, но и сами ИИ-агенты. По сути, Substack в мире скиллов. 😎 https://skillsync.com/</description>
     </item>
   </channel>
 </rss>

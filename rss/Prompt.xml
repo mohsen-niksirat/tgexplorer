@@ -7,6 +7,27 @@
     <description>Welcome to @prompt , your go-to source for AI insights, breakthroughs, and tools shaping the future of intelligence. Contact: @LightEarendil</description>
     <language>en</language>
     <item>
+      <title>🧪 DeepMind now lets AI agents run part of the compute for Gemini experiments VP…</title>
+      <link>https://t.me/Prompt/1139</link>
+      <guid isPermaLink="true">https://t.me/Prompt/1139</guid>
+      <pubDate>Fri, 27 Nov 2026 01:04:29 GMT</pubDate>
+      <description>🧪 DeepMind now lets AI agents run part of the compute for Gemini experiments VP of Research Koray Kavukcuoglu said on the lab&apos;s podcast that agents control a slice of the compute themselves. He says full recursive self-improvement is still far off. DeepMind doesn&apos;t reward the agents&apos; chain of thought in training, so their reasoning stays readable before they act. Each Gemini generation is still a hand-built one-off.</description>
+    </item>
+    <item>
+      <title>🧩 The Netherlands is lobbying Washington to kill a chip bill aimed at ASML The …</title>
+      <link>https://t.me/Prompt/1138</link>
+      <guid isPermaLink="true">https://t.me/Prompt/1138</guid>
+      <pubDate>Thu, 26 Nov 2026 22:03:29 GMT</pubDate>
+      <description>🧩 The Netherlands is lobbying Washington to kill a chip bill aimed at ASML The US MATCH Act would push allies like the Netherlands and Japan to tighten export controls on chipmaking tools for China. If they don&apos;t, Washington could restrict their equipment unilaterally, including ASML&apos;s immersion DUV lithography machines. Dutch lawmakers called it disastrous for ASML. Supporters want it attached to the annual defense bill in December, so The Hague has a few weeks to change minds.</description>
+    </item>
+    <item>
+      <title>🐧 Linus to AI-assisted kernel contributors: your bug fixes add bugs too Linus T…</title>
+      <link>https://t.me/Prompt/1137</link>
+      <guid isPermaLink="true">https://t.me/Prompt/1137</guid>
+      <pubDate>Thu, 26 Nov 2026 19:02:29 GMT</pubDate>
+      <description>🐧 Linus to AI-assisted kernel contributors: your bug fixes add bugs too Linus Torvalds told contributors to stop assuming that fixes, whether human or AI-written, never introduce new bugs. • Dump fixes for a thousand bugs at once and you&apos;ve also shipped an unknown number of new ones • Using an agent doesn&apos;t exempt you from the kernel&apos;s usual rules for working with the rest of the team Fixing a thousand bugs is easy to brag about. Counting what you broke is the hard part.</description>
+    </item>
+    <item>
       <title>🔮 Thinking Machines and Mantic trained a small forecasting agent that matches a…</title>
       <link>https://t.me/Prompt/1136</link>
       <guid isPermaLink="true">https://t.me/Prompt/1136</guid>
@@ -124,27 +145,6 @@
       <guid isPermaLink="true">https://t.me/Prompt/1118</guid>
       <pubDate>Tue, 24 Nov 2026 21:39:11 GMT</pubDate>
       <description>🧬 OpenAI says GPT-6 designs proteins with just reasoning and code, no specialized biology models In OpenAI&apos;s preprint , an internal model matched or beat specialist tools on most design tasks. In lab tests with Onava, GPT-6.2-based designs showed binding on all five targets. But specialized models still supplied sequences and picked the candidates to test, and full structure prediction remains a clear weakness.</description>
-    </item>
-    <item>
-      <title>🚨 OpenAI says it proved VP ≠ VNP, and the Lean proof is in the repo OpenAI post…</title>
-      <link>https://t.me/Prompt/1117</link>
-      <guid isPermaLink="true">https://t.me/Prompt/1117</guid>
-      <pubDate>Tue, 24 Nov 2026 19:04:01 GMT</pubDate>
-      <description>🚨 OpenAI says it proved VP ≠ VNP, and the Lean proof is in the repo OpenAI posted a preprint with a border circuit lower bound of exp(Ω((log n)^(5/4))) for an explicit VNP family over every field. It carries over to the directed Hamiltonian cycle polynomial, and to the permanent outside characteristic two. It&apos;s a GitHub preprint with no peer review, and it lands days after Anthropic&apos;s Claude result on the arithmetic analogue of P vs NP.</description>
-    </item>
-    <item>
-      <title>🚨 Ex-OpenAI engineer allegedly bugged a conference room, and prosecutors say it…</title>
-      <link>https://t.me/Prompt/1116</link>
-      <guid isPermaLink="true">https://t.me/Prompt/1116</guid>
-      <pubDate>Tue, 24 Nov 2026 17:14:48 GMT</pubDate>
-      <description>🚨 Ex-OpenAI engineer allegedly bugged a conference room, and prosecutors say it likely caught trade secrets Prosecutors argued against bail for Abdulrahman Alfozan in a Monday filing. • A photo of what looks like a term sheet for a &quot;strategic partnership&quot; with another company • Hundreds of audio files, reportedly 160+ hours, per X trending summaries • Flight risk claim: weak US ties, plenty of connections and resources in Saudi Arabia</description>
-    </item>
-    <item>
-      <title>🚨 Anthropic is trading below its $83 IPO price before the opening bell Bloomber…</title>
-      <link>https://t.me/Prompt/1115</link>
-      <guid isPermaLink="true">https://t.me/Prompt/1115</guid>
-      <pubDate>Tue, 24 Nov 2026 14:13:48 GMT</pubDate>
-      <description>🚨 Anthropic is trading below its $83 IPO price before the opening bell Bloomberg reports the stock slipped under the offer price in premarket. Day-one buyers are already underwater. Premarket volume is thin and prices can swing hard, so the open could look different.</description>
     </item>
   </channel>
 </rss>

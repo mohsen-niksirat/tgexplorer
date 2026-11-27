@@ -7,6 +7,38 @@
     <description>توییت های برنامه نویسی و طراحی وب :) Admin: @dvtwi Hashtags: devtwitter.t.me/5 DevBooks Channel: https://t.me/+AYbOl75CLNYxY2U0 Github: https://github.com/DevTwitter X: https://x.com/devtwittir</description>
     <language>fa</language>
     <item>
+      <title>چرا String در Java تغییرناپذیر (Immutable) است؟ یکی از ویژگی‌های مهم کلاس String…</title>
+      <link>https://t.me/devtwitter/14076</link>
+      <guid isPermaLink="true">https://t.me/devtwitter/14076</guid>
+      <pubDate>Thu, 26 Nov 2026 19:53:01 GMT</pubDate>
+      <description>چرا String در Java تغییرناپذیر (Immutable) است؟ یکی از ویژگی‌های مهم کلاس String در جاوا، تغییرناپذیر بودن آن است؛ یعنی بعد از ساخته شدن یک شیء از این کلاس، مقدار داخلی آن قابل تغییر نیست. اما چرا جاوا چنین تصمیمی گرفته است؟ این ویژگی چند دلیل مهم دارد: - امنیت (Security) رشته‌ها در بخش‌های حساسی مثل نام کاربری، مسیر فایل‌ها و اطلاعات اتصال استفاده می‌شوند. تغییرناپذیری کمک می‌کند مقدار یک رشته پس از بررسی و اعتبارسنجی، ناخواسته تغییر نکند. - مدیریت حافظه (String Pool) جاوا می‌تواند رشته‌های یکسان را در String Pool به‌صورت مشترک نگهداری کند. چون رشته‌ها تغییرناپذیرند، اشتراک‌گذاری آن‌ها بین بخش‌های مختلف برنامه امن‌تر است و از مصرف حافظه اضافی جلوگیری می‌کند. - امنیت در محیط چندنخی (Thread Safety) از آنجا که مقدار یک String پس از ساخته شدن تغییر نمی‌کند، چند Thread می‌توانند آن را هم‌زمان بخوانند، بدون اینکه نگران تغییر مقدار داخلی آن باشند. - عملکرد در ساختارهای داده رشته‌ها در ساختارهایی مانند HashMap و HashSet کاربرد زیادی دارند. ثابت ماندن مقدار رشته باعث می‌شود مقدار hashCode آن نیز پایدار بماند و عملکرد این ساختارها قابل‌اعتمادتر باشد. در واقع، تغییرناپذیری به این معنا نیست که نمی‌توان متغیری از نوع String را به مقدار دیگری نسبت داد؛ بلکه شیء String ساخته‌شده، قابل تغییر نیست و در صورت نیاز، شیء جدیدی ایجاد می‌شود. اگر قرار است تغییرات متنی زیادی انجام دهیم، کلاس StringBuilder می‌تواند انتخاب مناسب‌تری باشد؛ چون Mutable است و امکان تغییر محتوای خودش را فراهم می‌کند. @DevTwitter | &lt; parham saghazadeh /&gt;</description>
+      <enclosure url="https://cdn4.telesco.pe/file/sZxub6TZl-eUZExVtREEUnaPVG-vskWP3iM6GMYPH0uL_1Ors5zOEbD2IUwOPDxCvu60DIHbgBD4RQ9m7Y5e-Hd3NUhNDRb3Q02hBvgjwf37iLX4MIkroBswxt4HQGez9FBTkSq7XlmRZm3Q1k9i47uBFBGMkWPxpcyKXpe_cA0-zf-rPR5Xb-5QLFUMSweKwZHdibBxWnyLh4EGyQX_wpbRk-NdfpQdIrYC6IO7ijsv5CXEVMVlcGQBlg5w2G8CFyxisfeHFwJR_WbiixFpyTaNuu4vYu0IykrR9jSC34nsYfE1sQsukokZGOEtWghxRTEmWe_w5jfZEvtXxpAV2w.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>ایجنت OpenCode حالا مرورگر داخلی و اتوماسیون داره! نسخه‌ی OpenCode 2.4 منتشر شد؛…</title>
+      <link>https://t.me/devtwitter/14075</link>
+      <guid isPermaLink="true">https://t.me/devtwitter/14075</guid>
+      <pubDate>Thu, 26 Nov 2026 19:32:58 GMT</pubDate>
+      <description>ایجنت OpenCode حالا مرورگر داخلی و اتوماسیون داره! نسخه‌ی OpenCode 2.4 منتشر شد؛ تو اپ دسکتاپ یه مرورگر داخلی اومده که لاگین‌ها و تاریخچه رو از Chrome، Edge، Firefox یا Safari میاره و ایجنت می‌تونه همون صفحه‌ها رو بخونه و باهاشون کار کنه. قابلیت Automations هم اضافه شده؛ ایجنت می‌تونه یه پرامپت، اسکریپت یا دستور شل رو با تایمر، زمان‌بندی cron یا رویداد یه سرور MCP اجرا کنه. با دستور /automation مدیریت میشه. اگه مدل ویدیویی وصل باشه، با ابزار generate_video ویدیو هم می‌سازه و فایل‌ها رو تو پروژه ذخیره می‌کنه. ظاهر جدید TUI هم پیش‌فرض شده؛ برای تم قبلی opencode-classic رو انتخاب کن. ️ ابزار تولید عکس اسمش به generate_image عوض شده و تأییدهای قبلی یه بار دیگه پرسیده میشن. https://github.com/anomalyco/opencode/releases/tag/v2.4.0 @DevTwitter | &lt; Ali Askari /&gt;</description>
+      <enclosure url="https://cdn4.telesco.pe/file/lmdTgvMGac2WKdq9vzQ1dezPw3SVplFI0bXZx-NeHpjFjOF8If6_-zkD99UYilL-BFn4RRKdoQm_mHjXsUFEVobPZaceJUhTOylcQ7RtMm02gAMPnhNFHA4gjDuHf66YD0Irt2p4KYIlhjaN6b_ugKVnUq1XUhsfVjD_OVzHHanSs91uvf84GNmXjJtAcdXbetn6WruATth57VockhdGKQb2vmE6SU0JWbnL19av9CedslTB99HSKHPAhFUiwd84DcY4529QplP55W-HoxpKgP0OEulW1JNGCWewfAg-H5sRj7RlDsBlKgOj0I4AQno-yUd4G6tgaxVwNqo5kVe2CQ.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>چرا هکر نمی‌شی؟ ما تو کوئرا داریم هک و امنیت یاد می‌گیریم! 🔥 فقط ۲۴ ساعت فرصت د…</title>
+      <link>https://t.me/devtwitter/14074</link>
+      <guid isPermaLink="true">https://t.me/devtwitter/14074</guid>
+      <pubDate>Thu, 26 Nov 2026 18:33:03 GMT</pubDate>
+      <description>چرا هکر نمی‌شی؟ ما تو کوئرا داریم هک و امنیت یاد می‌گیریم! 🔥 فقط ۲۴ ساعت فرصت داری که دوره هک و امنیت رو با ۵۰٪ تخفیف ثبت‌نام کنی! 💳 امکان پرداخت قسطی 🔗 https://quera.org/r/trk3p</description>
+      <enclosure url="https://cdn4.telesco.pe/file/hdoK_ZOwEJV-5qYIIvcHchvwRimpPoImNWrOZDBYXG5tzSUfAaZedQS6hjvYOpnW1DNIFn-RggZ4Q0Kk3XjteKa3cBJYVLH4pb3iPk5Lukzff7R5AowwvgykAH1hur6FDVRr1iPnGEBRkRLLQAuHQ3RawQcS5dJLefkPBfNc-vbBcudQGCXTV75EEJyIld8t0JHKTBvX15nTpyc77Y3n5xU5T919MA90djvcFCy0bD8H7Jl74f9mJdU6MHZTi16B4SasfuYzq4vVGsRv6HOCCdNr1ITOBaky6Kt9H1qBLYaPqkEsQynjyNdfaHCmwlNccbrj50wpNtNPxcHC22usvw.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>قبلنا MCP به Claude ابزار می‌داد؛ حالا می‌تونه بهش یاد بده چطور از اون ابزارها د…</title>
+      <link>https://t.me/devtwitter/14073</link>
+      <guid isPermaLink="true">https://t.me/devtwitter/14073</guid>
+      <pubDate>Thu, 26 Nov 2026 17:51:01 GMT</pubDate>
+      <description>قبلنا MCP به Claude ابزار می‌داد؛ حالا می‌تونه بهش یاد بده چطور از اون ابزارها درست استفاده کنه! یکی از تغییرات جالب نسخهٔ جدید Claude Code، پشتیبانی از Skills ارائه‌شده توسط MCP Serverهاست. بذار ساده توضیح بدم چی تغییر کرده. قبلاً وقتی یک MCP به Claude وصل می‌کردیم، ابزارهایی در اختیارش قرار می‌گرفت؛ مثلاً برای کار با GitHub، دیتابیس یا سرویس‌های خارجی. اما داشتن ابزار لزوماً به معنی بلد بودن Workflow درست نیست! مثلاً Claude می‌تونست Pull Request بسازه، ولی برای انجام یک Code Review استاندارد، به دستورالعمل‌های جداگانه نیاز داشت. حالا MCP Server می‌تونه علاوه بر ابزارها، Skill هم ارائه بده. یعنی چی؟ یعنی یک MCP می‌تونه هم ابزار انجام کار رو در اختیار Claude بذاره، هم روش صحیح انجام اون کار رو. به نظرم این تغییر می‌تونه نحوهٔ طراحی و توزیع ابزارهای AI رو حسابی تغییر بده. چون دیگه فقط با یک API Wrapper طرف نیستیم؛ داریم به سمت ابزارهایی می‌ریم که دانش و توانایی انجام کار رو با هم ارائه می‌کنن. @DevTwitter | &lt; Sepideh Moradiani /&gt;</description>
+      <enclosure url="https://cdn4.telesco.pe/file/a6LJ9Q_o8moFL74Mv0uZ_fJw9hldjOvuFfZBTNoozgkudSnCaYN9T40F16-7xFtu-13pnnudRC6m6yQlATt-62JGqLSy83xY3ILEhe3IwDIbmFCh7cqNvOgooCQ0iACnKbc0oSYC18fOKLq7G59avSaHRbEYuz_LyeJet5-whM3HuE-gkK4V7ND5HCnb1mJuOIHjXHirzZkql2dwrRUX0ABOZOrT-r8r2PwvHgt-ib6jVyBbSbEn5LOOx5Ge0bbS44jplQw__DNwR6MZ9W0DQA2RUPp8PkBs9JUrjE_V_P1kv6_w_6dvQwq3_NBSgPQqJEs29AUiIRltno34HfSZOA.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
       <title>لیابات هنوز کوتاه نیومده! تو چی؟ 🤖 بلک‌فرایدی لیارا به روز سوم رسید! فقط کافیه …</title>
       <link>https://t.me/devtwitter/14072</link>
       <guid isPermaLink="true">https://t.me/devtwitter/14072</guid>
@@ -114,7 +146,7 @@
       <guid isPermaLink="true">https://t.me/devtwitter/14059</guid>
       <pubDate>Wed, 25 Nov 2026 20:28:55 GMT</pubDate>
       <description>#میم_شبانگاهی وضعیت من و پروژه :))) @DevTwitter</description>
-      <enclosure url="https://cdn4.telesco.pe/file/ZyL2We15DdFnQ8FiSwzRw0XKb0CQpHfFgUFrKwTG7T61QMMyvBW7UBKWVYctDcEa1AWP2kz0M0N_faYKKGhxZkaqevvHoDIVTaFl7xOPps8JQYN8b8oNuam_I4Mu4rS0BFfoTMGUa6c-t9RaohQI19hvhedV_gsRIPWA-596s1qq5seOkJm9LJThXqqo0-vKnWatKHr1K_wE8l1aJDxBIjz9_LwM5RbbS2kcRE3_ZhYEJA9cHgUOegnAPrl6eg7mEMwByv8d5DadyB6GN16yN3F_d-EBcovjBmlhS1Da4wXp8M76crGwSvCeM1yRzbPa4Tjf2LHhTZzJOcAj9Gb8hg.jpg" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/v2dALBkV1zhO-iyDYJKEUgIXL-iZ2As0bqajeKgyYCwvpAFPxBQzqJv_7W4InP29DAeTqoUF_oUJWTJ5NBFBsH2USd5NPmGfEkEdNgey_hPg2djiskYuEhXzeLr6Ax3rGMlWZBoUzwIYgz2OHK_oJpYABz8_1WUbTF8WcpD8Y_Dl4es_zY1R8542zk5sdtqg2FhZCu_N76h6vUOdHYh5ISRjA0BgTQHWAgCSF9OAHQHJ_UFl2PK92qBwlfOyekCNWwnHgoCIkAqcZC3NQr2UXQ0VZJhu4zxW0fEl94pP_rO_RiUm9sUDDpQn4Fm4MEq03LbJHyY4xi_c8Dd9apR3Og.jpg" type="image/jpeg" length="0"/>
     </item>
     <item>
       <title>✨ با پایتون و LangChain، قدم‌به‌قدم اپلیکیشن‌های هوشمند مبتنی بر LLM بساز! در دو…</title>
@@ -122,7 +154,7 @@
       <guid isPermaLink="true">https://t.me/devtwitter/14058</guid>
       <pubDate>Wed, 25 Nov 2026 19:29:55 GMT</pubDate>
       <description>✨ با پایتون و LangChain، قدم‌به‌قدم اپلیکیشن‌های هوشمند مبتنی بر LLM بساز! در دوره «ساخت اپلیکیشن‌های LLM» کوئرا کالج ، از مفاهیم پایه تا ساخت چت‌بات، معماری RAG، Agentها و پروژه نهایی LibreChat پیش می‌ری. 🤩 فرصت ویژه بلک‌فرایدی: 🔥 ۵۰٪ تخفیف برای ثبت‌نام دوره | تا ۷۰٪ تخفیف با انتخاب دوره‌های بیشتر 💳 امکان پرداخت با اسنپ‌پی ✔️ دوره رو با تخفیف ثبت‌نام کن و هر وقت خواستی شروعش کن: 🔗 https://quera.org/r/aq75o</description>
-      <enclosure url="https://cdn4.telesco.pe/file/gAMy5Cuca2WQQT9riSy-wKrU_K6GThK9BGYX7oyqz_EuycA3fT7Qf-iGKJDMtFqD9JAi6U1IitU9kGFexVJAT-jQHPi3w2YT_4PZrWzm2dft0wHvNWIoVZIv9gutgidXKy8BMib2Rdy8ATteUMY8w1U9rX_Ws-h2PnVYmCz_8hNnNpV_ffBr4iG948cjyV_3UmtIm3K0-2U4LgkR_31RUKUokRVj7v32mlTj6Qcl6id6HfeQVLljG_VdPzih_I7ygOkSVRyk0Jbf4n4OS3ORJZEc7vECAFuU0V3KCRISPVTOrw8EEqKgVAeMLdMHr4sEK8pQOqWFtzFjpQBx6-9gkQ.jpg" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/J1Rzd8Kmj5sR_KRtOV-O6250Y24w6xSVKMPLEac7oY4Zd7Jj3QeH-Su4ff7Z1yNiPbowfFyVIAIaxnz1tEexu3LwzdA9hFzAoGDoEKCEfQZ1C0EAd34hKueFDczs_fbqeMwrInPz1QRz6f7bnZywd_WwZD__4b_Io8-j_BaDzlHwEv-Myyf7t11odqhokombRVLoA6pkYH_MTN0CFjvnhBHm36ddgnyvMHTnRCqBuLQqOcXixcjLuzUUcA6DHKcuO2O1k7IX1LwLlxiqgcbKguHSRxQ7612tVD56MNsbQ1tPQvQ7wQczB9Vxj4LbiryT5PZXTM63BtUmILDF8rI7NQ.jpg" type="image/jpeg" length="0"/>
     </item>
     <item>
       <title>۴۸ هزار آیکون، رایگان کاشی حالا ۸۰۰۰ آیکون دارد که هر کدام در ۶ سبک آماده است؛ ی…</title>
@@ -130,39 +162,7 @@
       <guid isPermaLink="true">https://t.me/devtwitter/14057</guid>
       <pubDate>Wed, 25 Nov 2026 18:59:55 GMT</pubDate>
       <description>۴۸ هزار آیکون، رایگان کاشی حالا ۸۰۰۰ آیکون دارد که هر کدام در ۶ سبک آماده است؛ یعنی ۴۸ هزار آیکون. بیشتر از Hugeicons Pro و Iconly Pro، و کاملاً رایگان و متن‌باز. - خطی، توپر، حجمی، دورنگ، شکسته و منحنی - شبکهٔ دقیق ۲۰×۲۰ با ضخامت خط یکدست - پر از آیکون ایرانی: سی‌وسه‌پل، گره‌چینی، سنتور، تخته‌نرد… - برای React، HTML و فیگما kashi.sepantapouya.com @DevTwitter | &lt; Sepanta Pouya /&gt;</description>
-      <enclosure url="https://cdn4.telesco.pe/file/QJU0gCQBkVVkiYq47Vx5DnL0SuIV63pyPMnnMZ_XjAZVHbUhTkW3hEUrw1b3ZoTiSeNB5tG5_TZuAqOKkCObdCLgWZ7rWsEU2D5Z67Ap3CtUmTYUJav1u94co4Iq-VGCEBRJcZYOoUgaT868w5gJOD80zDQE5jvzOM1aZL9pFTbp6h1KxIt9FOOZPkGN4KDi23JXLsNBfWUM_eu9gkoIQMO61x0WL9GX2d5WCFYGTGV9Qxtqc628sYAkm4Zi6D6CkmGKF1u5NB7UUsV6gtYqMqMb7GyxcPjz9qCT_k2rd6PM2A7zpWbHR_VxY-KAsJ92pGfP11Bf7QdJv14e6WAfug.jpg" type="image/jpeg" length="0"/>
-    </item>
-    <item>
-      <title>واقعاً LocalSend برنامه فوق‌العاده‌ایه. باهاش می‌تونید برای همیشه از شر ShareIt …</title>
-      <link>https://t.me/devtwitter/14056</link>
-      <guid isPermaLink="true">https://t.me/devtwitter/14056</guid>
-      <pubDate>Wed, 25 Nov 2026 18:31:56 GMT</pubDate>
-      <description>واقعاً LocalSend برنامه فوق‌العاده‌ایه. باهاش می‌تونید برای همیشه از شر ShareIt و بقیه برنامه‌های مزخرف انتقال فایل خلاص بشید. اندروید به iOS، مک به ویندوز، اندروید به تلویزیون و تقریباً هر ترکیب دیگه‌ای. رایگان، متن‌باز و بدون دردسر. حتماً امتحانش کنید: https://localsend.org https://github.com/localsend/localsend @DevTwitter | &lt; Hamzeh Ghoreyshi /&gt;</description>
-      <enclosure url="https://cdn4.telesco.pe/file/uQZjKR_dpS5ikcOPwCbvkGNFnM2KoErze-mTw8YI8KX6cPQ9s78dVjweR1uGrXc7nRLA3BmR93OjRNhCkHiT78wkWnqUwOqJPAq-RqZvz3dTGWe01yIdDpYX-7geaPDPqOtn7uDt1SV_kCToFrxbX8JhaI_JBXGw_GsVgyrIW4D7ufK8lCvlakCAAzTt-CMSslHkRwkUsqV8wbNqIW5GT1sREN9eJbgTpwReXQBhCgC5UNuRiLNNHOdU-tzqQ1Nisifl9Ics0Q5ZN3cjJKKilha4uQJ7SGBwrSpKBeURMSHvIj9zoPKSVgdHSQHE9R9_xZvbKTrCpb09P8aS6_AhuA.jpg" type="image/jpeg" length="0"/>
-    </item>
-    <item>
-      <title>😺 اشتراک قانونی ChatGPT Plus + Codex 🚀 &amp;rlm;⁧ اکانت آماده و کاملاً اختصاصی · ۳…</title>
-      <link>https://t.me/devtwitter/14055</link>
-      <guid isPermaLink="true">https://t.me/devtwitter/14055</guid>
-      <pubDate>Wed, 25 Nov 2026 16:32:35 GMT</pubDate>
-      <description>😺 اشتراک قانونی ChatGPT Plus + Codex 🚀 &amp;rlm;⁧ اکانت آماده و کاملاً اختصاصی · ۳۰ روزه⁩ فقط ⁦۲٬۱۹۹٬۰۰۰⁩ تومان⁩ &amp;rlm;⁧ ✔️ گارانتی کامل در برابر مسدودی! ⏳ تحویل در حداکثر سی دقیقه! 🛒 فقط &amp;rlm;⁧20 اشتراک برامون شارژ شده! · برای ثبت سفارش خرید روم بزن</description>
-      <enclosure url="https://cdn4.telesco.pe/file/QWLmRNWtSFv8gYFcJo0CAn_uYJd5ARDVw1WNh7fDe-qH1HSpGL12O5xm0LwqnOfbG2ep_6e0AkvC_nb6nBje-V3Kpft4J6NIOOM0xKSE7Fj_8pApD2jDebQvhcoDilulaU8hYEuwf_8yNE4Tp4D1L0JrXDlOgdyL5xqttWOz5t1up_sVR_qcYcKatDs4BCh2ihJzKN8Hxe_gZu1eg_KanSEYi0Qh1H-N2-0ktYt8Q5WZWP2OVxgWZcfOfXBMHIEoEko1zLvZUc4Zapc64MiieYVRK6LfSC2XS77Cz-3Kcj6SvAyHzgLIRFctuOTShCQJOCxFar9cXtsqC0QTaAU0nw.jpg" type="image/jpeg" length="0"/>
-    </item>
-    <item>
-      <title>یه ابزار ساده برای مدیریت راحت‌تر GitHub می‌تونی: فالو بک نداده هارو گروهی Unfol…</title>
-      <link>https://t.me/devtwitter/14054</link>
-      <guid isPermaLink="true">https://t.me/devtwitter/14054</guid>
-      <pubDate>Wed, 25 Nov 2026 15:48:55 GMT</pubDate>
-      <description>یه ابزار ساده برای مدیریت راحت‌تر GitHub می‌تونی: فالو بک نداده هارو گروهی Unfollow کنی با یک کلیک به تمام ریپوهای یک نفر Star بدی تاریخ‌های دلخواهت رو توی Graph سبز کنی یه crawer داره که میتونی اتوماتیک بزاری برات فالو کنه پروژه کاملاً Open Source هست https://git-gpt.netlify.app https://github.com/MiladJoodi/Git-GPT @DevTwitter | &lt; JooD /&gt;</description>
-      <enclosure url="https://cdn4.telesco.pe/file/apIANyHWQ9U1ERS6FwZZtaguOyKs-Z2QUX3RzpEMFlPzxirLezwHdgqI8-TQ03JScJ3v_-gTna8qGS1Iwb7QgRFN3DwXw_JGUR-XQklOGfsYV8etU2zQ5HVJiRsZZCQ2rFswJF3NCuUDZuEn2SddCC2fpFWmvrKsId7ASfQnYv6ULI_el9tO3qgjcGWQN5M-r62YjuOBa4MY_FZWKU_RY7aAxmJewrCcNX4s-j6zSzdM8VDh_R_T7MtWGbDeHyF97hpzwhw5nbDeweG53YKMdRaq9zK_Ncv8gGc1XS4TNXOjyovHTw6rpDB3Kvthz-GOittwdizClu93Ub3AnBtLwA" type="image/jpeg" length="0"/>
-    </item>
-    <item>
-      <title>این پست یه گنج واقعی برای Motion Designerها و کاربران Fable 5.2 ابزار و Opus 5.5…</title>
-      <link>https://t.me/devtwitter/14053</link>
-      <guid isPermaLink="true">https://t.me/devtwitter/14053</guid>
-      <pubDate>Wed, 25 Nov 2026 13:46:55 GMT</pubDate>
-      <description>این پست یه گنج واقعی برای Motion Designerها و کاربران Fable 5.2 ابزار و Opus 5.5 ابزارـه! این ۲۰ ریپازیتوری رایگان GitHub می‌تونن Fable 5.2 ابزار رو به یک استودیوی کامل Motion Design تبدیل کنن. از انیمیشن و برنامه‌نویسی گرفته تا طراحی سه‌بعدی، تولید ویدیو با AI و رندر نهایی! انیمیشن و ساخت ویدیو 01. ابزار HyperFrames - با یک پرامپت، یک ویدیوی کامل Motion Design بساز. https://github.com/heygen-com/hyperframes 02. ابزار MCP for Blender - با کمک Fable 5.2 ابزار، صحنه‌های سه‌بعدی رو به‌صورت خودکار داخل Blender بساز. https://github.com/ahujasid/mcp-fusion 03. ابزار Wan 2.2 - تولید ویدیوی AI از متن یا تصویر با یک مدل Open Source. https://github.com/Wan-Video/Wan2.2 04. ابزار Hunyuan3D-2 - تبدیل یک تصویر به یک مدل سه‌بعدی کامل. https://github.com/Tencent-Hunyuan/Hunyuan3D-2 05. ابزار LivePortrait - به تصاویر پرتره جان بده و کاری کن حرکت کنن و حرف بزنن. https://github.com/KlingAIResearch/LivePortrait 06. ابزار Blender - یک استودیوی کامل طراحی سه‌بعدی و Motion Design به‌صورت رایگان. https://github.com/blender/blender انیمیشن با کدنویسی 07. ابزار Remotion - ساخت ویدیو با React و امکان رندر هم‌زمان ۱۰۰۰ ویدیو. https://github.com/remotion-dev/remotion 08. ابزار Motion Canvas - ساخت انیمیشن با TypeScript. https://github.com/motion-canvas/motion-canvas 09. ابزار Manim - موتور ساخت انیمیشن‌های ریاضی و آموزشی با سبک ویدیوهای 3Blue1Brown. https://github.com/ManimCommunity/manim 10. ابزار Theatre.js - ساخت انیمیشن‌های Keyframe سه‌بعدی، مشابه After Effects. https://github.com/theatre-js/theatre 11. ابزار GSAP - ساخت Timelineهای حرفه‌ای و کنترل دقیق حرکت و انیمیشن؛ حالا کاملاً رایگان. https://github.com/greensock/GSAP 12. ابزار anime.js - متحرک‌سازی تقریباً هر چیزی در محیط مرورگر. https://github.com/juliangarnier/anime 13. ابزار Revideo - تولید ۱۰۰۰ ویدیوی شخصی‌سازی‌شده از یک Template. https://github.com/midrender/revideo ابزارهای جایگزین و مکمل After Effects 14. ابزار Friction - نرم‌افزار رایگان Motion Graphics با امکاناتی شبیه After Effects. https://github.com/friction2d/friction 15. ابزار Natron - کامپوزیتینگ Node-Based مشابه Nuke به‌صورت رایگان. https://github.com/NatronGitHub/Natron 16. ابزار Glaxnimate - ساخت انیمیشن‌های وکتوری و خروجی گرفتن با فرمت Lottie. https://github.com/KDE/glaxnimate 17. ابزار OpenToonz - نرم‌افزار انیمیشن‌سازی دوبعدی که ریشه در ابزار استفاده‌شده در Studio Ghibli داره. https://github.com/opentoonz/opentoonz 18. ابزار Synfig - ساخت انیمیشن دوبعدی با سیستم Bone و بدون نیاز به انیمیشن‌سازی فریم‌به‌فریم. https://github.com/synfig/synfig 19. ابزار mo.js - ساخت افکت‌های انفجاری، اشکال متحرک و انیمیشن‌های جذاب با چند خط کد. https://github.com/mojs/mojs 20. ابزار gl-transitions - بیش از ۱۰۰ افکت Transition رایگان با استفاده از GLSL. https://github.com/gl-transitions/gl-transitions حالا تصور کن این ابزارها رو کنار هم داشته باشی: Prompt - Animate - 3D - AI - Render نکته جذاب اینجاست که با کمک Fable 5.2 ابزار و Opus 5.5 ابزار می‌تونی بسیاری از مراحل کار با این ابزارها رو از طریق دستور متنی انجام بدی. @DevTwitter | &lt; Yarad /&gt;</description>
-      <enclosure url="https://cdn4.telesco.pe/file/k4F6c1fk_ya9SzdPrEP1bnE3D6uR1HZ_RgssmnOZOVLMrxalvrhn7gzZuhofbkO9V_fl8jIITlRcaXv5kYP2Yc_vYUGtodOt5HoQ2ANmCuE1ywEUIGeIM28uNah0uFxiv8CJt8_tG63PSQCtk-mmrW_lmRachJX8PChqVSJ3siG-n6rvmZgkoctaLyR_Gykf7OejYL079fEfCK8Zo272jXAv8jpDykyH5iHfCPiJ4tVwaEEwK-SNamPGc595prQMGZxE4aD3iBUVnwZIjP1eCkSLMWuL_WaVPS4Z3RbjFzKX1QSRvxmZd05z9QdcRznRa3G7fPxVVlUeJrjiV7IAFw" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/MVSg0ljIBxjo3bPbSo1l-4bpFrEO38Mv3C04jkU0VU00q0TGBMn8OoxUVD054sfCPX3_l2sp4BNL1uu6eq2K-frmEuUR92IJcGsRdZrEYm5fUqYxAUFUyP0R1fBSX7lteKUnvTRYoQD4161CXdD8h6uI_Fo2D37T7JGDczwr5HJ6J4dYYt8HfCjajRaHw-B9w9bSb_ou22bRSt_Pw6viRdJp9j7LKaTKAX9mB4d3Js4rIRompjPMBYvzcpm60Zwt8USQeITofIh0yRHbSScEnWcFCSgzcUHkzwRMSYyQYBnUwPgMD_-FxdantsrCkjzw4lZrjvPr4j8FbPOOTzpS8g.jpg" type="image/jpeg" length="0"/>
     </item>
   </channel>
 </rss>
