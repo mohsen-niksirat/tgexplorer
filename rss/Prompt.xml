@@ -7,6 +7,41 @@
     <description>Welcome to @prompt , your go-to source for AI insights, breakthroughs, and tools shaping the future of intelligence. Contact: @LightEarendil</description>
     <language>en</language>
     <item>
+      <title>🦠 Five booby-trapped GGUF models on Hugging Face were downloaded 2,428 times A …</title>
+      <link>https://t.me/Prompt/1152</link>
+      <guid isPermaLink="true">https://t.me/Prompt/1152</guid>
+      <pubDate>Sat, 28 Nov 2026 14:30:29 GMT</pubDate>
+      <description>🦠 Five booby-trapped GGUF models on Hugging Face were downloaded 2,428 times A scan of 3.27M repos found a Windows RAT hidden after the last tensor, where loaders never look, and the chat template later told the model to print the unpack command.</description>
+    </item>
+    <item>
+      <title>🔐 Rumor says AI labs found a polynomial-time attack on public-key crypto Nature…</title>
+      <link>https://t.me/Prompt/1151</link>
+      <guid isPermaLink="true">https://t.me/Prompt/1151</guid>
+      <pubDate>Sat, 28 Nov 2026 11:29:29 GMT</pubDate>
+      <description>🔐 Rumor says AI labs found a polynomial-time attack on public-key crypto Nature reports that several computer scientists are hinting OpenAI and Anthropic hold algorithms aimed at RSA and newer schemes. Scott Aaronson says he&apos;s &quot;virtually certain&quot; the labs are sitting on bombshells, but he doesn&apos;t know what they are. Nothing is confirmed. A polynomial-time algorithm could still be useless in practice (think n^10000 steps), though history says that kind of result usually gets sharpened.</description>
+    </item>
+    <item>
+      <title>🚨 OpenAI claims matrix multiplication runs in O(n^2.25), and says that&apos;s the ex…</title>
+      <link>https://t.me/Prompt/1150</link>
+      <guid isPermaLink="true">https://t.me/Prompt/1150</guid>
+      <pubDate>Sat, 28 Nov 2026 08:29:05 GMT</pubDate>
+      <description>🚨 OpenAI claims matrix multiplication runs in O(n^2.25), and says that&apos;s the exact exponent A new preprint puts omega at exactly 9/4. The best known upper bound was about 2.37, and nobody has pinned the true value before. It&apos;s a GitHub PDF with no peer review…</description>
+    </item>
+    <item>
+      <title>🚨 240,000 banned Nvidia chips allegedly reached China, mostly H100s and H200s T…</title>
+      <link>https://t.me/Prompt/1149</link>
+      <guid isPermaLink="true">https://t.me/Prompt/1149</guid>
+      <pubDate>Sat, 28 Nov 2026 07:14:29 GMT</pubDate>
+      <description>🚨 240,000 banned Nvidia chips allegedly reached China, mostly H100s and H200s Tom&apos;s Hardware reports that Alice Huang helped secure over $7.5B in GPU imports during her three-year relationship with Jensen Huang. That&apos;s about $31K per chip on average, so…</description>
+    </item>
+    <item>
+      <title>🧠 Google&apos;s DeepCrossAttention hits the same quality up to 3x faster Google Rese…</title>
+      <link>https://t.me/Prompt/1148</link>
+      <guid isPermaLink="true">https://t.me/Prompt/1148</guid>
+      <pubDate>Sat, 28 Nov 2026 04:13:29 GMT</pubDate>
+      <description>🧠 Google&apos;s DeepCrossAttention hits the same quality up to 3x faster Google Research details DCA, an ICML 2025 paper that swaps plain residual summation for learned, per-token weights over earlier layers&apos; outputs. The added parameter count is negligible. Standard residuals treat every prior layer equally, which dilutes detail in deep stacks. DCA lets each layer choose what to pull forward.</description>
+    </item>
+    <item>
       <title>🚨 🔥 Apple&apos;s forensic team found OpenAI used its stolen schematics to train an …</title>
       <link>https://t.me/Prompt/1147</link>
       <guid isPermaLink="true">https://t.me/Prompt/1147</guid>
@@ -110,41 +145,6 @@
       <guid isPermaLink="true">https://t.me/Prompt/1133</guid>
       <pubDate>Thu, 26 Nov 2026 06:58:52 GMT</pubDate>
       <description>🚨 US moves to blacklist Singapore&apos;s Megaspeed over suspected Nvidia chip diversion to China Commerce says it plans to add the data center developer to the Entity List, after investigating it for almost two years, well before the Alice Huang affair story broke.…</description>
-    </item>
-    <item>
-      <title>🖥 Claude&apos;s new Mac &quot;apps&quot; are HTML files in an Electron shim, and they need Cla…</title>
-      <link>https://t.me/Prompt/1132</link>
-      <guid isPermaLink="true">https://t.me/Prompt/1132</guid>
-      <pubDate>Thu, 26 Nov 2026 05:16:29 GMT</pubDate>
-      <description>🖥 Claude&apos;s new Mac &quot;apps&quot; are HTML files in an Electron shim, and they need Claude running to work MacStories dug in and found the installed app is a tiny launcher that borrows Claude.app &apos;s Electron, so it&apos;s a Claude process in disguise.</description>
-    </item>
-    <item>
-      <title>🤖 Amazon says AI agents found and exploited a 0-day with almost no human help A…</title>
-      <link>https://t.me/Prompt/1131</link>
-      <guid isPermaLink="true">https://t.me/Prompt/1131</guid>
-      <pubDate>Thu, 26 Nov 2026 02:15:29 GMT</pubDate>
-      <description>🤖 Amazon says AI agents found and exploited a 0-day with almost no human help Amazon reports that attackers pointed agents at a list of IPs and told them to get shell access. • The target was an East Asian university server, and the agents found the bug in an open source medical imaging AI app • They ran on Cairn, an open source pentesting framework that works with Claude Code, Codex and Pi • The prompts were in simplified Chinese, with the model set to Chinese Standard Time</description>
-    </item>
-    <item>
-      <title>🧮 Engram says it can predict the exact LoRA rank a SFT dataset needs Engram&apos;s t…</title>
-      <link>https://t.me/Prompt/1130</link>
-      <guid isPermaLink="true">https://t.me/Prompt/1130</guid>
-      <pubDate>Wed, 25 Nov 2026 23:14:29 GMT</pubDate>
-      <description>🧮 Engram says it can predict the exact LoRA rank a SFT dataset needs Engram&apos;s theory sizes an adapter by how many bits it takes to encode the data under the base model. That counts memorization, so for tasks that are really just patterns, it&apos;s likely an upper bound.</description>
-    </item>
-    <item>
-      <title>⚡️ Google&apos;s DiffusionGemma generates text like an image diffuser. And it&apos;s fast.…</title>
-      <link>https://t.me/Prompt/1129</link>
-      <guid isPermaLink="true">https://t.me/Prompt/1129</guid>
-      <pubDate>Wed, 25 Nov 2026 20:13:51 GMT</pubDate>
-      <description>⚡️ Google&apos;s DiffusionGemma generates text like an image diffuser. And it&apos;s fast. DiffusionGemma is Google DeepMind&apos;s open-weight text diffusion model built on a clever trick: it&apos;s a 25.2B-parameter MoE with only ~3.8B active params per forward pass. No retraining…</description>
-    </item>
-    <item>
-      <title>🚨 Billions in data center deals are stalling after the new AI chip curbs Bloomb…</title>
-      <link>https://t.me/Prompt/1128</link>
-      <guid isPermaLink="true">https://t.me/Prompt/1128</guid>
-      <pubDate>Wed, 25 Nov 2026 17:27:10 GMT</pubDate>
-      <description>🚨 Billions in data center deals are stalling after the new AI chip curbs Bloomberg reports that financing and buildout agreements are freezing while buyers and builders work out what export rules let them ship, and to whom. A data center without approved chips is a very expensive warehouse with great air conditioning.</description>
     </item>
   </channel>
 </rss>

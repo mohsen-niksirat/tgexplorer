@@ -7,6 +7,20 @@
     <description>JavaScript ecosystem news</description>
     <language>en</language>
     <item>
+      <title>JavaScript #3628</title>
+      <link>https://t.me/javascript/3628</link>
+      <guid isPermaLink="true">https://t.me/javascript/3628</guid>
+      <pubDate>Sat, 28 Nov 2026 06:33:26 GMT</pubDate>
+      <description></description>
+    </item>
+    <item>
+      <title>CHALLENGE const data = [ { key: &apos;a&apos;, value: 1 }, { key: &apos;b&apos;, value: null }, { ke…</title>
+      <link>https://t.me/javascript/3627</link>
+      <guid isPermaLink="true">https://t.me/javascript/3627</guid>
+      <pubDate>Sat, 28 Nov 2026 06:33:26 GMT</pubDate>
+      <description>CHALLENGE const data = [ { key: &apos;a&apos;, value: 1 }, { key: &apos;b&apos;, value: null }, { key: &apos;a&apos;, value: 3 }, ]; const result = data.reduce((acc, { key, value }) =&gt; { acc[key] = (acc[key] ?? 0) + (value ?? 0); return acc; }, {}); console.log(JSON.stringify(result));</description>
+    </item>
+    <item>
       <title>JavaScript #3626</title>
       <link>https://t.me/javascript/3626</link>
       <guid isPermaLink="true">https://t.me/javascript/3626</guid>
@@ -33,20 +47,6 @@
       <guid isPermaLink="true">https://t.me/javascript/3623</guid>
       <pubDate>Thu, 26 Nov 2026 06:32:22 GMT</pubDate>
       <description>CHALLENGE function* inner() { yield 1; yield 2; return 100; } function* outer() { const result = yield* inner(); yield result; yield 3; } const it = outer(); console.log(it.next().value, it.next().value, it.next().value, it.next().value);</description>
-    </item>
-    <item>
-      <title>JavaScript #3622</title>
-      <link>https://t.me/javascript/3622</link>
-      <guid isPermaLink="true">https://t.me/javascript/3622</guid>
-      <pubDate>Wed, 25 Nov 2026 06:30:14 GMT</pubDate>
-      <description></description>
-    </item>
-    <item>
-      <title>CHALLENGE function makeCounter() { let count = 0; return function increment(step…</title>
-      <link>https://t.me/javascript/3621</link>
-      <guid isPermaLink="true">https://t.me/javascript/3621</guid>
-      <pubDate>Wed, 25 Nov 2026 06:30:14 GMT</pubDate>
-      <description>CHALLENGE function makeCounter() { let count = 0; return function increment(step = count++) { return (count += step); }; } const counter = makeCounter(); console.log(counter(), counter(), counter(5));</description>
     </item>
   </channel>
 </rss>

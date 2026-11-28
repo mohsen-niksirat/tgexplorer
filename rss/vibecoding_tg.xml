@@ -7,6 +7,78 @@
     <description>Авторский канал по ВАЙБ КОДИНГУ Ссылка для друзей: https://t.me/+ll3pbl442dNkZmYy Cотрудничество: @devmangx РКН: https://clck.ru/3RRVfk</description>
     <language>ru</language>
     <item>
+      <title>Пользователям Antigravity стоит проверить расход своих лимитов. Причина их стрем…</title>
+      <link>https://t.me/vibecoding_tg/4472</link>
+      <guid isPermaLink="true">https://t.me/vibecoding_tg/4472</guid>
+      <pubDate>Sat, 28 Nov 2026 14:59:58 GMT</pubDate>
+      <description>Пользователям Antigravity стоит проверить расход своих лимитов. Причина их стремительного исчерпания наконец выяснилась. Это не баг, а намеренное изменение, которое подтвердила сама Google! 😱 Несколько дней назад разработчики сравнили версии 1.5.16 и 1.5.17 в одинаковых условиях (GitHub #1890). При использовании одной и той же модели, одинаковых промптов и без вызова инструментов эквивалентная стоимость 1% недельного лимита для пользовательских агентов снизилась с $6 до $1,5. Иными словами, лимиты стали расходоваться ровно в четыре раза быстрее. При этом в журнале изменений об этом не было ни слова. Пользователи в комментариях жалуются, что лимиты, которых раньше хватало на 4–5 часов работы, теперь исчерпываются за 10–45 минут. Сегодня утром в 05:40 инженер Google подтвердил , что изменение было намеренным и не является регрессией, после чего закрыл обращение. Повышенный коэффициент расхода распространяется не только на --agent , но и на всех пользовательских агентов из .agents/agents/* , агентов из плагинов и создаваемых ими субагентов. Прежний коэффициент сохраняется только для агента по умолчанию и встроенных агентов. Чтобы вернуться к прежнему расходу лимитов, Google рекомендует отказаться от --agent и пользовательских агентов из плагинов при выполнении основных задач. Достаточно перенести системные инструкции в AGENTS.md , GEMINI.md или skills и использовать агента по умолчанию. Это позволит сократить расход лимитов в четыре раза. 🤓</description>
+      <enclosure url="https://cdn4.telesco.pe/file/GvVh2DhhR_x-hUUVVhfQ5uYA6sj4DWQU-BDuLnHYNL8e3rQ-01VV1HGRlbEtFzsMpSE2UW3zPvZwxDEEeysAuSVRp2jytdfofbcCeG3KiR2T8hDC7k9duQ1jbkmoVDPa24_ZHyV3ycV-4-RH06p9uMuVDcsBXGwKWrNn4LkcD6HnVCTrl54WPpaOex8nKaUmKXGvOKijnwKvGlLZnjjiiiv3wIQ47nyXHib4zhy9RjPKWLajyVa_6TVRjgTCINj0Daz6dffGOa9dnD7huQbRH-7eFrZpBEYCcf9BrTQqSZKykBu5mANmsmTUGH7408dSegTiv8w_13ER5mZu8JknRg.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>Нашли бесплатный инструмент, который поможет избежать отказа при публикации прил…</title>
+      <link>https://t.me/vibecoding_tg/4471</link>
+      <guid isPermaLink="true">https://t.me/vibecoding_tg/4471</guid>
+      <pubDate>Sat, 28 Nov 2026 12:02:39 GMT</pubDate>
+      <description>Нашли бесплатный инструмент, который поможет избежать отказа при публикации приложений в App Store и Google Play. App Store Compliance позволяет ИИ-агентам проверять проект на соответствие требованиям магазинов ещё до отправки на модерацию. ✓ Проверяет более 120 требований и подсказывает, как исправить нарушения. ✓ Работает локально и не вносит изменений в код. ✓ Учитывает европейский закон об ИИ и законодательство о возрастных ограничениях. ✓ Поддерживает Claude Code, Codex, Cursor и других ИИ-агентов. https://github.com/mjmirza/app-store-compliance</description>
+      <enclosure url="https://cdn4.telesco.pe/file/b4bdGDKxzAF73u0jql1mhDtQqBXPjaYXXUvsuTpjyI0I6N6FdAzCZJomv6T67ixEiBxgFu7eB41q_C5CkgUPbqy24yqxZA6Estvpua_Kf-bxSYFpgQmmgDvb8pNT8qBxFLiDDJjZ1tiL0zm02-qL_ByrY62gmBt6ohVdb-KaMAIZ8Ty9m2SNM-aF_LiyQHwR46B97-nt148mzca-59W5ne-c_KiiKPxK0ZAgcLfX6kg7um2op8b55gOuV-xq9qVVqwXhirAmrr5k1JECTtq0mDghaLUsYmi__wauBTfV18ihYdODSzrvAydfG-666bmSNawN1hoj2suXCUm526ucEQ.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>У Google есть официальный скилл /migrate-to-rust , который помогает переносить у…</title>
+      <link>https://t.me/vibecoding_tg/4470</link>
+      <guid isPermaLink="true">https://t.me/vibecoding_tg/4470</guid>
+      <pubDate>Sat, 28 Nov 2026 11:04:45 GMT</pubDate>
+      <description>У Google есть официальный скилл /migrate-to-rust , который помогает переносить устаревшие системы на Rust. https://github.com/google/skills/tree/main/skills/developers/migrate-to-rust</description>
+      <enclosure url="https://cdn4.telesco.pe/file/T3VWDTa9yxiQIe8daK1GjSciKW5DXufsqsKVapytymnXnIrgtAWyN1v6HzIel9EHgPm_LK4GgQv8haHnbPFGwOGPEQTtLbf920n_aqIhnJURyzZZGI4P8fMqSGei_phZiV2jkCcE6JrREc_NUINhfueVuKy1kKGhHbw4RIkquprL0mJmmmivfNMtNFEDoM88XwsUSoQT5s_yENvP0DOZYBr9AazAiCHHPxxcSqaBggnjjf8harnvcvyO5KFrNqSIxKI6X2CMch0LLgDvacPHnfqezl7izGrYZARUxnzXHuIPGoice-ArlwLsVoGxKfESd7yfRERdYgHeZ5F68NpSTg.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>Отличная новость. В Pi harness появится поддержка подписки Google AI Ultra. Можн…</title>
+      <link>https://t.me/vibecoding_tg/4469</link>
+      <guid isPermaLink="true">https://t.me/vibecoding_tg/4469</guid>
+      <pubDate>Sat, 28 Nov 2026 09:37:58 GMT</pubDate>
+      <description>Отличная новость. В Pi harness появится поддержка подписки Google AI Ultra. Можно будет пользоваться моделями Gemini прямо в Pi в рамках своей подписки, без дополнительных расходов на API. В скором времени мы можем увидеть поддержку подписок Google AI и в других сторонних ИИ-агентах. https://github.com/earendil-works/pi/pull/12614</description>
+      <enclosure url="https://cdn4.telesco.pe/file/L2LEXemrgRtB1Co87bYqUHY1GR_Sg8rXKflXq9UbZUyWA2zgx7mBwhWTif1ArB-0wEexDQr5adEwI7BEkEjEbfol2L_4_5bRjWdyQoer4GNfkiiYXGH3uXipSx6eDWwke71Hyk-SR_icVgdH5ti3AM40tWIhymWCdk19ciFwYcBee888GbAHG44ZamCQJzb-WmAED1dfgyh6918ZlP-U11_lvR2J4o25j6WKhHfmJYwqmfaiBfn8cEDPxtfU9t2rOjjb68P58VmGEDNfpFWzVB-zkJiKzVzt03pd_1DtvfDliBDvQ2nNbikp0hcSkinfhuKaOgO5NqiEzNzx322k0A.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>Вайб-кодинг #4468</title>
+      <link>https://t.me/vibecoding_tg/4468</link>
+      <guid isPermaLink="true">https://t.me/vibecoding_tg/4468</guid>
+      <pubDate>Sat, 28 Nov 2026 08:45:58 GMT</pubDate>
+      <description></description>
+      <enclosure url="https://cdn4.telesco.pe/file/RLE_PjZK157l0J8XBIYAbfDPZGg5ZsWmBm-fUsxm8kmo6q53-h6fGPhx9OtFsSmRE4S_g1t7xLwJnHmMOJwbdL6M-B1ZwDmxRcX1Q6oeTOu9D_sHTiYvFXO0yDmN_RUT8UB5Uqgy7Hc7RjVFquQhRDFogOZGWupbmoTfHEhuStUpb0kvlc2XEdFgkzi4hfse3VBOMIEOWviJFYPsZZNl6O0yjP5DpcxuynVLLAC5W3nvNlqaotWP73-2mHE9n6kL8P3wNJeH5kAOcTqdfhHW-g701ozHSbHJAOVe7pzRUP1Cuf6R065gxCDPLd0sVYiRqu-Z454yxx8shxK5owtvUA.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>Вайбкодеры, забираем полезный лайфхак по продвижению своих проектов. 1. Зайдите …</title>
+      <link>https://t.me/vibecoding_tg/4467</link>
+      <guid isPermaLink="true">https://t.me/vibecoding_tg/4467</guid>
+      <pubDate>Sat, 28 Nov 2026 08:15:58 GMT</pubDate>
+      <description>Вайбкодеры, забираем полезный лайфхак по продвижению своих проектов. 1. Зайдите на сайт Giphy. 2. Создайте GIF-анимации по тематике вашей ниши, которые легко найти через поиск. 3. Добавьте логотип бренда или адрес сайта. 4. Подайте заявку на создание канала бренда. 5. Загрузите свои GIF-анимации. Ваши GIF-анимации будут появляться в различных социальных сетях. Люди будут видеть ваш бренд и искать его в Google. 😸</description>
+      <enclosure url="https://cdn4.telesco.pe/file/DXweOW_n9MVHy4lP5xogG8TzIC4MjS0YifkpTCujSlZsITLrJndppkCheHzplcKwr73ZJDR9zFvyn4E_Jb_MY19vKJintR5HyNmUwrWqozn4NPFd8eyhUYLm3b33z-o1CHCqddoXnUTz7JuAfx70XxmVlKwYfg7gs5eaoO4cOyojgsvu8N-nqjrU9coILCWlKsimnGPpIAnSZhw_XshFkMd4ALGFH5SAPeWLncW9QX2-g7sn3pleRGW_buPsO2aZlkplDChECNfNIymULLI3pexDYilYnkChZqysRi00r_d4RLgUoDn1qXCNYrhbamdNpF6E7spxMiI2-CH6hVasQw.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>Исследователь в области информационной безопасности сообщил об обнаружении пяти …</title>
+      <link>https://t.me/vibecoding_tg/4465</link>
+      <guid isPermaLink="true">https://t.me/vibecoding_tg/4465</guid>
+      <pubDate>Sat, 28 Nov 2026 07:20:58 GMT</pubDate>
+      <description>Исследователь в области информационной безопасности сообщил об обнаружении пяти GGUF-моделей на Hugging Face, содержащих вредоносный код. В общей сложности их скачали 2 428 раз. Исследователь просканировал 3 273 389 публичных репозиториев моделей. В рамках основной кампании Mir2k троян для Windows скрывали в конце GGUF-файлов моделей без цензуры, сразу после последнего тензора, в области файла, которую llama.cpp и LM Studio не считывают. 26 ноября злоумышленники изменили шаблоны чата таким образом, чтобы модель начинала каждый ответ с команды PowerShell, распаковывающей вредоносную программу. При этом сама модель нормально загружается и отвечает на запросы. Вредоносный код просто распространяется вместе с файлом. Что удалось выяснить: - Пять репозиториев с двух аккаунтов набрали 2 428 скачиваний против 1 502 днём ранее. - Mir2k/Inkling-2-Mini-Uncensored-GGUF скачали 458 раз, а Mir2k/Huihui-Qwen3.5-9B-abliterated-GGUF — 1 488 раз. Также обнаружены 12 пустых репозиториев с названиями вроде Qwen4-27B и DeepSeek-V4. - Вредоносная программа для Windows занимает 11,47 МБ, из которых 10,25 МБ приходится на встроенную копию Tor. Троян крадёт пароли из Chrome, Edge и Brave, атакует криптокошельки Phantom и MetaMask, а во время простоя компьютера майнит Monero. - В трёх моделях Qwen3 без цензуры от пользователя timdedid обнаружены скрытые инструкции в шаблонах чата, побуждающие ИИ-агентов для программирования загружать и запускать вредоносный PowerShell-скрипт. - В ходе тестирования ни антивирусы, ни сканеры pickle-файлов не обнаружили угрозу в заражённых файлах Mir2k. Для обнаружения подобных угроз исследователь разработал gguf-radar. Инструмент распространяется под лицензией MIT, проверяет шаблоны чата и содержимое файлов после последнего тензора, ничего не исполняя, а также позволяет восстановить чистый GGUF-файл без изменения весов модели. Во всей этой истории удивляют две вещи. Из 3,2 млн проверенных репозиториев вредоносными оказались всего пять. И нацелены они были именно на пользователей Windows. Будьте осторожны с моделями, которые скачиваете. 🤨</description>
+      <enclosure url="https://cdn4.telesco.pe/file/NlcTrg7bHibC28MwHd00mpQDrgP2p4q55W07cCHEW74atZpfuzlP1woEHc76ikuWA-Z9-zfaGg87TwoijeZiwoaUXrUeZnwgWyOg5U66p2mBIu7xvnfiTfSAeb5lhjVKwsOS-bRB-o3JkhkYxZWqc5jNTh55yFIuOs4grtAqwV4oCjM7F_1jN2l3nC402_gMliK8KUYn3r0-WePqeAOGpNq_RptmslINhytnTNubi7LtHlhukeF7sRm1FLnvTQSOeyLF3eKLWyLTFJ4FWnXj77GaUhPkjNCK5Qap4D1sjWjjSekwOuOv0l-1aNuyPF9PTMK8C0IR4UykDlMRYRA0Bw.jpg" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>Разраб накодил инструмент, который позволяет ИИ-агентам читать публикации в X, R…</title>
+      <link>https://t.me/vibecoding_tg/4464</link>
+      <guid isPermaLink="true">https://t.me/vibecoding_tg/4464</guid>
+      <pubDate>Sat, 28 Nov 2026 06:40:58 GMT</pubDate>
+      <description>Разраб накодил инструмент, который позволяет ИИ-агентам читать публикации в X, Reddit и других сайтах, которые пропускает обычный веб-поиск. Бесплатный, с открытым исходным кодом. Доступен в виде CLI и скилла для ИИ-агентов. https://github.com/SamuelZ12/research-sources</description>
+      <enclosure url="https://cdn4.telesco.pe/file/rrBioIXypjbVFPN5QK1Lf1hMs91ahKykSmplp3DMt4UJrmae3KgVz3ySDSiOthJEfLZa-WQq1HeCWRc5g0NYhxcL7OH1gksCX4jXvZnoDfVvgnY82axeLXTIhLMd8oICQnuygiQjJDViRST78kpXbenWtMaUrYqymsLjgZOniWjuwsXoETts8_wK0DIdKTZ03aJTGGVGe-kjmyGkL5nyjPF8-xjT07CzFEE-03NiYDA_WEdH4drPAjxhLAJlDSu5SVA5C8isB1bXnBPbCrgdzm1w8RHZBIaYEF4wUv-88IqE1QkNMH-TpERVuF53HdPygnuHCG5qgoArnSGHKlp5Hw" type="image/jpeg" length="0"/>
+    </item>
+    <item>
+      <title>OpenAI урезал лимиты Codex, но забыл про лимиты обычного чата. Разраб поделился …</title>
+      <link>https://t.me/vibecoding_tg/4463</link>
+      <guid isPermaLink="true">https://t.me/vibecoding_tg/4463</guid>
+      <pubDate>Sat, 28 Nov 2026 05:02:45 GMT</pubDate>
+      <description>OpenAI урезал лимиты Codex, но забыл про лимиты обычного чата. Разраб поделился проектом, который превращает ChatGPT в Codex, благодаря чему каждый подписчик Plus получает практически безлимитный доступ к GPT-6.2. https://github.com/totec448-spec/chat-on-steroids</description>
+      <enclosure url="https://cdn4.telesco.pe/file/sKJLOQdIHmhXlYoOqWE_PtjzEOhjlu9avo3Dty42j7vq8DeWKByAqRM8fp1FV7zbDM6jm3ySGIC_gLN_m60q_Uw-f453xK_KB1qWpbbrbpLSIgyS326RRufhiP01GzxRAacG3OdhNatM4aXqSPhZOVen1LvoNYK0R6k1VWW76WrCUpaylZ_1ZUbpPU8u2y4gHwv8gCYrMnnuBn1Bpxbm1S8h0NA9BYejXx9Hh_fuBAJMxilASJo3SlXFY1crSwUIwXs0ZRzUHy0dKpsqT1mAXZVxXRTo9ulpNemXuh9LyHUD_RQaex-NooyBxQ5vi01_6rn_CqXxZMxwnMH8gnhtsA" type="image/jpeg" length="0"/>
+    </item>
+    <item>
       <title>Неважно, пишете вы код уже 15 лет или только недавно познакомились с Claude Code…</title>
       <link>https://t.me/vibecoding_tg/4462</link>
       <guid isPermaLink="true">https://t.me/vibecoding_tg/4462</guid>
@@ -20,7 +92,7 @@
       <guid isPermaLink="true">https://t.me/vibecoding_tg/4461</guid>
       <pubDate>Fri, 27 Nov 2026 10:59:58 GMT</pubDate>
       <description>Gemini Task сильно недооценивают. По сути, это аналог Grok Bot, который для выполнения всех задач использует Gemini Neon. Причём у него есть собственный облачный компьютер и уже настроены интеграции с Gmail, Drive, Docs, Sheets, YouTube и другими сервисами. С его помощью можно автоматизировать множество рабочих процессов, которые раньше выполнялись вручную. 🤓</description>
-      <enclosure url="https://cdn4.telesco.pe/file/oJBNoDKET_Gym014Yu2I0BPhSNCA4kPEJRO6vVRCwajxKwuz__EMz9CNzlZt3K6S-zu8NC5NoQk4fFqp3q9w5yUQzxdDXeIK3GzidcZcIdWXWlq1CedSf-leacmmCeTTFoiYEjl2yIvXCyjLlrAgNQ1sA6BlmptH139NQOVIiENA3_UnGd-yt9cJZ1BUKbsoOI5SQlRQBCRu-JvU3lFm0neresI2qe9UAx23nqqH_7uji__mDXdyvoGAq5ZCrMuU2oceG0l8xz1Gb2MUpg2yYYLd8_M3rPA0NcYm99TK3Yh54kPKkN6zIJ11Rj_0d0L2U8EkTelnB_RfTnJCJZnrOg" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/V0YIx5KZAwg4aGg7gY2zsikKLEpF29H2W9111tZBffJnTfkC5gvUZFIX9U_xM4jSC9Gj3aaU5cv81dfBsyOLbxolLwi67YLw88i4YMgFsedUMlNrlpvhFRVsrT2aRYho4gtbmDpWtNW_dR-4d7aoK4vx7IGUEEymoPaRZOPmn_zfrzLWvttRRrthED-KtbDHO4nLlJfNf9G2lVRHmcF7lG6NWlgZLrKKDZLyUC2aEn7IaiDPLbOW9F5ZGnc_8IXhYuv_EQ2QFHh6ujOL2UpVe14aQ0bI5CpSGKiAcoAh5GkA-WC3Ygtfkwj-Q-j7e2YOEfEvgPdeYFfdQ8KkoMmFzw" type="image/jpeg" length="0"/>
     </item>
     <item>
       <title>Исследователь в области социальных наук BK Lee поделился готовой конфигурацией C…</title>
@@ -28,7 +100,7 @@
       <guid isPermaLink="true">https://t.me/vibecoding_tg/4460</guid>
       <pubDate>Fri, 27 Nov 2026 10:20:15 GMT</pubDate>
       <description>Исследователь в области социальных наук BK Lee поделился готовой конфигурацией Claude Code и Codex для научной работы. В неё входят набор полезных навыков, настройки безопасности, инструкции по планированию задач, ведению журнала действий и перекрёстной проверке результатов несколькими ИИ-агентами. Отдельные навыки позволяют создавать таблицы и графики в соответствии с требованиями 17 научных журналов, составлять опросы в Qualtrics и решать проблемы с сохранением контекста проекта. Конфигурация ориентирована прежде всего на исследователей, которые только начинают работать с ИИ-агентами. https://github.com/letitbk/claude-academic-setup</description>
-      <enclosure url="https://cdn4.telesco.pe/file/TVmMoa-IAWqEclkeSlZrWkDhf7YYgxvGSj5Rh8K5l49UlfJYymyxMnVcZ4iH8SUP-8RYJrcUgybrRvBhWCcoz4NviuIbox1ODtgHfFQ1cVaMjlPodE271jWWF9Z_b3MjnU767s4XB2jONMDqqhvFdtjtCTlZYEP2MZpYs7p1KTHOGvoVs0OONoSrsvT-h2EtIxbH8q_Bq7fDuEpYQe-2ywNZUJBvCkVQDXydSj6QGd1bjSkg3NT2JjvKZDZQHnCMxw0rpMEh9e0HvMM0aOzU_RBPsszRcyRCaqtv3rsbEzBZlJ1qcC8svrmJNCkhalXAiIyMIB0o4pDOTKofkzgYFQ.jpg" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/N2qB34BO1Jz_C56IClL6xLBmtuC2N2mfHCfMw-GHXPFUi-Y389EaJq5Y6T-qbNFtPX1TUVXeBjixbCbDepc2TNmTe95c0XqkrB1sveW9-S4VdiHFewCJXh8RoZuRBLuv1nk1UkuEwbH4bvr7cz92Q2u-aIV6XHCP_VF3yG9yilj19VjaZ_33yCgHYRAzQm_671wEOs9hDX_QlFmZ8hG0tI3D79HG06xDcIZMgPy2YGQfPgwEIgXcyPQhUtoDkva0mKjO5WI0-rULeSomG4onKa_PXsBYdkw_L31Qw9WCj2TF4OBV_yryppqInvgYZvTqS6wGR4OJPqHfgUyqtAhpRA.jpg" type="image/jpeg" length="0"/>
     </item>
     <item>
       <title>В Antigravity CLI v1.5.18 в списке моделей появились два новых названия — nemosr…</title>
@@ -36,7 +108,7 @@
       <guid isPermaLink="true">https://t.me/vibecoding_tg/4459</guid>
       <pubDate>Fri, 27 Nov 2026 08:40:58 GMT</pubDate>
       <description>В Antigravity CLI v1.5.18 в списке моделей появились два новых названия — nemosreef и pureprism. 👀 Также Google хочет внедрить механизм banked ресетов, аналогичный тому, что уже есть в Codex. Google не остановить.</description>
-      <enclosure url="https://cdn4.telesco.pe/file/ClsGHVTLVKfeLGC9kkMdQgvnnY4gKTTVaSRgam9G422F4VLDYUyHhPodSftmo2OM38AIHsqpXKHJsthKuqwA3XQolP_vKCWgKhRmIADZLLTapxRopjoZiP-pIdFfwWRmtxriYe7y2YyrTmBuH8Ws86cHN1dxvTdKUTZ2Qu2GqnmscU-eAom9pU0enM87qe_HgBq_3sWVNhChVFGSjuuSz5w1jg8gS2IQ3repqv8jOEz9JGDzHXGQgXwTIaKhMXx7l4NnZTnkOGt3bF8RtrlXi_jbNxUwPSBBtze3VHBpLRR-oAl1Vkht8WbdakpwpEP9_kUo-03JGuym-A3njUyrEw.jpg" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/CswJAGLT6RmpXDuqQDYZY5Q1_4yUalBapGOf2g9yKKb3vJ4zJM-PtFWni_Y2FH-5uR82-qwZD15wb7Se7yAu3LJqpjHFf96hF8yvA6Pr99H20gNN6d9DF4dsUzOcx_dMncQA_fB8od1S0SGUilG9eLxv5rZ9_nAt3qGJR2iMl2thdL_WItY7N17-VcZDYrQAkQP6CWJUnsUUUmjdDMcexfED9LR2Rg0IZo6Hfsp3K3NnAG6_ClwKBTdgeT5M5EYEIH6I2W8VhB19d5qJ2eKffni7dx1ni7HAnufN5N9cjH8st0AtKTkZ3sbpcwZMnCDbTxrDX0nuTXj18joipguHoA.jpg" type="image/jpeg" length="0"/>
     </item>
     <item>
       <title>Один из разработчиков полностью отказался от Linux и запустил Qwen3-0.6B в опера…</title>
@@ -44,7 +116,7 @@
       <guid isPermaLink="true">https://t.me/vibecoding_tg/4458</guid>
       <pubDate>Fri, 27 Nov 2026 07:40:58 GMT</pubDate>
       <description>Один из разработчиков полностью отказался от Linux и запустил Qwen3-0.6B в операционной системе размером всего 24 КБ, написанной на чистом ассемблере x86-64. При этом модель работает до 54% быстрее, чем в llama.cpp под Linux. Бинарный файл ОС с поддержкой Multiboot (asm-llm-os.elf) занимает 24 252 байта. Система написана с нуля, без использования Linux, Windows, C, Rust и libc. Она загружается за 74–94 мс, переходит в 64-битный режим Long Mode, активирует все ядра процессора через APIC, отображает 614 МиБ весов Q8_0 непосредственно из физической памяти и запускает интерактивный чат с поддержкой KV-кэша, многоходового диалога, VGA, клавиатуры PS/2 и последовательного порта. Результаты сравнения с llama.cpp (Q8_0, -ngl 0) на AMD EPYC 7642: - 1 поток — 23,67 против 16,63 токена/с (+42%). - 4 потока — 78,89 против 51,08 токена/с (+54%). - 8 потоков — 118,08 против 80,79 токена/с (+46%). - 16 потоков — 134,94 против 103,03 токена/с (+31%, на пике 136,6). На виртуальной машине Proxmox без диска, с 12-ядерным Intel Xeon E5-2670 v3 образца 2014 года и 2 ГиБ оперативной памяти система загружается до приглашения ввода менее чем за 5 секунд (само ядро за 95 мс). Модель работает непосредственно из оперативной памяти, выдавая 78 токенов/с при генерации и до 111,5 токена/с при обработке входных данных. Результаты побитово совпадают при любом количестве потоков. Все 64 токена, полученные методом жадного декодирования, совпадают с результатами PyTorch FP32 (косинусное сходство 0,99965). Сборка ELF для Linux размером 14,7 КБ (FAST_Q8=1, INT8×INT8, AVX2+F16C) также превосходит llama.cpp на 18–36% при использовании от 1 до 40 потоков, а запуск непосредственно на железе со страницами памяти размером 2 МиБ даёт ещё 10% прироста. Исходный код ОС, инструмент для сборки гибридного ISO-образа с поддержкой BIOS и UEFI, а также инструкция по настройке Proxmox без диска доступны под лицензией MIT. https://github.com/alesha-pro/llm.asm/tree/main/02-baremetal-os</description>
-      <enclosure url="https://cdn4.telesco.pe/file/I4gq60gt3B0TNETBvsbs-EZfvuKZNj73o9UD6IcXqdTST_9eHwf8CRD9MiSX5TRUpJeN69vDyOwup07270448BCooZuwPsFAA8MSdyed-J7OEnOzfSnQvYFq9DJvxgn0iRla1UeQPz1dRxfI_Oea1N1AhhN_r0iWqIgG7g1konF6rG2CdXApR7IAJqx7uTnDjlPGU-2bAGXfal83ngqf62FrBXu4tcW-2W0qTVn8tMY-hqi723zLAzGy-H5YS_LnX0yEqwAvZVmOe3SdVNOgTJxYPOZH8bkoVj_jFh3FZi_JATMurXRXqzureAW-DUbN2qYc0aRtdoF357D6kOyqeg" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/NVCUu2ces9XgATaQMfMFJ1sZcQc_h7Meeg_a9RVcdPfejsu9ASzuODnbkMoqsGAKU28wEh2P34B6p4BHunwcK2wCbZ0Lo1t2jLS18J3wVyrOM8WbxMqozOkZQeKvBTkWDx1eZL1H9OcfIkgy9cZJkU3FMb85E4OTcwtPcl-4IUf36pQebJIUF0yMSayIfY5P0MK9KGNCmxsTjcI8ZgkD0_vHG3aTprOi_g50wIgq1agodQUL_WRRJ7MVC7Gi7X2oLf8St93WHo5SGR0I6a85QYjoBoiPa4qa2enlc3rcrI1yliJ9vLZsIXy1n6Ndj1PVdyO3sP-ByA68IoVoGw-3bg" type="image/jpeg" length="0"/>
     </item>
     <item>
       <title>Если вы оформили подписку Google AI, не забывайте получать ежемесячные кредиты G…</title>
@@ -52,7 +124,7 @@
       <guid isPermaLink="true">https://t.me/vibecoding_tg/4457</guid>
       <pubDate>Fri, 27 Nov 2026 06:59:58 GMT</pubDate>
       <description>Если вы оформили подписку Google AI, не забывайте получать ежемесячные кредиты Google Cloud. - Pro: $10 в месяц. - Ultra 5x: $40 в месяц. - Ultra 20x: $100 в месяц. Неполученные кредиты переносятся на следующие месяцы, поэтому вы по-прежнему можете забрать их за пропущенные месяцы. Кредиты можно использовать в Google AI Studio или для оплаты запросов к Gemini API. Получить кредиты можно здесь: https://me.developers.google.com/benefits Чтобы воспользоваться полученными кредитами в Google AI Studio: 1. Перейдите на https://aistudio.google.com/billing . 2. Привяжите платёжный аккаунт, на который были начислены кредиты. 3. Создайте платный API-ключ в проекте, привязанном к этому аккаунту. Предварительно нужно пополнить баланс минимум на $5. Google сначала будет расходовать полученные кредиты и только после этого — ваши деньги.</description>
-      <enclosure url="https://cdn4.telesco.pe/file/LwcA-EyWvESrykQLRDzhQH3vSd7n5C97CcQjULqJVUr2WcMa3BSR81Ubo8ZzcaacF5YGRVJMC56D6cxZ7sQAlDMIjCLVv9aO1fyL0M6kwatEyxoRWxJCz4nDTreCu8kxNxnMlKxEuDuxA8UKfi4e7_pSnQYrGrZBuc6OeZdlQvRe2OFWV7ajldfHf9k4Qjgki2DYb1CHdjK8yir0cK1lzg37w88-8nr2u1CC2R-gLHXd-_nmcVa7mpu7H5_BoUCU1Z6cp8utbRH_eCmtqbYyBEwEfHpnkEmyKIb-H-S3t8L-rW7_aidhnd9EzF9YfkPYRihCZ4J4bNP0nInVhIK-1w.jpg" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/SNS2hY4rpNgFi1-3rvwdy9EB8ciDJJwPERt2dLButqm9x3bGu5PgnetxdefIxiRMWw_z0ALYWl1rWj9CmVcE9ZJ3bRxOdP_dMjElsjSraBlT4bvPxH0wmBG6SDF9SCVt30NbGk5wq2aQ4uSxahKT2lgWOLfZ0KkeciTF_WANCsjs_RmizuhMCuCHzQDzxp_LxB8mTkXHBFw_W2meVgyWrexYpgSZ-pfaBQzwKITLLngtoDjCl4bcp4yNKYgPzK33hGC2etXrm8LJVU2-8Dynx9Y_OG1vLDwAmc6E-bbM-Fut3aBtw66hhGV5cNy_YWJkX_CcpTZzllexKMgQhIBZTw.jpg" type="image/jpeg" length="0"/>
     </item>
     <item>
       <title>Отправьте свой сайт на индексацию в Brave Search. SEO-специалист с восьмилетним …</title>
@@ -60,7 +132,7 @@
       <guid isPermaLink="true">https://t.me/vibecoding_tg/4456</guid>
       <pubDate>Fri, 27 Nov 2026 06:45:14 GMT</pubDate>
       <description>Отправьте свой сайт на индексацию в Brave Search. SEO-специалист с восьмилетним опытом в поисковой оптимизации плохого не посоветует. Потом ещё спасибо скажете. 🙏 🙏 🙏</description>
-      <enclosure url="https://cdn4.telesco.pe/file/MDfrUO4BueCxTWFNy9H2RIAq5FdUWWjZaXTzeKgJc76scTzgn_A_N4CV6w864LXxvrm4S7awk1Bgx0CaC7MjSOE9DGJonM3PU8Vu5z-WJOEXk3pXGaqiMCba81zAMyVpZ78E66nUtQZYBcBvhr792XsIKJYcfozxegIA-CWkVBIIUvBODt861vDxXIf5nh5ahc-VNphr4Pl3Dqgbqbq4cw6vL9y3c8Gv6uOb4Cy_uOoPKCCgV3O21TTqRUMjnueHYELJsy1ChFX-D-4bCJMj5d2JOfC9hLbPYCurtog7yAqHRQhY7FjIh-B3ckQroX3kk0QoRqDvWExLV7qm1Ja4xg.jpg" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/lSga6p7qFS3CFL8MePfzBdaiGsZFKmq503y45dSO-Cx3LsOk9O2uHvIOpv5XKhf75ACUTGy5Z4aPUdMFftLeZrHPbYT_zjPFbYRz7rfJ2i0fib9I58dC54nw1JQ7_1q_7jzwXioSc9xvly3DQ8PG8XUlV-77DJG7UVt2EHId_gSMz457TYdvySIHInTzyIofjta-UIxMLUrnunKBbzMIZMyzujqhPQd9tKnkSDKiTAulM7D93AMGalTqozRvIatg91LFeenyuJSBANViNIY90CTcM3KmvqyItXoQ0W5gXroXoZ1woi6tBXg0a4_Sl6BAAQUbQK0CGX9xHNiZj8EpCw.jpg" type="image/jpeg" length="0"/>
     </item>
     <item>
       <title>Вайб-кодинг #4455</title>
@@ -75,7 +147,7 @@
       <guid isPermaLink="true">https://t.me/vibecoding_tg/4454</guid>
       <pubDate>Fri, 27 Nov 2026 05:03:27 GMT</pubDate>
       <description>Moonshot AI открыла приём заявок на получение бесплатных кредитов для Kimi API на сумму 150 тыс. юаней. Это эквивалентно примерно 7 млрд токенов. Программа предназначена для исследовательских команд, работающих в области естественных наук, инженерии и междисциплинарных исследований. Если вы тратите средства на использование API в своих исследованиях, успейте подать заявку, пока есть свободные места. https://www.kimi.com/news/kimi-for-science-program</description>
-      <enclosure url="https://cdn4.telesco.pe/file/qvitQ7jX662jG7FmHiA8N0bN7XjAmrnad9Ujtgtx7p7I0bKSl-hHHuKkdcb5fvGxJNVRsOVvhSQ4LqwTlTHb5cFJVa9YNziDqA6vnaBSlMksUsoSb8Xgs0OtoO1gQceeTnh6OB3edDSDpjI_ie-kq_gDFgwm7TUPXfSbOUiCU02RYw9bB4XYnisn2ga6TdbIECltohaIo17ojMo9GQJeUwlgueLc80KYKYAgE4iapZFBtX_MJmHFB4FZ_Kh0-KB5Hr26t93BDYlF_bZ4rPhVYdR2xmYpuXfaknTx9754v2WdxbDwDLbNpUJhNGTP-DRpnWKZqEjbdzzx641FdiMMKA.jpg" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/OYKQeWuLKRVnOmHtU8WaQKbwvKcrFdtDsfPW5d-ZU4i5VtOMpS4vD984KqI7ETUsYvXanY9ARUSESK3eeTEvclHKTndIcGTIaiGjpz7SYWIZ3BdYistAe9kfpBoAiDMOIh1eS9t3so0HbhNjOMvwlRvTYb332d-Sx3f78nHSpsl1w3XG_KdInFAiP6UHuD-OJT-XQBA9n-ltnAxJvXP_OV6YDNtg9TGAAi4HMXm3OBebK8N9iX2tjPWbOqW1ZgxiChfnRg3taJZ9b9vab8GWrZp3isH17qYBHl4uaXt4TOOO1lCcBKCmE52VkLw9sWYmNjknU2qkUcTsIDhPhYWnhA.jpg" type="image/jpeg" length="0"/>
     </item>
     <item>
       <title>Сегодня один из лучших способов разобраться в новой теме — попросить ИИ создать …</title>
@@ -92,76 +164,6 @@
       <pubDate>Thu, 26 Nov 2026 17:08:58 GMT</pubDate>
       <description>Tencent открыла исходный код DFly2 — метода спекулятивного декодирования, который ускоряет генерацию токенов в моделях с разреженной архитектурой, таких как DeepSeek-V4.1-Flash, GLM-5.3-Flash и собственная Hy4-Flash. Согласно результатам тестирования, DFly2 повышает пропускную способность при инференсе DeepSeek-V4.1-Flash до 81% при длине контекста в 64 тыс. токенов, а выполнение агентных задач на Hy4-Flash ускоряется до 4,2 раза. Не так давно Tencent также представила DSpine , позволяющий ускорить декодирование в Qwen3.8-27B. Повышение скорости генерации всегда радует, и приятно видеть, что Tencent тоже активно работает в этом направлении. https://huggingface.co/collections/AngelSlim/angelspec https://arxiv.org/abs/2611.34776</description>
       <enclosure url="https://cdn4.telesco.pe/file/ewUiq2q-nyuIcq6fmvybRohJOe6YxILrsURZ108Gl-tma2DSsPHMCyhcQ95lHrOwcTQuokOI8eOd5brseGClinuA7sxWDPX6gos60v8uAHPJiDILVF3LsE6lGr63YtebNgTXVuSn2DBQz1l8i_kPytdL1yoZn_FZzr3BhGYsr-Xl98o666woswwnebxHV_Ojn0tGsGogpnhFLxZoaaqTruDfOfr5_vxXGzX6hK_Jqp8Oi7TYWpVj8bkxwb7pvdmT1_Z3ydVeZgpe4nHePj5HjkDBTLgcUTzVkowQGom6A3D6xyOkcMvNV7QHQgt_5i6rkzokx0oYnwNxRbLuAJnBSw.jpg" type="image/jpeg" length="0"/>
-    </item>
-    <item>
-      <title>Одна из наиболее интересных возможностей скиллов в Claude Code заключается в том…</title>
-      <link>https://t.me/vibecoding_tg/4451</link>
-      <guid isPermaLink="true">https://t.me/vibecoding_tg/4451</guid>
-      <pubDate>Thu, 26 Nov 2026 15:18:01 GMT</pubDate>
-      <description>Одна из наиболее интересных возможностей скиллов в Claude Code заключается в том, что они могут выполнять shell-команды в момент загрузки, ещё до того, как Claude прочитает их содержимое. Это позволяет экономить токены и передавать модели полезный контекст, например состояние Git-репозитория, логи или сведения об окружении. Однако этот же механизм позволяет незаметно для пользователя выполнять произвольные скрипты. 💻 В Claude Code 2.1.332 появился хук PreSkillShellCommand, который позволяет проверять и блокировать такие команды до их выполнения. Для защиты от сторонних скиллов автор разработал skill-shell-guard, работающий на основе списка разрешённых команд. - Разрешает команды, предназначенные только для чтения, включая git status, git log, ls, cat, grep, проверку версий Node.js и Python. - Блокирует сетевые запросы, выполнение скриптов, установку пакетов, запись и удаление файлов. - Блокирует доступ к конфиденциальным файлам и каталогам, включая .env , ~/.ssh , ~/.aws и *.pem . Если команда заблокирована, скилл всё равно загружается, а Claude получает информацию о причине блокировки. После этого модель может выполнить команду через стандартный инструмент Bash в соответствии с установленными пользователем разрешениями. Установить хук можно следующей командой: npx claude-code-templates@latest --hook security/skill-shell-guard При установке выберите User settings, чтобы защита распространялась на все ваши репозитории. https://www.aitmpl.com/component/hooks/security/skill-shell-guard</description>
-    </item>
-    <item>
-      <title>95 ГБ данных, объединивших практически все основные материалы по кибербезопаснос…</title>
-      <link>https://t.me/vibecoding_tg/4450</link>
-      <guid isPermaLink="true">https://t.me/vibecoding_tg/4450</guid>
-      <pubDate>Thu, 26 Nov 2026 12:15:18 GMT</pubDate>
-      <description>95 ГБ данных, объединивших практически все основные материалы по кибербезопасности, теперь доступны в одном месте. Этот датасет содержит 507 файлов и охватывает более 30 направлений. В него вошли более 600 000 реальных отчётов HackerOne, все 31 модуль PortSwigger Academy, более 1500 лабораторных заданий HackTheBox, свыше 200 техник MITRE ATT&amp;CK, а также материалы по OWASP, SOC, цифровой криминалистике, облачной безопасности, IoT, безопасности ИИ и обратной разработке. Лицензия Apache 2.0. Перед скачиванием необходимо принять её условия на странице проекта. Если вы обучаете собственные модели, данные можно использовать для дообучения Qwen или локальных моделей Llama. Если дообучение не требуется, достаточно выбрать интересующие материалы и подключить их к Claude Code или собственной базе знаний, чтобы анализировать свои проекты. Использовать материалы рекомендуется для обучения, аудита собственных систем и практики в лабораторной среде, где у вас есть соответствующее разрешение. https://huggingface.co/datasets/Vyber07/cyber-security</description>
-      <enclosure url="https://cdn4.telesco.pe/file/O_7R-kJUCEKS_57oG6Ozj6amx9fUUQkpy3qlLn6FxMokNYqbyvdTGP5_N9c-p60WQV4JwCJ_KdUs7raRYbTzTNtGTw85NlFKgXhA-E1wj4I99n0U3KXgzQEPQkxTRBlBkGchR5HEEgDVEXctumvVIejNS67LevJwMr1MRlxaSAaOk47JVNR9DwTL41F-dRR-MS2hS21pR-Vl66AoxkpbUdmgIjuuBPArJrLNOVA8xOqm9GoQPgYeKFnw9dDs1Xakw7lz0vYAMUTEj1_c-5aXRcF7WA17Q9CjPeVzIRxVf9v65sebgr_0K19vUnNtDwqR0TGftQFgicObYsrunS0RUw.jpg" type="image/jpeg" length="0"/>
-    </item>
-    <item>
-      <title>В честь Дня благодарения Google обновляет лимиты Gemini для всех пользователей A…</title>
-      <link>https://t.me/vibecoding_tg/4449</link>
-      <guid isPermaLink="true">https://t.me/vibecoding_tg/4449</guid>
-      <pubDate>Thu, 26 Nov 2026 11:44:01 GMT</pubDate>
-      <description>В честь Дня благодарения Google обновляет лимиты Gemini для всех пользователей Antigravity! Google просто разрывает 🔥 🔥 🔥</description>
-      <enclosure url="https://cdn4.telesco.pe/file/VY70hjZtM6qQNNwlouFn2I_jhoR_WAt-IahwK2GfhUJZwR-L_YZFN0hMqqd7wtlykiTAgltRSjQIacAlXgWBdEEg6m34SnTJCy2J2C9G1vNKsGf8Aa5YVmtLpPtKxkaudMdwtEIx5tCWzKi9df5z_HICxPwYY7g07v6Y5UClXVloMXtRj1RX4_nE7kmi9RSoNPrybVDv-oBMduvz_eJSzh-lxWGfAtXkqevKzDokNPSNL1X7HRwWhcDxiMuVHVARjus8qrFXVsiu34da2WtL5X8Q-eTQ3EfPEXuPL06-h97knYxj8wcyf45-e3R5V76fez0199fK8jzlpmhFQDQpEw.jpg" type="image/jpeg" length="0"/>
-    </item>
-    <item>
-      <title>10 лучших моделей ИИ без цензуры для локального запуска на данный момент: https:…</title>
-      <link>https://t.me/vibecoding_tg/4448</link>
-      <guid isPermaLink="true">https://t.me/vibecoding_tg/4448</guid>
-      <pubDate>Thu, 26 Nov 2026 11:14:01 GMT</pubDate>
-      <description>10 лучших моделей ИИ без цензуры для локального запуска на данный момент: https://huggingface.co/AtomicChat/DeepSeek-V4.1-Flash-1017-Uncensored-GSQ-RCO-GGUF https://huggingface.co/alesha-pro/Hy4-flash-Uncensored-GGUF https://huggingface.co/huihui-ai/Huihui-GLM-5.3-abliterated-GGUF https://huggingface.co/AtomicChat/Inkling-2-Mini-Uncensored-GGUF https://huggingface.co/huihui-ai/Huihui-Qwen3.8-27B-abliterated-GGUF https://huggingface.co/huihui-ai/Huihui-Qwen3.8-Flash-Next-abliterated-v2-GGUF https://huggingface.co/huihui-ai/Huihui-GLM-5.3-Flash-abliterated-GGUF https://huggingface.co/mradermacher/DeepSeek-V4-Pro-Qwen3.5-9B-UNCENSORED-heretic-GGUF https://huggingface.co/mradermacher/gemma-4-31B-it-ARA-heretic-GGUF https://huggingface.co/AtomicChat/Ternary-Bonsai-2.5-27B-Uncensored-GGUF 🤖 🤖 🤖</description>
-    </item>
-    <item>
-      <title>Разработчица Grok из xAI Лорен Тан добавила в pstack новый навык /reframe , кото…</title>
-      <link>https://t.me/vibecoding_tg/4447</link>
-      <guid isPermaLink="true">https://t.me/vibecoding_tg/4447</guid>
-      <pubDate>Thu, 26 Nov 2026 08:11:01 GMT</pubDate>
-      <description>Разработчица Grok из xAI Лорен Тан добавила в pstack новый навык /reframe , который призван решить одну из распространённых проблем вайб-кодинга: вы знаете, чего хотите, но не можете правильно сформулировать задачу для ИИ, особенно если работаете в незнакомой области. Допустим, вы разрабатываете видеоредактор, но никогда не слышали об обнаружении голосовой активности (VAD) или non-destructive редактировании. Соответственно, в вашем промпте эти понятия даже не упоминаются. Команда /reframe знакомит вас с необходимой терминологией на примерах реальных проектов, указывает на то, что вы упустили, и переформулирует исходный запрос. Её можно использовать в связке с командой /sharpen , которая помогает уточнить порядок выполнения задачи агентом и критерии проверки результата. Стоит попробовать как вайб-кодерам без технического образования, так и разработчикам, работающим за пределами своей специализации. https://github.com/cursor/plugins/blob/main/pstack/skills/reframe/SKILL.md</description>
-      <enclosure url="https://cdn4.telesco.pe/file/mvrPn220lL3wOtJDLvxa_FlPaFPt4jN2-JJljsF6rSSd7wc1rZVm0ea8gvSlOBQIHL5zngqePr76puwMHCI2vw5Vr_QnigTN1kkJLicHO5vWpsHGOlHYmC8Ysx-Xe-MUGLiBdjam7iRRqWa9tYxFY2lgMel0n7lVI4yJzJ0i_qoNmCdvs_boNU-3fOs3Jeo_tvaJ73ccKGMNIdbCEt6R70VrCkHZCKtQJQVrAdxJZo3wro97eu08gU_KLkzkOzkEcjqa-LoxgS7FxjzZh8HCaMPyCfzYkPzN1MFE52jLPC7vdxjXrCH23qlAOkVKI0uo8XS-W4tlUysDv_mZPkLz7g.jpg" type="image/jpeg" length="0"/>
-    </item>
-    <item>
-      <title>Не спешите покупать платные курсы по безопасности ИИ. Для начала попрактикуйтесь…</title>
-      <link>https://t.me/vibecoding_tg/4446</link>
-      <guid isPermaLink="true">https://t.me/vibecoding_tg/4446</guid>
-      <pubDate>Thu, 26 Nov 2026 07:41:01 GMT</pubDate>
-      <description>Не спешите покупать платные курсы по безопасности ИИ. Для начала попрактикуйтесь на этих проектах: https://github.com/microsoft/AI-Red-Teaming-Playground-Labs https://github.com/AISecurityConsortium/AIGoat https://github.com/ppradyoth/prompt-injection-ctf https://github.com/pwnedlabs/ai-security-labs</description>
-      <enclosure url="https://cdn4.telesco.pe/file/hE25SfM9VttiKwmFWI5rATzzaMmEKikCW13Tccvo_BdedRwQyk3s1T9mJefIYxEp5Nuhb3KIS5zpHqjSO8EdFy_xvHNLphu3b4QHovyVQ-sGfRHX89jKpR2FCnhVLRs1QlWhd2YgFPI7em0bVLb_1X9TvxwWZEL2EMvRjO2wThZqukhoFA-Hua6YWfqQ1RovlFzLmDdWZ5N0wqexdr3nxNRdGeKR1vEDb7NdnTic5MyDmZ860ETlBP55a2WICQgNmf2Ka4nGN4sgbSpWh5XmzGE5RHmPQBHP3j7p-mizs9w1Sxsjf9_Uo2T1sO7oNA2dbYEXptKJR9WAaRCAu0ihWw.jpg" type="image/jpeg" length="0"/>
-    </item>
-    <item>
-      <title>Лучшая новость этой недели для пользователей ChatGPT Plus за $20 в месяц. Режим …</title>
-      <link>https://t.me/vibecoding_tg/4445</link>
-      <guid isPermaLink="true">https://t.me/vibecoding_tg/4445</guid>
-      <pubDate>Thu, 26 Nov 2026 07:01:01 GMT</pubDate>
-      <description>Лучшая новость этой недели для пользователей ChatGPT Plus за $20 в месяц. Режим Extra High доступен только на тарифах Pro и Business, однако, судя по графику самой OpenAI, GPT-6.2 в режиме High показывает даже более высокий результат: 71,5% против 71,1% у Extra High. Пользователи Plus могут пользоваться быстрым режимом Instant (65,2%) для повседневных задач, а при необходимости переключаться на High, ничуть не уступая Extra High по результатам этого теста.</description>
-      <enclosure url="https://cdn4.telesco.pe/file/Wgp3IP7usejXUVc47iXSdkH3lY5Fc_cA6Pcp6_DTC3A16nWKpJFa30JYZg4qHtw0LoNg1IZd9RLXVBUjgoIAeGe98ayzL34GWkpejNKvA69VKjBchqtggtY-RkFmvrXPNp5ELPOguvQpdmTlJj2KQm6IBYFNgkUuLJFypkh4MGzXn2X4wfviIZAtUmUAmKqETPSWWfdjgY96Y2SduPzoEvruEWDEJH6uJM01nQdptSsRWJ6FtROjtzvopYTpL9vZy2lHklZcRCfSXQg-kV4h1iG6YoqgIf46GW2OI0vqZLlsPeoCtCyf3NsbH7HdmqZLpytR7t7SY8SMHYraHJGDmw.jpg" type="image/jpeg" length="0"/>
-    </item>
-    <item>
-      <title>Уже сегодня лимиты GPT-6.2 начнут расходоваться гораздо быстрее. OpenAI исправил…</title>
-      <link>https://t.me/vibecoding_tg/4444</link>
-      <guid isPermaLink="true">https://t.me/vibecoding_tg/4444</guid>
-      <pubDate>Thu, 26 Nov 2026 06:01:01 GMT</pubDate>
-      <description>Уже сегодня лимиты GPT-6.2 начнут расходоваться гораздо быстрее. OpenAI исправила ошибку в расчёте расхода лимитов, из-за которой с момента выхода GPT-6.2 Astra и Sol на их использование тратилось меньше лимитов, чем предполагалось. → Лимиты GPT-6.2 Astra будут исчерпываться на 40% быстрее, чем на прошлой неделе. → Лимиты GPT-6.2 Sol — на 25% быстрее. → В качестве компенсации пользователи получат один бесплатный сброс лимитов, которым можно воспользоваться позже. Нормальные лимиты OpenAI так и остались несбыточной мечтой.</description>
-      <enclosure url="https://cdn4.telesco.pe/file/bdfs85hv9ks8cNPdJOhN8e7K5j7daIAVqWEWLv9xfQDOEB3_RSNs5GcWWsvfYRG1JRlHYExnFD6QHOJn0RrFmVIHdkoCn5WvX1fRiZhB7MnZQ6_RV3QS2rVcbX0GDGQqwJlFRzi_dqMozu974rlU66w-TUUgYF2qbovYNjAZXf5XfrnjT9qQo--UsT_qRTI1YgyeZ_p1PF5Y2swtbr3YSFRDgzBtjRa0018bf2cbs7EQO9_CK8mmKKqtF_Hj9B5mVgjic5LIFGCeSW4O6Y-NMO5_JfO1Dsii_ipIVt8FAbeXgr6g2RN5TzYXzVwaRY6imlYrvPtF8dkdrDHt9Xeyrg.jpg" type="image/jpeg" length="0"/>
-    </item>
-    <item>
-      <title>Одна и та же неделя, но совершенно разные письма пользователям платных подписок.…</title>
-      <link>https://t.me/vibecoding_tg/4443</link>
-      <guid isPermaLink="true">https://t.me/vibecoding_tg/4443</guid>
-      <pubDate>Thu, 26 Nov 2026 05:31:01 GMT</pubDate>
-      <description>Одна и та же неделя, но совершенно разные письма пользователям платных подписок. OpenAI Codex: исправили ошибку в расчёте расхода лимитов. Теперь лимиты GPT-6.2 Astra и Sol исчерпываются быстрее при той же стоимости подписки. Google Antigravity: доля попаданий в кеш выросла ещё на 4,5%. Уже сегодня с Neon можно выполнить на 28% больше задач, а за последние пять дней эффективный объём использования вырос примерно на 75%. Удерживать платных подписчиков на самом деле не так уж сложно. 👍</description>
-      <enclosure url="https://cdn4.telesco.pe/file/byhRmToK96tReY5meL93Pkde92hrGR4MU7dud2i-7ECk3gVGrZHLs8UJ4VwFmfLPt4hcLxi2DC9hr1XBtEMy__xJglPW8asWzQSuvfw5WkgYzivIzpO8n4Hc9vpwHYPj_jy7oVyPt_wQdE4BFlZ-MzKnGP1wx4ZN9coAdyhECAgJbj7Pyqj6hS9IIBEbgSqzJThdDNPL6sk0q0HK3b6mKNl3z8I9Sw-7xBqB6ETr1ukQKue5dLl0fcj5m4MIszOqa5JO9lft6978HwZXXatwVS2VTR7rtFPnu_vhAyvF0fm11G07TxTw1L_9taecA8wIdckC-fO49XSatnWMm2jnJw.jpg" type="image/jpeg" length="0"/>
     </item>
   </channel>
 </rss>

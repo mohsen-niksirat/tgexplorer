@@ -6,6 +6,12 @@
     <atom:link href="https://mohsen-niksirat.github.io/tgexplorer/rss/one_apis.xml" rel="self" type="application/rss+xml"/>
     <description>وان سرویس ارائه دهنده کاملترین وبسرویس ها و API ها &amp;#33; با ما همیشه اول باشید&amp;#33; سایت رسمی: https://one-api.ir پنل کاربری: https://panel.one-api.ir ربات رسمی: @One_Api_Bot جهت ارتباط با پشتیبانی، از طریق پنل کاربری سایت، تیکت بزنید&amp;#33;</description>
     <language>fa</language>
-
+    <item>
+      <title>#اطلاعیه #پست_موقت پنل وان سرویس هفته گذشته به دلیل تغییرات زیرساختی، با اختلال …</title>
+      <link>https://t.me/one_apis/868</link>
+      <guid isPermaLink="true">https://t.me/one_apis/868</guid>
+      <pubDate>Sat, 28 Nov 2026 06:18:29 GMT</pubDate>
+      <description>#اطلاعیه #پست_موقت پنل وان سرویس هفته گذشته به دلیل تغییرات زیرساختی، با اختلال های جدی مخصوصا در سیستم تیکتینگ روبه‌رو بوده است به همین دلیل تیکت برخی از کاربران به اپراتور های پشتیبانی تحویل داده نشده بود. ضمن عذرخواهی بابت این موضوع، این مورد هم اکنون برطرف شده و امروز تمامی تیکت های پاسخ داده نشده پیگیری خواهند شد.</description>
+    </item>
   </channel>
 </rss>

@@ -6,6 +6,13 @@
     <atom:link href="https://mohsen-niksirat.github.io/tgexplorer/rss/alpha2026start.xml" rel="self" type="application/rss+xml"/>
     <description>Alpha</description>
     <language>en</language>
-
+    <item>
+      <title>https://youtu.be/vPy1lSRIkrA</title>
+      <link>https://t.me/alpha2026start/203</link>
+      <guid isPermaLink="true">https://t.me/alpha2026start/203</guid>
+      <pubDate>Sat, 28 Nov 2026 04:42:48 GMT</pubDate>
+      <description>https://youtu.be/vPy1lSRIkrA</description>
+      <enclosure url="https://cdn5.telesco.pe/file/dCu36QPJota0v21Q7myLdBN_NRtDDUxRv2WbZBamu9kPn9WFRi072LV0x234s0MSYZh0WDX0W4XiRgH2EtWflXNcppY7oDJ9FuDheuvubKfuCp5TxjaReFfZ4wxCfPfWo0Ftua-lZAQ7MumlAPOwp0Hju1Sx-yLPxHe8e9cFA_YR2WlaXQ_zcmJ3TrDYOPNe72Znr7_-2F5p7cXJx0mA2rhmR_lgmaSkzGz1N7LKyMFV6EDHSincFZbyMaJoeanWBdH75s-bNmhBWZbI-ImJqG7YbxRiYB42DTFcTI0cw44sGyO8KKpo3Km43wnxOHvO8ZOKn50Q_iHya0VwCeF1OQ" type="image/jpeg" length="0"/>
+    </item>
   </channel>
 </rss>
