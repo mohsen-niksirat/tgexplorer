@@ -115,7 +115,7 @@
       <guid isPermaLink="true">https://t.me/pgkj666/4272</guid>
       <pubDate>Wed, 25 Nov 2026 03:50:09 GMT</pubDate>
       <description>🎬 Stream Tube：Rust 打造的开源 YouTube 桌面客户端 💻 桌面软件 ｜ Windows / Linux / macOS ｜ 开源项目 ✨ 核心功能： ▸ 广告拦截 自动屏蔽视频前贴片广告、中插广告及其他广告内容，提供更纯净的观看体验。 ▸ 极低内存占用 采用 Rust 构建，据介绍 RAM 占用约 400MB，相比 Edge 浏览器播放 YouTube 时的约 1200MB 更省资源。 ▸ 视频下载 集成 yt-dlp，支持下载 YouTube 视频，并可选择高画质。 ▸ 恢复视频踩 无需安装额外浏览器扩展，即可恢复显示 YouTube 视频的 Dislike（踩）数据。 ▸ 经典界面设计 回归简洁的 YouTube 观看体验，减少多余元素及缓慢加载的预览内容。 ▸ 主题自定义 支持浅色、深色及自定义主题，满足不同使用习惯。 ▸ 多平台支持 支持 Windows、Linux 和 macOS。 📌 简单说： Stream Tube 是一款使用 Rust 开发的 YouTube 第三方桌面客户端，主打去广告、低内存占用、视频下载和恢复踩数据显示，适合希望获得更轻量、更简洁观看体验的用户。 🛠 技术特点： Rust 开发 · yt-dlp 集成 · 广告过滤 · 多平台支持 ⚠️ 注意： 第三方客户端，非 YouTube 官方产品。视频下载及内容使用请遵守相关版权规定和平台服务条款。 📥 项目地址： 请通过项目官方 GitHub 获取安装包。 📂 #StreamTube #YouTube #Rust #开源软件 #视频下载 #去广告 #Windows #Linux #macOS</description>
-      <enclosure url="https://cdn5.telesco.pe/file/KOOV49ZhZXCwYQZScW3q6Z8Z0UVdkI_Pp47DuUdqa6iRk3n81PPkkdkd8nyo8ccvy4oMuF-mMHoSpAPbIo2sGAckgRqFUG8ZcvlapFTynHwfCktmRuxL0eVKZd3NrEgbaBCj117rDUUB-tyPkqmXSk5STbrvay6reu116NgCsNQcwanoKYBJAIXTEy3g6Hv5ibVwIpGWG1FeXScXOwkFkKPKo1uzQMzAY0Wh2sNln0fUJaSzWoope8jRmll_mgFZXP_P5gvDCzSAz5Pp6dbtLLj1GeUTiQZxbJyAPiEUcVUFc8D_vkHo_zntgRSq0Y01GZijyiz6GfwErX3Kk4zG3Q.jpg" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn5.telesco.pe/file/dS9o5yHzUVuU9xb1c7W54uPv5T_n6wx7998iBi6dcrRR0Lsai14De88tu5QVrcUvMthNMqcHCy_0YPbeMGbIItxt0t_GRCYwdeQDJ52Li9qUw_WJgDwXbZD2PTYUkXdPR_9kLGjNi7zvpO3vII8JDPe9sNG2MKVCouybMlkCTGJZUI5bT_UgeQFXL9EoHPj1FZ_wfw7Cm9d5cXKnGFkUAWIqJDJIzislxSgNvhKSwuStzhLhnbUuq3wwquFUR2AccBKmE2mdyIwLVxA6pAop2m_N7P9b6iPHAXbU4R1vUbrZUmzE7s84UaT0AF2e-4RDdP4AK9nxllHe4EoSKhuXSw.jpg" type="image/jpeg" length="0"/>
     </item>
   </channel>
 </rss>

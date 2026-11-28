@@ -44,7 +44,7 @@
       <guid isPermaLink="true">https://t.me/code_stars/16700</guid>
       <pubDate>Fri, 27 Nov 2026 02:16:53 GMT</pubDate>
       <description>zortos293/XSEmu Experimental Xbox Series X|S (GDK) title runner for Windows, built on the XCL translation layer: D3D12.X to D3D12, RDNA2 shaders to DXIL. Language: Rust Total stars: 688 #rust #compatibilitylayer , #d3d12 , #dxil , #emulator , #gdk , #hlsl , #rdna2 , #rust , #shaderrecompiler , #windows , #xbox , #xboxseries</description>
-      <enclosure url="https://cdn4.telesco.pe/file/Tnac8debtonrABKyZLVxDElJZUYntQS_CmMggJWbt599lM14cbTUPaDHnxJJdCKl5YZ7kPAielFSOhNobhF-w4uT-VCU2kyFknNUsK6aPStvb2HRrFwbexVDSA0fZmm0bQZqQcKbMJxpN-I4X1Sfc4rizyGqn6wwb05mfv3tuLUEkG1j21LfLlslBVZPVu9KREXmouJt9Bpx7XRKaLw3C1CSn_ofi3UcqtiLbJChVGMR6Ij9TBVa1easA7AdBSHe3_2hyqIck-OLqjv8EKv_f5che5zUvzQSLlrHZTBs82SRwOqj5dIlaePzME3xXYdDHZ7UxsHi6HTrVaH4igCOAQ.jpg" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/b02EV6sn19tP4OuIDHLf8zThYutheQNOmmHC43-WSs471wOPKFUOMENn-aZq1xvBHTbdUQHzK1oq1mtg9G5Z4PmQSp_29ORCpeAlByJpQuM2QFjwjEQKkDy2QORI6WseMapjN7SULr1Am44KlmvsCecJfeOEKKEQJS8jJeELxYyRggAgYQ7oIriAVAxFnvwoUzeoWjvKXf9WsBQpNoxIa3SE-T3bauUifLje_rJgRq433xqN7hu65Xjgj9_oAfnZeDMv5Aq_1NR6j8zrRuo8OwQKDT81TqmAzE226Hl9A-LNXibkJ0DUw5xJ3IJZ487j2zaxQg-a7sYtb2IEQSRD-A.jpg" type="image/jpeg" length="0"/>
     </item>
     <item>
       <title>nexu-io/opengame The Super Game Agent — the Unity &amp; Unreal for AI agents, with 1…</title>
@@ -52,7 +52,7 @@
       <guid isPermaLink="true">https://t.me/code_stars/16699</guid>
       <pubDate>Fri, 27 Nov 2026 01:16:53 GMT</pubDate>
       <description>nexu-io/opengame The Super Game Agent — the Unity &amp; Unreal for AI agents, with 100+ viral games to remix. Turn 20+ coding agents (Claude Code, Codex, DeepSeek, etc.) into a full-stack AI game studio. Build and publish 3D &amp; mini-games to WeChat, Douyin, TikTok, Telegram, itch.io , and more. Language: TypeScript Total stars: 925 #typescript #agentskills , #aiagents , #aigamegenerator , #claudecode , #codex , #deepseek , #deepseekharness , #dsh , #dshplugin , #gamedevelopment , #gameengine , #indiegame , #localfirst , #mcp , #minigames , #threejs , #unity , #unrealengine , #vibecoding , #wechatminigame</description>
-      <enclosure url="https://cdn4.telesco.pe/file/jG05cP3Soj4qThrMLQYd4onGU87V7oHIK0TGkxzicagQkfsRII7x5D2_kDVHxiUB2Mmdy_k9mJebYA2XnDRYO-HSNUtQkgv4hzNPSd9601Cc5WFR7ilY7R4gmx8qgCBzekmB1QG_TVCJxSM6UWDMXl1pXOaCP0afENvskeajzXI49MFgA7BE-TUrN-kEIPymJHMV4PCxVLlObEW1U9bMJc265kYITNnN6oI8CwBTmTwOZbIUoxO-P1z9HtikiJCSwpxgnvzXEHhYWGsWQydILhDe98VHw836-Ol6gUCt-6-jjXqAbhmLvQDyrZ3xsrpBSWCfe64eJI3E5wvAy07Tvw.jpg" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/tc2HE2RHBeyBAYKG64SyLOT5P35HxXnJFqet3NL8_lA99cKyqSwuhs1glOOEYEfUHZF4aFZVFjR01SZwdUdgeocLuBBSn_dmtL3tGLA608D8m5-MlLAwJX_JsGuznd7Lcruwj9lZsgvB7w-LiyuLDefQJKCxvTYJkgGcr7RBlWkakRdYmKyXeI9K6VxQTuuDpVE3-HaEp5_4lAIX797os9KRKxzwg6DibRSBKbgLLpdD0ybD8fea5KzfGMmLwf8EqaZ2ek644fmuimtgEKpXxe5IVsDPYucaB4iO6FMMACNEskoO3HEORZsp35pCaRHTsXXrEcIwv4QTsWgkI8IUqg.jpg" type="image/jpeg" length="0"/>
     </item>
     <item>
       <title>alesha-pro/llm.asm Qwen3-0.6B inference (12 KB), bare-metal bootable OS (22 KB),…</title>
@@ -60,7 +60,7 @@
       <guid isPermaLink="true">https://t.me/code_stars/16698</guid>
       <pubDate>Fri, 27 Nov 2026 00:16:52 GMT</pubDate>
       <description>alesha-pro/llm.asm Qwen3-0.6B inference (12 KB), bare-metal bootable OS (22 KB), and from-scratch Mini-GPT trainer with live Braille TUI (32 KB) in 100% pure x86-64 NASM assembly. Zero C, zero libc, zero dependencies. Language: Assembly Total stars: 1509 #assembly #assembly , #avx2 , #baremetal , #llm , #machinelearning , #nasm , #osdev , #qwen , #transformer , #x8664</description>
-      <enclosure url="https://cdn4.telesco.pe/file/V8Y34kJx36zsRXS7oeLweAS_J6Ioyizr4VwZd2sYDlAZVh_ooVy-KMkzQztj4-CK2GbDzbHKzy9LvLvLgyQ6aAgfS8hNqTpQb2yGVWy3xaSJ_s6HKOO3YLo_6hI044YA7W9v9rHQEoWXI95NR2bN3t1GWSv3fV42oAenSwwqSbbPuhSI-gS1kYactu7w6hwReq4Jb5lGohdWmhAq8kPdrLPikOUz7rwdfB1oSa1fBzcekJbbIEFDt5E3fFAbr9BcgQLaVCmozSicyaTlgnCWnzuF67Qenv-WHByGek6rLtKe9pk5fkIcn1yRW_BXa5aZ7ZU09VWjMKywWQE-CtfN1w.jpg" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/IAZPLdiwDmz-Z_tHV_7mujah-PeUQUWcMZRr-9Xi5OPZElOvgb7pmJtNE_C7ifjJ5W4R8xB7EAgdK-xsDwKls_1Z6Syk4363YqG1xum85Z4zRUlrAotYXUnXbKNqq9zrIJNETNGNni7qrncyz6qaqF68dE13XiufsZ-PmHrL6x3GCy_zv_SLSexDpM5sK8Ys_pct4a8kQ1MZA5u1eTsELPfRc3H8Ml1VPr8yaQsxDZ3t17fG8cKydfbVuL2SnxwL2yuiD4TtHA_sHccIhmZl5KPg1CWbJGFj16lhHHZ9i0lX4nw1qd0NISjACDNGfhd5jNcVwx3VemXB9Nsi5qognA.jpg" type="image/jpeg" length="0"/>
     </item>
     <item>
       <title>antigravity-cn-community/Antigravity-Chinese-Localization antigravity一键汉化 Langua…</title>
@@ -100,7 +100,7 @@
       <guid isPermaLink="true">https://t.me/code_stars/16693</guid>
       <pubDate>Thu, 26 Nov 2026 01:17:00 GMT</pubDate>
       <description>google-gemini/gemini-api-cli An (experimental) CLI for the Gemini API Language: Go Total stars: 3087 #go #gemini , #geminiapi</description>
-      <enclosure url="https://cdn4.telesco.pe/file/qlJRwrMvlaL_6Gdf5tvwZd47Z0Q5ofVJBOEOXGP49rs_C82_GhlvGAAsNXgZIY8hKkCcnbveWBRbv1JvpOzvortNRkS13oSAeqAc3Z7ecWHXVyaO6XqHM36ovd64dQrR6MPsRKC_tnGZRXPj3obWbJbL3soRtfgL0hCqKgH7b8IKktWipyoA8pQigA00GgKqztQvp66NifPcUtJTDg3gatEezPsXZjXd7WA5g-JYt19bGvPZB8T2WKoi-86BbxjwOcFnCSR3BpU5HoSyAk3kREbC5dcgW5WUhs5ZmYk8O0ohDr8I-R11_CYBMTPlS6kIkQk_0nC9yuNzU4VDXRMI4A.jpg" type="image/jpeg" length="0"/>
+      <enclosure url="https://cdn4.telesco.pe/file/pY3XqeUqMEUpOIYUb5bvHbGzTc8wAF3YQ7ZWepT4K3UkhYnFni7dZjAYuxk6qgprMLJv22KQbHT7o2Nzj8YXZLGb-AxuFAvEFvzLNmLvy9tUSSBHqEEFQUz33cdBFIymG7hWqhz0S12f9Qf9bUuAvlm95kzdFgcx-AGfX8tFNv1ywbTcdCF9A84FK3x4aInFquDZZLyU4VKxMDF2aLsX3t9u_7-RgpWOuTXqLjPpIFBwv_yegUWcTYfR594uPZB06VPFFtnxnkOPnTcDz-zVQE-yg0pQcm7sDnguDLmHxnZ0JrMMGIlY2oYDgZkEPfPnZCILRX4A841qf3_BfsF_zA.jpg" type="image/jpeg" length="0"/>
     </item>
     <item>
       <title>WhiteTowerAI/ohmygame The open-source studio for making games with AI. Your own …</title>
@@ -133,30 +133,6 @@
       <pubDate>Wed, 25 Nov 2026 11:17:10 GMT</pubDate>
       <description>fxceless/victory-fork Work-in-progress fork of VIctory: getting an Xbox Series title to render and run on a Windows PC. No game files. Language: Rust Total stars: 2619 #rust</description>
       <enclosure url="https://cdn4.telesco.pe/file/AsqTZfrz4Ae77K_cuJLoguo52TAWXyYvu79d9YEst9A8u-pWUbFS5h7a6JqUF2DdlKNHhO51dvFPDmdtyGaMyyW434B6hTt7esahW3mkdklGsjVWph1cUQD9SnsGdv-lMWaqRm-xL9yB07UmG4iT4NLihEw0IwAiMX919fqBp3elkuaHwDBi8UXEUDSSpmcPhLXpWC6sk1IJzRL3PQPRBEUcESceUCwaPICPLg4RqvXtXZq-z4JINYJ_X2muieHb_jddEfTK9d_7ZCOSc_iWWdtMAOx7GNVLlsduhlUwEjKoxUYYflEh72JSVEIpJxnJqROxcwQhqgHHg0jTFR3aYw.jpg" type="image/jpeg" length="0"/>
-    </item>
-    <item>
-      <title>pierridotite/mobile-agent-testers 20 AI testers on 20 different phones, in paral…</title>
-      <link>https://t.me/code_stars/16688</link>
-      <guid isPermaLink="true">https://t.me/code_stars/16688</guid>
-      <pubDate>Wed, 25 Nov 2026 00:16:55 GMT</pubDate>
-      <description>pierridotite/mobile-agent-testers 20 AI testers on 20 different phones, in parallel, on GitHub&apos;s free runners: Claude Code agents on iOS Simulators and Android emulators that find broken flows, translation, layout and accessibility bugs Language: Python Total stars: 1841 #python #accessibilitytesting , #aiagents , #aitesting , #android , #androidemulator , #claude , #claudecode , #e2etesting , #exploratorytesting , #expo , #flutter , #githubactions , #ios , #iossimulator , #llm , #mobiletesting , #qa , #reactnative , #testautomation , #uitesting</description>
-      <enclosure url="https://cdn4.telesco.pe/file/UoaTuhZC9PlZaiGojg7pnmvhBDyOSGecoeubSTPoSs0uH9GkwSlZfb_ZSCoOCDDYaQE9N4qUQyJfJtnTiKDPK977S5uvXogRRHJoavLTZ1ms4UaBsy4JD81FBMtKx0Q8sel43Tdou1jHUc6jRtw6J4f_DGobIDLDjCaee2zlxq_whoYDRBnSGNCoRPJIFrqSehQTwGXRJbAdcPqZT6BJ3ra6ztdFJ96HjHNhhDTEjHdd4nNBHK3EHvSkR13B_0bXjKRAjavTTEGiB6_OgNKjG-KQG_9_zHj-qmuzOHq0eJQi7H1f01Yu9gv-ZrxSc7nSt8TLMDNuZZoYCkt7qppsQg.jpg" type="image/jpeg" length="0"/>
-    </item>
-    <item>
-      <title>ScrapeCreators/social-media-research-skills AI agent skills for social media res…</title>
-      <link>https://t.me/code_stars/16687</link>
-      <guid isPermaLink="true">https://t.me/code_stars/16687</guid>
-      <pubDate>Tue, 24 Nov 2026 23:16:42 GMT</pubDate>
-      <description>ScrapeCreators/social-media-research-skills AI agent skills for social media research. Outlier posts, comment mining, competitor teardowns, ad libraries &amp; trends across TikTok, Instagram, YouTube, Reddit, X, LinkedIn &amp; more. Powered by ScrapeCreators. Works with Claude Code, Cursor, Codex, Gemini CLI. Language: Python Total stars: 7831 #python #agentskills , #aiagents , #claudecode , #claudeskills , #competitoranalysis , #contentmarketing , #cursor , #influencermarketing , #marketresearch , #socialmedia , #socialmediaresearch , #workflowautomation</description>
-      <enclosure url="https://cdn4.telesco.pe/file/WJ7HAluwy8HztkNVoiLEyOZBq4bFnsD8h6LSD3SLNgubPiTgeByiPQa9oqWll7dGVk9ofPYT4z3I1gh_fHJjkjZ_bV2ZbamOSVf-JM0I05GdxzyyZ6mTdzjm6TEuONy2oZeuYEcG2KnF6OIgGCAb_Q45dN_ca-9YvWvkDc69yrpmV_LneoVyB1zvyDuFZx0AELaz1qTk_pUv8DZv0R24fOpfYcWEAVgQaumSa8IkLcLFSSGBSg-YCFp9YUSHdQZseh4rNfZak8l_ym4mmLigUG3BlLaKSE2zgrZ3K-b2F_ITF2ETEGi_nnPTx5MHILrTrx6BnDtR5YwHE2mr8ZQF8A.jpg" type="image/jpeg" length="0"/>
-    </item>
-    <item>
-      <title>ubiquitarianism/leonida A continuation of Leonida, the Xbox &gt; PC port interface …</title>
-      <link>https://t.me/code_stars/16686</link>
-      <guid isPermaLink="true">https://t.me/code_stars/16686</guid>
-      <pubDate>Tue, 24 Nov 2026 22:16:46 GMT</pubDate>
-      <description>ubiquitarianism/leonida A continuation of Leonida, the Xbox &gt; PC port interface of GTA VI Language: Python Total stars: 1804 #python</description>
-      <enclosure url="https://cdn4.telesco.pe/file/k3U1kEJmazQwQq0qI03S2OJXe9FDbY0bUI6TkDaqU8jNbth1v9aTopaT7MR7DOpXu7ZDU7TVBimbjSQSSHD-shVKc91I0zfaqmNDYcSgIp1M_2sNDSdMV9YwzcmL10W1tlPxuFkVoD5qFw6yxAZ__E0AVb_qf9t-ANFmgeWapYKCEtmcBaj4uFGUsnqjA39L1MErEmXYylxXrzUlvyoveJH1gTdFGaPDwO2FXdibWZw9pTlTvf0h42oCv5AGKWJmL7TM0Gf4jnrKEe0DCKHjbcNyAzMVhrQHrh686VYZ_-ujLuJHHwAjVU1ATwOVsm_Nyzwq_53FVDLIXqudkX5pQA.jpg" type="image/jpeg" length="0"/>
     </item>
   </channel>
 </rss>
